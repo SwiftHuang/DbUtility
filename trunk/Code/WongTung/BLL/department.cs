@@ -1,0 +1,134 @@
+using System;
+using System.Data;
+using System.Collections.Generic;
+using LTP.Common;
+using WongTung.Model;
+using WongTung.DALFactory;
+using WongTung.IDAL;
+namespace WongTung.BLL
+{
+	/// <summary>
+	/// 业务逻辑类department 的摘要说明。
+	/// </summary>
+	public class department
+	{
+		private readonly Idepartment dal=DataAccess.Createdepartment();
+		public department()
+		{}
+		#region  成员方法
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool Exists(string DEPT_CODE)
+		{
+			return dal.Exists(DEPT_CODE);
+		}
+
+		/// <summary>
+		/// 增加一条数据
+		/// </summary>
+		public void Add(WongTung.Model.department model)
+		{
+			dal.Add(model);
+		}
+
+		/// <summary>
+		/// 更新一条数据
+		/// </summary>
+		public void Update(WongTung.Model.department model)
+		{
+			dal.Update(model);
+		}
+
+		/// <summary>
+		/// 删除一条数据
+		/// </summary>
+		public void Delete(string DEPT_CODE)
+		{
+			
+			dal.Delete(DEPT_CODE);
+		}
+
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		public WongTung.Model.department GetModel(string DEPT_CODE)
+		{
+			
+			return dal.GetModel(DEPT_CODE);
+		}
+
+		/// <summary>
+		/// 得到一个对象实体，从缓存中。
+		/// </summary>
+		public WongTung.Model.department GetModelByCache(string DEPT_CODE)
+		{
+			
+			string CacheKey = "departmentModel-" + DEPT_CODE;
+			object objModel = LTP.Common.DataCache.GetCache(CacheKey);
+			if (objModel == null)
+			{
+				try
+				{
+					objModel = dal.GetModel(DEPT_CODE);
+					if (objModel != null)
+					{
+						int ModelCache = LTP.Common.ConfigHelper.GetConfigInt("ModelCache");
+						LTP.Common.DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
+					}
+				}
+				catch{}
+			}
+			return (WongTung.Model.department)objModel;
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetList(string strWhere)
+		{
+			return dal.GetList(strWhere);
+		}
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public List<WongTung.Model.department> GetModelList(string strWhere)
+		{
+			DataSet ds = dal.GetList(strWhere);
+			List<WongTung.Model.department> modelList = new List<WongTung.Model.department>();
+			int rowsCount = ds.Tables[0].Rows.Count;
+			if (rowsCount > 0)
+			{
+				WongTung.Model.department model;
+				for (int n = 0; n < rowsCount; n++)
+				{
+					model = new WongTung.Model.department();
+					model.DEPT_CO_CODE=ds.Tables[0].Rows[n]["DEPT_CO_CODE"].ToString();
+					model.DEPT_CODE=ds.Tables[0].Rows[n]["DEPT_CODE"].ToString();
+					model.DEPT_NAME=ds.Tables[0].Rows[n]["DEPT_NAME"].ToString();
+					modelList.Add(model);
+				}
+			}
+			return modelList;
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetAllList()
+		{
+			return GetList("");
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		//public DataSet GetList(int PageSize,int PageIndex,string strWhere)
+		//{
+			//return dal.GetList(PageSize,PageIndex,strWhere);
+		//}
+
+		#endregion  成员方法
+	}
+}
+

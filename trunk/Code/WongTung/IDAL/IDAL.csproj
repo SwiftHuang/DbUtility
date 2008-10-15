@@ -1,0 +1,152 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0706FA2-977C-4523-B093-F57804756498}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>CodematicDemo.IDAL</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CodematicDemo.IDAL</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Name>Model</Name>
+      <Project>{53995DBB-9836-4647-AD22-865884FDEB9E}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ISysManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Ibackdate.cs" />
+    <Compile Include="Ibackspecial.cs" />
+    <Compile Include="Ibk_jobbud.cs" />
+    <Compile Include="Ibudgetot.cs" />
+    <Compile Include="Ichangepw.cs" />
+    <Compile Include="Icompany.cs" />
+    <Compile Include="Idailyts.cs" />
+    <Compile Include="Idailyts_hist.cs" />
+    <Compile Include="Idepartment.cs" />
+    <Compile Include="Iemp_day_tem.cs" />
+    <Compile Include="Iemp_job_tem.cs" />
+    <Compile Include="Iemployee.cs" />
+    <Compile Include="Iholiday.cs" />
+    <Compile Include="Iholiday_date.cs" />
+    <Compile Include="Iicpinq.cs" />
+    <Compile Include="Iincomts.cs" />
+    <Compile Include="Iincomts_hist.cs" />
+    <Compile Include="Ijob.cs" />
+    <Compile Include="Ijobbud.cs" />
+    <Compile Include="Ileave_bak.cs" />
+    <Compile Include="Inocontrol.cs" />
+    <Compile Include="Inon.cs" />
+    <Compile Include="Inon_hist.cs" />
+    <Compile Include="Ioffices.cs" />
+    <Compile Include="Ioutstanding_temp.cs" />
+    <Compile Include="Ipat_job_tem.cs" />
+    <Compile Include="Iplan_emp.cs" />
+    <Compile Include="Iplan_pos.cs" />
+    <Compile Include="Iposition.cs" />
+    <Compile Include="Iprriod.cs" />
+    <Compile Include="Iptl_job_tem.cs" />
+    <Compile Include="Iservicetype.cs" />
+    <Compile Include="Ispe_endorse.cs" />
+    <Compile Include="Itemp_all_app.cs" />
+    <Compile Include="Itemp_day_inq.cs" />
+    <Compile Include="Iupdate_time.cs" />
+    <Compile Include="Iuserinf.cs" />
+    <Compile Include="Iworknatrue.cs" />
+    <Compile Include="Iworkstage.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

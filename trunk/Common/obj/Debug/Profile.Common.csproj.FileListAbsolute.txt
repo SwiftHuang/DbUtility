@@ -1,0 +1,5 @@
+D:\Project\Profile\Common\bin\Debug\Profile.Common.dll
+D:\Project\Profile\Common\bin\Debug\Profile.Common.pdb
+D:\Project\Profile\Common\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Profile\Common\obj\Debug\Profile.Common.dll
+D:\Project\Profile\Common\obj\Debug\Profile.Common.pdb

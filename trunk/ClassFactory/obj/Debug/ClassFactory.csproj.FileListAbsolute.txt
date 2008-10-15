@@ -1,0 +1,15 @@
+D:\Project\Profile\ClassFactory\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Profile\ClassFactory\bin\Debug\Profile.ClassFactory.dll
+D:\Project\Profile\ClassFactory\bin\Debug\Profile.ClassFactory.pdb
+D:\Project\Profile\ClassFactory\obj\Debug\Profile.ClassFactory.dll
+D:\Project\Profile\ClassFactory\obj\Debug\Profile.ClassFactory.pdb
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\ClassFactory\bin\Debug\Profile.ClassFactory.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\ClassFactory\bin\Debug\Profile.ClassFactory.pdb
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\ClassFactory\obj\Debug\ResolveAssemblyReference.cache
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\ClassFactory\obj\Debug\Profile.ClassFactory.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\ClassFactory\obj\Debug\Profile.ClassFactory.pdb
+E:\Vinson\WongTung\ClassFactory\bin\Debug\WongTung.ClassFactory.dll
+E:\Vinson\WongTung\ClassFactory\bin\Debug\WongTung.ClassFactory.pdb
+E:\Vinson\WongTung\ClassFactory\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\ClassFactory\obj\Debug\WongTung.ClassFactory.dll
+E:\Vinson\WongTung\ClassFactory\obj\Debug\WongTung.ClassFactory.pdb

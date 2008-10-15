@@ -1,0 +1,20 @@
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\bin\Debug\Profile.Entity.dll.config
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\bin\Debug\Profile.Entity.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\bin\Debug\Profile.Entity.pdb
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\obj\Debug\Profile.Entity.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\Entity\obj\Debug\Profile.Entity.pdb
+D:\Project\Profile\Entity\bin\Debug\Profile.Entity.dll.config
+D:\Project\Profile\Entity\bin\Debug\Profile.Entity.dll
+D:\Project\Profile\Entity\bin\Debug\Profile.Entity.pdb
+D:\Project\Profile\Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Profile\Entity\obj\Debug\Profile.Entity.dll
+D:\Project\Profile\Entity\obj\Debug\Profile.Entity.pdb
+E:\Vinson\WongTung\Entity\bin\Debug\WongTung.Entity.dll.config
+E:\Vinson\WongTung\Entity\bin\Debug\WongTung.Entity.dll
+E:\Vinson\WongTung\Entity\bin\Debug\WongTung.Entity.pdb
+E:\Vinson\WongTung\Entity\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\Entity\obj\Debug\WongTung.Entity.dll
+E:\Vinson\WongTung\Entity\obj\Debug\WongTung.Entity.pdb
+E:\Vinson\WongTung\Entity\bin\Debug\WongTung.Common.dll
+E:\Vinson\WongTung\Entity\bin\Debug\WongTung.Common.pdb
