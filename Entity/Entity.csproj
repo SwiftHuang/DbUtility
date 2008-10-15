@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{58997085-C943-4948-849A-A624FF622F9F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WongTung.Entity</RootNamespace>
+    <AssemblyName>WongTung.Entity</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="ErrorInfo.cs" />
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Table\backdate.cs" />
+    <Compile Include="Table\backspecial.cs" />
+    <Compile Include="Table\bk_jobbud.cs" />
+    <Compile Include="Table\budgetot.cs" />
+    <Compile Include="Table\changepw.cs" />
+    <Compile Include="Table\company.cs" />
+    <Compile Include="Table\dailyts2.cs" />
+    <Compile Include="Table\dailyts.cs" />
+    <Compile Include="Table\dailyts_hist.cs" />
+    <Compile Include="Table\department.cs" />
+    <Compile Include="Table\employee.cs" />
+    <Compile Include="Table\emp_day_tem.cs" />
+    <Compile Include="Table\emp_job_tem.cs" />
+    <Compile Include="Table\holiday.cs" />
+    <Compile Include="Table\holiday_date.cs" />
+    <Compile Include="Table\icpinq.cs" />
+    <Compile Include="Table\incomts.cs" />
+    <Compile Include="Table\incomts_hist.cs" />
+    <Compile Include="Table\job.cs" />
+    <Compile Include="Table\jobbud.cs" />
+    <Compile Include="Table\leave_bak.cs" />
+    <Compile Include="Table\nocontrol.cs" />
+    <Compile Include="Table\non.cs" />
+    <Compile Include="Table\non_hist.cs" />
+    <Compile Include="Table\offices.cs" />
+    <Compile Include="Table\outstanding_temp.cs" />
+    <Compile Include="Table\pat_job_tem.cs" />
+    <Compile Include="Table\plan_emp.cs" />
+    <Compile Include="Table\plan_pos.cs" />
+    <Compile Include="Table\position.cs" />
+    <Compile Include="Table\prriod.cs" />
+    <Compile Include="Table\ptl_job_tem.cs" />
+    <Compile Include="Table\servicetype.cs" />
+    <Compile Include="Table\spe_endorse.cs" />
+    <Compile Include="Table\SysNode.cs" />
+    <Compile Include="Table\temp_all_app.cs" />
+    <Compile Include="Table\temp_day_inq.cs" />
+    <Compile Include="Table\update_time.cs" />
+    <Compile Include="Table\userinf.cs" />
+    <Compile Include="Table\worknatrue.cs" />
+    <Compile Include="Table\workstage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C05F0FF6-FCC4-4388-91C2-000E28D0C155}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

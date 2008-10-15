@@ -1,0 +1,13 @@
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.SQLServerDAL.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.SQLServerDAL.pdb
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\CodematicDemo.IDAL.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\LTP.Common.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.DBUtility.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.Model.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\MySql.Data.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.Model.pdb
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\WongTung.DBUtility.pdb
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\bin\Debug\CodematicDemo.IDAL.pdb
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\obj\Debug\WongTung.SQLServerDAL.dll
+E:\Vinson\WongTung\Code\WongTung\SQLServerDAL\obj\Debug\WongTung.SQLServerDAL.pdb

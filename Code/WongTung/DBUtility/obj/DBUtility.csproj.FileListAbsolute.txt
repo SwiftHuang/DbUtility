@@ -1,0 +1,6 @@
+E:\Vinson\WongTung\Code\WongTung\DBUtility\bin\Debug\WongTung.DBUtility.dll
+E:\Vinson\WongTung\Code\WongTung\DBUtility\bin\Debug\WongTung.DBUtility.pdb
+E:\Vinson\WongTung\Code\WongTung\DBUtility\bin\Debug\MySql.Data.dll
+E:\Vinson\WongTung\Code\WongTung\DBUtility\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\Code\WongTung\DBUtility\obj\Debug\WongTung.DBUtility.dll
+E:\Vinson\WongTung\Code\WongTung\DBUtility\obj\Debug\WongTung.DBUtility.pdb

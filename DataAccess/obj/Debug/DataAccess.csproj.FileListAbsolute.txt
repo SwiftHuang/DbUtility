@@ -1,0 +1,23 @@
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\bin\Debug\Profile.DataAccess.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\bin\Debug\Profile.DataAccess.pdb
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\bin\Debug\Profile.Entity.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\bin\Debug\Profile.Entity.pdb
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\obj\Debug\ResolveAssemblyReference.cache
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\obj\Debug\Profile.DataAccess.dll
+D:\用户文档\Vinson\Visual Studio 2008\Projects\Profile\DataAccess\obj\Debug\Profile.DataAccess.pdb
+D:\Project\Profile\DataAccess\bin\Debug\Profile.DataAccess.dll
+D:\Project\Profile\DataAccess\bin\Debug\Profile.DataAccess.pdb
+D:\Project\Profile\DataAccess\bin\Debug\Profile.Entity.dll
+D:\Project\Profile\DataAccess\bin\Debug\Profile.Entity.pdb
+D:\Project\Profile\DataAccess\obj\Debug\ResolveAssemblyReference.cache
+D:\Project\Profile\DataAccess\obj\Debug\Profile.DataAccess.dll
+D:\Project\Profile\DataAccess\obj\Debug\Profile.DataAccess.pdb
+E:\Vinson\WongTung\DataAccess\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.DataAccess.dll
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.DataAccess.pdb
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.Entity.dll
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.Entity.pdb
+E:\Vinson\WongTung\DataAccess\obj\Debug\WongTung.DataAccess.dll
+E:\Vinson\WongTung\DataAccess\obj\Debug\WongTung.DataAccess.pdb
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.Common.dll
+E:\Vinson\WongTung\DataAccess\bin\Debug\WongTung.Common.pdb

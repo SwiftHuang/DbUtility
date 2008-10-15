@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="ProfileDemo" xmlns="http://schemas.microsoft.com/linqtosql/mapping/2007">
+  <Table Name="dbo.Customer" Member="Customer">
+    <Type Name="Profile.Business.Profiles.Customer">
+      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" UpdateCheck="Never" AutoSync="OnInsert" />
+      <Column Name="CustID" Member="CustID" Storage="_CustID" DbType="Int NOT NULL" UpdateCheck="Never" />
+      <Column Name="FirstName" Member="FirstName" Storage="_FirstName" DbType="NVarChar(255) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastName" Member="LastName" Storage="_LastName" DbType="NVarChar(255)" UpdateCheck="Never" />
+      <Column Name="Sex" Member="Sex" Storage="_Sex" DbType="Int NOT NULL" UpdateCheck="Never" />
+      <Column Name="CreateOn" Member="CreateOn" Storage="_CreateOn" DbType="DateTime NOT NULL" UpdateCheck="Never" />
+      <Column Name="CreateBy" Member="CreateBy" Storage="_CreateBy" DbType="NVarChar(255) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UpdateOn" Member="UpdateOn" Storage="_UpdateOn" DbType="DateTime NOT NULL" UpdateCheck="Never" />
+      <Column Name="UpdateBy" Member="UpdateBy" Storage="_UpdateBy" DbType="NVarChar(255) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TimeStamp" Member="TimeStamp" Storage="_TimeStamp" DbType="rowversion" IsDbGenerated="true" IsVersion="true" UpdateCheck="Never" AutoSync="Always" />
+      <Association Name="FK_CustomerDetail_Customer" Member="CustomerDetail" Storage="_CustomerDetail" ThisKey="ID" OtherKey="CustomerID" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerDetail" Member="CustomerDetail">
+    <Type Name="Profile.Business.Profiles.CustomerDetail">
+      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" UpdateCheck="Never" AutoSync="OnInsert" />
+      <Column Name="CustomerID" Member="CustomerID" Storage="_CustomerID" DbType="Int" UpdateCheck="Never" />
+      <Column Name="Phone" Member="Phone" Storage="_Phone" DbType="NVarChar(255)" UpdateCheck="Never" />
+      <Column Name="Address" Member="Address" Storage="_Address" DbType="NVarChar(255)" UpdateCheck="Never" />
+      <Column Name="TimeStamp" Member="TimeStamp" Storage="_TimeStamp" DbType="rowversion" IsDbGenerated="true" IsVersion="true" UpdateCheck="Never" AutoSync="Always" />
+      <Association Name="FK_CustomerDetail_Customer" Member="Customer" Storage="_Customer" ThisKey="CustomerID" OtherKey="ID" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User" Member="User">
+    <Type Name="Profile.Business.Profiles.User">
+      <Column Name="ID" Member="ID" Storage="_ID" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" UpdateCheck="Never" AutoSync="OnInsert" />
+      <Column Name="FirstName" Member="FirstName" Storage="_FirstName" DbType="NVarChar(255) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastName" Member="LastName" Storage="_LastName" DbType="NVarChar(255)" UpdateCheck="Never" />
+      <Column Name="TimeStamp" Member="TimeStamp" Storage="_TimeStamp" DbType="rowversion" IsDbGenerated="true" IsVersion="true" UpdateCheck="Never" AutoSync="Always" />
+    </Type>
+  </Table>
+</Database>

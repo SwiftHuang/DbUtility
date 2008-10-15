@@ -1,0 +1,5 @@
+E:\Vinson\WongTung\Code\WongTung\Model\bin\Debug\WongTung.Model.dll
+E:\Vinson\WongTung\Code\WongTung\Model\bin\Debug\WongTung.Model.pdb
+E:\Vinson\WongTung\Code\WongTung\Model\obj\Debug\ResolveAssemblyReference.cache
+E:\Vinson\WongTung\Code\WongTung\Model\obj\Debug\WongTung.Model.dll
+E:\Vinson\WongTung\Code\WongTung\Model\obj\Debug\WongTung.Model.pdb
