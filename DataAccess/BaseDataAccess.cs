@@ -48,22 +48,24 @@ namespace WongTung.DataAccess
             IDataReader reader = GetDataReader(strWhere);
 
             List<T> DataList = new List<T>();
-            string entityID = Sql.GetHashCode().ToString();
+            string entityID = typeof(T).ToString();//Sql.GetHashCode().ToString();
             List<TableMapping.FieldInfo> lstFieldInfo = new List<TableMapping.FieldInfo>();
 
             if (WebCache.GetCache(entityID) == null)
             {
                 foreach (PropertyInfo Property in typeof(T).GetProperties())
                 {
-                    foreach (TableMapping.FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(TableMapping.FieldMappingAttribute), true))
+                    foreach (TableMapping.FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(TableMapping.FieldMappingAttribute), false))
                     {
-                        lstFieldInfo.Add(new TableMapping.FieldInfo(Property, Field.DataFieldName, Field.NullValue, Field.DataType, GetIndex(reader, Field.DataFieldName)));
+                        lstFieldInfo.Add(new TableMapping.FieldInfo(Property, Field.DataFieldName, Field.NullValue, Field.DataType, -1));
                     }
                 }
                 WebCache.Insert(entityID, lstFieldInfo);
             }
             else
                 lstFieldInfo = (List<TableMapping.FieldInfo>)WebCache.GetCache(entityID);
+
+            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
             while (reader.Read())
             {
@@ -77,10 +79,10 @@ namespace WongTung.DataAccess
                         if (f.FieldIndex != -1)
                         {
                             object obj = reader.GetValue(f.FieldIndex);
-                            //if (obj != DBNull.Value)
-                            //{
-                            f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataType), null);
-                            //}
+                            if (obj != DBNull.Value)
+                            {
+                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataType), null);
+                            }
                         }
                     }
                     catch (Exception e)
@@ -148,16 +150,23 @@ namespace WongTung.DataAccess
             timeSpan = DateTime.Now - s;
             return r;
         }
-        private int GetIndex(IDataReader reader, string fieldName)
+        private List<TableMapping.FieldInfo> SetFieldIndex(IDataReader reader, List<TableMapping.FieldInfo> list)
         {
-            try
+            List<TableMapping.FieldInfo> datalist = new List<TableMapping.FieldInfo>();
+            foreach (TableMapping.FieldInfo f in list)
             {
-                return reader.GetOrdinal(fieldName);
+                try
+                {
+                    f.FieldIndex = reader.GetOrdinal(f.FieldName);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    f.FieldIndex = -1;
+                }
+                datalist.Add(f);
             }
-            catch
-            {
-                return -1;
-            }
+            return datalist;
+
         }
         #endregion
     }
