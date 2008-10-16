@@ -32,6 +32,9 @@ namespace WongTung.WebSite
             if (Request["C"] != null)
                 Count = Convert.ToInt32(Request["C"].ToString());
 
+            BOJob BJJob = new BOJob();
+            BJJob.GetList();
+
             BODailyts BJ = new BODailyts();
             DateTime dStart = new DateTime();
 

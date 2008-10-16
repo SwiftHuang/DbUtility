@@ -11,9 +11,9 @@ namespace WongTung.Business
     public class BOJob
     {
         private DAJob DAJob = new DAJob();
-        //public List<Entity.Table.job> GetList()
-        //{
-        //    return DAJob.GetList("");
-        //}
+        public List<Entity.Table.job> GetList()
+        {
+            return DAJob.GetList("");
+        }
     }
 }
