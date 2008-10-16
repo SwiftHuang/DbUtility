@@ -1,7 +1,0 @@
-D:\Project\Profile\Business\obj\Debug\ResolveAssemblyReference.cache
-D:\Project\Profile\Business\bin\Debug\Business.dll
-D:\Project\Profile\Business\bin\Debug\Business.pdb
-D:\Project\Profile\Business\bin\Debug\Profile.Common.dll
-D:\Project\Profile\Business\bin\Debug\Profile.Common.pdb
-D:\Project\Profile\Business\obj\Debug\Business.dll
-D:\Project\Profile\Business\obj\Debug\Business.pdb
