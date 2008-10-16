@@ -1,9 +1,0 @@
-D:\Project\Profile\DataAccess\bin\Debug\DataAccess.dll
-D:\Project\Profile\DataAccess\bin\Debug\DataAccess.pdb
-D:\Project\Profile\DataAccess\obj\Debug\ResolveAssemblyReference.cache
-D:\Project\Profile\DataAccess\obj\Debug\DataAccess.dll
-D:\Project\Profile\DataAccess\obj\Debug\DataAccess.pdb
-D:\Project\Profile\DataAccess\bin\Debug\Business.dll
-D:\Project\Profile\DataAccess\bin\Debug\Profile.Common.dll
-D:\Project\Profile\DataAccess\bin\Debug\Business.pdb
-D:\Project\Profile\DataAccess\bin\Debug\Profile.Common.pdb
