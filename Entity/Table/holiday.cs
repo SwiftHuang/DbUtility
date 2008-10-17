@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类holiday 。(属性说明自动提取数据库字段的描述信息)
@@ -17,6 +18,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("HD_CO_CODE", "", typeof(string))]
 		public string HD_CO_CODE
 		{
 			set{ _hd_co_code=value;}
@@ -25,6 +27,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("HD_EMP_CODE", "", typeof(string))]
 		public string HD_EMP_CODE
 		{
 			set{ _hd_emp_code=value;}
@@ -33,6 +36,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("HD_LINE_NO", "", typeof(decimal))]
 		public decimal HD_LINE_NO
 		{
 			set{ _hd_line_no=value;}
@@ -41,6 +45,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("HD_DATE", "", typeof(DateTime))]
 		public DateTime? HD_DATE
 		{
 			set{ _hd_date=value;}
@@ -49,6 +54,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("HD_LEVE_CODE", "", typeof(string))]
 		public string HD_LEVE_CODE
 		{
 			set{ _hd_leve_code=value;}

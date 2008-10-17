@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类outstanding_temp 。(属性说明自动提取数据库字段的描述信息)
@@ -21,6 +22,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NUM", "", typeof(decimal))]
 		public decimal NUM
 		{
 			set{ _num=value;}
@@ -29,6 +31,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_OFF_CODE", "", typeof(string))]
 		public string OUT_OFF_CODE
 		{
 			set{ _out_off_code=value;}
@@ -37,6 +40,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_OFF_NAME", "", typeof(string))]
 		public string OUT_OFF_NAME
 		{
 			set{ _out_off_name=value;}
@@ -45,6 +49,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_EMP_CODE", "", typeof(string))]
 		public string OUT_EMP_CODE
 		{
 			set{ _out_emp_code=value;}
@@ -53,6 +58,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_EMP_NAME", "", typeof(string))]
 		public string OUT_EMP_NAME
 		{
 			set{ _out_emp_name=value;}
@@ -61,6 +67,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_DAY", "", typeof(DateTime))]
 		public DateTime? OUT_DAY
 		{
 			set{ _out_day=value;}
@@ -69,6 +76,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_POS_CLASS", "", typeof(decimal))]
 		public decimal? OUT_POS_CLASS
 		{
 			set{ _out_pos_class=value;}
@@ -77,6 +85,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_POS_CODE", "", typeof(string))]
 		public string OUT_POS_CODE
 		{
 			set{ _out_pos_code=value;}
@@ -85,6 +94,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OUT_UPDATE_DATE", "", typeof(DateTime))]
 		public DateTime? OUT_UPDATE_DATE
 		{
 			set{ _out_update_date=value;}

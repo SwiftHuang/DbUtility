@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类non_hist 。(属性说明自动提取数据库字段的描述信息)
@@ -20,6 +21,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_CODE", "", typeof(string))]
 		public string CO_CODE
 		{
 			set{ _co_code=value;}
@@ -28,6 +30,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("STAFF_CODE", "", typeof(string))]
 		public string STAFF_CODE
 		{
 			set{ _staff_code=value;}
@@ -36,6 +39,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DATE", "", typeof(DateTime))]
 		public DateTime DATE
 		{
 			set{ _date=value;}
@@ -44,6 +48,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TYPE", "", typeof(string))]
 		public string TYPE
 		{
 			set{ _type=value;}
@@ -52,6 +57,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ANNUAL", "", typeof(decimal))]
 		public decimal? ANNUAL
 		{
 			set{ _annual=value;}
@@ -60,6 +66,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("SICK", "", typeof(decimal))]
 		public decimal? SICK
 		{
 			set{ _sick=value;}
@@ -68,6 +75,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ADMIN", "", typeof(decimal))]
 		public decimal? ADMIN
 		{
 			set{ _admin=value;}
@@ -76,6 +84,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("OT_PAY", "", typeof(decimal))]
 		public decimal? OT_PAY
 		{
 			set{ _ot_pay=value;}

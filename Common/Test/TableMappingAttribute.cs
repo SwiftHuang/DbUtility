@@ -6,7 +6,7 @@ namespace TableMapping
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMappingAttribute : System.Attribute
     {
-        public FieldMappingAttribute(string dataFieldName, object nullValue, TypeCode dataType)
+        public FieldMappingAttribute(string dataFieldName, object nullValue, Type dataType)
             : base()
         {
             _dataFieldName = dataFieldName;
@@ -14,7 +14,7 @@ namespace TableMapping
             _dataType = dataType;
         }
 
-        public FieldMappingAttribute(object nullValue) : this(string.Empty, nullValue, TypeCode.String) { }
+        //public FieldMappingAttribute(object nullValue) : this(string.Empty, nullValue, Type.String) { }
         #region Attributes
         private string _dataFieldName;
         public string DataFieldName
@@ -26,8 +26,8 @@ namespace TableMapping
         {
             get { return _nullValue; }
         }
-        private TypeCode _dataType;
-        public TypeCode DataType
+        private Type _dataType;
+        public Type DataType
         {
             get { return _dataType; }
         }
@@ -37,7 +37,7 @@ namespace TableMapping
 
     public class FieldInfo
     {
-        public FieldInfo(PropertyInfo property, string fieldName, object nullValue, TypeCode dataType, int fieldIndex)
+        public FieldInfo(PropertyInfo property, string fieldName, object nullValue, Type dataType, int fieldIndex)
         {
             Property = property;
             FieldName = fieldName;
@@ -48,7 +48,7 @@ namespace TableMapping
         public PropertyInfo Property { get; set; }
         public string FieldName { get; set; }
         public object NullValue { get; set; }
-        public TypeCode DataType { get; set; }
+        public Type DataType { get; set; }
         public int FieldIndex { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace WongTung.WebSite
         protected void Page_Load(object sender, EventArgs e)
         {
             TimeSpan ts;
-            int Count = 20000;
+            int Count = 10000;
 
             if (Request["C"] != null)
                 Count = Convert.ToInt32(Request["C"].ToString());
@@ -52,8 +52,7 @@ namespace WongTung.WebSite
             Label6.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
             Label7.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
 
-
-
+            
             List<Entity.Table.dailyts> lst1 = new List<WongTung.Entity.Table.dailyts>();
             dStart = DateTime.Now;
             lst1 = BJ.GetList(Count);

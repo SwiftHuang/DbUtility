@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类userinf 。(属性说明自动提取数据库字段的描述信息)
@@ -21,6 +22,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_CO_CODE", "", typeof(string))]
 		public string USER_CO_CODE
 		{
 			set{ _user_co_code=value;}
@@ -29,6 +31,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_CODE", "", typeof(string))]
 		public string USER_CODE
 		{
 			set{ _user_code=value;}
@@ -37,6 +40,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_NAME", "", typeof(string))]
 		public string USER_NAME
 		{
 			set{ _user_name=value;}
@@ -45,6 +49,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_EMP_CODE", "", typeof(string))]
 		public string USER_EMP_CODE
 		{
 			set{ _user_emp_code=value;}
@@ -53,6 +58,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_RAND", "", typeof(string))]
 		public string USER_RAND
 		{
 			set{ _user_rand=value;}
@@ -61,6 +67,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_CURDATE", "", typeof(DateTime))]
 		public DateTime? USER_CURDATE
 		{
 			set{ _user_curdate=value;}
@@ -69,6 +76,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_RAND_BACK", "", typeof(string))]
 		public string USER_RAND_BACK
 		{
 			set{ _user_rand_back=value;}
@@ -77,6 +85,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_ACTIVATE", "", typeof(string))]
 		public string USER_ACTIVATE
 		{
 			set{ _user_activate=value;}
@@ -85,6 +94,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("USER_CHNAME", "", typeof(string))]
 		public string USER_CHNAME
 		{
 			set{ _user_chname=value;}

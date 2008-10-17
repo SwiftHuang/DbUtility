@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类worknatrue 。(属性说明自动提取数据库字段的描述信息)
@@ -17,6 +18,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("WN_CO_CODE", "", typeof(string))]
 		public string WN_CO_CODE
 		{
 			set{ _wn_co_code=value;}
@@ -25,6 +27,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("WN_CODE", "", typeof(string))]
 		public string WN_CODE
 		{
 			set{ _wn_code=value;}
@@ -33,6 +36,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("WN_DESC", "", typeof(string))]
 		public string WN_DESC
 		{
 			set{ _wn_desc=value;}
@@ -41,6 +45,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("WN_DESC_T", "", typeof(string))]
 		public string WN_DESC_T
 		{
 			set{ _wn_desc_t=value;}
@@ -49,6 +54,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("WN_DESC_S", "", typeof(string))]
 		public string WN_DESC_S
 		{
 			set{ _wn_desc_s=value;}

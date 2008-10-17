@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类dailyts_hist 。(属性说明自动提取数据库字段的描述信息)
@@ -24,6 +25,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_CO_CODE", "", typeof(string))]
 		public string DT_CO_CODE
 		{
 			set{ _dt_co_code=value;}
@@ -32,6 +34,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_STAFF_CODE", "", typeof(string))]
 		public string DT_STAFF_CODE
 		{
 			set{ _dt_staff_code=value;}
@@ -40,6 +43,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_WORK_DATE", "", typeof(DateTime))]
 		public DateTime DT_WORK_DATE
 		{
 			set{ _dt_work_date=value;}
@@ -48,6 +52,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_LINE_NO", "", typeof(decimal))]
 		public decimal DT_LINE_NO
 		{
 			set{ _dt_line_no=value;}
@@ -56,6 +61,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_APP_CODE", "", typeof(string))]
 		public string DT_APP_CODE
 		{
 			set{ _dt_app_code=value;}
@@ -64,6 +70,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_JOB_CODE", "", typeof(string))]
 		public string DT_JOB_CODE
 		{
 			set{ _dt_job_code=value;}
@@ -72,6 +79,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_SER_CODE", "", typeof(string))]
 		public string DT_SER_CODE
 		{
 			set{ _dt_ser_code=value;}
@@ -80,6 +88,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_NOR_HOUR", "", typeof(decimal))]
 		public decimal? DT_NOR_HOUR
 		{
 			set{ _dt_nor_hour=value;}
@@ -88,6 +97,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_OVER_HOUR", "", typeof(decimal))]
 		public decimal? DT_OVER_HOUR
 		{
 			set{ _dt_over_hour=value;}
@@ -96,6 +106,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_TYPE", "", typeof(string))]
 		public string DT_TYPE
 		{
 			set{ _dt_type=value;}
@@ -104,6 +115,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_PERIOD", "", typeof(string))]
 		public string DT_PERIOD
 		{
 			set{ _dt_period=value;}
@@ -112,6 +124,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DT_SUBMIT", "", typeof(string))]
 		public string DT_SUBMIT
 		{
 			set{ _dt_submit=value;}

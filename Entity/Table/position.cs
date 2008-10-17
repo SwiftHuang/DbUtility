@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类position 。(属性说明自动提取数据库字段的描述信息)
@@ -31,6 +32,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_CO_CODE", "", typeof(string))]
 		public string POS_CO_CODE
 		{
 			set{ _pos_co_code=value;}
@@ -39,6 +41,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_CODE", "", typeof(string))]
 		public string POS_CODE
 		{
 			set{ _pos_code=value;}
@@ -47,6 +50,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_DESC", "", typeof(string))]
 		public string POS_DESC
 		{
 			set{ _pos_desc=value;}
@@ -55,6 +59,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_FEE_LEV1", "", typeof(decimal))]
 		public decimal? POS_FEE_LEV1
 		{
 			set{ _pos_fee_lev1=value;}
@@ -63,6 +68,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_FEE_LEV2", "", typeof(decimal))]
 		public decimal? POS_FEE_LEV2
 		{
 			set{ _pos_fee_lev2=value;}
@@ -71,6 +77,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_FEE_LEV3", "", typeof(decimal))]
 		public decimal? POS_FEE_LEV3
 		{
 			set{ _pos_fee_lev3=value;}
@@ -79,6 +86,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_RATE_OUT", "", typeof(decimal))]
 		public decimal? POS_RATE_OUT
 		{
 			set{ _pos_rate_out=value;}
@@ -87,6 +95,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_RATE_DAILY", "", typeof(decimal))]
 		public decimal? POS_RATE_DAILY
 		{
 			set{ _pos_rate_daily=value;}
@@ -95,6 +104,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_RATE_MON", "", typeof(decimal))]
 		public decimal? POS_RATE_MON
 		{
 			set{ _pos_rate_mon=value;}
@@ -103,6 +113,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_RATE_OT", "", typeof(decimal))]
 		public decimal? POS_RATE_OT
 		{
 			set{ _pos_rate_ot=value;}
@@ -111,6 +122,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_MON_TOTAL", "", typeof(decimal))]
 		public decimal? POS_MON_TOTAL
 		{
 			set{ _pos_mon_total=value;}
@@ -119,6 +131,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_MON_UTILIST", "", typeof(decimal))]
 		public decimal? POS_MON_UTILIST
 		{
 			set{ _pos_mon_utilist=value;}
@@ -127,6 +140,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_MON_REV", "", typeof(decimal))]
 		public decimal? POS_MON_REV
 		{
 			set{ _pos_mon_rev=value;}
@@ -135,6 +149,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_SAL_FROM", "", typeof(decimal))]
 		public decimal? POS_SAL_FROM
 		{
 			set{ _pos_sal_from=value;}
@@ -143,6 +158,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_SAL_TO", "", typeof(decimal))]
 		public decimal? POS_SAL_TO
 		{
 			set{ _pos_sal_to=value;}
@@ -151,6 +167,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_DALIY_COST", "", typeof(decimal))]
 		public decimal? POS_DALIY_COST
 		{
 			set{ _pos_daliy_cost=value;}
@@ -159,6 +176,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_MON_COST", "", typeof(decimal))]
 		public decimal? POS_MON_COST
 		{
 			set{ _pos_mon_cost=value;}
@@ -167,6 +185,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_CLASS", "", typeof(decimal))]
 		public decimal? POS_CLASS
 		{
 			set{ _pos_class=value;}
@@ -175,6 +194,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("POS_PLAN", "", typeof(string))]
 		public string POS_PLAN
 		{
 			set{ _pos_plan=value;}

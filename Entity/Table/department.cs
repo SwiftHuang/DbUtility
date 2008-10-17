@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类department 。(属性说明自动提取数据库字段的描述信息)
@@ -15,6 +16,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DEPT_CO_CODE", "", typeof(string))]
 		public string DEPT_CO_CODE
 		{
 			set{ _dept_co_code=value;}
@@ -23,6 +25,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DEPT_CODE", "", typeof(string))]
 		public string DEPT_CODE
 		{
 			set{ _dept_code=value;}
@@ -31,6 +34,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("DEPT_NAME", "", typeof(string))]
 		public string DEPT_NAME
 		{
 			set{ _dept_name=value;}

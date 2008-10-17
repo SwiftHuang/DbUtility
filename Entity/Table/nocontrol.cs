@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类nocontrol 。(属性说明自动提取数据库字段的描述信息)
@@ -17,6 +18,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NO_CO_CODE", "", typeof(string))]
 		public string NO_CO_CODE
 		{
 			set{ _no_co_code=value;}
@@ -25,6 +27,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NO_CODE", "", typeof(string))]
 		public string NO_CODE
 		{
 			set{ _no_code=value;}
@@ -33,6 +36,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NO_DESC", "", typeof(string))]
 		public string NO_DESC
 		{
 			set{ _no_desc=value;}
@@ -41,6 +45,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NO_STA_NO", "", typeof(decimal))]
 		public decimal? NO_STA_NO
 		{
 			set{ _no_sta_no=value;}
@@ -49,6 +54,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("NO_SEQ_NO", "", typeof(decimal))]
 		public decimal? NO_SEQ_NO
 		{
 			set{ _no_seq_no=value;}

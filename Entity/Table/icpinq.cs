@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类icpinq 。(属性说明自动提取数据库字段的描述信息)
@@ -17,6 +18,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ICP_CO_CODE", "", typeof(string))]
 		public string ICP_CO_CODE
 		{
 			set{ _icp_co_code=value;}
@@ -25,6 +27,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ICP_OFFICE_CODE", "", typeof(string))]
 		public string ICP_OFFICE_CODE
 		{
 			set{ _icp_office_code=value;}
@@ -33,6 +36,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ICP_OFFICE_NAME", "", typeof(string))]
 		public string ICP_OFFICE_NAME
 		{
 			set{ _icp_office_name=value;}
@@ -41,6 +45,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ICP_EMP_CODE", "", typeof(string))]
 		public string ICP_EMP_CODE
 		{
 			set{ _icp_emp_code=value;}
@@ -49,6 +54,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("ICP_EMP_NAME", "", typeof(string))]
 		public string ICP_EMP_NAME
 		{
 			set{ _icp_emp_name=value;}

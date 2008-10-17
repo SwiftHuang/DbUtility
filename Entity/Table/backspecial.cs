@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类backspecial 。(属性说明自动提取数据库字段的描述信息)
@@ -16,6 +17,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("BS_CO_CODE", "", typeof(string))]
 		public string BS_CO_CODE
 		{
 			set{ _bs_co_code=value;}
@@ -24,6 +26,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("BS_CODE", "", typeof(string))]
 		public string BS_CODE
 		{
 			set{ _bs_code=value;}
@@ -32,6 +35,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("BS_DATE", "", typeof(DateTime))]
 		public DateTime? BS_DATE
 		{
 			set{ _bs_date=value;}
@@ -40,6 +44,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("BS_CURDATE", "", typeof(DateTime))]
 		public DateTime? BS_CURDATE
 		{
 			set{ _bs_curdate=value;}

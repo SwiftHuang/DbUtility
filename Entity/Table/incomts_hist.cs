@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类incomts_hist 。(属性说明自动提取数据库字段的描述信息)
@@ -22,6 +23,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_CO_CODE", "", typeof(string))]
 		public string IST_CO_CODE
 		{
 			set{ _ist_co_code=value;}
@@ -30,6 +32,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_OFFICE_CODE", "", typeof(string))]
 		public string IST_OFFICE_CODE
 		{
 			set{ _ist_office_code=value;}
@@ -38,6 +41,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_WORK_DATE", "", typeof(DateTime))]
 		public DateTime IST_WORK_DATE
 		{
 			set{ _ist_work_date=value;}
@@ -46,6 +50,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_USER_CODE", "", typeof(string))]
 		public string IST_USER_CODE
 		{
 			set{ _ist_user_code=value;}
@@ -54,6 +59,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_USER_NAME", "", typeof(string))]
 		public string IST_USER_NAME
 		{
 			set{ _ist_user_name=value;}
@@ -62,6 +68,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_INPUT_OK", "", typeof(string))]
 		public string IST_INPUT_OK
 		{
 			set{ _ist_input_ok=value;}
@@ -70,6 +77,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_APP", "", typeof(string))]
 		public string IST_APP
 		{
 			set{ _ist_app=value;}
@@ -78,6 +86,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_NOR_HR", "", typeof(decimal))]
 		public decimal? IST_NOR_HR
 		{
 			set{ _ist_nor_hr=value;}
@@ -86,6 +95,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_OT_HR", "", typeof(decimal))]
 		public decimal? IST_OT_HR
 		{
 			set{ _ist_ot_hr=value;}
@@ -94,6 +104,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("IST_PERIOD", "", typeof(string))]
 		public string IST_PERIOD
 		{
 			set{ _ist_period=value;}
