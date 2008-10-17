@@ -52,47 +52,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Table\backdate.cs" />
-    <Compile Include="Table\backspecial.cs" />
-    <Compile Include="Table\bk_jobbud.cs" />
-    <Compile Include="Table\budgetot.cs" />
-    <Compile Include="Table\changepw.cs" />
-    <Compile Include="Table\company.cs" />
     <Compile Include="Table\dailyts2.cs" />
     <Compile Include="Table\dailyts.cs" />
-    <Compile Include="Table\dailyts_hist.cs" />
-    <Compile Include="Table\department.cs" />
-    <Compile Include="Table\employee.cs" />
-    <Compile Include="Table\emp_day_tem.cs" />
-    <Compile Include="Table\emp_job_tem.cs" />
-    <Compile Include="Table\holiday.cs" />
-    <Compile Include="Table\holiday_date.cs" />
-    <Compile Include="Table\icpinq.cs" />
-    <Compile Include="Table\incomts.cs" />
-    <Compile Include="Table\incomts_hist.cs" />
-    <Compile Include="Table\job.cs" />
-    <Compile Include="Table\jobbud.cs" />
-    <Compile Include="Table\leave_bak.cs" />
-    <Compile Include="Table\nocontrol.cs" />
-    <Compile Include="Table\non.cs" />
-    <Compile Include="Table\non_hist.cs" />
-    <Compile Include="Table\offices.cs" />
-    <Compile Include="Table\outstanding_temp.cs" />
-    <Compile Include="Table\pat_job_tem.cs" />
-    <Compile Include="Table\plan_emp.cs" />
-    <Compile Include="Table\plan_pos.cs" />
-    <Compile Include="Table\position.cs" />
-    <Compile Include="Table\prriod.cs" />
-    <Compile Include="Table\ptl_job_tem.cs" />
-    <Compile Include="Table\servicetype.cs" />
-    <Compile Include="Table\spe_endorse.cs" />
-    <Compile Include="Table\SysNode.cs" />
-    <Compile Include="Table\temp_all_app.cs" />
-    <Compile Include="Table\temp_day_inq.cs" />
-    <Compile Include="Table\update_time.cs" />
-    <Compile Include="Table\userinf.cs" />
-    <Compile Include="Table\worknatrue.cs" />
-    <Compile Include="Table\workstage.cs" />
+    <Compile Include="Table\job.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

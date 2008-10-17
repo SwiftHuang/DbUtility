@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类temp_all_app 。(属性说明自动提取数据库字段的描述信息)
@@ -32,6 +33,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_CO_CODE", "", typeof(string))]
 		public string TEM_CO_CODE
 		{
 			set{ _tem_co_code=value;}
@@ -40,6 +42,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_STAFF_CODE", "", typeof(string))]
 		public string TEM_STAFF_CODE
 		{
 			set{ _tem_staff_code=value;}
@@ -48,6 +51,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_WORK_DATE", "", typeof(DateTime))]
 		public DateTime? TEM_WORK_DATE
 		{
 			set{ _tem_work_date=value;}
@@ -56,6 +60,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_LINE_NO", "", typeof(int))]
 		public int? TEM_LINE_NO
 		{
 			set{ _tem_line_no=value;}
@@ -64,6 +69,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_HOUR_TYPE", "", typeof(string))]
 		public string TEM_HOUR_TYPE
 		{
 			set{ _tem_hour_type=value;}
@@ -72,6 +78,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_APP_CODE", "", typeof(string))]
 		public string TEM_APP_CODE
 		{
 			set{ _tem_app_code=value;}
@@ -80,6 +87,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_SER_CODE", "", typeof(string))]
 		public string TEM_SER_CODE
 		{
 			set{ _tem_ser_code=value;}
@@ -88,6 +96,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_JOB_CODE", "", typeof(string))]
 		public string TEM_JOB_CODE
 		{
 			set{ _tem_job_code=value;}
@@ -96,6 +105,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_BF_SUM", "", typeof(decimal))]
 		public decimal? TEM_BF_SUM
 		{
 			set{ _tem_bf_sum=value;}
@@ -104,6 +114,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_0", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_0
 		{
 			set{ _tem_nor_hour_0=value;}
@@ -112,6 +123,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_1", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_1
 		{
 			set{ _tem_nor_hour_1=value;}
@@ -120,6 +132,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_2", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_2
 		{
 			set{ _tem_nor_hour_2=value;}
@@ -128,6 +141,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_3", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_3
 		{
 			set{ _tem_nor_hour_3=value;}
@@ -136,6 +150,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_4", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_4
 		{
 			set{ _tem_nor_hour_4=value;}
@@ -144,6 +159,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_5", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_5
 		{
 			set{ _tem_nor_hour_5=value;}
@@ -152,6 +168,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_NOR_HOUR_6", "", typeof(decimal))]
 		public decimal? TEM_NOR_HOUR_6
 		{
 			set{ _tem_nor_hour_6=value;}
@@ -160,6 +177,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_TYPE", "", typeof(string))]
 		public string TEM_TYPE
 		{
 			set{ _tem_type=value;}
@@ -168,6 +186,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_APP_FLAG", "", typeof(string))]
 		public string TEM_APP_FLAG
 		{
 			set{ _tem_app_flag=value;}
@@ -176,6 +195,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_QUE", "", typeof(string))]
 		public string TEM_QUE
 		{
 			set{ _tem_que=value;}
@@ -184,6 +204,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("TEM_POS_CODE", "", typeof(string))]
 		public string TEM_POS_CODE
 		{
 			set{ _tem_pos_code=value;}

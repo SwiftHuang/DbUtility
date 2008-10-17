@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类plan_emp 。(属性说明自动提取数据库字段的描述信息)
@@ -24,6 +25,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_CO", "", typeof(string))]
 		public string PLA_EMP_CO
 		{
 			set{ _pla_emp_co=value;}
@@ -32,6 +34,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_OFF", "", typeof(string))]
 		public string PLA_EMP_OFF
 		{
 			set{ _pla_emp_off=value;}
@@ -40,6 +43,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_POS", "", typeof(string))]
 		public string PLA_EMP_POS
 		{
 			set{ _pla_emp_pos=value;}
@@ -48,6 +52,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_CODE", "", typeof(string))]
 		public string PLA_EMP_CODE
 		{
 			set{ _pla_emp_code=value;}
@@ -56,6 +61,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_NUM", "", typeof(int))]
 		public int PLA_EMP_NUM
 		{
 			set{ _pla_emp_num=value;}
@@ -64,6 +70,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_NOR", "", typeof(decimal))]
 		public decimal PLA_EMP_NOR
 		{
 			set{ _pla_emp_nor=value;}
@@ -72,6 +79,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_OT1", "", typeof(decimal))]
 		public decimal PLA_EMP_OT1
 		{
 			set{ _pla_emp_ot1=value;}
@@ -80,6 +88,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_OT2", "", typeof(decimal))]
 		public decimal PLA_EMP_OT2
 		{
 			set{ _pla_emp_ot2=value;}
@@ -88,6 +97,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_OT3", "", typeof(decimal))]
 		public decimal PLA_EMP_OT3
 		{
 			set{ _pla_emp_ot3=value;}
@@ -96,6 +106,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_T1", "", typeof(decimal))]
 		public decimal PLA_EMP_T1
 		{
 			set{ _pla_emp_t1=value;}
@@ -104,6 +115,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_T2", "", typeof(decimal))]
 		public decimal PLA_EMP_T2
 		{
 			set{ _pla_emp_t2=value;}
@@ -112,6 +124,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("PLA_EMP_T3", "", typeof(decimal))]
 		public decimal PLA_EMP_T3
 		{
 			set{ _pla_emp_t3=value;}

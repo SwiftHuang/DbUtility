@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类company 。(属性说明自动提取数据库字段的描述信息)
@@ -22,6 +23,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_CODE", "", typeof(string))]
 		public string CO_CODE
 		{
 			set{ _co_code=value;}
@@ -30,6 +32,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_SCR_NAME", "", typeof(string))]
 		public string CO_SCR_NAME
 		{
 			set{ _co_scr_name=value;}
@@ -38,6 +41,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_RPT_NAME", "", typeof(string))]
 		public string CO_RPT_NAME
 		{
 			set{ _co_rpt_name=value;}
@@ -46,6 +50,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_LB_DATE", "", typeof(DateTime))]
 		public DateTime? CO_LB_DATE
 		{
 			set{ _co_lb_date=value;}
@@ -54,6 +59,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_LE_DATE", "", typeof(DateTime))]
 		public DateTime? CO_LE_DATE
 		{
 			set{ _co_le_date=value;}
@@ -62,6 +68,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_CB_DATE", "", typeof(DateTime))]
 		public DateTime? CO_CB_DATE
 		{
 			set{ _co_cb_date=value;}
@@ -70,6 +77,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_CE_DATE", "", typeof(DateTime))]
 		public DateTime? CO_CE_DATE
 		{
 			set{ _co_ce_date=value;}
@@ -78,6 +86,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_CURR", "", typeof(string))]
 		public string CO_CURR
 		{
 			set{ _co_curr=value;}
@@ -86,6 +95,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_PERIOD_FROM", "", typeof(DateTime))]
 		public DateTime? CO_PERIOD_FROM
 		{
 			set{ _co_period_from=value;}
@@ -94,6 +104,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("CO_PERIOD_TO", "", typeof(DateTime))]
 		public DateTime? CO_PERIOD_TO
 		{
 			set{ _co_period_to=value;}

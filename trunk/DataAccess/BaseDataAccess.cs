@@ -81,7 +81,7 @@ namespace WongTung.DataAccess
                             object obj = reader.GetValue(f.FieldIndex);
                             if (obj != DBNull.Value)
                             {
-                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataType), null);
+                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj,f.DataType), null);
                             }
                         }
                     }

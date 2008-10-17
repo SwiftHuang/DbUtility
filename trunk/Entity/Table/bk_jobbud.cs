@@ -1,5 +1,6 @@
 using System;
-namespace WongTung.Entity.Table
+using TableMapping;
+namespace WongTung.Entity.Table.Model
 {
 	/// <summary>
 	/// 实体类bk_jobbud 。(属性说明自动提取数据库字段的描述信息)
@@ -22,6 +23,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_CO_CODE", "", typeof(string))]
 		public string JOB_CO_CODE
 		{
 			set{ _job_co_code=value;}
@@ -30,6 +32,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_CODE", "", typeof(string))]
 		public string JOB_CODE
 		{
 			set{ _job_code=value;}
@@ -38,6 +41,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_SER", "", typeof(string))]
 		public string JOB_SER
 		{
 			set{ _job_ser=value;}
@@ -46,6 +50,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_POS", "", typeof(string))]
 		public string JOB_POS
 		{
 			set{ _job_pos=value;}
@@ -54,6 +59,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_STAFF", "", typeof(string))]
 		public string JOB_STAFF
 		{
 			set{ _job_staff=value;}
@@ -62,6 +68,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_BUD", "", typeof(decimal))]
 		public decimal? JOB_BUD
 		{
 			set{ _job_bud=value;}
@@ -70,6 +77,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_NOR", "", typeof(decimal))]
 		public decimal? JOB_NOR
 		{
 			set{ _job_nor=value;}
@@ -78,6 +86,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_NOR_EXP", "", typeof(decimal))]
 		public decimal JOB_NOR_EXP
 		{
 			set{ _job_nor_exp=value;}
@@ -86,6 +95,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_OT", "", typeof(decimal))]
 		public decimal? JOB_OT
 		{
 			set{ _job_ot=value;}
@@ -94,6 +104,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
+		[FieldMapping("JOB_OT_EXP", "", typeof(decimal))]
 		public decimal? JOB_OT_EXP
 		{
 			set{ _job_ot_exp=value;}
