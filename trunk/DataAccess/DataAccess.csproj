@@ -45,11 +45,7 @@
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="DADailyts.cs" />
     <Compile Include="DAJob.cs" />
-    <Compile Include="DBUtility\CommandInfo.cs" />
-    <Compile Include="DBUtility\DbHelperMySQL.cs" />
-    <Compile Include="DBUtility\DESEncrypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DBUtility\PubConstant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -58,6 +54,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{C05F0FF6-FCC4-4388-91C2-000E28D0C155}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</Project>
+      <Name>DBUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{58997085-C943-4948-849A-A624FF622F9F}</Project>
