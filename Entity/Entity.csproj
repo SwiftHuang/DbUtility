@@ -73,6 +73,10 @@
       <Project>{C05F0FF6-FCC4-4388-91C2-000E28D0C155}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

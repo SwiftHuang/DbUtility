@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using MySql.Data.MySqlClient;
 
 using WongTung.DBUtility;
+using WongTung.DBUtility.TableMapping;
 using WongTung.Common;
 
 namespace WongTung.DataAccess
@@ -49,21 +49,21 @@ namespace WongTung.DataAccess
 
             List<T> DataList = new List<T>();
             string entityID = typeof(T).ToString();//Sql.GetHashCode().ToString();
-            List<TableMapping.FieldInfo> lstFieldInfo = new List<TableMapping.FieldInfo>();
+            List<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
 
             if (WebCache.GetCache(entityID) == null)
             {
                 foreach (PropertyInfo Property in typeof(T).GetProperties())
                 {
-                    foreach (TableMapping.FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(TableMapping.FieldMappingAttribute), false))
+                    foreach (FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
                     {
-                        lstFieldInfo.Add(new TableMapping.FieldInfo(Property, Field.DataFieldName, Field.NullValue, Field.DataType, -1));
+                        lstFieldInfo.Add(new FieldMappingInfo(Property, Field.DataFieldName, Field.NullValue, Field.DataType, -1));
                     }
                 }
                 WebCache.Insert(entityID, lstFieldInfo);
             }
             else
-                lstFieldInfo = (List<TableMapping.FieldInfo>)WebCache.GetCache(entityID);
+                lstFieldInfo = (List<FieldMappingInfo>)WebCache.GetCache(entityID);
 
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
@@ -71,7 +71,7 @@ namespace WongTung.DataAccess
             {
                 T RowInstance = new T();
 
-                foreach (TableMapping.FieldInfo f in lstFieldInfo)
+                foreach (FieldMappingInfo f in lstFieldInfo)
                 {
                     try
                     {
@@ -81,7 +81,7 @@ namespace WongTung.DataAccess
                             object obj = reader.GetValue(f.FieldIndex);
                             if (obj != DBNull.Value)
                             {
-                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj,f.DataType), null);
+                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataType), null);
                             }
                         }
                     }
@@ -150,10 +150,10 @@ namespace WongTung.DataAccess
             timeSpan = DateTime.Now - s;
             return r;
         }
-        private List<TableMapping.FieldInfo> SetFieldIndex(IDataReader reader, List<TableMapping.FieldInfo> list)
+        private List<FieldMappingInfo> SetFieldIndex(IDataReader reader, List<FieldMappingInfo> list)
         {
-            List<TableMapping.FieldInfo> datalist = new List<TableMapping.FieldInfo>();
-            foreach (TableMapping.FieldInfo f in list)
+            List<FieldMappingInfo> datalist = new List<FieldMappingInfo>();
+            foreach (FieldMappingInfo f in list)
             {
                 try
                 {
