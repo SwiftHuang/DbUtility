@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using WongTung.DBUtility.TableMapping;
 
 namespace WongTung.Entity.Table
@@ -6,7 +7,7 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类dailyts 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class dailyts
+	public class dailyts  
 	{
 		public dailyts()
 		{}

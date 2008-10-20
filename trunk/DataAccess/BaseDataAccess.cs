@@ -14,6 +14,9 @@ namespace WongTung.DataAccess
     public abstract class BaseDataAccess<T> where T : class, new()
     {
         private const string _SelectString = "SELECT * FROM {0} {1}";
+        private const string _InsertString = "INSERT INTO {0} ({1}) VALUE({2});";
+        private const string _StringFormat = "'{0}',";
+        private const string _DecimalFormat = "{0},";
         private string _sql = string.Empty;
         public string Sql
         { get { return _sql; } }
@@ -22,9 +25,35 @@ namespace WongTung.DataAccess
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        protected void Add(T entity)
+        public void Add(T entity)
         {
+            StringBuilder sbInsField = new StringBuilder();
+            StringBuilder sbInsValue = new StringBuilder();
 
+            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            {
+                object obj = f.Property.GetValue(entity, null);
+                if (obj != null)
+                {
+                    if (f.DataType == typeof(DateTime))
+                    {
+                        if (DateTime.MinValue != (DateTime)obj)
+                        {
+                            sbInsField.AppendFormat(_StringFormat, f.FieldName);
+                            sbInsValue.AppendFormat(_StringFormat, Convert.ChangeType(obj, f.DataType));
+                        }
+                    }
+                    else
+                    {
+                        sbInsField.AppendFormat(_StringFormat, f.FieldName);
+                        if (f.DataType == typeof(Decimal) || f.DataType == typeof(Int16))
+                            sbInsValue.AppendFormat(_DecimalFormat, Convert.ChangeType(obj, f.DataType));
+                        else
+                            sbInsValue.AppendFormat(_StringFormat, Convert.ChangeType(obj, f.DataType));
+                    }
+                }
+            }
+            string s = string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
         }
         /// <summary>
         /// 更新一条数据
@@ -48,23 +77,9 @@ namespace WongTung.DataAccess
             IDataReader reader = GetDataReader(strWhere);
 
             List<T> DataList = new List<T>();
-            string entityID = typeof(T).ToString();//Sql.GetHashCode().ToString();
             List<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
 
-            if (WebCache.GetCache(entityID) == null)
-            {
-                foreach (PropertyInfo Property in typeof(T).GetProperties())
-                {
-                    foreach (FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
-                    {
-                        lstFieldInfo.Add(new FieldMappingInfo(Property, Field.DataFieldName, Field.NullValue, Field.DataType, -1));
-                    }
-                }
-                WebCache.Insert(entityID, lstFieldInfo);
-            }
-            else
-                lstFieldInfo = (List<FieldMappingInfo>)WebCache.GetCache(entityID);
-
+            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
             while (reader.Read())
