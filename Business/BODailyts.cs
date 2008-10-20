@@ -35,5 +35,9 @@ namespace WongTung.Business
             timeSpan = DADailyts.timeSpan;
             return t;
         }
+        public void Add(Entity.Table.dailyts entity)
+        {
+            DADailyts.Add(entity);
+        }
     }
 }
