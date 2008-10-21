@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类position 。(属性说明自动提取数据库字段的描述信息)
@@ -32,7 +32,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_CO_CODE", "", typeof(string))]
+		[FieldMapping("POS_CO_CODE", TypeCode.String)]
 		public string POS_CO_CODE
 		{
 			set{ _pos_co_code=value;}
@@ -41,7 +41,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_CODE", "", typeof(string))]
+		[FieldMapping("POS_CODE", TypeCode.String)]
 		public string POS_CODE
 		{
 			set{ _pos_code=value;}
@@ -50,7 +50,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_DESC", "", typeof(string))]
+		[FieldMapping("POS_DESC", TypeCode.String)]
 		public string POS_DESC
 		{
 			set{ _pos_desc=value;}
@@ -59,7 +59,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_FEE_LEV1", "", typeof(decimal))]
+		[FieldMapping("POS_FEE_LEV1", TypeCode.Decimal)]
 		public decimal? POS_FEE_LEV1
 		{
 			set{ _pos_fee_lev1=value;}
@@ -68,7 +68,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_FEE_LEV2", "", typeof(decimal))]
+		[FieldMapping("POS_FEE_LEV2", TypeCode.Decimal)]
 		public decimal? POS_FEE_LEV2
 		{
 			set{ _pos_fee_lev2=value;}
@@ -77,7 +77,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_FEE_LEV3", "", typeof(decimal))]
+		[FieldMapping("POS_FEE_LEV3", TypeCode.Decimal)]
 		public decimal? POS_FEE_LEV3
 		{
 			set{ _pos_fee_lev3=value;}
@@ -86,7 +86,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_RATE_OUT", "", typeof(decimal))]
+		[FieldMapping("POS_RATE_OUT", TypeCode.Decimal)]
 		public decimal? POS_RATE_OUT
 		{
 			set{ _pos_rate_out=value;}
@@ -95,7 +95,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_RATE_DAILY", "", typeof(decimal))]
+		[FieldMapping("POS_RATE_DAILY", TypeCode.Decimal)]
 		public decimal? POS_RATE_DAILY
 		{
 			set{ _pos_rate_daily=value;}
@@ -104,7 +104,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_RATE_MON", "", typeof(decimal))]
+		[FieldMapping("POS_RATE_MON", TypeCode.Decimal)]
 		public decimal? POS_RATE_MON
 		{
 			set{ _pos_rate_mon=value;}
@@ -113,7 +113,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_RATE_OT", "", typeof(decimal))]
+		[FieldMapping("POS_RATE_OT", TypeCode.Decimal)]
 		public decimal? POS_RATE_OT
 		{
 			set{ _pos_rate_ot=value;}
@@ -122,7 +122,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_MON_TOTAL", "", typeof(decimal))]
+		[FieldMapping("POS_MON_TOTAL", TypeCode.Decimal)]
 		public decimal? POS_MON_TOTAL
 		{
 			set{ _pos_mon_total=value;}
@@ -131,7 +131,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_MON_UTILIST", "", typeof(decimal))]
+		[FieldMapping("POS_MON_UTILIST", TypeCode.Decimal)]
 		public decimal? POS_MON_UTILIST
 		{
 			set{ _pos_mon_utilist=value;}
@@ -140,7 +140,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_MON_REV", "", typeof(decimal))]
+		[FieldMapping("POS_MON_REV", TypeCode.Decimal)]
 		public decimal? POS_MON_REV
 		{
 			set{ _pos_mon_rev=value;}
@@ -149,7 +149,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_SAL_FROM", "", typeof(decimal))]
+		[FieldMapping("POS_SAL_FROM", TypeCode.Decimal)]
 		public decimal? POS_SAL_FROM
 		{
 			set{ _pos_sal_from=value;}
@@ -158,7 +158,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_SAL_TO", "", typeof(decimal))]
+		[FieldMapping("POS_SAL_TO", TypeCode.Decimal)]
 		public decimal? POS_SAL_TO
 		{
 			set{ _pos_sal_to=value;}
@@ -167,7 +167,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_DALIY_COST", "", typeof(decimal))]
+		[FieldMapping("POS_DALIY_COST", TypeCode.Decimal)]
 		public decimal? POS_DALIY_COST
 		{
 			set{ _pos_daliy_cost=value;}
@@ -176,7 +176,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_MON_COST", "", typeof(decimal))]
+		[FieldMapping("POS_MON_COST", TypeCode.Decimal)]
 		public decimal? POS_MON_COST
 		{
 			set{ _pos_mon_cost=value;}
@@ -185,7 +185,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_CLASS", "", typeof(decimal))]
+		[FieldMapping("POS_CLASS", TypeCode.Decimal)]
 		public decimal? POS_CLASS
 		{
 			set{ _pos_class=value;}
@@ -194,7 +194,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("POS_PLAN", "", typeof(string))]
+		[FieldMapping("POS_PLAN", TypeCode.String)]
 		public string POS_PLAN
 		{
 			set{ _pos_plan=value;}

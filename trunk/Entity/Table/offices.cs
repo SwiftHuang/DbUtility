@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类offices 。(属性说明自动提取数据库字段的描述信息)
@@ -17,7 +17,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OFF_CO_CODE", "", typeof(string))]
+		[FieldMapping("OFF_CO_CODE", TypeCode.String)]
 		public string OFF_CO_CODE
 		{
 			set{ _off_co_code=value;}
@@ -26,7 +26,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OFF_CODE", "", typeof(string))]
+		[FieldMapping("OFF_CODE", TypeCode.String)]
 		public string OFF_CODE
 		{
 			set{ _off_code=value;}
@@ -35,7 +35,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OFF_NAME", "", typeof(string))]
+		[FieldMapping("OFF_NAME", TypeCode.String)]
 		public string OFF_NAME
 		{
 			set{ _off_name=value;}
@@ -44,7 +44,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OFF_ENDORSE", "", typeof(string))]
+		[FieldMapping("OFF_ENDORSE", TypeCode.String)]
 		public string OFF_ENDORSE
 		{
 			set{ _off_endorse=value;}

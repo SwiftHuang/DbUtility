@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类holiday_date 。(属性说明自动提取数据库字段的描述信息)
@@ -19,7 +19,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_CO_CODE", "", typeof(string))]
+		[FieldMapping("HO_CO_CODE", TypeCode.String)]
 		public string HO_CO_CODE
 		{
 			set{ _ho_co_code=value;}
@@ -28,7 +28,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_LOC", "", typeof(string))]
+		[FieldMapping("HO_LOC", TypeCode.String)]
 		public string HO_LOC
 		{
 			set{ _ho_loc=value;}
@@ -37,7 +37,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_CODE", "", typeof(string))]
+		[FieldMapping("HO_CODE", TypeCode.String)]
 		public string HO_CODE
 		{
 			set{ _ho_code=value;}
@@ -46,7 +46,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_DATE_START", "", typeof(DateTime))]
+		[FieldMapping("HO_DATE_START", TypeCode.DateTime)]
 		public DateTime HO_DATE_START
 		{
 			set{ _ho_date_start=value;}
@@ -55,7 +55,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_DATE_END", "", typeof(DateTime))]
+		[FieldMapping("HO_DATE_END", TypeCode.DateTime)]
 		public DateTime HO_DATE_END
 		{
 			set{ _ho_date_end=value;}
@@ -64,7 +64,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("HO_DESC", "", typeof(string))]
+		[FieldMapping("HO_DESC", TypeCode.String)]
 		public string HO_DESC
 		{
 			set{ _ho_desc=value;}

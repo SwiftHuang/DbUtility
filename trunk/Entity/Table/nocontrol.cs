@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类nocontrol 。(属性说明自动提取数据库字段的描述信息)
@@ -18,7 +18,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NO_CO_CODE", "", typeof(string))]
+		[FieldMapping("NO_CO_CODE", TypeCode.String)]
 		public string NO_CO_CODE
 		{
 			set{ _no_co_code=value;}
@@ -27,7 +27,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NO_CODE", "", typeof(string))]
+		[FieldMapping("NO_CODE", TypeCode.String)]
 		public string NO_CODE
 		{
 			set{ _no_code=value;}
@@ -36,7 +36,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NO_DESC", "", typeof(string))]
+		[FieldMapping("NO_DESC", TypeCode.String)]
 		public string NO_DESC
 		{
 			set{ _no_desc=value;}
@@ -45,7 +45,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NO_STA_NO", "", typeof(decimal))]
+		[FieldMapping("NO_STA_NO", TypeCode.Decimal)]
 		public decimal? NO_STA_NO
 		{
 			set{ _no_sta_no=value;}
@@ -54,7 +54,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NO_SEQ_NO", "", typeof(decimal))]
+		[FieldMapping("NO_SEQ_NO", TypeCode.Decimal)]
 		public decimal? NO_SEQ_NO
 		{
 			set{ _no_seq_no=value;}

@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类icpinq 。(属性说明自动提取数据库字段的描述信息)
@@ -18,7 +18,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ICP_CO_CODE", "", typeof(string))]
+		[FieldMapping("ICP_CO_CODE", TypeCode.String)]
 		public string ICP_CO_CODE
 		{
 			set{ _icp_co_code=value;}
@@ -27,7 +27,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ICP_OFFICE_CODE", "", typeof(string))]
+		[FieldMapping("ICP_OFFICE_CODE", TypeCode.String)]
 		public string ICP_OFFICE_CODE
 		{
 			set{ _icp_office_code=value;}
@@ -36,7 +36,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ICP_OFFICE_NAME", "", typeof(string))]
+		[FieldMapping("ICP_OFFICE_NAME", TypeCode.String)]
 		public string ICP_OFFICE_NAME
 		{
 			set{ _icp_office_name=value;}
@@ -45,7 +45,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ICP_EMP_CODE", "", typeof(string))]
+		[FieldMapping("ICP_EMP_CODE", TypeCode.String)]
 		public string ICP_EMP_CODE
 		{
 			set{ _icp_emp_code=value;}
@@ -54,7 +54,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ICP_EMP_NAME", "", typeof(string))]
+		[FieldMapping("ICP_EMP_NAME", TypeCode.String)]
 		public string ICP_EMP_NAME
 		{
 			set{ _icp_emp_name=value;}

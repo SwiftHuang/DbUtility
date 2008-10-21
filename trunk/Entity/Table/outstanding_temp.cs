@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类outstanding_temp 。(属性说明自动提取数据库字段的描述信息)
@@ -22,7 +22,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("NUM", "", typeof(decimal))]
+		[FieldMapping("NUM", TypeCode.Decimal)]
 		public decimal NUM
 		{
 			set{ _num=value;}
@@ -31,7 +31,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_OFF_CODE", "", typeof(string))]
+		[FieldMapping("OUT_OFF_CODE", TypeCode.String)]
 		public string OUT_OFF_CODE
 		{
 			set{ _out_off_code=value;}
@@ -40,7 +40,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_OFF_NAME", "", typeof(string))]
+		[FieldMapping("OUT_OFF_NAME", TypeCode.String)]
 		public string OUT_OFF_NAME
 		{
 			set{ _out_off_name=value;}
@@ -49,7 +49,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_EMP_CODE", "", typeof(string))]
+		[FieldMapping("OUT_EMP_CODE", TypeCode.String)]
 		public string OUT_EMP_CODE
 		{
 			set{ _out_emp_code=value;}
@@ -58,7 +58,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_EMP_NAME", "", typeof(string))]
+		[FieldMapping("OUT_EMP_NAME", TypeCode.String)]
 		public string OUT_EMP_NAME
 		{
 			set{ _out_emp_name=value;}
@@ -67,7 +67,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_DAY", "", typeof(DateTime))]
+		[FieldMapping("OUT_DAY", TypeCode.DateTime)]
 		public DateTime? OUT_DAY
 		{
 			set{ _out_day=value;}
@@ -76,7 +76,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_POS_CLASS", "", typeof(decimal))]
+		[FieldMapping("OUT_POS_CLASS", TypeCode.Decimal)]
 		public decimal? OUT_POS_CLASS
 		{
 			set{ _out_pos_class=value;}
@@ -85,7 +85,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_POS_CODE", "", typeof(string))]
+		[FieldMapping("OUT_POS_CODE", TypeCode.String)]
 		public string OUT_POS_CODE
 		{
 			set{ _out_pos_code=value;}
@@ -94,7 +94,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OUT_UPDATE_DATE", "", typeof(DateTime))]
+		[FieldMapping("OUT_UPDATE_DATE", TypeCode.DateTime)]
 		public DateTime? OUT_UPDATE_DATE
 		{
 			set{ _out_update_date=value;}

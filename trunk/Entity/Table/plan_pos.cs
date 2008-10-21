@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类plan_pos 。(属性说明自动提取数据库字段的描述信息)
@@ -24,7 +24,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_CO", "", typeof(string))]
+		[FieldMapping("PLA_POS_CO", TypeCode.String)]
 		public string PLA_POS_CO
 		{
 			set{ _pla_pos_co=value;}
@@ -33,7 +33,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_OFF", "", typeof(string))]
+		[FieldMapping("PLA_POS_OFF", TypeCode.String)]
 		public string PLA_POS_OFF
 		{
 			set{ _pla_pos_off=value;}
@@ -42,7 +42,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_CODE", "", typeof(string))]
+		[FieldMapping("PLA_POS_CODE", TypeCode.String)]
 		public string PLA_POS_CODE
 		{
 			set{ _pla_pos_code=value;}
@@ -51,7 +51,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_NUM", "", typeof(int))]
+		[FieldMapping("PLA_POS_NUM", TypeCode.Int)]
 		public int PLA_POS_NUM
 		{
 			set{ _pla_pos_num=value;}
@@ -60,7 +60,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_NOR", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_NOR", TypeCode.Decimal)]
 		public decimal PLA_POS_NOR
 		{
 			set{ _pla_pos_nor=value;}
@@ -69,7 +69,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_OT1", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_OT1", TypeCode.Decimal)]
 		public decimal PLA_POS_OT1
 		{
 			set{ _pla_pos_ot1=value;}
@@ -78,7 +78,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_OT2", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_OT2", TypeCode.Decimal)]
 		public decimal PLA_POS_OT2
 		{
 			set{ _pla_pos_ot2=value;}
@@ -87,7 +87,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_OT3", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_OT3", TypeCode.Decimal)]
 		public decimal PLA_POS_OT3
 		{
 			set{ _pla_pos_ot3=value;}
@@ -96,7 +96,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_T1", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_T1", TypeCode.Decimal)]
 		public decimal PLA_POS_T1
 		{
 			set{ _pla_pos_t1=value;}
@@ -105,7 +105,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_T2", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_T2", TypeCode.Decimal)]
 		public decimal PLA_POS_T2
 		{
 			set{ _pla_pos_t2=value;}
@@ -114,7 +114,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PLA_POS_T3", "", typeof(decimal))]
+		[FieldMapping("PLA_POS_T3", TypeCode.Decimal)]
 		public decimal PLA_POS_T3
 		{
 			set{ _pla_pos_t3=value;}

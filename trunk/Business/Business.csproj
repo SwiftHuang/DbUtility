@@ -58,6 +58,10 @@
       <Project>{48831FB0-3BCD-46CC-996F-26FABBE060BF}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{58997085-C943-4948-849A-A624FF622F9F}</Project>
       <Name>Entity</Name>

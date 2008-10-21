@@ -37,6 +37,27 @@ namespace WongTung.DBUtility
             return connectionString;
         }
 
-
+        private static Enums.DBType _DatabaseType;
+        public static Enums.DBType DatabaseType
+        {
+            get
+            {
+                if (_DatabaseType == Enums.DBType.None)
+                {
+                    switch (Common.WebConfig.DatabaseTypeString)
+                    {
+                        case "MYSQL":
+                            _DatabaseType = Enums.DBType.MySql;
+                            break;
+                        case "MSSQL":
+                            _DatabaseType = Enums.DBType.MsSql;
+                            break;
+                        default:
+                            throw new Exception("Invalid database type");
+                    };
+                }
+                return _DatabaseType;
+            }
+        }
     }
 }

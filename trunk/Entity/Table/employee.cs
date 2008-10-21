@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类employee 。(属性说明自动提取数据库字段的描述信息)
@@ -24,7 +24,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_CO_CODE", "", typeof(string))]
+		[FieldMapping("EMP_CO_CODE", TypeCode.String)]
 		public string EMP_CO_CODE
 		{
 			set{ _emp_co_code=value;}
@@ -33,7 +33,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_CODE", "", typeof(string))]
+		[FieldMapping("EMP_CODE", TypeCode.String)]
 		public string EMP_CODE
 		{
 			set{ _emp_code=value;}
@@ -42,7 +42,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_NAME", "", typeof(string))]
+		[FieldMapping("EMP_NAME", TypeCode.String)]
 		public string EMP_NAME
 		{
 			set{ _emp_name=value;}
@@ -51,7 +51,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_POS_CODE", "", typeof(string))]
+		[FieldMapping("EMP_POS_CODE", TypeCode.String)]
 		public string EMP_POS_CODE
 		{
 			set{ _emp_pos_code=value;}
@@ -60,7 +60,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_DEP_CODE", "", typeof(string))]
+		[FieldMapping("EMP_DEP_CODE", TypeCode.String)]
 		public string EMP_DEP_CODE
 		{
 			set{ _emp_dep_code=value;}
@@ -69,7 +69,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_INITIAL", "", typeof(string))]
+		[FieldMapping("EMP_INITIAL", TypeCode.String)]
 		public string EMP_INITIAL
 		{
 			set{ _emp_initial=value;}
@@ -78,7 +78,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_OFFICE", "", typeof(string))]
+		[FieldMapping("EMP_OFFICE", TypeCode.String)]
 		public string EMP_OFFICE
 		{
 			set{ _emp_office=value;}
@@ -87,7 +87,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_CHNAME", "", typeof(string))]
+		[FieldMapping("EMP_CHNAME", TypeCode.String)]
 		public string EMP_CHNAME
 		{
 			set{ _emp_chname=value;}
@@ -96,7 +96,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_SPE", "", typeof(string))]
+		[FieldMapping("EMP_SPE", TypeCode.String)]
 		public string EMP_SPE
 		{
 			set{ _emp_spe=value;}
@@ -105,7 +105,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_CRE_DATE", "", typeof(DateTime))]
+		[FieldMapping("EMP_CRE_DATE", TypeCode.DateTime)]
 		public DateTime EMP_CRE_DATE
 		{
 			set{ _emp_cre_date=value;}
@@ -114,7 +114,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("EMP_DEL", "", typeof(string))]
+		[FieldMapping("EMP_DEL", TypeCode.String)]
 		public string EMP_DEL
 		{
 			set{ _emp_del=value;}

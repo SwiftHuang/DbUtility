@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类pat_job_tem 。(属性说明自动提取数据库字段的描述信息)
@@ -37,7 +37,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_CO_CODE", "", typeof(string))]
+		[FieldMapping("AJ_CO_CODE", TypeCode.String)]
 		public string AJ_CO_CODE
 		{
 			set{ _aj_co_code=value;}
@@ -46,7 +46,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_EMP_CODE", "", typeof(string))]
+		[FieldMapping("AJ_EMP_CODE", TypeCode.String)]
 		public string AJ_EMP_CODE
 		{
 			set{ _aj_emp_code=value;}
@@ -55,7 +55,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_LAST_DATE", "", typeof(DateTime))]
+		[FieldMapping("AJ_LAST_DATE", TypeCode.DateTime)]
 		public DateTime AJ_LAST_DATE
 		{
 			set{ _aj_last_date=value;}
@@ -64,7 +64,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_LAST_NUM", "", typeof(decimal))]
+		[FieldMapping("AJ_LAST_NUM", TypeCode.Decimal)]
 		public decimal AJ_LAST_NUM
 		{
 			set{ _aj_last_num=value;}
@@ -73,7 +73,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_1", "", typeof(string))]
+		[FieldMapping("AJ_JOB_1", TypeCode.String)]
 		public string AJ_JOB_1
 		{
 			set{ _aj_job_1=value;}
@@ -82,7 +82,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_2", "", typeof(string))]
+		[FieldMapping("AJ_JOB_2", TypeCode.String)]
 		public string AJ_JOB_2
 		{
 			set{ _aj_job_2=value;}
@@ -91,7 +91,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_3", "", typeof(string))]
+		[FieldMapping("AJ_JOB_3", TypeCode.String)]
 		public string AJ_JOB_3
 		{
 			set{ _aj_job_3=value;}
@@ -100,7 +100,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_4", "", typeof(string))]
+		[FieldMapping("AJ_JOB_4", TypeCode.String)]
 		public string AJ_JOB_4
 		{
 			set{ _aj_job_4=value;}
@@ -109,7 +109,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_5", "", typeof(string))]
+		[FieldMapping("AJ_JOB_5", TypeCode.String)]
 		public string AJ_JOB_5
 		{
 			set{ _aj_job_5=value;}
@@ -118,7 +118,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_6", "", typeof(string))]
+		[FieldMapping("AJ_JOB_6", TypeCode.String)]
 		public string AJ_JOB_6
 		{
 			set{ _aj_job_6=value;}
@@ -127,7 +127,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_7", "", typeof(string))]
+		[FieldMapping("AJ_JOB_7", TypeCode.String)]
 		public string AJ_JOB_7
 		{
 			set{ _aj_job_7=value;}
@@ -136,7 +136,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_8", "", typeof(string))]
+		[FieldMapping("AJ_JOB_8", TypeCode.String)]
 		public string AJ_JOB_8
 		{
 			set{ _aj_job_8=value;}
@@ -145,7 +145,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_9", "", typeof(string))]
+		[FieldMapping("AJ_JOB_9", TypeCode.String)]
 		public string AJ_JOB_9
 		{
 			set{ _aj_job_9=value;}
@@ -154,7 +154,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_10", "", typeof(string))]
+		[FieldMapping("AJ_JOB_10", TypeCode.String)]
 		public string AJ_JOB_10
 		{
 			set{ _aj_job_10=value;}
@@ -163,7 +163,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_11", "", typeof(string))]
+		[FieldMapping("AJ_JOB_11", TypeCode.String)]
 		public string AJ_JOB_11
 		{
 			set{ _aj_job_11=value;}
@@ -172,7 +172,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_12", "", typeof(string))]
+		[FieldMapping("AJ_JOB_12", TypeCode.String)]
 		public string AJ_JOB_12
 		{
 			set{ _aj_job_12=value;}
@@ -181,7 +181,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_13", "", typeof(string))]
+		[FieldMapping("AJ_JOB_13", TypeCode.String)]
 		public string AJ_JOB_13
 		{
 			set{ _aj_job_13=value;}
@@ -190,7 +190,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_14", "", typeof(string))]
+		[FieldMapping("AJ_JOB_14", TypeCode.String)]
 		public string AJ_JOB_14
 		{
 			set{ _aj_job_14=value;}
@@ -199,7 +199,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_15", "", typeof(string))]
+		[FieldMapping("AJ_JOB_15", TypeCode.String)]
 		public string AJ_JOB_15
 		{
 			set{ _aj_job_15=value;}
@@ -208,7 +208,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_16", "", typeof(string))]
+		[FieldMapping("AJ_JOB_16", TypeCode.String)]
 		public string AJ_JOB_16
 		{
 			set{ _aj_job_16=value;}
@@ -217,7 +217,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_17", "", typeof(string))]
+		[FieldMapping("AJ_JOB_17", TypeCode.String)]
 		public string AJ_JOB_17
 		{
 			set{ _aj_job_17=value;}
@@ -226,7 +226,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_18", "", typeof(string))]
+		[FieldMapping("AJ_JOB_18", TypeCode.String)]
 		public string AJ_JOB_18
 		{
 			set{ _aj_job_18=value;}
@@ -235,7 +235,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_19", "", typeof(string))]
+		[FieldMapping("AJ_JOB_19", TypeCode.String)]
 		public string AJ_JOB_19
 		{
 			set{ _aj_job_19=value;}
@@ -244,7 +244,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("AJ_JOB_20", "", typeof(string))]
+		[FieldMapping("AJ_JOB_20", TypeCode.String)]
 		public string AJ_JOB_20
 		{
 			set{ _aj_job_20=value;}

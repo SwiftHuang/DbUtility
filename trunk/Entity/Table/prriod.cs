@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类prriod 。(属性说明自动提取数据库字段的描述信息)
@@ -17,7 +17,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PR_CO_CODE", "", typeof(string))]
+		[FieldMapping("PR_CO_CODE", TypeCode.String)]
 		public string PR_CO_CODE
 		{
 			set{ _pr_co_code=value;}
@@ -26,7 +26,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PR_NO", "", typeof(decimal))]
+		[FieldMapping("PR_NO", TypeCode.Decimal)]
 		public decimal PR_NO
 		{
 			set{ _pr_no=value;}
@@ -35,7 +35,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PR_FROM", "", typeof(string))]
+		[FieldMapping("PR_FROM", TypeCode.String)]
 		public string PR_FROM
 		{
 			set{ _pr_from=value;}
@@ -44,7 +44,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("PR_TO", "", typeof(string))]
+		[FieldMapping("PR_TO", TypeCode.String)]
 		public string PR_TO
 		{
 			set{ _pr_to=value;}

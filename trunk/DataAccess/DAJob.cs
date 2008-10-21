@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WongTung.DataAccess
 {
-    public class DAJob : BaseDataAccess<Entity.Table.job>
+    public class DAJob : WongTung.DBUtility.BaseDataAccess<Entity.Table.job>
     {
         public DAJob()
         {

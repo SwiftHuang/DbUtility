@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-using WongTung.Entity;
+using WongTung.Entity.Table;
+using WongTung.DBUtility;
 using WongTung.DataAccess;
 
 namespace WongTung.Business
@@ -38,6 +39,16 @@ namespace WongTung.Business
         public void Add(Entity.Table.dailyts entity)
         {
             DADailyts.Add(entity);
+        }
+        public void Update()
+        {
+            List<GenerateSqlPara<dailyts>> updatePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
+            List<GenerateSqlPara<dailyts>> wherePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
+            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
+            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
+            wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
+            wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
+            DADailyts.Update(updatePara, wherePara);
         }
     }
 }

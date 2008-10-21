@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类spe_endorse 。(属性说明自动提取数据库字段的描述信息)
@@ -16,7 +16,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("SPE_CODE", "", typeof(string))]
+		[FieldMapping("SPE_CODE", TypeCode.String)]
 		public string SPE_CODE
 		{
 			set{ _spe_code=value;}
@@ -25,7 +25,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("SPE_CRE_EMP", "", typeof(string))]
+		[FieldMapping("SPE_CRE_EMP", TypeCode.String)]
 		public string SPE_CRE_EMP
 		{
 			set{ _spe_cre_emp=value;}
@@ -34,7 +34,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("SPE_CRE_DATE", "", typeof(DateTime))]
+		[FieldMapping("SPE_CRE_DATE", TypeCode.DateTime)]
 		public DateTime? SPE_CRE_DATE
 		{
 			set{ _spe_cre_date=value;}

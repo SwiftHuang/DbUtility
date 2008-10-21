@@ -48,10 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataAccess.cs" />
     <Compile Include="CommandInfo.cs" />
     <Compile Include="DBCache.cs" />
     <Compile Include="DbHelperMySQL.cs" />
     <Compile Include="DESEncrypt.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="GenerateSql.cs" />
+    <Compile Include="GenerateSqlPara.cs" />
     <Compile Include="PubConstant.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
