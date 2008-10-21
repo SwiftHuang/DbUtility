@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类bk_jobbud 。(属性说明自动提取数据库字段的描述信息)
@@ -23,7 +23,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_CO_CODE", "", typeof(string))]
+		[FieldMapping("JOB_CO_CODE", TypeCode.String)]
 		public string JOB_CO_CODE
 		{
 			set{ _job_co_code=value;}
@@ -32,7 +32,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_CODE", "", typeof(string))]
+		[FieldMapping("JOB_CODE", TypeCode.String)]
 		public string JOB_CODE
 		{
 			set{ _job_code=value;}
@@ -41,7 +41,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_SER", "", typeof(string))]
+		[FieldMapping("JOB_SER", TypeCode.String)]
 		public string JOB_SER
 		{
 			set{ _job_ser=value;}
@@ -50,7 +50,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_POS", "", typeof(string))]
+		[FieldMapping("JOB_POS", TypeCode.String)]
 		public string JOB_POS
 		{
 			set{ _job_pos=value;}
@@ -59,7 +59,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_STAFF", "", typeof(string))]
+		[FieldMapping("JOB_STAFF", TypeCode.String)]
 		public string JOB_STAFF
 		{
 			set{ _job_staff=value;}
@@ -68,7 +68,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_BUD", "", typeof(decimal))]
+		[FieldMapping("JOB_BUD", TypeCode.Decimal)]
 		public decimal? JOB_BUD
 		{
 			set{ _job_bud=value;}
@@ -77,7 +77,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_NOR", "", typeof(decimal))]
+		[FieldMapping("JOB_NOR", TypeCode.Decimal)]
 		public decimal? JOB_NOR
 		{
 			set{ _job_nor=value;}
@@ -86,7 +86,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_NOR_EXP", "", typeof(decimal))]
+		[FieldMapping("JOB_NOR_EXP", TypeCode.Decimal)]
 		public decimal JOB_NOR_EXP
 		{
 			set{ _job_nor_exp=value;}
@@ -95,7 +95,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_OT", "", typeof(decimal))]
+		[FieldMapping("JOB_OT", TypeCode.Decimal)]
 		public decimal? JOB_OT
 		{
 			set{ _job_ot=value;}
@@ -104,7 +104,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_OT_EXP", "", typeof(decimal))]
+		[FieldMapping("JOB_OT_EXP", TypeCode.Decimal)]
 		public decimal? JOB_OT_EXP
 		{
 			set{ _job_ot_exp=value;}

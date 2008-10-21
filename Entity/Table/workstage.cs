@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类workstage 。(属性说明自动提取数据库字段的描述信息)
@@ -18,7 +18,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("WT_CO_CODE", "", typeof(string))]
+		[FieldMapping("WT_CO_CODE", TypeCode.String)]
 		public string WT_CO_CODE
 		{
 			set{ _wt_co_code=value;}
@@ -27,7 +27,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("WT_CODE", "", typeof(string))]
+		[FieldMapping("WT_CODE", TypeCode.String)]
 		public string WT_CODE
 		{
 			set{ _wt_code=value;}
@@ -36,7 +36,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("WT_DESC", "", typeof(string))]
+		[FieldMapping("WT_DESC", TypeCode.String)]
 		public string WT_DESC
 		{
 			set{ _wt_desc=value;}
@@ -45,7 +45,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("WT_DESC_T", "", typeof(string))]
+		[FieldMapping("WT_DESC_T", TypeCode.String)]
 		public string WT_DESC_T
 		{
 			set{ _wt_desc_t=value;}
@@ -54,7 +54,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("WT_DESC_S", "", typeof(string))]
+		[FieldMapping("WT_DESC_S", TypeCode.String)]
 		public string WT_DESC_S
 		{
 			set{ _wt_desc_s=value;}

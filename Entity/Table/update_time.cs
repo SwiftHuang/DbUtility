@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类update_time 。(属性说明自动提取数据库字段的描述信息)
@@ -20,7 +20,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_CODE", "", typeof(string))]
+		[FieldMapping("UT_CODE", TypeCode.String)]
 		public string UT_CODE
 		{
 			set{ _ut_code=value;}
@@ -29,7 +29,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_DATE", "", typeof(DateTime))]
+		[FieldMapping("UT_DATE", TypeCode.DateTime)]
 		public DateTime UT_DATE
 		{
 			set{ _ut_date=value;}
@@ -38,7 +38,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_TIME", "", typeof(string))]
+		[FieldMapping("UT_TIME", TypeCode.String)]
 		public string UT_TIME
 		{
 			set{ _ut_time=value;}
@@ -47,7 +47,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_FRE", "", typeof(int))]
+		[FieldMapping("UT_FRE", TypeCode.Int)]
 		public int UT_FRE
 		{
 			set{ _ut_fre=value;}
@@ -56,7 +56,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_UPDATE_USER", "", typeof(string))]
+		[FieldMapping("UT_UPDATE_USER", TypeCode.String)]
 		public string UT_UPDATE_USER
 		{
 			set{ _ut_update_user=value;}
@@ -65,7 +65,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_UPDATE_DT", "", typeof(DateTime))]
+		[FieldMapping("UT_UPDATE_DT", TypeCode.DateTime)]
 		public DateTime UT_UPDATE_DT
 		{
 			set{ _ut_update_dt=value;}
@@ -74,7 +74,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_INF", "", typeof(string))]
+		[FieldMapping("UT_INF", TypeCode.String)]
 		public string UT_INF
 		{
 			set{ _ut_inf=value;}

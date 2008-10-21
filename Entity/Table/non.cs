@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类non 。(属性说明自动提取数据库字段的描述信息)
@@ -21,7 +21,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("CO_CODE", "", typeof(string))]
+		[FieldMapping("CO_CODE", TypeCode.String)]
 		public string CO_CODE
 		{
 			set{ _co_code=value;}
@@ -30,7 +30,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("STAFF_CODE", "", typeof(string))]
+		[FieldMapping("STAFF_CODE", TypeCode.String)]
 		public string STAFF_CODE
 		{
 			set{ _staff_code=value;}
@@ -39,7 +39,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("DATE", "", typeof(DateTime))]
+		[FieldMapping("DATE", TypeCode.DateTime)]
 		public DateTime DATE
 		{
 			set{ _date=value;}
@@ -48,7 +48,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("TYPE", "", typeof(string))]
+		[FieldMapping("TYPE", TypeCode.String)]
 		public string TYPE
 		{
 			set{ _type=value;}
@@ -57,7 +57,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ANNUAL", "", typeof(decimal))]
+		[FieldMapping("ANNUAL", TypeCode.Decimal)]
 		public decimal? ANNUAL
 		{
 			set{ _annual=value;}
@@ -66,7 +66,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("SICK", "", typeof(decimal))]
+		[FieldMapping("SICK", TypeCode.Decimal)]
 		public decimal? SICK
 		{
 			set{ _sick=value;}
@@ -75,7 +75,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ADMIN", "", typeof(decimal))]
+		[FieldMapping("ADMIN", TypeCode.Decimal)]
 		public decimal? ADMIN
 		{
 			set{ _admin=value;}
@@ -84,7 +84,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("OT_PAY", "", typeof(decimal))]
+		[FieldMapping("OT_PAY", TypeCode.Decimal)]
 		public decimal? OT_PAY
 		{
 			set{ _ot_pay=value;}

@@ -39,7 +39,9 @@ namespace WongTung.WebSite
 
             Entity.Table.dailyts d = new WongTung.Entity.Table.dailyts();
             d.DT_CO_CODE = "VI";
+            d.DT_UPDATE_DATE = DateTime.Now;
             BJ.Add(d);
+            BJ.Update();
             DateTime dStart = new DateTime();
 
             List<Entity.Table.dailyts2> lst = new List<WongTung.Entity.Table.dailyts2>();

@@ -6,16 +6,17 @@ namespace WongTung.DBUtility.TableMapping
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMappingAttribute : System.Attribute
     {
-        public FieldMappingAttribute(string dataFieldName, object nullValue, Type dataType)
+        public FieldMappingAttribute(string dataFieldName, TypeCode dataTypeCode, object nullValue)
             : base()
         {
             _dataFieldName = dataFieldName;
             _nullValue = nullValue;
-            _dataType = dataType;
+            _dataTypeCode = dataTypeCode;
         }
 
-        //public FieldMappingAttribute(object nullValue) : this(string.Empty, nullValue, Type.String) { }
-        #region Attributes
+        public FieldMappingAttribute(string dataFieldName, TypeCode dataTypeCode) : this(dataFieldName, dataTypeCode, null) { }
+
+        #region Property
         private string _dataFieldName;
         public string DataFieldName
         {
@@ -26,14 +27,12 @@ namespace WongTung.DBUtility.TableMapping
         {
             get { return _nullValue; }
         }
-        private Type _dataType;
-        public Type DataType
+        private TypeCode _dataTypeCode;
+        public TypeCode DataTypeCode
         {
-            get { return _dataType; }
+            get { return _dataTypeCode; }
         }
 
         #endregion
     }
-
-
 }

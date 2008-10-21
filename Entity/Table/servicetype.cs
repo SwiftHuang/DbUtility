@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类servicetype 。(属性说明自动提取数据库字段的描述信息)
@@ -22,7 +22,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_CO_CODE", "", typeof(string))]
+		[FieldMapping("ST_CO_CODE", TypeCode.String)]
 		public string ST_CO_CODE
 		{
 			set{ _st_co_code=value;}
@@ -31,7 +31,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_JOB_CODE", "", typeof(string))]
+		[FieldMapping("ST_JOB_CODE", TypeCode.String)]
 		public string ST_JOB_CODE
 		{
 			set{ _st_job_code=value;}
@@ -40,7 +40,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_SER_CODE", "", typeof(string))]
+		[FieldMapping("ST_SER_CODE", TypeCode.String)]
 		public string ST_SER_CODE
 		{
 			set{ _st_ser_code=value;}
@@ -49,7 +49,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC", "", typeof(string))]
+		[FieldMapping("ST_DESC", TypeCode.String)]
 		public string ST_DESC
 		{
 			set{ _st_desc=value;}
@@ -58,7 +58,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC1", "", typeof(string))]
+		[FieldMapping("ST_DESC1", TypeCode.String)]
 		public string ST_DESC1
 		{
 			set{ _st_desc1=value;}
@@ -67,7 +67,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC_T1", "", typeof(string))]
+		[FieldMapping("ST_DESC_T1", TypeCode.String)]
 		public string ST_DESC_T1
 		{
 			set{ _st_desc_t1=value;}
@@ -76,7 +76,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC_S1", "", typeof(string))]
+		[FieldMapping("ST_DESC_S1", TypeCode.String)]
 		public string ST_DESC_S1
 		{
 			set{ _st_desc_s1=value;}
@@ -85,7 +85,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC_T2", "", typeof(string))]
+		[FieldMapping("ST_DESC_T2", TypeCode.String)]
 		public string ST_DESC_T2
 		{
 			set{ _st_desc_t2=value;}
@@ -94,7 +94,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("ST_DESC_S2", "", typeof(string))]
+		[FieldMapping("ST_DESC_S2", TypeCode.String)]
 		public string ST_DESC_S2
 		{
 			set{ _st_desc_s2=value;}

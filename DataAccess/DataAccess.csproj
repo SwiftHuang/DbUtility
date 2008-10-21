@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDataAccess.cs" />
     <Compile Include="DADailyts.cs" />
     <Compile Include="DAJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

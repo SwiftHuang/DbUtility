@@ -63,8 +63,8 @@ namespace LTP.BuilderModel
         {
             StringPlus strclass = new StringPlus();
             strclass.AppendLine("using System;");
-            strclass.AppendLine("using TableMapping;");
-            strclass.AppendLine("namespace " + Modelpath);
+            strclass.AppendLine("using WongTung.DBUtility.TableMapping;");
+            strclass.AppendLine("namespace WongTung.Entity.Table");
             strclass.AppendLine("{");
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// 实体类" + _modelname + " 。(属性说明自动提取数据库字段的描述信息)");
@@ -89,7 +89,7 @@ namespace LTP.BuilderModel
         /// <returns></returns>
         public string CreatModelMethod()
         {
-            string sFieldFormat = "[FieldMapping(\"{0}\", \"{1}\", {2})]";
+            string sFieldFormat = "[FieldMapping(\"{0}\", {1})]";
 
             StringPlus strclass = new StringPlus();
             StringPlus strclass1 = new StringPlus();
@@ -117,7 +117,7 @@ namespace LTP.BuilderModel
                 strclass2.AppendSpaceLine(2, "/// <summary>");
                 strclass2.AppendSpaceLine(2, "/// " + deText);
                 strclass2.AppendSpaceLine(2, "/// </summary>");
-                strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, "", GetTypeCode(columnType)));
+                strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType)));
                 strclass2.AppendSpaceLine(2, "public " + columnType + isnull + " " + columnName);//属性
                 strclass2.AppendSpaceLine(2, "{");
                 strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
@@ -134,7 +134,8 @@ namespace LTP.BuilderModel
         private string GetTypeCode(string columnType)
         {
             string s = string.Empty;
-            s = "typeof(" + columnType + ")";
+
+            s = "TypeCode." + columnType.Substring(0, 1).ToUpper() + columnType.Substring(1) + "";
             return s;
         }
         #endregion

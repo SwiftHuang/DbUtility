@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类budgetot 。(属性说明自动提取数据库字段的描述信息)
@@ -19,7 +19,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_CO_CODE", "", typeof(string))]
+		[FieldMapping("BG_CO_CODE", TypeCode.String)]
 		public string BG_CO_CODE
 		{
 			set{ _bg_co_code=value;}
@@ -28,7 +28,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_JOB_CODE", "", typeof(string))]
+		[FieldMapping("BG_JOB_CODE", TypeCode.String)]
 		public string BG_JOB_CODE
 		{
 			set{ _bg_job_code=value;}
@@ -37,7 +37,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_SER_CODE", "", typeof(string))]
+		[FieldMapping("BG_SER_CODE", TypeCode.String)]
 		public string BG_SER_CODE
 		{
 			set{ _bg_ser_code=value;}
@@ -46,7 +46,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_POS", "", typeof(string))]
+		[FieldMapping("BG_POS", TypeCode.String)]
 		public string BG_POS
 		{
 			set{ _bg_pos=value;}
@@ -55,7 +55,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_HOUR", "", typeof(decimal))]
+		[FieldMapping("BG_HOUR", TypeCode.Decimal)]
 		public decimal? BG_HOUR
 		{
 			set{ _bg_hour=value;}
@@ -64,7 +64,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("BG_EXP_BUDGET", "", typeof(decimal))]
+		[FieldMapping("BG_EXP_BUDGET", TypeCode.Decimal)]
 		public decimal? BG_EXP_BUDGET
 		{
 			set{ _bg_exp_budget=value;}

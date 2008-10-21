@@ -1,6 +1,6 @@
 using System;
-using TableMapping;
-namespace WongTung.Entity.Table.Model
+using WongTung.DBUtility.TableMapping;
+namespace WongTung.Entity.Table
 {
 	/// <summary>
 	/// 实体类leave_bak 。(属性说明自动提取数据库字段的描述信息)
@@ -16,7 +16,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("CO_CODE", "", typeof(string))]
+		[FieldMapping("CO_CODE", TypeCode.String)]
 		public string CO_CODE
 		{
 			set{ _co_code=value;}
@@ -25,7 +25,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("LEVAE_CODE", "", typeof(string))]
+		[FieldMapping("LEVAE_CODE", TypeCode.String)]
 		public string LEVAE_CODE
 		{
 			set{ _levae_code=value;}
@@ -34,7 +34,7 @@ namespace WongTung.Entity.Table.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("LEVAE_DESC", "", typeof(string))]
+		[FieldMapping("LEVAE_DESC", TypeCode.String)]
 		public string LEVAE_DESC
 		{
 			set{ _levae_desc=value;}
