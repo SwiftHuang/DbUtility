@@ -44,7 +44,7 @@ namespace WongTung.Business
         {
             List<GenerateSqlPara<dailyts>> updatePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
             List<GenerateSqlPara<dailyts>> wherePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
-            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
+            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", DateTime.Now, Enums.Operator.Equal));
             updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
             wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
             wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
