@@ -42,6 +42,7 @@ namespace WongTung.WebSite
             d.DT_UPDATE_DATE = DateTime.Now;
             BJ.Add(d);
             BJ.Update();
+            BJ.Delete();
             DateTime dStart = new DateTime();
 
             List<Entity.Table.dailyts2> lst = new List<WongTung.Entity.Table.dailyts2>();
@@ -58,8 +59,7 @@ namespace WongTung.WebSite
             Label6.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
             Label7.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
 
-
-            List<Entity.Table.dailyts> lst1 = new List<WongTung.Entity.Table.dailyts>();
+            IList<Entity.Table.dailyts> lst1 = new List<WongTung.Entity.Table.dailyts>();
             dStart = DateTime.Now;
             lst1 = BJ.GetList(Count);
             Label1.Text = lst1.Count.ToString();
