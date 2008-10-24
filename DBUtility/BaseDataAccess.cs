@@ -19,23 +19,24 @@ namespace WongTung.DBUtility
         protected string TableName { get; set; }
         #endregion
 
-        /// <summary>
-        /// 增加一条数据
-        /// </summary>
         public void Add(T entity)
         {
             _sql = GenerateSql<T>.InsertSql(entity);
         }
-        public void Update(List<GenerateSqlPara<T>> updatePara, List<GenerateSqlPara<T>> wherePara)
+        public void Update(IList<SqlPara> updatePara, IList<SqlPara> wherePara)
         {
             _sql = GenerateSql<T>.UpdateSql(updatePara, wherePara);
         }
-        public List<T> GetList(string strWhere)
+        public void Delete(IList<SqlPara> wherePara)
+        {
+            _sql = GenerateSql<T>.DeleteSql(wherePara);
+        }
+        public IList<T> GetList(string strWhere)
         {
             IDataReader reader = GetDataReader(strWhere);
 
-            List<T> DataList = new List<T>();
-            List<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+            IList<T> DataList = new List<T>();
+            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
 
             lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
@@ -123,9 +124,9 @@ namespace WongTung.DBUtility
             timeSpan = DateTime.Now - s;
             return r;
         }
-        private List<FieldMappingInfo> SetFieldIndex(IDataReader reader, List<FieldMappingInfo> list)
+        private IList<FieldMappingInfo> SetFieldIndex(IDataReader reader, IList<FieldMappingInfo> list)
         {
-            List<FieldMappingInfo> datalist = new List<FieldMappingInfo>();
+            IList<FieldMappingInfo> datalist = new List<FieldMappingInfo>();
             foreach (FieldMappingInfo f in list)
             {
                 try

@@ -13,9 +13,8 @@ namespace WongTung.DBUtility
         private const string _SelectString = "SELECT * FROM {0} {1}";
         private const string _UpdateString = "UPDATE {0} SET {1} WHERE {2}";
         private const string _InsertString = "INSERT INTO {0} ({1}) VALUE({2})";
-        private const string _AndString = " AND ";
-        private const string _StringFormat = "'{0}',";
-        private const string _DecimalFormat = "{0},";
+        private const string _StringFormat = "'{0}'";
+        private const string _DecimalFormat = "{0}";
         private const string _MySqlDateFormat = "yyyy-MM-dd hh:mm:ss";
 
         #region Property
@@ -26,35 +25,35 @@ namespace WongTung.DBUtility
         #endregion
 
         #region Public Functons
-        public static string DeleteSql(List<GenerateSqlPara<T>> wherePara)
+        public static string DeleteSql(IList<SqlPara> wherePara)
         {
             StringBuilder sbWhere = new StringBuilder();
             if (wherePara.Count > 0)
             {
-                foreach (GenerateSqlPara<T> para in wherePara)
+                foreach (SqlPara para in wherePara)
                 {
-                    sbWhere.Append(GetCondition(para, true));
+                    sbWhere.Append(GetCondition(para));
                 }
             }
             else
                 sbWhere.Append("1=1");
 
-            return string.Format(_DecimalFormat, GetTableName(), sbWhere.ToString());
+            return string.Format(_DeleteString, GetTableName(), sbWhere.ToString().TrimEnd(','));
         }
-        public static string UpdateSql(List<GenerateSqlPara<T>> updatePara, List<GenerateSqlPara<T>> wherePara)
+        public static string UpdateSql(IList<SqlPara> updatePara, IList<SqlPara> wherePara)
         {
             StringBuilder sbUpdate = new StringBuilder();
             StringBuilder sbWhere = new StringBuilder();
 
-            foreach (GenerateSqlPara<T> para in updatePara)
+            foreach (SqlPara para in updatePara)
             {
-                sbUpdate.Append(GetCondition(para, false));
+                sbUpdate.Append(GetCondition(para));
             }
             if (wherePara.Count > 0)
             {
-                foreach (GenerateSqlPara<T> para in wherePara)
+                foreach (SqlPara para in wherePara)
                 {
-                    sbWhere.Append(GetCondition(para, true));
+                    sbWhere.Append(GetCondition(para));
                 }
             }
             else
@@ -124,27 +123,27 @@ namespace WongTung.DBUtility
             else
                 return false;
         }
-        private static string GetCondition(GenerateSqlPara<T> para, bool isWhere)
+        private static string GetCondition(SqlPara para)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
 
             if (IsNumType(f.DataTypeCode))
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue);
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue).Append(para.Expression.ToSqlString());
             else if (IsDateType(f.DataTypeCode) && PubConstant.DatabaseType == Enums.DBType.MySql)
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue).ToString(_MySqlDateFormat));
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue).ToString(_MySqlDateFormat)).Append(para.Expression.ToSqlString());
             else
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue);
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
 
-            if (isWhere)
-                return sbStr.ToString().TrimEnd(',') + _AndString;
-            else
-                return sbStr.ToString();
+            return sbStr.ToString();
         }
         private static string GetFieldSql()
-        { }
+        {
+            return null;
+        }
         private static string GetWhereSql()
         {
+            return null;
         }
         #endregion
     }

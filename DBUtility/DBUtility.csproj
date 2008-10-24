@@ -55,7 +55,7 @@
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GenerateSql.cs" />
-    <Compile Include="GenerateSqlPara.cs" />
+    <Compile Include="SqlPara.cs" />
     <Compile Include="PubConstant.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

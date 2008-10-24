@@ -15,9 +15,9 @@ namespace WongTung.Business
         private DADailyts DADailyts = new DADailyts();
         private DADailyts2 DADailyts2 = new DADailyts2();
         public TimeSpan timeSpan { get; set; }
-        public List<Entity.Table.dailyts> GetList(int count)
+        public IList<Entity.Table.dailyts> GetList(int count)
         {
-            List<Entity.Table.dailyts> lst = new List<WongTung.Entity.Table.dailyts>();
+            IList<Entity.Table.dailyts> lst = new List<WongTung.Entity.Table.dailyts>();
             lst = DADailyts.GetList("LIMIT " + count.ToString());
             timeSpan = DADailyts.timeSpan;
             return lst;
@@ -42,13 +42,23 @@ namespace WongTung.Business
         }
         public void Update()
         {
-            List<GenerateSqlPara<dailyts>> updatePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
-            List<GenerateSqlPara<dailyts>> wherePara = new List<GenerateSqlPara<WongTung.Entity.Table.dailyts>>();
-            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", DateTime.Now, Enums.Operator.Equal));
-            updatePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
-            wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
-            wherePara.Add(new GenerateSqlPara<dailyts>("DT_UPDATE", "2000-01-01", Enums.Operator.Equal));
-            DADailyts.Update(updatePara, wherePara);
+            IList<SqlPara> upLst = new List<SqlPara>();
+            upLst.Add(new SqlPara("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal));
+            upLst.Add(new SqlPara("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal));
+
+            IList<SqlPara> whereLst = new List<SqlPara>();
+            whereLst.Add(new SqlPara("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal, Enums.Expression.AND));
+            whereLst.Add(new SqlPara("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal, Enums.Expression.None));
+
+            DADailyts.Update(upLst, whereLst);
         }
+        public void Delete()
+        {
+            IList<SqlPara> whereLst = new List<SqlPara>();
+            whereLst.Add(new SqlPara("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.OR));
+            whereLst.Add(new SqlPara("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.None));
+            DADailyts.Delete(whereLst);
+        }
+
     }
 }

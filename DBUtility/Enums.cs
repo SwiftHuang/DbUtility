@@ -19,6 +19,12 @@ namespace WongTung.DBUtility
             MySql,
             MsSql
         }
+        public enum Expression
+        {
+            None,
+            AND,
+            OR
+        }
     }
     public static class EnumsExtensions
     {
@@ -36,6 +42,22 @@ namespace WongTung.DBUtility
                     throw new Exception("Enums.Operator error");
             }
             throw new Exception("Enums.Operator error");
+        }
+
+        public static string ToSqlString(this Enums.Expression exp)
+        {
+            switch (exp)
+            {
+                case Enums.Expression.AND:
+                    return " AND ";
+                case Enums.Expression.OR:
+                    return " OR ";
+                case Enums.Expression.None:
+                    return ",";
+                default:
+                    throw new Exception("Enums Expression error");
+            }
+            throw new Exception("Enums Expression error");
         }
     }
 }

@@ -5,28 +5,31 @@ using System.Text;
 
 namespace WongTung.DBUtility
 {
-    public class GenerateSqlPara<T> where T : class, new()
+    public class SqlPara
     {
         #region Property
         public string FieldName { get; set; }
         public object FieldValue { get; set; }
         public Enums.Operator Operator { get; set; }
+        public Enums.Expression Expression { get; set; }
         #endregion
 
-        public GenerateSqlPara(string fieldName, object fieldValue, Enums.Operator oper)
+        public SqlPara(string fieldName, object fieldValue, Enums.Operator oper, Enums.Expression exp)
             : base()
         {
             FieldName = fieldName;
             FieldValue = fieldValue;
             Operator = oper;
+            Expression = exp;
         }
 
-        public GenerateSqlPara(string fieldName, object fieldValue)
+        public SqlPara(string fieldName, object fieldValue, Enums.Operator oper)
             : base()
         {
             FieldName = fieldName;
             FieldValue = fieldValue;
-            Operator = Enums.Operator.Equal;
+            Operator = oper;
+            Expression = Enums.Expression.None;
         }
     }
 }
