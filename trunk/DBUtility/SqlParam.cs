@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WongTung.DBUtility
 {
-    public class SqlPara
+    public class SqlParam
     {
         #region Property
         public string FieldName { get; set; }
@@ -14,7 +14,7 @@ namespace WongTung.DBUtility
         public Enums.Expression Expression { get; set; }
         #endregion
 
-        public SqlPara(string fieldName, object fieldValue, Enums.Operator oper, Enums.Expression exp)
+        public SqlParam(string fieldName, object fieldValue, Enums.Operator oper, Enums.Expression exp)
             : base()
         {
             FieldName = fieldName;
@@ -23,7 +23,7 @@ namespace WongTung.DBUtility
             Expression = exp;
         }
 
-        public SqlPara(string fieldName, object fieldValue, Enums.Operator oper)
+        public SqlParam(string fieldName, object fieldValue, Enums.Operator oper)
             : base()
         {
             FieldName = fieldName;
