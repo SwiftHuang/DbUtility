@@ -25,12 +25,12 @@ namespace WongTung.DBUtility
         #endregion
 
         #region Public Functons
-        public static string DeleteSql(IList<SqlPara> wherePara)
+        public static string DeleteSql(IList<SqlParam> wherePara)
         {
             StringBuilder sbWhere = new StringBuilder();
             if (wherePara.Count > 0)
             {
-                foreach (SqlPara para in wherePara)
+                foreach (SqlParam para in wherePara)
                 {
                     sbWhere.Append(GetCondition(para));
                 }
@@ -40,18 +40,18 @@ namespace WongTung.DBUtility
 
             return string.Format(_DeleteString, GetTableName(), sbWhere.ToString().TrimEnd(','));
         }
-        public static string UpdateSql(IList<SqlPara> updatePara, IList<SqlPara> wherePara)
+        public static string UpdateSql(IList<SqlParam> updatePara, IList<SqlParam> wherePara)
         {
             StringBuilder sbUpdate = new StringBuilder();
             StringBuilder sbWhere = new StringBuilder();
 
-            foreach (SqlPara para in updatePara)
+            foreach (SqlParam para in updatePara)
             {
                 sbUpdate.Append(GetCondition(para));
             }
             if (wherePara.Count > 0)
             {
-                foreach (SqlPara para in wherePara)
+                foreach (SqlParam para in wherePara)
                 {
                     sbWhere.Append(GetCondition(para));
                 }
@@ -123,7 +123,7 @@ namespace WongTung.DBUtility
             else
                 return false;
         }
-        private static string GetCondition(SqlPara para)
+        private static string GetCondition(SqlParam para)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));

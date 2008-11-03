@@ -23,11 +23,11 @@ namespace WongTung.DBUtility
         {
             _sql = GenerateSql<T>.InsertSql(entity);
         }
-        public void Update(IList<SqlPara> updatePara, IList<SqlPara> wherePara)
+        public void Update(IList<SqlParam> updatePara, IList<SqlParam> wherePara)
         {
             _sql = GenerateSql<T>.UpdateSql(updatePara, wherePara);
         }
-        public void Delete(IList<SqlPara> wherePara)
+        public void Delete(IList<SqlParam> wherePara)
         {
             _sql = GenerateSql<T>.DeleteSql(wherePara);
         }
