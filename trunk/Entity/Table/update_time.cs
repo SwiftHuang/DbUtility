@@ -9,6 +9,14 @@ namespace WongTung.Entity.Table
 	{
 		public update_time()
 		{}
+		public enum Fields{UT_CODE,
+UT_DATE,
+UT_TIME,
+UT_FRE,
+UT_UPDATE_USER,
+UT_UPDATE_DT,
+UT_INF,
+}
 		#region Model
 		private string _ut_code;
 		private DateTime _ut_date;

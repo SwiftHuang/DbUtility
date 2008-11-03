@@ -9,6 +9,17 @@ namespace WongTung.Entity.Table
 	{
 		public incomts()
 		{}
+		public enum Fields{IST_CO_CODE,
+IST_OFFCIE_CODE,
+IST_WORK_DATE,
+IST_USER_CODE,
+IST_USER_NAME,
+IST_INPUT_OK,
+IST_APP,
+IST_NOR_HR,
+IST_OT_HR,
+IST_PERIOD,
+}
 		#region Model
 		private string _ist_co_code;
 		private string _ist_offcie_code;

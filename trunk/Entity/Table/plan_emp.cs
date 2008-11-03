@@ -9,6 +9,19 @@ namespace WongTung.Entity.Table
 	{
 		public plan_emp()
 		{}
+		public enum Fields{PLA_EMP_CO,
+PLA_EMP_OFF,
+PLA_EMP_POS,
+PLA_EMP_CODE,
+PLA_EMP_NUM,
+PLA_EMP_NOR,
+PLA_EMP_OT1,
+PLA_EMP_OT2,
+PLA_EMP_OT3,
+PLA_EMP_T1,
+PLA_EMP_T2,
+PLA_EMP_T3,
+}
 		#region Model
 		private string _pla_emp_co;
 		private string _pla_emp_off;

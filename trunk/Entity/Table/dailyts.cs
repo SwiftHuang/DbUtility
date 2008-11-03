@@ -9,6 +9,22 @@ namespace WongTung.Entity.Table
 	{
 		public dailyts()
 		{}
+		public enum Fields{DT_CO_CODE,
+DT_STAFF_CODE,
+DT_WORK_DATE,
+DT_LINE_NO,
+DT_APP_CODE,
+DT_JOB_CODE,
+DT_SER_CODE,
+DT_NOR_HOUR,
+DT_OVER_HOUR,
+DT_TYPE,
+DT_PERIOD,
+DT_SUBMIT,
+DT_UPDATE,
+DT_RAMNO,
+DT_UPDATE_DATE,
+}
 		#region Model
 		private string _dt_co_code;
 		private string _dt_staff_code;

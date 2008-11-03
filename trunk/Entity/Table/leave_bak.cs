@@ -9,6 +9,10 @@ namespace WongTung.Entity.Table
 	{
 		public leave_bak()
 		{}
+		public enum Fields{CO_CODE,
+LEVAE_CODE,
+LEVAE_DESC,
+}
 		#region Model
 		private string _co_code;
 		private string _levae_code;

@@ -9,6 +9,16 @@ namespace WongTung.Entity.Table
 	{
 		public servicetype()
 		{}
+		public enum Fields{ST_CO_CODE,
+ST_JOB_CODE,
+ST_SER_CODE,
+ST_DESC,
+ST_DESC1,
+ST_DESC_T1,
+ST_DESC_S1,
+ST_DESC_T2,
+ST_DESC_S2,
+}
 		#region Model
 		private string _st_co_code;
 		private string _st_job_code;

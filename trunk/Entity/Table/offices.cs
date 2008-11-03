@@ -9,6 +9,11 @@ namespace WongTung.Entity.Table
 	{
 		public offices()
 		{}
+		public enum Fields{OFF_CO_CODE,
+OFF_CODE,
+OFF_NAME,
+OFF_ENDORSE,
+}
 		#region Model
 		private string _off_co_code;
 		private string _off_code;

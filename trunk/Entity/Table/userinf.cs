@@ -9,6 +9,16 @@ namespace WongTung.Entity.Table
 	{
 		public userinf()
 		{}
+		public enum Fields{USER_CO_CODE,
+USER_CODE,
+USER_NAME,
+USER_EMP_CODE,
+USER_RAND,
+USER_CURDATE,
+USER_RAND_BACK,
+USER_ACTIVATE,
+USER_CHNAME,
+}
 		#region Model
 		private string _user_co_code;
 		private string _user_code;

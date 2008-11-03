@@ -90,10 +90,18 @@ namespace LTP.BuilderModel
         public string CreatModelMethod()
         {
             string sFieldFormat = "[FieldMapping(\"{0}\", {1})]";
+            string sEnumsFormate = "public enum Fields{{{0}}}";
+            StringBuilder sb = new StringBuilder();
+            foreach (ColumnInfo f in Fieldlist)
+            {
+                sb.AppendLine(f.ColumnName + ",");
+            }
 
             StringPlus strclass = new StringPlus();
             StringPlus strclass1 = new StringPlus();
             StringPlus strclass2 = new StringPlus();
+
+            strclass.AppendSpaceLine(2, string.Format(sEnumsFormate, sb.ToString()));
             strclass.AppendSpaceLine(2, "#region Model");
             foreach (ColumnInfo field in Fieldlist)
             {
@@ -123,6 +131,10 @@ namespace LTP.BuilderModel
                 strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
                 strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
                 strclass2.AppendSpaceLine(2, "}");
+                //strclass2.AppendSpaceLine(2, "public static string " + columnName);
+                //strclass2.AppendSpaceLine(2, "{");
+                //strclass2.AppendSpaceLine(3, "get{return \"" + columnName.ToString().Trim() + "\";}");
+                //strclass2.AppendSpaceLine(2, "}");
             }
             strclass.Append(strclass1.Value);
             strclass.Append(strclass2.Value);

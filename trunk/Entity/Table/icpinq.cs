@@ -9,6 +9,12 @@ namespace WongTung.Entity.Table
 	{
 		public icpinq()
 		{}
+		public enum Fields{ICP_CO_CODE,
+ICP_OFFICE_CODE,
+ICP_OFFICE_NAME,
+ICP_EMP_CODE,
+ICP_EMP_NAME,
+}
 		#region Model
 		private string _icp_co_code;
 		private string _icp_office_code;

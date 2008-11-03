@@ -9,6 +9,12 @@ namespace WongTung.Entity.Table
 	{
 		public worknatrue()
 		{}
+		public enum Fields{WN_CO_CODE,
+WN_CODE,
+WN_DESC,
+WN_DESC_T,
+WN_DESC_S,
+}
 		#region Model
 		private string _wn_co_code;
 		private string _wn_code;

@@ -9,6 +9,12 @@ namespace WongTung.Entity.Table
 	{
 		public nocontrol()
 		{}
+		public enum Fields{NO_CO_CODE,
+NO_CODE,
+NO_DESC,
+NO_STA_NO,
+NO_SEQ_NO,
+}
 		#region Model
 		private string _no_co_code;
 		private string _no_code;

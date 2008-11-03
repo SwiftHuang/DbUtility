@@ -9,6 +9,14 @@ namespace WongTung.Entity.Table
 	{
 		public backdate()
 		{}
+		public enum Fields{BK_CO_CODE,
+BK_USER,
+BK_RAN_NO,
+BK_EMP,
+BK_RAN_DATE,
+BK_CRE_DATE,
+BK_STATUS,
+}
 		#region Model
 		private string _bk_co_code;
 		private string _bk_user;

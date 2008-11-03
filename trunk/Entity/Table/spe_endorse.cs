@@ -9,6 +9,10 @@ namespace WongTung.Entity.Table
 	{
 		public spe_endorse()
 		{}
+		public enum Fields{SPE_CODE,
+SPE_CRE_EMP,
+SPE_CRE_DATE,
+}
 		#region Model
 		private string _spe_code;
 		private string _spe_cre_emp;

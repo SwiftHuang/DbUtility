@@ -9,6 +9,16 @@ namespace WongTung.Entity.Table
 	{
 		public outstanding_temp()
 		{}
+		public enum Fields{NUM,
+OUT_OFF_CODE,
+OUT_OFF_NAME,
+OUT_EMP_CODE,
+OUT_EMP_NAME,
+OUT_DAY,
+OUT_POS_CLASS,
+OUT_POS_CODE,
+OUT_UPDATE_DATE,
+}
 		#region Model
 		private decimal _num;
 		private string _out_off_code;
