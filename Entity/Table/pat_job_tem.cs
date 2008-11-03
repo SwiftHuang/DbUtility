@@ -9,6 +9,31 @@ namespace WongTung.Entity.Table
 	{
 		public pat_job_tem()
 		{}
+		public enum Fields{AJ_CO_CODE,
+AJ_EMP_CODE,
+AJ_LAST_DATE,
+AJ_LAST_NUM,
+AJ_JOB_1,
+AJ_JOB_2,
+AJ_JOB_3,
+AJ_JOB_4,
+AJ_JOB_5,
+AJ_JOB_6,
+AJ_JOB_7,
+AJ_JOB_8,
+AJ_JOB_9,
+AJ_JOB_10,
+AJ_JOB_11,
+AJ_JOB_12,
+AJ_JOB_13,
+AJ_JOB_14,
+AJ_JOB_15,
+AJ_JOB_16,
+AJ_JOB_17,
+AJ_JOB_18,
+AJ_JOB_19,
+AJ_JOB_20,
+}
 		#region Model
 		private string _aj_co_code;
 		private string _aj_emp_code;

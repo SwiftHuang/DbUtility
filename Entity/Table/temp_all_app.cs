@@ -9,6 +9,27 @@ namespace WongTung.Entity.Table
 	{
 		public temp_all_app()
 		{}
+		public enum Fields{TEM_CO_CODE,
+TEM_STAFF_CODE,
+TEM_WORK_DATE,
+TEM_LINE_NO,
+TEM_HOUR_TYPE,
+TEM_APP_CODE,
+TEM_SER_CODE,
+TEM_JOB_CODE,
+TEM_BF_SUM,
+TEM_NOR_HOUR_0,
+TEM_NOR_HOUR_1,
+TEM_NOR_HOUR_2,
+TEM_NOR_HOUR_3,
+TEM_NOR_HOUR_4,
+TEM_NOR_HOUR_5,
+TEM_NOR_HOUR_6,
+TEM_TYPE,
+TEM_APP_FLAG,
+TEM_QUE,
+TEM_POS_CODE,
+}
 		#region Model
 		private string _tem_co_code;
 		private string _tem_staff_code;

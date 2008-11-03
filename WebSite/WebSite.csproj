@@ -117,6 +117,10 @@
       <Project>{58997085-C943-4948-849A-A624FF622F9F}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Vin-WebUserControls\Vin-WebUserControls.csproj">
+      <Project>{B4C9D759-33D9-4FC3-9AB5-6E779A11076E}</Project>
+      <Name>Vin-WebUserControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Resource.resx">
@@ -147,6 +151,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Components\Calendar\calendar-brown.css" />
+    <Content Include="Components\Calendar\calendar-debug.js" />
+    <Content Include="Components\Calendar\calendar.js" />
+    <Content Include="Components\Calendar\Lang\calendar-en-debug.js" />
+    <Content Include="Components\Calendar\Lang\calendar-en.js" />
+    <Content Include="Components\Calendar\Lang\calendar-zh.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

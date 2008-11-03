@@ -9,6 +9,18 @@ namespace WongTung.Entity.Table
 	{
 		public plan_pos()
 		{}
+		public enum Fields{PLA_POS_CO,
+PLA_POS_OFF,
+PLA_POS_CODE,
+PLA_POS_NUM,
+PLA_POS_NOR,
+PLA_POS_OT1,
+PLA_POS_OT2,
+PLA_POS_OT3,
+PLA_POS_T1,
+PLA_POS_T2,
+PLA_POS_T3,
+}
 		#region Model
 		private string _pla_pos_co;
 		private string _pla_pos_off;

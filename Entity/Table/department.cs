@@ -9,6 +9,10 @@ namespace WongTung.Entity.Table
 	{
 		public department()
 		{}
+		public enum Fields{DEPT_CO_CODE,
+DEPT_CODE,
+DEPT_NAME,
+}
 		#region Model
 		private string _dept_co_code;
 		private string _dept_code;

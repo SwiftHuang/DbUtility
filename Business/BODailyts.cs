@@ -43,8 +43,8 @@ namespace WongTung.Business
         public void Update()
         {
             IList<SqlPara> upLst = new List<SqlPara>();
-            upLst.Add(new SqlPara("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal));
-            upLst.Add(new SqlPara("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal));
+            upLst.Add(new SqlPara(dailyts.Fields.DT_UPDATE_DATE.ToString(), DateTime.Now, Enums.Operator.Equal));
+            upLst.Add(new SqlPara(dailyts.Fields.DT_UPDATE_DATE.ToString(), "2000-01-01", Enums.Operator.Equal));
 
             IList<SqlPara> whereLst = new List<SqlPara>();
             whereLst.Add(new SqlPara("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal, Enums.Expression.AND));

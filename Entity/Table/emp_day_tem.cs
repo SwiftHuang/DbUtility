@@ -9,6 +9,19 @@ namespace WongTung.Entity.Table
 	{
 		public emp_day_tem()
 		{}
+		public enum Fields{ED_CO_CODE,
+ED_EMP_CODE,
+ED_JS_1,
+ED_JS_2,
+ED_JS_3,
+ED_JS_4,
+ED_JS_5,
+ED_JS_6,
+ED_JS_7,
+ED_JS_8,
+ED_JS_9,
+ED_JS_10,
+}
 		#region Model
 		private string _ed_co_code;
 		private string _ed_emp_code;

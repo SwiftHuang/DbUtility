@@ -9,6 +9,40 @@ namespace WongTung.Entity.Table
 	{
 		public job()
 		{}
+		public enum Fields{JOB_CO_CODE,
+JOB_CODE,
+JOB_NAME,
+JOB_CON,
+JOB_OPEN_BAL_HOUR,
+JOB_YTD_HOUR,
+JOB_OPEN_BAL_AMT,
+JOB_YTD_AMT,
+JOB_REC,
+JOB_OS_BAL,
+JOB_BUD_HOUR,
+JOB_CO_ORD,
+JOB_ADMIN,
+JOB_DESIGN,
+JOB_LEV1,
+JOB_LEV2,
+JOB_LEV3,
+JOB_CHARGE_OUT,
+JOB_DAILY,
+JOB_MON,
+JOB_PERIOD,
+JOB_PERIOD_VAL,
+JOB_AUTH,
+JOB_OFF_INCHG_AD,
+JOB_OFF_INCHG_DES,
+JOB_AUTH_1,
+JOB_AUTH_2,
+JOB_AUTH_3,
+JOB_AUTH_4,
+JOB_AUTH_5,
+JOB_INDEX,
+JOB_NAME_S,
+JOB_NAME_T,
+}
 		#region Model
 		private string _job_co_code;
 		private string _job_code;
@@ -145,7 +179,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("JOB_CO_ORD", TypeCode.Int32)]
+		[FieldMapping("JOB_CO_ORD", TypeCode.Int)]
 		public int JOB_CO_ORD
 		{
 			set{ _job_co_ord=value;}
@@ -154,7 +188,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_ADMIN", TypeCode.Int32)]
+		[FieldMapping("JOB_ADMIN", TypeCode.Int)]
 		public int JOB_ADMIN
 		{
 			set{ _job_admin=value;}
@@ -163,7 +197,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_DESIGN", TypeCode.Int32)]
+		[FieldMapping("JOB_DESIGN", TypeCode.Int)]
 		public int JOB_DESIGN
 		{
 			set{ _job_design=value;}
@@ -172,7 +206,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_LEV1", TypeCode.Int32)]
+		[FieldMapping("JOB_LEV1", TypeCode.Int)]
 		public int JOB_LEV1
 		{
 			set{ _job_lev1=value;}
@@ -181,7 +215,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_LEV2", TypeCode.Int32)]
+		[FieldMapping("JOB_LEV2", TypeCode.Int)]
 		public int JOB_LEV2
 		{
 			set{ _job_lev2=value;}
@@ -190,7 +224,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_LEV3", TypeCode.Int32)]
+		[FieldMapping("JOB_LEV3", TypeCode.Int)]
 		public int JOB_LEV3
 		{
 			set{ _job_lev3=value;}
@@ -199,7 +233,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_CHARGE_OUT", TypeCode.Int32)]
+		[FieldMapping("JOB_CHARGE_OUT", TypeCode.Int)]
 		public int JOB_CHARGE_OUT
 		{
 			set{ _job_charge_out=value;}
@@ -208,7 +242,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_DAILY", TypeCode.Int32)]
+		[FieldMapping("JOB_DAILY", TypeCode.Int)]
 		public int JOB_DAILY
 		{
 			set{ _job_daily=value;}
@@ -217,7 +251,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_MON", TypeCode.Int32)]
+		[FieldMapping("JOB_MON", TypeCode.Int)]
 		public int JOB_MON
 		{
 			set{ _job_mon=value;}
@@ -316,7 +350,7 @@ namespace WongTung.Entity.Table
 		/// <summary>
 		/// 
 		/// </summary>
-        [FieldMapping("JOB_INDEX", TypeCode.Int32)]
+		[FieldMapping("JOB_INDEX", TypeCode.Int)]
 		public int JOB_INDEX
 		{
 			set{ _job_index=value;}

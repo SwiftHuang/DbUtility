@@ -9,6 +9,11 @@ namespace WongTung.Entity.Table
 	{
 		public prriod()
 		{}
+		public enum Fields{PR_CO_CODE,
+PR_NO,
+PR_FROM,
+PR_TO,
+}
 		#region Model
 		private string _pr_co_code;
 		private decimal _pr_no;

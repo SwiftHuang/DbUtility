@@ -9,6 +9,26 @@ namespace WongTung.Entity.Table
 	{
 		public position()
 		{}
+		public enum Fields{POS_CO_CODE,
+POS_CODE,
+POS_DESC,
+POS_FEE_LEV1,
+POS_FEE_LEV2,
+POS_FEE_LEV3,
+POS_RATE_OUT,
+POS_RATE_DAILY,
+POS_RATE_MON,
+POS_RATE_OT,
+POS_MON_TOTAL,
+POS_MON_UTILIST,
+POS_MON_REV,
+POS_SAL_FROM,
+POS_SAL_TO,
+POS_DALIY_COST,
+POS_MON_COST,
+POS_CLASS,
+POS_PLAN,
+}
 		#region Model
 		private string _pos_co_code;
 		private string _pos_code;

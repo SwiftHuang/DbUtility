@@ -9,6 +9,15 @@ namespace WongTung.Entity.Table
 	{
 		public non()
 		{}
+		public enum Fields{CO_CODE,
+STAFF_CODE,
+DATE,
+TYPE,
+ANNUAL,
+SICK,
+ADMIN,
+OT_PAY,
+}
 		#region Model
 		private string _co_code;
 		private string _staff_code;

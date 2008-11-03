@@ -9,6 +9,11 @@ namespace WongTung.Entity.Table
 	{
 		public backspecial()
 		{}
+		public enum Fields{BS_CO_CODE,
+BS_CODE,
+BS_DATE,
+BS_CURDATE,
+}
 		#region Model
 		private string _bs_co_code;
 		private string _bs_code;

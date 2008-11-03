@@ -9,6 +9,18 @@ namespace WongTung.Entity.Table
 	{
 		public employee()
 		{}
+		public enum Fields{EMP_CO_CODE,
+EMP_CODE,
+EMP_NAME,
+EMP_POS_CODE,
+EMP_DEP_CODE,
+EMP_INITIAL,
+EMP_OFFICE,
+EMP_CHNAME,
+EMP_SPE,
+EMP_CRE_DATE,
+EMP_DEL,
+}
 		#region Model
 		private string _emp_co_code;
 		private string _emp_code;

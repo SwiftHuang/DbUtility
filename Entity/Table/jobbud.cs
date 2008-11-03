@@ -9,6 +9,17 @@ namespace WongTung.Entity.Table
 	{
 		public jobbud()
 		{}
+		public enum Fields{JOB_CO_CODE,
+JOB_CODE,
+JOB_SER,
+JOB_POS,
+JOB_STAFF,
+JOB_BUD,
+JOB_NOR,
+JOB_NOR_EXP,
+JOB_OT,
+JOB_OT_EXP,
+}
 		#region Model
 		private string _job_co_code;
 		private string _job_code;

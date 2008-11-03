@@ -9,6 +9,17 @@ namespace WongTung.Entity.Table
 	{
 		public company()
 		{}
+		public enum Fields{CO_CODE,
+CO_SCR_NAME,
+CO_RPT_NAME,
+CO_LB_DATE,
+CO_LE_DATE,
+CO_CB_DATE,
+CO_CE_DATE,
+CO_CURR,
+CO_PERIOD_FROM,
+CO_PERIOD_TO,
+}
 		#region Model
 		private string _co_code;
 		private string _co_scr_name;

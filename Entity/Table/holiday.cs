@@ -9,6 +9,12 @@ namespace WongTung.Entity.Table
 	{
 		public holiday()
 		{}
+		public enum Fields{HD_CO_CODE,
+HD_EMP_CODE,
+HD_LINE_NO,
+HD_DATE,
+HD_LEVE_CODE,
+}
 		#region Model
 		private string _hd_co_code;
 		private string _hd_emp_code;

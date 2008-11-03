@@ -9,6 +9,10 @@ namespace WongTung.Entity.Table
 	{
 		public changepw()
 		{}
+		public enum Fields{CP_CO_CODE,
+CP_USER_CODE,
+CP_NEW_PWD,
+}
 		#region Model
 		private string _cp_co_code;
 		private string _cp_user_code;

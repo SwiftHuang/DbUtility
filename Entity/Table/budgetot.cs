@@ -9,6 +9,13 @@ namespace WongTung.Entity.Table
 	{
 		public budgetot()
 		{}
+		public enum Fields{BG_CO_CODE,
+BG_JOB_CODE,
+BG_SER_CODE,
+BG_POS,
+BG_HOUR,
+BG_EXP_BUDGET,
+}
 		#region Model
 		private string _bg_co_code;
 		private string _bg_job_code;
