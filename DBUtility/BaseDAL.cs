@@ -37,7 +37,17 @@ namespace WongTung.DBUtility
         }
         public void Select(IList<SqlParam> whereParam, IList<Enum> selectField)
         {
-            _sql = GenerateSql<T>.SelectSql(TableName, whereParam, selectField);
+            _sql = GenerateSql<T>.SelectSql(TableName, selectField, whereParam);
+        }
+
+        public T GetEntity(string strWhere)
+        {
+            IDataReader reader = GetDataReader(strWhere);
+            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
+            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
+
+            return GetEntity(reader, lstFieldInfo);
         }
         public IList<T> GetList(string strWhere)
         {
@@ -51,29 +61,7 @@ namespace WongTung.DBUtility
 
             while (reader.Read())
             {
-                T RowInstance = new T();
-
-                foreach (FieldMappingInfo f in lstFieldInfo)
-                {
-                    try
-                    {
-                        //取得当前数据库字段的顺序
-                        if (f.FieldIndex != -1)
-                        {
-                            object obj = reader.GetValue(f.FieldIndex);
-                            if (obj != DBNull.Value)
-                            {
-                                f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataTypeCode), null);
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
-                }
-                //将数据实体对象add到泛型集合中
-                DataList.Add(RowInstance);
+                DataList.Add(GetEntity(reader, lstFieldInfo));
             }
             reader.Close();
             return DataList;
@@ -128,6 +116,30 @@ namespace WongTung.DBUtility
 
             timeSpan = DateTime.Now - s;
             return r;
+        }
+        private T GetEntity(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
+        {
+            T RowInstance = new T();
+            foreach (FieldMappingInfo f in lstFieldInfo)
+            {
+                try
+                {
+                    //取得当前数据库字段的顺序
+                    if (f.FieldIndex != -1)
+                    {
+                        object obj = reader.GetValue(f.FieldIndex);
+                        if (obj != DBNull.Value)
+                        {
+                            f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataTypeCode), null);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            return RowInstance;
         }
         private IList<FieldMappingInfo> SetFieldIndex(IDataReader reader, IList<FieldMappingInfo> list)
         {
