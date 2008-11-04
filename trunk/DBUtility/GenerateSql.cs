@@ -106,11 +106,11 @@ namespace WongTung.DBUtility
         {
             return string.Format(_SelectFieldsString, GetSelectFields(selectFields), GetTableName(tableName), string.Empty, string.Empty);
         }
-        public static string SelectSql(string tableName, IList<SqlParam> whereParam, IList<Enum> selectFields)
+        public static string SelectSql(string tableName, IList<Enum> selectFields, IList<SqlParam> whereParam)
         {
-            return SelectSql(tableName, whereParam, selectFields, null);
+            return SelectSql(tableName,  selectFields,whereParam, null);
         }
-        public static string SelectSql(string tableName, IList<SqlParam> whereParam, IList<Enum> selectFields, params OrderParam[] orderFields)
+        public static string SelectSql(string tableName, IList<Enum> selectFields, IList<SqlParam> whereParam, params OrderParam[] orderFields)
         {
             if (selectFields.Count > 0)
                 return string.Format(_SelectFieldsString, GetSelectFields(selectFields), GetTableName(tableName), GetWhereSql(whereParam), GetOrderByFields(orderFields));
