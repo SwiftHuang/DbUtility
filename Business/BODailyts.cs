@@ -43,13 +43,12 @@ namespace WongTung.Business
         public void Update()
         {
             IList<SqlParam> upLst = new List<SqlParam>();
-            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE.ToString(), DateTime.Now, Enums.Operator.Equal));
-            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE.ToString(), "2000-01-01", Enums.Operator.Equal));
+            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, DateTime.Now, Enums.Operator.Equal));
+            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Equal));
 
             IList<SqlParam> whereLst = new List<SqlParam>();
-            whereLst.Add(new SqlParam("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal, Enums.Expression.AND));
+            whereLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Equal, Enums.Expression.AND));
             whereLst.Add(new SqlParam("DT_UPDATE_DATE", "2000-01-01", Enums.Operator.Equal, Enums.Expression.None));
-
             DADailyts.Update(upLst, whereLst);
         }
         public void Delete()
@@ -58,6 +57,47 @@ namespace WongTung.Business
             whereLst.Add(new SqlParam("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.OR));
             whereLst.Add(new SqlParam("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.None));
             DADailyts.Delete(whereLst);
+        }
+
+        public string UpdateSql()
+        {
+            IList<SqlParam> upLst = new List<SqlParam>();
+            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, DateTime.Now, Enums.Operator.Equal));
+            upLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Equal));
+
+            IList<SqlParam> whereLst = new List<SqlParam>();
+            whereLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Equal, Enums.Expression.AND));
+            whereLst.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Equal, Enums.Expression.None));
+            DADailyts.Update(upLst, whereLst);
+            return DADailyts.Sql;
+        }
+        public string DeleteSql()
+        {
+            IList<SqlParam> whereLst = new List<SqlParam>();
+            whereLst.Add(new SqlParam("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.OR));
+            whereLst.Add(new SqlParam("DT_UPDATE_DATE", DateTime.Now, Enums.Operator.Equal, Enums.Expression.None));
+            DADailyts.Delete(whereLst);
+            return DADailyts.Sql;
+        }
+        public string InsertSql(Entity.Table.dailyts entity)
+        {
+            DADailyts.Add(entity);
+            return DADailyts.Sql;
+        }
+        public string SelectSql()
+        {
+            List<SqlParam> wParam = new List<SqlParam>();
+            wParam.AddParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Unequal, Enums.Expression.OR);
+            wParam.AddParam(dailyts.Fields.DT_CO_CODE, "", Enums.Operator.Unequal, Enums.Expression.AND);
+            wParam.AddParam(dailyts.Fields.DT_JOB_CODE, "", Enums.Operator.Equal);
+
+            //whereParam.Add(new SqlParam(dailyts.Fields.DT_UPDATE_DATE, "2000-01-01", Enums.Operator.Unequal, Enums.Expression.OR));
+            //whereParam.Add(new SqlParam(dailyts.Fields.DT_CO_CODE, "", Enums.Operator.IsNull, Enums.Expression.AND));
+            //whereParam.Add(new SqlParam(dailyts.Fields.DT_LINE_NO, "", Enums.Operator.IsNotNull, Enums.Expression.AND));
+            //whereParam.Add(new SqlParam(dailyts.Fields.DT_CO_CODE, "", Enums.Operator.Unequal, Enums.Expression.None));
+
+            DADailyts.Select(wParam);
+            return DADailyts.Sql;
         }
 
     }

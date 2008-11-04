@@ -11,7 +11,8 @@ namespace WongTung.DBUtility
         {
             Equal,
             Unequal,
-            IsNull
+            IsNull,
+            IsNotNull
         }
         public enum DBType
         {
@@ -25,6 +26,12 @@ namespace WongTung.DBUtility
             AND,
             OR
         }
+        public enum OrderBy
+        {
+            Descending,
+            Ascending,
+            None
+        }
     }
     public static class EnumsExtensions
     {
@@ -37,7 +44,9 @@ namespace WongTung.DBUtility
                 case Enums.Operator.Unequal:
                     return "<>";
                 case Enums.Operator.IsNull:
-                    return "is null";
+                    return " is null ";
+                case Enums.Operator.IsNotNull:
+                    return " is not null";
                 default:
                     throw new Exception("Enums.Operator error");
             }
@@ -58,6 +67,20 @@ namespace WongTung.DBUtility
                     throw new Exception("Enums Expression error");
             }
             throw new Exception("Enums Expression error");
+        }
+        public static string ToSqlString(this Enums.OrderBy ord)
+        {
+            switch (ord)
+            {
+                case Enums.OrderBy.Descending:
+                    return " desc";
+                case Enums.OrderBy.Ascending:
+                    return string.Empty;
+                case Enums.OrderBy.None:
+                    return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

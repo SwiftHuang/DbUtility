@@ -27,7 +27,7 @@ namespace WongTung.WebSite
         protected void Page_Load(object sender, EventArgs e)
         {
             TimeSpan ts;
-            int Count = 10000;
+            int Count = 1;
 
             if (Request["C"] != null)
                 Count = Convert.ToInt32(Request["C"].ToString());
@@ -40,6 +40,9 @@ namespace WongTung.WebSite
             Entity.Table.dailyts d = new WongTung.Entity.Table.dailyts();
             d.DT_CO_CODE = "VI";
             d.DT_UPDATE_DATE = DateTime.Now;
+            d.DT_STAFF_CODE = "VIN";
+            d.DT_APP_CODE = "V";
+            d.DT_RAMNO = "000001";
             BJ.Add(d);
             BJ.Update();
             BJ.Delete();
@@ -66,6 +69,11 @@ namespace WongTung.WebSite
             ts = DateTime.Now - dStart;
             Label2.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
             Label3.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
+
+            txtSelect.Text = BJ.SelectSql();
+            txtInsert.Text = BJ.InsertSql(d);
+            txtDel.Text = BJ.DeleteSql();
+            txtUpdate.Text = BJ.UpdateSql();
         }
     }
 }
