@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Table\dailyts2.cs" />
     <Compile Include="Table\dailyts.cs" />
+    <Compile Include="iTable.cs" />
     <Compile Include="Table\job.cs">
       <SubType>Code</SubType>
     </Compile>

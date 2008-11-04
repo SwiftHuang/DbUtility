@@ -5,65 +5,74 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类ptl_job_tem 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class ptl_job_tem
+	[Serializable]
+	public class ptl_job_tem : iTable
 	{
 		public ptl_job_tem()
 		{}
-		public enum Fields{TJ_CO_CODE,
-TJ_EMP_CODE,
-TJ_LAST_DATE,
-TJ_LAST_NUM,
-TJ_JOB_1,
-TJ_JOB_2,
-TJ_JOB_3,
-TJ_JOB_4,
-TJ_JOB_5,
-TJ_JOB_6,
-TJ_JOB_7,
-TJ_JOB_8,
-TJ_JOB_9,
-TJ_JOB_10,
-TJ_JOB_11,
-TJ_JOB_12,
-TJ_JOB_13,
-TJ_JOB_14,
-TJ_JOB_15,
-TJ_JOB_16,
-TJ_JOB_17,
-TJ_JOB_18,
-TJ_JOB_19,
-TJ_JOB_20,
-}
+		public enum Fields
+		{
+			TJ_CO_CODE,
+			TJ_EMP_CODE,
+			TJ_LAST_DATE,
+			TJ_LAST_NUM,
+			TJ_JOB_1,
+			TJ_JOB_2,
+			TJ_JOB_3,
+			TJ_JOB_4,
+			TJ_JOB_5,
+			TJ_JOB_6,
+			TJ_JOB_7,
+			TJ_JOB_8,
+			TJ_JOB_9,
+			TJ_JOB_10,
+			TJ_JOB_11,
+			TJ_JOB_12,
+			TJ_JOB_13,
+			TJ_JOB_14,
+			TJ_JOB_15,
+			TJ_JOB_16,
+			TJ_JOB_17,
+			TJ_JOB_18,
+			TJ_JOB_19,
+			TJ_JOB_20,
+		}
+
+		public static string TableName
+		{
+			get { return "ptl_job_tem"; }
+		}
+
 		#region Model
-		private string _tj_co_code;
-		private string _tj_emp_code;
+		private String _tj_co_code;
+		private String _tj_emp_code;
 		private DateTime _tj_last_date;
-		private decimal _tj_last_num;
-		private string _tj_job_1;
-		private string _tj_job_2;
-		private string _tj_job_3;
-		private string _tj_job_4;
-		private string _tj_job_5;
-		private string _tj_job_6;
-		private string _tj_job_7;
-		private string _tj_job_8;
-		private string _tj_job_9;
-		private string _tj_job_10;
-		private string _tj_job_11;
-		private string _tj_job_12;
-		private string _tj_job_13;
-		private string _tj_job_14;
-		private string _tj_job_15;
-		private string _tj_job_16;
-		private string _tj_job_17;
-		private string _tj_job_18;
-		private string _tj_job_19;
-		private string _tj_job_20;
+		private Decimal _tj_last_num;
+		private String _tj_job_1;
+		private String _tj_job_2;
+		private String _tj_job_3;
+		private String _tj_job_4;
+		private String _tj_job_5;
+		private String _tj_job_6;
+		private String _tj_job_7;
+		private String _tj_job_8;
+		private String _tj_job_9;
+		private String _tj_job_10;
+		private String _tj_job_11;
+		private String _tj_job_12;
+		private String _tj_job_13;
+		private String _tj_job_14;
+		private String _tj_job_15;
+		private String _tj_job_16;
+		private String _tj_job_17;
+		private String _tj_job_18;
+		private String _tj_job_19;
+		private String _tj_job_20;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_CO_CODE", TypeCode.String)]
-		public string TJ_CO_CODE
+		public String TJ_CO_CODE
 		{
 			set{ _tj_co_code=value;}
 			get{return _tj_co_code;}
@@ -72,7 +81,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_EMP_CODE", TypeCode.String)]
-		public string TJ_EMP_CODE
+		public String TJ_EMP_CODE
 		{
 			set{ _tj_emp_code=value;}
 			get{return _tj_emp_code;}
@@ -90,7 +99,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_LAST_NUM", TypeCode.Decimal)]
-		public decimal TJ_LAST_NUM
+		public Decimal TJ_LAST_NUM
 		{
 			set{ _tj_last_num=value;}
 			get{return _tj_last_num;}
@@ -99,7 +108,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_1", TypeCode.String)]
-		public string TJ_JOB_1
+		public String TJ_JOB_1
 		{
 			set{ _tj_job_1=value;}
 			get{return _tj_job_1;}
@@ -108,7 +117,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_2", TypeCode.String)]
-		public string TJ_JOB_2
+		public String TJ_JOB_2
 		{
 			set{ _tj_job_2=value;}
 			get{return _tj_job_2;}
@@ -117,7 +126,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_3", TypeCode.String)]
-		public string TJ_JOB_3
+		public String TJ_JOB_3
 		{
 			set{ _tj_job_3=value;}
 			get{return _tj_job_3;}
@@ -126,7 +135,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_4", TypeCode.String)]
-		public string TJ_JOB_4
+		public String TJ_JOB_4
 		{
 			set{ _tj_job_4=value;}
 			get{return _tj_job_4;}
@@ -135,7 +144,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_5", TypeCode.String)]
-		public string TJ_JOB_5
+		public String TJ_JOB_5
 		{
 			set{ _tj_job_5=value;}
 			get{return _tj_job_5;}
@@ -144,7 +153,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_6", TypeCode.String)]
-		public string TJ_JOB_6
+		public String TJ_JOB_6
 		{
 			set{ _tj_job_6=value;}
 			get{return _tj_job_6;}
@@ -153,7 +162,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_7", TypeCode.String)]
-		public string TJ_JOB_7
+		public String TJ_JOB_7
 		{
 			set{ _tj_job_7=value;}
 			get{return _tj_job_7;}
@@ -162,7 +171,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_8", TypeCode.String)]
-		public string TJ_JOB_8
+		public String TJ_JOB_8
 		{
 			set{ _tj_job_8=value;}
 			get{return _tj_job_8;}
@@ -171,7 +180,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_9", TypeCode.String)]
-		public string TJ_JOB_9
+		public String TJ_JOB_9
 		{
 			set{ _tj_job_9=value;}
 			get{return _tj_job_9;}
@@ -180,7 +189,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_10", TypeCode.String)]
-		public string TJ_JOB_10
+		public String TJ_JOB_10
 		{
 			set{ _tj_job_10=value;}
 			get{return _tj_job_10;}
@@ -189,7 +198,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_11", TypeCode.String)]
-		public string TJ_JOB_11
+		public String TJ_JOB_11
 		{
 			set{ _tj_job_11=value;}
 			get{return _tj_job_11;}
@@ -198,7 +207,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_12", TypeCode.String)]
-		public string TJ_JOB_12
+		public String TJ_JOB_12
 		{
 			set{ _tj_job_12=value;}
 			get{return _tj_job_12;}
@@ -207,7 +216,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_13", TypeCode.String)]
-		public string TJ_JOB_13
+		public String TJ_JOB_13
 		{
 			set{ _tj_job_13=value;}
 			get{return _tj_job_13;}
@@ -216,7 +225,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_14", TypeCode.String)]
-		public string TJ_JOB_14
+		public String TJ_JOB_14
 		{
 			set{ _tj_job_14=value;}
 			get{return _tj_job_14;}
@@ -225,7 +234,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_15", TypeCode.String)]
-		public string TJ_JOB_15
+		public String TJ_JOB_15
 		{
 			set{ _tj_job_15=value;}
 			get{return _tj_job_15;}
@@ -234,7 +243,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_16", TypeCode.String)]
-		public string TJ_JOB_16
+		public String TJ_JOB_16
 		{
 			set{ _tj_job_16=value;}
 			get{return _tj_job_16;}
@@ -243,7 +252,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_17", TypeCode.String)]
-		public string TJ_JOB_17
+		public String TJ_JOB_17
 		{
 			set{ _tj_job_17=value;}
 			get{return _tj_job_17;}
@@ -252,7 +261,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_18", TypeCode.String)]
-		public string TJ_JOB_18
+		public String TJ_JOB_18
 		{
 			set{ _tj_job_18=value;}
 			get{return _tj_job_18;}
@@ -261,7 +270,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_19", TypeCode.String)]
-		public string TJ_JOB_19
+		public String TJ_JOB_19
 		{
 			set{ _tj_job_19=value;}
 			get{return _tj_job_19;}
@@ -270,7 +279,7 @@ TJ_JOB_20,
 		/// 
 		/// </summary>
 		[FieldMapping("TJ_JOB_20", TypeCode.String)]
-		public string TJ_JOB_20
+		public String TJ_JOB_20
 		{
 			set{ _tj_job_20=value;}
 			get{return _tj_job_20;}

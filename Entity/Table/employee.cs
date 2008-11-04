@@ -5,39 +5,48 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类employee 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class employee
+	[Serializable]
+	public class employee : iTable
 	{
 		public employee()
 		{}
-		public enum Fields{EMP_CO_CODE,
-EMP_CODE,
-EMP_NAME,
-EMP_POS_CODE,
-EMP_DEP_CODE,
-EMP_INITIAL,
-EMP_OFFICE,
-EMP_CHNAME,
-EMP_SPE,
-EMP_CRE_DATE,
-EMP_DEL,
-}
+		public enum Fields
+		{
+			EMP_CO_CODE,
+			EMP_CODE,
+			EMP_NAME,
+			EMP_POS_CODE,
+			EMP_DEP_CODE,
+			EMP_INITIAL,
+			EMP_OFFICE,
+			EMP_CHNAME,
+			EMP_SPE,
+			EMP_CRE_DATE,
+			EMP_DEL,
+		}
+
+		public static string TableName
+		{
+			get { return "employee"; }
+		}
+
 		#region Model
-		private string _emp_co_code;
-		private string _emp_code;
-		private string _emp_name;
-		private string _emp_pos_code;
-		private string _emp_dep_code;
-		private string _emp_initial;
-		private string _emp_office;
-		private string _emp_chname;
-		private string _emp_spe;
+		private String _emp_co_code;
+		private String _emp_code;
+		private String _emp_name;
+		private String _emp_pos_code;
+		private String _emp_dep_code;
+		private String _emp_initial;
+		private String _emp_office;
+		private String _emp_chname;
+		private String _emp_spe;
 		private DateTime _emp_cre_date;
-		private string _emp_del;
+		private String _emp_del;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_CO_CODE", TypeCode.String)]
-		public string EMP_CO_CODE
+		public String EMP_CO_CODE
 		{
 			set{ _emp_co_code=value;}
 			get{return _emp_co_code;}
@@ -46,7 +55,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_CODE", TypeCode.String)]
-		public string EMP_CODE
+		public String EMP_CODE
 		{
 			set{ _emp_code=value;}
 			get{return _emp_code;}
@@ -55,7 +64,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_NAME", TypeCode.String)]
-		public string EMP_NAME
+		public String EMP_NAME
 		{
 			set{ _emp_name=value;}
 			get{return _emp_name;}
@@ -64,7 +73,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_POS_CODE", TypeCode.String)]
-		public string EMP_POS_CODE
+		public String EMP_POS_CODE
 		{
 			set{ _emp_pos_code=value;}
 			get{return _emp_pos_code;}
@@ -73,7 +82,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_DEP_CODE", TypeCode.String)]
-		public string EMP_DEP_CODE
+		public String EMP_DEP_CODE
 		{
 			set{ _emp_dep_code=value;}
 			get{return _emp_dep_code;}
@@ -82,7 +91,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_INITIAL", TypeCode.String)]
-		public string EMP_INITIAL
+		public String EMP_INITIAL
 		{
 			set{ _emp_initial=value;}
 			get{return _emp_initial;}
@@ -91,7 +100,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_OFFICE", TypeCode.String)]
-		public string EMP_OFFICE
+		public String EMP_OFFICE
 		{
 			set{ _emp_office=value;}
 			get{return _emp_office;}
@@ -100,7 +109,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_CHNAME", TypeCode.String)]
-		public string EMP_CHNAME
+		public String EMP_CHNAME
 		{
 			set{ _emp_chname=value;}
 			get{return _emp_chname;}
@@ -109,7 +118,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_SPE", TypeCode.String)]
-		public string EMP_SPE
+		public String EMP_SPE
 		{
 			set{ _emp_spe=value;}
 			get{return _emp_spe;}
@@ -127,7 +136,7 @@ EMP_DEL,
 		/// 
 		/// </summary>
 		[FieldMapping("EMP_DEL", TypeCode.String)]
-		public string EMP_DEL
+		public String EMP_DEL
 		{
 			set{ _emp_del=value;}
 			get{return _emp_del;}

@@ -9,7 +9,7 @@ using WongTung.DBUtility.TableMapping;
 
 namespace WongTung.DBUtility
 {
-    public abstract class BaseDataAccess<T> where T : class, new()
+    public abstract class DALBase<T> where T : class, new()
     {
         #region Property
         private string _sql = string.Empty;

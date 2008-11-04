@@ -5,33 +5,42 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类non_hist 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class non_hist
+	[Serializable]
+	public class non_hist : iTable
 	{
 		public non_hist()
 		{}
-		public enum Fields{CO_CODE,
-STAFF_CODE,
-DATE,
-TYPE,
-ANNUAL,
-SICK,
-ADMIN,
-OT_PAY,
-}
+		public enum Fields
+		{
+			CO_CODE,
+			STAFF_CODE,
+			DATE,
+			TYPE,
+			ANNUAL,
+			SICK,
+			ADMIN,
+			OT_PAY,
+		}
+
+		public static string TableName
+		{
+			get { return "non_hist"; }
+		}
+
 		#region Model
-		private string _co_code;
-		private string _staff_code;
+		private String _co_code;
+		private String _staff_code;
 		private DateTime _date;
-		private string _type;
-		private decimal? _annual;
-		private decimal? _sick;
-		private decimal? _admin;
-		private decimal? _ot_pay;
+		private String _type;
+		private Decimal? _annual;
+		private Decimal? _sick;
+		private Decimal? _admin;
+		private Decimal? _ot_pay;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("CO_CODE", TypeCode.String)]
-		public string CO_CODE
+		public String CO_CODE
 		{
 			set{ _co_code=value;}
 			get{return _co_code;}
@@ -40,7 +49,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("STAFF_CODE", TypeCode.String)]
-		public string STAFF_CODE
+		public String STAFF_CODE
 		{
 			set{ _staff_code=value;}
 			get{return _staff_code;}
@@ -58,7 +67,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("TYPE", TypeCode.String)]
-		public string TYPE
+		public String TYPE
 		{
 			set{ _type=value;}
 			get{return _type;}
@@ -67,7 +76,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("ANNUAL", TypeCode.Decimal)]
-		public decimal? ANNUAL
+		public Decimal? ANNUAL
 		{
 			set{ _annual=value;}
 			get{return _annual;}
@@ -76,7 +85,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("SICK", TypeCode.Decimal)]
-		public decimal? SICK
+		public Decimal? SICK
 		{
 			set{ _sick=value;}
 			get{return _sick;}
@@ -85,7 +94,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("ADMIN", TypeCode.Decimal)]
-		public decimal? ADMIN
+		public Decimal? ADMIN
 		{
 			set{ _admin=value;}
 			get{return _admin;}
@@ -94,7 +103,7 @@ OT_PAY,
 		/// 
 		/// </summary>
 		[FieldMapping("OT_PAY", TypeCode.Decimal)]
-		public decimal? OT_PAY
+		public Decimal? OT_PAY
 		{
 			set{ _ot_pay=value;}
 			get{return _ot_pay;}

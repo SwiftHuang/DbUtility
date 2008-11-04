@@ -5,31 +5,40 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类update_time 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class update_time
+	[Serializable]
+	public class update_time : iTable
 	{
 		public update_time()
 		{}
-		public enum Fields{UT_CODE,
-UT_DATE,
-UT_TIME,
-UT_FRE,
-UT_UPDATE_USER,
-UT_UPDATE_DT,
-UT_INF,
-}
+		public enum Fields
+		{
+			UT_CODE,
+			UT_DATE,
+			UT_TIME,
+			UT_FRE,
+			UT_UPDATE_USER,
+			UT_UPDATE_DT,
+			UT_INF,
+		}
+
+		public static string TableName
+		{
+			get { return "update_time"; }
+		}
+
 		#region Model
-		private string _ut_code;
+		private String _ut_code;
 		private DateTime _ut_date;
-		private string _ut_time;
-		private int _ut_fre;
-		private string _ut_update_user;
+		private String _ut_time;
+		private Int32 _ut_fre;
+		private String _ut_update_user;
 		private DateTime _ut_update_dt;
-		private string _ut_inf;
+		private String _ut_inf;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("UT_CODE", TypeCode.String)]
-		public string UT_CODE
+		public String UT_CODE
 		{
 			set{ _ut_code=value;}
 			get{return _ut_code;}
@@ -47,7 +56,7 @@ UT_INF,
 		/// 
 		/// </summary>
 		[FieldMapping("UT_TIME", TypeCode.String)]
-		public string UT_TIME
+		public String UT_TIME
 		{
 			set{ _ut_time=value;}
 			get{return _ut_time;}
@@ -55,8 +64,8 @@ UT_INF,
 		/// <summary>
 		/// 
 		/// </summary>
-		[FieldMapping("UT_FRE", TypeCode.Int)]
-		public int UT_FRE
+		[FieldMapping("UT_FRE", TypeCode.Int32)]
+		public Int32 UT_FRE
 		{
 			set{ _ut_fre=value;}
 			get{return _ut_fre;}
@@ -65,7 +74,7 @@ UT_INF,
 		/// 
 		/// </summary>
 		[FieldMapping("UT_UPDATE_USER", TypeCode.String)]
-		public string UT_UPDATE_USER
+		public String UT_UPDATE_USER
 		{
 			set{ _ut_update_user=value;}
 			get{return _ut_update_user;}
@@ -83,7 +92,7 @@ UT_INF,
 		/// 
 		/// </summary>
 		[FieldMapping("UT_INF", TypeCode.String)]
-		public string UT_INF
+		public String UT_INF
 		{
 			set{ _ut_inf=value;}
 			get{return _ut_inf;}

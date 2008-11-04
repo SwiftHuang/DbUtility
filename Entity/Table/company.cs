@@ -5,37 +5,46 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类company 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class company
+	[Serializable]
+	public class company : iTable
 	{
 		public company()
 		{}
-		public enum Fields{CO_CODE,
-CO_SCR_NAME,
-CO_RPT_NAME,
-CO_LB_DATE,
-CO_LE_DATE,
-CO_CB_DATE,
-CO_CE_DATE,
-CO_CURR,
-CO_PERIOD_FROM,
-CO_PERIOD_TO,
-}
+		public enum Fields
+		{
+			CO_CODE,
+			CO_SCR_NAME,
+			CO_RPT_NAME,
+			CO_LB_DATE,
+			CO_LE_DATE,
+			CO_CB_DATE,
+			CO_CE_DATE,
+			CO_CURR,
+			CO_PERIOD_FROM,
+			CO_PERIOD_TO,
+		}
+
+		public static string TableName
+		{
+			get { return "company"; }
+		}
+
 		#region Model
-		private string _co_code;
-		private string _co_scr_name;
-		private string _co_rpt_name;
+		private String _co_code;
+		private String _co_scr_name;
+		private String _co_rpt_name;
 		private DateTime? _co_lb_date;
 		private DateTime? _co_le_date;
 		private DateTime? _co_cb_date;
 		private DateTime? _co_ce_date;
-		private string _co_curr;
+		private String _co_curr;
 		private DateTime? _co_period_from;
 		private DateTime? _co_period_to;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("CO_CODE", TypeCode.String)]
-		public string CO_CODE
+		public String CO_CODE
 		{
 			set{ _co_code=value;}
 			get{return _co_code;}
@@ -44,7 +53,7 @@ CO_PERIOD_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("CO_SCR_NAME", TypeCode.String)]
-		public string CO_SCR_NAME
+		public String CO_SCR_NAME
 		{
 			set{ _co_scr_name=value;}
 			get{return _co_scr_name;}
@@ -53,7 +62,7 @@ CO_PERIOD_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("CO_RPT_NAME", TypeCode.String)]
-		public string CO_RPT_NAME
+		public String CO_RPT_NAME
 		{
 			set{ _co_rpt_name=value;}
 			get{return _co_rpt_name;}
@@ -98,7 +107,7 @@ CO_PERIOD_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("CO_CURR", TypeCode.String)]
-		public string CO_CURR
+		public String CO_CURR
 		{
 			set{ _co_curr=value;}
 			get{return _co_curr;}

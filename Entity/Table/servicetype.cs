@@ -5,35 +5,44 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类servicetype 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class servicetype
+	[Serializable]
+	public class servicetype : iTable
 	{
 		public servicetype()
 		{}
-		public enum Fields{ST_CO_CODE,
-ST_JOB_CODE,
-ST_SER_CODE,
-ST_DESC,
-ST_DESC1,
-ST_DESC_T1,
-ST_DESC_S1,
-ST_DESC_T2,
-ST_DESC_S2,
-}
+		public enum Fields
+		{
+			ST_CO_CODE,
+			ST_JOB_CODE,
+			ST_SER_CODE,
+			ST_DESC,
+			ST_DESC1,
+			ST_DESC_T1,
+			ST_DESC_S1,
+			ST_DESC_T2,
+			ST_DESC_S2,
+		}
+
+		public static string TableName
+		{
+			get { return "servicetype"; }
+		}
+
 		#region Model
-		private string _st_co_code;
-		private string _st_job_code;
-		private string _st_ser_code;
-		private string _st_desc;
-		private string _st_desc1;
-		private string _st_desc_t1;
-		private string _st_desc_s1;
-		private string _st_desc_t2;
-		private string _st_desc_s2;
+		private String _st_co_code;
+		private String _st_job_code;
+		private String _st_ser_code;
+		private String _st_desc;
+		private String _st_desc1;
+		private String _st_desc_t1;
+		private String _st_desc_s1;
+		private String _st_desc_t2;
+		private String _st_desc_s2;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("ST_CO_CODE", TypeCode.String)]
-		public string ST_CO_CODE
+		public String ST_CO_CODE
 		{
 			set{ _st_co_code=value;}
 			get{return _st_co_code;}
@@ -42,7 +51,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_JOB_CODE", TypeCode.String)]
-		public string ST_JOB_CODE
+		public String ST_JOB_CODE
 		{
 			set{ _st_job_code=value;}
 			get{return _st_job_code;}
@@ -51,7 +60,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_SER_CODE", TypeCode.String)]
-		public string ST_SER_CODE
+		public String ST_SER_CODE
 		{
 			set{ _st_ser_code=value;}
 			get{return _st_ser_code;}
@@ -60,7 +69,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC", TypeCode.String)]
-		public string ST_DESC
+		public String ST_DESC
 		{
 			set{ _st_desc=value;}
 			get{return _st_desc;}
@@ -69,7 +78,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC1", TypeCode.String)]
-		public string ST_DESC1
+		public String ST_DESC1
 		{
 			set{ _st_desc1=value;}
 			get{return _st_desc1;}
@@ -78,7 +87,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC_T1", TypeCode.String)]
-		public string ST_DESC_T1
+		public String ST_DESC_T1
 		{
 			set{ _st_desc_t1=value;}
 			get{return _st_desc_t1;}
@@ -87,7 +96,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC_S1", TypeCode.String)]
-		public string ST_DESC_S1
+		public String ST_DESC_S1
 		{
 			set{ _st_desc_s1=value;}
 			get{return _st_desc_s1;}
@@ -96,7 +105,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC_T2", TypeCode.String)]
-		public string ST_DESC_T2
+		public String ST_DESC_T2
 		{
 			set{ _st_desc_t2=value;}
 			get{return _st_desc_t2;}
@@ -105,7 +114,7 @@ ST_DESC_S2,
 		/// 
 		/// </summary>
 		[FieldMapping("ST_DESC_S2", TypeCode.String)]
-		public string ST_DESC_S2
+		public String ST_DESC_S2
 		{
 			set{ _st_desc_s2=value;}
 			get{return _st_desc_s2;}

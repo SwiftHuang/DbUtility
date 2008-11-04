@@ -5,25 +5,34 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类backspecial 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class backspecial
+	[Serializable]
+	public class backspecial : iTable
 	{
 		public backspecial()
 		{}
-		public enum Fields{BS_CO_CODE,
-BS_CODE,
-BS_DATE,
-BS_CURDATE,
-}
+		public enum Fields
+		{
+			BS_CO_CODE,
+			BS_CODE,
+			BS_DATE,
+			BS_CURDATE,
+		}
+
+		public static string TableName
+		{
+			get { return "backspecial"; }
+		}
+
 		#region Model
-		private string _bs_co_code;
-		private string _bs_code;
+		private String _bs_co_code;
+		private String _bs_code;
 		private DateTime? _bs_date;
 		private DateTime? _bs_curdate;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("BS_CO_CODE", TypeCode.String)]
-		public string BS_CO_CODE
+		public String BS_CO_CODE
 		{
 			set{ _bs_co_code=value;}
 			get{return _bs_co_code;}
@@ -32,7 +41,7 @@ BS_CURDATE,
 		/// 
 		/// </summary>
 		[FieldMapping("BS_CODE", TypeCode.String)]
-		public string BS_CODE
+		public String BS_CODE
 		{
 			set{ _bs_code=value;}
 			get{return _bs_code;}

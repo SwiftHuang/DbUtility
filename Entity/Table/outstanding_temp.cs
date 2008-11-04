@@ -5,35 +5,44 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类outstanding_temp 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class outstanding_temp
+	[Serializable]
+	public class outstanding_temp : iTable
 	{
 		public outstanding_temp()
 		{}
-		public enum Fields{NUM,
-OUT_OFF_CODE,
-OUT_OFF_NAME,
-OUT_EMP_CODE,
-OUT_EMP_NAME,
-OUT_DAY,
-OUT_POS_CLASS,
-OUT_POS_CODE,
-OUT_UPDATE_DATE,
-}
+		public enum Fields
+		{
+			NUM,
+			OUT_OFF_CODE,
+			OUT_OFF_NAME,
+			OUT_EMP_CODE,
+			OUT_EMP_NAME,
+			OUT_DAY,
+			OUT_POS_CLASS,
+			OUT_POS_CODE,
+			OUT_UPDATE_DATE,
+		}
+
+		public static string TableName
+		{
+			get { return "outstanding_temp"; }
+		}
+
 		#region Model
-		private decimal _num;
-		private string _out_off_code;
-		private string _out_off_name;
-		private string _out_emp_code;
-		private string _out_emp_name;
+		private Decimal _num;
+		private String _out_off_code;
+		private String _out_off_name;
+		private String _out_emp_code;
+		private String _out_emp_name;
 		private DateTime? _out_day;
-		private decimal? _out_pos_class;
-		private string _out_pos_code;
+		private Decimal? _out_pos_class;
+		private String _out_pos_code;
 		private DateTime? _out_update_date;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("NUM", TypeCode.Decimal)]
-		public decimal NUM
+		public Decimal NUM
 		{
 			set{ _num=value;}
 			get{return _num;}
@@ -42,7 +51,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_OFF_CODE", TypeCode.String)]
-		public string OUT_OFF_CODE
+		public String OUT_OFF_CODE
 		{
 			set{ _out_off_code=value;}
 			get{return _out_off_code;}
@@ -51,7 +60,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_OFF_NAME", TypeCode.String)]
-		public string OUT_OFF_NAME
+		public String OUT_OFF_NAME
 		{
 			set{ _out_off_name=value;}
 			get{return _out_off_name;}
@@ -60,7 +69,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_EMP_CODE", TypeCode.String)]
-		public string OUT_EMP_CODE
+		public String OUT_EMP_CODE
 		{
 			set{ _out_emp_code=value;}
 			get{return _out_emp_code;}
@@ -69,7 +78,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_EMP_NAME", TypeCode.String)]
-		public string OUT_EMP_NAME
+		public String OUT_EMP_NAME
 		{
 			set{ _out_emp_name=value;}
 			get{return _out_emp_name;}
@@ -87,7 +96,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_POS_CLASS", TypeCode.Decimal)]
-		public decimal? OUT_POS_CLASS
+		public Decimal? OUT_POS_CLASS
 		{
 			set{ _out_pos_class=value;}
 			get{return _out_pos_class;}
@@ -96,7 +105,7 @@ OUT_UPDATE_DATE,
 		/// 
 		/// </summary>
 		[FieldMapping("OUT_POS_CODE", TypeCode.String)]
-		public string OUT_POS_CODE
+		public String OUT_POS_CODE
 		{
 			set{ _out_pos_code=value;}
 			get{return _out_pos_code;}
