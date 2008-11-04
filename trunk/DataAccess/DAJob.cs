@@ -5,11 +5,11 @@ using System.Text;
 
 namespace WongTung.DataAccess
 {
-    public class DAJob : WongTung.DBUtility.BaseDataAccess<Entity.Table.job>
+    public class DAJob : WongTung.DBUtility.DALBase<Entity.Table.job>
     {
         public DAJob()
         {
-            TableName = "job";
+            TableName = Entity.Table.job.TableName;
         }
     }
 }

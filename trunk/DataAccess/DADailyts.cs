@@ -4,14 +4,14 @@ using System.Text;
 
 namespace WongTung.DataAccess
 {
-    public class DADailyts : WongTung.DBUtility.BaseDataAccess<Entity.Table.dailyts>
+    public class DADailyts : WongTung.DBUtility.DALBase<Entity.Table.dailyts>
     {
     }
-    public class DADailyts2 : WongTung.DBUtility.BaseDataAccess<Entity.Table.dailyts2>
+    public class DADailyts2 : WongTung.DBUtility.DALBase<Entity.Table.dailyts2>
     {
         public DADailyts2()
         {
-            TableName = "dailyts";
+            TableName = Entity.Table.dailyts.TableName;
         }
     }
 }

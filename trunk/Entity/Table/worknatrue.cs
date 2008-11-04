@@ -5,27 +5,36 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类worknatrue 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class worknatrue
+	[Serializable]
+	public class worknatrue : iTable
 	{
 		public worknatrue()
 		{}
-		public enum Fields{WN_CO_CODE,
-WN_CODE,
-WN_DESC,
-WN_DESC_T,
-WN_DESC_S,
-}
+		public enum Fields
+		{
+			WN_CO_CODE,
+			WN_CODE,
+			WN_DESC,
+			WN_DESC_T,
+			WN_DESC_S,
+		}
+
+		public static string TableName
+		{
+			get { return "worknatrue"; }
+		}
+
 		#region Model
-		private string _wn_co_code;
-		private string _wn_code;
-		private string _wn_desc;
-		private string _wn_desc_t;
-		private string _wn_desc_s;
+		private String _wn_co_code;
+		private String _wn_code;
+		private String _wn_desc;
+		private String _wn_desc_t;
+		private String _wn_desc_s;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("WN_CO_CODE", TypeCode.String)]
-		public string WN_CO_CODE
+		public String WN_CO_CODE
 		{
 			set{ _wn_co_code=value;}
 			get{return _wn_co_code;}
@@ -34,7 +43,7 @@ WN_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WN_CODE", TypeCode.String)]
-		public string WN_CODE
+		public String WN_CODE
 		{
 			set{ _wn_code=value;}
 			get{return _wn_code;}
@@ -43,7 +52,7 @@ WN_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WN_DESC", TypeCode.String)]
-		public string WN_DESC
+		public String WN_DESC
 		{
 			set{ _wn_desc=value;}
 			get{return _wn_desc;}
@@ -52,7 +61,7 @@ WN_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WN_DESC_T", TypeCode.String)]
-		public string WN_DESC_T
+		public String WN_DESC_T
 		{
 			set{ _wn_desc_t=value;}
 			get{return _wn_desc_t;}
@@ -61,7 +70,7 @@ WN_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WN_DESC_S", TypeCode.String)]
-		public string WN_DESC_S
+		public String WN_DESC_S
 		{
 			set{ _wn_desc_s=value;}
 			get{return _wn_desc_s;}

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="DALBase.cs" />
     <Compile Include="CommandInfo.cs" />
     <Compile Include="DBCache.cs" />
     <Compile Include="DbHelperMySQL.cs" />

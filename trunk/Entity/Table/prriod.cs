@@ -5,25 +5,34 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类prriod 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class prriod
+	[Serializable]
+	public class prriod : iTable
 	{
 		public prriod()
 		{}
-		public enum Fields{PR_CO_CODE,
-PR_NO,
-PR_FROM,
-PR_TO,
-}
+		public enum Fields
+		{
+			PR_CO_CODE,
+			PR_NO,
+			PR_FROM,
+			PR_TO,
+		}
+
+		public static string TableName
+		{
+			get { return "prriod"; }
+		}
+
 		#region Model
-		private string _pr_co_code;
-		private decimal _pr_no;
-		private string _pr_from;
-		private string _pr_to;
+		private String _pr_co_code;
+		private Decimal _pr_no;
+		private String _pr_from;
+		private String _pr_to;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("PR_CO_CODE", TypeCode.String)]
-		public string PR_CO_CODE
+		public String PR_CO_CODE
 		{
 			set{ _pr_co_code=value;}
 			get{return _pr_co_code;}
@@ -32,7 +41,7 @@ PR_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("PR_NO", TypeCode.Decimal)]
-		public decimal PR_NO
+		public Decimal PR_NO
 		{
 			set{ _pr_no=value;}
 			get{return _pr_no;}
@@ -41,7 +50,7 @@ PR_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("PR_FROM", TypeCode.String)]
-		public string PR_FROM
+		public String PR_FROM
 		{
 			set{ _pr_from=value;}
 			get{return _pr_from;}
@@ -50,7 +59,7 @@ PR_TO,
 		/// 
 		/// </summary>
 		[FieldMapping("PR_TO", TypeCode.String)]
-		public string PR_TO
+		public String PR_TO
 		{
 			set{ _pr_to=value;}
 			get{return _pr_to;}

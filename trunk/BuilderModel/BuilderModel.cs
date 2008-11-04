@@ -69,10 +69,13 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// 实体类" + _modelname + " 。(属性说明自动提取数据库字段的描述信息)");
             strclass.AppendSpaceLine(1, "/// </summary>");
-            strclass.AppendSpaceLine(1, "public class " + _modelname);
+            strclass.AppendSpaceLine(1, "[Serializable]");
+            strclass.AppendSpaceLine(1, "public class " + _modelname + " : iTable");
             strclass.AppendSpaceLine(1, "{");
             strclass.AppendSpaceLine(2, "public " + _modelname + "()");
             strclass.AppendSpaceLine(2, "{}");
+            strclass.AppendLine(CreatFieldsEnum());
+            strclass.AppendLine(CreatTableName(_modelname));
             strclass.AppendLine(CreatModelMethod());
             strclass.AppendSpaceLine(1, "}");
             strclass.AppendLine("}");
@@ -90,18 +93,11 @@ namespace LTP.BuilderModel
         public string CreatModelMethod()
         {
             string sFieldFormat = "[FieldMapping(\"{0}\", {1})]";
-            string sEnumsFormate = "public enum Fields{{{0}}}";
-            StringBuilder sb = new StringBuilder();
-            foreach (ColumnInfo f in Fieldlist)
-            {
-                sb.AppendLine(f.ColumnName + ",");
-            }
 
             StringPlus strclass = new StringPlus();
             StringPlus strclass1 = new StringPlus();
             StringPlus strclass2 = new StringPlus();
 
-            strclass.AppendSpaceLine(2, string.Format(sEnumsFormate, sb.ToString()));
             strclass.AppendSpaceLine(2, "#region Model");
             foreach (ColumnInfo field in Fieldlist)
             {
@@ -121,12 +117,12 @@ namespace LTP.BuilderModel
                     }
                 }
 
-                strclass1.AppendSpaceLine(2, "private " + columnType + isnull + " _" + columnName.ToLower() + ";");//私有变量
+                strclass1.AppendSpaceLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
                 strclass2.AppendSpaceLine(2, "/// <summary>");
                 strclass2.AppendSpaceLine(2, "/// " + deText);
                 strclass2.AppendSpaceLine(2, "/// </summary>");
                 strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType)));
-                strclass2.AppendSpaceLine(2, "public " + columnType + isnull + " " + columnName);//属性
+                strclass2.AppendSpaceLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                 strclass2.AppendSpaceLine(2, "{");
                 strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
                 strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
@@ -142,13 +138,37 @@ namespace LTP.BuilderModel
 
             return strclass.ToString();
         }
-
+        public string CreatFieldsEnum()
+        {
+            StringPlus strclass = new StringPlus();
+            strclass.AppendSpaceLine(2, "public enum Fields");
+            strclass.AppendSpaceLine(2, "{");
+            foreach (ColumnInfo f in Fieldlist)
+            {
+                strclass.AppendSpaceLine(3, f.ColumnName + ",");
+            }
+            strclass.AppendSpaceLine(2, "}");
+            return strclass.ToString();
+        }
+        public string CreatTableName(string tableName)
+        {
+            StringPlus strclass = new StringPlus();
+            strclass.AppendSpaceLine(2, "public static string TableName");
+            strclass.AppendSpaceLine(2, "{");
+            strclass.AppendSpaceLine(3, "get { return \"" + tableName + "\"; }");
+            strclass.AppendSpaceLine(2, "}");
+            return strclass.ToString();
+        }
         private string GetTypeCode(string columnType)
         {
             string s = string.Empty;
 
-            s = "TypeCode." + columnType.Substring(0, 1).ToUpper() + columnType.Substring(1) + "";
+            s = "TypeCode." + SetFirstUpper(columnType) + "";
             return s;
+        }
+        private string SetFirstUpper(string value)
+        {
+            return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
         #endregion
     }

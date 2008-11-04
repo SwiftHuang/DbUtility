@@ -5,31 +5,40 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类backdate 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class backdate
+	[Serializable]
+	public class backdate : iTable
 	{
 		public backdate()
 		{}
-		public enum Fields{BK_CO_CODE,
-BK_USER,
-BK_RAN_NO,
-BK_EMP,
-BK_RAN_DATE,
-BK_CRE_DATE,
-BK_STATUS,
-}
+		public enum Fields
+		{
+			BK_CO_CODE,
+			BK_USER,
+			BK_RAN_NO,
+			BK_EMP,
+			BK_RAN_DATE,
+			BK_CRE_DATE,
+			BK_STATUS,
+		}
+
+		public static string TableName
+		{
+			get { return "backdate"; }
+		}
+
 		#region Model
-		private string _bk_co_code;
-		private string _bk_user;
-		private string _bk_ran_no;
-		private string _bk_emp;
+		private String _bk_co_code;
+		private String _bk_user;
+		private String _bk_ran_no;
+		private String _bk_emp;
 		private DateTime _bk_ran_date;
 		private DateTime _bk_cre_date;
-		private string _bk_status;
+		private String _bk_status;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("BK_CO_CODE", TypeCode.String)]
-		public string BK_CO_CODE
+		public String BK_CO_CODE
 		{
 			set{ _bk_co_code=value;}
 			get{return _bk_co_code;}
@@ -38,7 +47,7 @@ BK_STATUS,
 		/// 
 		/// </summary>
 		[FieldMapping("BK_USER", TypeCode.String)]
-		public string BK_USER
+		public String BK_USER
 		{
 			set{ _bk_user=value;}
 			get{return _bk_user;}
@@ -47,7 +56,7 @@ BK_STATUS,
 		/// 
 		/// </summary>
 		[FieldMapping("BK_RAN_NO", TypeCode.String)]
-		public string BK_RAN_NO
+		public String BK_RAN_NO
 		{
 			set{ _bk_ran_no=value;}
 			get{return _bk_ran_no;}
@@ -56,7 +65,7 @@ BK_STATUS,
 		/// 
 		/// </summary>
 		[FieldMapping("BK_EMP", TypeCode.String)]
-		public string BK_EMP
+		public String BK_EMP
 		{
 			set{ _bk_emp=value;}
 			get{return _bk_emp;}
@@ -83,7 +92,7 @@ BK_STATUS,
 		/// 
 		/// </summary>
 		[FieldMapping("BK_STATUS", TypeCode.String)]
-		public string BK_STATUS
+		public String BK_STATUS
 		{
 			set{ _bk_status=value;}
 			get{return _bk_status;}

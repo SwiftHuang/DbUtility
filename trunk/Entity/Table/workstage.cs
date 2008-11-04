@@ -5,27 +5,36 @@ namespace WongTung.Entity.Table
 	/// <summary>
 	/// 实体类workstage 。(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
-	public class workstage
+	[Serializable]
+	public class workstage : iTable
 	{
 		public workstage()
 		{}
-		public enum Fields{WT_CO_CODE,
-WT_CODE,
-WT_DESC,
-WT_DESC_T,
-WT_DESC_S,
-}
+		public enum Fields
+		{
+			WT_CO_CODE,
+			WT_CODE,
+			WT_DESC,
+			WT_DESC_T,
+			WT_DESC_S,
+		}
+
+		public static string TableName
+		{
+			get { return "workstage"; }
+		}
+
 		#region Model
-		private string _wt_co_code;
-		private string _wt_code;
-		private string _wt_desc;
-		private string _wt_desc_t;
-		private string _wt_desc_s;
+		private String _wt_co_code;
+		private String _wt_code;
+		private String _wt_desc;
+		private String _wt_desc_t;
+		private String _wt_desc_s;
 		/// <summary>
 		/// 
 		/// </summary>
 		[FieldMapping("WT_CO_CODE", TypeCode.String)]
-		public string WT_CO_CODE
+		public String WT_CO_CODE
 		{
 			set{ _wt_co_code=value;}
 			get{return _wt_co_code;}
@@ -34,7 +43,7 @@ WT_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WT_CODE", TypeCode.String)]
-		public string WT_CODE
+		public String WT_CODE
 		{
 			set{ _wt_code=value;}
 			get{return _wt_code;}
@@ -43,7 +52,7 @@ WT_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WT_DESC", TypeCode.String)]
-		public string WT_DESC
+		public String WT_DESC
 		{
 			set{ _wt_desc=value;}
 			get{return _wt_desc;}
@@ -52,7 +61,7 @@ WT_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WT_DESC_T", TypeCode.String)]
-		public string WT_DESC_T
+		public String WT_DESC_T
 		{
 			set{ _wt_desc_t=value;}
 			get{return _wt_desc_t;}
@@ -61,7 +70,7 @@ WT_DESC_S,
 		/// 
 		/// </summary>
 		[FieldMapping("WT_DESC_S", TypeCode.String)]
-		public string WT_DESC_S
+		public String WT_DESC_S
 		{
 			set{ _wt_desc_s=value;}
 			get{return _wt_desc_s;}
