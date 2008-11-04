@@ -31,6 +31,14 @@ namespace WongTung.DBUtility
         {
             _sql = GenerateSql<T>.DeleteSql(wherePara);
         }
+        public void Select(IList<SqlParam> whereParam)
+        {
+            Select(whereParam, null);
+        }
+        public void Select(IList<SqlParam> whereParam, IList<Enum> selectField)
+        {
+            _sql = GenerateSql<T>.SelectSql(TableName, whereParam, selectField);
+        }
         public IList<T> GetList(string strWhere)
         {
             IDataReader reader = GetDataReader(strWhere);
@@ -115,10 +123,7 @@ namespace WongTung.DBUtility
         private IDataReader GetDataReader(string strWhere)
         {
             DateTime s = DateTime.Now;
-            if (TableName != null && TableName != string.Empty)
-                _sql = GenerateSql<T>.SelectSql(strWhere, TableName);
-            else
-                _sql = GenerateSql<T>.SelectSql(strWhere);
+            _sql = GenerateSql<T>.SelectSql(TableName, strWhere);
             IDataReader r = DbHelperMySQL.ExecuteReader(_sql);
 
             timeSpan = DateTime.Now - s;

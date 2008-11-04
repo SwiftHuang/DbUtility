@@ -11,7 +11,7 @@
 
     <link href="Components/Calendar/calendar-brown.css" rel="stylesheet" type="text/css" />
 </head>
-<body onload="SetupCalendar();">
+<body onload="SetupCalendar();" style="font-size: 12px;">
     <form id="form1" runat="server">
     <div>
         <asp:Label ID="Label1" runat="server" Text="Label" EnableViewState="false"></asp:Label><br />
@@ -29,7 +29,7 @@
     </div>
     <input id="txtDep" readonly="readonly" class="txt" style="width: 70px;" type="text"
         maxlength="12" /><input type="button" id="cal-dep" />
-    
+
     <script language="javascript" type="text/javascript">
     function SetupCalendar()
     {
@@ -57,7 +57,50 @@
     </script>
 
     <asp:Localize ID="Localize1" runat="server"></asp:Localize>
+    <asp:Panel ID="Panel1" runat="server">
+        <table border="0px" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td>
+                    Select
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:TextBox ID="txtSelect" runat="server" TextMode="MultiLine" Rows="5" Width="100%"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Insert
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:TextBox ID="txtInsert" runat="server" TextMode="MultiLine" Rows="5" Width="100%"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Update
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:TextBox ID="txtUpdate" runat="server" TextMode="MultiLine" Rows="5" Width="100%"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Delete
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:TextBox ID="txtDel" runat="server" TextMode="MultiLine" Rows="5" Width="100%"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
     </form>
-
-    </body>
+</body>
 </html>
