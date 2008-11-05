@@ -49,12 +49,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
+    <Compile Include="BaseGenSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CommandInfo.cs" />
     <Compile Include="DBCache.cs" />
-    <Compile Include="DbHelperMySQL.cs" />
+    <Compile Include="IBaseGenSql.cs" />
+    <Compile Include="MSSQL\DbHelperSQL.cs" />
+    <Compile Include="MSSQL\GenMSSqlSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MYSQL\DbHelperMySQL.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="GenerateSql.cs" />
+    <Compile Include="MYSQL\GenMySqlSql.cs" />
     <Compile Include="OrderParam.cs" />
     <Compile Include="SqlParam.cs" />
     <Compile Include="PubConstant.cs" />

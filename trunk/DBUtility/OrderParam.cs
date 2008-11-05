@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace WongTung.DBUtility
 {
@@ -24,8 +22,20 @@ namespace WongTung.DBUtility
             FieldName = fieldName;
             OrderBy = order;
         }
+    }
 
 
-
+    public static class OrderParamExtensions
+    {
+        public static List<OrderParam> AddParam(this List<OrderParam> lst, Enum fieldName, Enums.OrderBy order)
+        {
+            lst.Add(new OrderParam(fieldName, order));
+            return lst;
+        }
+        public static List<OrderParam> AddParam(this List<OrderParam> lst, string fieldName, Enums.OrderBy order)
+        {
+            lst.Add(new OrderParam(fieldName, order));
+            return lst;
+        }
     }
 }

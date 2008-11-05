@@ -26,54 +26,10 @@ namespace WongTung.WebSite
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            TimeSpan ts;
-            int Count = 1;
-
-            if (Request["C"] != null)
-                Count = Convert.ToInt32(Request["C"].ToString());
-
-            BOJob BJJob = new BOJob();
-            BJJob.GetList();
-
-            BODailyts BJ = new BODailyts();
-
-            Entity.Table.dailyts d = new WongTung.Entity.Table.dailyts();
-            d.DT_CO_CODE = "VI";
-            d.DT_UPDATE_DATE = DateTime.Now;
-            d.DT_STAFF_CODE = "VIN";
-            d.DT_APP_CODE = "V";
-            d.DT_RAMNO = "000001";
-            BJ.Add(d);
-            BJ.Update();
-            BJ.Delete();
-            DateTime dStart = new DateTime();
-
-            List<Entity.Table.dailyts2> lst = new List<WongTung.Entity.Table.dailyts2>();
-            dStart = DateTime.Now;
-            lst = BJ.GetList2(Count);
-            ts = DateTime.Now - dStart;
-            Label4.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
-            Label5.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
-
-
-            dStart = DateTime.Now;
-            BJ.GetTable(Count);
-            ts = DateTime.Now - dStart;
-            Label6.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
-            Label7.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
-
-            IList<Entity.Table.dailyts> lst1 = new List<WongTung.Entity.Table.dailyts>();
-            dStart = DateTime.Now;
-            lst1 = BJ.GetList(Count);
-            Label1.Text = lst1.Count.ToString();
-            ts = DateTime.Now - dStart;
-            Label2.Text = (ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds).ToString();
-            Label3.Text = ((ts.TotalMilliseconds - BJ.timeSpan.TotalMilliseconds) / 1000).ToString();
-
-            txtSelect.Text = BJ.SelectSql();
-            txtInsert.Text = BJ.InsertSql(d);
-            txtDel.Text = BJ.DeleteSql();
-            txtUpdate.Text = BJ.UpdateSql();
+ 
+            txtSelect.Text = BODemo.GetCount();
+            txtInsert.Text = BODemo.GetSelect();
+            
         }
     }
 }
