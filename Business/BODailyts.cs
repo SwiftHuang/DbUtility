@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-
-using WongTung.Entity.Table;
-using WongTung.DBUtility;
 using WongTung.DataAccess;
+using WongTung.DBUtility;
+using WongTung.Entity.Table;
 
 namespace WongTung.Business
 {
@@ -81,7 +78,7 @@ namespace WongTung.Business
         }
         public string InsertSql(Entity.Table.dailyts entity)
         {
-            DADailyts.Add(entity);
+            DADailyts.Add_GetInsertID(entity);
             return DADailyts.Sql;
         }
         public string SelectSql()
@@ -99,6 +96,14 @@ namespace WongTung.Business
             DADailyts.Select(wParam);
             return DADailyts.Sql;
         }
-
+        public string InsertTestTable()
+        {
+            Entity.Table.testtable t = new testtable();
+            t.Name = "vinson";
+            t.Phone = 123;
+            t.CreateOn = DateTime.Now;
+            DATestTable d = new DATestTable();
+            return d.Add_GetInsertID(t).ToString();
+        }
     }
 }

@@ -11,6 +11,10 @@ namespace WongTung.DBUtility
         {
             Equal,
             Unequal,
+            Greater,
+            Lesser,
+            Geq,
+            Leq,
             IsNull,
             IsNotNull
         }
@@ -47,12 +51,19 @@ namespace WongTung.DBUtility
                     return " is null ";
                 case Enums.Operator.IsNotNull:
                     return " is not null";
+                case Enums.Operator.Geq:
+                    return ">=";
+                case Enums.Operator.Greater:
+                    return ">";
+                case Enums.Operator.Lesser:
+                    return "<";
+                case Enums.Operator.Leq:
+                    return "<=";
                 default:
                     throw new Exception("Enums.Operator error");
             }
             throw new Exception("Enums.Operator error");
         }
-
         public static string ToSqlString(this Enums.Expression exp)
         {
             switch (exp)
@@ -73,7 +84,7 @@ namespace WongTung.DBUtility
             switch (ord)
             {
                 case Enums.OrderBy.Descending:
-                    return " desc";
+                    return "desc";
                 case Enums.OrderBy.Ascending:
                     return string.Empty;
                 case Enums.OrderBy.None:

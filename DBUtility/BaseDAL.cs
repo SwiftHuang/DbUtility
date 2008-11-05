@@ -1,58 +1,91 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-
+using System.Data;
+using WongTung.DBUtility.MYSQL;
 using WongTung.DBUtility.TableMapping;
 
 namespace WongTung.DBUtility
 {
     public abstract class DALBase<T> where T : class, new()
     {
+        private DBUtility.MYSQL.GenerateSql<T> GenSql = new GenerateSql<T>();
+
         #region Property
         private string _sql = string.Empty;
-        public string Sql
-        { get { return _sql; } }
-        public TimeSpan timeSpan { get; set; }
+        public string SqlCommand
+        {
+            get
+            {
+                return _sql;
+            }
+        }
         protected string TableName { get; set; }
         #endregion
 
         public void Add(T entity)
         {
-            _sql = GenerateSql<T>.InsertSql(entity);
+            _sql = GenSql.InsertSql(entity);
+            DbHelperMySQL.ExecuteSql(_sql);
         }
-        public void Update(IList<SqlParam> updatePara, IList<SqlParam> wherePara)
+        public Int64 Add_GetInsertID(T entity)
         {
-            _sql = GenerateSql<T>.UpdateSql(updatePara, wherePara);
-        }
-        public void Delete(IList<SqlParam> wherePara)
-        {
-            _sql = GenerateSql<T>.DeleteSql(wherePara);
-        }
-        public void Select(IList<SqlParam> whereParam)
-        {
-            Select(whereParam, null);
-        }
-        public void Select(IList<SqlParam> whereParam, IList<Enum> selectField)
-        {
-            _sql = GenerateSql<T>.SelectSql(TableName, selectField, whereParam);
+            _sql = GenSql.InsertSql(entity) + GenSql.InsertLastIDSql();
+            return Convert.ToInt64(DbHelperMySQL.GetSingle(_sql));
         }
 
-        public T GetEntity(string strWhere)
+        public void Update(IList<SqlParam> updateParam, IList<SqlParam> whereParam)
         {
-            IDataReader reader = GetDataReader(strWhere);
+            _sql = GenSql.UpdateSql(updateParam, whereParam);
+            DbHelperMySQL.ExecuteSql(_sql);
+        }
+        public void Delete(IList<SqlParam> whereParam)
+        {
+            _sql = GenSql.DeleteSql(whereParam);
+            DbHelperMySQL.ExecuteSql(_sql);
+        }
+
+        public T GetEntity()
+        {
+            return GetEntity(null);
+        }
+        public T GetEntity(IList<SqlParam> whereParam)
+        {
+            _sql = GenSql.SelectSql(TableName, null, whereParam, null, 1);
+            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
             IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
             lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
-
-            return GetEntity(reader, lstFieldInfo);
+            try
+            {
+                reader.Read();
+                return CreateEntity(reader, lstFieldInfo);
+            }
+            catch (Exception)
+            { throw; }
+            finally
+            { reader.Close(); }
         }
-        public IList<T> GetList(string strWhere)
-        {
-            IDataReader reader = GetDataReader(strWhere);
 
+        public IList<T> GetList()
+        {
+            return GetList(null, null, null, null);
+        }
+        public IList<T> GetList(IList<Enum> selectFields)
+        {
+            return GetList(selectFields, null, null, null);
+        }
+        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam)
+        {
+            return GetList(selectFields, whereParam, null, null);
+        }
+        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam)
+        {
+            return GetList(selectFields, whereParam, orderParam, null);
+        }
+        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount)
+        {
+            _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
+            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
             IList<T> DataList = new List<T>();
             IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
 
@@ -61,25 +94,42 @@ namespace WongTung.DBUtility
 
             while (reader.Read())
             {
-                DataList.Add(GetEntity(reader, lstFieldInfo));
+                DataList.Add(CreateEntity(reader, lstFieldInfo));
             }
             reader.Close();
             return DataList;
         }
-        public List<T> GetList2(string strWhere)
+
+        #region Record Count
+        /// <summary>
+        /// 返回表的记录数
+        /// </summary>
+        /// <returns></returns>
+        public Int64 RecordCount()
         {
-            IDataReader reader = GetDataReader(strWhere);
-            T entity = new T();
-            return DataMapping.ObjectHelper.FillCollection<T, List<T>>(entity.GetType(), reader);
+            return RecordCount(null);
         }
+        /// <summary>
+        /// 返回表的记录数
+        /// </summary>
+        /// <param name="whereParam">条件参数</param>
+        /// <returns>记录数</returns>
+        public Int64 RecordCount(IList<SqlParam> whereParam)
+        {
+            _sql = GenSql.SelectCountSql(TableName, whereParam);
+            return Convert.ToInt64(DbHelperMySQL.GetSingle(_sql));
+        }
+        #endregion
+
         /// <summary>
         /// 返回DataTable(建议用在Report)
         /// </summary>
         /// <param name="strWhere"></param>
         /// <returns></returns>
-        public DataTable GetTable(string strWhere)
+        public DataTable GetTable(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount)
         {
-            IDataReader reader = GetDataReader(strWhere);
+            _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
+            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
             DataTable dataTable = new DataTable();//建一个新的实例
 
             for (int i = 0; i < reader.FieldCount; i++)
@@ -108,16 +158,7 @@ namespace WongTung.DBUtility
         }
 
         #region Private Functions
-        private IDataReader GetDataReader(string strWhere)
-        {
-            DateTime s = DateTime.Now;
-            _sql = GenerateSql<T>.SelectSql(TableName, strWhere);
-            IDataReader r = DbHelperMySQL.ExecuteReader(_sql);
-
-            timeSpan = DateTime.Now - s;
-            return r;
-        }
-        private T GetEntity(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
+        private T CreateEntity(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
         {
             T RowInstance = new T();
             foreach (FieldMappingInfo f in lstFieldInfo)

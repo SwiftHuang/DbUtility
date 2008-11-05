@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DADailyts.cs" />
     <Compile Include="DAJob.cs" />
+    <Compile Include="DATestTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
