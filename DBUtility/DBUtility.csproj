@@ -8,8 +8,8 @@
     <ProjectGuid>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WongTung.DBUtility</RootNamespace>
-    <AssemblyName>WongTung.DBUtility</AssemblyName>
+    <RootNamespace>hwj.DBUtility</RootNamespace>
+    <AssemblyName>hwj.DBUtility</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -62,12 +62,14 @@
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="MYSQL\GenMySqlSql.cs" />
-    <Compile Include="OrderParam.cs" />
-    <Compile Include="SqlParam.cs" />
+    <Compile Include="Param\OrderParam.cs" />
+    <Compile Include="Param\SqlParam.cs" />
     <Compile Include="PubConstant.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableMapping\TableMappingAttribute.cs" />
+    <Compile Include="Param\UpdateParam.cs" />
+    <Compile Include="Param\WhereParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace WongTung.DBUtility.TableMapping
+namespace hwj.DBUtility.TableMapping
 {
     public class FieldMappingInfo
     {

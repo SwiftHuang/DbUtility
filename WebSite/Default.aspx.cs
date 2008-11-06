@@ -26,10 +26,14 @@ namespace WongTung.WebSite
         }
         protected void Page_Load(object sender, EventArgs e)
         {
- 
-            txtSelect.Text = BODemo.GetCount();
-            txtInsert.Text = BODemo.GetSelect();
-            
+
+            txtSelect.Text = BODemo.GetSelect();
+            txtInsert.Text = BODemo.Add();
+            txtUpdate.Text = BODemo.Update();
+            txtDel.Text = BODemo.Delete();
+            //BODemo.GetSingle();
+            this.GridView1.DataSource = BODemo.GetDataTable();
+            this.GridView1.DataBind();
         }
     }
 }

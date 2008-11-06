@@ -101,6 +101,9 @@
             </tr>
         </table>
     </asp:Panel>
+    <asp:DataList ID="DataList1" runat="server">
+    </asp:DataList><asp:GridView ID="GridView1" runat="server">
+    </asp:GridView>
     </form>
 </body>
 </html>

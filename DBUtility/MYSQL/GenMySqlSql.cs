@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using WongTung.DBUtility.TableMapping;
+using hwj.DBUtility.TableMapping;
 
-namespace WongTung.DBUtility.MYSQL
+namespace hwj.DBUtility.MYSQL
 {
     public class GenerateSql<T> : BaseGenSql<T> where T : class, new()
     {
@@ -56,7 +56,7 @@ namespace WongTung.DBUtility.MYSQL
         #endregion
 
         #region Select Sql
-        public override string SelectSql(string tableName, IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount)
+        public override string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
             string sMaxCount = string.Empty;
 
@@ -64,7 +64,7 @@ namespace WongTung.DBUtility.MYSQL
             {
                 sMaxCount = string.Format(_MySqlLimitCount, maxCount);
             }
-            return string.Format(_MySqlSelectString, GetSelectFields(selectFields), GetTableName(tableName), GetWhereSql(whereParam), GetOrderByFields(orderParam), sMaxCount);
+            return string.Format(_MySqlSelectString, GenerateSelectFieldsSql(selectFields), GetTableName(tableName), GenerateWhereSql(whereParam), GenerateOrderByFieldsSql(orderParam), sMaxCount);
         }
         #endregion
 

@@ -8,7 +8,7 @@
     <ProjectGuid>{C05F0FF6-FCC4-4388-91C2-000E28D0C155}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WongTung.Common</RootNamespace>
+    <RootNamespace>hwj.Common</RootNamespace>
     <AssemblyName>WongTung.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

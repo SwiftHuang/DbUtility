@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using WongTung.DBUtility.TableMapping;
+using hwj.DBUtility.TableMapping;
 
-namespace WongTung.DBUtility
+namespace hwj.DBUtility
 {
     public abstract class BaseGenSql<T>
     {
-        protected const string _DeleteString = "DELETE FROM {0} WHERE {1};";
+        protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(*) FROM {0} {1};";
         protected const string _UpdateString = "UPDATE {0} SET {1} {2};";
         protected const string _InsertString = "INSERT INTO {0} ({1}) VALUE({2});";
@@ -33,27 +33,16 @@ namespace WongTung.DBUtility
         #region Public Functions
 
         #region Delete Sql
-        public string DeleteSql(IList<SqlParam> whereParam)
+        public string DeleteSql(WhereParam whereParam)
         {
-            StringBuilder sbWhere = new StringBuilder();
-            if (whereParam.Count > 0)
-            {
-                foreach (SqlParam para in whereParam)
-                {
-                    sbWhere.Append(GetCondition(para));
-                }
-            }
-            else
-                sbWhere.Append("1=1");
-
-            return string.Format(_DeleteString, GetTableName(), sbWhere.ToString().TrimEnd(','));
+            return string.Format(_DeleteString, GetTableName(), GenerateWhereSql(whereParam));
         }
         #endregion
 
         #region Update Sql
-        public string UpdateSql(IList<SqlParam> updateParam, IList<SqlParam> whereParam)
+        public string UpdateSql(UpdateParam updateParam, WhereParam whereParam)
         {
-            return string.Format(_UpdateString, GetTableName(), GetFieldSql(updateParam), GetWhereSql(whereParam));
+            return string.Format(_UpdateString, GetTableName(), GenerateFieldSql(updateParam), GenerateWhereSql(whereParam));
         }
         #endregion
 
@@ -62,18 +51,18 @@ namespace WongTung.DBUtility
         public abstract string InsertSql(T entity);
         #endregion
 
-        public abstract string SelectSql(string tableName, IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount);
+        public abstract string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount);
 
         #region Record Count Sql
-        public string SelectCountSql(string tableName, IList<SqlParam> whereParam)
+        public string SelectCountSql(string tableName, WhereParam whereParam)
         {
-            return string.Format(_SelectCountString, GetTableName(tableName), GetWhereSql(whereParam));
+            return string.Format(_SelectCountString, GetTableName(tableName), GenerateWhereSql(whereParam));
         }
         #endregion
 
         #endregion
 
-        #region Private Functions
+        #region Protected Functions
         protected bool IsNumType(TypeCode typeCode)
         {
             if (typeCode == TypeCode.Decimal || typeCode == TypeCode.Int16 || typeCode == TypeCode.Int32 || typeCode == TypeCode.Int64)
@@ -90,7 +79,7 @@ namespace WongTung.DBUtility
         }
 
         protected abstract string GetCondition(SqlParam para);
-        protected string GetFieldSql(IList<SqlParam> listParam)
+        protected string GenerateFieldSql(UpdateParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
             {
@@ -104,7 +93,7 @@ namespace WongTung.DBUtility
             else
                 return string.Empty;
         }
-        protected string GetWhereSql(IList<SqlParam> listParam)
+        protected string GenerateWhereSql(WhereParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
             {
@@ -119,12 +108,11 @@ namespace WongTung.DBUtility
             else
                 return string.Empty;
         }
-        protected string GetOrderBySql(OrderParam o)
+        protected string GenerateOrderByField(OrderParam o)
         {
             return string.Format("{0} {1},", o.FieldName, o.OrderBy.ToSqlString());
         }
-
-        protected string GetSelectFields(IList<Enum> fields)
+        protected string GenerateSelectFieldsSql(SelectFields fields)
         {
             if (fields != null && fields.Count > 0)
             {
@@ -137,21 +125,7 @@ namespace WongTung.DBUtility
             }
             return "*";
         }
-        protected string GetSelectFields(IList<string> fields)
-        {
-            if (fields != null && fields.Count > 0)
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (string s in fields)
-                {
-                    sb.Append(s.ToString()).Append(',');
-                }
-                return sb.ToString().TrimEnd(',');
-            }
-            return "*";
-        }
-
-        protected string GetOrderByFields(IList<OrderParam> orders)
+        protected string GenerateOrderByFieldsSql(OrderFields orders)
         {
             if (orders != null)
             {
@@ -159,7 +133,7 @@ namespace WongTung.DBUtility
                 sb.Append("ORDER BY ");
                 foreach (OrderParam o in orders)
                 {
-                    sb.Append(GetOrderBySql(o));
+                    sb.Append(GenerateOrderByField(o));
                 }
                 return sb.ToString().TrimEnd(',');
             }

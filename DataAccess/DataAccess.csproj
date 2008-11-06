@@ -8,7 +8,7 @@
     <ProjectGuid>{48831FB0-3BCD-46CC-996F-26FABBE060BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WongTung.DataAccess</RootNamespace>
+    <RootNamespace>hwj.DataAccess</RootNamespace>
     <AssemblyName>WongTung.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
