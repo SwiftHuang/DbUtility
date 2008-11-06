@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace WongTung.DBUtility.MYSQL
+namespace hwj.DBUtility.MYSQL
 {
     /// <summary>
     /// 数据访问抽象基础类

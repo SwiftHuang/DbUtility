@@ -8,7 +8,7 @@
     <ProjectGuid>{E13337A5-4C41-4D56-BE5F-4A404EDB138B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WongTung.Business</RootNamespace>
+    <RootNamespace>hwj.Business</RootNamespace>
     <AssemblyName>WongTung.Business</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

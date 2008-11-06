@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WongTung.DBUtility
+namespace hwj.DBUtility
 {
     public static class DBCache
     {

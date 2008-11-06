@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Data.Common;
 using System.Globalization;
-
+using System.Web.UI;
 using WongTung.Entity;
-//using WongTung.Business;
-using WongTung.WebSite;
-using WongTung.Common;
 
 namespace WongTung.WebSite
 {

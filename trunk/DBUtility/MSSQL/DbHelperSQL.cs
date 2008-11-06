@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-namespace WongTung.DBUtility.MSSQL
+namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
     /// 数据访问抽象基础类

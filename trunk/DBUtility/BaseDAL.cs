@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using WongTung.DBUtility.MYSQL;
-using WongTung.DBUtility.TableMapping;
+using hwj.DBUtility.MYSQL;
+using hwj.DBUtility.TableMapping;
 
-namespace WongTung.DBUtility
+namespace hwj.DBUtility
 {
     public abstract class DALBase<T> where T : class, new()
     {
-        private DBUtility.MYSQL.GenerateSql<T> GenSql = new GenerateSql<T>();
+        protected DBUtility.MYSQL.GenerateSql<T> GenSql = new GenerateSql<T>();
 
         #region Property
         private string _sql = string.Empty;
@@ -33,12 +33,20 @@ namespace WongTung.DBUtility
             return Convert.ToInt64(DbHelperMySQL.GetSingle(_sql));
         }
 
-        public void Update(IList<SqlParam> updateParam, IList<SqlParam> whereParam)
+        public void Update(UpdateParam param)
+        {
+            Update(param, null);
+        }
+        public void Update(UpdateParam updateParam, WhereParam whereParam)
         {
             _sql = GenSql.UpdateSql(updateParam, whereParam);
             DbHelperMySQL.ExecuteSql(_sql);
         }
-        public void Delete(IList<SqlParam> whereParam)
+        public void Delete()
+        {
+            Delete(null);
+        }
+        public void Delete(WhereParam whereParam)
         {
             _sql = GenSql.DeleteSql(whereParam);
             DbHelperMySQL.ExecuteSql(_sql);
@@ -48,56 +56,34 @@ namespace WongTung.DBUtility
         {
             return GetEntity(null);
         }
-        public T GetEntity(IList<SqlParam> whereParam)
+        public T GetEntity(WhereParam whereParam)
         {
             _sql = GenSql.SelectSql(TableName, null, whereParam, null, 1);
             IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
-            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
-            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
-            try
-            {
-                reader.Read();
-                return CreateEntity(reader, lstFieldInfo);
-            }
-            catch (Exception)
-            { throw; }
-            finally
-            { reader.Close(); }
+            return CreateSingleEntity(reader);
         }
 
         public IList<T> GetList()
         {
             return GetList(null, null, null, null);
         }
-        public IList<T> GetList(IList<Enum> selectFields)
+        public IList<T> GetList(SelectFields selectFields)
         {
             return GetList(selectFields, null, null, null);
         }
-        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam)
+        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam)
         {
             return GetList(selectFields, whereParam, null, null);
         }
-        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam)
+        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam)
         {
             return GetList(selectFields, whereParam, orderParam, null);
         }
-        public IList<T> GetList(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount)
+        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
             _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
             IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
-            IList<T> DataList = new List<T>();
-            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-
-            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
-            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
-
-            while (reader.Read())
-            {
-                DataList.Add(CreateEntity(reader, lstFieldInfo));
-            }
-            reader.Close();
-            return DataList;
+            return CreateListEntity(reader);
         }
 
         #region Record Count
@@ -114,51 +100,101 @@ namespace WongTung.DBUtility
         /// </summary>
         /// <param name="whereParam">条件参数</param>
         /// <returns>记录数</returns>
-        public Int64 RecordCount(IList<SqlParam> whereParam)
+        public Int64 RecordCount(WhereParam whereParam)
         {
             _sql = GenSql.SelectCountSql(TableName, whereParam);
             return Convert.ToInt64(DbHelperMySQL.GetSingle(_sql));
         }
         #endregion
 
+        #region DataTable
         /// <summary>
-        /// 返回DataTable(建议用在Report)
+        /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="strWhere"></param>
         /// <returns></returns>
-        public DataTable GetTable(IList<Enum> selectFields, IList<SqlParam> whereParam, IList<OrderParam> orderParam, int? maxCount)
+        public DataTable GetDataTable(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
             _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
-            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
-            DataTable dataTable = new DataTable();//建一个新的实例
+            return CreateDataTable(DbHelperMySQL.ExecuteReader(_sql));
+        }
+        #endregion
 
-            for (int i = 0; i < reader.FieldCount; i++)
+        #region Protected Functions
+        protected DataTable CreateDataTable(IDataReader reader)
+        {
+            try
             {
-                DataColumn mydc = new DataColumn();//关键的一步
-                mydc.DataType = reader.GetFieldType(i);
-                mydc.ColumnName = reader.GetName(i);
+                DataTable dataTable = new DataTable();//建一个新的实例
 
-                dataTable.Columns.Add(mydc);//关键的第二步
-            }
-
-            while (reader.Read())
-            {
-                DataRow mydr = dataTable.NewRow();//关键的第三步
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    mydr[i] = reader[i].ToString();
+                    DataColumn mydc = new DataColumn();//关键的一步
+                    mydc.DataType = reader.GetFieldType(i);
+                    mydc.ColumnName = reader.GetName(i);
+
+                    dataTable.Columns.Add(mydc);//关键的第二步
                 }
 
-                dataTable.Rows.Add(mydr);//关键的第四步
-                mydr = null;
-            }
+                while (reader.Read())
+                {
+                    DataRow mydr = dataTable.NewRow();//关键的第三步
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        mydr[i] = reader[i].ToString();
+                    }
 
-            reader.Close();
-            return dataTable;//别忘了要返回datatable，否则出错
+                    dataTable.Rows.Add(mydr);//关键的第四步
+                    mydr = null;
+                }
+                return dataTable;//别忘了要返回datatable，否则出错
+            }
+            catch { throw; }
+            finally { reader.Close(); }
         }
+        protected T CreateSingleEntity(IDataReader reader)
+        {
+            try
+            {
+                IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+                lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
+                lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
+
+                reader.Read();
+                return CreateEntityNotClose(reader, lstFieldInfo);
+            }
+            catch
+            { throw; }
+            finally
+            { reader.Close(); }
+        }
+        protected List<T> CreateListEntity(IDataReader reader)
+        {
+            try
+            {
+                List<T> DataList = new List<T>();
+                IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+
+                lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
+                lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
+
+                while (reader.Read())
+                {
+                    DataList.Add(CreateEntityNotClose(reader, lstFieldInfo));
+                }
+                return DataList;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            { reader.Close(); }
+        }
+        #endregion
 
         #region Private Functions
-        private T CreateEntity(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
+        private T CreateEntityNotClose(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
         {
             T RowInstance = new T();
             foreach (FieldMappingInfo f in lstFieldInfo)

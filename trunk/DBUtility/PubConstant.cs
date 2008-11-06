@@ -1,7 +1,7 @@
 using System;
 using System.Configuration;
 
-namespace WongTung.DBUtility
+namespace hwj.DBUtility
 {
 
     public class PubConstant
@@ -44,7 +44,7 @@ namespace WongTung.DBUtility
             {
                 if (_DatabaseType == Enums.DBType.None)
                 {
-                    switch (Common.WebConfig.DatabaseTypeString)
+                    switch (WongTung.Common.WebConfig.DatabaseTypeString)
                     {
                         case "MYSQL":
                             _DatabaseType = Enums.DBType.MySql;

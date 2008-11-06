@@ -1,5 +1,5 @@
 using System;
-using WongTung.DBUtility.TableMapping;
+using hwj.DBUtility.TableMapping;
 namespace WongTung.Entity.Table
 {
 	/// <summary>

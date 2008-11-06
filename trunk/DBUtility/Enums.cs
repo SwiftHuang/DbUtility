@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WongTung.DBUtility
+namespace hwj.DBUtility
 {
     public class Enums
     {

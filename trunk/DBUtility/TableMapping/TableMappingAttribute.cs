@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace WongTung.DBUtility.TableMapping
+namespace hwj.DBUtility.TableMapping
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMappingAttribute : System.Attribute
