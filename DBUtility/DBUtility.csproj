@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDAL.cs" />
+    <Compile Include="MSSQL\BaseDAL.cs" />
+    <Compile Include="MYSQL\BaseDAL.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
     </Compile>

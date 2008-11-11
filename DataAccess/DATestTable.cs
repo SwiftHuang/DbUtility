@@ -6,7 +6,7 @@ using System.Data;
 using hwj.DBUtility.MYSQL;
 namespace WongTung.DataAccess
 {
-    public class DATestTable : hwj.DBUtility.DALBase<Entity.Table.testtable>
+    public class DATestTable : hwj.DBUtility.MYSQL.BaseDAL<Entity.Table.testtable>
     {
         public DATestTable()
         {
