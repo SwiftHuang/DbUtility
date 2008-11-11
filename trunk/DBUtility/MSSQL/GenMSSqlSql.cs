@@ -9,7 +9,7 @@ namespace hwj.DBUtility.MSSQL
 {
     public class GenerateSql<T> : BaseGenSql<T> where T : class, new()
     {
-        private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4};";
+        private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";//没Test过可否使用
 
@@ -59,13 +59,17 @@ namespace hwj.DBUtility.MSSQL
         #region Select Sql
         public override string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
+            return SelectSql(tableName, selectFields, whereParam, orderParam, maxCount, true);
+        }
+        public string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount, bool isNoLock)
+        {
             string sMaxCount = string.Empty;
 
             if (maxCount.HasValue && maxCount > 0)
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(selectFields), GetTableName(tableName), GenerateWhereSql(whereParam), GenerateOrderByFieldsSql(orderParam));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(selectFields), GetTableName(tableName), GetNoLock(isNoLock), GenerateWhereSql(whereParam), GenerateOrderByFieldsSql(orderParam));
         }
         #endregion
 
@@ -87,6 +91,13 @@ namespace hwj.DBUtility.MSSQL
                     sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
             }
             return sbStr.ToString();
+        }
+        private string GetNoLock(bool isNoLock)
+        {
+            if (isNoLock)
+                return "(NOLOCK)";
+            else
+                return string.Empty;
         }
         #endregion
     }
