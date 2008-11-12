@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
+using hwj.DBUtility;
 using WongTung.DataAccess;
 using WongTung.Entity.Table;
-using hwj.DBUtility;
+
 namespace WongTung.Business
 {
     public class BODemo

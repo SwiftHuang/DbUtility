@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DESEncrypt.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Test\Attributes.cs" />
     <Compile Include="Test\MappingInfoCache.cs" />

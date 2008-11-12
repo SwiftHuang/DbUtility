@@ -12,8 +12,18 @@ namespace hwj.DBUtility.MYSQL
     /// </summary>
     public abstract class DbHelperMySQL
     {
-        //数据库连接字符串(web.config来配置)，可以动态更改connectionString支持多数据库.		
-        public static string connectionString = PubConstant.ConnectionString;
+        private static string _connectionString = string.Empty;
+        public static string ConnectionString
+        {
+            get
+            {
+                if (_connectionString == null || _connectionString == string.Empty)
+                    throw new Exception("数据连接字符不能为空");
+                else
+                    return _connectionString;
+            }
+            set { _connectionString = value; }
+        }
         public DbHelperMySQL()
         {
         }
@@ -86,7 +96,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string SQLString)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
                 {
@@ -107,7 +117,7 @@ namespace hwj.DBUtility.MYSQL
 
         public static int ExecuteSqlByTime(string SQLString, int Times)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
                 {
@@ -135,7 +145,7 @@ namespace hwj.DBUtility.MYSQL
         ///// <returns>执行结果 0-由于SQL造成事务失败 -1 由于Oracle造成事务失败 1-整体事务执行成功</returns>
         //public static int ExecuteSqlTran(List<CommandInfo> list, List<CommandInfo> oracleCmdSqlList)
         //{
-        //    using (MySqlConnection conn = new MySqlConnection(connectionString))
+        //    using (MySqlConnection conn = new MySqlConnection(ConnectionString))
         //    {
         //        conn.Open();
         //        MySqlCommand cmd = new MySqlCommand();
@@ -240,7 +250,7 @@ namespace hwj.DBUtility.MYSQL
         /// <param name="SQLStringList">多条SQL语句</param>		
         public static int ExecuteSqlTran(List<String> SQLStringList)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
@@ -277,7 +287,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string SQLString, string content)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(SQLString, connection);
                 MySql.Data.MySqlClient.MySqlParameter myParameter = new MySql.Data.MySqlClient.MySqlParameter("@content", SqlDbType.NText);
@@ -308,7 +318,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>影响的记录数</returns>
         public static object ExecuteSqlGet(string SQLString, string content)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(SQLString, connection);
                 MySql.Data.MySqlClient.MySqlParameter myParameter = new MySql.Data.MySqlClient.MySqlParameter("@content", SqlDbType.NText);
@@ -346,7 +356,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSqlInsertImg(string strSQL, byte[] fs)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand cmd = new MySqlCommand(strSQL, connection);
                 MySql.Data.MySqlClient.MySqlParameter myParameter = new MySql.Data.MySqlClient.MySqlParameter("@fs", SqlDbType.Image);
@@ -377,7 +387,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>查询结果（object）</returns>
         public static object GetSingle(string SQLString)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
                 {
@@ -404,7 +414,7 @@ namespace hwj.DBUtility.MYSQL
         }
         public static object GetSingle(string SQLString, int Times)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
                 {
@@ -437,7 +447,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>MySqlDataReader</returns>
         public static MySqlDataReader ExecuteReader(string strSQL)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(strSQL, connection);
             try
             {
@@ -458,7 +468,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>DataSet</returns>
         public static DataSet Query(string SQLString)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 DataSet ds = new DataSet();
                 try
@@ -476,7 +486,7 @@ namespace hwj.DBUtility.MYSQL
         }
         public static DataSet Query(string SQLString, int Times)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 DataSet ds = new DataSet();
                 try
@@ -507,7 +517,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string SQLString, params MySqlParameter[] cmdParms)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
@@ -533,7 +543,7 @@ namespace hwj.DBUtility.MYSQL
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
         public static void ExecuteSqlTran(Hashtable SQLStringList)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (MySqlTransaction trans = conn.BeginTransaction())
@@ -566,7 +576,7 @@ namespace hwj.DBUtility.MYSQL
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
         public static int ExecuteSqlTran(System.Collections.Generic.List<CommandInfo> cmdList)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (MySqlTransaction trans = conn.BeginTransaction())
@@ -636,7 +646,7 @@ namespace hwj.DBUtility.MYSQL
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
         public static void ExecuteSqlTranWithIndentity(System.Collections.Generic.List<CommandInfo> SQLStringList)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (MySqlTransaction trans = conn.BeginTransaction())
@@ -684,7 +694,7 @@ namespace hwj.DBUtility.MYSQL
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的MySqlParameter[]）</param>
         public static void ExecuteSqlTranWithIndentity(Hashtable SQLStringList)
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (MySqlTransaction trans = conn.BeginTransaction())
@@ -733,7 +743,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>查询结果（object）</returns>
         public static object GetSingle(string SQLString, params MySqlParameter[] cmdParms)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
@@ -766,7 +776,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>MySqlDataReader</returns>
         public static MySqlDataReader ExecuteReader(string SQLString, params MySqlParameter[] cmdParms)
         {
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlConnection connection = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand();
             try
             {
@@ -794,7 +804,7 @@ namespace hwj.DBUtility.MYSQL
         /// <returns>DataSet</returns>
         public static DataSet Query(string SQLString, params MySqlParameter[] cmdParms)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 PrepareCommand(cmd, connection, null, SQLString, cmdParms);

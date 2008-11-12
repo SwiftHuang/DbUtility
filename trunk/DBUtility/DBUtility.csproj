@@ -37,10 +37,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -62,23 +58,15 @@
     </Compile>
     <Compile Include="MYSQL\DbHelper.cs" />
     <Compile Include="MYSQL\DbHelperMySQL.cs" />
-    <Compile Include="DESEncrypt.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="MYSQL\GenMySqlSql.cs" />
     <Compile Include="Param\OrderParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
-    <Compile Include="PubConstant.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableMapping\TableMappingAttribute.cs" />
     <Compile Include="Param\UpdateParam.cs" />
     <Compile Include="Param\WhereParam.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{C05F0FF6-FCC4-4388-91C2-000E28D0C155}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
