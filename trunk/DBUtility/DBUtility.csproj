@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSSQL\BaseDAL.cs" />
+    <Compile Include="MSSQL\DbHelper.cs" />
     <Compile Include="MYSQL\BaseDAL.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
@@ -59,6 +60,7 @@
     <Compile Include="MSSQL\GenMSSqlSql.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MYSQL\DbHelper.cs" />
     <Compile Include="MYSQL\DbHelperMySQL.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="Enums.cs" />
