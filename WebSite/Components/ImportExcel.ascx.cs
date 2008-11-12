@@ -16,7 +16,7 @@ namespace WongTung.WebSite.Components
             string strConn;
             strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filepath + ";Extended Properties=Excel 8.0;";
             OleDbConnection conn = new OleDbConnection(strConn);
-            OleDbDataAdapter oada = new OleDbDataAdapter("select * from [" + sheetname + "$A67:M75]", strConn);
+            OleDbDataAdapter oada = new OleDbDataAdapter("select * from [" + sheetname + "$]", strConn);
             DataSet ds = new DataSet();
             oada.Fill(ds);
             //数据绑定   

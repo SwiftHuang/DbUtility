@@ -25,7 +25,7 @@ namespace hwj.DBUtility.MSSQL
         public void Add(T entity)
         {
             _sql = GenSql.InsertSql(entity);
-           DbHelperSQL.ExecuteSql(_sql);
+            DbHelperSQL.ExecuteSql(_sql);
         }
         public Int64 Add_GetInsertID(T entity)
         {

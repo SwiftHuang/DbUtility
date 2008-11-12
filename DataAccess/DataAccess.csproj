@@ -8,7 +8,7 @@
     <ProjectGuid>{48831FB0-3BCD-46CC-996F-26FABBE060BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>hwj.DataAccess</RootNamespace>
+    <RootNamespace>WongTung.DataAccess</RootNamespace>
     <AssemblyName>WongTung.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DADailyts.cs" />
     <Compile Include="DAJob.cs" />
+    <Compile Include="DAtbHPInfo.cs" />
     <Compile Include="DATestTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

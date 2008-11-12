@@ -58,6 +58,9 @@
     <Compile Include="Table\job.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Table\tbBloodInfo.cs" />
+    <Compile Include="Table\tbHPInfo.cs" />
+    <Compile Include="Table\tbSickInfo.cs" />
     <Compile Include="Table\testtable.cs" />
   </ItemGroup>
   <ItemGroup>
