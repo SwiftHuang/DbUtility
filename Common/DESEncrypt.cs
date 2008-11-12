@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace hwj.DBUtility
+namespace WongTung.Common
 {
 	/// <summary>
 	/// DESº”√‹/Ω‚√‹¿‡°£

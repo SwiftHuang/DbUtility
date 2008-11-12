@@ -5,17 +5,11 @@ namespace WongTung.Common
 {
     public class WebConfig
     {
+        public readonly static bool DisplayErrorDetails = General.String2Bool(ConfigurationManager.AppSettings["DisplayErrorDetails"].ToString());
+        public readonly static bool ConnectionStringEncrypt = General.String2Bool(ConfigurationManager.AppSettings["ConnectionStringEncrypt"].ToString());
 
-        private static string _WongTungConnection;
-        public static string WongTungConnection
-        {
-            get
-            {
-                if (_WongTungConnection == null)
-                    _WongTungConnection = ConfigurationManager.ConnectionStrings["WongTungConnection"].ToString();
-                return _WongTungConnection;
-            }
-        }
+        public readonly static string DatabaseConnection = GetConnectionString("WongTungConnection", ConnectionStringEncrypt);
+
         private static string _LoginPageUrl;
         public static string LoginPageUrl
         {
@@ -26,8 +20,6 @@ namespace WongTung.Common
                 return _LoginPageUrl;
             }
         }
-        public readonly static bool DisplayErrorDetails = General.String2Bool(ConfigurationManager.AppSettings["DisplayErrorDetails"].ToString());
-        public readonly static bool ConnectionStringEncrypt = General.String2Bool(ConfigurationManager.AppSettings["ConnectionStringEncrypt"].ToString());
         private static string _DatabaseTypeString;
         public static string DatabaseTypeString
         {
@@ -37,6 +29,16 @@ namespace WongTung.Common
                     _DatabaseTypeString = ConfigurationManager.AppSettings["DatabaseType"].ToString().ToUpper().Trim();
                 return _DatabaseTypeString;
             }
+        }
+
+        private static string GetConnectionString(string configName, bool isEncrype)
+        {
+            string connectionString = ConfigurationManager.AppSettings[configName];
+            if (isEncrype)
+            {
+                connectionString = DESEncrypt.Decrypt(connectionString);
+            }
+            return connectionString;
         }
     }
 }
