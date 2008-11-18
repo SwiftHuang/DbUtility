@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using hwj.DBUtility.MYSQL;
 using hwj.DBUtility.TableMapping;
+using MySql.Data.MySqlClient;
 
 namespace hwj.DBUtility.MYSQL
 {
@@ -59,31 +59,37 @@ namespace hwj.DBUtility.MYSQL
         public T GetEntity(WhereParam whereParam)
         {
             _sql = GenSql.SelectSql(TableName, null, whereParam, null, 1);
-            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
-            return CreateSingleEntity(reader);
+            MySqlDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
+            if (reader.HasRows)
+                return CreateSingleEntity(reader);
+            else
+                return null;
         }
 
-        public IList<T> GetList()
+        public List<T> GetList()
         {
             return GetList(null, null, null, null);
         }
-        public IList<T> GetList(SelectFields selectFields)
+        public List<T> GetList(SelectFields selectFields)
         {
             return GetList(selectFields, null, null, null);
         }
-        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam)
+        public List<T> GetList(SelectFields selectFields, WhereParam whereParam)
         {
             return GetList(selectFields, whereParam, null, null);
         }
-        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam)
+        public List<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam)
         {
             return GetList(selectFields, whereParam, orderParam, null);
         }
-        public IList<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
+        public List<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
             _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
-            IDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
-            return CreateListEntity(reader);
+            MySqlDataReader reader = DbHelperMySQL.ExecuteReader(_sql);
+            if (reader.HasRows)
+                return CreateListEntity(reader);
+            else
+                return null;
         }
 
         #region Record Count
