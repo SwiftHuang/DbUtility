@@ -86,7 +86,12 @@ namespace hwj.DBUtility.MSSQL
                 if (IsNumType(f.DataTypeCode))
                     sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue).Append(para.Expression.ToSqlString());
                 else
-                    sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
+                {
+                    if (IsDateType(f.DataTypeCode))
+                        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue) == DateTime.MinValue ? Convert.ToDateTime("1900-01-01") : para.FieldValue).Append(para.Expression.ToSqlString());
+                    else
+                        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
+                }
             }
             return sbStr.ToString();
         }

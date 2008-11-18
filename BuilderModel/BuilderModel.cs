@@ -63,8 +63,8 @@ namespace LTP.BuilderModel
         {
             StringPlus strclass = new StringPlus();
             strclass.AppendLine("using System;");
-            strclass.AppendLine("using WongTung.DBUtility.TableMapping;");
-            strclass.AppendLine("namespace WongTung.Entity.Table");
+            strclass.AppendLine("using hwj.DBUtility.TableMapping;");
+            strclass.AppendLine("namespace Entity.Table");
             strclass.AppendLine("{");
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// 实体类" + _modelname + " 。(属性说明自动提取数据库字段的描述信息)");
