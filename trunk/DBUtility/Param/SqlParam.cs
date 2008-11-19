@@ -20,7 +20,23 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = exp;
         }
+        public SqlParam(string fieldName, object fieldValue, Enums.Operator oper, Enums.Expression exp)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+        }
         public SqlParam(Enum fieldName, object fieldValue, Enums.Operator oper)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = Enums.Expression.None;
+        }
+        public SqlParam(string fieldName, object fieldValue, Enums.Operator oper)
             : base()
         {
             FieldName = fieldName.ToString();
@@ -48,6 +64,11 @@ namespace hwj.DBUtility
             return lst;
         }
         public static List<UpdateFields> AddParam(this List<UpdateFields> lst, Enum fieldName, object fieldValue)
+        {
+            lst.Add(new UpdateFields(fieldName, fieldValue));
+            return lst;
+        }
+        public static List<UpdateFields> AddParam(this List<UpdateFields> lst, string fieldName, object fieldValue)
         {
             lst.Add(new UpdateFields(fieldName, fieldValue));
             return lst;

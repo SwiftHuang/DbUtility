@@ -42,6 +42,11 @@ namespace hwj.DBUtility.MYSQL
             _sql = GenSql.UpdateSql(updateParam, whereParam);
             DbHelperMySQL.ExecuteSql(_sql);
         }
+        public void Update(T entity, WhereParam whereParam, params Enum[] notUpdateParam)
+        {
+            _sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
+            DbHelperMySQL.ExecuteSql(_sql);
+        }
         public void Delete()
         {
             Delete(null);

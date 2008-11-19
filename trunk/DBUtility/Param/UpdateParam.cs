@@ -15,6 +15,10 @@ namespace hwj.DBUtility
             : base(fieldName, fieldValue, Enums.Operator.Equal)
         {
         }
+        public UpdateFields(string fieldName, object fieldValue)
+            : base(fieldName, fieldValue, Enums.Operator.Equal)
+        {
+        }
     }
     public class SelectFields : List<Enum>
     {

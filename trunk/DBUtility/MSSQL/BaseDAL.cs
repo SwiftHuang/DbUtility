@@ -42,6 +42,11 @@ namespace hwj.DBUtility.MSSQL
             _sql = GenSql.UpdateSql(updateParam, whereParam);
             DbHelperSQL.ExecuteSql(_sql);
         }
+        public void Update(T entity, WhereParam whereParam, params Enum[] notUpdateParam)
+        {
+            _sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
+            DbHelperSQL.ExecuteSql(_sql);
+        }
         public void Delete()
         {
             Delete(null);
@@ -69,6 +74,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+
         public List<T> GetList()
         {
             return GetList(null, null, null, null);

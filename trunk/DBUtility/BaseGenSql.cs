@@ -12,7 +12,7 @@ namespace hwj.DBUtility
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(*) FROM {0} {1};";
         protected const string _UpdateString = "UPDATE {0} SET {1} {2};";
-        protected const string _InsertString = "INSERT INTO {0} ({1}) VALUE({2});";
+        protected const string _InsertString = "INSERT INTO {0} ({1}) VALUES({2});";
         protected const string _StringFormat = "'{0}'";
         protected const string _DecimalFormat = "{0}";
 
@@ -40,10 +40,35 @@ namespace hwj.DBUtility
         #endregion
 
         #region Update Sql
+        public string UpdateSql(T entity, WhereParam whereParam, params Enum[] notUpdateParam)
+        {
+            UpdateParam up = new UpdateParam();
+            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            {
+                object obj = f.Property.GetValue(entity, null);
+                if (obj != null)
+                {
+                    if (!FindName(f.FieldName, notUpdateParam))
+                        up.AddParam(f.FieldName, obj);
+
+                }
+            }
+            return UpdateSql(up, whereParam);
+        }
         public string UpdateSql(UpdateParam updateParam, WhereParam whereParam)
         {
             return string.Format(_UpdateString, GetTableName(), GenerateFieldSql(updateParam), GenerateWhereSql(whereParam));
         }
+        private bool FindName(string value, params Enum[] datasource)
+        {
+            foreach (Enum s in datasource)
+            {
+                if (value == s.ToString())
+                    return true;
+            }
+            return false;
+        }
+
         #endregion
 
         #region Insert Sql
