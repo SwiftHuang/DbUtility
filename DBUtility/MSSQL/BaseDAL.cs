@@ -47,14 +47,17 @@ namespace hwj.DBUtility.MSSQL
             _sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
             DbHelperSQL.ExecuteSql(_sql);
         }
-        public void Delete()
+        public bool Delete()
         {
-            Delete(null);
+            return Delete(null);
         }
-        public void Delete(WhereParam whereParam)
+        public bool Delete(WhereParam whereParam)
         {
             _sql = GenSql.DeleteSql(whereParam);
-            DbHelperSQL.ExecuteSql(_sql);
+            if (DbHelperSQL.ExecuteSql(_sql) > 0)
+                return true;
+            else
+                return false;
         }
 
         public T GetEntity()
@@ -119,7 +122,7 @@ namespace hwj.DBUtility.MSSQL
         /// 返回表的记录数
         /// </summary>
         /// <returns></returns>
-        public Int64 RecordCount()
+        public UInt32 RecordCount()
         {
             return RecordCount(null);
         }
@@ -128,10 +131,10 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="whereParam">条件参数</param>
         /// <returns>记录数</returns>
-        public Int64 RecordCount(WhereParam whereParam)
+        public UInt32 RecordCount(WhereParam whereParam)
         {
             _sql = GenSql.SelectCountSql(TableName, whereParam);
-            return Convert.ToInt64(DbHelperSQL.GetSingle(_sql));
+            return Convert.ToUInt32(DbHelperSQL.GetSingle(_sql));
         }
         #endregion
 
