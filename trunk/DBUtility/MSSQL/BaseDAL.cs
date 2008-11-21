@@ -100,6 +100,19 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+        public List<T> GetListPage(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, SelectFields PK, int pageNumber, int pageSize)
+        {
+            return GetListPage(selectFields, whereParam, orderParam, null, PK, pageNumber, pageSize);
+        }
+        public List<T> GetListPage(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, SelectFields groupParam, SelectFields PK, int pageNumber, int pageSize)
+        {
+            _sql = GenSql.SelectPageSql(TableName, selectFields, whereParam, orderParam, groupParam, PK, pageNumber, pageSize);
+            SqlDataReader reader = DbHelperSQL.ExecuteReader(_sql);
+            if (reader.HasRows)
+                return CreateListEntity(reader);
+            else
+                return null;
+        }
 
         #region Record Count
         /// <summary>
