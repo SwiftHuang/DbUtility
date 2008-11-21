@@ -120,10 +120,15 @@ namespace hwj.DBUtility
         }
         protected string GenerateWhereSql(WhereParam listParam)
         {
+            return GenerateWhereSql(listParam, false);
+        }
+        protected string GenerateWhereSql(WhereParam listParam, bool isPage)
+        {
             if (listParam != null && listParam.Count > 0)
             {
                 StringBuilder sbWhere = new StringBuilder();
-                sbWhere.Append("WHERE ");
+                if (!isPage)
+                    sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
                     sbWhere.Append(GetCondition(para));
@@ -139,6 +144,10 @@ namespace hwj.DBUtility
         }
         protected string GenerateSelectFieldsSql(SelectFields fields)
         {
+            return GenerateSelectFieldsSql(fields, false);
+        }
+        protected string GenerateSelectFieldsSql(SelectFields fields, bool isPage)
+        {
             if (fields != null && fields.Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
@@ -148,14 +157,22 @@ namespace hwj.DBUtility
                 }
                 return sb.ToString().TrimEnd(',');
             }
-            return "*";
+            if (!isPage)
+                return "*";
+            else
+                return "";
         }
         protected string GenerateOrderByFieldsSql(OrderFields orders)
+        {
+            return GenerateOrderByFieldsSql(orders, false);
+        }
+        protected string GenerateOrderByFieldsSql(OrderFields orders, bool isPage)
         {
             if (orders != null)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("ORDER BY ");
+                if (!isPage)
+                    sb.Append("ORDER BY ");
                 foreach (OrderParam o in orders)
                 {
                     sb.Append(GenerateOrderByField(o));

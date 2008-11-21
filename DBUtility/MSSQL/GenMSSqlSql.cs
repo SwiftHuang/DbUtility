@@ -10,6 +10,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";//没Test过可否使用
+        private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount '{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}'";
 
         #region Public Functions
 
@@ -68,6 +69,25 @@ namespace hwj.DBUtility.MSSQL
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
             return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(selectFields), GetTableName(tableName), GetNoLock(isNoLock), GenerateWhereSql(whereParam), GenerateOrderByFieldsSql(orderParam));
+        }
+        /// <summary>
+        /// 数据分页
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="selectFields">需要显示的字段</param>
+        /// <param name="whereParam">筛选条件</param>
+        /// <param name="orderParam">排序</param>
+        /// <param name="PK">分页依据(关键字)</param>
+        /// <param name="groupParam">分组显示</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页显示记录数</param>
+        /// <returns></returns>
+        public string SelectPageSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, SelectFields groupParam, SelectFields PK, int pageNumber, int pageSize)
+        {
+            string _SelectFields = GenerateSelectFieldsSql(selectFields);
+            string _WhereParam = GenerateWhereSql(whereParam, true);
+            string _OrderParam = GenerateOrderByFieldsSql(orderParam, true);
+            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenerateSelectFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _WhereParam, GenerateSelectFieldsSql(groupParam, true));
         }
         #endregion
 
