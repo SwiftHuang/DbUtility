@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
-
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections.Generic;
 using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
@@ -11,8 +13,9 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";//没Test过可否使用
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount '{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}'";
+        private const string _MsSqlParam = "@{0}";
+        private const string _MsSqlWhereParam = "@_{0}";
 
-        #region Public Functions
 
         #region Insert Sql
         public override string InsertLastIDSql()
@@ -29,26 +32,8 @@ namespace hwj.DBUtility.MSSQL
                 object obj = f.Property.GetValue(entity, null);
                 if (obj != null)
                 {
-                    if (IsDateType(f.DataTypeCode))
-                    {
-                        if (DateTime.MinValue != (DateTime)obj)
-                        {
-                            sbInsField.AppendFormat(_DecimalFormat, f.FieldName);
-                            sbInsValue.AppendFormat(_StringFormat, Convert.ChangeType(obj, f.DataTypeCode));
-                        }
-                        else
-                            continue;
-                    }
-                    else
-                    {
-                        sbInsField.AppendFormat(_DecimalFormat, f.FieldName);
-                        if (IsNumType(f.DataTypeCode))
-                            sbInsValue.AppendFormat(_DecimalFormat, Convert.ChangeType(obj, f.DataTypeCode));
-                        else
-                            sbInsValue.AppendFormat(_StringFormat, Convert.ChangeType(obj, f.DataTypeCode));
-                    }
-                    sbInsField.Append(',');
-                    sbInsValue.Append(',');
+                    sbInsField.Append(f.FieldName).Append(',');
+                    sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
                 }
             }
             return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
@@ -91,28 +76,36 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        #endregion
-
         #region Private Functions
-        protected override string GetCondition(SqlParam para)
+        protected override string GenerateWhereSql(WhereParam listParam, bool isPage)
+        {
+            if (listParam != null && listParam.Count > 0)
+            {
+                StringBuilder sbWhere = new StringBuilder();
+                if (!isPage)
+                    sbWhere.Append("WHERE ");
+                foreach (SqlParam para in listParam)
+                {
+                    sbWhere.Append(GetCondition(para, true));
+                }
+                return sbWhere.ToString().TrimEnd(',');
+            }
+            else
+                return string.Empty;
+        }
+        protected override string GetCondition(SqlParam para, bool isWhere)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
-
+            string __MsSqlParam = string.Empty;
+            if (isWhere)
+                __MsSqlParam = _MsSqlWhereParam;
+            else
+                __MsSqlParam = _MsSqlParam;
             if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
             else
-            {
-                if (IsNumType(f.DataTypeCode))
-                    sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue).Append(para.Expression.ToSqlString());
-                else
-                {
-                    if (IsDateType(f.DataTypeCode))
-                        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue) == DateTime.MinValue ? Convert.ToDateTime("1900-01-01") : para.FieldValue).Append(para.Expression.ToSqlString());
-                    else
-                        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
-                }
-            }
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
             return sbStr.ToString();
         }
         private string GetNoLock(bool isNoLock)
@@ -121,6 +114,79 @@ namespace hwj.DBUtility.MSSQL
                 return "(NOLOCK)";
             else
                 return string.Empty;
+        }
+        #endregion
+
+        #region Public Functions
+        public List<SqlParameter> GetParameter(UpdateParam updateParam)
+        {
+            if (updateParam != null)
+            {
+                List<SqlParameter> LstDP = new List<SqlParameter>();
+                foreach (UpdateFields up in updateParam)
+                {
+                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    {
+                        if (up.FieldName == f.FieldName)
+                        {
+                            SqlParameter dp = new SqlParameter();
+                            dp.DbType = f.DataTypeCode;
+                            dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
+                            dp.Value = up.FieldValue;
+                            LstDP.Add(dp);
+                            break;
+                        }
+                    }
+                }
+                return LstDP;
+            }
+            else
+                return null;
+        }
+        public List<SqlParameter> GetParameter(WhereParam whereParam)
+        {
+            if (whereParam != null)
+            {
+                List<SqlParameter> LstDP = new List<SqlParameter>();
+                foreach (SqlParam sp in whereParam)
+                {
+                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    {
+                        if (sp.FieldName == f.FieldName)
+                        {
+                            SqlParameter dp = new SqlParameter();
+                            dp.DbType = f.DataTypeCode;
+                            dp.ParameterName = string.Format(_MsSqlWhereParam, sp.FieldName);
+                            dp.Value = sp.FieldValue;
+                            LstDP.Add(dp);
+                            break;
+                        }
+                    }
+                }
+                return LstDP;
+            }
+            else
+                return null;
+        }
+        public List<SqlParameter> GetParameter(T entity)
+        {
+            List<SqlParameter> LstDP = new List<SqlParameter>();
+            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            {
+                SqlParameter dp = new SqlParameter();
+                object _value = f.Property.GetValue(entity, null);
+                dp.DbType = f.DataTypeCode;
+                dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
+                if (IsDateType(f.DataTypeCode))
+                {
+                    if (Convert.ToDateTime(_value) == DateTime.MinValue)
+                        dp.Value = "1900-01-01";
+                }
+                else
+                    dp.Value = _value;
+                LstDP.Add(dp);
+            }
+            return LstDP;
         }
         #endregion
     }

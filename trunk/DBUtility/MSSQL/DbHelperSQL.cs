@@ -587,7 +587,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">SQL语句</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string SQLString, params SqlParameter[] cmdParms)
+        public static int ExecuteSql(string SQLString, List<SqlParameter> cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -856,7 +856,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="strSQL">查询语句</param>
         /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string SQLString, params SqlParameter[] cmdParms)
+        public static SqlDataReader ExecuteReader(string SQLString, List<SqlParameter> cmdParms)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
@@ -919,8 +919,6 @@ namespace hwj.DBUtility.MSSQL
             cmd.CommandType = CommandType.Text;//cmdType;
             if (cmdParms != null)
             {
-
-
                 foreach (SqlParameter parameter in cmdParms)
                 {
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
@@ -932,7 +930,28 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-
+        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
+        {
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = cmdText;
+            if (trans != null)
+                cmd.Transaction = trans;
+            cmd.CommandType = CommandType.Text;//cmdType;
+            if (cmdParms != null)
+            {
+                foreach (SqlParameter parameter in cmdParms)
+                {
+                    if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
+                        (parameter.Value == null))
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add(parameter);
+                }
+            }
+        }
         #endregion
 
         #region 存储过程操作

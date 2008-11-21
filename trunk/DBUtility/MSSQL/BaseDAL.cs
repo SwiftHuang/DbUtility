@@ -11,42 +11,46 @@ namespace hwj.DBUtility.MSSQL
         protected DBUtility.MSSQL.GenerateSql<T> GenSql = new GenerateSql<T>();
 
         #region Property
-        private string _sql = string.Empty;
-        public string SqlCommand
-        {
-            get
-            {
-                return _sql;
-            }
-        }
+        private string _sql;
+        private SqlEntity _sqlEntity = new SqlEntity();
+        public SqlEntity SqlEntity { get { return _sqlEntity; } }
         protected string TableName { get; set; }
         #endregion
 
-        public void Add(T entity)
+        public bool Add(T entity)
         {
-            _sql = GenSql.InsertSql(entity);
-            DbHelperSQL.ExecuteSql(_sql);
+            _sqlEntity.Sql = GenSql.InsertSql(entity);
+            _sqlEntity.Params = GenSql.GetParameter(entity);
+            if (DbHelperSQL.ExecuteSql(_sqlEntity.Sql, _sqlEntity.Params) > 0)
+                return true;
+            else
+                return false;
         }
-        public Int64 Add_GetInsertID(T entity)
+        public Int64 GetInsertID()
         {
-            _sql = GenSql.InsertSql(entity) + GenSql.InsertLastIDSql();
-            return Convert.ToInt64(DbHelperSQL.GetSingle(_sql));
+            return Convert.ToInt64(DbHelperSQL.GetSingle(GenSql.InsertLastIDSql()));
         }
 
-        public void Update(UpdateParam param)
+        public bool Update(UpdateParam param)
         {
-            Update(param, null);
+            return Update(param, null);
         }
-        public void Update(UpdateParam updateParam, WhereParam whereParam)
+        public bool Update(UpdateParam updateParam, WhereParam whereParam)
         {
-            _sql = GenSql.UpdateSql(updateParam, whereParam);
-            DbHelperSQL.ExecuteSql(_sql);
+            _sqlEntity.Sql = GenSql.UpdateSql(updateParam, whereParam);
+            _sqlEntity.Params = GenSql.GetParameter(updateParam);
+            _sqlEntity.Params.AddRange(GenSql.GetParameter(whereParam));
+            if (DbHelperSQL.ExecuteSql(_sqlEntity.Sql, _sqlEntity.Params) > 0)
+                return true;
+            else
+                return false;
         }
         public void Update(T entity, WhereParam whereParam, params Enum[] notUpdateParam)
         {
             _sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
             DbHelperSQL.ExecuteSql(_sql);
         }
+
         public bool Delete()
         {
             return Delete(null);
@@ -70,8 +74,9 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(SelectFields selectFields, WhereParam whereParam)
         {
-            _sql = GenSql.SelectSql(TableName, selectFields, whereParam, null, 1);
-            SqlDataReader reader = DbHelperSQL.ExecuteReader(_sql);
+            _sqlEntity.Sql = GenSql.SelectSql(TableName, selectFields, whereParam, null, 1);
+            _sqlEntity.Params = GenSql.GetParameter(whereParam);
+            SqlDataReader reader = DbHelperSQL.ExecuteReader(_sqlEntity.Sql, _sqlEntity.Params);
             if (reader.HasRows)
                 return CreateSingleEntity(reader);
             else
@@ -96,13 +101,15 @@ namespace hwj.DBUtility.MSSQL
         }
         public List<T> GetList(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
         {
-            _sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
-            SqlDataReader reader = DbHelperSQL.ExecuteReader(_sql);
+            _sqlEntity.Sql = GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount);
+            _sqlEntity.Params = GenSql.GetParameter(whereParam);
+            SqlDataReader reader = DbHelperSQL.ExecuteReader(_sqlEntity.Sql, _sqlEntity.Params);
             if (reader.HasRows)
                 return CreateListEntity(reader);
             else
                 return null;
         }
+
         public List<T> GetListPage(SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, SelectFields PK, int pageNumber, int pageSize)
         {
             return GetListPage(selectFields, whereParam, orderParam, null, PK, pageNumber, pageSize);
@@ -238,7 +245,7 @@ namespace hwj.DBUtility.MSSQL
                         object obj = reader.GetValue(f.FieldIndex);
                         if (obj != DBNull.Value)
                         {
-                            f.Property.SetValue(RowInstance, Convert.ChangeType(obj, f.DataTypeCode), null);
+                            f.Property.SetValue(RowInstance, obj, null);
                         }
                     }
                 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Text;
-
 using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
@@ -88,22 +87,22 @@ namespace hwj.DBUtility
         #endregion
 
         #region Protected Functions
-        protected bool IsNumType(TypeCode typeCode)
+        protected bool IsNumType(DbType typeCode)
         {
-            if (typeCode == TypeCode.Decimal || typeCode == TypeCode.Int16 || typeCode == TypeCode.Int32 || typeCode == TypeCode.Int64)
+            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64)
                 return true;
             else
                 return false;
         }
-        protected bool IsDateType(TypeCode typeCode)
+        protected bool IsDateType(DbType typeCode)
         {
-            if (typeCode == TypeCode.DateTime)
+            if (typeCode == DbType.DateTime)
                 return true;
             else
                 return false;
         }
 
-        protected abstract string GetCondition(SqlParam para);
+        protected abstract string GetCondition(SqlParam para,bool isWhere);
         protected string GenerateFieldSql(UpdateParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
@@ -111,32 +110,17 @@ namespace hwj.DBUtility
                 StringBuilder sbUpdate = new StringBuilder();
                 foreach (SqlParam para in listParam)
                 {
-                    sbUpdate.Append(GetCondition(para));
+                    sbUpdate.Append(GetCondition(para,false));
                 }
                 return sbUpdate.ToString().TrimEnd(',');
             }
             else
                 return string.Empty;
         }
+        protected abstract string GenerateWhereSql(WhereParam listParam,bool isPage);
         protected string GenerateWhereSql(WhereParam listParam)
         {
             return GenerateWhereSql(listParam, false);
-        }
-        protected string GenerateWhereSql(WhereParam listParam, bool isPage)
-        {
-            if (listParam != null && listParam.Count > 0)
-            {
-                StringBuilder sbWhere = new StringBuilder();
-                if (!isPage)
-                    sbWhere.Append("WHERE ");
-                foreach (SqlParam para in listParam)
-                {
-                    sbWhere.Append(GetCondition(para));
-                }
-                return sbWhere.ToString().TrimEnd(',');
-            }
-            else
-                return string.Empty;
         }
         protected string GenerateOrderByField(OrderParam o)
         {
