@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 
 namespace hwj.DBUtility.TableMapping
@@ -14,7 +15,7 @@ namespace hwj.DBUtility.TableMapping
             DataTypeCode = fieldMappingInfo.DataTypeCode;
             FieldIndex = fieldMappingInfo.FieldIndex;
         }
-        public FieldMappingInfo(PropertyInfo property, string fieldName, TypeCode typeCode, object nullValue, int fieldIndex)
+        public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, int fieldIndex)
         {
             Property = property;
             FieldName = fieldName;
@@ -26,7 +27,7 @@ namespace hwj.DBUtility.TableMapping
         #region Property
         public PropertyInfo Property { get; set; }
         public string FieldName { get; set; }
-        public TypeCode DataTypeCode { get; set; }
+        public DbType DataTypeCode { get; set; }
         public object NullValue { get; set; }
         public int FieldIndex { get; set; }
         #endregion

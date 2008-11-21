@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
-
 using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MYSQL
@@ -50,6 +50,10 @@ namespace hwj.DBUtility.MYSQL
                 }
             }
             return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
+        }
+        public override List<System.Data.IDataParameter> InsertParams(T entity)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

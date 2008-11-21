@@ -1,12 +1,12 @@
 using System;
-using System.Reflection;
+using System.Data;
 
 namespace hwj.DBUtility.TableMapping
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMappingAttribute : System.Attribute
     {
-        public FieldMappingAttribute(string dataFieldName, TypeCode dataTypeCode, object nullValue)
+        public FieldMappingAttribute(string dataFieldName, DbType dataTypeCode, object nullValue)
             : base()
         {
             _dataFieldName = dataFieldName;
@@ -14,7 +14,7 @@ namespace hwj.DBUtility.TableMapping
             _dataTypeCode = dataTypeCode;
         }
 
-        public FieldMappingAttribute(string dataFieldName, TypeCode dataTypeCode) : this(dataFieldName, dataTypeCode, null) { }
+        public FieldMappingAttribute(string dataFieldName, DbType dataTypeCode) : this(dataFieldName, dataTypeCode, null) { }
 
         #region Property
         private string _dataFieldName;
@@ -27,12 +27,11 @@ namespace hwj.DBUtility.TableMapping
         {
             get { return _nullValue; }
         }
-        private TypeCode _dataTypeCode;
-        public TypeCode DataTypeCode
+        private DbType _dataTypeCode;
+        public DbType DataTypeCode
         {
             get { return _dataTypeCode; }
         }
-
         #endregion
     }
 }
