@@ -526,8 +526,6 @@ namespace hwj.DBUtility.MSSQL
             {
                 throw e;
             }
-
-
         }
         /// <summary>
         /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØDataSet
@@ -579,8 +577,6 @@ namespace hwj.DBUtility.MSSQL
                 return ds;
             }
         }
-
-
 
         #endregion
 
