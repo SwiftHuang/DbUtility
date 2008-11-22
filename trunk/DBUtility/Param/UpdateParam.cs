@@ -20,7 +20,7 @@ namespace hwj.DBUtility
         {
         }
     }
-    public class SelectFields : List<Enum>
+    public class DisplayFields : List<Enum>
     {
     }
 }

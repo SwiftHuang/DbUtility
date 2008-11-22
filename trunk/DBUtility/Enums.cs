@@ -18,7 +18,7 @@ namespace hwj.DBUtility
             IsNull,
             IsNotNull
         }
-        public enum DBType
+        public enum DatabaseType
         {
             None,
             MySql,

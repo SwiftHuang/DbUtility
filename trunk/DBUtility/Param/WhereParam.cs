@@ -5,7 +5,7 @@ using System.Text;
 
 namespace hwj.DBUtility
 {
-    public class WhereParam : List<SqlParam>
+    public class FilterParam : List<SqlParam>
     {
     }
 }

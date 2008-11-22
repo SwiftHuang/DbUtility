@@ -32,14 +32,14 @@ namespace hwj.DBUtility
         #region Public Functions
 
         #region Delete Sql
-        public string DeleteSql(WhereParam whereParam)
+        public string DeleteSql(FilterParam whereParam)
         {
-            return string.Format(_DeleteString, GetTableName(), GenerateWhereSql(whereParam));
+            return string.Format(_DeleteString, GetTableName(), GenFilterSql(whereParam));
         }
         #endregion
 
         #region Update Sql
-        public string UpdateSql(T entity, WhereParam whereParam, params Enum[] notUpdateParam)
+        public string UpdateSql(T entity, FilterParam whereParam, params Enum[] notUpdateParam)
         {
             UpdateParam up = new UpdateParam();
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
@@ -54,9 +54,9 @@ namespace hwj.DBUtility
             }
             return UpdateSql(up, whereParam);
         }
-        public string UpdateSql(UpdateParam updateParam, WhereParam whereParam)
+        public string UpdateSql(UpdateParam updateParam, FilterParam whereParam)
         {
-            return string.Format(_UpdateString, GetTableName(), GenerateFieldSql(updateParam), GenerateWhereSql(whereParam));
+            return string.Format(_UpdateString, GetTableName(), GenerateFieldSql(updateParam), GenFilterSql(whereParam));
         }
         private bool FindName(string value, params Enum[] datasource)
         {
@@ -75,12 +75,12 @@ namespace hwj.DBUtility
         public abstract string InsertSql(T entity);
         #endregion
 
-        public abstract string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount);
+        public abstract string SelectSql(string tableName, DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount);
 
         #region Record Count Sql
-        public string SelectCountSql(string tableName, WhereParam whereParam)
+        public string SelectCountSql(string tableName, FilterParam whereParam)
         {
-            return string.Format(_SelectCountString, GetTableName(tableName), GenerateWhereSql(whereParam));
+            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterSql(whereParam));
         }
         #endregion
 
@@ -117,20 +117,20 @@ namespace hwj.DBUtility
             else
                 return string.Empty;
         }
-        protected abstract string GenerateWhereSql(WhereParam listParam,bool isPage);
-        protected string GenerateWhereSql(WhereParam listParam)
+        protected abstract string GenFilterSql(FilterParam listParam,bool isPage);
+        protected string GenFilterSql(FilterParam listParam)
         {
-            return GenerateWhereSql(listParam, false);
+            return GenFilterSql(listParam, false);
         }
         protected string GenerateOrderByField(OrderParam o)
         {
             return string.Format("{0} {1},", o.FieldName, o.OrderBy.ToSqlString());
         }
-        protected string GenerateSelectFieldsSql(SelectFields fields)
+        protected string GenerateSelectFieldsSql(DisplayFields fields)
         {
             return GenerateSelectFieldsSql(fields, false);
         }
-        protected string GenerateSelectFieldsSql(SelectFields fields, bool isPage)
+        protected string GenerateSelectFieldsSql(DisplayFields fields, bool isPage)
         {
             if (fields != null && fields.Count > 0)
             {
@@ -146,11 +146,11 @@ namespace hwj.DBUtility
             else
                 return "";
         }
-        protected string GenerateOrderByFieldsSql(OrderFields orders)
+        protected string GenerateOrderByFieldsSql(SortFields orders)
         {
             return GenerateOrderByFieldsSql(orders, false);
         }
-        protected string GenerateOrderByFieldsSql(OrderFields orders, bool isPage)
+        protected string GenerateOrderByFieldsSql(SortFields orders, bool isPage)
         {
             if (orders != null)
             {

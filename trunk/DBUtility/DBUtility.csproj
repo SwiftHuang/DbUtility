@@ -45,17 +45,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSSQL\BaseDAL.cs" />
-    <Compile Include="MSSQL\DbHelper.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommandInfo.cs" />
     <Compile Include="DBCache.cs" />
+    <Compile Include="MSSQL\DbHelper.cs" />
     <Compile Include="MSSQL\DbHelperSQL.cs" />
     <Compile Include="MSSQL\GenMSSqlSql.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums.cs" />
+    <Compile Include="MYSQL\BaseDAL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MYSQL\DbHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MYSQL\DbHelperMySQL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MYSQL\GenMySqlSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MYSQL\SqlEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Param\OrderParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />

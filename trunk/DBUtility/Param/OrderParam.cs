@@ -23,18 +23,18 @@ namespace hwj.DBUtility
             OrderBy = order;
         }
     }
-    public class OrderFields : List<OrderParam>
+    public class SortFields : List<OrderParam>
     {
     }
 
     public static class OrderParamExtensions
     {
-        public static OrderFields AddParam(this OrderFields lst, Enum fieldName, Enums.OrderBy order)
+        public static SortFields AddParam(this SortFields lst, Enum fieldName, Enums.OrderBy order)
         {
             lst.Add(new OrderParam(fieldName, order));
             return lst;
         }
-        public static OrderFields AddParam(this OrderFields lst, string fieldName, Enums.OrderBy order)
+        public static SortFields AddParam(this SortFields lst, string fieldName, Enums.OrderBy order)
         {
             lst.Add(new OrderParam(fieldName, order));
             return lst;
