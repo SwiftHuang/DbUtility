@@ -41,11 +41,11 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Select Sql
-        public override string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount)
+        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParam filterParam, SortFields sortFields, int? maxCount)
         {
-            return SelectSql(tableName, selectFields, whereParam, orderParam, maxCount, true);
+            return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, true);
         }
-        public string SelectSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, int? maxCount, bool isNoLock)
+        public string SelectSql(string tableName, DisplayFields displayFields, FilterParam filterParam, SortFields sortFields, int? maxCount, bool isNoLock)
         {
             string sMaxCount = string.Empty;
 
@@ -53,7 +53,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(selectFields), GetTableName(tableName), GetNoLock(isNoLock), GenerateWhereSql(whereParam), GenerateOrderByFieldsSql(orderParam));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(displayFields), GetTableName(tableName), GetNoLock(isNoLock), GenFilterSql(filterParam), GenerateOrderByFieldsSql(sortFields));
         }
         /// <summary>
         /// 数据分页
@@ -67,17 +67,17 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页显示记录数</param>
         /// <returns></returns>
-        public string SelectPageSql(string tableName, SelectFields selectFields, WhereParam whereParam, OrderFields orderParam, SelectFields groupParam, SelectFields PK, int pageNumber, int pageSize)
+        public string SelectPageSql(string tableName, DisplayFields selectFields, FilterParam filterParam, SortFields sortFields, DisplayFields groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             string _SelectFields = GenerateSelectFieldsSql(selectFields);
-            string _WhereParam = GenerateWhereSql(whereParam, true);
-            string _OrderParam = GenerateOrderByFieldsSql(orderParam, true);
+            string _WhereParam = GenFilterSql(filterParam, true);
+            string _OrderParam = GenerateOrderByFieldsSql(sortFields, true);
             return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenerateSelectFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _WhereParam, GenerateSelectFieldsSql(groupParam, true));
         }
         #endregion
 
         #region Private Functions
-        protected override string GenerateWhereSql(WhereParam listParam, bool isPage)
+        protected override string GenFilterSql(FilterParam listParam, bool isPage)
         {
             if (listParam != null && listParam.Count > 0)
             {
@@ -118,7 +118,7 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Public Functions
-        public List<SqlParameter> GetParameter(UpdateParam updateParam)
+        public List<SqlParameter> GenParameter(UpdateParam updateParam)
         {
             if (updateParam != null)
             {
@@ -143,12 +143,12 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
-        public List<SqlParameter> GetParameter(WhereParam whereParam)
+        public List<SqlParameter> GenParameter(FilterParam filterParam)
         {
-            if (whereParam != null)
+            if (filterParam != null)
             {
                 List<SqlParameter> LstDP = new List<SqlParameter>();
-                foreach (SqlParam sp in whereParam)
+                foreach (SqlParam sp in filterParam)
                 {
                     foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                     {
@@ -168,7 +168,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
-        public List<SqlParameter> GetParameter(T entity)
+        public List<SqlParameter> GenParameter(T entity)
         {
             List<SqlParameter> LstDP = new List<SqlParameter>();
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
@@ -180,7 +180,9 @@ namespace hwj.DBUtility.MSSQL
                 if (IsDateType(f.DataTypeCode))
                 {
                     if (Convert.ToDateTime(_value) == DateTime.MinValue)
-                        dp.Value = "1900-01-01";
+                        dp.Value = DBNull.Value;
+                    else
+                        dp.Value = _value;
                 }
                 else
                     dp.Value = _value;

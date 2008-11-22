@@ -195,7 +195,7 @@ namespace hwj.DBUtility.MSSQL
         ///// <param name="list">SQL命令行列表</param>
         ///// <param name="oracleCmdSqlList">Oracle命令行列表</param>
         ///// <returns>执行结果 0-由于SQL造成事务失败 -1 由于Oracle造成事务失败 1-整体事务执行成功</returns>
-        //public static int ExecuteSqlTran(List<CommandInfo> list, List<CommandInfo> oracleCmdSqlList)
+        //public  int ExecuteSqlTran(List<CommandInfo> list, List<CommandInfo> oracleCmdSqlList)
         //{
         //    using (SqlConnection conn = new SqlConnection(connectionString))
         //    {
