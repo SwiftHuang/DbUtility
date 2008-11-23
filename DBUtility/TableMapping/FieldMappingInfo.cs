@@ -14,14 +14,16 @@ namespace hwj.DBUtility.TableMapping
             NullValue = fieldMappingInfo.NullValue;
             DataTypeCode = fieldMappingInfo.DataTypeCode;
             FieldIndex = fieldMappingInfo.FieldIndex;
+            DataHandles = fieldMappingInfo.DataHandles;
         }
-        public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, int fieldIndex)
+        public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, Enums.DataHandle[] dataHandles, int fieldIndex)
         {
             Property = property;
             FieldName = fieldName;
             NullValue = NullValue;
             DataTypeCode = typeCode;
             FieldIndex = fieldIndex;
+            DataHandles = dataHandles;
         }
 
         #region Property
@@ -30,6 +32,7 @@ namespace hwj.DBUtility.TableMapping
         public DbType DataTypeCode { get; set; }
         public object NullValue { get; set; }
         public int FieldIndex { get; set; }
+        public Enums.DataHandle[] DataHandles { get; set; }
         #endregion
 
         #region Public Functions
@@ -44,7 +47,7 @@ namespace hwj.DBUtility.TableMapping
                 {
                     foreach (FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
                     {
-                        lstFieldInfo.Add(new FieldMappingInfo(Property, Field.DataFieldName, Field.DataTypeCode, Field.NullValue, -1));
+                        lstFieldInfo.Add(new FieldMappingInfo(Property, Field.DataFieldName, Field.DataTypeCode, Field.NullValue, Field.DataHandles, -1));
                     }
                 }
                 DBCache.SetCache(entityID, lstFieldInfo);

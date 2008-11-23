@@ -63,6 +63,9 @@ namespace LTP.BuilderModel
         {
             StringPlus strclass = new StringPlus();
             strclass.AppendLine("using System;");
+            strclass.AppendLine("using System.Collections.Generic;");
+            strclass.AppendLine("using System.Data;");
+            strclass.AppendLine("using hwj.DBUtility;");
             strclass.AppendLine("using hwj.DBUtility.TableMapping;");
             strclass.AppendLine("namespace Entity.Table");
             strclass.AppendLine("{");
@@ -78,6 +81,8 @@ namespace LTP.BuilderModel
             strclass.AppendLine(CreatTableName(_modelname));
             strclass.AppendLine(CreatModelMethod());
             strclass.AppendSpaceLine(1, "}");
+            strclass.AppendSpaceLine(1, "public class " + _modelname + "s : List<" + _modelname + "> { }");
+            strclass.AppendSpaceLine(1, "public class " + _modelname + "Page : PageResult<" + _modelname + "> { }");
             strclass.AppendLine("}");
             strclass.AppendLine("");
 
@@ -113,7 +118,7 @@ namespace LTP.BuilderModel
                 {
                     if ((!IsIdentity) && (!ispk) && (cisnull))
                     {
-                        isnull = "?";//代表可空类型
+                        //isnull = "?";//代表可空类型
                     }
                 }
 
@@ -163,7 +168,7 @@ namespace LTP.BuilderModel
         {
             string s = string.Empty;
 
-            s = "TypeCode." + SetFirstUpper(columnType) + "";
+            s = "DbType." + SetFirstUpper(columnType) + "";
             return s;
         }
         private string SetFirstUpper(string value)

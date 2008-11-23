@@ -35,22 +35,22 @@ namespace hwj.DBUtility.MSSQL
         {
             return Update(param, null);
         }
-        public bool Update(UpdateParam updateParam, FilterParam whereParam)
+        public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
             List<SqlParameter> sp = new List<SqlParameter>();
             sp.AddRange(GenSql.GenParameter(updateParam));
-            sp.AddRange(GenSql.GenParameter(whereParam));
-            _SqlEntity = new SqlEntity(GenSql.UpdateSql(updateParam, whereParam), sp);
+            sp.AddRange(GenSql.GenParameter(filterParam));
+            _SqlEntity = new SqlEntity(GenSql.UpdateSql(updateParam, filterParam), sp);
             if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
                 return true;
             else
                 return false;
         }
-        public void Update(T entity, FilterParam whereParam, params Enum[] notUpdateParam)
+        public void Update(T entity, FilterParams filterParam)
         {
-            _SqlEntity.Sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
+            _SqlEntity.Sql = GenSql.UpdateSql(entity, filterParam);
             _SqlEntity.Parameters = GenSql.GenParameter(entity);
-            _SqlEntity.Parameters.AddRange(GenSql.GenParameter(whereParam));
+            _SqlEntity.Parameters.AddRange(GenSql.GenParameter(filterParam));
             DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters);
         }
 
@@ -58,9 +58,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return Delete(null);
         }
-        public bool Delete(FilterParam whereParam)
+        public bool Delete(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.DeleteSql(whereParam), GenSql.GenParameter(whereParam));
+            _SqlEntity = new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
             if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
                 return true;
             else
@@ -71,13 +71,13 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(null);
         }
-        public T GetEntity(FilterParam whereParam)
+        public T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, whereParam);
+            return GetEntity(null, filterParam);
         }
-        public T GetEntity(DisplayFields selectFields, FilterParam whereParam)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, null, 1), GenSql.GenParameter(whereParam));
+            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, null, 1), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters);
             if (reader.HasRows)
                 return CreateSingleEntity(reader);
@@ -89,21 +89,21 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(null, null, null, null);
         }
-        public List<T> GetList(DisplayFields selectFields)
+        public List<T> GetList(DisplayFields displayFields)
         {
-            return GetList(selectFields, null, null, null);
+            return GetList(displayFields, null, null, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam)
+        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetList(selectFields, whereParam, null, null);
+            return GetList(displayFields, filterParam, null, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam)
+        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetList(selectFields, whereParam, orderParam, null);
+            return GetList(displayFields, filterParam, sortParams, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount)
+        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount), GenSql.GenParameter(whereParam));
+            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters);
             if (reader.HasRows)
                 return CreateListEntity(reader);
@@ -111,13 +111,13 @@ namespace hwj.DBUtility.MSSQL
                 return null;
         }
 
-        public List<T> GetListPage(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, DisplayFields PK, int pageNumber, int pageSize)
+        public List<T> GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
-            return GetListPage(selectFields, whereParam, orderParam, null, PK, pageNumber, pageSize);
+            return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize);
         }
-        public List<T> GetListPage(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, DisplayFields groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public List<T> GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
-            _SqlEntity.Sql = GenSql.SelectPageSql(TableName, selectFields, whereParam, orderParam, groupParam, PK, pageNumber, pageSize);
+            _SqlEntity.Sql = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql);
             if (reader.HasRows)
                 return CreateListEntity(reader);
@@ -139,9 +139,9 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="whereParam">条件参数</param>
         /// <returns>记录数</returns>
-        public UInt32 RecordCount(FilterParam whereParam)
+        public UInt32 RecordCount(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, whereParam), null);
+            _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, filterParam), null);
             return Convert.ToUInt32(DbHelper.GetSingle(SqlEntity.Sql));
         }
         #endregion
@@ -152,7 +152,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="strWhere"></param>
         /// <returns></returns>
-        public DataTable GetDataTable(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount)
+        public DataTable GetDataTable(DisplayFields selectFields, FilterParams whereParam, SortParams orderParam, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount), GenSql.GenParameter(whereParam));
             return CreateDataTable(DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters));

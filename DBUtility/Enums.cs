@@ -36,6 +36,11 @@ namespace hwj.DBUtility
             Ascending,
             None
         }
+        public enum DataHandle
+        {
+            UnInsert,
+            UnUpdate,
+        }
     }
     public static class EnumsExtensions
     {
@@ -92,6 +97,17 @@ namespace hwj.DBUtility
                 default:
                     return string.Empty;
             }
+        }
+        public static bool Find(this Enums.DataHandle[] handles, Enums.DataHandle dataHandle)
+        {
+            if (handles == null || handles.Length == 0)
+                return false;
+            foreach (Enums.DataHandle dh in handles)
+            {
+                if (dh == dataHandle)
+                    return true;
+            }
+            return false;
         }
     }
 }

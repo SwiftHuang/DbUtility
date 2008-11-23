@@ -39,7 +39,7 @@ namespace hwj.DBUtility.MYSQL
         #endregion
 
         #region Select Sql
-        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParam filterParam, SortFields sortFields, int? maxCount)
+        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
             string sMaxCount = string.Empty;
 
@@ -47,12 +47,12 @@ namespace hwj.DBUtility.MYSQL
             {
                 sMaxCount = string.Format(_MySqlLimitCount, maxCount);
             }
-            return string.Format(_MySqlSelectString, GenerateSelectFieldsSql(displayFields), GetTableName(tableName), GenFilterSql(filterParam), GenerateOrderByFieldsSql(sortFields), sMaxCount);
+            return string.Format(_MySqlSelectString, GenDisplayFieldsSql(displayFields), GetTableName(tableName), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields), sMaxCount);
         }
         #endregion
 
         #region Private Functions
-        protected override string GenFilterSql(FilterParam listParam, bool isPage)
+        protected override string GenFilterParamsSql(FilterParams listParam, bool isPage)
         {
             if (listParam != null && listParam.Count > 0)
             {
@@ -114,7 +114,7 @@ namespace hwj.DBUtility.MYSQL
             else
                 return null;
         }
-        public List<MySqlParameter> GenParameter(FilterParam filterParam)
+        public List<MySqlParameter> GenParameter(FilterParams filterParam)
         {
             if (filterParam != null)
             {
