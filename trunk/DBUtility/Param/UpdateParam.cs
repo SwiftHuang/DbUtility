@@ -23,4 +23,6 @@ namespace hwj.DBUtility
     public class DisplayFields : List<Enum>
     {
     }
+    public class GroupParams : List<Enum>
+    { }
 }

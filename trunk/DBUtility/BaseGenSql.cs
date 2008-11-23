@@ -32,14 +32,29 @@ namespace hwj.DBUtility
         #region Public Functions
 
         #region Delete Sql
-        public string DeleteSql(FilterParam whereParam)
+        public string DeleteSql(FilterParams whereParam)
         {
-            return string.Format(_DeleteString, GetTableName(), GenFilterSql(whereParam));
+            return string.Format(_DeleteString, GetTableName(), GenFilterParamsSql(whereParam));
         }
         #endregion
 
         #region Update Sql
-        public string UpdateSql(T entity, FilterParam whereParam, params Enum[] notUpdateParam)
+        //public string UpdateSql(T entity, FilterParams whereParam, params Enum[] notUpdateParam)
+        //{
+        //    UpdateParam up = new UpdateParam();
+        //    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+        //    {
+        //        object obj = f.Property.GetValue(entity, null);
+        //        if (obj != null)
+        //        {
+        //            if (!FindName(f.FieldName, notUpdateParam))
+        //                up.AddParam(f.FieldName, obj);
+
+        //        }
+        //    }
+        //    return UpdateSql(up, whereParam);
+        //}
+        public string UpdateSql(T entity, FilterParams filterParams)
         {
             UpdateParam up = new UpdateParam();
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
@@ -47,16 +62,16 @@ namespace hwj.DBUtility
                 object obj = f.Property.GetValue(entity, null);
                 if (obj != null)
                 {
-                    if (!FindName(f.FieldName, notUpdateParam))
+                    if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
                         up.AddParam(f.FieldName, obj);
 
                 }
             }
-            return UpdateSql(up, whereParam);
+            return UpdateSql(up, filterParams);
         }
-        public string UpdateSql(UpdateParam updateParam, FilterParam whereParam)
+        public string UpdateSql(UpdateParam updateParam, FilterParams whereParam)
         {
-            return string.Format(_UpdateString, GetTableName(), GenerateFieldSql(updateParam), GenFilterSql(whereParam));
+            return string.Format(_UpdateString, GetTableName(), GenFieldsSql(updateParam), GenFilterParamsSql(whereParam));
         }
         private bool FindName(string value, params Enum[] datasource)
         {
@@ -75,12 +90,12 @@ namespace hwj.DBUtility
         public abstract string InsertSql(T entity);
         #endregion
 
-        public abstract string SelectSql(string tableName, DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount);
+        public abstract string SelectSql(string tableName, DisplayFields selectFields, FilterParams whereParam, SortParams orderParam, int? maxCount);
 
         #region Record Count Sql
-        public string SelectCountSql(string tableName, FilterParam whereParam)
+        public string SelectCountSql(string tableName, FilterParams whereParam)
         {
-            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterSql(whereParam));
+            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterParamsSql(whereParam));
         }
         #endregion
 
@@ -102,35 +117,39 @@ namespace hwj.DBUtility
                 return false;
         }
 
-        protected abstract string GetCondition(SqlParam para,bool isWhere);
-        protected string GenerateFieldSql(UpdateParam listParam)
+        protected abstract string GetCondition(SqlParam para, bool isWhere);
+        protected string GenFieldsSql(UpdateParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
             {
                 StringBuilder sbUpdate = new StringBuilder();
                 foreach (SqlParam para in listParam)
                 {
-                    sbUpdate.Append(GetCondition(para,false));
+                    sbUpdate.Append(GetCondition(para, false));
                 }
                 return sbUpdate.ToString().TrimEnd(',');
             }
             else
                 return string.Empty;
         }
-        protected abstract string GenFilterSql(FilterParam listParam,bool isPage);
-        protected string GenFilterSql(FilterParam listParam)
+        protected abstract string GenFilterParamsSql(FilterParams listParam, bool isPage);
+        protected string GenFilterParamsSql(FilterParams listParam)
         {
-            return GenFilterSql(listParam, false);
+            return GenFilterParamsSql(listParam, false);
         }
-        protected string GenerateOrderByField(OrderParam o)
+        protected string GenSortField(SortParam o)
         {
             return string.Format("{0} {1},", o.FieldName, o.OrderBy.ToSqlString());
         }
-        protected string GenerateSelectFieldsSql(DisplayFields fields)
+        protected string GenGroupParamsSql(GroupParams param)
         {
-            return GenerateSelectFieldsSql(fields, false);
+            return GenDisplayFieldsSql(param, true);
         }
-        protected string GenerateSelectFieldsSql(DisplayFields fields, bool isPage)
+        protected string GenDisplayFieldsSql(DisplayFields fields)
+        {
+            return GenDisplayFieldsSql(fields, false);
+        }
+        protected string GenDisplayFieldsSql(List<Enum> fields, bool isPage)
         {
             if (fields != null && fields.Count > 0)
             {
@@ -146,20 +165,20 @@ namespace hwj.DBUtility
             else
                 return "";
         }
-        protected string GenerateOrderByFieldsSql(SortFields orders)
+        protected string GenSortParamsSql(SortParams orders)
         {
-            return GenerateOrderByFieldsSql(orders, false);
+            return GenSortParamsSql(orders, false);
         }
-        protected string GenerateOrderByFieldsSql(SortFields orders, bool isPage)
+        protected string GenSortParamsSql(SortParams orders, bool isPage)
         {
             if (orders != null)
             {
                 StringBuilder sb = new StringBuilder();
                 if (!isPage)
                     sb.Append("ORDER BY ");
-                foreach (OrderParam o in orders)
+                foreach (SortParam o in orders)
                 {
-                    sb.Append(GenerateOrderByField(o));
+                    sb.Append(GenSortField(o));
                 }
                 return sb.ToString().TrimEnd(',');
             }

@@ -32,8 +32,11 @@ namespace hwj.DBUtility.MSSQL
                 object obj = f.Property.GetValue(entity, null);
                 if (obj != null)
                 {
-                    sbInsField.Append(f.FieldName).Append(',');
-                    sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
+                    if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
+                    {
+                        sbInsField.Append(f.FieldName).Append(',');
+                        sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
+                    }
                 }
             }
             return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
@@ -41,11 +44,11 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Select Sql
-        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParam filterParam, SortFields sortFields, int? maxCount)
+        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
             return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, true);
         }
-        public string SelectSql(string tableName, DisplayFields displayFields, FilterParam filterParam, SortFields sortFields, int? maxCount, bool isNoLock)
+        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, bool isNoLock)
         {
             string sMaxCount = string.Empty;
 
@@ -53,7 +56,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenerateSelectFieldsSql(displayFields), GetTableName(tableName), GetNoLock(isNoLock), GenFilterSql(filterParam), GenerateOrderByFieldsSql(sortFields));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), GetTableName(tableName), GetNoLock(isNoLock), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
         }
         /// <summary>
         /// 数据分页
@@ -67,17 +70,17 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页显示记录数</param>
         /// <returns></returns>
-        public string SelectPageSql(string tableName, DisplayFields selectFields, FilterParam filterParam, SortFields sortFields, DisplayFields groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public string SelectPageSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
-            string _SelectFields = GenerateSelectFieldsSql(selectFields);
-            string _WhereParam = GenFilterSql(filterParam, true);
-            string _OrderParam = GenerateOrderByFieldsSql(sortFields, true);
-            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenerateSelectFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _WhereParam, GenerateSelectFieldsSql(groupParam, true));
+            string _SelectFields = GenDisplayFieldsSql(displayFields);
+            string _WhereParam = GenFilterParamsSql(filterParam, true);
+            string _OrderParam = GenSortParamsSql(sortParams, true);
+            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _WhereParam, GenGroupParamsSql(groupParam));
         }
         #endregion
 
         #region Private Functions
-        protected override string GenFilterSql(FilterParam listParam, bool isPage)
+        protected override string GenFilterParamsSql(FilterParams listParam, bool isPage)
         {
             if (listParam != null && listParam.Count > 0)
             {
@@ -143,7 +146,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
-        public List<SqlParameter> GenParameter(FilterParam filterParam)
+        public List<SqlParameter> GenParameter(FilterParams filterParam)
         {
             if (filterParam != null)
             {

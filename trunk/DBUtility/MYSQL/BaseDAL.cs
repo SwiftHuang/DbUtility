@@ -35,7 +35,7 @@ namespace hwj.DBUtility.MYSQL
         {
             return Update(param, null);
         }
-        public bool Update(UpdateParam updateParam, FilterParam whereParam)
+        public bool Update(UpdateParam updateParam, FilterParams whereParam)
         {
             List<MySqlParameter> sp = new List<MySqlParameter>();
             sp.AddRange(GenSql.GenParameter(updateParam));
@@ -46,11 +46,11 @@ namespace hwj.DBUtility.MYSQL
             else
                 return false;
         }
-        public void Update(T entity, FilterParam whereParam, params Enum[] notUpdateParam)
+        public void Update(T entity, FilterParams filterParams)
         {
-            _SqlEntity.Sql = GenSql.UpdateSql(entity, whereParam, notUpdateParam);
+            _SqlEntity.Sql = GenSql.UpdateSql(entity, filterParams);
             _SqlEntity.Parameters = GenSql.GenParameter(entity);
-            _SqlEntity.Parameters.AddRange(GenSql.GenParameter(whereParam));
+            _SqlEntity.Parameters.AddRange(GenSql.GenParameter(filterParams));
             DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters);
         }
 
@@ -58,7 +58,7 @@ namespace hwj.DBUtility.MYSQL
         {
             return Delete(null);
         }
-        public bool Delete(FilterParam whereParam)
+        public bool Delete(FilterParams whereParam)
         {
             _SqlEntity = new SqlEntity(GenSql.DeleteSql(whereParam), GenSql.GenParameter(whereParam));
             if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
@@ -71,11 +71,11 @@ namespace hwj.DBUtility.MYSQL
         {
             return GetEntity(null);
         }
-        public T GetEntity(FilterParam whereParam)
+        public T GetEntity(FilterParams whereParam)
         {
             return GetEntity(null, whereParam);
         }
-        public T GetEntity(DisplayFields selectFields, FilterParam whereParam)
+        public T GetEntity(DisplayFields selectFields, FilterParams whereParam)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, null, 1), GenSql.GenParameter(whereParam));
             MySqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters);
@@ -93,15 +93,15 @@ namespace hwj.DBUtility.MYSQL
         {
             return GetList(selectFields, null, null, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam)
+        public List<T> GetList(DisplayFields selectFields, FilterParams whereParam)
         {
             return GetList(selectFields, whereParam, null, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam)
+        public List<T> GetList(DisplayFields selectFields, FilterParams whereParam, SortParams orderParam)
         {
             return GetList(selectFields, whereParam, orderParam, null);
         }
-        public List<T> GetList(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount)
+        public List<T> GetList(DisplayFields selectFields, FilterParams whereParam, SortParams orderParam, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount), GenSql.GenParameter(whereParam));
             MySqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters);
@@ -139,7 +139,7 @@ namespace hwj.DBUtility.MYSQL
         /// </summary>
         /// <param name="whereParam">条件参数</param>
         /// <returns>记录数</returns>
-        public UInt32 RecordCount(FilterParam whereParam)
+        public UInt32 RecordCount(FilterParams whereParam)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, whereParam), null);
             return Convert.ToUInt32(DbHelper.GetSingle(SqlEntity.Sql));
@@ -152,7 +152,7 @@ namespace hwj.DBUtility.MYSQL
         /// </summary>
         /// <param name="strWhere"></param>
         /// <returns></returns>
-        public DataTable GetDataTable(DisplayFields selectFields, FilterParam whereParam, SortFields orderParam, int? maxCount)
+        public DataTable GetDataTable(DisplayFields selectFields, FilterParams whereParam, SortParams orderParam, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, selectFields, whereParam, orderParam, maxCount), GenSql.GenParameter(whereParam));
             return CreateDataTable(DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters));
