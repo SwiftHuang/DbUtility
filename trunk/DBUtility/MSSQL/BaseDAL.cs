@@ -8,7 +8,7 @@ namespace hwj.DBUtility.MSSQL
 {
     public abstract class BaseDAL<T> where T : class, new()
     {
-        GenerateSql<T> GenSql = new GenerateSql<T>();
+        protected GenerateSql<T> GenSql = new GenerateSql<T>();
         #region Property
         protected SqlEntity _SqlEntity = null;
         public SqlEntity SqlEntity
@@ -177,6 +177,7 @@ namespace hwj.DBUtility.MSSQL
 
                 while (reader.Read())
                 {
+
                     DataRow mydr = dataTable.NewRow();//关键的第三步
                     for (int i = 0; i < reader.FieldCount; i++)
                     {

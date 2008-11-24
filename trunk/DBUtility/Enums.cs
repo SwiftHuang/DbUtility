@@ -16,7 +16,8 @@ namespace hwj.DBUtility
             Geq,
             Leq,
             IsNull,
-            IsNotNull
+            IsNotNull,
+            Like,
         }
         public enum DatabaseType
         {
@@ -64,6 +65,8 @@ namespace hwj.DBUtility
                     return "<";
                 case Enums.Operator.Leq:
                     return "<=";
+                case Enums.Operator.Like:
+                    return " LIKE ";
                 default:
                     throw new Exception("Enums.Operator error");
             }
