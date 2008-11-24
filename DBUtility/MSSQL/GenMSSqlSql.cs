@@ -16,7 +16,6 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
 
-
         #region Insert Sql
         public override string InsertLastIDSql()
         {
@@ -107,6 +106,10 @@ namespace hwj.DBUtility.MSSQL
                 __MsSqlParam = _MsSqlParam;
             if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
+            else if (para.Operator == Enums.Operator.Like)
+            {
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
+            }
             else
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
             return sbStr.ToString();
