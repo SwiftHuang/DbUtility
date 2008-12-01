@@ -106,7 +106,7 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
-        public static bool Exists(string strSql, params SqlParameter[] cmdParms)
+        public static bool Exists(string strSql, List<SqlParameter> cmdParms)
         {
             object obj = DbHelperSQL.GetSingle(strSql, cmdParms);
             int cmdresult;
@@ -818,7 +818,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">计算查询结果语句</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string SQLString, params SqlParameter[] cmdParms)
+        public static object GetSingle(string SQLString, List<SqlParameter> cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {

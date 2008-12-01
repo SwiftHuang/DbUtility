@@ -141,8 +141,8 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>记录数</returns>
         public UInt32 RecordCount(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, filterParam), null);
-            return Convert.ToUInt32(DbHelper.GetSingle(SqlEntity.Sql));
+            _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, filterParam), GenSql.GenParameter(filterParam));
+            return Convert.ToUInt32(DbHelper.GetSingle(SqlEntity.Sql, SqlEntity.Parameters));
         }
         #endregion
 

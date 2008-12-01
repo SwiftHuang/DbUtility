@@ -27,6 +27,21 @@ namespace hwj.DBUtility
             else
                 return typeof(T).Name.ToString().Trim();
         }
+        protected string CheckSql(string str)
+        {
+            string s = string.Empty;
+            if (str == null)
+            {
+                s = string.Empty;
+            }
+            else
+            {
+                s = str.Replace("'", "").Replace("*", "").Replace("select", "")
+                       .Replace("where", "").Replace(";", "").Replace("(", "").Replace(")", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "").Replace(" ", "");
+            }
+            return s;
+        }
+
         #endregion
 
         #region Public Functions
@@ -117,7 +132,7 @@ namespace hwj.DBUtility
                 return false;
         }
 
-        protected abstract string GetCondition(SqlParam para, bool isWhere);
+        protected abstract string GetCondition(SqlParam para, bool isWhere, bool isPage);
         protected string GenFieldsSql(UpdateParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
@@ -125,7 +140,7 @@ namespace hwj.DBUtility
                 StringBuilder sbUpdate = new StringBuilder();
                 foreach (SqlParam para in listParam)
                 {
-                    sbUpdate.Append(GetCondition(para, false));
+                    sbUpdate.Append(GetCondition(para, false,false));
                 }
                 return sbUpdate.ToString().TrimEnd(',');
             }
