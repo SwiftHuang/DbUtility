@@ -61,29 +61,37 @@ namespace hwj.DBUtility.MYSQL
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
-                    sbWhere.Append(GetCondition(para, true));
+                    sbWhere.Append(GetCondition(para, true, true));
                 }
                 return sbWhere.ToString().TrimEnd(',');
             }
             else
                 return string.Empty;
         }
-        protected override string GetCondition(SqlParam para, bool isPage)
+        protected override string GetCondition(SqlParam para, bool isWhere, bool isPage)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
 
+            string __MySqlParam = string.Empty;
+            if (isWhere)
+                __MySqlParam = _MySqlWhereParam;
+            else
+                __MySqlParam = _MySqlParam;
+
             if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
             else
-            {
-                if (IsNumType(f.DataTypeCode))
-                    sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue).Append(para.Expression.ToSqlString());
-                else if (IsDateType(f.DataTypeCode))
-                    sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue).ToString(_MySqlDateFormat)).Append(para.Expression.ToSqlString());
-                else
-                    sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, para.FieldValue).Append(para.Expression.ToSqlString());
-            }
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MySqlParam, para.FieldName).Append(para.Expression.ToSqlString());
+            //else
+            //{
+            //    if (IsNumType(f.DataTypeCode))
+            //        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_DecimalFormat, para.FieldValue).Append(para.Expression.ToSqlString());
+            //    else if (IsDateType(f.DataTypeCode))
+            //        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(_StringFormat, Convert.ToDateTime(para.FieldValue).ToString(_MySqlDateFormat)).Append(para.Expression.ToSqlString());
+            //    else
+            //        sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MySqlParam, para.FieldName).Append(para.Expression.ToSqlString());
+            //}
             return sbStr.ToString();
         }
         #endregion

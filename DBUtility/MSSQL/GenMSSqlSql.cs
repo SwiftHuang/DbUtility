@@ -72,9 +72,9 @@ namespace hwj.DBUtility.MSSQL
         public string SelectPageSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             string _SelectFields = GenDisplayFieldsSql(displayFields);
-            string _WhereParam = GenFilterParamsSql(filterParam, true);
+            string _FilterParam = GenFilterParamsSql(filterParam, true);
             string _OrderParam = GenSortParamsSql(sortParams, true);
-            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _WhereParam, GenGroupParamsSql(groupParam));
+            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
         }
         #endregion
 
@@ -88,14 +88,14 @@ namespace hwj.DBUtility.MSSQL
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
-                    sbWhere.Append(GetCondition(para, true));
+                    sbWhere.Append(GetCondition(para, true, isPage));
                 }
                 return sbWhere.ToString().TrimEnd(',');
             }
             else
                 return string.Empty;
         }
-        protected override string GetCondition(SqlParam para, bool isWhere)
+        protected override string GetCondition(SqlParam para, bool isWhere, bool isPage)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
@@ -106,10 +106,8 @@ namespace hwj.DBUtility.MSSQL
                 __MsSqlParam = _MsSqlParam;
             if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
-            else if (para.Operator == Enums.Operator.Like)
-            {
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
-            }
+            else if (isPage)
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append('\'').Append('\'').Append(CheckSql(para.FieldValue.ToString())).Append('\'').Append('\'').Append(para.Expression.ToSqlString());
             else
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
             return sbStr.ToString();
