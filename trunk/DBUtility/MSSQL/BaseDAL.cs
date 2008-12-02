@@ -6,7 +6,9 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public abstract class BaseDAL<T> where T : class, new()
+    public abstract class BaseDAL<T, L>
+        where T : class, new()
+        where L : List<T>, new()
     {
         protected GenerateSql<T> GenSql = new GenerateSql<T>();
         #region Property
@@ -85,23 +87,23 @@ namespace hwj.DBUtility.MSSQL
                 return null;
         }
 
-        public List<T> GetList()
+        public L GetList()
         {
             return GetList(null, null, null, null);
         }
-        public List<T> GetList(DisplayFields displayFields)
+        public L GetList(DisplayFields displayFields)
         {
             return GetList(displayFields, null, null, null);
         }
-        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam)
+        public L GetList(DisplayFields displayFields, FilterParams filterParam)
         {
             return GetList(displayFields, filterParam, null, null);
         }
-        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public L GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
             return GetList(displayFields, filterParam, sortParams, null);
         }
-        public List<T> GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public L GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql, SqlEntity.Parameters);
@@ -111,11 +113,11 @@ namespace hwj.DBUtility.MSSQL
                 return null;
         }
 
-        public List<T> GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
             return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize);
         }
-        public List<T> GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             _SqlEntity.Sql = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql);
@@ -208,11 +210,11 @@ namespace hwj.DBUtility.MSSQL
             finally
             { reader.Close(); }
         }
-        protected List<T> CreateListEntity(IDataReader reader)
+        protected L CreateListEntity(IDataReader reader)
         {
             try
             {
-                List<T> DataList = new List<T>();
+                L DataList = new L();
                 IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
                 lstFieldInfo = SetFieldIndex(reader, FieldMappingInfo.GetFieldMapping(typeof(T)));
 
