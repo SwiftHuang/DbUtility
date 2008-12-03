@@ -48,12 +48,15 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
-        public void Update(T entity, FilterParams filterParam)
+        public bool Update(T entity, FilterParams filterParam)
         {
             _SqlEntity.Sql = GenSql.UpdateSql(entity, filterParam);
             _SqlEntity.Parameters = GenSql.GenParameter(entity);
             _SqlEntity.Parameters.AddRange(GenSql.GenParameter(filterParam));
-            DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters);
+            if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
+                return true;
+            else
+                return false;
         }
 
         public bool Delete()
