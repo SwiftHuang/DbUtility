@@ -44,8 +44,24 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = Enums.Expression.None;
         }
+        public SqlParam(Enum fieldName, object fieldValue)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = Enums.Operator.Equal;
+            Expression = Enums.Expression.None;
+        }
+        public SqlParam(string fieldName, object fieldValue)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = Enums.Operator.Equal;
+            Expression = Enums.Expression.None;
+        }
     }
-    
+
     public static class SqlParamExtensions
     {
         public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Operator oper, Enums.Expression exp)
@@ -56,6 +72,11 @@ namespace hwj.DBUtility
         public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Operator oper)
         {
             lst.Add(new SqlParam(fieldName, fieldValue, oper));
+            return lst;
+        }
+        public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue)
+        {
+            lst.Add(new SqlParam(fieldName, fieldValue));
             return lst;
         }
         public static List<SqlParam> AddParam(this List<SqlParam> lst, SqlParam sqlParam)
