@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Text;
 using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL

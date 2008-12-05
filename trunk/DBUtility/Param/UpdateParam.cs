@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace hwj.DBUtility
 {
@@ -22,7 +20,24 @@ namespace hwj.DBUtility
     }
     public class DisplayFields : List<Enum>
     {
+        public DisplayFields(params Enum[] enums)
+            : base()
+        {
+            foreach (Enum e in enums)
+            {
+                this.Add(e);
+            }
+        }
     }
     public class GroupParams : List<Enum>
-    { }
+    {
+        public GroupParams(params Enum[] enums)
+            : base()
+        {
+            foreach (Enum e in enums)
+            {
+                this.Add(e);
+            }
+        }
+    }
 }
