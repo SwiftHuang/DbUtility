@@ -6,13 +6,37 @@ namespace hwj.DBUtility
     {
         public enum Operator
         {
+            /// <summary>
+            /// 等于
+            /// </summary>
             Equal,
+            /// <summary>
+            /// 不等于
+            /// </summary>
             Unequal,
+            /// <summary>
+            /// 大于
+            /// </summary>
             Greater,
+            /// <summary>
+            /// 小于
+            /// </summary>
             Lesser,
+            /// <summary>
+            /// 大于等于
+            /// </summary>
             Geq,
+            /// <summary>
+            /// 小于等于
+            /// </summary>
             Leq,
+            /// <summary>
+            /// 为空
+            /// </summary>
             IsNull,
+            /// <summary>
+            /// 不为空
+            /// </summary>
             IsNotNull,
             Like,
         }
@@ -30,13 +54,25 @@ namespace hwj.DBUtility
         }
         public enum OrderBy
         {
+            /// <summary>
+            /// 降序
+            /// </summary>
             Descending,
+            /// <summary>
+            /// 升序
+            /// </summary>
             Ascending,
             None
         }
         public enum DataHandle
         {
+            /// <summary>
+            /// 不插入该字段
+            /// </summary>
             UnInsert,
+            /// <summary>
+            /// 不更新该字段
+            /// </summary>
             UnUpdate,
         }
     }

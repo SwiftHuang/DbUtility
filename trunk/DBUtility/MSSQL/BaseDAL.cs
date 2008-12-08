@@ -122,6 +122,7 @@ namespace hwj.DBUtility.MSSQL
         }
         public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
+            _SqlEntity = new SqlEntity();
             _SqlEntity.Sql = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.Sql);
             if (reader.HasRows)
