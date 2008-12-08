@@ -89,17 +89,25 @@ namespace hwj.DBUtility.MSSQL
                 {
                     sbWhere.Append(GetCondition(para, true, isPage));
                 }
-                return sbWhere.ToString().TrimEnd(',');
+                //格式化最后的表达式，
+                string sql = sbWhere.ToString().TrimEnd(',');
+                int andL = Enums.Expression.AND.ToSqlString().Length;
+                int andR = Enums.Expression.OR.ToSqlString().Length;
+                if (sql.Substring(sql.Length - andL, andL) == Enums.Expression.AND.ToSqlString())
+                    sql = sql.Substring(0, sql.Length - andL);
+                if (sql.Substring(sql.Length - andR, andR) == Enums.Expression.OR.ToSqlString())
+                    sql = sql.Substring(0, sql.Length - andR);
+                return sql;
             }
             else
                 return string.Empty;
         }
-        protected override string GetCondition(SqlParam para, bool isWhere, bool isPage)
+        protected override string GetCondition(SqlParam para, bool isFilter, bool isPage)
         {
             StringBuilder sbStr = new StringBuilder();
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
             string __MsSqlParam = string.Empty;
-            if (isWhere)
+            if (isFilter)
                 __MsSqlParam = _MsSqlWhereParam;
             else
                 __MsSqlParam = _MsSqlParam;
