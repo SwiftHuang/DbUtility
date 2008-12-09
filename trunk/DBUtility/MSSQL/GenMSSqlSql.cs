@@ -87,7 +87,19 @@ namespace hwj.DBUtility.MSSQL
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
-                    sbWhere.Append(GetCondition(para, true, isPage));
+                    if (para.Operator == Enums.Operator.IN)
+                    {
+                        StringBuilder inSql = new StringBuilder();
+                        string[] s = (string[])para.FieldValue;
+
+                        for (int i = 0; i < s.Length; i++)
+                        {
+                            inSql.AppendFormat(_MsSqlParam, "T" + i).Append(',');
+                        }
+                        sbWhere.Append(para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
+                    }
+                    else
+                        sbWhere.Append(GetCondition(para, true, isPage));
                 }
                 //格式化最后的表达式，
                 string sql = sbWhere.ToString().TrimEnd(',');
@@ -116,7 +128,7 @@ namespace hwj.DBUtility.MSSQL
             else if (isPage)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append('\'').Append('\'').Append(CheckSql(para.FieldValue.ToString())).Append('\'').Append('\'').Append(para.Expression.ToSqlString());
             else
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.FieldName).Append(para.Expression.ToSqlString());
+                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName).Append(para.Expression.ToSqlString());
             return sbStr.ToString();
         }
         private string GetNoLock(bool isNoLock)
@@ -161,16 +173,30 @@ namespace hwj.DBUtility.MSSQL
                 List<SqlParameter> LstDP = new List<SqlParameter>();
                 foreach (SqlParam sp in filterParam)
                 {
-                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    if (sp.Operator == Enums.Operator.IN)
                     {
-                        if (sp.FieldName == f.FieldName)
+                        string[] s = (string[])sp.FieldValue;
+                        for (int i = 0; i < s.Length; i++)
                         {
-                            SqlParameter dp = new SqlParameter();
-                            dp.DbType = f.DataTypeCode;
-                            dp.ParameterName = string.Format(_MsSqlWhereParam, sp.FieldName);
-                            dp.Value = sp.FieldValue;
-                            LstDP.Add(dp);
-                            break;
+                            SqlParameter p = new SqlParameter();
+                            p.ParameterName = "T" + i;
+                            p.Value = s[i].ToString();
+                            LstDP.Add(p);
+                        }
+                    }
+                    else
+                    {
+                        foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                        {
+                            if (sp.FieldName == f.FieldName)
+                            {
+                                SqlParameter dp = new SqlParameter();
+                                dp.DbType = f.DataTypeCode;
+                                dp.ParameterName = string.Format(_MsSqlWhereParam, sp.ParamName != null ? sp.ParamName : sp.FieldName);
+                                dp.Value = sp.FieldValue;
+                                LstDP.Add(dp);
+                                break;
+                            }
                         }
                     }
                 }

@@ -39,6 +39,7 @@ namespace hwj.DBUtility
             /// </summary>
             IsNotNull,
             Like,
+            IN,
         }
         public enum DatabaseType
         {
@@ -100,6 +101,8 @@ namespace hwj.DBUtility
                     return "<=";
                 case Enums.Operator.Like:
                     return " LIKE ";
+                case Enums.Operator.IN:
+                    return " IN({0}) ";
                 default:
                     throw new Exception("Enums.Operator error");
             }
