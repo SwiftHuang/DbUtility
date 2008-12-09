@@ -37,7 +37,7 @@ namespace hwj.DBUtility
             else
             {
                 s = str.Replace("'", "").Replace("*", "").Replace("select", "")
-                       .Replace("where", "").Replace(";", "").Replace("(", "").Replace(")", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "").Replace(" ", "");
+                       .Replace("where", "").Replace(";", "").Replace("(", "").Replace(")", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
             }
             return s;
         }
@@ -47,9 +47,13 @@ namespace hwj.DBUtility
         #region Public Functions
 
         #region Delete Sql
-        public string DeleteSql(FilterParams whereParam)
+        public string DeleteSql(FilterParams filterParam)
         {
-            return string.Format(_DeleteString, GetTableName(), GenFilterParamsSql(whereParam));
+            return string.Format(_DeleteString, GetTableName(), GenFilterParamsSql(filterParam));
+        }
+        public string DeleteBatchSql(FilterParams filterParam, string inSqlParam)
+        {
+            return string.Format(_DeleteString, GetTableName(), string.Format(GenFilterParamsSql(filterParam), inSqlParam));
         }
         #endregion
 
@@ -105,12 +109,12 @@ namespace hwj.DBUtility
         public abstract string InsertSql(T entity);
         #endregion
 
-        public abstract string SelectSql(string tableName, DisplayFields selectFields, FilterParams whereParam, SortParams orderParam, int? maxCount);
+        public abstract string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams orderParam, int? maxCount);
 
         #region Record Count Sql
-        public string SelectCountSql(string tableName, FilterParams whereParam)
+        public string SelectCountSql(string tableName, FilterParams filterParam)
         {
-            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterParamsSql(whereParam));
+            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterParamsSql(filterParam));
         }
         #endregion
 
@@ -140,7 +144,7 @@ namespace hwj.DBUtility
                 StringBuilder sbUpdate = new StringBuilder();
                 foreach (SqlParam para in listParam)
                 {
-                    sbUpdate.Append(GetCondition(para, false,false));
+                    sbUpdate.Append(GetCondition(para, false, false));
                 }
                 return sbUpdate.ToString().TrimEnd(',');
             }
