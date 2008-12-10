@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace hwj.DBUtility
@@ -25,7 +26,7 @@ namespace hwj.DBUtility
         /// 引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
         /// </summary>
         SolicitationEvent
-    }   
+    }
     public class CommandInfo
     {
         public object ShareObject = null;
@@ -46,22 +47,22 @@ namespace hwj.DBUtility
         {
             if (_solicitationEvent != null)
             {
-                _solicitationEvent(this,new EventArgs());
+                _solicitationEvent(this, new EventArgs());
             }
         }
         public string CommandText;
-        public System.Data.Common.DbParameter[] Parameters;
+        public List<System.Data.Common.DbParameter> Parameters;
         public EffentNextType EffentNextType = EffentNextType.None;
         public CommandInfo()
         {
 
         }
-        public CommandInfo(string sqlText, SqlParameter[] para)
+        public CommandInfo(string sqlText, List<SqlParameter> para)
         {
             this.CommandText = sqlText;
             this.Parameters = para;
         }
-        public CommandInfo(string sqlText, SqlParameter[] para, EffentNextType type)
+        public CommandInfo(string sqlText, List<SqlParameter> para, EffentNextType type)
         {
             this.CommandText = sqlText;
             this.Parameters = para;
