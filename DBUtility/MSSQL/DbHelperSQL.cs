@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+
 namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
@@ -651,7 +652,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static int ExecuteSqlTran(System.Collections.Generic.List<CommandInfo> cmdList)
+        public static int ExecuteSqlTran(List<SqlEntity> cmdList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -663,13 +664,12 @@ namespace hwj.DBUtility.MSSQL
                     {
                         int count = 0;
                         //循环
-                        foreach (CommandInfo myDE in cmdList)
+                        foreach (SqlEntity myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
-                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Parameters;
-                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters);
 
-                            if (myDE.EffentNextType == EffentNextType.WhenHaveContine || myDE.EffentNextType == EffentNextType.WhenNoHaveContine)
+                            if (myDE.EffentNextType == Enums.EffentNextType.WhenHaveContine || myDE.EffentNextType == Enums.EffentNextType.WhenNoHaveContine)
                             {
                                 if (myDE.CommandText.ToLower().IndexOf("count(") == -1)
                                 {
@@ -685,12 +685,12 @@ namespace hwj.DBUtility.MSSQL
                                 }
                                 isHave = Convert.ToInt32(obj) > 0;
 
-                                if (myDE.EffentNextType == EffentNextType.WhenHaveContine && !isHave)
+                                if (myDE.EffentNextType == Enums.EffentNextType.WhenHaveContine && !isHave)
                                 {
                                     trans.Rollback();
                                     return 0;
                                 }
-                                if (myDE.EffentNextType == EffentNextType.WhenNoHaveContine && isHave)
+                                if (myDE.EffentNextType == Enums.EffentNextType.WhenNoHaveContine && isHave)
                                 {
                                     trans.Rollback();
                                     return 0;
@@ -699,7 +699,7 @@ namespace hwj.DBUtility.MSSQL
                             }
                             int val = cmd.ExecuteNonQuery();
                             count += val;
-                            if (myDE.EffentNextType == EffentNextType.ExcuteEffectRows && val == 0)
+                            if (myDE.EffentNextType == Enums.EffentNextType.ExcuteEffectRows && val == 0)
                             {
                                 trans.Rollback();
                                 return 0;
@@ -721,7 +721,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(System.Collections.Generic.List<CommandInfo> SQLStringList)
+        public static void ExecuteSqlTranWithIndentity(List<SqlEntity> SQLStringList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -733,20 +733,19 @@ namespace hwj.DBUtility.MSSQL
                     {
                         int indentity = 0;
                         //循环
-                        foreach (CommandInfo myDE in SQLStringList)
+                        foreach (SqlEntity myDE in SQLStringList)
                         {
                             string cmdText = myDE.CommandText;
-                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Parameters;
-                            foreach (SqlParameter q in cmdParms)
+                            foreach (SqlParameter q in myDE.Parameters)
                             {
                                 if (q.Direction == ParameterDirection.InputOutput)
                                 {
                                     q.Value = indentity;
                                 }
                             }
-                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters);
                             int val = cmd.ExecuteNonQuery();
-                            foreach (SqlParameter q in cmdParms)
+                            foreach (SqlParameter q in myDE.Parameters)
                             {
                                 if (q.Direction == ParameterDirection.Output)
                                 {

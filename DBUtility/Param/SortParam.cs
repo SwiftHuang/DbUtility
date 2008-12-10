@@ -25,6 +25,20 @@ namespace hwj.DBUtility
     }
     public class SortParams : List<SortParam>
     {
+        public SortParams(Enum filedName)
+            : base()
+        {
+            this.AddParam(filedName, Enums.OrderBy.Ascending);
+        }
+        public SortParams(Enum filedName, Enums.OrderBy order)
+            : base()
+        {
+            this.AddParam(filedName, order);
+        }
+        public SortParams()
+            : base()
+        {
+        }
     }
 
     public static class OrderParamExtensions

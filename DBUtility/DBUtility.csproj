@@ -48,7 +48,6 @@
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CommandInfo.cs" />
     <Compile Include="DBCache.cs" />
     <Compile Include="MSSQL\DbHelper.cs" />
     <Compile Include="MSSQL\DbHelperSQL.cs" />
