@@ -929,7 +929,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
+        public static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
