@@ -41,22 +41,34 @@ namespace hwj.DBUtility.MSSQL
         {
             return Update(param, null);
         }
-        public bool Update(UpdateParam updateParam, FilterParams filterParam)
+        public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParam)
         {
+            SqlEntity se = new SqlEntity();
             List<SqlParameter> sp = new List<SqlParameter>();
             sp.AddRange(GenSql.GenParameter(updateParam));
             sp.AddRange(GenSql.GenParameter(filterParam));
-            _SqlEntity = new SqlEntity(GenSql.UpdateSql(updateParam, filterParam), sp);
+            se = new SqlEntity(GenSql.UpdateSql(updateParam, filterParam), sp);
+            return se;
+        }
+        public bool Update(UpdateParam updateParam, FilterParams filterParam)
+        {
+            _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
             if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
                 return true;
             else
                 return false;
         }
+        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParam)
+        {
+            SqlEntity se = new SqlEntity();
+            se.CommandText = GenSql.UpdateSql(entity, filterParam);
+            se.Parameters = GenSql.GenParameter(entity);
+            se.Parameters.AddRange(GenSql.GenParameter(filterParam));
+            return se;
+        }
         public bool Update(T entity, FilterParams filterParam)
         {
-            _SqlEntity.CommandText = GenSql.UpdateSql(entity, filterParam);
-            _SqlEntity.Parameters = GenSql.GenParameter(entity);
-            _SqlEntity.Parameters.AddRange(GenSql.GenParameter(filterParam));
+            _SqlEntity = UpdateSqlEntity(entity, filterParam);
             if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
                 return true;
             else
