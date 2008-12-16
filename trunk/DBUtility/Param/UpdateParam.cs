@@ -5,7 +5,20 @@ namespace hwj.DBUtility
 {
     public class UpdateParam : List<UpdateFields>
     {
-
+        public UpdateParam()
+            : base()
+        {
+        }
+        public UpdateParam(Enum fieldName, object fieldvalue)
+            : base()
+        {
+            this.AddParam(fieldName, fieldvalue);
+        }
+        public UpdateParam(string fieldName, object fieldvalue)
+            : base()
+        {
+            this.AddParam(fieldName, fieldvalue);
+        }
     }
     public class UpdateFields : SqlParam
     {
