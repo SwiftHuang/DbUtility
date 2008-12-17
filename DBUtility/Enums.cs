@@ -75,6 +75,10 @@ namespace hwj.DBUtility
             /// 不更新该字段
             /// </summary>
             UnUpdate,
+            /// <summary>
+            /// 该字段不允许为Null
+            /// </summary>
+            UnNull,
         }
         public enum EffentNextType
         {
