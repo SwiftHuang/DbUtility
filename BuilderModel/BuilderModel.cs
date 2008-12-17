@@ -133,7 +133,7 @@ namespace LTP.BuilderModel
                 string _sUnNull = sUnNull;
                 if (cisnull)
                     _sUnNull = string.Empty;
-                if (ispk)
+                if (IsIdentity)
                     strclass2.AppendSpaceLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(columnType), _sUnNull));
                 else
                     strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
