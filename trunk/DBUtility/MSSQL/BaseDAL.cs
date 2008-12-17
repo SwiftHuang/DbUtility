@@ -79,9 +79,13 @@ namespace hwj.DBUtility.MSSQL
         {
             return Delete(null);
         }
+        public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
+        {
+            return new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
+        }
         public bool Delete(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
+            _SqlEntity = DeleteSqlEntity(filterParam);
             if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
                 return true;
             else
