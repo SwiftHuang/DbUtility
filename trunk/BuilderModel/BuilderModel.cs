@@ -97,8 +97,12 @@ namespace LTP.BuilderModel
         /// <returns></returns>
         public string CreatModelMethod()
         {
-            string sFieldFormat = "[FieldMapping(\"{0}\", {1})]";
-
+            string sFieldFormat = "[FieldMapping(\"{0}\", {1}{2})]";
+            string sFieldFormat_isPK = "[FieldMapping(\"{0}\", {1}, Enums.DataHandle.UnInsert, Enums.DataHandle.UnUpdate{2})]";
+            string sUnNull = string.Empty;// ", Enums.DataHandle.UnNull";//需要时再打开该属性
+            string sDescIsPK = "PK";
+            string sDescCanNull = "Allow Null";
+            string sDescCanntNull = "Un-Null";
             StringPlus strclass = new StringPlus();
             StringPlus strclass1 = new StringPlus();
             StringPlus strclass2 = new StringPlus();
@@ -124,9 +128,15 @@ namespace LTP.BuilderModel
 
                 strclass1.AppendSpaceLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
                 strclass2.AppendSpaceLine(2, "/// <summary>");
-                strclass2.AppendSpaceLine(2, "/// " + deText);
+                strclass2.AppendSpaceLine(2, "/// " + deText + string.Format("({0})", string.Format("{0}{1}", (ispk ? sDescIsPK : ""), "/" + (cisnull ? sDescCanNull : sDescCanntNull)).TrimEnd('/').TrimStart('/')));
                 strclass2.AppendSpaceLine(2, "/// </summary>");
-                strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType)));
+                string _sUnNull = sUnNull;
+                if (cisnull)
+                    _sUnNull = string.Empty;
+                if (ispk)
+                    strclass2.AppendSpaceLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(columnType), _sUnNull));
+                else
+                    strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
                 strclass2.AppendSpaceLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                 strclass2.AppendSpaceLine(2, "{");
                 strclass2.AppendSpaceLine(3, "set{" + " _" + columnName.ToLower() + "=value;}");
