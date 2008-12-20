@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class GenerateSql<T> : BaseGenSql<T> where T : class, new()
+    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable, new()
     {
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
@@ -27,13 +27,16 @@ namespace hwj.DBUtility.MSSQL
 
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
             {
-                object obj = f.Property.GetValue(entity, null);
-                if (obj != null)
+                if (entity.Assigned.IndexOf(f.FieldName) != -1)
                 {
-                    if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
+                    object obj = f.Property.GetValue(entity, null);
+                    if (obj != null)
                     {
-                        sbInsField.Append(f.FieldName).Append(',');
-                        sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
+                        if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
+                        {
+                            sbInsField.Append(f.FieldName).Append(',');
+                            sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
+                        }
                     }
                 }
             }
@@ -210,20 +213,23 @@ namespace hwj.DBUtility.MSSQL
             List<SqlParameter> LstDP = new List<SqlParameter>();
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
             {
-                SqlParameter dp = new SqlParameter();
-                object _value = f.Property.GetValue(entity, null);
-                dp.DbType = f.DataTypeCode;
-                dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
-                if (IsDateType(f.DataTypeCode))
+                if (entity.Assigned.IndexOf(f.FieldName) != -1)
                 {
-                    if (Convert.ToDateTime(_value) == DateTime.MinValue)
-                        dp.Value = DBNull.Value;
+                    SqlParameter dp = new SqlParameter();
+                    object _value = f.Property.GetValue(entity, null);
+                    dp.DbType = f.DataTypeCode;
+                    dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
+                    if (IsDateType(f.DataTypeCode))
+                    {
+                        if (Convert.ToDateTime(_value) == DateTime.MinValue)
+                            dp.Value = DBNull.Value;
+                        else
+                            dp.Value = _value;
+                    }
                     else
                         dp.Value = _value;
+                    LstDP.Add(dp);
                 }
-                else
-                    dp.Value = _value;
-                LstDP.Add(dp);
             }
             return LstDP;
         }

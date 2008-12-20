@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace hwj.DBUtility.MYSQL
 {
-    public class GenerateSql<T> : BaseGenSql<T> where T : class, new()
+    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable, new()
     {
         private const string _MySqlSelectString = "SELECT {0} FROM {1} {2} {3} {4};";
         private const string _MySqlDateFormat = "yyyy-MM-dd hh:mm:ss";
