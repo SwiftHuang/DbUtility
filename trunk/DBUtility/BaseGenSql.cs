@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
-    public abstract class BaseGenSql<T>
+    public abstract class BaseGenSql<T> where T : BaseTable
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(*) FROM {0} {1};";
@@ -78,12 +78,19 @@ namespace hwj.DBUtility
             UpdateParam up = new UpdateParam();
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
             {
-                object obj = f.Property.GetValue(entity, null);
-                if (obj != null)
+                if (entity.Assigned.IndexOf(f.FieldName) != -1)
                 {
-                    if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
-                        up.AddParam(f.FieldName, obj);
-
+                    object obj = f.Property.GetValue(entity, null);
+                    if (obj != null)
+                    {
+                        if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
+                            up.AddParam(f.FieldName, obj);
+                    }
+                    else
+                    {
+                        if (!f.DataHandles.Find(Enums.DataHandle.UnNull))
+                            up.AddParam(f.FieldName, DBNull.Value);
+                    }
                 }
             }
             return UpdateSql(up, filterParams);

@@ -7,7 +7,7 @@ using hwj.DBUtility.TableMapping;
 namespace hwj.DBUtility.MSSQL
 {
     public abstract class BaseDAL<T, L>
-        where T : class, new()
+        where T : BaseTable, new()
         where L : List<T>, new()
     {
         protected static GenerateSql<T> GenSql = new GenerateSql<T>();
