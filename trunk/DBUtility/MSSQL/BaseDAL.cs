@@ -19,7 +19,11 @@ namespace hwj.DBUtility.MSSQL
         }
         protected string TableName { get; set; }
         #endregion
-
+        /// <summary>
+        /// 执行插入数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public bool Add(T entity)
         {
             _SqlEntity = AddSqlEntity(entity);
@@ -28,6 +32,11 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
+        /// <summary>
+        /// 获取增加的Sql对象
+        /// </summary>
+        /// <param name="entity">Table对象</param>
+        /// <returns>Sql对象</returns>
         public static SqlEntity AddSqlEntity(T entity)
         {
             return new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity));
@@ -36,11 +45,21 @@ namespace hwj.DBUtility.MSSQL
         {
             return Convert.ToInt64(DbHelper.GetSingle(GenSql.InsertLastIDSql()));
         }
-
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="param">更新字段</param>
+        /// <returns></returns>
         public bool Update(UpdateParam param)
         {
             return Update(param, null);
         }
+        /// <summary>
+        /// 获取更新的Sql对象
+        /// </summary>
+        /// <param name="updateParam">需要更新的字段</param>
+        /// <param name="filterParam">需要更新的条件</param>
+        /// <returns>Sql对象</returns>
         public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParam)
         {
             SqlEntity se = new SqlEntity();
@@ -58,6 +77,12 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
+        /// <summary>
+        /// 获取更新的Sql对象
+        /// </summary>
+        /// <param name="entity">需要Table对象</param>
+        /// <param name="filterParam">被更新的条件</param>
+        /// <returns>Sql对象</returns>
         public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParam)
         {
             SqlEntity se = new SqlEntity();
@@ -79,6 +104,11 @@ namespace hwj.DBUtility.MSSQL
         {
             return Delete(null);
         }
+        /// <summary>
+        /// 获取删除的Sql对象
+        /// </summary>
+        /// <param name="filterParam">被删除的条件</param>
+        /// <returns>Sql对象</returns>
         public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
         {
             return new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
@@ -135,11 +165,31 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
-
+        /// <summary>
+        /// 获取分页对象
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序(只能填一个字段)</param>
+        /// <param name="PK">分页依据</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <returns></returns>
         public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
             return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize);
         }
+        /// <summary>
+        /// 获取分页对象
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序(只能填一个字段)</param>
+        /// <param name="groupParam">分组条件</param>
+        /// <param name="PK">分页依据</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <returns></returns>
         public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             _SqlEntity = new SqlEntity();
