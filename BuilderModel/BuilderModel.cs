@@ -160,6 +160,9 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(2, "{");
             foreach (ColumnInfo f in Fieldlist)
             {
+                strclass.AppendSpaceLine(3, "/// <summary>");
+                strclass.AppendSpaceLine(3, "///" + f.DeText);
+                strclass.AppendSpaceLine(3, "/// </summary>");
                 strclass.AppendSpaceLine(3, f.ColumnName + ",");
             }
             strclass.AppendSpaceLine(2, "}");
@@ -183,6 +186,8 @@ namespace LTP.BuilderModel
         }
         private string SetFirstUpper(string value)
         {
+            if (value == "Int")
+                value = "Int32";
             return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
         #endregion
