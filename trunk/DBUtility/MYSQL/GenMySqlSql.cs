@@ -14,6 +14,7 @@ namespace hwj.DBUtility.MYSQL
         private const string _MySqlInsertLastID = "SELECT LAST_INSERT_ID();";
         private const string _MySqlParam = "?{0}";
         private const string _MySqlWhereParam = "?_{0}";
+        private const string _MySqlTruncate = "TRUNCATE TABLE {0};";
 
         #region Insert Sql
         public override string InsertLastIDSql()
@@ -37,7 +38,12 @@ namespace hwj.DBUtility.MYSQL
             return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
         }
         #endregion
-
+        #region Delete Sql
+        public override string TruncateSql(string tableName)
+        {
+            return string.Format(_MySqlTruncate, tableName);
+        }
+        #endregion
         #region Select Sql
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {

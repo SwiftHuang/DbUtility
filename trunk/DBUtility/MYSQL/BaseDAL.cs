@@ -66,6 +66,17 @@ namespace hwj.DBUtility.MYSQL
             else
                 return false;
         }
+        /// <summary>
+        /// 彻底清除表的内容(重置自动增量)
+        /// </summary>
+        /// <returns></returns>
+        public bool Truncate()
+        {
+            if (DbHelper.ExecuteSql(GenSql.TruncateSql(TableName)) > 0)
+                return true;
+            else
+                return false;
+        }
 
         public T GetEntity()
         {

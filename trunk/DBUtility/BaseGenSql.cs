@@ -55,6 +55,12 @@ namespace hwj.DBUtility
         {
             return string.Format(_DeleteString, GetTableName(), string.Format(GenFilterParamsSql(filterParam), inSqlParam));
         }
+        /// <summary>
+        /// 彻底清除表的内容(重置自动增量)
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public abstract string TruncateSql(string tableName);
         #endregion
 
         #region Update Sql

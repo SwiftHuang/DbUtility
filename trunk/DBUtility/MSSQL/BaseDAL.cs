@@ -19,6 +19,8 @@ namespace hwj.DBUtility.MSSQL
         }
         protected string TableName { get; set; }
         #endregion
+
+        #region  Insert
         /// <summary>
         /// 执行插入数据
         /// </summary>
@@ -45,6 +47,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return Convert.ToInt64(DbHelper.GetSingle(GenSql.InsertLastIDSql()));
         }
+        #endregion
+
+        #region Update
         /// <summary>
         /// 执行数据更新
         /// </summary>
@@ -99,7 +104,9 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
+        #endregion
 
+        #region Delete
         public bool Delete()
         {
             return Delete(null);
@@ -121,6 +128,18 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
+        /// <summary>
+        /// 彻底清除表的内容(重置自动增量)
+        /// </summary>
+        /// <returns></returns>
+        public bool Truncate()
+        {
+            if (DbHelper.ExecuteSql(GenSql.TruncateSql(TableName)) > 0)
+                return true;
+            else
+                return false;
+        }
+        #endregion
 
         public T GetEntity()
         {
