@@ -14,6 +14,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount '{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}'";
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
+        private const string _MsSqlTruncate = "TRUNCATE TABLE {0};";
 
         #region Insert Sql
         public override string InsertLastIDSql()
@@ -43,7 +44,12 @@ namespace hwj.DBUtility.MSSQL
             return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
         }
         #endregion
-
+        #region Delete Sql
+        public override string TruncateSql(string tableName)
+        {
+            return string.Format(_MsSqlTruncate, tableName);
+        }
+        #endregion
         #region Select Sql
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
