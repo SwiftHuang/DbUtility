@@ -210,6 +210,9 @@ namespace hwj.DBUtility.MSSQL
                             LstDP.Add(p);
                         }
                     }
+                    else if (sp.Operator == Enums.Operator.IsNotNull || sp.Operator == Enums.Operator.IsNull)
+                    {
+                    }
                     else
                     {
                         foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
