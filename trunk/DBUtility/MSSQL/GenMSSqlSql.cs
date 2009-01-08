@@ -25,10 +25,27 @@ namespace hwj.DBUtility.MSSQL
         {
             StringBuilder sbInsField = new StringBuilder();
             StringBuilder sbInsValue = new StringBuilder();
-
-            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            if (entity.UseAssigned)
             {
-                if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                {
+                    if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                    {
+                        object obj = f.Property.GetValue(entity, null);
+                        if (obj != null)
+                        {
+                            if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
+                            {
+                                sbInsField.Append(f.FieldName).Append(',');
+                                sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     object obj = f.Property.GetValue(entity, null);
                     if (obj != null)
@@ -217,9 +234,32 @@ namespace hwj.DBUtility.MSSQL
         public List<SqlParameter> GenParameter(T entity)
         {
             List<SqlParameter> LstDP = new List<SqlParameter>();
-            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            if (entity.UseAssigned)
             {
-                if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                {
+                    if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                    {
+                        SqlParameter dp = new SqlParameter();
+                        object _value = f.Property.GetValue(entity, null);
+                        dp.DbType = f.DataTypeCode;
+                        dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
+                        if (IsDateType(f.DataTypeCode))
+                        {
+                            if (Convert.ToDateTime(_value) == DateTime.MinValue)
+                                dp.Value = DBNull.Value;
+                            else
+                                dp.Value = _value;
+                        }
+                        else
+                            dp.Value = _value;
+                        LstDP.Add(dp);
+                    }
+                }
+            }
+            else
+            {
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     SqlParameter dp = new SqlParameter();
                     object _value = f.Property.GetValue(entity, null);

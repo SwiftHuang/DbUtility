@@ -330,6 +330,7 @@ namespace hwj.DBUtility.MSSQL
         private T CreateEntityNotClose(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
         {
             T RowInstance = new T();
+            RowInstance.UseAssigned = false;
             foreach (FieldMappingInfo f in lstFieldInfo)
             {
                 try

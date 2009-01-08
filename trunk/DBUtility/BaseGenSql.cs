@@ -64,27 +64,32 @@ namespace hwj.DBUtility
         #endregion
 
         #region Update Sql
-        //public string UpdateSql(T entity, FilterParams whereParam, params Enum[] notUpdateParam)
-        //{
-        //    UpdateParam up = new UpdateParam();
-        //    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
-        //    {
-        //        object obj = f.Property.GetValue(entity, null);
-        //        if (obj != null)
-        //        {
-        //            if (!FindName(f.FieldName, notUpdateParam))
-        //                up.AddParam(f.FieldName, obj);
-
-        //        }
-        //    }
-        //    return UpdateSql(up, whereParam);
-        //}
         public string UpdateSql(T entity, FilterParams filterParams)
         {
             UpdateParam up = new UpdateParam();
-            foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+            if (entity.UseAssigned)
             {
-                if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                {
+                    if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                    {
+                        object obj = f.Property.GetValue(entity, null);
+                        if (obj != null)
+                        {
+                            if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
+                                up.AddParam(f.FieldName, obj);
+                        }
+                        else
+                        {
+                            if (!f.DataHandles.Find(Enums.DataHandle.UnNull))
+                                up.AddParam(f.FieldName, DBNull.Value);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     object obj = f.Property.GetValue(entity, null);
                     if (obj != null)
