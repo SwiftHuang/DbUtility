@@ -139,7 +139,7 @@ namespace LTP.BuilderModel
                     strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
                 strclass2.AppendSpaceLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);// Ù–‘
                 strclass2.AppendSpaceLine(2, "{");
-                strclass2.AppendSpaceLine(3, "set{Assigned.Add(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value;}");
+                strclass2.AppendSpaceLine(3, "set{AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value;}");
                 strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
                 strclass2.AppendSpaceLine(2, "}");
                 //strclass2.AppendSpaceLine(2, "public static string " + columnName);
