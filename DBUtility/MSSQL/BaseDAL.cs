@@ -147,11 +147,15 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, filterParam);
+            return GetEntity(null, filterParam, null);
         }
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, null, 1), GenSql.GenParameter(filterParam));
+            return GetEntity(displayFields, filterParam, null);
+        }
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
             if (reader.HasRows)
                 return CreateSingleEntity(reader);
