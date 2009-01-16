@@ -181,7 +181,7 @@ namespace hwj.DBUtility.MSSQL
                             SqlParameter dp = new SqlParameter();
                             dp.DbType = f.DataTypeCode;
                             dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
-                            dp.Value = up.FieldValue;
+                            dp.Value = CheckValue(dp, up.FieldValue);
                             LstDP.Add(dp);
                             break;
                         }
@@ -234,6 +234,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+
         public List<SqlParameter> GenParameter(T entity)
         {
             List<SqlParameter> LstDP = new List<SqlParameter>();
@@ -244,18 +245,9 @@ namespace hwj.DBUtility.MSSQL
                     if (entity.Assigned.IndexOf(f.FieldName) != -1)
                     {
                         SqlParameter dp = new SqlParameter();
-                        object _value = f.Property.GetValue(entity, null);
                         dp.DbType = f.DataTypeCode;
                         dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
-                        if (IsDateType(f.DataTypeCode))
-                        {
-                            if (Convert.ToDateTime(_value) == DateTime.MinValue)
-                                dp.Value = DBNull.Value;
-                            else
-                                dp.Value = _value;
-                        }
-                        else
-                            dp.Value = _value;
+                        dp.Value = CheckValue(dp, f.Property.GetValue(entity, null));
                         LstDP.Add(dp);
                     }
                 }
@@ -268,19 +260,20 @@ namespace hwj.DBUtility.MSSQL
                     object _value = f.Property.GetValue(entity, null);
                     dp.DbType = f.DataTypeCode;
                     dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
-                    if (IsDateType(f.DataTypeCode))
-                    {
-                        if (Convert.ToDateTime(_value) == DateTime.MinValue)
-                            dp.Value = DBNull.Value;
-                        else
-                            dp.Value = _value;
-                    }
-                    else
-                        dp.Value = _value;
+                    dp.Value = CheckValue(dp, f.Property.GetValue(entity, null));
                     LstDP.Add(dp);
                 }
             }
             return LstDP;
+        }
+        private object CheckValue(SqlParameter param, object value)
+        {
+            if (IsDateType(param.DbType))
+            {
+                if (Convert.ToDateTime(value) == DateTime.MinValue)
+                    return DBNull.Value;
+            }
+            return value;
         }
         #endregion
     }
