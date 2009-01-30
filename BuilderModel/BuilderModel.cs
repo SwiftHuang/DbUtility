@@ -81,7 +81,7 @@ namespace LTP.BuilderModel
             strclass.AppendLine(CreatTableName(_modelname));
             strclass.AppendLine(CreatModelMethod());
             strclass.AppendSpaceLine(1, "}");
-            strclass.AppendSpaceLine(1, "public class " + _modelname + "s : List<" + _modelname + "> { }");
+            strclass.AppendSpaceLine(1, "public class " + _modelname + "s : BaseList<" + _modelname + "> { }");
             strclass.AppendSpaceLine(1, "public class " + _modelname + "Page : PageResult<" + _modelname + "> { }");
             strclass.AppendLine("}");
             strclass.AppendLine("");
