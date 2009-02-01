@@ -143,7 +143,7 @@ namespace hwj.DBUtility.MSSQL
         protected override string GetCondition(SqlParam para, bool isFilter, bool isPage)
         {
             StringBuilder sbStr = new StringBuilder();
-            FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
+            //FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
             string __MsSqlParam = string.Empty;
             if (isFilter)
                 __MsSqlParam = _MsSqlWhereParam;
