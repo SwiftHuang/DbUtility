@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
-    public abstract class BaseGenSql<T> where T : BaseTable
+    public abstract class BaseGenSql<T> where T : BaseTable<T>
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(*) FROM {0} {1};";

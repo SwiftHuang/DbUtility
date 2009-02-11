@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable, new()
+    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable<T>, new()
     {
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";

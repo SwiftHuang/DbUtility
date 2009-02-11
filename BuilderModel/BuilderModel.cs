@@ -73,7 +73,7 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(1, "/// 实体类" + _modelname + " 。(属性说明自动提取数据库字段的描述信息)");
             strclass.AppendSpaceLine(1, "/// </summary>");
             strclass.AppendSpaceLine(1, "[Serializable]");
-            strclass.AppendSpaceLine(1, "public class " + _modelname + " : BaseTable");
+            strclass.AppendSpaceLine(1, "public class " + _modelname + " : BaseTable<" + _modelname + ">");
             strclass.AppendSpaceLine(1, "{");
             strclass.AppendSpaceLine(2, "public " + _modelname + "()");
             strclass.AppendSpaceLine(2, "{}");
