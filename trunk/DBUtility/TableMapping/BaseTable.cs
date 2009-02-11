@@ -2,7 +2,7 @@
 using System;
 namespace hwj.DBUtility.TableMapping
 {
-    public class BaseTable
+    public class BaseTable<T> where T : BaseTable<T>
     {
         protected BaseTable()
         {
@@ -37,6 +37,10 @@ namespace hwj.DBUtility.TableMapping
         {
             if (_assigned != null)
                 _assigned.Add(columnName);
+        }
+        public static void SetValue(T entity, string fieldName, object value)
+        {
+            TableMapping.FieldMappingInfo.GetFieldInfo(typeof(T), fieldName).Property.SetValue(entity, value, null);
         }
     }
 }

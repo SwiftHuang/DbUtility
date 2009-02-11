@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace hwj.DBUtility.MYSQL
 {
-    public abstract class BaseDAL<T> where T : BaseTable, new()
+    public abstract class BaseDAL<T> where T : BaseTable<T>, new()
     {
         GenerateSql<T> GenSql = new GenerateSql<T>();
         #region Property
