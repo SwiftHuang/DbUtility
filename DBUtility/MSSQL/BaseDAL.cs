@@ -11,15 +11,17 @@ namespace hwj.DBUtility.MSSQL
         where L : List<T>, new()
     {
         protected static GenerateSql<T> GenSql = new GenerateSql<T>();
+
         #region Property
         protected SqlEntity _SqlEntity = null;
         public SqlEntity SqlEntity
         {
             get { return _SqlEntity; }
         }
-        protected string TableName { get; set; }
+        protected static string TableName { get; set; }
+        private static bool _EnableSqlLog = false;
+        public static bool EnableSqlLog { get { return _EnableSqlLog; } set { _EnableSqlLog = value; } }
         #endregion
-
         #region  Insert
         /// <summary>
         /// 执行插入数据
@@ -41,7 +43,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity AddSqlEntity(T entity)
         {
-            return new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity));
+            if (EnableSqlLog)
+                return InsertSqlLog(new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity)), "INSERT");
+            else
+                return new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity));
         }
         public Int64 GetInsertID()
         {
@@ -72,7 +77,10 @@ namespace hwj.DBUtility.MSSQL
             sp.AddRange(GenSql.GenParameter(updateParam));
             sp.AddRange(GenSql.GenParameter(filterParam));
             se = new SqlEntity(GenSql.UpdateSql(updateParam, filterParam), sp);
-            return se;
+            if (EnableSqlLog)
+                return InsertSqlLog(se, "UPDATE");
+            else
+                return se;
         }
         public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
@@ -94,7 +102,10 @@ namespace hwj.DBUtility.MSSQL
             se.CommandText = GenSql.UpdateSql(entity, filterParam);
             se.Parameters = GenSql.GenParameter(entity);
             se.Parameters.AddRange(GenSql.GenParameter(filterParam));
-            return se;
+            if (EnableSqlLog)
+                return InsertSqlLog(se, "UPDATE");
+            else
+                return se;
         }
         public bool Update(T entity, FilterParams filterParam)
         {
@@ -118,7 +129,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
         {
-            return new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
+            if (EnableSqlLog)
+                return InsertSqlLog(new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam)), "DELETE");
+            else
+                return new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
         }
         public bool Delete(FilterParams filterParam)
         {
@@ -141,6 +155,35 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
+        private const string SqlParamsFormat = "{0}={1}$";
+        private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES('{0}','{1}','{2}','{3}',getdate())";
+        /// <summary>
+        /// 记录Sql Log
+        /// </summary>
+        /// <param name="cmd"></param>
+        private static SqlEntity InsertSqlLog(SqlEntity sqlEntity, string type)
+        {
+            try
+            {
+                DbHelper.ExecuteSql(string.Format(InsertSqlLogFormat, TableName, type, sqlEntity.CommandText, Params2String(sqlEntity)));
+            }
+            catch
+            {
+                throw;
+            }
+            return sqlEntity;
+        }
+        private static string Params2String(SqlEntity sqlEntity)
+        {
+            string s = "";
+            foreach (SqlParameter p in sqlEntity.Parameters)
+            {
+                s += string.Format(SqlParamsFormat, p.ParameterName, p.Value);
+            }
+            return s;
+        }
+
+        #region Get Entity
         public T GetEntity()
         {
             return GetEntity(null);
@@ -162,7 +205,9 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+        #endregion
 
+        #region Get List
         public L GetList()
         {
             return GetList(null, null, null, null);
@@ -188,6 +233,9 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+        #endregion
+
+        #region Get Page
         /// <summary>
         /// 获取分页对象
         /// </summary>
@@ -223,6 +271,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 return null;
         }
+        #endregion
 
         #region Record Count
         /// <summary>
