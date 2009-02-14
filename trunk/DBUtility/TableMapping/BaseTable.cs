@@ -40,7 +40,43 @@ namespace hwj.DBUtility.TableMapping
         }
         public static void SetValue(T entity, string fieldName, object value)
         {
-            TableMapping.FieldMappingInfo.GetFieldInfo(typeof(T), fieldName).Property.SetValue(entity, value, null);
+            if (value != null)
+            {
+                FieldMappingInfo f = TableMapping.FieldMappingInfo.GetFieldInfo(typeof(T), fieldName);
+                switch (f.DataTypeCode)
+                {
+                    case System.Data.DbType.DateTime:
+                        value = Convert.ToDateTime(value);
+                        break;
+                    case System.Data.DbType.Decimal:
+                        value = Convert.ToDecimal(value);
+                        break;
+                    case System.Data.DbType.Double:
+                        value = Convert.ToDouble(value);
+                        break;
+                    case System.Data.DbType.Int16:
+                        value = Convert.ToInt16(value);
+                        break;
+                    case System.Data.DbType.Int32:
+                        value = Convert.ToInt32(value);
+                        break;
+                    case System.Data.DbType.Int64:
+                        value = Convert.ToInt64(value);
+                        break;
+                    case System.Data.DbType.UInt16:
+                        value = Convert.ToUInt16(value);
+                        break;
+                    case System.Data.DbType.UInt32:
+                        value = Convert.ToUInt32(value);
+                        break;
+                    case System.Data.DbType.UInt64:
+                        value = Convert.ToUInt64(value);
+                        break;
+                    default:
+                        break;
+                }
+                f.Property.SetValue(entity, value, null);
+            }
         }
     }
 }
