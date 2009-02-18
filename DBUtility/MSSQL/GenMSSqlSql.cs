@@ -113,14 +113,14 @@ namespace hwj.DBUtility.MSSQL
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
-                    if (para.Operator == Enums.Operator.IN)
+                    if (para.Operator == Enums.Operator.IN || para.Operator == Enums.Operator.NotIN)
                     {
                         StringBuilder inSql = new StringBuilder();
                         string[] s = (string[])para.FieldValue;
 
                         for (int i = 0; i < s.Length; i++)
                         {
-                            inSql.AppendFormat(_MsSqlParam, "T" + i).Append(',');
+                            inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + i).Append(',');
                         }
                         sbWhere.Append(para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
                     }
@@ -199,13 +199,13 @@ namespace hwj.DBUtility.MSSQL
                 List<SqlParameter> LstDP = new List<SqlParameter>();
                 foreach (SqlParam sp in filterParam)
                 {
-                    if (sp.Operator == Enums.Operator.IN)
+                    if (sp.Operator == Enums.Operator.IN || sp.Operator == Enums.Operator.NotIN)
                     {
                         string[] s = (string[])sp.FieldValue;
                         for (int i = 0; i < s.Length; i++)
                         {
                             SqlParameter p = new SqlParameter();
-                            p.ParameterName = "T" + i;
+                            p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + i;
                             p.Value = s[i].ToString();
                             LstDP.Add(p);
                         }
