@@ -231,7 +231,7 @@ namespace hwj.DBUtility.MSSQL
             if (reader.HasRows)
                 return CreateListEntity(reader);
             else
-                return null;
+                return new L();
         }
         #endregion
 
