@@ -97,6 +97,8 @@ namespace LTP.BuilderModel
         /// <returns></returns>
         public string CreatModelMethod()
         {
+            //修正视图重复字段的问题
+            string tmpColumnName = string.Empty;
             string sFieldFormat = "[FieldMapping(\"{0}\", {1}{2})]";
             string sFieldFormat_isPK = "[FieldMapping(\"{0}\", {1}, Enums.DataHandle.UnInsert, Enums.DataHandle.UnUpdate{2})]";
             string sUnNull = string.Empty;// ", Enums.DataHandle.UnNull";//需要时再打开该属性
@@ -110,42 +112,46 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(2, "#region Model");
             foreach (ColumnInfo field in Fieldlist)
             {
-                string columnName = field.ColumnName;
-                string columnType = field.TypeName;
-                bool IsIdentity = field.IsIdentity;
-                bool ispk = field.IsPK;
-                bool cisnull = field.cisNull;
-                string deText = field.DeText;
-                columnType = CodeCommon.DbTypeToCS(columnType);
-                string isnull = "";
-                if (CodeCommon.isValueType(columnType))
+                if (tmpColumnName != field.ColumnName)
                 {
-                    if ((!IsIdentity) && (!ispk) && (cisnull))
+                    string columnName = field.ColumnName;
+                    string columnType = field.TypeName;
+                    bool IsIdentity = field.IsIdentity;
+                    bool ispk = field.IsPK;
+                    bool cisnull = field.cisNull;
+                    string deText = field.DeText;
+                    columnType = CodeCommon.DbTypeToCS(columnType);
+                    string isnull = "";
+                    if (CodeCommon.isValueType(columnType))
                     {
-                        //isnull = "?";//代表可空类型
+                        if ((!IsIdentity) && (!ispk) && (cisnull))
+                        {
+                            //isnull = "?";//代表可空类型
+                        }
                     }
-                }
 
-                strclass1.AppendSpaceLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
-                strclass2.AppendSpaceLine(2, "/// <summary>");
-                strclass2.AppendSpaceLine(2, "/// " + deText + string.Format("({0})", string.Format("{0}{1}", (ispk ? sDescIsPK : ""), "/" + (cisnull ? sDescCanNull : sDescCanntNull)).TrimEnd('/').TrimStart('/')));
-                strclass2.AppendSpaceLine(2, "/// </summary>");
-                string _sUnNull = sUnNull;
-                if (cisnull)
-                    _sUnNull = string.Empty;
-                if (IsIdentity)
-                    strclass2.AppendSpaceLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(columnType), _sUnNull));
-                else
-                    strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
-                strclass2.AppendSpaceLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
-                strclass2.AppendSpaceLine(2, "{");
-                strclass2.AppendSpaceLine(3, "set{AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value;}");
-                strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
-                strclass2.AppendSpaceLine(2, "}");
-                //strclass2.AppendSpaceLine(2, "public static string " + columnName);
-                //strclass2.AppendSpaceLine(2, "{");
-                //strclass2.AppendSpaceLine(3, "get{return \"" + columnName.ToString().Trim() + "\";}");
-                //strclass2.AppendSpaceLine(2, "}");
+                    strclass1.AppendSpaceLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
+                    strclass2.AppendSpaceLine(2, "/// <summary>");
+                    strclass2.AppendSpaceLine(2, "/// " + deText + string.Format("({0})", string.Format("{0}{1}", (ispk ? sDescIsPK : ""), "/" + (cisnull ? sDescCanNull : sDescCanntNull)).TrimEnd('/').TrimStart('/')));
+                    strclass2.AppendSpaceLine(2, "/// </summary>");
+                    string _sUnNull = sUnNull;
+                    if (cisnull)
+                        _sUnNull = string.Empty;
+                    if (IsIdentity)
+                        strclass2.AppendSpaceLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(columnType), _sUnNull));
+                    else
+                        strclass2.AppendSpaceLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
+                    strclass2.AppendSpaceLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
+                    strclass2.AppendSpaceLine(2, "{");
+                    strclass2.AppendSpaceLine(3, "set{AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value;}");
+                    strclass2.AppendSpaceLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
+                    strclass2.AppendSpaceLine(2, "}");
+                    //strclass2.AppendSpaceLine(2, "public static string " + columnName);
+                    //strclass2.AppendSpaceLine(2, "{");
+                    //strclass2.AppendSpaceLine(3, "get{return \"" + columnName.ToString().Trim() + "\";}");
+                    //strclass2.AppendSpaceLine(2, "}");
+                }
+                tmpColumnName = field.ColumnName;
             }
             strclass.Append(strclass1.Value);
             strclass.Append(strclass2.Value);
@@ -155,15 +161,21 @@ namespace LTP.BuilderModel
         }
         public string CreatFieldsEnum()
         {
+            //修正视图重复字段的问题
+            string tmpColumnName = string.Empty;
             StringPlus strclass = new StringPlus();
             strclass.AppendSpaceLine(2, "public enum Fields");
             strclass.AppendSpaceLine(2, "{");
             foreach (ColumnInfo f in Fieldlist)
             {
-                strclass.AppendSpaceLine(3, "/// <summary>");
-                strclass.AppendSpaceLine(3, "///" + f.DeText);
-                strclass.AppendSpaceLine(3, "/// </summary>");
-                strclass.AppendSpaceLine(3, f.ColumnName + ",");
+                if (tmpColumnName != f.ColumnName)
+                {
+                    strclass.AppendSpaceLine(3, "/// <summary>");
+                    strclass.AppendSpaceLine(3, "///" + f.DeText);
+                    strclass.AppendSpaceLine(3, "/// </summary>");
+                    strclass.AppendSpaceLine(3, f.ColumnName + ",");
+                }
+                tmpColumnName = f.ColumnName;
             }
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
