@@ -101,7 +101,8 @@ namespace hwj.DBUtility.MSSQL
             SqlEntity se = new SqlEntity();
             se.CommandText = GenSql.UpdateSql(entity, filterParam);
             se.Parameters = GenSql.GenParameter(entity);
-            se.Parameters.AddRange(GenSql.GenParameter(filterParam));
+            if (filterParam != null)
+                se.Parameters.AddRange(GenSql.GenParameter(filterParam));
             if (EnableSqlLog)
                 return InsertSqlLog(se, "UPDATE");
             else
