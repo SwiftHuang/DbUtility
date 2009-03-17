@@ -335,7 +335,7 @@ namespace hwj.DBUtility.MSSQL
                     DataRow mydr = dataTable.NewRow();//关键的第三步
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        mydr[i] = reader[i].ToString();
+                        mydr[i] = reader[i];
                     }
 
                     dataTable.Rows.Add(mydr);//关键的第四步
