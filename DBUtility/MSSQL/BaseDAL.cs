@@ -176,12 +176,17 @@ namespace hwj.DBUtility.MSSQL
         }
         private static string Params2String(SqlEntity sqlEntity)
         {
-            string s = "";
-            foreach (SqlParameter p in sqlEntity.Parameters)
+            if (sqlEntity.Parameters != null)
             {
-                s += string.Format(SqlParamsFormat, p.ParameterName, p.Value);
+                string s = "";
+                foreach (SqlParameter p in sqlEntity.Parameters)
+                {
+                    s += string.Format(SqlParamsFormat, p.ParameterName, p.Value);
+                }
+                return s;
             }
-            return s;
+            else
+                return string.Empty;
         }
 
         #region Get Entity
