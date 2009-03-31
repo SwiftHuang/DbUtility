@@ -37,7 +37,7 @@ namespace hwj.DBUtility
             else
             {
                 s = str.Replace("'", "").Replace("*", "").Replace("select", "")
-                       .Replace("where", "").Replace(";", "").Replace("(", "").Replace(")", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
+                       .Replace("where", "").Replace(";", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
             }
             return s;
         }

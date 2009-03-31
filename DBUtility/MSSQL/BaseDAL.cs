@@ -157,7 +157,7 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         private const string SqlParamsFormat = "{0}={1}$";
-        private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES('{0}','{1}','{2}','{3}',getdate())";
+        private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES(@Table,@Type,@SQL,@Param,getdate())";
         /// <summary>
         /// 记录Sql Log
         /// </summary>
@@ -166,7 +166,13 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                DbHelper.ExecuteSql(string.Format(InsertSqlLogFormat, TableName, type, sqlEntity.CommandText, Params2String(sqlEntity)));
+                List<SqlParameter> lstP = new List<SqlParameter>();
+                lstP.Add(new SqlParameter("@Table", TableName));
+                lstP.Add(new SqlParameter("@Type", type));
+                lstP.Add(new SqlParameter("@SQL", sqlEntity.CommandText));
+                lstP.Add(new SqlParameter("@Param", Params2String(sqlEntity)));
+
+                DbHelper.ExecuteSql(InsertSqlLogFormat, lstP);
             }
             catch
             {
