@@ -290,7 +290,7 @@ namespace hwj.DBUtility.MSSQL
         /// 返回表的记录数
         /// </summary>
         /// <returns></returns>
-        public UInt32 RecordCount()
+        public int RecordCount()
         {
             return RecordCount(null);
         }
@@ -299,10 +299,10 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="whereParam">条件参数</param>
         /// <returns>记录数</returns>
-        public UInt32 RecordCount(FilterParams filterParam)
+        public int RecordCount(FilterParams filterParam)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, filterParam), GenSql.GenParameter(filterParam));
-            return Convert.ToUInt32(DbHelper.GetSingle(SqlEntity.CommandText, SqlEntity.Parameters));
+            return Convert.ToInt32(DbHelper.GetSingle(SqlEntity.CommandText, SqlEntity.Parameters));
         }
         #endregion
 
