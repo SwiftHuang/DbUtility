@@ -11,7 +11,6 @@ namespace hwj.DBUtility
             try
             {
                 info = (List<TableMapping.FieldMappingInfo>)cache[typeName];
-
             }
             catch (KeyNotFoundException) { }
 
@@ -20,9 +19,16 @@ namespace hwj.DBUtility
 
         public static void SetCache(string typeName, List<TableMapping.FieldMappingInfo> mappingInfoList)
         {
-            cache[typeName] = mappingInfoList;
+            try
+            {
+                cache[typeName] = mappingInfoList;
+            }
+            catch
+            {
+                cache = new Dictionary<string, List<hwj.DBUtility.TableMapping.FieldMappingInfo>>();
+                cache[typeName] = mappingInfoList;
+            }
         }
-
         public static void ClearCache()
         {
             cache.Clear();
