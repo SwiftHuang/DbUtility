@@ -258,9 +258,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize);
+            return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象
@@ -273,15 +273,31 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             _SqlEntity = new SqlEntity();
             _SqlEntity.CommandText = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
-            SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText);
+
+            TotalCount = 0;
+            SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+            SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+            SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
+            sp.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(sp);
+            SqlDataReader reader = cmd.ExecuteReader();
+
             if (reader.HasRows)
-                return CreateListEntity(reader);
+            {
+                L result = CreateListEntity(reader);
+                if (cmd.Parameters.Count > 0)
+                    TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
+                cmd.Parameters.Clear();
+                return result;
+            }
             else
-                return null;
+                return new L();
         }
         #endregion
 
