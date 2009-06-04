@@ -9,7 +9,7 @@ namespace hwj.DBUtility
     public abstract class BaseGenSql<T> where T : BaseTable<T>
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
-        protected const string _SelectCountString = "SELECT COUNT(*) FROM {0} {1};";
+        protected const string _SelectCountString = "SELECT COUNT(1) FROM {0} (NOLOCK) {1};";
         protected const string _UpdateString = "UPDATE {0} SET {1} {2};";
         protected const string _InsertString = "INSERT INTO {0} ({1}) VALUES({2});";
         protected const string _StringFormat = "'{0}'";

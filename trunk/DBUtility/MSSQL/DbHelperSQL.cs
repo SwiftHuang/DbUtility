@@ -86,8 +86,8 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public static bool TabExists(string TableName)
         {
-            string strsql = "select count(*) from sysobjects where id = object_id(N'[" + TableName + "]') and OBJECTPROPERTY(id, N'IsUserTable') = 1";
-            //string strsql = "SELECT count(*) FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[" + TableName + "]') AND type in (N'U')";
+            string strsql = "select COUNT(1) from sysobjects where id = object_id(N'[" + TableName + "]') and OBJECTPROPERTY(id, N'IsUserTable') = 1";
+            //string strsql = "SELECT COUNT(1) FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[" + TableName + "]') AND type in (N'U')";
             object obj = DbHelperSQL.GetSingle(strsql);
             int cmdresult;
             if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
@@ -614,12 +614,16 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
         public static void ExecuteSqlTran(Hashtable SQLStringList)
+        {
+            ExecuteSqlTran(SQLStringList, 30);
+        }
+
+        public static void ExecuteSqlTran(Hashtable SQLStringList, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -627,6 +631,7 @@ namespace hwj.DBUtility.MSSQL
                 using (SqlTransaction trans = conn.BeginTransaction())
                 {
                     SqlCommand cmd = new SqlCommand();
+                    cmd.CommandTimeout = timeout;
                     try
                     {
                         //循环
@@ -654,12 +659,17 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
         public static int ExecuteSqlTran(List<SqlEntity> cmdList)
         {
+            return ExecuteSqlTran(cmdList, 30);
+        }
+        public static int ExecuteSqlTran(List<SqlEntity> cmdList, int timeout)
+        {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (SqlTransaction trans = conn.BeginTransaction())
                 {
                     SqlCommand cmd = new SqlCommand();
+                    cmd.CommandTimeout = timeout;
                     try
                     {
                         int count = 0;
