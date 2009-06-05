@@ -1085,6 +1085,31 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
+        public static bool ClearDatabaseLog(string databsae)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("exec sp_ClearDatabaseLog '" + databsae + "'", connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (System.Data.SqlClient.SqlException e)
+                    {
+                        connection.Close();
+                        throw e;
+                    }
+                    finally
+                    {
+                        cmd.Dispose();
+                        connection.Close();
+                    }
+                }
+            }
+        }
     }
 
 }
