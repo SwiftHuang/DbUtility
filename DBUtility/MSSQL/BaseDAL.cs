@@ -249,7 +249,7 @@ namespace hwj.DBUtility.MSSQL
 
         #region Get Page
         /// <summary>
-        /// 获取分页对象
+        /// 获取分页对象(单主键,以主键作为排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
         /// <param name="filterParam">筛选条件</param>
@@ -258,12 +258,12 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetListPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
+            return GetPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
-        /// 获取分页对象
+        /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
         /// <param name="filterParam">筛选条件</param>
@@ -273,7 +273,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetListPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             _SqlEntity = new SqlEntity();
             _SqlEntity.CommandText = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
@@ -293,6 +293,41 @@ namespace hwj.DBUtility.MSSQL
                 L result = CreateListEntity(reader);
                 if (cmd.Parameters.Count > 0)
                     TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
+                cmd.Parameters.Clear();
+                return result;
+            }
+            else
+                return new L();
+        }
+        /// <summary>
+        /// 获取分页对象(支持多主键、多排序)
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="PK"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="TotalCount"></param>
+        /// <returns></returns>
+        public L GetPage2(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        {
+            _SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
+            TotalCount = 0;
+            SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+            SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+            SqlParameter sp = new SqlParameter("@PageCount", DbType.Int32);
+            sp.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(sp);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                L result = CreateListEntity(reader);
+                if (cmd.Parameters.Count > 0)
+                    TotalCount = int.Parse(cmd.Parameters["@PageCount"].Value.ToString());
                 cmd.Parameters.Clear();
                 return result;
             }

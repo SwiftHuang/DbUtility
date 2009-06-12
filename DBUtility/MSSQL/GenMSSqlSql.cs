@@ -12,6 +12,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount '{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}',@_PTotalCount output";
+        private const string _MsSqlPageView = "EXEC dbo.sp_PageView '{0}','{1}',{2},{3},'{4}','{5}','{6}',@PageCount output";
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlTruncate = "TRUNCATE TABLE {0};";
@@ -100,6 +101,13 @@ namespace hwj.DBUtility.MSSQL
             string _FilterParam = GenFilterParamsSql(filterParam, true);
             string _OrderParam = GenSortParamsSql(sortParams, true);
             return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
+        }
+        public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        {
+            string _SelectFields = GenDisplayFieldsSql(displayFields);
+            string _FilterParam = GenFilterParamsSql(filterParam, true);
+            string _OrderParam = GenSortParamsSql(sortParams, true);
+            return string.Format(_MsSqlPageView, GetTableName(tableName), GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
         }
         #endregion
 

@@ -174,10 +174,6 @@ namespace hwj.DBUtility
         {
             return GenFilterParamsSql(listParam, false);
         }
-        protected string GenSortField(SortParam o)
-        {
-            return string.Format("{0} {1},", o.FieldName, o.OrderBy.ToSqlString());
-        }
         protected string GenGroupParamsSql(GroupParams param)
         {
             return GenDisplayFieldsSql(param, true);
@@ -193,7 +189,7 @@ namespace hwj.DBUtility
                 StringBuilder sb = new StringBuilder();
                 foreach (Enum s in fields)
                 {
-                    sb.Append(s.ToString()).Append(',');
+                    sb.AppendFormat("[{0}]", s.ToString()).Append(',');
                 }
                 return sb.ToString().TrimEnd(',');
             }
@@ -215,7 +211,7 @@ namespace hwj.DBUtility
                     sb.Append("ORDER BY ");
                 foreach (SortParam o in orders)
                 {
-                    sb.Append(GenSortField(o));
+                    sb.AppendFormat("[{0}] {1},", o.FieldName, o.OrderBy.ToSqlString());
                 }
                 return sb.ToString().TrimEnd(',');
             }
