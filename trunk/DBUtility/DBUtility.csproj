@@ -81,8 +81,8 @@
     <Compile Include="Param\FilterParam.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MSSQL\ClearDatabaseLog.sql" />
-    <None Include="MSSQL\Paging_RowCount.sql" />
+    <None Include="MSSQL\sp_ClearDatabaseLog.sql" />
+    <None Include="MSSQL\sp_Paging_RowCount.sql" />
     <None Include="MSSQL\sp_PageView.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

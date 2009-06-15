@@ -8,7 +8,7 @@ namespace LTP.BuilderModel
     /// <summary>
     /// Model代码生成组件
     /// </summary>
-    public class BuilderModel : LTP.IBuilder.IBuilderModel
+    public class BuilderModel : IBuilder.IBuilderModel
     {
         #region 公有属性
         protected string _modelname = ""; //model类名
@@ -198,7 +198,7 @@ namespace LTP.BuilderModel
         }
         private string SetFirstUpper(string value)
         {
-            if (value == "Int")
+            if (value == "int")
                 value = "Int32";
             return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
