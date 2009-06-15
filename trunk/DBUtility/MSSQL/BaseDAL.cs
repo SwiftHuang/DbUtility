@@ -318,7 +318,7 @@ namespace hwj.DBUtility.MSSQL
             if (conn.State != ConnectionState.Open)
                 conn.Open();
             SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
-            SqlParameter sp = new SqlParameter("@PageCount", DbType.Int32);
+            SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
             sp.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(sp);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -327,7 +327,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 L result = CreateListEntity(reader);
                 if (cmd.Parameters.Count > 0)
-                    TotalCount = int.Parse(cmd.Parameters["@PageCount"].Value.ToString());
+                    TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
                 cmd.Parameters.Clear();
                 return result;
             }
