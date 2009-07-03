@@ -30,15 +30,15 @@
   <ItemGroup>
     <Reference Include="LTP.CodeHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\LTP.CodeHelper.dll</HintPath>
+      <HintPath>..\..\动软插件代码Builder\Lib\LTP.CodeHelper.dll</HintPath>
     </Reference>
     <Reference Include="LTP.IBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\LTP.IBuilder.dll</HintPath>
+      <HintPath>..\..\动软插件代码Builder\Lib\LTP.IBuilder.dll</HintPath>
     </Reference>
     <Reference Include="LTP.Utility, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\LTP.Utility.dll</HintPath>
+      <HintPath>..\..\动软插件代码Builder\Lib\LTP.Utility.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
