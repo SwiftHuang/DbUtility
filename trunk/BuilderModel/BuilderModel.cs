@@ -67,7 +67,8 @@ namespace LTP.BuilderModel
             strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using hwj.DBUtility;");
             strclass.AppendLine("using hwj.DBUtility.TableMapping;");
-            strclass.AppendLine("namespace Entity.Table");
+            strclass.AppendLine("");
+            strclass.AppendLine("namespace " + Modelpath.Replace("Model", "Entity"));
             strclass.AppendLine("{");
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// 实体类" + _modelname + " 。(属性说明自动提取数据库字段的描述信息)");
@@ -132,7 +133,7 @@ namespace LTP.BuilderModel
 
                     strclass1.AppendSpaceLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
                     strclass2.AppendSpaceLine(2, "/// <summary>");
-                    strclass2.AppendSpaceLine(2, "/// " + deText + string.Format("({0})", string.Format("{0}{1}", (ispk ? sDescIsPK : ""), "/" + (cisnull ? sDescCanNull : sDescCanntNull)).TrimEnd('/').TrimStart('/')));
+                    strclass2.AppendSpaceLine(2, "/// " + deText + "[" + string.Format("{0}/{1}/{2}({3})/{4}", (ispk ? sDescIsPK : ""), (cisnull ? sDescCanNull : sDescCanntNull), field.TypeName, field.Length, string.IsNullOrEmpty(field.DefaultVal) ? "" : "Default:" + field.DefaultVal).TrimEnd('/').TrimStart('/') + "]");
                     strclass2.AppendSpaceLine(2, "/// </summary>");
                     string _sUnNull = sUnNull;
                     if (cisnull)

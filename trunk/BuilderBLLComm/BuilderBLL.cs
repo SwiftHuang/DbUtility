@@ -106,7 +106,7 @@ namespace LTP.BuilderBLLComm
         public string BLLName
         {
             set { _bllname = value; }
-            get { return "BO" + _bllname; }
+            get { return _bllname; }
         }
 
         /*============================*/
@@ -125,7 +125,7 @@ namespace LTP.BuilderBLLComm
         public string DALName
         {
             set { _dalname = value; }
-            get { return "DA" + _dalname; }
+            get { return _dalname; }
         }
 
         /// <summary>
@@ -257,18 +257,19 @@ namespace LTP.BuilderBLLComm
             //{
             //    strclass.AppendLine("using LTP.Common;");
             //}
-            //strclass.AppendLine("using " + Modelpath + ";");
-            //if ((Factorypath != "")&&(Factorypath !=null))
-            //{
-            //    strclass.AppendLine("using " + Factorypath + ";");
-            //}
-            //if ((IDALpath != "")&&(IDALpath !=null))
-            //{
-            //    strclass.AppendLine("using " + IDALpath + ";");
-            //}
+            strclass.AppendLine("using " + Modelpath.Replace("Model", "Entity") + ";");
+            strclass.AppendLine("using " + Modelpath.Replace("Model", "DAL") + ";");
+            if ((Factorypath != "") && (Factorypath != null))
+            {
+                strclass.AppendLine("using " + Factorypath + ";");
+            }
+            if ((IDALpath != "") && (IDALpath != null))
+            {
+                strclass.AppendLine("using " + IDALpath + ";");
+            }
             strclass.AppendLine("");
-            //strclass.AppendLine("namespace " + BLLpath);
-            strclass.AppendLine("namespace BLL.Table");
+            strclass.AppendLine("namespace " + BLLpath);
+            //strclass.AppendLine("namespace BLL.Table");
             strclass.AppendLine("{");
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// Business [" + BLLName + "]");
@@ -290,23 +291,23 @@ namespace LTP.BuilderBLLComm
             //strclass.AppendSpaceLine(2, "#region  成员方法" );
 
             #region  方法代码
-            if (Maxid)
-            {
-                if (Keys.Count > 0)
-                {
-                    foreach (ColumnInfo obj in Keys)
-                    {
-                        if (CodeCommon.DbTypeToCS(obj.TypeName) == "int")
-                        {
-                            if (obj.IsPK)
-                            {
-                                strclass.AppendLine(CreatBLLGetMaxID());
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+            //if (Maxid)
+            //{
+            //    if (Keys.Count > 0)
+            //    {
+            //        foreach (ColumnInfo obj in Keys)
+            //        {
+            //            if (CodeCommon.DbTypeToCS(obj.TypeName) == "int")
+            //            {
+            //                if (obj.IsPK)
+            //                {
+            //                    strclass.AppendLine(CreatBLLGetMaxID());
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             if (Exists)
             {
                 strclass.AppendLine(CreatBLLExists());
@@ -327,10 +328,10 @@ namespace LTP.BuilderBLLComm
             {
                 strclass.AppendLine(CreatBLLGetModel());
             }
-            if (GetModelByCache)
-            {
-                strclass.AppendLine(CreatBLLGetModelByCache(ModelName));
-            }
+            //if (GetModelByCache)
+            //{
+            //    strclass.AppendLine(CreatBLLGetModelByCache(ModelName));
+            //}
             if (List)
             {
                 strclass.AppendLine(CreatBLLGetList());
@@ -386,12 +387,13 @@ namespace LTP.BuilderBLLComm
             StringPlus strclass = new StringPlus();
             if (_keys.Count > 0)
             {
-                strclass.AppendSpaceLine(2, "/// <summary>");
-                strclass.AppendSpaceLine(2, "/// 是否存在该记录");
-                strclass.AppendSpaceLine(2, "/// </summary>");
+                //strclass.AppendSpaceLine(2, "/// <summary>");
+                //strclass.AppendSpaceLine(2, "/// 是否存在该记录");
+                //strclass.AppendSpaceLine(2, "/// </summary>");
                 strclass.AppendSpaceLine(2, "public bool Exists(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
                 strclass.AppendSpaceLine(2, "{");
-                strclass.AppendSpaceLine(3, "return dal.Exists(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.RecordCount(fp) > 0;");
                 strclass.AppendSpaceLine(2, "}");
             }
             return strclass.ToString();
@@ -427,12 +429,17 @@ namespace LTP.BuilderBLLComm
         public string CreatBLLUpdate()
         {
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 更新一条数据");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public void Update(" + ModelSpace + " model)");
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 更新一条数据");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public void Update(" + ModelSpace + " model)");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, "dal.Update(model);");
+            //strclass.AppendSpaceLine(2, "}");
+            strclass.AppendSpaceLine(2, "public static bool Update(" + ModelName + " updateEntity, " + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "dal.Update(model);");
+            GetFilterParam(ref strclass);
+            strclass.AppendSpaceLine(3, "return da.Update(updateEntity, fp);");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
@@ -447,32 +454,28 @@ namespace LTP.BuilderBLLComm
             //strclass.AppendSpaceLine(3, KeysNullTip);
             //strclass.AppendSpaceLine(3, "dal.Delete(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
             //strclass.AppendSpaceLine(2, "}");
-            string pks = string.Empty;
-            foreach (ColumnInfo c in PKList)
-            {
-                pks += string.Format("{0} {1},", CodeCommon.DbTypeToCS(c.TypeName), c.ColumnName);
-            }
-            strclass.AppendSpaceLine(2, "public static bool Delete(" + pks.TrimEnd(',') + ")");
+            strclass.AppendSpaceLine(2, "public static bool Delete(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "FilterParams fp = new FilterParams();");
-            foreach (ColumnInfo c in PKList)
-            {
-                strclass.AppendSpaceLine(3, "fp.AddParam(" + ModelName + ".Fields." + c.ColumnName + ", " + c.ColumnName + ", Enums.Operator.Equal, Enums.Expression.AND);");
-            }
-            strclass.AppendSpaceLine(3, "return da.Delete();");
+            GetFilterParam(ref strclass);
+            strclass.AppendSpaceLine(3, "return da.Delete(fp);");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
         public string CreatBLLGetModel()
         {
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 得到一个对象实体");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public " + ModelSpace + " GetModel(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 得到一个对象实体");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public " + ModelSpace + " GetModel(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, KeysNullTip);
+            //strclass.AppendSpaceLine(3, "return dal.GetModel(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
+            //strclass.AppendSpaceLine(2, "}");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + " GetEntity(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, KeysNullTip);
-            strclass.AppendSpaceLine(3, "return dal.GetModel(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
+            GetFilterParam(ref strclass);
+            strclass.AppendSpaceLine(3, "return da.GetEntity(fp);");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
 
@@ -514,138 +517,150 @@ namespace LTP.BuilderBLLComm
         public string CreatBLLGetList()
         {
             StringPlus strclass = new StringPlus();
-            //返回DataSet
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得数据列表");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public DataSet GetList(string strWhere)");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "return dal.GetList(strWhere);");
+            GetFilterParam(ref strclass);
+            strclass.AppendSpaceLine(3, "return da.GetList(null, fp);");
             strclass.AppendSpaceLine(2, "}");
 
-            //返回DataSet
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得前几行数据");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public DataSet GetList(int Top,string strWhere,string filedOrder)");
+            strclass.AppendLine("");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ", int top)");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "return dal.GetList(Top,strWhere,filedOrder);");
+            GetFilterParam(ref strclass);
+            strclass.AppendSpaceLine(3, "return da.GetList(null, fp, null,top);");
             strclass.AppendSpaceLine(2, "}");
+            ////返回DataSet
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得数据列表");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public DataSet GetList(string strWhere)");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, "return dal.GetList(strWhere);");
+            //strclass.AppendSpaceLine(2, "}");
 
-            //返回List<>
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得数据列表");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public List<" + ModelSpace + "> GetModelList(string strWhere)");
-            strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "DataSet ds = dal.GetList(strWhere);");
-            strclass.AppendSpaceLine(3, "return DataTableToList(ds.Tables[0]);");
-            strclass.AppendSpaceLine(2, "}");
+            ////返回DataSet
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得前几行数据");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public DataSet GetList(int Top,string strWhere,string filedOrder)");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, "return dal.GetList(Top,strWhere,filedOrder);");
+            //strclass.AppendSpaceLine(2, "}");
 
-
-            //返回List<>
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得数据列表");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public List<" + ModelSpace + "> DataTableToList(DataTable dt)");
-            strclass.AppendSpaceLine(2, "{");
+            ////返回List<>
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得数据列表");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public List<" + ModelSpace + "> GetModelList(string strWhere)");
+            //strclass.AppendSpaceLine(2, "{");
             //strclass.AppendSpaceLine(3, "DataSet ds = dal.GetList(strWhere);");
-            strclass.AppendSpaceLine(3, "List<" + ModelSpace + "> modelList = new List<" + ModelSpace + ">();");
-            strclass.AppendSpaceLine(3, "int rowsCount = dt.Rows.Count;");
-            strclass.AppendSpaceLine(3, "if (rowsCount > 0)");
-            strclass.AppendSpaceLine(3, "{");
-            strclass.AppendSpaceLine(4, ModelSpace + " model;");
-            strclass.AppendSpaceLine(4, "for (int n = 0; n < rowsCount; n++)");
-            strclass.AppendSpaceLine(4, "{");
-            strclass.AppendSpaceLine(5, "model = new " + ModelSpace + "();");
+            //strclass.AppendSpaceLine(3, "return DataTableToList(ds.Tables[0]);");
+            //strclass.AppendSpaceLine(2, "}");
 
-            #region 字段赋值
-            foreach (ColumnInfo field in Fieldlist)
-            {
-                string columnName = field.ColumnName;
-                string columnType = field.TypeName;
-                switch (CodeCommon.DbTypeToCS(columnType))
-                {
-                    case "int":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=int.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "decimal":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=decimal.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "float":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=float.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "DateTime":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=DateTime.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "string":
-                        {
-                            strclass.AppendSpaceLine(5, "model." + columnName + "=dt.Rows[n][\"" + columnName + "\"].ToString();");
-                        }
-                        break;
-                    case "bool":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "if((dt.Rows[n][\"" + columnName + "\"].ToString()==\"1\")||(dt.Rows[n][\"" + columnName + "\"].ToString().ToLower()==\"true\"))");
-                            strclass.AppendSpaceLine(6, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=true;");
-                            strclass.AppendSpaceLine(6, "}");
-                            strclass.AppendSpaceLine(6, "else");
-                            strclass.AppendSpaceLine(6, "{");
-                            strclass.AppendSpaceLine(7, "model." + columnName + "=false;");
-                            strclass.AppendSpaceLine(6, "}");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "byte[]":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=(byte[])dt.Rows[n][\"" + columnName + "\"];");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    case "Guid":
-                        {
-                            strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
-                            strclass.AppendSpaceLine(5, "{");
-                            strclass.AppendSpaceLine(6, "model." + columnName + "=new Guid(dt.Rows[n][\"" + columnName + "\"].ToString());");
-                            strclass.AppendSpaceLine(5, "}");
-                        }
-                        break;
-                    default:
-                        strclass.AppendSpaceLine(5, "//model." + columnName + "=dt.Rows[n][\"" + columnName + "\"].ToString();");
-                        break;
-                }
-            }
-            #endregion
 
-            strclass.AppendSpaceLine(5, "modelList.Add(model);");
-            strclass.AppendSpaceLine(4, "}");
-            strclass.AppendSpaceLine(3, "}");
-            strclass.AppendSpaceLine(3, "return modelList;");
-            strclass.AppendSpaceLine(2, "}");
+            ////返回List<>
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得数据列表");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public List<" + ModelSpace + "> DataTableToList(DataTable dt)");
+            //strclass.AppendSpaceLine(2, "{");
+            ////strclass.AppendSpaceLine(3, "DataSet ds = dal.GetList(strWhere);");
+            //strclass.AppendSpaceLine(3, "List<" + ModelSpace + "> modelList = new List<" + ModelSpace + ">();");
+            //strclass.AppendSpaceLine(3, "int rowsCount = dt.Rows.Count;");
+            //strclass.AppendSpaceLine(3, "if (rowsCount > 0)");
+            //strclass.AppendSpaceLine(3, "{");
+            //strclass.AppendSpaceLine(4, ModelSpace + " model;");
+            //strclass.AppendSpaceLine(4, "for (int n = 0; n < rowsCount; n++)");
+            //strclass.AppendSpaceLine(4, "{");
+            //strclass.AppendSpaceLine(5, "model = new " + ModelSpace + "();");
+
+            //#region 字段赋值
+            //foreach (ColumnInfo field in Fieldlist)
+            //{
+            //    string columnName = field.ColumnName;
+            //    string columnType = field.TypeName;
+            //    switch (CodeCommon.DbTypeToCS(columnType))
+            //    {
+            //        case "int":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=int.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "decimal":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=decimal.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "float":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=float.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "DateTime":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=DateTime.Parse(dt.Rows[n][\"" + columnName + "\"].ToString());");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "string":
+            //            {
+            //                strclass.AppendSpaceLine(5, "model." + columnName + "=dt.Rows[n][\"" + columnName + "\"].ToString();");
+            //            }
+            //            break;
+            //        case "bool":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "if((dt.Rows[n][\"" + columnName + "\"].ToString()==\"1\")||(dt.Rows[n][\"" + columnName + "\"].ToString().ToLower()==\"true\"))");
+            //                strclass.AppendSpaceLine(6, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=true;");
+            //                strclass.AppendSpaceLine(6, "}");
+            //                strclass.AppendSpaceLine(6, "else");
+            //                strclass.AppendSpaceLine(6, "{");
+            //                strclass.AppendSpaceLine(7, "model." + columnName + "=false;");
+            //                strclass.AppendSpaceLine(6, "}");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "byte[]":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=(byte[])dt.Rows[n][\"" + columnName + "\"];");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        case "Guid":
+            //            {
+            //                strclass.AppendSpaceLine(5, "if(dt.Rows[n][\"" + columnName + "\"].ToString()!=\"\")");
+            //                strclass.AppendSpaceLine(5, "{");
+            //                strclass.AppendSpaceLine(6, "model." + columnName + "=new Guid(dt.Rows[n][\"" + columnName + "\"].ToString());");
+            //                strclass.AppendSpaceLine(5, "}");
+            //            }
+            //            break;
+            //        default:
+            //            strclass.AppendSpaceLine(5, "//model." + columnName + "=dt.Rows[n][\"" + columnName + "\"].ToString();");
+            //            break;
+            //    }
+            //}
+            //#endregion
+
+            //strclass.AppendSpaceLine(5, "modelList.Add(model);");
+            //strclass.AppendSpaceLine(4, "}");
+            //strclass.AppendSpaceLine(3, "}");
+            //strclass.AppendSpaceLine(3, "return modelList;");
+            //strclass.AppendSpaceLine(2, "}");
 
 
 
@@ -655,25 +670,39 @@ namespace LTP.BuilderBLLComm
         public string CreatBLLGetAllList()
         {
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得数据列表");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "public DataSet GetAllList()");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetAllList()");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "return GetList(\"\");");
+            strclass.AppendSpaceLine(3, "return da.GetList();");
             strclass.AppendSpaceLine(2, "}");
+
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得数据列表");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "public DataSet GetAllList()");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, "return GetList(\"\");");
+            //strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
         public string CreatBLLGetListByPage()
         {
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "/// <summary>");
-            strclass.AppendSpaceLine(2, "/// 获得数据列表");
-            strclass.AppendSpaceLine(2, "/// </summary>");
-            strclass.AppendSpaceLine(2, "//public DataSet GetList(int PageSize,int PageIndex,string strWhere)");
-            strclass.AppendSpaceLine(2, "//{");
-            strclass.AppendSpaceLine(3, "//return dal.GetList(PageSize,PageIndex,strWhere);");
-            strclass.AppendSpaceLine(2, "//}");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + "Page GetPage(int pageIndex, int pageSize)");
+            strclass.AppendSpaceLine(2, "{");
+            strclass.AppendSpaceLine(3, "int RecordCount;");
+            strclass.AppendSpaceLine(3, ModelName + "Page page = new " + ModelName + "Page();");
+            GetPKParam(ref strclass);
+            strclass.AppendSpaceLine(3, "page.PageSize = pageSize;");
+            strclass.AppendSpaceLine(3, "page.Result = da.GetPage2(null, null, null, pk, pageIndex, pageSize, out page.RecordCount);");
+            strclass.AppendSpaceLine(2, "}");
+
+            //strclass.AppendSpaceLine(2, "/// <summary>");
+            //strclass.AppendSpaceLine(2, "/// 获得数据列表");
+            //strclass.AppendSpaceLine(2, "/// </summary>");
+            //strclass.AppendSpaceLine(2, "//public DataSet GetList(int PageSize,int PageIndex,string strWhere)");
+            //strclass.AppendSpaceLine(2, "//{");
+            //strclass.AppendSpaceLine(3, "//return dal.GetList(PageSize,PageIndex,strWhere);");
+            //strclass.AppendSpaceLine(2, "//}");
             return strclass.ToString();
         }
 
@@ -687,6 +716,22 @@ namespace LTP.BuilderBLLComm
             {
                 if (c.IsPK)
                     PKList.Add(c);
+            }
+        }
+        private void GetFilterParam(ref StringPlus strclass)
+        {
+            strclass.AppendSpaceLine(3, "FilterParams fp = new FilterParams();");
+            foreach (ColumnInfo c in PKList)
+            {
+                strclass.AppendSpaceLine(3, "fp.AddParam(" + ModelName + ".Fields." + c.ColumnName + ", " + c.ColumnName + ", Enums.Operator.Equal, Enums.Expression.AND);");
+            }
+        }
+        private void GetPKParam(ref StringPlus strclass)
+        {
+            strclass.AppendSpaceLine(3, "DisplayFields pk = new DisplayFields();");
+            foreach (ColumnInfo c in PKList)
+            {
+                strclass.AppendSpaceLine(3, "df.Add(" + ModelName + ".Fields." + c.ColumnName + ");");
             }
         }
     }

@@ -134,7 +134,7 @@ namespace LTP.BuilderDALParam
         public string DALName
         {
             set { _dalname = value; }
-            get { return "DA" + _dalname; }
+            get { return _dalname; }
         }
         /*============================*/
 
@@ -407,10 +407,12 @@ namespace LTP.BuilderDALParam
             {
                 case "SQL2005":
                     strclass.AppendLine("using System.Data.SqlClient;");
+                    strclass.AppendLine("using hwj.DBUtility;");
                     strclass.AppendLine("using hwj.DBUtility.MSSQL;");
                     break;
                 case "SQL2000":
                     strclass.AppendLine("using System.Data.SqlClient;");
+                    strclass.AppendLine("using hwj.DBUtility;");
                     strclass.AppendLine("using hwj.DBUtility.MSSQL;");
                     break;
                 case "Oracle":
@@ -423,14 +425,14 @@ namespace LTP.BuilderDALParam
                     strclass.AppendLine("using System.Data.OleDb;");
                     break;
             }
+            strclass.AppendLine("using " + Modelpath.Replace("Model", "Entity") + ";");
             if (IDALpath != "")
             {
                 strclass.AppendLine("using " + IDALpath + ";");
             }
             //strclass.AppendLine("using Maticsoft.DBUtility;//请先添加引用");
             strclass.AppendLine("");
-            //strclass.AppendLine("namespace " + DALpath);
-            strclass.AppendLine("namespace DAL.Table");
+            strclass.AppendLine("namespace " + DALpath);
             strclass.AppendLine("{");
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// DataAccess [Table:" + TableName + "]");
