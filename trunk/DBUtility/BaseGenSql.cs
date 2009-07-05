@@ -219,5 +219,21 @@ namespace hwj.DBUtility
                 return string.Empty;
         }
         #endregion
+
+        private static readonly int andL = Enums.Expression.AND.ToSqlString().Length;
+        private static readonly int andR = Enums.Expression.OR.ToSqlString().Length;
+        /// <summary>
+        /// 格式化最后的表达式
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        internal string TrimSql(string sql)
+        {
+            if (sql.Substring(sql.Length - andL, andL) == Enums.Expression.AND.ToSqlString())
+                sql = sql.Substring(0, sql.Length - andL);
+            if (sql.Substring(sql.Length - andR, andR) == Enums.Expression.OR.ToSqlString())
+                sql = sql.Substring(0, sql.Length - andR);
+            return sql.TrimEnd(',');
+        }
     }
 }

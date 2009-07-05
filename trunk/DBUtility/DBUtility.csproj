@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\hwj.DBUtility.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
@@ -45,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\BaseList.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
@@ -71,6 +73,7 @@
     <Compile Include="MYSQL\SqlEntity.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entity\PageResult.cs" />
     <Compile Include="Param\SortParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />

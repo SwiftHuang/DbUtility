@@ -437,7 +437,7 @@ namespace LTP.BuilderDALParam
             strclass.AppendSpaceLine(1, "/// <summary>");
             strclass.AppendSpaceLine(1, "/// DataAccess [Table:" + TableName + "]");
             strclass.AppendSpaceLine(1, "/// </summary>");
-            strclass.AppendSpace(1, "public class " + DALName + " : BaseDAL<" + TableName + ", " + TableName + "s>");
+            strclass.AppendSpace(1, "public class " + DALName + " : BaseDAL<" + ModelName + ", " + ModelName + "s>");
             if (IClass != "")
             {
                 strclass.Append(":" + IClass);
@@ -447,7 +447,7 @@ namespace LTP.BuilderDALParam
             strclass.AppendSpaceLine(2, "public " + DALName + "(string connectionString)");
             strclass.AppendSpaceLine(2, "{");
             strclass.AppendSpaceLine(3, "DbHelper.ConnectionString = connectionString;");
-            strclass.AppendSpaceLine(3, "TableName = " + TableName + ".TableName;");
+            strclass.AppendSpaceLine(3, "TableName = " + ModelName + ".TableName;");
             strclass.AppendSpaceLine(2, "}");
             //strclass.AppendSpaceLine(2, "#region  成员方法");
 

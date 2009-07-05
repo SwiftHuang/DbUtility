@@ -66,6 +66,7 @@ namespace LTP.BuilderModel
             strclass.AppendLine("using System.Collections.Generic;");
             strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using hwj.DBUtility;");
+            strclass.AppendLine("using hwj.DBUtility.Entity;");
             strclass.AppendLine("using hwj.DBUtility.TableMapping;");
             strclass.AppendLine("");
             strclass.AppendLine("namespace " + Modelpath.Replace("Model", "Entity"));
@@ -181,12 +182,14 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
-        public string CreatTableName(string tableName)
+        public string CreatTableName(string modelName)
         {
+            if (modelName.IndexOf("tb") != -1)
+                modelName = modelName.Substring(2);
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "public static string TableName");
+            strclass.AppendSpaceLine(2, "public static string DBTableName");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "get { return \"" + tableName + "\"; }");
+            strclass.AppendSpaceLine(3, "get { return \"" + modelName + "\"; }");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }

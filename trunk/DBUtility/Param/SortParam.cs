@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace hwj.DBUtility
 {
+    /// <summary>
+    /// Sort parameter
+    /// </summary>
     public class SortParam
     {
         #region Property

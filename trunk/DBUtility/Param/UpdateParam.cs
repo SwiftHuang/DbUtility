@@ -23,11 +23,11 @@ namespace hwj.DBUtility
     public class UpdateFields : SqlParam
     {
         public UpdateFields(Enum fieldName, object fieldValue)
-            : base(fieldName, fieldValue, Enums.Operator.Equal)
+            : base(fieldName, fieldValue, Enums.Relation.Equal)
         {
         }
         public UpdateFields(string fieldName, object fieldValue)
-            : base(fieldName, fieldValue, Enums.Operator.Equal)
+            : base(fieldName, fieldValue, Enums.Relation.Equal)
         {
         }
     }

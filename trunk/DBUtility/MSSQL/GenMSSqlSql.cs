@@ -121,7 +121,21 @@ namespace hwj.DBUtility.MSSQL
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
                 {
-                    if (para.Operator == Enums.Operator.IN || para.Operator == Enums.Operator.NotIN)
+                    if (string.IsNullOrEmpty(para.FieldName))
+                    {
+                        if (para.FieldValue.ToString() == ")")
+                        {
+                            string tmp = TrimSql(sbWhere.ToString());
+                            sbWhere = new StringBuilder();
+                            sbWhere.Append(tmp).Append(para.FieldValue).Append(para.Expression.ToSqlString());
+                        }
+                        else
+                        {
+                            sbWhere.Append(para.FieldValue);
+                        }
+
+                    }
+                    else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                     {
                         StringBuilder inSql = new StringBuilder();
                         string[] s = (string[])para.FieldValue;
@@ -136,14 +150,7 @@ namespace hwj.DBUtility.MSSQL
                         sbWhere.Append(GetCondition(para, true, isPage));
                 }
                 //格式化最后的表达式，
-                string sql = sbWhere.ToString().TrimEnd(',');
-                int andL = Enums.Expression.AND.ToSqlString().Length;
-                int andR = Enums.Expression.OR.ToSqlString().Length;
-                if (sql.Substring(sql.Length - andL, andL) == Enums.Expression.AND.ToSqlString())
-                    sql = sql.Substring(0, sql.Length - andL);
-                if (sql.Substring(sql.Length - andR, andR) == Enums.Expression.OR.ToSqlString())
-                    sql = sql.Substring(0, sql.Length - andR);
-                return sql;
+                return base.TrimSql(sbWhere.ToString());
             }
             else
                 return string.Empty;
@@ -151,13 +158,12 @@ namespace hwj.DBUtility.MSSQL
         protected override string GetCondition(SqlParam para, bool isFilter, bool isPage)
         {
             StringBuilder sbStr = new StringBuilder();
-            //FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName));
             string __MsSqlParam = string.Empty;
             if (isFilter)
                 __MsSqlParam = _MsSqlWhereParam;
             else
                 __MsSqlParam = _MsSqlParam;
-            if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
+            if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
             else if (isPage)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append('\'').Append('\'').Append(CheckSql(para.FieldValue.ToString())).Append('\'').Append('\'').Append(para.Expression.ToSqlString());
@@ -207,7 +213,7 @@ namespace hwj.DBUtility.MSSQL
                 List<SqlParameter> LstDP = new List<SqlParameter>();
                 foreach (SqlParam sp in filterParam)
                 {
-                    if (sp.Operator == Enums.Operator.IN || sp.Operator == Enums.Operator.NotIN)
+                    if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
                         string[] s = (string[])sp.FieldValue;
                         for (int i = 0; i < s.Length; i++)
@@ -218,7 +224,7 @@ namespace hwj.DBUtility.MSSQL
                             LstDP.Add(p);
                         }
                     }
-                    else if (sp.Operator == Enums.Operator.IsNotNull || sp.Operator == Enums.Operator.IsNull)
+                    else if (sp.Operator == Enums.Relation.IsNotNull || sp.Operator == Enums.Relation.IsNull)
                     {
                     }
                     else
