@@ -257,6 +257,7 @@ namespace LTP.BuilderBLLComm
             //{
             //    strclass.AppendLine("using LTP.Common;");
             //}
+            strclass.AppendLine("using " + NameSpace + ".AccountLibrary;");
             strclass.AppendLine("using " + Modelpath.Replace("Model", "Entity") + ";");
             strclass.AppendLine("using " + Modelpath.Replace("Model", "DAL") + ";");
             if ((Factorypath != "") && (Factorypath != null))
@@ -287,8 +288,9 @@ namespace LTP.BuilderBLLComm
             //}
             strclass.AppendSpaceLine(2, "private static " + DALName + " da = new " + DALName + "(AccountLibrary.Config.DatabaseConnection);");
             strclass.AppendSpaceLine(2, "public " + BLLName + "()");
-            strclass.AppendSpaceLine(2, "{}");
+            strclass.AppendSpaceLine(2, "{ }");
             //strclass.AppendSpaceLine(2, "#region  成员方法" );
+            param = LTP.CodeHelper.CodeCommon.GetInParameter(Keys);
 
             #region  方法代码
             //if (Maxid)
@@ -390,10 +392,15 @@ namespace LTP.BuilderBLLComm
                 //strclass.AppendSpaceLine(2, "/// <summary>");
                 //strclass.AppendSpaceLine(2, "/// 是否存在该记录");
                 //strclass.AppendSpaceLine(2, "/// </summary>");
-                strclass.AppendSpaceLine(2, "public bool Exists(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+                strclass.AppendSpaceLine(2, "public bool Exists(" + param + ")");
                 strclass.AppendSpaceLine(2, "{");
-                GetFilterParam(ref strclass);
-                strclass.AppendSpaceLine(3, "return da.RecordCount(fp) > 0;");
+                if (!string.IsNullOrEmpty(param))
+                {
+                    GetFilterParam(ref strclass);
+                    strclass.AppendSpaceLine(3, "return da.RecordCount(fp) > 0;");
+                }
+                else
+                    strclass.AppendSpaceLine(3, "return da.RecordCount() > 0;");
                 strclass.AppendSpaceLine(2, "}");
             }
             return strclass.ToString();
@@ -436,10 +443,21 @@ namespace LTP.BuilderBLLComm
             //strclass.AppendSpaceLine(2, "{");
             //strclass.AppendSpaceLine(3, "dal.Update(model);");
             //strclass.AppendSpaceLine(2, "}");
-            strclass.AppendSpaceLine(2, "public static bool Update(" + ModelName + " updateEntity, " + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
-            strclass.AppendSpaceLine(2, "{");
-            GetFilterParam(ref strclass);
-            strclass.AppendSpaceLine(3, "return da.Update(updateEntity, fp);");
+
+            if (!string.IsNullOrEmpty(param))
+            {
+                strclass.AppendSpaceLine(2, "public static bool Update(" + ModelName + " updateEntity, " + param + ")");
+                strclass.AppendSpaceLine(2, "{");
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.Update(updateEntity, fp);");
+            }
+            else
+            {
+                strclass.AppendSpaceLine(2, "public static bool Update(" + ModelName + " updateEntity)");
+                strclass.AppendSpaceLine(2, "{");
+                strclass.AppendSpaceLine(3, "return da.Update(updateEntity, null);");
+            }
+
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
@@ -454,10 +472,16 @@ namespace LTP.BuilderBLLComm
             //strclass.AppendSpaceLine(3, KeysNullTip);
             //strclass.AppendSpaceLine(3, "dal.Delete(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
             //strclass.AppendSpaceLine(2, "}");
-            strclass.AppendSpaceLine(2, "public static bool Delete(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+            string param = LTP.CodeHelper.CodeCommon.GetInParameter(Keys);
+            strclass.AppendSpaceLine(2, "public static bool Delete(" + param + ")");
             strclass.AppendSpaceLine(2, "{");
-            GetFilterParam(ref strclass);
-            strclass.AppendSpaceLine(3, "return da.Delete(fp);");
+            if (!string.IsNullOrEmpty(param))
+            {
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.Delete(fp);");
+            }
+            else
+                strclass.AppendSpaceLine(3, "return da.Delete();");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
@@ -472,10 +496,15 @@ namespace LTP.BuilderBLLComm
             //strclass.AppendSpaceLine(3, KeysNullTip);
             //strclass.AppendSpaceLine(3, "return dal.GetModel(" + LTP.CodeHelper.CodeCommon.GetFieldstrlist(Keys) + ");");
             //strclass.AppendSpaceLine(2, "}");
-            strclass.AppendSpaceLine(2, "public static " + ModelName + " GetEntity(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + " GetEntity(" + param + ")");
             strclass.AppendSpaceLine(2, "{");
-            GetFilterParam(ref strclass);
-            strclass.AppendSpaceLine(3, "return da.GetEntity(fp);");
+            if (!string.IsNullOrEmpty(param))
+            {
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.GetEntity(fp);");
+            }
+            else
+                strclass.AppendSpaceLine(3, "return da.GetEntity();");
             strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
 
@@ -517,17 +546,32 @@ namespace LTP.BuilderBLLComm
         public string CreatBLLGetList()
         {
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ")");
+            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + param + ")");
             strclass.AppendSpaceLine(2, "{");
-            GetFilterParam(ref strclass);
-            strclass.AppendSpaceLine(3, "return da.GetList(null, fp);");
+            if (!string.IsNullOrEmpty(param))
+            {
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.GetList(null, fp);");
+            }
+            else
+                strclass.AppendSpaceLine(3, "return da.GetList();");
             strclass.AppendSpaceLine(2, "}");
 
             strclass.AppendLine("");
-            strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + LTP.CodeHelper.CodeCommon.GetInParameter(Keys) + ", int top)");
-            strclass.AppendSpaceLine(2, "{");
-            GetFilterParam(ref strclass);
-            strclass.AppendSpaceLine(3, "return da.GetList(null, fp, null,top);");
+
+            if (!string.IsNullOrEmpty(param))
+            {
+                strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(" + param + ", int top)");
+                strclass.AppendSpaceLine(2, "{");
+                GetFilterParam(ref strclass);
+                strclass.AppendSpaceLine(3, "return da.GetList(null, fp, null, top);");
+            }
+            else
+            {
+                strclass.AppendSpaceLine(2, "public static " + ModelName + "s GetList(int top)");
+                strclass.AppendSpaceLine(2, "{");
+                strclass.AppendSpaceLine(3, "return da.GetList(null, null, null, top);");
+            }
             strclass.AppendSpaceLine(2, "}");
             ////返回DataSet
             //strclass.AppendSpaceLine(2, "/// <summary>");
@@ -693,7 +737,10 @@ namespace LTP.BuilderBLLComm
             strclass.AppendSpaceLine(3, ModelName + "Page page = new " + ModelName + "Page();");
             GetPKParam(ref strclass);
             strclass.AppendSpaceLine(3, "page.PageSize = pageSize;");
-            strclass.AppendSpaceLine(3, "page.Result = da.GetPage2(null, null, null, pk, pageIndex, pageSize, out page.RecordCount);");
+            strclass.AppendSpaceLine(3, "page.Result = da.GetPage2(null, null, null, pk, pageIndex, pageSize, out RecordCount);");
+            strclass.AppendSpaceLine(3, "page.RecordCount = RecordCount;");
+            strclass.AppendSpaceLine(3, "return page;");
+
             strclass.AppendSpaceLine(2, "}");
 
             //strclass.AppendSpaceLine(2, "/// <summary>");
@@ -708,6 +755,7 @@ namespace LTP.BuilderBLLComm
 
         #endregion
 
+        private string param = string.Empty;
         private List<ColumnInfo> PKList = new List<ColumnInfo>();
         private void SetPKList()
         {
@@ -723,7 +771,7 @@ namespace LTP.BuilderBLLComm
             strclass.AppendSpaceLine(3, "FilterParams fp = new FilterParams();");
             foreach (ColumnInfo c in PKList)
             {
-                strclass.AppendSpaceLine(3, "fp.AddParam(" + ModelName + ".Fields." + c.ColumnName + ", " + c.ColumnName + ", Enums.Operator.Equal, Enums.Expression.AND);");
+                strclass.AppendSpaceLine(3, "fp.AddParam(" + ModelName + ".Fields." + c.ColumnName + ", " + c.ColumnName + ", Enums.Relation.Equal, Enums.Expression.AND);");
             }
         }
         private void GetPKParam(ref StringPlus strclass)
@@ -731,7 +779,7 @@ namespace LTP.BuilderBLLComm
             strclass.AppendSpaceLine(3, "DisplayFields pk = new DisplayFields();");
             foreach (ColumnInfo c in PKList)
             {
-                strclass.AppendSpaceLine(3, "df.Add(" + ModelName + ".Fields." + c.ColumnName + ");");
+                strclass.AppendSpaceLine(3, "pk.Add(" + ModelName + ".Fields." + c.ColumnName + ");");
             }
         }
     }

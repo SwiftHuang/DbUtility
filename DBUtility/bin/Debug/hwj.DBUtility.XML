@@ -4,11 +4,23 @@
         <name>hwj.DBUtility</name>
     </assembly>
     <members>
+        <member name="T:hwj.DBUtility.SortParam">
+            <summary>
+            Sort parameter
+            </summary>
+        </member>
         <member name="M:hwj.DBUtility.BaseGenSql`1.TruncateSql(System.String)">
             <summary>
             彻底清除表的内容(重置自动增量)
             </summary>
             <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.BaseGenSql`1.TrimSql(System.String)">
+            <summary>
+            格式化最后的表达式
+            </summary>
+            <param name="sql"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.GenerateSql`1.SelectPageSql(System.String,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32)">
@@ -117,44 +129,89 @@
             <param name="SQLString">查询语句</param>
             <returns>DataSet</returns>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Equal">
+        <member name="T:hwj.DBUtility.Enums.Relation">
+            <summary>
+            字段关系
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.Equal">
             <summary>
             等于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Unequal">
+        <member name="F:hwj.DBUtility.Enums.Relation.Unequal">
             <summary>
             不等于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Greater">
+        <member name="F:hwj.DBUtility.Enums.Relation.Greater">
             <summary>
             大于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Lesser">
+        <member name="F:hwj.DBUtility.Enums.Relation.Less">
             <summary>
             小于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Geq">
+        <member name="F:hwj.DBUtility.Enums.Relation.GreaterThanOrEqual">
             <summary>
             大于等于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.Leq">
+        <member name="F:hwj.DBUtility.Enums.Relation.LessThanOrEqual">
             <summary>
             小于等于
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.IsNull">
+        <member name="F:hwj.DBUtility.Enums.Relation.IsNull">
             <summary>
             为空
             </summary>
         </member>
-        <member name="F:hwj.DBUtility.Enums.Operator.IsNotNull">
+        <member name="F:hwj.DBUtility.Enums.Relation.IsNotNull">
             <summary>
             不为空
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.Like">
+            <summary>
+            相似
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.IN">
+            <summary>
+            包含
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.NotIN">
+            <summary>
+            不包含
+            </summary>
+        </member>
+        <member name="T:hwj.DBUtility.Enums.Expression">
+            <summary>
+            逻辑运算符
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Expression.Comma">
+            <summary>
+            逗号
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Expression.AND">
+            <summary>
+            与
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Expression.OR">
+            <summary>
+            或
+            </summary>
+        </member>
+        <member name="T:hwj.DBUtility.Enums.OrderBy">
+            <summary>
+            排序
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.OrderBy.Descending">
@@ -536,7 +593,7 @@
             自定义参数名(防止From To的情况下相同的参数名)
             </summary>
         </member>
-        <member name="M:hwj.DBUtility.SqlParamExtensions.AddParam(System.Collections.Generic.List{hwj.DBUtility.SqlParam},System.Enum,System.Object,hwj.DBUtility.Enums.Operator,hwj.DBUtility.Enums.Expression,System.String)">
+        <member name="M:hwj.DBUtility.SqlParamExtensions.AddParam(System.Collections.Generic.List{hwj.DBUtility.SqlParam},System.Enum,System.Object,hwj.DBUtility.Enums.Relation,hwj.DBUtility.Enums.Expression,System.String)">
             <summary>
             
             </summary>
@@ -547,6 +604,22 @@
             <param name="exp"></param>
             <param name="paramName">自定义参数名(不需要@)</param>
             <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
+            <summary>
+            Add a left brackets
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets">
+            <summary>
+            Add a right brackets
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets(hwj.DBUtility.Enums.Expression)">
+            <summary>
+            Add a right brackets
+            </summary>
+            <param name="expression"></param>
         </member>
     </members>
 </doc>

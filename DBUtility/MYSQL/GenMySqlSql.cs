@@ -85,7 +85,7 @@ namespace hwj.DBUtility.MYSQL
             else
                 __MySqlParam = _MySqlParam;
 
-            if (para.Operator == Enums.Operator.IsNotNull || para.Operator == Enums.Operator.IsNull)
+            if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
             else
                 sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MySqlParam, para.FieldName).Append(para.Expression.ToSqlString());

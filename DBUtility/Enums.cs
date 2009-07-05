@@ -4,7 +4,10 @@ namespace hwj.DBUtility
 {
     public class Enums
     {
-        public enum Operator
+        /// <summary>
+        /// 字段关系
+        /// </summary>
+        public enum Relation
         {
             /// <summary>
             /// 等于
@@ -21,15 +24,15 @@ namespace hwj.DBUtility
             /// <summary>
             /// 小于
             /// </summary>
-            Lesser,
+            Less,
             /// <summary>
             /// 大于等于
             /// </summary>
-            Geq,
+            GreaterThanOrEqual,
             /// <summary>
             /// 小于等于
             /// </summary>
-            Leq,
+            LessThanOrEqual,
             /// <summary>
             /// 为空
             /// </summary>
@@ -38,8 +41,17 @@ namespace hwj.DBUtility
             /// 不为空
             /// </summary>
             IsNotNull,
+            /// <summary>
+            /// 相似
+            /// </summary>
             Like,
+            /// <summary>
+            /// 包含
+            /// </summary>
             IN,
+            /// <summary>
+            /// 不包含
+            /// </summary>
             NotIN,
         }
         public enum DatabaseType
@@ -48,12 +60,28 @@ namespace hwj.DBUtility
             MySql,
             MsSql
         }
+        /// <summary>
+        /// 逻辑运算符
+        /// </summary>
         public enum Expression
         {
             None,
+            /// <summary>
+            /// 逗号
+            /// </summary>
+            Comma,
+            /// <summary>
+            /// 与
+            /// </summary>
             AND,
+            /// <summary>
+            /// 或
+            /// </summary>
             OR
         }
+        /// <summary>
+        /// 排序
+        /// </summary>
         public enum OrderBy
         {
             /// <summary>
@@ -107,31 +135,31 @@ namespace hwj.DBUtility
     }
     public static class EnumsExtensions
     {
-        public static string ToSqlString(this Enums.Operator oper)
+        public static string ToSqlString(this Enums.Relation oper)
         {
             switch (oper)
             {
-                case Enums.Operator.Equal:
+                case Enums.Relation.Equal:
                     return "=";
-                case Enums.Operator.Unequal:
+                case Enums.Relation.Unequal:
                     return "<>";
-                case Enums.Operator.IsNull:
+                case Enums.Relation.IsNull:
                     return " is null ";
-                case Enums.Operator.IsNotNull:
+                case Enums.Relation.IsNotNull:
                     return " is not null";
-                case Enums.Operator.Geq:
+                case Enums.Relation.GreaterThanOrEqual:
                     return ">=";
-                case Enums.Operator.Greater:
+                case Enums.Relation.Greater:
                     return ">";
-                case Enums.Operator.Lesser:
+                case Enums.Relation.Less:
                     return "<";
-                case Enums.Operator.Leq:
+                case Enums.Relation.LessThanOrEqual:
                     return "<=";
-                case Enums.Operator.Like:
+                case Enums.Relation.Like:
                     return " LIKE ";
-                case Enums.Operator.IN:
+                case Enums.Relation.IN:
                     return " IN({0}) ";
-                case Enums.Operator.NotIN:
+                case Enums.Relation.NotIN:
                     return " NOT IN({0}) ";
                 default:
                     throw new Exception("Enums.Operator error");
@@ -146,8 +174,10 @@ namespace hwj.DBUtility
                     return " AND ";
                 case Enums.Expression.OR:
                     return " OR ";
-                case Enums.Expression.None:
+                case Enums.Expression.Comma:
                     return ",";
+                case Enums.Expression.None:
+                    return "";
                 default:
                     throw new Exception("Enums Expression error");
             }
