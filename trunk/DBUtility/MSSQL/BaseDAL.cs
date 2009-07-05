@@ -212,10 +212,20 @@ namespace hwj.DBUtility.MSSQL
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
-            if (reader.HasRows)
-                return CreateSingleEntity(reader);
-            else
-                return null;
+            try
+            {
+                if (reader.HasRows)
+                    return CreateSingleEntity(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
         }
         #endregion
 
@@ -240,10 +250,20 @@ namespace hwj.DBUtility.MSSQL
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
-            if (reader.HasRows)
-                return CreateListEntity(reader);
-            else
-                return new L();
+            try
+            {
+                if (reader.HasRows)
+                    return CreateListEntity(reader);
+                else
+                    return new L();
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
         }
         #endregion
 
@@ -279,25 +299,39 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity.CommandText = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
             TotalCount = 0;
-            SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
-            if (conn.State != ConnectionState.Open)
-                conn.Open();
-            SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
-            SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
-            sp.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(sp);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
+            using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
-                L result = CreateListEntity(reader);
-                if (cmd.Parameters.Count > 0)
-                    TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
-                cmd.Parameters.Clear();
-                return result;
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+                SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
+                sp.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(sp);
+                SqlDataReader reader = cmd.ExecuteReader();
+                try
+                {
+                    if (reader.HasRows)
+                    {
+                        L result = CreateListEntity(reader);
+                        reader.Close();
+                        if (cmd.Parameters.Count > 0)
+                            TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
+                        cmd.Parameters.Clear();
+                        return result;
+                    }
+                    else
+                        return new L();
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
             }
-            else
-                return new L();
         }
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
@@ -314,25 +348,39 @@ namespace hwj.DBUtility.MSSQL
         {
             _SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
             TotalCount = 0;
-            SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
-            if (conn.State != ConnectionState.Open)
-                conn.Open();
-            SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
-            SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
-            sp.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(sp);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
+            using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
-                L result = CreateListEntity(reader);
-                if (cmd.Parameters.Count > 0)
-                    TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
-                cmd.Parameters.Clear();
-                return result;
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+                SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
+                sp.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(sp);
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                try
+                {
+                    if (reader.HasRows)
+                    {
+                        L result = CreateListEntity(reader);
+                        reader.Close();
+                        if (cmd.Parameters.Count > 0)
+                            TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
+                        cmd.Parameters.Clear();
+                        return result;
+                    }
+                    else
+                        return new L();
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
             }
-            else
-                return new L();
         }
         #endregion
 
@@ -401,44 +449,31 @@ namespace hwj.DBUtility.MSSQL
                 return dataTable;//别忘了要返回datatable，否则出错
             }
             catch { throw; }
-            finally { reader.Close(); }
+            finally
+            {
+                if (!reader.IsClosed) reader.Close();
+            }
         }
         protected T CreateSingleEntity(IDataReader reader)
         {
-            try
-            {
-                IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-                lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
-                lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
+            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
+            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
-                reader.Read();
-                return CreateEntityNotClose(reader, lstFieldInfo);
-            }
-            catch
-            { throw; }
-            finally
-            { reader.Close(); }
+            reader.Read();
+            return CreateEntityNotClose(reader, lstFieldInfo);
         }
         protected L CreateListEntity(IDataReader reader)
         {
-            try
-            {
-                L DataList = new L();
-                IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-                lstFieldInfo = SetFieldIndex(reader, FieldMappingInfo.GetFieldMapping(typeof(T)));
+            L DataList = new L();
+            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+            lstFieldInfo = SetFieldIndex(reader, FieldMappingInfo.GetFieldMapping(typeof(T)));
 
-                while (reader.Read())
-                {
-                    DataList.Add(CreateEntityNotClose(reader, lstFieldInfo));
-                }
-                return DataList;
-            }
-            catch
+            while (reader.Read())
             {
-                throw;
+                DataList.Add(CreateEntityNotClose(reader, lstFieldInfo));
             }
-            finally
-            { reader.Close(); }
+            return DataList;
         }
         #endregion
 
