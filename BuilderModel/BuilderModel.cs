@@ -78,7 +78,9 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(1, "public class " + _modelname + " : BaseTable<" + _modelname + ">");
             strclass.AppendSpaceLine(1, "{");
             strclass.AppendSpaceLine(2, "public " + _modelname + "()");
-            strclass.AppendSpaceLine(2, "{}");
+            strclass.AppendSpaceLine(2, "{");
+            strclass.AppendSpaceLine(3, "base.DBTableName = DBTableName;");
+            strclass.AppendSpaceLine(2, "}");
             strclass.AppendLine(CreatFieldsEnum());
             strclass.AppendLine(CreatTableName(_modelname));
             strclass.AppendLine(CreatModelMethod());
