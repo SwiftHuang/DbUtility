@@ -634,17 +634,17 @@
             <param name="strWhere"></param>
             <returns></returns>
         </member>
-        <member name="P:hwj.DBUtility.TableMapping.BaseTable.DatabaseDate">
+        <member name="P:hwj.DBUtility.TableMapping.BaseTable`1.DatabaseDate">
             <summary>
             设置为数据库当前时间日期
             </summary>
         </member>
-        <member name="P:hwj.DBUtility.TableMapping.BaseTable.UseAssigned">
+        <member name="P:hwj.DBUtility.TableMapping.BaseTable`1.UseAssigned">
             <summary>
             是否使用赋值字段检测
             </summary>
         </member>
-        <member name="P:hwj.DBUtility.TableMapping.BaseTable.Assigned">
+        <member name="P:hwj.DBUtility.TableMapping.BaseTable`1.Assigned">
             <summary>
             获取或设置被赋值字段
             </summary>

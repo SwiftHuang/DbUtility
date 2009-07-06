@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
-    public abstract class BaseGenSql<T> where T : BaseTable//<T>
+    public abstract class BaseGenSql<T> where T : BaseTable<T>, new()
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(1) FROM {0} (NOLOCK) {1};";
@@ -236,13 +236,13 @@ namespace hwj.DBUtility
         }
         protected bool IsDatabaseDate(SqlParam param)
         {
-            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable.DatabaseDate)
+            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable<T>.DatabaseDate)
                 return true;
             return false;
         }
         protected bool IsDatabaseDate(System.Data.DbType dbType, object value)
         {
-            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable.DatabaseDate)
+            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable<T>.DatabaseDate)
                 return true;
             else
                 return false;
