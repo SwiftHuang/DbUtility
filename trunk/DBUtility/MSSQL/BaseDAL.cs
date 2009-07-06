@@ -346,13 +346,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public L GetPage2(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
+            //_SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
+            _SqlEntity = GenSql.SelectPageSqlEntity2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
-                SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+                SqlCommand cmd = new SqlCommand();
+                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
                 SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);

@@ -53,7 +53,7 @@ namespace hwj.DBUtility.MYSQL
             {
                 sMaxCount = string.Format(_MySqlLimitCount, maxCount);
             }
-            return string.Format(_MySqlSelectString, GenDisplayFieldsSql(displayFields), GetTableName(tableName), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields), sMaxCount);
+            return string.Format(_MySqlSelectString, GenDisplayFieldsSql(displayFields), tableName, GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields), sMaxCount);
         }
         #endregion
 

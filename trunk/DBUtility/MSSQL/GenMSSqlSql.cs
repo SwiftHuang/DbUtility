@@ -16,7 +16,12 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlTruncate = "TRUNCATE TABLE {0};";
+        private const string _MsSqlGetDate = "GetDate()";
 
+        public GenerateSql()
+        {
+            base.DatabaseGetDateSql = _MsSqlGetDate;
+        }
         #region Insert Sql
         public override string InsertLastIDSql()
         {
@@ -32,15 +37,7 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (entity.Assigned.IndexOf(f.FieldName) != -1)
                     {
-                        object obj = f.Property.GetValue(entity, null);
-                        if (obj != null)
-                        {
-                            if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
-                            {
-                                sbInsField.Append(f.FieldName).Append(',');
-                                sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
-                            }
-                        }
+                        InsertSqlString(ref sbInsField, ref sbInsValue, f, entity);
                     }
                 }
             }
@@ -48,18 +45,25 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    object obj = f.Property.GetValue(entity, null);
-                    if (obj != null)
-                    {
-                        if (!f.DataHandles.Find(Enums.DataHandle.UnInsert))
-                        {
-                            sbInsField.Append(f.FieldName).Append(',');
-                            sbInsValue.AppendFormat(_MsSqlParam, f.FieldName).Append(',');
-                        }
-                    }
+                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity);
                 }
             }
-            return string.Format(_InsertString, entity.GetType().Name, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
+            return string.Format(_InsertString, entity.DBTableName, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
+        }
+        private void InsertSqlString(ref StringBuilder insField, ref StringBuilder insValue, FieldMappingInfo field, T entity)
+        {
+            object obj = field.Property.GetValue(entity, null);
+            if (obj != null)
+            {
+                if (!field.DataHandles.Find(Enums.DataHandle.UnInsert))
+                {
+                    insField.Append(field.FieldName).Append(',');
+                    if (!IsDatabaseDate(field.DataTypeCode, obj))
+                        insValue.AppendFormat(_MsSqlParam, field.FieldName).Append(',');
+                    else
+                        insValue.Append(_MsSqlGetDate).Append(',');
+                }
+            }
         }
         #endregion
         #region Delete Sql
@@ -81,7 +85,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), GetTableName(tableName), GetNoLock(isNoLock), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(isNoLock), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
         }
         /// <summary>
         /// 数据分页
@@ -100,14 +104,28 @@ namespace hwj.DBUtility.MSSQL
             string _SelectFields = GenDisplayFieldsSql(displayFields);
             string _FilterParam = GenFilterParamsSql(filterParam, true);
             string _OrderParam = GenSortParamsSql(sortParams, true);
-            return string.Format(_MsSqlPaging_RowCount, GetTableName(tableName), GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
+            return string.Format(_MsSqlPaging_RowCount, tableName, GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
         }
         public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
             string _SelectFields = GenDisplayFieldsSql(displayFields);
             string _FilterParam = GenFilterParamsSql(filterParam, true);
             string _OrderParam = GenSortParamsSql(sortParams, true);
-            return string.Format(_MsSqlPageView, GetTableName(tableName), GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
+            return string.Format(_MsSqlPageView, tableName, GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
+        }
+        public SqlEntity SelectPageSqlEntity2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        {
+            SqlEntity SE = new SqlEntity();
+            SE.CommandText = "EXEC dbo.sp_PageView @TableName,@FieldKey,@PageIndex,@PageSize,@DisplayField,@Sort,@Where,@_RecordCount output";
+            SE.Parameters = new List<SqlParameter>();
+            SE.Parameters.Add(new SqlParameter("@TableName", tableName));
+            SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
+            SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
+            SE.Parameters.Add(new SqlParameter("@PageSize", pageSize));
+            SE.Parameters.Add(new SqlParameter("@DisplayField", GenDisplayFieldsSql(displayFields)));
+            SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
+            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
+            return SE;
         }
         #endregion
 
@@ -133,7 +151,6 @@ namespace hwj.DBUtility.MSSQL
                         {
                             sbWhere.Append(para.FieldValue);
                         }
-
                     }
                     else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                     {
@@ -163,12 +180,28 @@ namespace hwj.DBUtility.MSSQL
                 __MsSqlParam = _MsSqlWhereParam;
             else
                 __MsSqlParam = _MsSqlParam;
+
+            sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString());
+
             if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append(para.Expression.ToSqlString());
+            {
+                //sbStr.Append(para.Expression.ToSqlString());
+            }
             else if (isPage)
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).Append('\'').Append('\'').Append(CheckSql(para.FieldValue.ToString())).Append('\'').Append('\'').Append(para.Expression.ToSqlString());
+            {
+                sbStr.Append('\'').Append('\'');
+                if (IsDatabaseDate(para))
+                    sbStr.Append(_MsSqlGetDate);
+                else
+                    sbStr.Append(para.FieldValue.ToString());
+                sbStr.Append('\'').Append('\'');
+            }
+            else if (IsDatabaseDate(para))
+                sbStr.Append(para.FieldValue);
             else
-                sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString()).AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName).Append(para.Expression.ToSqlString());
+                sbStr.AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName);
+
+            sbStr.Append(para.Expression.ToSqlString());
             return sbStr.ToString();
         }
         private string GetNoLock(bool isNoLock)
@@ -177,6 +210,28 @@ namespace hwj.DBUtility.MSSQL
                 return "(NOLOCK)";
             else
                 return string.Empty;
+        }
+        private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
+        {
+            object value = field.Property.GetValue(entity, null);
+            if (!IsDatabaseDate(field.DataTypeCode, value))
+            {
+                SqlParameter dp = new SqlParameter();
+                dp.DbType = field.DataTypeCode;
+                dp.ParameterName = string.Format(_MsSqlParam, field.FieldName);
+                dp.Value = CheckValue(dp, value);
+                return dp;
+            }
+            return null;
+        }
+        private object CheckValue(SqlParameter param, object value)
+        {
+            if (IsDateType(param.DbType))
+            {
+                if (Convert.ToDateTime(value) == DateTime.MinValue)
+                    return DBNull.Value;
+            }
+            return value;
         }
         #endregion
 
@@ -258,11 +313,9 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (entity.Assigned.IndexOf(f.FieldName) != -1)
                     {
-                        SqlParameter dp = new SqlParameter();
-                        dp.DbType = f.DataTypeCode;
-                        dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
-                        dp.Value = CheckValue(dp, f.Property.GetValue(entity, null));
-                        LstDP.Add(dp);
+                        SqlParameter dp = GetSqlParameter(f, entity);
+                        if (dp != null)
+                            LstDP.Add(dp);
                     }
                 }
             }
@@ -270,24 +323,12 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    SqlParameter dp = new SqlParameter();
-                    object _value = f.Property.GetValue(entity, null);
-                    dp.DbType = f.DataTypeCode;
-                    dp.ParameterName = string.Format(_MsSqlParam, f.FieldName);
-                    dp.Value = CheckValue(dp, f.Property.GetValue(entity, null));
-                    LstDP.Add(dp);
+                    SqlParameter dp = GetSqlParameter(f, entity);
+                    if (dp != null)
+                        LstDP.Add(dp);
                 }
             }
             return LstDP;
-        }
-        private object CheckValue(SqlParameter param, object value)
-        {
-            if (IsDateType(param.DbType))
-            {
-                if (Convert.ToDateTime(value) == DateTime.MinValue)
-                    return DBNull.Value;
-            }
-            return value;
         }
         #endregion
     }
