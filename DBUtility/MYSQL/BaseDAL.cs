@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace hwj.DBUtility.MYSQL
 {
-    public abstract class BaseDAL<T> where T : BaseTable<T>, new()
+    public abstract class BaseDAL<T> where T : BaseTable, new()
     {
         GenerateSql<T> GenSql = new GenerateSql<T>();
         #region Property
@@ -40,7 +40,7 @@ namespace hwj.DBUtility.MYSQL
             List<MySqlParameter> sp = new List<MySqlParameter>();
             sp.AddRange(GenSql.GenParameter(updateParam));
             sp.AddRange(GenSql.GenParameter(whereParam));
-            _SqlEntity = new SqlEntity(GenSql.UpdateSql(updateParam, whereParam), sp);
+            _SqlEntity = new SqlEntity(GenSql.UpdateSql(TableName, updateParam, whereParam), sp);
             if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
                 return true;
             else
@@ -60,7 +60,7 @@ namespace hwj.DBUtility.MYSQL
         }
         public bool Delete(FilterParams whereParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.DeleteSql(whereParam), GenSql.GenParameter(whereParam));
+            _SqlEntity = new SqlEntity(GenSql.DeleteSql(TableName, whereParam), GenSql.GenParameter(whereParam));
             if (DbHelper.ExecuteSql(SqlEntity.Sql, SqlEntity.Parameters) > 0)
                 return true;
             else

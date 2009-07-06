@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
-    public abstract class BaseGenSql<T> where T : BaseTable<T>, new()
+    public abstract class BaseGenSql<T> where T : BaseTable//<T>
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(1) FROM {0} (NOLOCK) {1};";
@@ -14,44 +14,26 @@ namespace hwj.DBUtility
         protected const string _InsertString = "INSERT INTO {0} ({1}) VALUES({2});";
         protected const string _StringFormat = "'{0}'";
         protected const string _DecimalFormat = "{0}";
-
-        #region Property
-        protected string GetTableName()
-        {
-            return new T().DBTableName;
-        }
         /// <summary>
-        /// 检查非法字符
+        /// 获取数据库SQL
         /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        protected string CheckSql(string str)
-        {
-            string s = string.Empty;
-            if (str == null)
-            {
-                s = string.Empty;
-            }
-            else
-            {
-                s = str.Replace("'", "").Replace("*", "").Replace("select", "")
-                       .Replace("where", "").Replace(";", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
-            }
-            return s;
-        }
-        public string DatabaseGetDateSql { get; set; }
-        #endregion
+        protected string DatabaseGetDateSql = string.Empty;
+
+        private static readonly int andL = Enums.Expression.AND.ToSqlString().Length;
+        private static readonly int andR = Enums.Expression.OR.ToSqlString().Length;
 
         #region Public Functions
 
         #region Delete Sql
-        public string DeleteSql(FilterParams filterParam)
+        /// <summary>
+        /// 获取Delete Sql
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <returns></returns>
+        public string DeleteSql(string tableName, FilterParams filterParam)
         {
-            return string.Format(_DeleteString, GetTableName(), GenFilterParamsSql(filterParam));
-        }
-        public string DeleteBatchSql(FilterParams filterParam, string inSqlParam)
-        {
-            return string.Format(_DeleteString, GetTableName(), string.Format(GenFilterParamsSql(filterParam), inSqlParam));
+            return string.Format(_DeleteString, tableName, GenFilterParamsSql(filterParam));
         }
         /// <summary>
         /// 彻底清除表的内容(重置自动增量)
@@ -62,7 +44,32 @@ namespace hwj.DBUtility
         #endregion
 
         #region Update Sql
-        public string UpdateSql(T entity, FilterParams filterParams)
+        private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity)
+        {
+            object obj = field.Property.GetValue(entity, null);
+            if (obj != null)
+            {
+                if (!field.DataHandles.Find(Enums.DataHandle.UnUpdate))
+                {
+                    if (!IsDatabaseDate(field.DataTypeCode, obj))
+                        up.AddParam(field.FieldName, obj);
+                    else
+                        up.AddParam(field.FieldName, DatabaseGetDateSql);
+                }
+            }
+            else
+            {
+                if (!field.DataHandles.Find(Enums.DataHandle.UnNull))
+                    up.AddParam(field.FieldName, DBNull.Value);
+            }
+        }
+        /// <summary>
+        /// 获取Update Sql
+        /// </summary>
+        /// <param name="entity">表对象</param>
+        /// <param name="filterParams">筛选条件</param>
+        /// <returns></returns>
+        internal string UpdateSql(T entity, FilterParams filterParams)
         {
             UpdateParam up = new UpdateParam();
             if (entity.UseAssigned)
@@ -82,39 +89,18 @@ namespace hwj.DBUtility
                     SetUpdateParam(ref up, f, entity);
                 }
             }
-            return UpdateSql(up, filterParams);
+            return UpdateSql(entity.GetTableName(), up, filterParams);
         }
-        public string UpdateSql(UpdateParam updateParam, FilterParams whereParam)
+        /// <summary>
+        /// 获取Update Sql
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="updateParam">Update参数</param>
+        /// <param name="filterParam">筛选参选</param>
+        /// <returns></returns>
+        internal string UpdateSql(string tableName, UpdateParam updateParam, FilterParams filterParam)
         {
-            return string.Format(_UpdateString, GetTableName(), GenFieldsSql(updateParam), GenFilterParamsSql(whereParam));
-        }
-        private bool FindName(string value, params Enum[] datasource)
-        {
-            foreach (Enum s in datasource)
-            {
-                if (value == s.ToString())
-                    return true;
-            }
-            return false;
-        }
-        private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity)
-        {
-            object obj = field.Property.GetValue(entity, null);
-            if (obj != null)
-            {
-                if (!field.DataHandles.Find(Enums.DataHandle.UnUpdate))
-                {
-                    if (!IsDatabaseDate(field.DataTypeCode, obj))
-                        up.AddParam(field.FieldName, obj);
-                    else
-                        up.AddParam(field.FieldName, DatabaseGetDateSql);
-                }
-            }
-            else
-            {
-                if (!field.DataHandles.Find(Enums.DataHandle.UnNull))
-                    up.AddParam(field.FieldName, DBNull.Value);
-            }
+            return string.Format(_UpdateString, tableName, GenFieldsSql(updateParam), GenFilterParamsSql(filterParam));
         }
         #endregion
 
@@ -135,21 +121,6 @@ namespace hwj.DBUtility
         #endregion
 
         #region Protected Functions
-        protected bool IsNumType(DbType typeCode)
-        {
-            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64)
-                return true;
-            else
-                return false;
-        }
-        protected bool IsDateType(DbType typeCode)
-        {
-            if (typeCode == DbType.DateTime)
-                return true;
-            else
-                return false;
-        }
-
         protected abstract string GetCondition(SqlParam para, bool isWhere, bool isPage);
         protected string GenFieldsSql(UpdateParam listParam)
         {
@@ -165,6 +136,7 @@ namespace hwj.DBUtility
             else
                 return string.Empty;
         }
+
         protected abstract string GenFilterParamsSql(FilterParams listParam, bool isPage);
         protected string GenFilterParamsSql(FilterParams listParam)
         {
@@ -214,16 +186,13 @@ namespace hwj.DBUtility
             else
                 return string.Empty;
         }
-        #endregion
 
-        private static readonly int andL = Enums.Expression.AND.ToSqlString().Length;
-        private static readonly int andR = Enums.Expression.OR.ToSqlString().Length;
         /// <summary>
         /// 格式化最后的表达式
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        internal string TrimSql(string sql)
+        protected string TrimSql(string sql)
         {
             if (sql.Substring(sql.Length - andL, andL) == Enums.Expression.AND.ToSqlString())
                 sql = sql.Substring(0, sql.Length - andL);
@@ -231,18 +200,53 @@ namespace hwj.DBUtility
                 sql = sql.Substring(0, sql.Length - andR);
             return sql.TrimEnd(',');
         }
-        internal bool IsDatabaseDate(SqlParam param)
+        /// <summary>
+        /// 检查非法字符
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        protected string CheckSql(string str)
         {
-            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable<T>.DatabaseDate)
-                return true;
-            return false;
+            string s = string.Empty;
+            if (str == null)
+            {
+                s = string.Empty;
+            }
+            else
+            {
+                s = str.Replace("'", "").Replace("*", "").Replace("select", "")
+                       .Replace("where", "").Replace(";", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
+            }
+            return s;
         }
-        internal bool IsDatabaseDate(System.Data.DbType dbType, object value)
+
+        protected bool IsNumType(DbType typeCode)
         {
-            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable<T>.DatabaseDate)
+            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64)
                 return true;
             else
                 return false;
         }
+        protected bool IsDateType(DbType typeCode)
+        {
+            if (typeCode == DbType.DateTime)
+                return true;
+            else
+                return false;
+        }
+        protected bool IsDatabaseDate(SqlParam param)
+        {
+            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable.DatabaseDate)
+                return true;
+            return false;
+        }
+        protected bool IsDatabaseDate(System.Data.DbType dbType, object value)
+        {
+            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable.DatabaseDate)
+                return true;
+            else
+                return false;
+        }
+        #endregion
     }
 }

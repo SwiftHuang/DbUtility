@@ -2,12 +2,12 @@
 using System;
 namespace hwj.DBUtility.TableMapping
 {
-    public class BaseTable<T> where T : BaseTable<T>
+    public abstract class BaseTable
     {
-        public BaseTable()
+        public BaseTable(string tableName)
         {
             _assigned = new List<String>();
-            DBTableName = string.Empty;
+            DBTableName = tableName;
         }
 
         private static DateTime _DatabaseDate = DateTime.Parse("9999-09-09");
@@ -19,7 +19,11 @@ namespace hwj.DBUtility.TableMapping
             get { return _DatabaseDate; }
         }
 
-        public string DBTableName { get; set; }
+        private string DBTableName = string.Empty;
+        public string GetTableName()
+        {
+            return DBTableName;
+        }
         private bool _useAssigned = true;
         /// <summary>
         /// 是否使用赋值字段检测
@@ -50,46 +54,46 @@ namespace hwj.DBUtility.TableMapping
             if (_assigned != null)
                 _assigned.Add(columnName);
         }
-        public static void SetValue(T entity, string fieldName, object value)
-        {
-            if (value != null)
-            {
-                FieldMappingInfo f = TableMapping.FieldMappingInfo.GetFieldInfo(typeof(T), fieldName);
-                switch (f.DataTypeCode)
-                {
-                    case System.Data.DbType.DateTime:
-                        value = Convert.ToDateTime(value);
-                        break;
-                    case System.Data.DbType.Decimal:
-                        value = Convert.ToDecimal(value);
-                        break;
-                    case System.Data.DbType.Double:
-                        value = Convert.ToDouble(value);
-                        break;
-                    case System.Data.DbType.Int16:
-                        value = Convert.ToInt16(value);
-                        break;
-                    case System.Data.DbType.Int32:
-                        value = Convert.ToInt32(value);
-                        break;
-                    case System.Data.DbType.Int64:
-                        value = Convert.ToInt64(value);
-                        break;
-                    case System.Data.DbType.UInt16:
-                        value = Convert.ToUInt16(value);
-                        break;
-                    case System.Data.DbType.UInt32:
-                        value = Convert.ToUInt32(value);
-                        break;
-                    case System.Data.DbType.UInt64:
-                        value = Convert.ToUInt64(value);
-                        break;
-                    default:
-                        break;
-                }
-                f.Property.SetValue(entity, value, null);
-            }
-        }
+        //public static void SetValue(T entity, string fieldName, object value)
+        //{
+        //    if (value != null)
+        //    {
+        //        FieldMappingInfo f = TableMapping.FieldMappingInfo.GetFieldInfo(typeof(T), fieldName);
+        //        switch (f.DataTypeCode)
+        //        {
+        //            case System.Data.DbType.DateTime:
+        //                value = Convert.ToDateTime(value);
+        //                break;
+        //            case System.Data.DbType.Decimal:
+        //                value = Convert.ToDecimal(value);
+        //                break;
+        //            case System.Data.DbType.Double:
+        //                value = Convert.ToDouble(value);
+        //                break;
+        //            case System.Data.DbType.Int16:
+        //                value = Convert.ToInt16(value);
+        //                break;
+        //            case System.Data.DbType.Int32:
+        //                value = Convert.ToInt32(value);
+        //                break;
+        //            case System.Data.DbType.Int64:
+        //                value = Convert.ToInt64(value);
+        //                break;
+        //            case System.Data.DbType.UInt16:
+        //                value = Convert.ToUInt16(value);
+        //                break;
+        //            case System.Data.DbType.UInt32:
+        //                value = Convert.ToUInt32(value);
+        //                break;
+        //            case System.Data.DbType.UInt64:
+        //                value = Convert.ToUInt64(value);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        f.Property.SetValue(entity, value, null);
+        //    }
+        //}
 
     }
 }
