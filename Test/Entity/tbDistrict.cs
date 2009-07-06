@@ -11,14 +11,16 @@ namespace Test.Entity.Table
     /// 实体类tbDistrict 。(属性说明自动提取数据库字段的描述信息)
     /// </summary>
     [Serializable]
-    public class tbDistrict : BaseTable
+    public class tbDistrict : BaseTable<tbDistrict>
     {
-        public static string DBTableName = "tbDistrict";
+
         public tbDistrict()
-            : base("tbDistrict")
+            : base(DBTableName)
         {
 
         }
+        public static string DBTableName = "tbDistrict";
+
         public enum Fields
         {
             /// <summary>
