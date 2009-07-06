@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
-    public abstract class BaseGenSql<T> where T : BaseTable<T>
+    public abstract class BaseGenSql<T> where T : BaseTable<T>, new()
     {
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _SelectCountString = "SELECT COUNT(1) FROM {0} (NOLOCK) {1};";
@@ -18,15 +18,13 @@ namespace hwj.DBUtility
         #region Property
         protected string GetTableName()
         {
-            return GetTableName(null);
+            return new T().DBTableName;
         }
-        protected string GetTableName(string tableName)
-        {
-            if (tableName != null && tableName != string.Empty)
-                return tableName;
-            else
-                return typeof(T).Name.ToString().Trim();
-        }
+        /// <summary>
+        /// 检查非法字符
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         protected string CheckSql(string str)
         {
             string s = string.Empty;
@@ -41,7 +39,7 @@ namespace hwj.DBUtility
             }
             return s;
         }
-
+        public string DatabaseGetDateSql { get; set; }
         #endregion
 
         #region Public Functions
@@ -73,17 +71,7 @@ namespace hwj.DBUtility
                 {
                     if (entity.Assigned.IndexOf(f.FieldName) != -1)
                     {
-                        object obj = f.Property.GetValue(entity, null);
-                        if (obj != null)
-                        {
-                            if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
-                                up.AddParam(f.FieldName, obj);
-                        }
-                        else
-                        {
-                            if (!f.DataHandles.Find(Enums.DataHandle.UnNull))
-                                up.AddParam(f.FieldName, DBNull.Value);
-                        }
+                        SetUpdateParam(ref up, f, entity);
                     }
                 }
             }
@@ -91,17 +79,7 @@ namespace hwj.DBUtility
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    object obj = f.Property.GetValue(entity, null);
-                    if (obj != null)
-                    {
-                        if (!f.DataHandles.Find(Enums.DataHandle.UnUpdate))
-                            up.AddParam(f.FieldName, obj);
-                    }
-                    else
-                    {
-                        if (!f.DataHandles.Find(Enums.DataHandle.UnNull))
-                            up.AddParam(f.FieldName, DBNull.Value);
-                    }
+                    SetUpdateParam(ref up, f, entity);
                 }
             }
             return UpdateSql(up, filterParams);
@@ -119,7 +97,25 @@ namespace hwj.DBUtility
             }
             return false;
         }
-
+        private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity)
+        {
+            object obj = field.Property.GetValue(entity, null);
+            if (obj != null)
+            {
+                if (!field.DataHandles.Find(Enums.DataHandle.UnUpdate))
+                {
+                    if (!IsDatabaseDate(field.DataTypeCode, obj))
+                        up.AddParam(field.FieldName, obj);
+                    else
+                        up.AddParam(field.FieldName, DatabaseGetDateSql);
+                }
+            }
+            else
+            {
+                if (!field.DataHandles.Find(Enums.DataHandle.UnNull))
+                    up.AddParam(field.FieldName, DBNull.Value);
+            }
+        }
         #endregion
 
         #region Insert Sql
@@ -132,7 +128,7 @@ namespace hwj.DBUtility
         #region Record Count Sql
         public string SelectCountSql(string tableName, FilterParams filterParam)
         {
-            return string.Format(_SelectCountString, GetTableName(tableName), GenFilterParamsSql(filterParam));
+            return string.Format(_SelectCountString, tableName, GenFilterParamsSql(filterParam));
         }
         #endregion
 
@@ -234,6 +230,19 @@ namespace hwj.DBUtility
             if (sql.Substring(sql.Length - andR, andR) == Enums.Expression.OR.ToSqlString())
                 sql = sql.Substring(0, sql.Length - andR);
             return sql.TrimEnd(',');
+        }
+        internal bool IsDatabaseDate(SqlParam param)
+        {
+            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable<T>.DatabaseDate)
+                return true;
+            return false;
+        }
+        internal bool IsDatabaseDate(System.Data.DbType dbType, object value)
+        {
+            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable<T>.DatabaseDate)
+                return true;
+            else
+                return false;
         }
     }
 }

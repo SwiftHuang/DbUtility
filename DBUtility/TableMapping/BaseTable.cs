@@ -4,10 +4,22 @@ namespace hwj.DBUtility.TableMapping
 {
     public class BaseTable<T> where T : BaseTable<T>
     {
-        protected BaseTable()
+        public BaseTable()
         {
             _assigned = new List<String>();
+            DBTableName = string.Empty;
         }
+
+        private static DateTime _DatabaseDate = DateTime.Parse("9999-09-09");
+        /// <summary>
+        /// 设置为数据库当前时间日期
+        /// </summary>
+        public static DateTime DatabaseDate
+        {
+            get { return _DatabaseDate; }
+        }
+
+        public string DBTableName { get; set; }
         private bool _useAssigned = true;
         /// <summary>
         /// 是否使用赋值字段检测
@@ -78,5 +90,6 @@ namespace hwj.DBUtility.TableMapping
                 f.Property.SetValue(entity, value, null);
             }
         }
+
     }
 }
