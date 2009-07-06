@@ -7,7 +7,7 @@ using hwj.DBUtility.TableMapping;
 namespace hwj.DBUtility.MSSQL
 {
     public abstract class BaseDAL<T, L>
-        where T : BaseTable<T>, new()
+        where T : BaseTable, new()
         where L : List<T>, new()
     {
         protected static GenerateSql<T> GenSql = new GenerateSql<T>();
@@ -20,9 +20,14 @@ namespace hwj.DBUtility.MSSQL
         }
         protected static string TableName { get; set; }
         private static bool _EnableSqlLog = false;
-        public static bool EnableSqlLog { get { return _EnableSqlLog; } set { _EnableSqlLog = value; } }
+        public static bool EnableSqlLog
+        {
+            get { return _EnableSqlLog; }
+            set { _EnableSqlLog = value; }
+        }
         #endregion
-        #region  Insert
+
+        #region Insert
         /// <summary>
         /// 执行插入数据
         /// </summary>
@@ -76,7 +81,7 @@ namespace hwj.DBUtility.MSSQL
             List<SqlParameter> sp = new List<SqlParameter>();
             sp.AddRange(GenSql.GenParameter(updateParam));
             sp.AddRange(GenSql.GenParameter(filterParam));
-            se = new SqlEntity(GenSql.UpdateSql(updateParam, filterParam), sp);
+            se = new SqlEntity(GenSql.UpdateSql(TableName, updateParam, filterParam), sp);
             if (EnableSqlLog)
                 return InsertSqlLog(se, "UPDATE");
             else
@@ -131,9 +136,9 @@ namespace hwj.DBUtility.MSSQL
         public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
         {
             if (EnableSqlLog)
-                return InsertSqlLog(new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam)), "DELETE");
+                return InsertSqlLog(new SqlEntity(GenSql.DeleteSql(TableName, filterParam), GenSql.GenParameter(filterParam)), "DELETE");
             else
-                return new SqlEntity(GenSql.DeleteSql(filterParam), GenSql.GenParameter(filterParam));
+                return new SqlEntity(GenSql.DeleteSql(TableName, filterParam), GenSql.GenParameter(filterParam));
         }
         public bool Delete(FilterParams filterParam)
         {
@@ -296,7 +301,7 @@ namespace hwj.DBUtility.MSSQL
         public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             _SqlEntity = new SqlEntity();
-            _SqlEntity.CommandText = GenSql.SelectPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            _SqlEntity.CommandText = GenSql.GetGroupPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
@@ -347,7 +352,7 @@ namespace hwj.DBUtility.MSSQL
         public L GetPage2(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             //_SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
-            _SqlEntity = GenSql.SelectPageSqlEntity2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            _SqlEntity = GenSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {

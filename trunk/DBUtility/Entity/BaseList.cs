@@ -8,7 +8,7 @@ using hwj.DBUtility.TableMapping;
 namespace hwj.DBUtility.Entity
 {
     public class BaseList<T, TS> : List<T>
-        where T : BaseTable<T>, new()
+        where T : BaseTable//<T>, new()
         where TS : List<T>, new()
     {
         public T ExFind(Enum field, object value)

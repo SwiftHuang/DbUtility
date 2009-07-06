@@ -6,23 +6,31 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable<T>, new()
+    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable
     {
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount '{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}',@_PTotalCount output";
-        private const string _MsSqlPageView = "EXEC dbo.sp_PageView '{0}','{1}',{2},{3},'{4}','{5}','{6}',@_RecordCount output";
+        private const string _MsSqlPageView = "EXEC dbo.sp_PageView @TableName,@FieldKey,@PageIndex,@PageSize,@DisplayField,@Sort,@Where,@_RecordCount output";
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlTruncate = "TRUNCATE TABLE {0};";
         private const string _MsSqlGetDate = "GetDate()";
 
+        /// <summary>
+        /// SQL生成类
+        /// </summary>
         public GenerateSql()
         {
             base.DatabaseGetDateSql = _MsSqlGetDate;
         }
+
         #region Insert Sql
+        /// <summary>
+        /// 返回最后插入的标识值
+        /// </summary>
+        /// <returns></returns>
         public override string InsertLastIDSql()
         {
             return _MsSqlInsertLastID;
@@ -48,7 +56,7 @@ namespace hwj.DBUtility.MSSQL
                     InsertSqlString(ref sbInsField, ref sbInsValue, f, entity);
                 }
             }
-            return string.Format(_InsertString, entity.DBTableName, sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
+            return string.Format(_InsertString, entity.GetTableName(), sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
         }
         private void InsertSqlString(ref StringBuilder insField, ref StringBuilder insValue, FieldMappingInfo field, T entity)
         {
@@ -66,12 +74,14 @@ namespace hwj.DBUtility.MSSQL
             }
         }
         #endregion
+
         #region Delete Sql
         public override string TruncateSql(string tableName)
         {
             return string.Format(_MsSqlTruncate, tableName);
         }
         #endregion
+
         #region Select Sql
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
@@ -91,32 +101,32 @@ namespace hwj.DBUtility.MSSQL
         /// 数据分页
         /// </summary>
         /// <param name="tableName">表名</param>
-        /// <param name="selectFields">需要显示的字段</param>
-        /// <param name="whereParam">筛选条件</param>
-        /// <param name="orderParam">排序</param>
+        /// <param name="displayFields">需要显示的字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序</param>
         /// <param name="PK">分页依据(关键字)</param>
         /// <param name="groupParam">分组显示</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页显示记录数</param>
         /// <returns></returns>
-        public string SelectPageSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public string GetGroupPageSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             string _SelectFields = GenDisplayFieldsSql(displayFields);
             string _FilterParam = GenFilterParamsSql(filterParam, true);
             string _OrderParam = GenSortParamsSql(sortParams, true);
             return string.Format(_MsSqlPaging_RowCount, tableName, GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
         }
-        public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
-        {
-            string _SelectFields = GenDisplayFieldsSql(displayFields);
-            string _FilterParam = GenFilterParamsSql(filterParam, true);
-            string _OrderParam = GenSortParamsSql(sortParams, true);
-            return string.Format(_MsSqlPageView, tableName, GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
-        }
-        public SqlEntity SelectPageSqlEntity2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        //public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        //{
+        //    string _SelectFields = GenDisplayFieldsSql(displayFields);
+        //    string _FilterParam = GenFilterParamsSql(filterParam, true);
+        //    string _OrderParam = GenSortParamsSql(sortParams, true);
+        //    return string.Format(_MsSqlPageView, tableName, GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
+        //}
+        public SqlEntity GetPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
             SqlEntity SE = new SqlEntity();
-            SE.CommandText = "EXEC dbo.sp_PageView @TableName,@FieldKey,@PageIndex,@PageSize,@DisplayField,@Sort,@Where,@_RecordCount output";
+            SE.CommandText = _MsSqlPageView;
             SE.Parameters = new List<SqlParameter>();
             SE.Parameters.Add(new SqlParameter("@TableName", tableName));
             SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
@@ -130,6 +140,12 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Private Functions
+        /// <summary>
+        /// 生成筛选SQL
+        /// </summary>
+        /// <param name="listParam"></param>
+        /// <param name="isPage"></param>
+        /// <returns></returns>
         protected override string GenFilterParamsSql(FilterParams listParam, bool isPage)
         {
             if (listParam != null && listParam.Count > 0)
@@ -197,7 +213,7 @@ namespace hwj.DBUtility.MSSQL
                 sbStr.Append('\'').Append('\'');
             }
             else if (IsDatabaseDate(para))
-                sbStr.Append(para.FieldValue);
+                sbStr.Append(_MsSqlGetDate);
             else
                 sbStr.AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName);
 
@@ -247,12 +263,15 @@ namespace hwj.DBUtility.MSSQL
                     {
                         if (up.FieldName == f.FieldName)
                         {
-                            SqlParameter dp = new SqlParameter();
-                            dp.DbType = f.DataTypeCode;
-                            dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
-                            dp.Value = CheckValue(dp, up.FieldValue);
-                            LstDP.Add(dp);
-                            break;
+                            if (!IsDatabaseDate(up))
+                            {
+                                SqlParameter dp = new SqlParameter();
+                                dp.DbType = f.DataTypeCode;
+                                dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
+                                dp.Value = CheckValue(dp, up.FieldValue);
+                                LstDP.Add(dp);
+                                break;
+                            }
                         }
                     }
                 }
@@ -268,6 +287,8 @@ namespace hwj.DBUtility.MSSQL
                 List<SqlParameter> LstDP = new List<SqlParameter>();
                 foreach (SqlParam sp in filterParam)
                 {
+                    if (IsDatabaseDate(sp))
+                        continue;
                     if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
                         string[] s = (string[])sp.FieldValue;
