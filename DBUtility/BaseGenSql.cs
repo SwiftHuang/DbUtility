@@ -72,11 +72,11 @@ namespace hwj.DBUtility
         internal string UpdateSql(T entity, FilterParams filterParams)
         {
             UpdateParam up = new UpdateParam();
-            if (entity.UseAssigned)
+            if (entity.GetAssignedStatus())
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    if (entity.Assigned.IndexOf(f.FieldName) != -1)
+                    if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
                         SetUpdateParam(ref up, f, entity);
                     }
@@ -236,13 +236,13 @@ namespace hwj.DBUtility
         }
         protected bool IsDatabaseDate(SqlParam param)
         {
-            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == BaseTable<T>.DatabaseDate)
+            if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == SqlParam.DatabaseDate)
                 return true;
             return false;
         }
         protected bool IsDatabaseDate(System.Data.DbType dbType, object value)
         {
-            if (IsDateType(dbType) && Convert.ToDateTime(value) == BaseTable<T>.DatabaseDate)
+            if (IsDateType(dbType) && Convert.ToDateTime(value) == SqlParam.DatabaseDate)
                 return true;
             else
                 return false;

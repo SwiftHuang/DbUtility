@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Xml.Serialization;
+
 namespace hwj.DBUtility.TableMapping
 {
     public abstract class BaseTable<T> where T : class, new()
@@ -10,51 +12,51 @@ namespace hwj.DBUtility.TableMapping
             DBTableName = tableName;
         }
 
-        private static DateTime _DatabaseDate = DateTime.Parse("9999-09-09");
-        /// <summary>
-        /// 设置为数据库当前时间日期
-        /// </summary>
-        public static DateTime DatabaseDate
-        {
-            get { return _DatabaseDate; }
-        }
-
         private string DBTableName = string.Empty;
         public string GetTableName()
         {
             return DBTableName;
         }
 
+        #region Use Assigned Status
         private bool _useAssigned = true;
         /// <summary>
-        /// 是否使用赋值字段检测
+        /// 设置是否使用赋值字段检测
         /// </summary>
-        public bool UseAssigned
+        public void SetAssignedStatus(bool use)
         {
-            get { return _useAssigned; }
-            set
-            {
-                _useAssigned = value;
-                if (value)
-                    _assigned = new List<string>();
-                else
-                    _assigned = null;
-            }
+            _useAssigned = use;
         }
+        /// <summary>
+        /// 获取当前赋值字段检测状态
+        /// </summary>
+        public bool GetAssignedStatus()
+        {
+            return _useAssigned;
+        }
+        #endregion
 
+        #region Assigned List
         private List<String> _assigned = null;
         /// <summary>
         /// 获取或设置被赋值字段
         /// </summary>
-        public List<String> Assigned
+        public List<String> GetAssigned()
         {
-            get { return _assigned; }
+            return _assigned;
         }
-        protected void AddAssigned(string columnName)
+        public void RemoveAssigned(string fieldName)
         {
             if (_assigned != null)
-                _assigned.Add(columnName);
+                _assigned.Remove(fieldName);
         }
+        protected void AddAssigned(string fieldName)
+        {
+            if (_assigned != null)
+                _assigned.Add(fieldName);
+        }
+        #endregion
+
         public static void SetValue(T entity, string fieldName, object value)
         {
             if (value != null)

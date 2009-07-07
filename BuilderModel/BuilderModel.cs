@@ -78,11 +78,12 @@ namespace LTP.BuilderModel
             strclass.AppendSpaceLine(1, "public class " + _modelname + " : BaseTable<" + _modelname + ">");
             strclass.AppendSpaceLine(1, "{");
             strclass.AppendSpaceLine(2, "public " + _modelname + "()");
+            strclass.AppendSpaceLine(3, ": base(DBTableName)");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "base.DBTableName = DBTableName;");
+            //strclass.AppendSpaceLine(3, "base.DBTableName = DBTableName;");
             strclass.AppendSpaceLine(2, "}");
-            strclass.AppendLine(CreatFieldsEnum());
             strclass.AppendLine(CreatTableName(_modelname));
+            strclass.AppendLine(CreatFieldsEnum());
             strclass.AppendLine(CreatModelMethod());
             strclass.AppendSpaceLine(1, "}");
             strclass.AppendSpaceLine(1, "public class " + _modelname + "s : BaseList<" + _modelname + ", " + _modelname + "s> { }");
@@ -189,10 +190,11 @@ namespace LTP.BuilderModel
             if (modelName.IndexOf("tb") != -1)
                 modelName = modelName.Substring(2);
             StringPlus strclass = new StringPlus();
-            strclass.AppendSpaceLine(2, "public static string DBTableName");
-            strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "get { return \"" + modelName + "\"; }");
-            strclass.AppendSpaceLine(2, "}");
+            strclass.AppendSpaceLine(2, "public const string DBTableName = \"" + modelName + "\";");
+            //strclass.AppendSpaceLine(2, "public static string DBTableName");
+            //strclass.AppendSpaceLine(2, "{");
+            //strclass.AppendSpaceLine(3, "get { return \"" + modelName + "\"; }");
+            //strclass.AppendSpaceLine(2, "}");
             return strclass.ToString();
         }
         private string GetTypeCode(string columnType)

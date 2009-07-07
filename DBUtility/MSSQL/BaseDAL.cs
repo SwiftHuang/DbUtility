@@ -283,9 +283,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public L GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
+            return GetPage3(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
@@ -298,17 +298,20 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public L GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            _SqlEntity = new SqlEntity();
-            _SqlEntity.CommandText = GenSql.GetGroupPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            _SqlEntity = GenSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            //_SqlEntity = new SqlEntity(); 
+            //_SqlEntity.CommandText = GenSql.GetGroupPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
-                SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+                //if (conn.State != ConnectionState.Open)
+                //    conn.Open();
+                //SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
+                SqlCommand cmd = new SqlCommand();
+                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
                 SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -349,7 +352,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize"></param>
         /// <param name="TotalCount"></param>
         /// <returns></returns>
-        public L GetPage2(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             //_SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
             _SqlEntity = GenSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
@@ -486,7 +489,7 @@ namespace hwj.DBUtility.MSSQL
         private T CreateEntityNotClose(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
         {
             T RowInstance = new T();
-            RowInstance.UseAssigned = false;
+            RowInstance.SetAssignedStatus(false);
             foreach (FieldMappingInfo f in lstFieldInfo)
             {
                 try

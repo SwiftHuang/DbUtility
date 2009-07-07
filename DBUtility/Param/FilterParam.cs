@@ -5,6 +5,7 @@ namespace hwj.DBUtility
 {
     public class FilterParams : List<SqlParam>
     {
+
         public FilterParams(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
             : base()
         {

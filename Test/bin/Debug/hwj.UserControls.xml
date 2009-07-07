@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>hwj.UserControls</name>
+    </assembly>
+    <members>
+        <member name="F:hwj.UserControls.Suggest.SuggestView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.EmptyValue">
+            <summary>
+            如果TextBox.Text为空时,SelectedValue的值.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.MaxRecords">
+            <summary>
+            返回最大记录数
+            </summary>
+        </member>
+        <member name="T:hwj.UserControls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ErrorInfo">
+            <summary>
+              Looks up a localized string similar to 错误信息.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Information">
+            <summary>
+              Looks up a localized string similar to 提示信息.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidEmail">
+            <summary>
+              Looks up a localized string similar to [{0}]为无效的电子邮箱格式.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidNumberic">
+            <summary>
+              Looks up a localized string similar to [{0}]为无效的数字格式.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.NoRecord">
+            <summary>
+              Looks up a localized string similar to 当前找不到你所需要的记录.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ReturnRecord">
+            <summary>
+              Looks up a localized string similar to {0}条记录.
+            </summary>
+        </member>
+    </members>
+</doc>

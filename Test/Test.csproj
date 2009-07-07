@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CommonLibrary\bin\Debug\CommonLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="hwj.CommonLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CommonLibrary\bin\Debug\hwj.CommonLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,6 +76,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Suggest.resx">
+      <DependentUpon>Suggest.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -85,8 +92,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Suggest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Suggest.Designer.cs">
+      <DependentUpon>Suggest.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+      <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
+      <Name>UserControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DBUtility\DBUtility.csproj">
       <Project>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</Project>
       <Name>DBUtility</Name>

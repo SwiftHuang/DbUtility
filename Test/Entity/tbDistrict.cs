@@ -13,13 +13,11 @@ namespace Test.Entity.Table
     [Serializable]
     public class tbDistrict : BaseTable<tbDistrict>
     {
-
         public tbDistrict()
             : base(DBTableName)
         {
-
         }
-        public static string DBTableName = "tbDistrict";
+        public const string DBTableName = "tbDistrict";
 
         public enum Fields
         {

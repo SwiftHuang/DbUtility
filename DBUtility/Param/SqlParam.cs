@@ -5,6 +5,14 @@ namespace hwj.DBUtility
 {
     public class SqlParam
     {
+        private static DateTime _DatabaseDate = DateTime.Parse("9999-09-09");
+        /// <summary>
+        /// 设置为数据库当前时间日期
+        /// </summary>
+        public static DateTime DatabaseDate
+        {
+            get { return _DatabaseDate; }
+        }
         #region Property
         public string FieldName { get; set; }
         public object FieldValue { get; set; }
@@ -122,7 +130,7 @@ namespace hwj.DBUtility
             lst.Add(new SqlParam(fieldName, fieldValue));
             return lst;
         }
-       
+
         //public static List<SqlParam> AddParam(this List<SqlParam> lst, SqlParam sqlParam)
         //{
         //    lst.Add(sqlParam);
