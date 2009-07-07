@@ -51,7 +51,7 @@ namespace Test.BLL.Table
         public static tbDistricts GetList(string Code)
         {
             FilterParams fp = new FilterParams();
-            fp.AddParam(tbDistrict.Fields.Code, Code, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbDistrict.Fields.Code, "%" + Code + "%", Enums.Relation.Like, Enums.Expression.AND);
             return da.GetList(null, fp);
         }
 
@@ -74,7 +74,7 @@ namespace Test.BLL.Table
             DisplayFields pk = new DisplayFields();
             pk.Add(tbDistrict.Fields.Code);
             page.PageSize = pageSize;
-            page.Result = da.GetPage2(null, null, null, pk, pageIndex, pageSize, out RecordCount);
+            page.Result = da.GetPage(null, null, null, pk, pageIndex, pageSize, out RecordCount);
             page.RecordCount = RecordCount;
             return page;
         }
@@ -92,7 +92,7 @@ namespace Test.BLL.Table
 
             UpdateParam up = new UpdateParam();
             up.AddParam(tbDistrict.Fields.UpdateOn, DateTime.Now.AddDays(-1));
-            da.Update(up, new FilterParams(tbDistrict.Fields.CreateOn, tbDistrict.DatabaseDate, Enums.Relation.Less));
+            da.Update(up, new FilterParams(tbDistrict.Fields.CreateOn, SqlParam.DatabaseDate, Enums.Relation.Less));
 
             tbDistrict d = new tbDistrict();
             d.Code = "000";
@@ -103,10 +103,14 @@ namespace Test.BLL.Table
             DisplayFields pk = new DisplayFields();
             pk.Add(tbDistrict.Fields.Code);
             FilterParams fp = new FilterParams();
-            fp.AddParam(tbDistrict.Fields.CreateBy, "", Enums.Relation.IsNotNull, Enums.Expression.AND);
-            fp.AddParam(tbDistrict.Fields.CreateOn, DateTime.Now, Enums.Relation.Less, Enums.Expression.AND);
+            //fp.AddParam(tbDistrict.Fields.CreateBy, "Y", Enums.Relation.Equal, Enums.Expression.AND);
+            //fp.AddParam(tbDistrict.Fields.CreateOn, DateTime.Now, Enums.Relation.Less, Enums.Expression.AND);
+
+            SortParams sp = new SortParams();
+            //sp.AddParam(tbDistrict.Fields.Code, Enums.OrderBy.Descending);
+            sp.AddParam(tbDistrict.Fields.CreateOn, Enums.OrderBy.Descending);
             page.PageSize = 10;
-            page.Result = da.GetPage2(null, null, null, pk, 1, page.PageSize, out RecordCount);
+            page.Result = da.GetPage(null, fp, sp, pk, 1, page.PageSize, out RecordCount);
             page.RecordCount = RecordCount;
             return page;
         }

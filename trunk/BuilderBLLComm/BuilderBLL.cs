@@ -737,7 +737,7 @@ namespace LTP.BuilderBLLComm
             strclass.AppendSpaceLine(3, ModelName + "Page page = new " + ModelName + "Page();");
             GetPKParam(ref strclass);
             strclass.AppendSpaceLine(3, "page.PageSize = pageSize;");
-            strclass.AppendSpaceLine(3, "page.Result = da.GetPage2(null, null, null, pk, pageIndex, pageSize, out RecordCount);");
+            strclass.AppendSpaceLine(3, "page.Result = da.GetPage(null, null, null, pk, pageIndex, page.PageSize, out RecordCount);");
             strclass.AppendSpaceLine(3, "page.RecordCount = RecordCount;");
             strclass.AppendSpaceLine(3, "return page;");
 
