@@ -30,5 +30,17 @@ namespace Test
             }
             suggestBox1.DataList = sLst;
         }
+
+        private void Suggest_Load(object sender, EventArgs e)
+        {
+            page1.PerformPageChange(1, 2);
+        }
+
+        private void page1_PageIndexChanged(int index, int pageSize)
+        {
+            Entity.Table.tbDistrictPage p = BLL.Table.BOtbDistrict.GetPage(index, pageSize);
+            xDataGridView1.DataSource = p.Result;
+            page1.RecordCount = p.RecordCount;
+        }
     }
 }
