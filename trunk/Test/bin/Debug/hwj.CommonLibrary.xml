@@ -9,95 +9,6 @@
             JavaScript Helper
             </summary>
         </member>
-        <member name="T:hwj.CommonLibrary.WebSite.WebCache">
-            <summary>
-            设置Cache操作类
-            </summary>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Clear">
-            <summary>
-            清除所有缓存
-            </summary>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.GetCache(System.String)">
-            <summary>
-            得到缓存实例
-            </summary>
-            <param name="key">缓存实例名称</param>
-            <returns>返回缓存实例</returns>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object)">
-            <summary>
-            缓存实例插入(默认缓存20分钟)
-            </summary>
-            <param name="key">缓存实例名称</param>
-            <param name="obj">要缓存的对象</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Int32)">
-            <summary>
-            缓存实例插入
-            </summary>
-            <param name="key">缓存实例名称</param>
-            <param name="obj">要缓存的对象</param>
-            <param name="seconds">缓存的时间</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency)">
-            <summary>
-            缓存实例插入(缓存过期时间是一天)
-            </summary>
-            <param name="key">缓存实例名称</param>
-            <param name="obj">要缓存的对象</param>
-            <param name="dep">缓存的依赖项</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.String)">
-            <summary>
-            缓存实例插入(缓存过期时间是一天)
-            </summary>
-            <param name="key">缓存实例名称</param>
-            <param name="obj">要缓存的对象</param>
-            <param name="xmlPath">缓存的依赖项xml文件的路径（绝对路径）</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Int32,System.Web.Caching.CacheItemPriority)" -->
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency,System.Int32)">
-            <summary>
-            缓存实例插入
-            </summary>
-            <param name="key">用于引用该对象的缓存键</param>
-            <param name="obj">要插入缓存中的对象</param>
-            <param name="dep">该项的文件依赖项或缓存键依赖项。当任何依赖项更改时，该对象即无效，并从缓存中移除。如果没有依赖项，则此参数包含空引用（Visual Basic 中为 Nothing）</param>
-            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.String,System.Int32)">
-            <summary>
-            缓存实例插入
-            </summary>
-            <param name="key">用于引用该对象的缓存键</param>
-            <param name="obj">要插入缓存中的对象</param>
-            <param name="xmlPath">缓存的依赖项xml文件的路径（绝对路径）</param>
-            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency,System.Int32,System.Web.Caching.CacheItemPriority)">
-            <summary>
-            缓存实例插入
-            </summary>
-            <param name="key">用于引用该对象的缓存键</param>
-            <param name="obj">要插入缓存中的对象</param>
-            <param name="dep">该项的文件依赖项或缓存键依赖项。当任何依赖项更改时，该对象即无效，并从缓存中移除。如果没有依赖项，则此参数包含空引用（Visual Basic 中为 Nothing）。</param>
-            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
-            <param name="priority">该对象相对于缓存中存储的其他项的成本，由 CacheItemPriority 枚举表示。该值由缓存在退出对象时使用；具有较低成本的对象在具有较高成本的对象之前被从缓存移除。 </param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Remove(System.String)">
-            <summary>
-            移出单个缓存
-            </summary>
-            <param name="key">缓存实例名称</param>
-        </member>
-        <member name="M:hwj.CommonLibrary.WebSite.WebCache.GetAllCacheKey">
-            <summary>
-            得到所有使用的Cache键值
-            </summary>
-            <returns>返回所有的Cache键值</returns>
-        </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.Encrypt(System.String,System.String)">
             <summary> 
             加密数据 
@@ -184,6 +95,95 @@
             <summary>
             分页页码
             </summary>
+        </member>
+        <member name="T:hwj.CommonLibrary.WebSite.WebCache">
+            <summary>
+            设置Cache操作类
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Clear">
+            <summary>
+            清除所有缓存
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.GetCache(System.String)">
+            <summary>
+            得到缓存实例
+            </summary>
+            <param name="key">缓存实例名称</param>
+            <returns>返回缓存实例</returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object)">
+            <summary>
+            缓存实例插入(默认缓存20分钟)
+            </summary>
+            <param name="key">缓存实例名称</param>
+            <param name="obj">要缓存的对象</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Int32)">
+            <summary>
+            缓存实例插入
+            </summary>
+            <param name="key">缓存实例名称</param>
+            <param name="obj">要缓存的对象</param>
+            <param name="seconds">缓存的时间</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency)">
+            <summary>
+            缓存实例插入(缓存过期时间是一天)
+            </summary>
+            <param name="key">缓存实例名称</param>
+            <param name="obj">要缓存的对象</param>
+            <param name="dep">缓存的依赖项</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.String)">
+            <summary>
+            缓存实例插入(缓存过期时间是一天)
+            </summary>
+            <param name="key">缓存实例名称</param>
+            <param name="obj">要缓存的对象</param>
+            <param name="xmlPath">缓存的依赖项xml文件的路径（绝对路径）</param>
+        </member>
+        <!-- 对于成员“M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Int32,System.Web.Caching.CacheItemPriority)”忽略有格式错误的 XML 注释 -->
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency,System.Int32)">
+            <summary>
+            缓存实例插入
+            </summary>
+            <param name="key">用于引用该对象的缓存键</param>
+            <param name="obj">要插入缓存中的对象</param>
+            <param name="dep">该项的文件依赖项或缓存键依赖项。当任何依赖项更改时，该对象即无效，并从缓存中移除。如果没有依赖项，则此参数包含空引用（Visual Basic 中为 Nothing）</param>
+            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.String,System.Int32)">
+            <summary>
+            缓存实例插入
+            </summary>
+            <param name="key">用于引用该对象的缓存键</param>
+            <param name="obj">要插入缓存中的对象</param>
+            <param name="xmlPath">缓存的依赖项xml文件的路径（绝对路径）</param>
+            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Insert(System.String,System.Object,System.Web.Caching.CacheDependency,System.Int32,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            缓存实例插入
+            </summary>
+            <param name="key">用于引用该对象的缓存键</param>
+            <param name="obj">要插入缓存中的对象</param>
+            <param name="dep">该项的文件依赖项或缓存键依赖项。当任何依赖项更改时，该对象即无效，并从缓存中移除。如果没有依赖项，则此参数包含空引用（Visual Basic 中为 Nothing）。</param>
+            <param name="seconds">所插入对象将过期并被从缓存中移除的时间。</param>
+            <param name="priority">该对象相对于缓存中存储的其他项的成本，由 CacheItemPriority 枚举表示。该值由缓存在退出对象时使用；具有较低成本的对象在具有较高成本的对象之前被从缓存移除。 </param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.Remove(System.String)">
+            <summary>
+            移出单个缓存
+            </summary>
+            <param name="key">缓存实例名称</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.WebSite.WebCache.GetAllCacheKey">
+            <summary>
+            得到所有使用的Cache键值
+            </summary>
+            <returns>返回所有的Cache键值</returns>
         </member>
     </members>
 </doc>

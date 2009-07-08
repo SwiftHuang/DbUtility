@@ -72,7 +72,7 @@ IF @PageCurrent=1
 	EXEC(N'SELECT TOP '+@TopN
 		+N' '+@FieldShow
 		+N' FROM '+@tbname
-		+N' '+@Where
+		+N' (NOLOCK) '+@Where
 		+N' '+@FieldOrder)
 ELSE
 BEGIN
@@ -105,10 +105,10 @@ BEGIN
 	EXEC(N'SELECT TOP '+@TopN
 		+N' '+@FieldShow
 		+N' FROM '+@tbname
-		+N' a LEFT JOIN(SELECT TOP '+@TopN1
+		+N' a (NOLOCK) LEFT JOIN(SELECT TOP '+@TopN1
 		+N' '+@FieldKey
 		+N' FROM '+@tbname
-		+N' a '+@Where
+		+N' a (NOLOCK) '+@Where
 		+N' '+@FieldOrder
 		+N')b ON '+@Where1
 		+N' '+@Where2
