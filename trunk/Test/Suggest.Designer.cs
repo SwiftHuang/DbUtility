@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Suggest));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.xDataGridView1 = new hwj.UserControls.DataList.xDataGridView();
-            this.page1 = new hwj.UserControls.DataList.Page();
+            this.page1 = new hwj.UserControls.DataList.DataListPage();
             this.xTextBox1 = new hwj.UserControls.CommonControls.xTextBox();
             this.suggestBox1 = new hwj.UserControls.Suggest.SuggestBox();
             ((System.ComponentModel.ISupportInitialize)(this.xDataGridView1)).BeginInit();
@@ -61,7 +62,7 @@
             this.page1.RecordCount = 0;
             this.page1.Size = new System.Drawing.Size(629, 28);
             this.page1.TabIndex = 2;
-            this.page1.PageIndexChanged += new hwj.UserControls.DataList.Page.PageIndexChangedHandler(this.page1_PageIndexChanged);
+            this.page1.PageIndexChanged += new hwj.UserControls.DataList.DataListPage.PageIndexChangedHandler(this.page1_PageIndexChanged);
             // 
             // xTextBox1
             // 
@@ -112,7 +113,7 @@
 
         private hwj.UserControls.Suggest.SuggestBox suggestBox1;
         private hwj.UserControls.CommonControls.xTextBox xTextBox1;
-        private hwj.UserControls.DataList.Page page1;
+        private hwj.UserControls.DataList.DataListPage page1;
         private hwj.UserControls.DataList.xDataGridView xDataGridView1;
     }
 }
