@@ -33,7 +33,9 @@ namespace Test
 
         private void Suggest_Load(object sender, EventArgs e)
         {
-            //page1.PerformPageChange(1, 2);
+            page1.PerformPageChange(1, 2);
+            page1.DataGridView = xDataGridView1;
+            page1.CheckBoxColumn = Column1;
         }
 
         private void page1_PageIndexChanged(int index, int pageSize)
