@@ -77,6 +77,56 @@
               查找类似 {0}条记录 的本地化字符串。
             </summary>
         </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChange(System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChange(System.Int32,System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+        </member>
+        <member name="F:hwj.UserControls.DataList.DataListPage.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageIndex">
+            <summary>
+            获取或设置当前页数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageSize">
+            <summary>
+            获取或设置每页显示的记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageNum">
+            <summary>
+            总页数
+            </summary>
+        </member>
         <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
             <summary> 
             Required designer variable.
@@ -107,43 +157,6 @@
         <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshTotal">
             <summary>
             重新计算结果
-            </summary>
-        </member>
-        <member name="F:hwj.UserControls.DataList.Page.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:hwj.UserControls.DataList.Page.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:hwj.UserControls.DataList.Page.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.Page.PageIndex">
-            <summary>
-            获取或设置当前页数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.Page.PageSize">
-            <summary>
-            获取或设置每页显示的记录数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.Page.RecordCount">
-            <summary>
-            记录总数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.Page.PageNum">
-            <summary>
-            总页数
             </summary>
         </member>
     </members>
