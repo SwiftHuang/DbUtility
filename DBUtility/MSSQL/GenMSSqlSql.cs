@@ -17,6 +17,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlTruncate = "TRUNCATE TABLE {0};";
         private const string _MsSqlGetDate = "GetDate()";
+        private const string _MsSqlFieldFmt = "[{0}]";
 
         /// <summary>
         /// SQL生成类
@@ -204,7 +205,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + i).Append(',');
                         }
-                        sbWhere.Append(para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
+                        sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
                     }
                     else
                         sbWhere.Append(GetCondition(para, true, isPage));
@@ -224,7 +225,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 __MsSqlParam = _MsSqlParam;
 
-            sbStr.Append(para.FieldName).Append(para.Operator.ToSqlString());
+            sbStr.AppendFormat(_MsSqlFieldFmt, para.FieldName).Append(para.Operator.ToSqlString());
 
             if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
             {
