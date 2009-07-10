@@ -16,8 +16,12 @@ namespace Test
             InitializeComponent();
         }
 
-        private void suggestBox1_DataBinding(object sender, EventArgs e)
+        private void Suggest_Load(object sender, EventArgs e)
         {
+            page1.PerformPageChange(1, 2);
+            page1.DataGridView = xDataGridView1;
+            page1.CheckBoxColumn = Column1;
+
             Entity.Table.tbDistricts lst = BLL.Table.BOtbDistrict.GetList(suggestBox1.Text);
             SuggestList sLst = new SuggestList();
             foreach (Entity.Table.tbDistrict c in lst)
@@ -29,13 +33,8 @@ namespace Test
                 sLst.Add(v);
             }
             suggestBox1.DataList = sLst;
-        }
-
-        private void Suggest_Load(object sender, EventArgs e)
-        {
-            page1.PerformPageChange(1, 2);
-            page1.DataGridView = xDataGridView1;
-            page1.CheckBoxColumn = Column1;
+//            suggestBox1.SelectedText = "0000";
+            suggestBox1.SelectedValue = "0002";
         }
 
         private void page1_PageIndexChanged(int index, int pageSize)

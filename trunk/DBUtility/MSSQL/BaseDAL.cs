@@ -36,7 +36,11 @@ namespace hwj.DBUtility.MSSQL
         public bool Add(T entity)
         {
             _SqlEntity = AddSqlEntity(entity);
-            if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
+            return Add(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public bool Add(string sql, List<SqlParameter> parameters)
+        {
+            if (DbHelper.ExecuteSql(sql, parameters) > 0)
                 return true;
             else
                 return false;
@@ -90,10 +94,7 @@ namespace hwj.DBUtility.MSSQL
         public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
             _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
-            if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
-                return true;
-            else
-                return false;
+            return Update(SqlEntity.CommandText, SqlEntity.Parameters);
         }
         /// <summary>
         /// 获取更新的Sql对象
@@ -116,6 +117,10 @@ namespace hwj.DBUtility.MSSQL
         public bool Update(T entity, FilterParams filterParam)
         {
             _SqlEntity = UpdateSqlEntity(entity, filterParam);
+            return Update(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public bool Update(string sql, List<SqlParameter> parameters)
+        {
             if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
                 return true;
             else
@@ -143,7 +148,11 @@ namespace hwj.DBUtility.MSSQL
         public bool Delete(FilterParams filterParam)
         {
             _SqlEntity = DeleteSqlEntity(filterParam);
-            if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
+            return Delete(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public bool Delete(string sql, List<SqlParameter> parameters)
+        {
+            if (DbHelper.ExecuteSql(sql, parameters) > 0)
                 return true;
             else
                 return false;
@@ -216,7 +225,11 @@ namespace hwj.DBUtility.MSSQL
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSql.GenParameter(filterParam));
-            SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
+            return GetEntity(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public T GetEntity(string sql, List<SqlParameter> parameters)
+        {
+            SqlDataReader reader = DbHelper.ExecuteReader(sql, parameters);
             try
             {
                 if (reader.HasRows)
@@ -255,6 +268,11 @@ namespace hwj.DBUtility.MSSQL
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
             SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
+            return GetList(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public L GetList(string sql, List<SqlParameter> parameters)
+        {
+            SqlDataReader reader = DbHelper.ExecuteReader(sql, parameters);
             try
             {
                 if (reader.HasRows)

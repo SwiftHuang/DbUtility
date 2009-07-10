@@ -18,6 +18,10 @@ namespace Test.DAL.Table
             DbHelper.ConnectionString = connectionString;
             TableName = tbDistrict.DBTableName;
         }
+        public string LeftJoinSql()
+        {
+            return "SELECT * FROM tbDistrict";
+        }
     }
 }
 

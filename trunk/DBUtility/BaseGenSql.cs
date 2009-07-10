@@ -14,6 +14,7 @@ namespace hwj.DBUtility
         protected const string _InsertString = "INSERT INTO {0} ({1}) VALUES({2});";
         protected const string _StringFormat = "'{0}'";
         protected const string _DecimalFormat = "{0}";
+        protected static string _FieldFormat = string.Empty;
         /// <summary>
         /// 获取数据库SQL
         /// </summary>
@@ -157,7 +158,7 @@ namespace hwj.DBUtility
                 StringBuilder sb = new StringBuilder();
                 foreach (Enum s in fields)
                 {
-                    sb.AppendFormat("[{0}]", s.ToString()).Append(',');
+                    sb.AppendFormat(_FieldFormat, s.ToString()).Append(',');
                 }
                 return sb.ToString().TrimEnd(',');
             }
@@ -179,7 +180,7 @@ namespace hwj.DBUtility
                     sb.Append("ORDER BY ");
                 foreach (SortParam o in orders)
                 {
-                    sb.AppendFormat("[{0}] {1},", o.FieldName, o.OrderBy.ToSqlString());
+                    sb.AppendFormat(_FieldFormat + " {1},", o.FieldName, o.OrderBy.ToSqlString());
                 }
                 return sb.ToString().TrimEnd(',');
             }

@@ -20,6 +20,7 @@ namespace Test
         {
             try
             {
+                
                 dataGridView1.DataSource = BLL.Table.BOtbDistrict.TestSql().Result;
             }
             catch (Exception ex)
