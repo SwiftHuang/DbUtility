@@ -25,6 +25,7 @@ namespace hwj.DBUtility.MSSQL
         public GenerateSql()
         {
             base.DatabaseGetDateSql = _MsSqlGetDate;
+            _FieldFormat = _MsSqlFieldFmt;
         }
 
         #region Insert Sql
