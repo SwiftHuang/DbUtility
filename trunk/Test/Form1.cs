@@ -14,13 +14,20 @@ namespace Test
         public Form1()
         {
             InitializeComponent();
+            this.Load += new EventHandler(Form1_Load);
+        }
+
+        void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                
+                decimal i = decimal.Parse("2.5");
+                hwj.CommonLibrary.Object.NumberHelper.RoundDown(2.5);
                 dataGridView1.DataSource = BLL.Table.BOtbDistrict.TestSql().Result;
             }
             catch (Exception ex)

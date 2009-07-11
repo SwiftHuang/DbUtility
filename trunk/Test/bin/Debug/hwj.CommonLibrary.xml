@@ -51,6 +51,76 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.IsNumeric(System.String)">
+            <summary>
+            是否数字(建议使用TryParse)
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.IsInt(System.String)">
+            <summary>
+            是否整数(建议使用TryParse)
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.RoundUp(System.Double)">
+            <summary>
+            四舍五入(向上取整 2.5->3/2.4->2)
+            </summary>
+            <param name="valueToRound"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.RoundUp(System.Decimal)">
+            <summary>
+            四舍五入(向上取整 2.5->3/2.4->2)
+            </summary>
+            <param name="valueToRound"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.RoundDown(System.Double)">
+            <summary>
+            向下取整(2.5->2/2.4->2)
+            </summary>
+            <param name="valueToRound"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.RoundDown(System.Decimal)">
+            <summary>
+            向下取整(2.5->2/2.4->2)
+            </summary>
+            <param name="valueToRound"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetInteger(System.Decimal)">
+            <summary>
+            取整数(不进行四舍五入,只取整数)
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetInteger(System.Double)">
+            <summary>
+            取整数(不进行四舍五入,只取整数)
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.IsEven(System.Int32)">
+            <summary>
+            是否偶数值
+            </summary>
+            <param name="intValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.IsOdd(System.Int32)">
+            <summary>
+            是否奇数值
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="T:hwj.CommonLibrary.WebSite.Base.BasePage">
             <summary>
             所有页面的基类
