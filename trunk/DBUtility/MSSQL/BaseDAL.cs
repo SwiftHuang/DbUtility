@@ -267,7 +267,6 @@ namespace hwj.DBUtility.MSSQL
         public L GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
-            SqlDataReader reader = DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters);
             return GetList(SqlEntity.CommandText, SqlEntity.Parameters);
         }
         public L GetList(string sql, List<SqlParameter> parameters)

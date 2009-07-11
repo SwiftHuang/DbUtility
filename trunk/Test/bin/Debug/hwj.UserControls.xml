@@ -127,6 +127,21 @@
             总页数
             </summary>
         </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.SelectAllVisible">
+            <summary>
+            显示全选CheckBox
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.DataGridView">
+            <summary>
+            设置CheckBox列所在的DataGridView
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.CheckBoxColumn">
+            <summary>
+            设置CheckBox列
+            </summary>
+        </member>
         <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
             <summary> 
             Required designer variable.
@@ -154,9 +169,41 @@
             返回最大记录数
             </summary>
         </member>
-        <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshTotal">
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.DropDownStyle">
             <summary>
-            重新计算结果
+            获取或设置SuggestBox Dropdown的显示方式
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshRowFooter">
+            <summary>
+            刷新行尾
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.xDataGridView.GetFooterValue(System.Windows.Forms.DataGridViewColumn)">
+            <summary>
+            获取行尾对应的列值
+            </summary>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.RowSeqVisible">
+            <summary>
+            显示行序列
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.RowFooterVisible">
+            <summary>
+            显示行尾
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.SumColumnName">
+            <summary>
+            获取或设置需要求和的列名
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.DisplayRows">
+            <summary>
+            获取或设置显示行数
             </summary>
         </member>
     </members>
