@@ -72,7 +72,6 @@
             this.xComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.xComboBox1.EnterEqualTab = true;
             this.xComboBox1.FormattingEnabled = true;
-            this.xComboBox1.IsRequired = true;
             this.xComboBox1.Items.AddRange(new object[] {
             "1",
             "2",
