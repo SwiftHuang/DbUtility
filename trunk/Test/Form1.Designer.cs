@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.suggestBox1 = new hwj.UserControls.Suggest.SuggestBox();
             this.xTextBox1 = new hwj.UserControls.CommonControls.xTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +63,23 @@
             this.dataGridView1.Size = new System.Drawing.Size(861, 321);
             this.dataGridView1.TabIndex = 2;
             // 
+            // suggestBox1
+            // 
+            this.suggestBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(223)))));
+            this.suggestBox1.EmptyValue = "";
+            this.suggestBox1.IsRequired = true;
+            this.suggestBox1.Location = new System.Drawing.Point(356, 98);
+            this.suggestBox1.MaxLength = 32767;
+            this.suggestBox1.Name = "suggestBox1";
+            this.suggestBox1.OldBackColor = System.Drawing.SystemColors.Window;
+            this.suggestBox1.PrimaryColumnHeaderName = null;
+            this.suggestBox1.SecondColumnHeaderName = null;
+            this.suggestBox1.SecondColumnMode = false;
+            this.suggestBox1.SelectedText = "";
+            this.suggestBox1.SelectedValue = "";
+            this.suggestBox1.Size = new System.Drawing.Size(120, 21);
+            this.suggestBox1.TabIndex = 4;
+            // 
             // xTextBox1
             // 
             this.xTextBox1.BackColor = System.Drawing.SystemColors.Window;
@@ -69,6 +87,7 @@
             this.xTextBox1.IsRequired = true;
             this.xTextBox1.Location = new System.Drawing.Point(356, 71);
             this.xTextBox1.Name = "xTextBox1";
+            this.xTextBox1.OldBackColor = System.Drawing.SystemColors.Window;
             this.xTextBox1.Size = new System.Drawing.Size(100, 21);
             this.xTextBox1.TabIndex = 3;
             // 
@@ -77,6 +96,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 552);
+            this.Controls.Add(this.suggestBox1);
             this.Controls.Add(this.xTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
@@ -95,6 +115,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private hwj.UserControls.CommonControls.xTextBox xTextBox1;
+        private hwj.UserControls.Suggest.SuggestBox suggestBox1;
     }
 }
 

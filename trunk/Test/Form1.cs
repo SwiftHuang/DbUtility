@@ -19,6 +19,9 @@ namespace Test
 
         void Form1_Load(object sender, EventArgs e)
         {
+            xTextBox1.Text = "vinson";
+            suggestBox1.Text = "vinson";
+            suggestBox1.ReadOnly = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
