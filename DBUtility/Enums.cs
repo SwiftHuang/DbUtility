@@ -5,52 +5,52 @@ namespace hwj.DBUtility
     public class Enums
     {
         /// <summary>
-        /// 字段关系
+        /// 字段关系(Field [Relation] Value)
         /// </summary>
         public enum Relation
         {
             /// <summary>
-            /// 等于
+            /// 等于(=)
             /// </summary>
             Equal,
             /// <summary>
-            /// 不等于
+            /// 不等于(&lt;&gt;)
             /// </summary>
             Unequal,
             /// <summary>
-            /// 大于
+            /// 大于(&gt;)
             /// </summary>
             Greater,
             /// <summary>
-            /// 小于
+            /// 小于(&lt;)
             /// </summary>
             Less,
             /// <summary>
-            /// 大于等于
+            /// 大于等于(&gt;=)
             /// </summary>
             GreaterThanOrEqual,
             /// <summary>
-            /// 小于等于
+            /// 小于等于(&lt;=)
             /// </summary>
             LessThanOrEqual,
             /// <summary>
-            /// 为空
+            /// 为空(is null)
             /// </summary>
             IsNull,
             /// <summary>
-            /// 不为空
+            /// 不为空(is not null)
             /// </summary>
             IsNotNull,
             /// <summary>
-            /// 相似
+            /// 相似(like)
             /// </summary>
             Like,
             /// <summary>
-            /// 包含
+            /// 包含(in)
             /// </summary>
             IN,
             /// <summary>
-            /// 不包含
+            /// 不包含(not in)
             /// </summary>
             NotIN,
         }

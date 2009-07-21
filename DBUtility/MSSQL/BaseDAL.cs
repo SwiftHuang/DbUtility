@@ -545,5 +545,11 @@ namespace hwj.DBUtility.MSSQL
 
         }
         #endregion
+
+        public bool ExecuteSqlTran(List<SqlEntity> list)
+        {
+            return DbHelperSQL.ExecuteSqlTran(list) > 0;
+        }
+
     }
 }

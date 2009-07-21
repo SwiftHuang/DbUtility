@@ -125,62 +125,62 @@
         </member>
         <member name="T:hwj.DBUtility.Enums.Relation">
             <summary>
-            字段关系
+            字段关系(Field [Relation] Value)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.Equal">
             <summary>
-            等于
+            等于(=)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.Unequal">
             <summary>
-            不等于
+            不等于(&lt;&gt;)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.Greater">
             <summary>
-            大于
+            大于(&gt;)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.Less">
             <summary>
-            小于
+            小于(&lt;)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.GreaterThanOrEqual">
             <summary>
-            大于等于
+            大于等于(&gt;=)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.LessThanOrEqual">
             <summary>
-            小于等于
+            小于等于(&lt;=)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IsNull">
             <summary>
-            为空
+            为空(is null)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IsNotNull">
             <summary>
-            不为空
+            不为空(is not null)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.Like">
             <summary>
-            相似
+            相似(like)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IN">
             <summary>
-            包含
+            包含(in)
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.NotIN">
             <summary>
-            不包含
+            不包含(not in)
             </summary>
         </member>
         <member name="T:hwj.DBUtility.Enums.Expression">
