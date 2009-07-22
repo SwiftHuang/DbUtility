@@ -657,11 +657,11 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static int ExecuteSqlTran(List<SqlEntity> cmdList)
+        public static int ExecuteSqlTran(SqlList cmdList)
         {
             return ExecuteSqlTran(cmdList, 30);
         }
-        public static int ExecuteSqlTran(List<SqlEntity> cmdList, int timeout)
+        public static int ExecuteSqlTran(SqlList cmdList, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -731,7 +731,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(List<SqlEntity> SQLStringList)
+        public static void ExecuteSqlTranWithIndentity(SqlList SQLStringList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {

@@ -49,4 +49,6 @@ namespace hwj.DBUtility
             this.EffentNextType = type;
         }
     }
+
+    public class SqlList : List<SqlEntity> { }
 }
