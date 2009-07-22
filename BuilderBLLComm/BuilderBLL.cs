@@ -392,7 +392,7 @@ namespace LTP.BuilderBLLComm
                 //strclass.AppendSpaceLine(2, "/// <summary>");
                 //strclass.AppendSpaceLine(2, "/// 是否存在该记录");
                 //strclass.AppendSpaceLine(2, "/// </summary>");
-                strclass.AppendSpaceLine(2, "public bool Exists(" + param + ")");
+                strclass.AppendSpaceLine(2, "public static bool Exists(" + param + ")");
                 strclass.AppendSpaceLine(2, "{");
                 if (!string.IsNullOrEmpty(param))
                 {

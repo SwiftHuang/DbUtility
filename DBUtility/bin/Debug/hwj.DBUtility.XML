@@ -31,6 +31,21 @@
             Sort parameter
             </summary>
         </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.Result">
+            <summary>
+            当前页结果集
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.PageSize">
+            <summary>
+            每页记录数
+            </summary>
+        </member>
         <member name="F:hwj.DBUtility.BaseGenSql`1.DatabaseGetDateSql">
             <summary>
             获取数据库SQL
@@ -605,13 +620,13 @@
             </summary>
             <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.Collections.Generic.List{hwj.DBUtility.SqlEntity})">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(hwj.DBUtility.SqlList)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
             <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.Collections.Generic.List{hwj.DBUtility.SqlEntity})">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(hwj.DBUtility.SqlList)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
