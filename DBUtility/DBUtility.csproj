@@ -46,37 +46,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseGenSelectSql.cs" />
+    <Compile Include="BaseGenUpdateSql.cs" />
     <Compile Include="Entity\BaseList.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DBCache.cs" />
+    <Compile Include="MSSQL\BaseSqlDAL.cs" />
+    <Compile Include="MSSQL\GenerateEntity.cs" />
+    <Compile Include="MSSQL\GenerateSelectSql.cs" />
     <Compile Include="MSSQL\DbHelper.cs" />
     <Compile Include="MSSQL\DbHelperSQL.cs" />
-    <Compile Include="MSSQL\GenMSSqlSql.cs">
+    <Compile Include="MSSQL\GenerateUpdateSql.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums.cs" />
-    <Compile Include="MYSQL\BaseDAL.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MYSQL\DbHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MYSQL\DbHelperMySQL.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MYSQL\GenMySqlSql.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MYSQL\SqlEntity.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entity\PageResult.cs" />
     <Compile Include="Param\SortParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />
+    <Compile Include="TableMapping\BaseSqlTable.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableMapping\BaseTable.cs" />
@@ -85,9 +76,9 @@
     <Compile Include="Param\FilterParam.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MSSQL\sp_ClearDatabaseLog.sql" />
-    <None Include="MSSQL\sp_Paging_RowCount.sql" />
-    <None Include="MSSQL\sp_PageView.sql" />
+    <None Include="MSSQL\SQL_SP\sp_ClearDatabaseLog.sql" />
+    <None Include="MSSQL\SQL_SP\sp_Paging_RowCount.sql" />
+    <None Include="MSSQL\SQL_SP\sp_PageView.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

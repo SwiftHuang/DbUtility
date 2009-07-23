@@ -6,11 +6,12 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public abstract class BaseDAL<T, L>
+    public abstract class BaseDAL<T, TS>
         where T : BaseTable<T>, new()
-        where L : List<T>, new()
+        where TS : List<T>, new()
     {
-        protected static GenerateSql<T> GenSql = new GenerateSql<T>();
+        protected static GenerateSelectSql<T> GenSelectSql = new GenerateSelectSql<T>();
+        protected static GenerateUpdateSql<T> GenUpdateSql = new GenerateUpdateSql<T>();
 
         #region Property
         protected SqlEntity _SqlEntity = null;
@@ -19,12 +20,12 @@ namespace hwj.DBUtility.MSSQL
             get { return _SqlEntity; }
         }
         protected static string TableName { get; set; }
-        private static bool _EnableSqlLog = false;
-        public static bool EnableSqlLog
-        {
-            get { return _EnableSqlLog; }
-            set { _EnableSqlLog = value; }
-        }
+        //private static bool _EnableSqlLog = false;
+        //public static bool EnableSqlLog
+        //{
+        //    get { return _EnableSqlLog; }
+        //    set { _EnableSqlLog = value; }
+        //}
         #endregion
 
         #region Insert
@@ -52,14 +53,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity AddSqlEntity(T entity)
         {
-            if (EnableSqlLog)
-                return InsertSqlLog(new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity)), "INSERT");
-            else
-                return new SqlEntity(GenSql.InsertSql(entity), GenSql.GenParameter(entity));
+            //if (EnableSqlLog)
+            //    return InsertSqlLog(new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity)), "INSERT");
+            //else
+            return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity));
         }
         public Int64 GetInsertID()
         {
-            return Convert.ToInt64(DbHelper.GetSingle(GenSql.InsertLastIDSql()));
+            return Convert.ToInt64(DbHelper.GetSingle(GenUpdateSql.InsertLastIDSql()));
         }
         #endregion
 
@@ -83,13 +84,13 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity se = new SqlEntity();
             List<SqlParameter> sp = new List<SqlParameter>();
-            sp.AddRange(GenSql.GenParameter(updateParam));
-            sp.AddRange(GenSql.GenParameter(filterParam));
-            se = new SqlEntity(GenSql.UpdateSql(TableName, updateParam, filterParam), sp);
-            if (EnableSqlLog)
-                return InsertSqlLog(se, "UPDATE");
-            else
-                return se;
+            sp.AddRange(GenUpdateSql.GenParameter(updateParam));
+            sp.AddRange(GenUpdateSql.GenParameter(filterParam));
+            se = new SqlEntity(GenUpdateSql.UpdateSql(TableName, updateParam, filterParam), sp);
+            //if (EnableSqlLog)
+            //    return InsertSqlLog(se, "UPDATE");
+            //else
+            return se;
         }
         public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
@@ -105,14 +106,14 @@ namespace hwj.DBUtility.MSSQL
         public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParam)
         {
             SqlEntity se = new SqlEntity();
-            se.CommandText = GenSql.UpdateSql(entity, filterParam);
-            se.Parameters = GenSql.GenParameter(entity);
+            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParam);
+            se.Parameters = GenUpdateSql.GenParameter(entity);
             if (filterParam != null)
-                se.Parameters.AddRange(GenSql.GenParameter(filterParam));
-            if (EnableSqlLog)
-                return InsertSqlLog(se, "UPDATE");
-            else
-                return se;
+                se.Parameters.AddRange(GenUpdateSql.GenParameter(filterParam));
+            //if (EnableSqlLog)
+            //    return InsertSqlLog(se, "UPDATE");
+            //else
+            return se;
         }
         public bool Update(T entity, FilterParams filterParam)
         {
@@ -140,10 +141,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
         {
-            if (EnableSqlLog)
-                return InsertSqlLog(new SqlEntity(GenSql.DeleteSql(TableName, filterParam), GenSql.GenParameter(filterParam)), "DELETE");
-            else
-                return new SqlEntity(GenSql.DeleteSql(TableName, filterParam), GenSql.GenParameter(filterParam));
+            //if (EnableSqlLog)
+            //    return InsertSqlLog(new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam)), "DELETE");
+            //else
+            return new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam));
         }
         public bool Delete(FilterParams filterParam)
         {
@@ -163,51 +164,53 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Truncate()
         {
-            if (DbHelper.ExecuteSql(GenSql.TruncateSql(TableName)) > 0)
+            if (DbHelper.ExecuteSql(GenUpdateSql.TruncateSql(TableName)) > 0)
                 return true;
             else
                 return false;
         }
         #endregion
 
-        private const string SqlParamsFormat = "{0}={1}$";
-        private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES(@Table,@Type,@SQL,@Param,getdate())";
-        /// <summary>
-        /// 记录Sql Log
-        /// </summary>
-        /// <param name="cmd"></param>
-        private static SqlEntity InsertSqlLog(SqlEntity sqlEntity, string type)
-        {
-            try
-            {
-                List<SqlParameter> lstP = new List<SqlParameter>();
-                lstP.Add(new SqlParameter("@Table", TableName));
-                lstP.Add(new SqlParameter("@Type", type));
-                lstP.Add(new SqlParameter("@SQL", sqlEntity.CommandText));
-                lstP.Add(new SqlParameter("@Param", Params2String(sqlEntity)));
+        #region Sql Log
+        //private const string SqlParamsFormat = "{0}={1}$";
+        //private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES(@Table,@Type,@SQL,@Param,getdate())";
+        ///// <summary>
+        ///// 记录Sql Log
+        ///// </summary>
+        ///// <param name="cmd"></param>
+        //private static SqlEntity InsertSqlLog(SqlEntity sqlEntity, string type)
+        //{
+        //    try
+        //    {
+        //        List<SqlParameter> lstP = new List<SqlParameter>();
+        //        lstP.Add(new SqlParameter("@Table", TableName));
+        //        lstP.Add(new SqlParameter("@Type", type));
+        //        lstP.Add(new SqlParameter("@SQL", sqlEntity.CommandText));
+        //        lstP.Add(new SqlParameter("@Param", Params2String(sqlEntity)));
 
-                DbHelper.ExecuteSql(InsertSqlLogFormat, lstP);
-            }
-            catch
-            {
-                throw;
-            }
-            return sqlEntity;
-        }
-        private static string Params2String(SqlEntity sqlEntity)
-        {
-            if (sqlEntity.Parameters != null)
-            {
-                string s = "";
-                foreach (SqlParameter p in sqlEntity.Parameters)
-                {
-                    s += string.Format(SqlParamsFormat, p.ParameterName, p.Value);
-                }
-                return s;
-            }
-            else
-                return string.Empty;
-        }
+        //        DbHelper.ExecuteSql(InsertSqlLogFormat, lstP);
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    return sqlEntity;
+        //}
+        //private static string Params2String(SqlEntity sqlEntity)
+        //{
+        //    if (sqlEntity.Parameters != null)
+        //    {
+        //        string s = "";
+        //        foreach (SqlParameter p in sqlEntity.Parameters)
+        //        {
+        //            s += string.Format(SqlParamsFormat, p.ParameterName, p.Value);
+        //        }
+        //        return s;
+        //    }
+        //    else
+        //        return string.Empty;
+        //}
+        #endregion
 
         #region Get Entity
         public T GetEntity()
@@ -224,7 +227,7 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSql.GenParameter(filterParam));
+            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
             return GetEntity(SqlEntity.CommandText, SqlEntity.Parameters);
         }
         public T GetEntity(string sql, List<SqlParameter> parameters)
@@ -233,7 +236,7 @@ namespace hwj.DBUtility.MSSQL
             try
             {
                 if (reader.HasRows)
-                    return CreateSingleEntity(reader);
+                    return GenerateEntity<T, TS>.CreateSingleEntity(reader);
                 else
                     return null;
             }
@@ -248,36 +251,36 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Get List
-        public L GetList()
+        public TS GetList()
         {
             return GetList(null, null, null, null);
         }
-        public L GetList(DisplayFields displayFields)
+        public TS GetList(DisplayFields displayFields)
         {
             return GetList(displayFields, null, null, null);
         }
-        public L GetList(DisplayFields displayFields, FilterParams filterParam)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
             return GetList(displayFields, filterParam, null, null);
         }
-        public L GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
             return GetList(displayFields, filterParam, sortParams, null);
         }
-        public L GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
+            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return GetList(SqlEntity.CommandText, SqlEntity.Parameters);
         }
-        public L GetList(string sql, List<SqlParameter> parameters)
+        public TS GetList(string sql, List<SqlParameter> parameters)
         {
             SqlDataReader reader = DbHelper.ExecuteReader(sql, parameters);
             try
             {
                 if (reader.HasRows)
-                    return CreateListEntity(reader);
+                    return GenerateEntity<T, TS>.CreateListEntity(reader);
                 else
-                    return new L();
+                    return new TS();
             }
             catch
             { throw; }
@@ -300,7 +303,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             return GetPage3(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
@@ -315,18 +318,13 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <returns></returns>
-        public L GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            _SqlEntity = GenSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
-            //_SqlEntity = new SqlEntity(); 
-            //_SqlEntity.CommandText = GenSql.GetGroupPageSql(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            _SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
-                //if (conn.State != ConnectionState.Open)
-                //    conn.Open();
-                //SqlCommand cmd = new SqlCommand(SqlEntity.CommandText, conn);
                 SqlCommand cmd = new SqlCommand();
                 DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
                 SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
@@ -337,7 +335,7 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (reader.HasRows)
                     {
-                        L result = CreateListEntity(reader);
+                        TS result = GenerateEntity<T, TS>.CreateListEntity(reader);
                         reader.Close();
                         if (cmd.Parameters.Count > 0)
                             TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
@@ -345,7 +343,7 @@ namespace hwj.DBUtility.MSSQL
                         return result;
                     }
                     else
-                        return new L();
+                        return new TS();
                 }
                 catch
                 {
@@ -369,10 +367,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize"></param>
         /// <param name="TotalCount"></param>
         /// <returns></returns>
-        public L GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            //_SqlEntity = new SqlEntity(GenSql.SelectPageSql2(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize), null);
-            _SqlEntity = GenSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            _SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
             {
@@ -386,7 +383,7 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (reader.HasRows)
                     {
-                        L result = CreateListEntity(reader);
+                        TS result = GenerateEntity<T, TS>.CreateListEntity(reader);
                         reader.Close();
                         if (cmd.Parameters.Count > 0)
                             TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
@@ -394,7 +391,7 @@ namespace hwj.DBUtility.MSSQL
                         return result;
                     }
                     else
-                        return new L();
+                        return new TS();
                 }
                 catch
                 {
@@ -425,7 +422,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>记录数</returns>
         public int RecordCount(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectCountSql(TableName, filterParam), GenSql.GenParameter(filterParam));
+            _SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
             return Convert.ToInt32(DbHelper.GetSingle(SqlEntity.CommandText, SqlEntity.Parameters));
         }
         #endregion
@@ -438,111 +435,8 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            _SqlEntity = new SqlEntity(GenSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSql.GenParameter(filterParam));
-            return CreateDataTable(DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters));
-        }
-        #endregion
-
-        #region Protected Functions
-        protected DataTable CreateDataTable(IDataReader reader)
-        {
-            try
-            {
-                DataTable dataTable = new DataTable();//建一个新的实例
-
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    DataColumn mydc = new DataColumn();//关键的一步
-                    mydc.DataType = reader.GetFieldType(i);
-                    mydc.ColumnName = reader.GetName(i);
-
-                    dataTable.Columns.Add(mydc);//关键的第二步
-                }
-
-                while (reader.Read())
-                {
-
-                    DataRow mydr = dataTable.NewRow();//关键的第三步
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        mydr[i] = reader[i];
-                    }
-
-                    dataTable.Rows.Add(mydr);//关键的第四步
-                    mydr = null;
-                }
-                return dataTable;//别忘了要返回datatable，否则出错
-            }
-            catch { throw; }
-            finally
-            {
-                if (!reader.IsClosed) reader.Close();
-            }
-        }
-        protected T CreateSingleEntity(IDataReader reader)
-        {
-            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-            lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
-            lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
-
-            reader.Read();
-            return CreateEntityNotClose(reader, lstFieldInfo);
-        }
-        protected L CreateListEntity(IDataReader reader)
-        {
-            L DataList = new L();
-            IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
-            lstFieldInfo = SetFieldIndex(reader, FieldMappingInfo.GetFieldMapping(typeof(T)));
-
-            while (reader.Read())
-            {
-                DataList.Add(CreateEntityNotClose(reader, lstFieldInfo));
-            }
-            return DataList;
-        }
-        #endregion
-
-        #region Private Functions
-        private T CreateEntityNotClose(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
-        {
-            T RowInstance = new T();
-            RowInstance.SetAssignedStatus(false);
-            foreach (FieldMappingInfo f in lstFieldInfo)
-            {
-                try
-                {
-                    //取得当前数据库字段的顺序
-                    if (f.FieldIndex != -1)
-                    {
-                        object obj = reader.GetValue(f.FieldIndex);
-                        if (obj != DBNull.Value)
-                            f.Property.SetValue(RowInstance, obj, null);
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-            return RowInstance;
-        }
-        private IList<FieldMappingInfo> SetFieldIndex(IDataReader reader, IList<FieldMappingInfo> list)
-        {
-            IList<FieldMappingInfo> datalist = new List<FieldMappingInfo>();
-            foreach (FieldMappingInfo f in list)
-            {
-                try
-                {
-                    f.FieldIndex = reader.GetOrdinal(f.FieldName);
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    f.FieldIndex = -1;
-                }
-                datalist.Add(f);
-            }
-            return datalist;
-
+            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters));
         }
         #endregion
 

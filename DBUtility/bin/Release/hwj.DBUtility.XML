@@ -31,20 +31,82 @@
             Sort parameter
             </summary>
         </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.RecordCount">
+        <member name="F:hwj.DBUtility.BaseGenSql`1.DatabaseGetDateSql">
             <summary>
-            记录总数
+            获取数据库SQL
             </summary>
         </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.Result">
+        <member name="M:hwj.DBUtility.BaseGenSql`1.DeleteSql(System.String,hwj.DBUtility.FilterParams)">
             <summary>
-            当前页结果集
+            获取Delete Sql
             </summary>
+            <param name="tableName">表名</param>
+            <param name="filterParam">筛选条件</param>
+            <returns></returns>
         </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.PageSize">
+        <member name="M:hwj.DBUtility.BaseGenSql`1.TruncateSql(System.String)">
             <summary>
-            每页记录数
+            彻底清除表的内容(重置自动增量)
             </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.BaseGenSql`1.UpdateSql(`0,hwj.DBUtility.FilterParams)">
+            <summary>
+            获取Update Sql
+            </summary>
+            <param name="entity">表对象</param>
+            <param name="filterParams">筛选条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.BaseGenSql`1.UpdateSql(System.String,hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
+            <summary>
+            获取Update Sql
+            </summary>
+            <param name="tableName">表名</param>
+            <param name="updateParam">Update参数</param>
+            <param name="filterParam">筛选参选</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.BaseGenSql`1.TrimSql(System.String)">
+            <summary>
+            格式化最后的表达式
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.BaseGenSql`1.CheckSql(System.String)">
+            <summary>
+            检查非法字符
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.BaseDAL`1.Truncate">
+            <summary>
+            彻底清除表的内容(重置自动增量)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.BaseDAL`1.RecordCount">
+            <summary>
+            返回表的记录数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.BaseDAL`1.RecordCount(hwj.DBUtility.FilterParams)">
+            <summary>
+            返回表的记录数
+            </summary>
+            <param name="whereParam">条件参数</param>
+            <returns>记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.BaseDAL`1.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="strWhere"></param>
+            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.SetAssignedStatus(System.Boolean)">
             <summary>
@@ -246,6 +308,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.InsertSqlLog(hwj.DBUtility.SqlEntity,System.String)">
+            <summary>
+            记录Sql Log
+            </summary>
+            <param name="cmd"></param>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
             <summary>
             获取分页对象(单主键,以主键作为排序)
@@ -304,25 +372,6 @@
             <param name="strWhere"></param>
             <returns></returns>
         </member>
-        <member name="F:hwj.DBUtility.BaseGenSql`1.DatabaseGetDateSql">
-            <summary>
-            获取数据库SQL
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.BaseGenSql`1.TrimSql(System.String)">
-            <summary>
-            格式化最后的表达式
-            </summary>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.BaseGenSql`1.CheckSql(System.String)">
-            <summary>
-            检查非法字符
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
         <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
             <summary>
             Add a left brackets
@@ -339,36 +388,129 @@
             </summary>
             <param name="expression"></param>
         </member>
-        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.DeleteSql(System.String,hwj.DBUtility.FilterParams)">
+        <member name="T:hwj.DBUtility.MYSQL.DbHelperMySQL">
             <summary>
-            获取Delete Sql
+            数据访问抽象基础类
+            Copyright (C) 2004-2008 By LiTianPing 
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSqlTran(System.Collections.Generic.List{System.String})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">多条SQL语句</param>		
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSql(System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSqlGet(System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSqlInsertImg(System.String,System.Byte[])">
+            <summary>
+            向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
+            </summary>
+            <param name="strSQL">SQL语句</param>
+            <param name="fs">图像字节,数据库的字段类型为image的情况</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.GetSingle(System.String)">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteReader(System.String)">
+            <summary>
+            执行查询语句，返回MySqlDataReader ( 注意：调用该方法后，一定要对MySqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>MySqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.Query(System.String)">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteSql(System.String,System.Collections.Generic.List{MySql.Data.MySqlClient.MySqlParameter})">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.GetSingle(System.String,System.Collections.Generic.List{MySql.Data.MySqlClient.MySqlParameter})">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.ExecuteReader(System.String,System.Collections.Generic.List{MySql.Data.MySqlClient.MySqlParameter})">
+            <summary>
+            执行查询语句，返回MySqlDataReader ( 注意：调用该方法后，一定要对MySqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>MySqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MYSQL.DbHelperMySQL.Query(System.String,System.Collections.Generic.List{MySql.Data.MySqlClient.MySqlParameter})">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.GenerateSql`1.#ctor">
+            <summary>
+            SQL生成类
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.GenerateSql`1.InsertLastIDSql">
+            <summary>
+            返回最后插入的标识值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.GenerateSql`1.GetGroupPageSqlEntity(System.String,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32)">
+            <summary>
+            数据分页
             </summary>
             <param name="tableName">表名</param>
+            <param name="displayFields">需要显示的字段</param>
             <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序</param>
+            <param name="PK">分页依据(关键字)</param>
+            <param name="groupParam">分组显示</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页显示记录数</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.TruncateSql(System.String)">
+        <member name="M:hwj.DBUtility.MSSQL.GenerateSql`1.GenFilterParamsSql(hwj.DBUtility.FilterParams,System.Boolean)">
             <summary>
-            彻底清除表的内容(重置自动增量)
+            生成筛选SQL
             </summary>
-            <param name="tableName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.UpdateSql(`0,hwj.DBUtility.FilterParams)">
-            <summary>
-            获取Update Sql
-            </summary>
-            <param name="entity">表对象</param>
-            <param name="filterParams">筛选条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.UpdateSql(System.String,hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
-            <summary>
-            获取Update Sql
-            </summary>
-            <param name="tableName">表名</param>
-            <param name="updateParam">Update参数</param>
-            <param name="filterParam">筛选参选</param>
+            <param name="listParam"></param>
+            <param name="isPage"></param>
             <returns></returns>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.DbHelperSQL">
@@ -544,52 +686,6 @@
             <param name="storedProcName">存储过程名</param>
             <param name="parameters">存储过程参数</param>
             <returns>SqlCommand 对象实例</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.#ctor">
-            <summary>
-            SQL生成类
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.InsertLastIDSql">
-            <summary>
-            返回最后插入的标识值
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.GenFilterParamsSql(hwj.DBUtility.FilterParams,System.Boolean)">
-            <summary>
-            生成筛选SQL
-            </summary>
-            <param name="listParam"></param>
-            <param name="isPage"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateSelectSql`1.#ctor">
-            <summary>
-            SQL生成类
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateSelectSql`1.GetGroupPageSqlEntity(System.String,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32)">
-            <summary>
-            数据分页
-            </summary>
-            <param name="tableName">表名</param>
-            <param name="displayFields">需要显示的字段</param>
-            <param name="filterParam">筛选条件</param>
-            <param name="sortParams">排序</param>
-            <param name="PK">分页依据(关键字)</param>
-            <param name="groupParam">分组显示</param>
-            <param name="pageNumber">页数</param>
-            <param name="pageSize">每页显示记录数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateSelectSql`1.GenFilterParamsSql(hwj.DBUtility.FilterParams,System.Boolean)">
-            <summary>
-            生成筛选SQL
-            </summary>
-            <param name="listParam"></param>
-            <param name="isPage"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>
