@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class GenerateSql<T> : BaseGenSql<T> where T : BaseTable<T>, new()
+    public class GenerateUpdateSql<T> : BaseGenUpdateSql<T> where T : BaseTable<T>, new()
     {
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
@@ -22,7 +22,7 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// SQL生成类
         /// </summary>
-        public GenerateSql()
+        public GenerateUpdateSql()
         {
             base.DatabaseGetDateSql = _MsSqlGetDate;
             _FieldFormat = _MsSqlFieldFmt;
@@ -81,90 +81,6 @@ namespace hwj.DBUtility.MSSQL
         public override string TruncateSql(string tableName)
         {
             return string.Format(_MsSqlTruncate, tableName);
-        }
-        #endregion
-
-        #region Select Sql
-        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
-        {
-            return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, true);
-        }
-        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, bool isNoLock)
-        {
-            string sMaxCount = string.Empty;
-
-            if (maxCount.HasValue && maxCount > 0)
-            {
-                sMaxCount = string.Format(_MsSqlTopCount, maxCount);
-            }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(isNoLock), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
-        }
-        /// <summary>
-        /// 数据分页
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="displayFields">需要显示的字段</param>
-        /// <param name="filterParam">筛选条件</param>
-        /// <param name="sortParams">排序</param>
-        /// <param name="PK">分页依据(关键字)</param>
-        /// <param name="groupParam">分组显示</param>
-        /// <param name="pageNumber">页数</param>
-        /// <param name="pageSize">每页显示记录数</param>
-        /// <returns></returns>
-        //public string GetGroupPageSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
-        //{
-        //    string _SelectFields = GenDisplayFieldsSql(displayFields);
-        //    string _FilterParam = GenFilterParamsSql(filterParam, true);
-        //    string _OrderParam = GenSortParamsSql(sortParams, true);
-        //    return string.Format(_MsSqlPaging_RowCount, tableName, GenDisplayFieldsSql(PK, true), _OrderParam, pageNumber, pageSize, _SelectFields, _FilterParam, GenGroupParamsSql(groupParam));
-        //}
-        /// <summary>
-        /// 数据分页
-        /// </summary>
-        /// <param name="tableName">表名</param>
-        /// <param name="displayFields">需要显示的字段</param>
-        /// <param name="filterParam">筛选条件</param>
-        /// <param name="sortParams">排序</param>
-        /// <param name="PK">分页依据(关键字)</param>
-        /// <param name="groupParam">分组显示</param>
-        /// <param name="pageNumber">页数</param>
-        /// <param name="pageSize">每页显示记录数</param>
-        /// <returns></returns>
-        public SqlEntity GetGroupPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
-        {
-            SqlEntity SE = new SqlEntity();
-            SE.CommandText = _MsSqlPaging_RowCount;
-            SE.Parameters = new List<SqlParameter>();
-            SE.Parameters.Add(new SqlParameter("@TableName", tableName));
-            SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
-            SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
-            SE.Parameters.Add(new SqlParameter("@PageSize", pageSize));
-            SE.Parameters.Add(new SqlParameter("@DisplayField", GenDisplayFieldsSql(displayFields)));
-            SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
-            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
-            SE.Parameters.Add(new SqlParameter("@Group", GenGroupParamsSql(groupParam)));
-            return SE;
-        }
-        //public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
-        //{
-        //    string _SelectFields = GenDisplayFieldsSql(displayFields);
-        //    string _FilterParam = GenFilterParamsSql(filterParam, true);
-        //    string _OrderParam = GenSortParamsSql(sortParams, true);
-        //    return string.Format(_MsSqlPageView, tableName, GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
-        //}
-        public SqlEntity GetPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
-        {
-            SqlEntity SE = new SqlEntity();
-            SE.CommandText = _MsSqlPageView;
-            SE.Parameters = new List<SqlParameter>();
-            SE.Parameters.Add(new SqlParameter("@TableName", tableName));
-            SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
-            SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
-            SE.Parameters.Add(new SqlParameter("@PageSize", pageSize));
-            SE.Parameters.Add(new SqlParameter("@DisplayField", GenDisplayFieldsSql(displayFields)));
-            SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
-            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
-            return SE;
         }
         #endregion
 
