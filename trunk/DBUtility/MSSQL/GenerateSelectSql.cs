@@ -28,6 +28,10 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region Select Sql
+        public string SelectServerDateTime()
+        {
+            return "SELECT GETDATE() AS [DateTime]";
+        }
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
             return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, true);
@@ -177,7 +181,7 @@ namespace hwj.DBUtility.MSSQL
             }
             else if (isPage)
             {
-                sbStr.Append('\'');//.Append('\'');
+                sbStr.Append("N\'");//.Append('\'');
                 if (IsDatabaseDate(para))
                     sbStr.Append(_MsSqlGetDate);
                 else

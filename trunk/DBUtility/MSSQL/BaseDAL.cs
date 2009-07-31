@@ -213,6 +213,15 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Get Entity
+        public DateTime GetServerDateTime()
+        {
+            DateTime tmpDateTime = DateTime.MinValue;
+            object tmp = DbHelper.GetSingle(GenSelectSql.SelectServerDateTime());
+
+            if (tmp != null)
+                DateTime.TryParse(tmp.ToString(), out tmpDateTime);
+            return tmpDateTime;
+        }
         public T GetEntity()
         {
             return GetEntity(null);
