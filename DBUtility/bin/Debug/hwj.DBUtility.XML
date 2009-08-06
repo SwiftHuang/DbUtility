@@ -242,7 +242,7 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Truncate">
             <summary>
-            彻底清除表的内容(重置自动增量)
+            彻底清除表的内容(重置自动增量),请慎用
             </summary>
             <returns></returns>
         </member>
@@ -298,6 +298,13 @@
             <returns>记录数</returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="strWhere"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
             <summary>
             返回DataTable(建议用于Report或自定义列表)
             </summary>
