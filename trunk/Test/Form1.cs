@@ -31,12 +31,21 @@ namespace Test
                 decimal i = 0;
                 decimal.TryParse("-", out i);
                 hwj.CommonLibrary.Object.NumberHelper.RoundDown(2.5);
-                dataGridView1.DataSource = BLL.Table.BOtbDistrict.TestSql().Result;
+                List<string> v = new List<string>();
+                v.Add("2");
+                Test(out v);
+                //dataGridView1.DataSource = BLL.Table.BOtbDistrict.TestSql().Result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Test(out List<string> vin)
+        {
+            vin.Add("1");
+        }
+
     }
 }

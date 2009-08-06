@@ -48,9 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\BOtbDistrict.cs" />
-    <Compile Include="DAL\DAtbDistrict.cs" />
-    <Compile Include="Entity\tbDistrict.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,9 +65,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Suggest.resx">
-      <DependentUpon>Suggest.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -83,12 +77,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Suggest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Suggest.Designer.cs">
-      <DependentUpon>Suggest.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

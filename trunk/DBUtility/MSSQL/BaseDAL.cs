@@ -37,14 +37,7 @@ namespace hwj.DBUtility.MSSQL
         public bool Add(T entity)
         {
             _SqlEntity = AddSqlEntity(entity);
-            return Add(SqlEntity.CommandText, SqlEntity.Parameters);
-        }
-        public bool Add(string sql, List<SqlParameter> parameters)
-        {
-            if (DbHelper.ExecuteSql(sql, parameters) > 0)
-                return true;
-            else
-                return false;
+            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
         /// <summary>
         /// 获取增加的Sql对象
@@ -95,7 +88,7 @@ namespace hwj.DBUtility.MSSQL
         public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
             _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
-            return Update(SqlEntity.CommandText, SqlEntity.Parameters);
+            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
         /// <summary>
         /// 获取更新的Sql对象
@@ -118,14 +111,7 @@ namespace hwj.DBUtility.MSSQL
         public bool Update(T entity, FilterParams filterParam)
         {
             _SqlEntity = UpdateSqlEntity(entity, filterParam);
-            return Update(SqlEntity.CommandText, SqlEntity.Parameters);
-        }
-        public bool Update(string sql, List<SqlParameter> parameters)
-        {
-            if (DbHelper.ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0)
-                return true;
-            else
-                return false;
+            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
         #endregion
 
@@ -149,17 +135,10 @@ namespace hwj.DBUtility.MSSQL
         public bool Delete(FilterParams filterParam)
         {
             _SqlEntity = DeleteSqlEntity(filterParam);
-            return Delete(SqlEntity.CommandText, SqlEntity.Parameters);
-        }
-        public bool Delete(string sql, List<SqlParameter> parameters)
-        {
-            if (DbHelper.ExecuteSql(sql, parameters) > 0)
-                return true;
-            else
-                return false;
+            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
         /// <summary>
-        /// 彻底清除表的内容(重置自动增量)
+        /// 彻底清除表的内容(重置自动增量),请慎用
         /// </summary>
         /// <returns></returns>
         public bool Truncate()
@@ -445,9 +424,23 @@ namespace hwj.DBUtility.MSSQL
         public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(SqlEntity.CommandText, SqlEntity.Parameters));
+            return GetDataTable(_SqlEntity.CommandText, _SqlEntity.Parameters);
+        }
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
+        {
+            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(sql, cmdParams));
         }
         #endregion
+
+        public int ExecuteSql(string sql, List<SqlParameter> parameters)
+        {
+            return DbHelper.ExecuteSql(sql, parameters);
+        }
 
         public bool ExecuteSqlTran(SqlList list)
         {

@@ -9,6 +9,22 @@
             JavaScript Helper
             </summary>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.SecurityHelper.Encrypt(System.String,System.String)">
+            <summary> 
+            加密数据 
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.SecurityHelper.Decrypt(System.String,System.String)">
+            <summary> 
+            解密数据 
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
         <member name="T:hwj.CommonLibrary.WebSite.WebCache">
             <summary>
             设置Cache操作类
@@ -97,22 +113,6 @@
             得到所有使用的Cache键值
             </summary>
             <returns>返回所有的Cache键值</returns>
-        </member>
-        <member name="M:hwj.CommonLibrary.Object.StringHelper.Encrypt(System.String,System.String)">
-            <summary> 
-            加密数据 
-            </summary> 
-            <param name="Text"></param> 
-            <param name="sKey"></param> 
-            <returns></returns> 
-        </member>
-        <member name="M:hwj.CommonLibrary.Object.StringHelper.Decrypt(System.String,System.String)">
-            <summary> 
-            解密数据 
-            </summary> 
-            <param name="Text"></param> 
-            <param name="sKey"></param> 
-            <returns></returns> 
         </member>
         <member name="F:hwj.CommonLibrary.Object.StringHelper.strChineseCharList">
             <summary> 
