@@ -19,7 +19,20 @@ namespace hwj.DBUtility.MSSQL
         {
             get { return _SqlEntity; }
         }
-        protected static string TableName { get; set; }
+        private static string _TableName;
+        protected static string TableName
+        {
+            get
+            {
+                if (_TableName == null)
+                {
+                    T t = new T();
+                    _TableName = t.GetTableName();
+                }
+                return _TableName;
+            }
+            set { _TableName = value; }
+        }
         //private static bool _EnableSqlLog = false;
         //public static bool EnableSqlLog
         //{
