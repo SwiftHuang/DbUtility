@@ -147,11 +147,26 @@ namespace hwj.DBUtility.MSSQL
                     else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                     {
                         StringBuilder inSql = new StringBuilder();
-                        string[] s = (string[])para.FieldValue;
+                        string[] s;
+                        List<string> lst = para.FieldValue as List<string>;
+                        if (lst == null)
+                            s = (string[])para.FieldValue;
+                        else
+                            s = lst.ToArray();
 
-                        for (int i = 0; i < s.Length; i++)
+                        if (!isPage)
                         {
-                            inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + i).Append(',');
+                            for (int i = 0; i < s.Length; i++)
+                            {
+                                inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + i).Append(',');
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < s.Length; i++)
+                            {
+                                inSql.Append('N').AppendFormat(_StringFormat, s[i]).Append(',');
+                            }
                         }
                         sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
                     }
