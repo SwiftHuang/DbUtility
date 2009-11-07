@@ -98,5 +98,10 @@ namespace hwj.DBUtility.TableMapping
             }
         }
 
+        public T Clone()
+        {
+            return (this.MemberwiseClone() as T);
+        }
+
     }
 }

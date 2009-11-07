@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 
 namespace hwj.DBUtility
@@ -46,6 +47,36 @@ namespace hwj.DBUtility
 
     public static class OrderParamExtensions
     {
+        public static SortParams AddParam(this SortParams lst, string fieldName, ListSortDirection sort, bool filterRepeat)
+        {
+            return AddParam(lst, fieldName, sort == ListSortDirection.Descending ? Enums.OrderBy.Descending : Enums.OrderBy.Ascending, filterRepeat);
+        }
+        public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order, bool filterRepeat)
+        {
+            if (filterRepeat)
+            {
+                foreach (SortParam p in lst)
+                {
+                    if (p.FieldName.ToUpper() == fieldName.ToString().ToUpper())
+                        return lst;
+                }
+            }
+            lst.Add(new SortParam(fieldName, order));
+            return lst;
+        }
+        public static SortParams AddParam(this SortParams lst, string fieldName, Enums.OrderBy order, bool filterRepeat)
+        {
+            if (filterRepeat)
+            {
+                foreach (SortParam p in lst)
+                {
+                    if (p.FieldName.ToUpper() == fieldName.ToUpper())
+                        return lst;
+                }
+            }
+            lst.Add(new SortParam(fieldName, order));
+            return lst;
+        }
         public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order)
         {
             lst.Add(new SortParam(fieldName, order));
