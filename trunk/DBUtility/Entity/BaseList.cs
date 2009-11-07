@@ -11,12 +11,22 @@ namespace hwj.DBUtility.Entity
         where T : BaseTable<T>, new()
         where TS : List<T>, new()
     {
+        private Enum tmpField;
+        private object tmpValue = null;
+        private T tmpFindObj = null;
         public T ExFind(Enum field, object value)
         {
+            if (field.Equals(tmpField) && value.Equals(tmpValue))
+                return tmpFindObj;
             foreach (T t in this)
             {
                 if (MatchData(field, value, t))
+                {
+                    tmpField = field;
+                    tmpValue = value;
+                    tmpFindObj = t;
                     return t;
+                }
             }
             return null;
         }
