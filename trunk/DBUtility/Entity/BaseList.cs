@@ -16,7 +16,7 @@ namespace hwj.DBUtility.Entity
         private T tmpFindObj = null;
         public T ExFind(Enum field, object value)
         {
-            if (field.Equals(tmpField) && value.Equals(tmpValue))
+            if (field != null && value != null && field.Equals(tmpField) && value.Equals(tmpValue))
                 return tmpFindObj;
             foreach (T t in this)
             {
