@@ -4,6 +4,7 @@ using System.Data;
 using System.Web;
 using hwj.DBUtility;
 using hwj.DBUtility.TableMapping;
+using System.ComponentModel;
 
 namespace hwj.DBUtility.Entity
 {
@@ -14,6 +15,7 @@ namespace hwj.DBUtility.Entity
         private Enum tmpField;
         private object tmpValue = null;
         private T tmpFindObj = null;
+
         public T ExFind(Enum field, object value)
         {
             if (field != null && value != null && field.Equals(tmpField) && value.Equals(tmpValue))
@@ -40,6 +42,17 @@ namespace hwj.DBUtility.Entity
             }
             return lst;
         }
+        public List<T> Sort(Enum field, ListSortDirection direction)
+        {
+            return Sort(field.ToString(), direction);
+        }
+        public List<T> Sort(string fieldName, ListSortDirection direction)
+        {
+            Reverser<T> reverser = new Reverser<T>(this.GetType(), fieldName, direction);
+            Sort(reverser);
+            return this;
+        }
+
         private bool MatchData(Enum field, object value, T entity)
         {
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), field.ToString()));

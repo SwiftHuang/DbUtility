@@ -50,6 +50,7 @@
     <Compile Include="BaseGenSelectSql.cs" />
     <Compile Include="BaseGenUpdateSql.cs" />
     <Compile Include="Entity\BaseList.cs" />
+    <Compile Include="Entity\Reverser.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
