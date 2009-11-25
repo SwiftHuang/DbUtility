@@ -32,9 +32,9 @@ namespace hwj.DBUtility.Entity
             }
             return null;
         }
-        public List<T> ExFindAll(Enum field, object value)
+        public TS ExFindAll(Enum field, object value)
         {
-            List<T> lst = new List<T>();
+            TS lst = new TS();
             foreach (T t in this)
             {
                 if (MatchData(field, value, t))
