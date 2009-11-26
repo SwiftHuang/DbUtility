@@ -96,6 +96,7 @@ namespace hwj.DBUtility.MSSQL
             if (listParam != null && listParam.Count > 0)
             {
                 StringBuilder sbWhere = new StringBuilder();
+                int index = 0;
                 if (!isPage)
                     sbWhere.Append("WHERE ");
                 foreach (SqlParam para in listParam)
@@ -116,11 +117,20 @@ namespace hwj.DBUtility.MSSQL
                     else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                     {
                         StringBuilder inSql = new StringBuilder();
-                        string[] s = (string[])para.FieldValue;
+                        string[] strList;
+                        if (para.FieldValue == null)
+                            continue;
+                        else if (para.FieldValue is List<string>)
+                            strList = ((List<string>)para.FieldValue).ToArray();
+                        else if (para.FieldValue is string)
+                            strList = new string[] { para.FieldValue.ToString() };
+                        else
+                            strList = (string[])para.FieldValue;
 
-                        for (int i = 0; i < s.Length; i++)
+                        foreach (string s in strList)
                         {
-                            inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + i).Append(',');
+                            inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
+                            index++;
                         }
                         sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
                     }
@@ -230,19 +240,29 @@ namespace hwj.DBUtility.MSSQL
             if (filterParam != null)
             {
                 List<SqlParameter> LstDP = new List<SqlParameter>();
+                int index = 0;
                 foreach (SqlParam sp in filterParam)
                 {
                     if (IsDatabaseDate(sp))
                         continue;
                     if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
-                        string[] s = (string[])sp.FieldValue;
-                        for (int i = 0; i < s.Length; i++)
+                        string[] strList;
+                        if (sp.FieldValue == null)
+                            continue;
+                        else if (sp.FieldValue is List<string>)
+                            strList = ((List<string>)sp.FieldValue).ToArray();
+                        else if (sp.FieldValue is string)
+                            strList = new string[] { sp.FieldValue.ToString() };
+                        else
+                            strList = (string[])sp.FieldValue;
+                        foreach (string s in strList)
                         {
                             SqlParameter p = new SqlParameter();
-                            p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + i;
-                            p.Value = s[i].ToString();
+                            p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
+                            p.Value = s;
                             LstDP.Add(p);
+                            index++;
                         }
                     }
                     else if (sp.Operator == Enums.Relation.IsNotNull || sp.Operator == Enums.Relation.IsNull)
