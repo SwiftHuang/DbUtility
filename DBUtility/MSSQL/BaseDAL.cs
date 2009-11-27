@@ -426,6 +426,10 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
             return Convert.ToInt32(DbHelper.GetSingle(SqlEntity.CommandText, SqlEntity.Parameters));
         }
+        public int RecordCount(string sql, List<SqlParameter> parameters)
+        {
+            return Convert.ToInt32(DbHelper.GetSingle(sql, parameters));
+        }
         #endregion
 
         #region DataTable
