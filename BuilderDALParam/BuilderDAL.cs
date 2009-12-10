@@ -445,8 +445,9 @@ namespace LTP.BuilderDALParam
             strclass.AppendLine("");
             strclass.AppendSpaceLine(1, "{");
             strclass.AppendSpaceLine(2, "public " + DALName + "(string connectionString)");
+            strclass.AppendSpaceLine(3, ": base(connectionString)");
             strclass.AppendSpaceLine(2, "{");
-            strclass.AppendSpaceLine(3, "DbHelper.ConnectionString = connectionString;");
+            //strclass.AppendSpaceLine(3, "DbHelper.ConnectionString = connectionString;");
             strclass.AppendSpaceLine(3, "TableName = " + ModelName + ".DBTableName;");
             strclass.AppendSpaceLine(2, "}");
             //strclass.AppendSpaceLine(2, "#region  成员方法");
