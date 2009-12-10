@@ -6,7 +6,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public abstract class BaseDAL<T, TS>
+    public class BaseDAL<T, TS> : BaseDataAccess<T>
         where T : BaseTable<T>, new()
         where TS : List<T>, new()
     {
@@ -14,11 +14,6 @@ namespace hwj.DBUtility.MSSQL
         protected static GenerateUpdateSql<T> GenUpdateSql = new GenerateUpdateSql<T>();
 
         #region Property
-        protected SqlEntity _SqlEntity = null;
-        public SqlEntity SqlEntity
-        {
-            get { return _SqlEntity; }
-        }
         private static string _TableName;
         protected static string TableName
         {
@@ -40,6 +35,12 @@ namespace hwj.DBUtility.MSSQL
         //    set { _EnableSqlLog = value; }
         //}
         #endregion
+
+        public BaseDAL(string ConnectionString)
+            : base(ConnectionString)
+        {
+
+        }
 
         #region Insert
         /// <summary>
@@ -66,7 +67,7 @@ namespace hwj.DBUtility.MSSQL
         }
         public Int64 GetInsertID()
         {
-            return Convert.ToInt64(DbHelper.GetSingle(GenUpdateSql.InsertLastIDSql()));
+            return Convert.ToInt64(DbHelper.GetSingle(ConnectionString, GenUpdateSql.InsertLastIDSql()));
         }
         #endregion
 
@@ -156,7 +157,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Truncate()
         {
-            if (DbHelper.ExecuteSql(GenUpdateSql.TruncateSql(TableName)) > 0)
+            if (DbHelper.ExecuteSql(ConnectionString, GenUpdateSql.TruncateSql(TableName)) > 0)
                 return true;
             else
                 return false;
@@ -208,7 +209,7 @@ namespace hwj.DBUtility.MSSQL
         public DateTime GetServerDateTime()
         {
             DateTime tmpDateTime = DateTime.MinValue;
-            object tmp = DbHelper.GetSingle(GenSelectSql.SelectServerDateTime());
+            object tmp = DbHelper.GetSingle(ConnectionString, GenSelectSql.SelectServerDateTime());
 
             if (tmp != null)
                 DateTime.TryParse(tmp.ToString(), out tmpDateTime);
@@ -233,7 +234,7 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(sql, parameters);
+            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
             try
             {
                 if (reader.HasRows)
@@ -275,7 +276,7 @@ namespace hwj.DBUtility.MSSQL
         }
         public TS GetList(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(sql, parameters);
+            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
             try
             {
                 if (reader.HasRows)
@@ -324,7 +325,7 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
             TotalCount = 0;
-            using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
@@ -372,7 +373,7 @@ namespace hwj.DBUtility.MSSQL
         {
             _SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             TotalCount = 0;
-            using (SqlConnection conn = new SqlConnection(DbHelper.ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
@@ -424,11 +425,11 @@ namespace hwj.DBUtility.MSSQL
         public int RecordCount(FilterParams filterParam)
         {
             _SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
-            return Convert.ToInt32(DbHelper.GetSingle(SqlEntity.CommandText, SqlEntity.Parameters));
+            return Convert.ToInt32(DbHelper.GetSingle(ConnectionString, SqlEntity.CommandText, SqlEntity.Parameters));
         }
         public int RecordCount(string sql, List<SqlParameter> parameters)
         {
-            return Convert.ToInt32(DbHelper.GetSingle(sql, parameters));
+            return Convert.ToInt32(DbHelper.GetSingle(ConnectionString, sql, parameters));
         }
         #endregion
 
@@ -450,18 +451,18 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
         {
-            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(sql, cmdParams));
+            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(ConnectionString, sql, cmdParams));
         }
         #endregion
 
         public int ExecuteSql(string sql, List<SqlParameter> parameters)
         {
-            return DbHelper.ExecuteSql(sql, parameters);
+            return DbHelper.ExecuteSql(ConnectionString, sql, parameters);
         }
 
         public bool ExecuteSqlTran(SqlList list)
         {
-            return DbHelperSQL.ExecuteSqlTran(list) > 0;
+            return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
         }
 
     }

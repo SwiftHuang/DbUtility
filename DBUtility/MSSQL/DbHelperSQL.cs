@@ -12,18 +12,7 @@ namespace hwj.DBUtility.MSSQL
     /// </summary>
     public abstract class DbHelperSQL
     {
-        private static string _connectionString = string.Empty;
-        public static string ConnectionString
-        {
-            get
-            {
-                if (_connectionString == null || _connectionString == string.Empty)
-                    throw new Exception("数据连接字符不能为空");
-                else
-                    return _connectionString;
-            }
-            set { _connectionString = value; }
-        }
+       
         public DbHelperSQL()
         {
         }
@@ -35,20 +24,20 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="tableName">表名称</param>
         /// <param name="columnName">列名称</param>
         /// <returns>是否存在</returns>
-        public static bool ColumnExists(string tableName, string columnName)
+        public static bool ColumnExists(string ConnectionString, string tableName, string columnName)
         {
             string sql = "select count(1) from syscolumns where [id]=object_id('" + tableName + "') and [name]='" + columnName + "'";
-            object res = GetSingle(sql);
+            object res = GetSingle(ConnectionString, sql);
             if (res == null)
             {
                 return false;
             }
             return Convert.ToInt32(res) > 0;
         }
-        public static int GetMaxID(string FieldName, string TableName)
+        public static int GetMaxID(string ConnectionString, string FieldName, string TableName)
         {
             string strsql = "select max(" + FieldName + ")+1 from " + TableName;
-            object obj = DbHelperSQL.GetSingle(strsql);
+            object obj = DbHelperSQL.GetSingle(ConnectionString, strsql);
             if (obj == null)
             {
                 return 1;
@@ -58,9 +47,9 @@ namespace hwj.DBUtility.MSSQL
                 return int.Parse(obj.ToString());
             }
         }
-        public static bool Exists(string strSql)
+        public static bool Exists(string ConnectionString, string strSql)
         {
-            object obj = DbHelperSQL.GetSingle(strSql);
+            object obj = DbHelperSQL.GetSingle(ConnectionString, strSql);
             int cmdresult;
             if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
             {
@@ -84,11 +73,11 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="TableName"></param>
         /// <returns></returns>
-        public static bool TabExists(string TableName)
+        public static bool TabExists(string ConnectionString, string TableName)
         {
             string strsql = "select COUNT(1) from sysobjects where id = object_id(N'[" + TableName + "]') and OBJECTPROPERTY(id, N'IsUserTable') = 1";
             //string strsql = "SELECT COUNT(1) FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[" + TableName + "]') AND type in (N'U')";
-            object obj = DbHelperSQL.GetSingle(strsql);
+            object obj = DbHelperSQL.GetSingle(ConnectionString, strsql);
             int cmdresult;
             if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
             {
@@ -107,9 +96,9 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
-        public static bool Exists(string strSql, List<SqlParameter> cmdParms)
+        public static bool Exists(string ConnectionString, string strSql, List<SqlParameter> cmdParms)
         {
-            object obj = DbHelperSQL.GetSingle(strSql, cmdParms);
+            object obj = DbHelperSQL.GetSingle(ConnectionString, strSql, cmdParms);
             int cmdresult;
             if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
             {
@@ -137,7 +126,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">SQL语句</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string SQLString)
+        public static int ExecuteSql(string ConnectionString, string SQLString)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -163,7 +152,7 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        public static int ExecuteSqlByTime(string SQLString, int Times)
+        public static int ExecuteSqlByTime(string ConnectionString, string SQLString, int Times)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -301,7 +290,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">多条SQL语句</param>		
-        public static int ExecuteSqlTran(List<String> SQLStringList)
+        public static int ExecuteSqlTran(string ConnectionString, List<String> SQLStringList)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -343,7 +332,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLString">SQL语句</param>
         /// <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string SQLString, string content)
+        public static int ExecuteSql(string ConnectionString, string SQLString, string content)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -374,7 +363,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLString">SQL语句</param>
         /// <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
         /// <returns>影响的记录数</returns>
-        public static object ExecuteSqlGet(string SQLString, string content)
+        public static object ExecuteSqlGet(string ConnectionString, string SQLString, string content)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -412,7 +401,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="strSQL">SQL语句</param>
         /// <param name="fs">图像字节,数据库的字段类型为image的情况</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSqlInsertImg(string strSQL, byte[] fs)
+        public static int ExecuteSqlInsertImg(string ConnectionString, string strSQL, byte[] fs)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -443,7 +432,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">计算查询结果语句</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string SQLString)
+        public static object GetSingle(string ConnectionString, string SQLString)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -475,7 +464,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        public static object GetSingle(string SQLString, int Times)
+        public static object GetSingle(string ConnectionString, string SQLString, int Times)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -513,7 +502,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="strSQL">查询语句</param>
         /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string strSQL)
+        public static SqlDataReader ExecuteReader(string ConnectionString, string strSQL)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand(strSQL, connection);
@@ -533,7 +522,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">查询语句</param>
         /// <returns>DataSet</returns>
-        public static DataSet Query(string SQLString)
+        public static DataSet Query(string ConnectionString, string SQLString)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -555,7 +544,7 @@ namespace hwj.DBUtility.MSSQL
                 return ds;
             }
         }
-        public static DataSet Query(string SQLString, int Times)
+        public static DataSet Query(string ConnectionString, string SQLString, int Times)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -588,7 +577,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">SQL语句</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string SQLString, List<SqlParameter> cmdParms)
+        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -618,12 +607,12 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTran(Hashtable SQLStringList)
+        public static void ExecuteSqlTran(string ConnectionString, Hashtable SQLStringList)
         {
-            ExecuteSqlTran(SQLStringList, 30);
+            ExecuteSqlTran(ConnectionString, SQLStringList, 30);
         }
 
-        public static void ExecuteSqlTran(Hashtable SQLStringList, int timeout)
+        public static void ExecuteSqlTran(string ConnectionString, Hashtable SQLStringList, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -657,11 +646,11 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static int ExecuteSqlTran(SqlList cmdList)
+        public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList)
         {
-            return ExecuteSqlTran(cmdList, 30);
+            return ExecuteSqlTran(ConnectionString, cmdList, 30);
         }
-        public static int ExecuteSqlTran(SqlList cmdList, int timeout)
+        public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -731,7 +720,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(SqlList SQLStringList)
+        public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList SQLStringList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -778,7 +767,7 @@ namespace hwj.DBUtility.MSSQL
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(Hashtable SQLStringList)
+        public static void ExecuteSqlTranWithIndentity(string ConnectionString, Hashtable SQLStringList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -827,7 +816,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">计算查询结果语句</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string SQLString, List<SqlParameter> cmdParms)
+        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -865,7 +854,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="strSQL">查询语句</param>
         /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string SQLString, List<SqlParameter> cmdParms)
+        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
@@ -888,7 +877,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString">查询语句</param>
         /// <returns>DataSet</returns>
-        public static DataSet Query(string SQLString, params SqlParameter[] cmdParms)
+        public static DataSet Query(string ConnectionString, string SQLString, params SqlParameter[] cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -971,7 +960,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlDataReader</returns>
-        public static SqlDataReader RunProcedure(string storedProcName, IDataParameter[] parameters)
+        public static SqlDataReader RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlDataReader returnReader;
@@ -991,7 +980,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">存储过程参数</param>
         /// <param name="tableName">DataSet结果中的表名</param>
         /// <returns>DataSet</returns>
-        public static DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName)
+        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1004,7 +993,7 @@ namespace hwj.DBUtility.MSSQL
                 return dataSet;
             }
         }
-        public static DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName, int Times)
+        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName, int Times)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1055,7 +1044,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">存储过程参数</param>
         /// <param name="rowsAffected">影响的行数</param>
         /// <returns></returns>
-        public static int RunProcedure(string storedProcName, IDataParameter[] parameters, out int rowsAffected)
+        public static int RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, out int rowsAffected)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1085,7 +1074,7 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        public static bool ClearDatabaseLog(string databsae)
+        public static bool ClearDatabaseLog(string ConnectionString, string databsae)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
