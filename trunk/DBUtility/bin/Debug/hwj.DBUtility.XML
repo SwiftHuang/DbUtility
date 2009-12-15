@@ -190,6 +190,180 @@
             <param name="filterParam">筛选参选</param>
             <returns></returns>
         </member>
+        <member name="T:hwj.DBUtility.MSSQL.DbHelperSQL">
+            <summary>
+            数据访问抽象基础类
+            Copyright (C) 2004-2008 By LiTianPing 
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ColumnExists(System.String,System.String,System.String)">
+            <summary>
+            判断是否存在某表的某个字段
+            </summary>
+            <param name="tableName">表名称</param>
+            <param name="columnName">列名称</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.TabExists(System.String,System.String)">
+            <summary>
+            表是否存在
+            </summary>
+            <param name="TableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">多条SQL语句</param>		
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlGet(System.String,System.String,System.String)">
+            <summary>
+            执行带一个存储过程参数的的SQL语句。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlInsertImg(System.String,System.String,System.Byte[])">
+            <summary>
+            向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
+            </summary>
+            <param name="strSQL">SQL语句</param>
+            <param name="fs">图像字节,数据库的字段类型为image的情况</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String)">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String)">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String)">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,hwj.DBUtility.SqlList)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,hwj.DBUtility.SqlList)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">计算查询结果语句</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="strSQL">查询语句</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="SQLString">查询语句</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[])">
+            <summary>
+            执行存储过程，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[],System.String)">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <param name="tableName">DataSet结果中的表名</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.BuildQueryCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
+            <summary>
+            构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlCommand</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[],System.Int32@)">
+            <summary>
+            执行存储过程，返回影响的行数		
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <param name="rowsAffected">影响的行数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.BuildIntCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
+            <summary>
+            创建 SqlCommand 对象实例(用来返回一个整数值)	
+            </summary>
+            <param name="storedProcName">存储过程名</param>
+            <param name="parameters">存储过程参数</param>
+            <returns>SqlCommand 对象实例</returns>
+        </member>
         <member name="P:hwj.DBUtility.SqlParam.DatabaseDate">
             <summary>
             设置为数据库当前时间日期
@@ -439,180 +613,6 @@
             <summary>
             获取或设置被赋值字段
             </summary>
-        </member>
-        <member name="T:hwj.DBUtility.MSSQL.DbHelperSQL">
-            <summary>
-            数据访问抽象基础类
-            Copyright (C) 2004-2008 By LiTianPing 
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ColumnExists(System.String,System.String,System.String)">
-            <summary>
-            判断是否存在某表的某个字段
-            </summary>
-            <param name="tableName">表名称</param>
-            <param name="columnName">列名称</param>
-            <returns>是否存在</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.TabExists(System.String,System.String)">
-            <summary>
-            表是否存在
-            </summary>
-            <param name="TableName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String)">
-            <summary>
-            执行SQL语句，返回影响的记录数
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Generic.List{System.String})">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">多条SQL语句</param>		
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.String)">
-            <summary>
-            执行带一个存储过程参数的的SQL语句。
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlGet(System.String,System.String,System.String)">
-            <summary>
-            执行带一个存储过程参数的的SQL语句。
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlInsertImg(System.String,System.String,System.Byte[])">
-            <summary>
-            向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
-            </summary>
-            <param name="strSQL">SQL语句</param>
-            <param name="fs">图像字节,数据库的字段类型为image的情况</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String)">
-            <summary>
-            执行一条计算查询结果语句，返回查询结果（object）。
-            </summary>
-            <param name="SQLString">计算查询结果语句</param>
-            <returns>查询结果（object）</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String)">
-            <summary>
-            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
-            </summary>
-            <param name="strSQL">查询语句</param>
-            <returns>SqlDataReader</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String)">
-            <summary>
-            执行查询语句，返回DataSet
-            </summary>
-            <param name="SQLString">查询语句</param>
-            <returns>DataSet</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            执行SQL语句，返回影响的记录数
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Hashtable)">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,hwj.DBUtility.SqlList)">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,hwj.DBUtility.SqlList)">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,System.Collections.Hashtable)">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            执行一条计算查询结果语句，返回查询结果（object）。
-            </summary>
-            <param name="SQLString">计算查询结果语句</param>
-            <returns>查询结果（object）</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
-            </summary>
-            <param name="strSQL">查询语句</param>
-            <returns>SqlDataReader</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String,System.Data.SqlClient.SqlParameter[])">
-            <summary>
-            执行查询语句，返回DataSet
-            </summary>
-            <param name="SQLString">查询语句</param>
-            <returns>DataSet</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[])">
-            <summary>
-            执行存储过程，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
-            </summary>
-            <param name="storedProcName">存储过程名</param>
-            <param name="parameters">存储过程参数</param>
-            <returns>SqlDataReader</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[],System.String)">
-            <summary>
-            执行存储过程
-            </summary>
-            <param name="storedProcName">存储过程名</param>
-            <param name="parameters">存储过程参数</param>
-            <param name="tableName">DataSet结果中的表名</param>
-            <returns>DataSet</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.BuildQueryCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
-            <summary>
-            构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
-            </summary>
-            <param name="connection">数据库连接</param>
-            <param name="storedProcName">存储过程名</param>
-            <param name="parameters">存储过程参数</param>
-            <returns>SqlCommand</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[],System.Int32@)">
-            <summary>
-            执行存储过程，返回影响的行数		
-            </summary>
-            <param name="storedProcName">存储过程名</param>
-            <param name="parameters">存储过程参数</param>
-            <param name="rowsAffected">影响的行数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.BuildIntCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDataParameter[])">
-            <summary>
-            创建 SqlCommand 对象实例(用来返回一个整数值)	
-            </summary>
-            <param name="storedProcName">存储过程名</param>
-            <param name="parameters">存储过程参数</param>
-            <returns>SqlCommand 对象实例</returns>
         </member>
         <member name="P:hwj.DBUtility.Entity.PageResult`2.RecordCount">
             <summary>
