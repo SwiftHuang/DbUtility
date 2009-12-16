@@ -437,21 +437,51 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
-        /// <param name="strWhere"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
         /// <returns></returns>
         public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
+            return GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
+        }
+
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        {
             _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return GetDataTable(_SqlEntity.CommandText, _SqlEntity.Parameters);
+            return GetDataTable(_SqlEntity.CommandText, _SqlEntity.Parameters, tableName);
+        }
+
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="cmdParams"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
+        {
+            return GetDataTable(sql, cmdParams, string.Empty);
         }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
-        /// <param name="strWhere"></param>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="cmdParams">SQL参数</param>
+        /// <param name="tableName"></param>
         /// <returns></returns>
-        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName)
         {
-            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(ConnectionString, sql, cmdParams));
+            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(ConnectionString, sql, cmdParams), tableName);
         }
         #endregion
 
@@ -459,7 +489,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelper.ExecuteSql(ConnectionString, sql, parameters);
         }
-
         public bool ExecuteSqlTran(SqlList list)
         {
             return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
