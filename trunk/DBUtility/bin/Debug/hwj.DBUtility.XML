@@ -4,6 +4,63 @@
         <name>hwj.DBUtility</name>
     </assembly>
     <members>
+        <member name="P:hwj.DBUtility.SqlParam.DatabaseDate">
+            <summary>
+            设置为数据库当前时间日期
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.ParamName">
+            <summary>
+            自定义参数名(防止From To的情况下相同的参数名)
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.SqlParamExtensions.AddParam(System.Collections.Generic.List{hwj.DBUtility.SqlParam},System.Enum,System.Object,hwj.DBUtility.Enums.Relation,hwj.DBUtility.Enums.Expression,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="lst"></param>
+            <param name="fieldName"></param>
+            <param name="fieldValue"></param>
+            <param name="oper"></param>
+            <param name="exp"></param>
+            <param name="paramName">自定义参数名(不需要@)</param>
+            <returns></returns>
+        </member>
+        <member name="T:hwj.DBUtility.SortParam">
+            <summary>
+            Sort parameter
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.Result">
+            <summary>
+            当前页结果集
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.PageSize">
+            <summary>
+            每页记录数
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.SetAssignedStatus(System.Boolean)">
+            <summary>
+            设置是否使用赋值字段检测
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.GetAssignedStatus">
+            <summary>
+            获取当前赋值字段检测状态
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.GetAssigned">
+            <summary>
+            获取或设置被赋值字段
+            </summary>
+        </member>
         <member name="T:hwj.DBUtility.Enums.Relation">
             <summary>
             字段关系(Field [Relation] Value)
@@ -139,6 +196,152 @@
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
+            <summary>
+            执行插入数据
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.AddSqlEntity(`0)">
+            <summary>
+            获取增加的Sql对象
+            </summary>
+            <param name="entity">Table对象</param>
+            <returns>Sql对象</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(hwj.DBUtility.UpdateParam)">
+            <summary>
+            执行数据更新
+            </summary>
+            <param name="param">更新字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.UpdateSqlEntity(hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
+            <summary>
+            获取更新的Sql对象
+            </summary>
+            <param name="updateParam">需要更新的字段</param>
+            <param name="filterParam">需要更新的条件</param>
+            <returns>Sql对象</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.UpdateSqlEntity(`0,hwj.DBUtility.FilterParams)">
+            <summary>
+            获取更新的Sql对象
+            </summary>
+            <param name="entity">需要Table对象</param>
+            <param name="filterParam">被更新的条件</param>
+            <returns>Sql对象</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.DeleteSqlEntity(hwj.DBUtility.FilterParams)">
+            <summary>
+            获取删除的Sql对象
+            </summary>
+            <param name="filterParam">被删除的条件</param>
+            <returns>Sql对象</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Truncate">
+            <summary>
+            彻底清除表的内容(重置自动增量),请慎用
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取分页对象(单主键,以主键作为排序)
+            </summary>
+            <param name="displayFields">显示字段</param>
+            <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序(只能填一个字段)</param>
+            <param name="PK">分页依据</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取分页对象(单主键,以主键作为排序,支持分组)
+            </summary>
+            <param name="displayFields">显示字段</param>
+            <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序(只能填一个字段)</param>
+            <param name="groupParam">分组条件</param>
+            <param name="PK">分页依据</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取分页对象(支持多主键、多排序)
+            </summary>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="PK"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="TotalCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount">
+            <summary>
+            返回表的记录数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount(hwj.DBUtility.FilterParams)">
+            <summary>
+            返回表的记录数
+            </summary>
+            <param name="whereParam">条件参数</param>
+            <returns>记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="strWhere"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="strWhere"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:hwj.DBUtility.Entity.Reverser`1" -->
+        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(System.Type,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="type">进行比较的类类型</param>
+            <param name="name">进行比较对象的属性名称</param>
+            <param name="direction">比较方向(升序/降序)</param>
+        </member>
+        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(System.String,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="className">进行比较的类名称</param>
+            <param name="name">进行比较对象的属性名称</param>
+            <param name="direction">比较方向(升序/降序)</param>
+        </member>
+        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(`0,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="t">进行比较的类型的实例</param>
+            <param name="name">进行比较对象的属性名称</param>
+            <param name="direction">比较方向(升序/降序)</param>
+        </member>
+        <member name="T:hwj.DBUtility.Entity.ReverserInfo">
+            
+            <summary>
+            对象比较时使用的信息类
+            </summary>
+        </member>
         <member name="F:hwj.DBUtility.BaseGenSql`1.DatabaseGetDateSql">
             <summary>
             获取数据库SQL
@@ -157,6 +360,22 @@
             </summary>
             <param name="str"></param>
             <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
+            <summary>
+            Add a left brackets
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets">
+            <summary>
+            Add a right brackets
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets(hwj.DBUtility.Enums.Expression)">
+            <summary>
+            Add a right brackets
+            </summary>
+            <param name="expression"></param>
         </member>
         <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.DeleteSql(System.String,hwj.DBUtility.FilterParams)">
             <summary>
@@ -364,49 +583,6 @@
             <param name="parameters">存储过程参数</param>
             <returns>SqlCommand 对象实例</returns>
         </member>
-        <member name="P:hwj.DBUtility.SqlParam.DatabaseDate">
-            <summary>
-            设置为数据库当前时间日期
-            </summary>
-        </member>
-        <member name="P:hwj.DBUtility.SqlParam.ParamName">
-            <summary>
-            自定义参数名(防止From To的情况下相同的参数名)
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.SqlParamExtensions.AddParam(System.Collections.Generic.List{hwj.DBUtility.SqlParam},System.Enum,System.Object,hwj.DBUtility.Enums.Relation,hwj.DBUtility.Enums.Expression,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="lst"></param>
-            <param name="fieldName"></param>
-            <param name="fieldValue"></param>
-            <param name="oper"></param>
-            <param name="exp"></param>
-            <param name="paramName">自定义参数名(不需要@)</param>
-            <returns></returns>
-        </member>
-        <member name="T:hwj.DBUtility.SortParam">
-            <summary>
-            Sort parameter
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
-            <summary>
-            Add a left brackets
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets">
-            <summary>
-            Add a right brackets
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.FilterParams.MarkedRightBrackets(hwj.DBUtility.Enums.Expression)">
-            <summary>
-            Add a right brackets
-            </summary>
-            <param name="expression"></param>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.#ctor">
             <summary>
             SQL生成类
@@ -425,152 +601,6 @@
             <param name="listParam"></param>
             <param name="isPage"></param>
             <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
-            <summary>
-            执行插入数据
-            </summary>
-            <param name="entity"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.AddSqlEntity(`0)">
-            <summary>
-            获取增加的Sql对象
-            </summary>
-            <param name="entity">Table对象</param>
-            <returns>Sql对象</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(hwj.DBUtility.UpdateParam)">
-            <summary>
-            执行数据更新
-            </summary>
-            <param name="param">更新字段</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.UpdateSqlEntity(hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
-            <summary>
-            获取更新的Sql对象
-            </summary>
-            <param name="updateParam">需要更新的字段</param>
-            <param name="filterParam">需要更新的条件</param>
-            <returns>Sql对象</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.UpdateSqlEntity(`0,hwj.DBUtility.FilterParams)">
-            <summary>
-            获取更新的Sql对象
-            </summary>
-            <param name="entity">需要Table对象</param>
-            <param name="filterParam">被更新的条件</param>
-            <returns>Sql对象</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.DeleteSqlEntity(hwj.DBUtility.FilterParams)">
-            <summary>
-            获取删除的Sql对象
-            </summary>
-            <param name="filterParam">被删除的条件</param>
-            <returns>Sql对象</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Truncate">
-            <summary>
-            彻底清除表的内容(重置自动增量),请慎用
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            获取分页对象(单主键,以主键作为排序)
-            </summary>
-            <param name="displayFields">显示字段</param>
-            <param name="filterParam">筛选条件</param>
-            <param name="sortParams">排序(只能填一个字段)</param>
-            <param name="PK">分页依据</param>
-            <param name="pageNumber">页数</param>
-            <param name="pageSize">每页记录数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            获取分页对象(单主键,以主键作为排序,支持分组)
-            </summary>
-            <param name="displayFields">显示字段</param>
-            <param name="filterParam">筛选条件</param>
-            <param name="sortParams">排序(只能填一个字段)</param>
-            <param name="groupParam">分组条件</param>
-            <param name="PK">分页依据</param>
-            <param name="pageNumber">页数</param>
-            <param name="pageSize">每页记录数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            获取分页对象(支持多主键、多排序)
-            </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="PK"></param>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="TotalCount"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount">
-            <summary>
-            返回表的记录数
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount(hwj.DBUtility.FilterParams)">
-            <summary>
-            返回表的记录数
-            </summary>
-            <param name="whereParam">条件参数</param>
-            <returns>记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
-            <summary>
-            返回DataTable(建议用于Report或自定义列表)
-            </summary>
-            <param name="strWhere"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            返回DataTable(建议用于Report或自定义列表)
-            </summary>
-            <param name="strWhere"></param>
-            <returns></returns>
-        </member>
-        <!-- 对于成员“T:hwj.DBUtility.Entity.Reverser`1”忽略有格式错误的 XML 注释 -->
-        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(System.Type,System.String,System.ComponentModel.ListSortDirection)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="type">进行比较的类类型</param>
-            <param name="name">进行比较对象的属性名称</param>
-            <param name="direction">比较方向(升序/降序)</param>
-        </member>
-        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(System.String,System.String,System.ComponentModel.ListSortDirection)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="className">进行比较的类名称</param>
-            <param name="name">进行比较对象的属性名称</param>
-            <param name="direction">比较方向(升序/降序)</param>
-        </member>
-        <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(`0,System.String,System.ComponentModel.ListSortDirection)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="t">进行比较的类型的实例</param>
-            <param name="name">进行比较对象的属性名称</param>
-            <param name="direction">比较方向(升序/降序)</param>
-        </member>
-        <member name="T:hwj.DBUtility.Entity.ReverserInfo">
-            
-            <summary>
-            对象比较时使用的信息类
-            </summary>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.GenerateSelectSql`1.#ctor">
             <summary>
@@ -598,36 +628,6 @@
             <param name="listParam"></param>
             <param name="isPage"></param>
             <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.SetAssignedStatus(System.Boolean)">
-            <summary>
-            设置是否使用赋值字段检测
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.GetAssignedStatus">
-            <summary>
-            获取当前赋值字段检测状态
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.GetAssigned">
-            <summary>
-            获取或设置被赋值字段
-            </summary>
-        </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.RecordCount">
-            <summary>
-            记录总数
-            </summary>
-        </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.Result">
-            <summary>
-            当前页结果集
-            </summary>
-        </member>
-        <member name="P:hwj.DBUtility.Entity.PageResult`2.PageSize">
-            <summary>
-            每页记录数
-            </summary>
         </member>
     </members>
 </doc>

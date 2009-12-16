@@ -12,9 +12,13 @@ namespace hwj.DBUtility.MSSQL
         #region Protected Functions
         internal static DataTable CreateDataTable(IDataReader reader)
         {
+            return CreateDataTable(reader, string.Empty);
+        }
+        internal static DataTable CreateDataTable(IDataReader reader, string tableName)
+        {
             try
             {
-                DataTable dataTable = new DataTable();//建一个新的实例
+                DataTable dataTable = new DataTable(tableName);//建一个新的实例
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
