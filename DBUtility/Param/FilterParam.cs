@@ -47,5 +47,32 @@ namespace hwj.DBUtility
         {
             this.Add(new SqlParam(string.Empty, ")", Enums.Relation.Equal, expression));
         }
+
+        #region Add Param
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="fieldValue"></param>
+        /// <param name="oper"></param>
+        /// <param name="exp"></param>
+        /// <param name="paramName">自定义参数名(不需要@)</param>
+        public void AddParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
+        {
+            this.Add(new SqlParam(fieldName, fieldValue, oper, exp, paramName));
+        }
+        public void AddParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
+        {
+            this.Add(new SqlParam(fieldName, fieldValue, oper, exp));
+        }
+        public void AddParam(Enum fieldName, object fieldValue, Enums.Relation oper)
+        {
+            this.Add(new SqlParam(fieldName, fieldValue, oper));
+        }
+        public void AddParam(Enum fieldName, object fieldValue)
+        {
+            this.Add(new SqlParam(fieldName, fieldValue));
+        }
+        #endregion
     }
 }

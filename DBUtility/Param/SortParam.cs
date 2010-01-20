@@ -43,49 +43,87 @@ namespace hwj.DBUtility
             : base()
         {
         }
-    }
 
-    public static class OrderParamExtensions
-    {
-        public static SortParams AddParam(this SortParams lst, string fieldName, ListSortDirection sort, bool filterRepeat)
+
+        public void AddParam(string fieldName, ListSortDirection sort, bool filterRepeat)
         {
-            return AddParam(lst, fieldName, sort == ListSortDirection.Descending ? Enums.OrderBy.Descending : Enums.OrderBy.Ascending, filterRepeat);
+            this.AddParam(fieldName, sort == ListSortDirection.Descending ? Enums.OrderBy.Descending : Enums.OrderBy.Ascending, filterRepeat);
         }
-        public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order, bool filterRepeat)
+        public void AddParam(Enum fieldName, Enums.OrderBy order, bool filterRepeat)
         {
             if (filterRepeat)
             {
-                foreach (SortParam p in lst)
+                foreach (SortParam p in this)
                 {
                     if (p.FieldName.ToUpper() == fieldName.ToString().ToUpper())
-                        return lst;
+                        return;
                 }
             }
-            lst.Add(new SortParam(fieldName, order));
-            return lst;
+            this.Add(new SortParam(fieldName, order));
         }
-        public static SortParams AddParam(this SortParams lst, string fieldName, Enums.OrderBy order, bool filterRepeat)
+        public void AddParam(string fieldName, Enums.OrderBy order, bool filterRepeat)
         {
             if (filterRepeat)
             {
-                foreach (SortParam p in lst)
+                foreach (SortParam p in this)
                 {
                     if (p.FieldName.ToUpper() == fieldName.ToUpper())
-                        return lst;
+                        return;
                 }
             }
-            lst.Add(new SortParam(fieldName, order));
-            return lst;
+            this.Add(new SortParam(fieldName, order));
         }
-        public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order)
+        public void AddParam(Enum fieldName, Enums.OrderBy order)
         {
-            lst.Add(new SortParam(fieldName, order));
-            return lst;
+            this.Add(new SortParam(fieldName, order));
         }
-        public static SortParams AddParam(this SortParams lst, string fieldName, Enums.OrderBy order)
+        public void AddParam(string fieldName, Enums.OrderBy order)
         {
-            lst.Add(new SortParam(fieldName, order));
-            return lst;
+            this.Add(new SortParam(fieldName, order));
         }
     }
+
+    //public static class OrderParamExtensions
+    //{
+    //    public static SortParams AddParam(this SortParams lst, string fieldName, ListSortDirection sort, bool filterRepeat)
+    //    {
+    //        return AddParam(lst, fieldName, sort == ListSortDirection.Descending ? Enums.OrderBy.Descending : Enums.OrderBy.Ascending, filterRepeat);
+    //    }
+    //    public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order, bool filterRepeat)
+    //    {
+    //        if (filterRepeat)
+    //        {
+    //            foreach (SortParam p in lst)
+    //            {
+    //                if (p.FieldName.ToUpper() == fieldName.ToString().ToUpper())
+    //                    return lst;
+    //            }
+    //        }
+    //        lst.Add(new SortParam(fieldName, order));
+    //        return lst;
+    //    }
+    //    public static SortParams AddParam(this SortParams lst, string fieldName, Enums.OrderBy order, bool filterRepeat)
+    //    {
+    //        if (filterRepeat)
+    //        {
+    //            foreach (SortParam p in lst)
+    //            {
+    //                if (p.FieldName.ToUpper() == fieldName.ToUpper())
+    //                    return lst;
+    //            }
+    //        }
+    //        lst.Add(new SortParam(fieldName, order));
+    //        return lst;
+    //    }
+    //    public static SortParams AddParam(this SortParams lst, Enum fieldName, Enums.OrderBy order)
+    //    {
+    //        lst.Add(new SortParam(fieldName, order));
+    //        return lst;
+    //    }
+    //    public static SortParams AddParam(this SortParams lst, string fieldName, Enums.OrderBy order)
+    //    {
+    //        lst.Add(new SortParam(fieldName, order));
+    //        return lst;
+    //    }
+    //}
 }

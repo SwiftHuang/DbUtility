@@ -98,53 +98,56 @@ namespace hwj.DBUtility
         }
     }
 
-    public static class SqlParamExtensions
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lst"></param>
-        /// <param name="fieldName"></param>
-        /// <param name="fieldValue"></param>
-        /// <param name="oper"></param>
-        /// <param name="exp"></param>
-        /// <param name="paramName">自定义参数名(不需要@)</param>
-        /// <returns></returns>
-        public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
-        {
-            lst.Add(new SqlParam(fieldName, fieldValue, oper, exp, paramName));
-            return lst;
-        }
-        public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
-        {
-            lst.Add(new SqlParam(fieldName, fieldValue, oper, exp));
-            return lst;
-        }
-        public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper)
-        {
-            lst.Add(new SqlParam(fieldName, fieldValue, oper));
-            return lst;
-        }
-        public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue)
-        {
-            lst.Add(new SqlParam(fieldName, fieldValue));
-            return lst;
-        }
+    //public static class SqlParamExtensions
+    //{
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    /// <param name="lst"></param>
+    //    /// <param name="fieldName"></param>
+    //    /// <param name="fieldValue"></param>
+    //    /// <param name="oper"></param>
+    //    /// <param name="exp"></param>
+    //    /// <param name="paramName">自定义参数名(不需要@)</param>
+    //    /// <returns></returns>
+    //    public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
+    //    {
+    //        lst.Add(new SqlParam(fieldName, fieldValue, oper, exp, paramName));
+    //        return lst;
+    //    }
+    //    public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
+    //    {
+    //        lst.Add(new SqlParam(fieldName, fieldValue, oper, exp));
+    //        return lst;
+    //    }
+    //    public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue, Enums.Relation oper)
+    //    {
+    //        lst.Add(new SqlParam(fieldName, fieldValue, oper));
+    //        return lst;
+    //    }
+    //    public static List<SqlParam> AddParam(this List<SqlParam> lst, Enum fieldName, object fieldValue)
+    //    {
+    //        lst.Add(new SqlParam(fieldName, fieldValue));
+    //        return lst;
+    //    }
 
-        //public static List<SqlParam> AddParam(this List<SqlParam> lst, SqlParam sqlParam)
-        //{
-        //    lst.Add(sqlParam);
-        //    return lst;
-        //}
-        public static List<UpdateFields> AddParam(this List<UpdateFields> lst, Enum fieldName, object fieldValue)
-        {
-            lst.Add(new UpdateFields(fieldName, fieldValue));
-            return lst;
-        }
-        public static List<UpdateFields> AddParam(this List<UpdateFields> lst, string fieldName, object fieldValue)
-        {
-            lst.Add(new UpdateFields(fieldName, fieldValue));
-            return lst;
-        }
-    }
+    //    public static List<SqlParam> AddParam(this List<SqlParam> lst, SqlParam sqlParam)
+    //    {
+    //        lst.Add(sqlParam);
+    //        return lst;
+    //    }
+    //    public static List<UpdateFields> AddParam(this List<UpdateFields> lst, Enum fieldName, object fieldValue)
+    //    {
+    //        lst.Add(new UpdateFields(fieldName, fieldValue));
+    //        return lst;
+    //    }
+    //    public static List<UpdateFields> AddParam(this List<UpdateFields> lst, string fieldName, object fieldValue)
+    //    {
+    //        lst.Add(new UpdateFields(fieldName, fieldValue));
+    //        return lst;
+    //    }
+    //}
 }
+
+
+

@@ -138,7 +138,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             string tmp = TrimSql(sbWhere.ToString());
                             sbWhere = new StringBuilder();
-                            sbWhere.Append(tmp).Append(para.FieldValue).Append(para.Expression.ToSqlString());
+                            sbWhere.Append(tmp).Append(para.FieldValue).Append(Enums.ExpressionString(para.Expression));
                         }
                         else
                         {
@@ -174,7 +174,7 @@ namespace hwj.DBUtility.MSSQL
                             }
                         }
 
-                        sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(para.Operator.ToSqlString(), inSql.ToString().TrimEnd(',')).Append(para.Expression.ToSqlString());
+                        sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
                     }
                     else
                         sbWhere.Append(GetCondition(para, true, isPage));
@@ -194,7 +194,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 __MsSqlParam = _MsSqlParam;
 
-            sbStr.AppendFormat(_MsSqlFieldFmt, para.FieldName).Append(para.Operator.ToSqlString());
+            sbStr.AppendFormat(_MsSqlFieldFmt, para.FieldName).Append(Enums.RelationString(para.Operator));
 
             if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
             {
@@ -214,7 +214,7 @@ namespace hwj.DBUtility.MSSQL
             else
                 sbStr.AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName);
 
-            sbStr.Append(para.Expression.ToSqlString());
+            sbStr.Append(Enums.ExpressionString(para.Expression));
             return sbStr.ToString();
         }
         private string GetNoLock(bool isNoLock)
