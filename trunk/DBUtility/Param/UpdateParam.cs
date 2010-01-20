@@ -19,6 +19,15 @@ namespace hwj.DBUtility
         {
             this.AddParam(fieldName, fieldvalue);
         }
+
+        public void AddParam(Enum fieldName, object fieldValue)
+        {
+            this.Add(new UpdateFields(fieldName, fieldValue));
+        }
+        public void AddParam(string fieldName, object fieldValue)
+        {
+            this.Add(new UpdateFields(fieldName, fieldValue));
+        }
     }
     public class UpdateFields : SqlParam
     {

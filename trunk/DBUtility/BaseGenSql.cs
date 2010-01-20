@@ -16,8 +16,8 @@ namespace hwj.DBUtility
         /// </summary>
         protected string DatabaseGetDateSql = string.Empty;
 
-        private static readonly int andL = Enums.Expression.AND.ToSqlString().Length;
-        private static readonly int andR = Enums.Expression.OR.ToSqlString().Length;
+        private static readonly int andL = Enums.ExpressionString(Enums.Expression.AND).Length;
+        private static readonly int andR = Enums.ExpressionString(Enums.Expression.OR).Length;
 
         #region Protected Functions
         protected abstract string GetCondition(SqlParam para, bool isWhere, bool isPage);
@@ -64,7 +64,7 @@ namespace hwj.DBUtility
                     sb.Append("ORDER BY ");
                 foreach (SortParam o in orders)
                 {
-                    sb.AppendFormat(_FieldFormat + " {1},", o.FieldName, o.OrderBy.ToSqlString());
+                    sb.AppendFormat(_FieldFormat + " {1},", o.FieldName, Enums.OrderByString(o.OrderBy));
                 }
                 return sb.ToString().TrimEnd(',');
             }
@@ -79,9 +79,9 @@ namespace hwj.DBUtility
         /// <returns></returns>
         protected string TrimSql(string sql)
         {
-            if (sql.Substring(sql.Length - andL, andL) == Enums.Expression.AND.ToSqlString())
+            if (sql.Substring(sql.Length - andL, andL) == Enums.ExpressionString(Enums.Expression.AND))
                 sql = sql.Substring(0, sql.Length - andL);
-            if (sql.Substring(sql.Length - andR, andR) == Enums.Expression.OR.ToSqlString())
+            if (sql.Substring(sql.Length - andR, andR) == Enums.ExpressionString(Enums.Expression.OR))
                 sql = sql.Substring(0, sql.Length - andR);
             return sql.TrimEnd(',');
         }

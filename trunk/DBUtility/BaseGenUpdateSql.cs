@@ -39,7 +39,7 @@ namespace hwj.DBUtility
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
-                if (!field.DataHandles.Find(Enums.DataHandle.UnUpdate))
+                if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnUpdate))
                 {
                     if (!IsDatabaseDate(field.DataTypeCode, obj))
                         up.AddParam(field.FieldName, obj);
@@ -49,7 +49,7 @@ namespace hwj.DBUtility
             }
             else
             {
-                if (!field.DataHandles.Find(Enums.DataHandle.UnNull))
+                if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnNull))
                     up.AddParam(field.FieldName, DBNull.Value);
             }
         }
