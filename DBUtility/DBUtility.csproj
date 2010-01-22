@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -76,7 +76,6 @@
     <Compile Include="Param\FilterParam.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="MSSQL\SQL_SP\sp_ClearDatabaseLog.sql" />
     <None Include="MSSQL\SQL_SP\sp_Paging_RowCount.sql" />
     <None Include="MSSQL\SQL_SP\sp_PageView.sql" />
