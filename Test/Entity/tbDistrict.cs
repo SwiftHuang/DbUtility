@@ -126,6 +126,6 @@ namespace Test.Entity.Table
 
     }
     public class tbDistricts : BaseList<tbDistrict, tbDistricts> { }
-    public class tbDistrictPage : PageResult<tbDistrict> { }
+    public class tbDistrictPage : PageResult<tbDistrict, tbDistricts> { }
 }
 

@@ -7,6 +7,7 @@ namespace hwj.MarkTableObject.Entity
     public class EntityInfo
     {
         public string EntityName { get; set; }
+        public string ConnectionString { get; set; }
         public string EntityPath { get; set; }
         public string NameSpace { get; set; }
         public ColumnInfos ColumnInfoList { get; set; }

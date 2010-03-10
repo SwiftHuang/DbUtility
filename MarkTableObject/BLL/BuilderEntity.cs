@@ -11,8 +11,25 @@ namespace hwj.MarkTableObject.BLL
 {
     public class BuilderEntity
     {
-        public static string CreatEntity(EntityInfo entity)
+        public static string CreatEntity(EntityInfo entity, ConnectionDataSourceType connType, DBModule module)
         {
+            string strModule = string.Empty;
+            switch (module)
+            {
+                case DBModule.Table:
+                    entity.ColumnInfoList = GetColumnInfoForTable(connType, entity.ConnectionString, entity.EntityName);
+                    strModule = "Table:";
+                    break;
+                case DBModule.View:
+                    strModule = "View:";
+                    break;
+                case DBModule.SP:
+                    strModule = "SP:";
+                    break;
+                default:
+                    break;
+            }
+
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine("using System;");
             strclass.AppendLine("using System.Collections.Generic;");
@@ -24,15 +41,14 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("namespace " + entity.NameSpace);
             strclass.AppendLine("{");
             strclass.AppendLine(1, "/// <summary>");
-            strclass.AppendLine(1, "/// 实体类" + entity.EntityName + " 。(属性说明自动提取数据库字段的描述信息)");
+            strclass.AppendLine(1, "/// " + strModule + entity.EntityName);
             strclass.AppendLine(1, "/// </summary>");
             strclass.AppendLine(1, "[Serializable]");
             strclass.AppendLine(1, "public class " + entity.EntityName + " : BaseTable<" + entity.EntityName + ">");
             strclass.AppendLine(1, "{");
             strclass.AppendLine(2, "public " + entity.EntityName + "()");
             strclass.AppendLine(3, ": base(DBTableName)");
-            strclass.AppendLine(2, "{");
-            strclass.AppendLine(2, "}");
+            strclass.AppendLine(2, "{ }");
             strclass.AppendLine(CreatTableName(entity.EntityName));
             strclass.AppendLine(CreatFieldsEnum(entity));
             strclass.AppendLine(CreatModelMethod(entity));
@@ -110,7 +126,14 @@ namespace hwj.MarkTableObject.BLL
 
                     strclass1.AppendLine(2, "private " + SetFirstUpper(columnType) + isnull + " _" + columnName.ToLower() + ";");//私有变量
                     strclass2.AppendLine(2, "/// <summary>");
-                    strclass2.AppendLine(2, "/// " + deText + "[" + string.Format("{0}/{1}/{2}({3})/{4}", (ispk ? sDescIsPK : ""), (cisnull ? sDescCanNull : sDescCanntNull), c.DataType, c.ColumnSize, string.IsNullOrEmpty(c.DefaultValue) ? "" : "Default:" + c.DefaultValue).TrimEnd('/').TrimStart('/') + "]");
+                    strclass2.AppendLine(2, "/// " + deText + "[" +
+                                                                string.Format("{0}/{1}/{2}({3})/{4}",
+                                                               (ispk ? sDescIsPK : ""),
+                                                                (cisnull ? sDescCanNull : sDescCanntNull),
+                                                                c.DataTypeName,
+                                                                c.ColumnSize,
+                                                                string.IsNullOrEmpty(c.DefaultValue) ? "" : "Default:" + c.DefaultValue).TrimEnd('/').TrimStart('/')
+                                                                + "]");
                     strclass2.AppendLine(2, "/// </summary>");
                     string _sUnNull = sUnNull;
                     if (cisnull)
@@ -137,102 +160,27 @@ namespace hwj.MarkTableObject.BLL
         {
             if (value == "int")
                 value = "Int32";
-            return value.Substring(0, 1).ToUpper() + value.Substring(1);
+            return (value.Substring(0, 1).ToUpper() + value.Substring(1)).Replace("System.", "");
         }
         private static string GetTypeCode(string columnType)
         {
-            string s = string.Empty;
-
-            s = "DbType." + SetFirstUpper(columnType) + "";
-            return s;
+            return "DbType." + SetFirstUpper(columnType);
         }
 
-        public static ColumnInfos GetColumnInfo(string connectionString, string sqlString)
+        private static ColumnInfos GetColumnInfoForTable(ConnectionDataSourceType connType, string connectionString, string tablName)
         {
-            ColumnInfos list = new ColumnInfos();
-
-            using (SqlConnection connection = new SqlConnection("Data Source=192.168.1.200;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=113502"))
+            switch (connType)
             {
-                SqlCommand command = new SqlCommand(sqlString, connection);
-
-                connection.Open();
-                SqlDataReader r = command.ExecuteReader(CommandBehavior.KeyInfo);
-
-                DataTable tb12 = r.GetSchemaTable();
+                case ConnectionDataSourceType.MSSQL:
+                    return BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(connectionString, tablName);
+                case ConnectionDataSourceType.MYSQL:
+                    break;
+                case ConnectionDataSourceType.OleDb:
+                    return BLL.OleDb.BuilderColumn.GetColumnInfoForTable(connectionString, tablName);
+                default:
+                    break;
             }
-
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
-            {
-                OleDbCommand command = new OleDbCommand(sqlString, connection);
-
-                connection.Open();
-                DataTable tb1 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, "artx" });
-                DataView dv = tb1.DefaultView;
-
-                //DataTable tb3 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns,null);
-                //DataTable tb2 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
-
-                OleDbDataReader reader = command.ExecuteReader(CommandBehavior.KeyInfo);
-                DataTable tb = reader.GetSchemaTable();
-                foreach (DataRow r in tb.Rows)
-                {
-                    ColumnInfo c = new ColumnInfo();
-                    c.ColumnName = GetStringValue(r["ColumnName"]);
-                    c.ColumnOrdinal = GetIntValue(r["ColumnOrdinal"]);
-                    c.ColumnSize = GetIntValue(r["ColumnSize"]);
-                    c.NumericPrecision = GetIntValue(r["NumericPrecision"]);
-                    c.NumericScale = GetIntValue(r["NumericScale"]);
-                    c.DataType = GetStringValue(r["DataType"]);
-                    c.ProviderType = GetStringValue(r["ProviderType"]);
-
-                    c.IsLong = GetBoolValue(r["IsLong"]);
-                    c.AllowDBNull = GetBoolValue(r["AllowDBNull"]);
-                    c.IsReadOnly = GetBoolValue(r["IsReadOnly"]);
-                    c.IsRowVersion = GetBoolValue(r["IsRowVersion"]);
-
-                    c.IsUnique = GetBoolValue(r["IsUnique"]);
-                    c.IsKey = GetBoolValue(r["IsKey"]);
-                    c.IsAutoIncrement = GetBoolValue(r["IsAutoIncrement"]);
-
-                    c.BaseSchemaName = GetStringValue(r["BaseSchemaName"]);
-                    c.BaseCatalogName = GetStringValue(r["BaseCatalogName"]);
-                    c.BaseTableName = GetStringValue(r["BaseTableName"]);
-                    c.BaseColumnName = GetStringValue(r["BaseColumnName"]);
-                    dv.RowFilter = string.Format("COLUMN_NAME='{0}'", c.ColumnName);
-                    if (dv.Count > 0)
-                    {
-                        if (dv[0]["COLUMN_DEFAULT"] != null)
-                            c.DefaultValue = dv[0]["COLUMN_DEFAULT"].ToString();
-                        if (dv[0]["DESCRIPTION"] != null)
-                            c.Description = dv[0]["DESCRIPTION"].ToString();
-                    }
-
-                    list.Add(c);
-                }
-                reader.Close();
-            }
-            return list;
-        }
-        private static string GetStringValue(object value)
-        {
-            if (value != null)
-                return value.ToString();
-            else
-                return null;
-        }
-        private static int GetIntValue(object value)
-        {
-            if (value != null)
-                return int.Parse(value.ToString());
-            else
-                return 0;
-        }
-        private static bool GetBoolValue(object value)
-        {
-            if (value != null)
-                return bool.Parse(value.ToString());
-            else
-                return false;
+            return null;
         }
     }
 }

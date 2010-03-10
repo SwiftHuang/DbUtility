@@ -42,6 +42,17 @@ namespace hwj.DBUtility.Entity
             }
             return lst;
         }
+        public TS Like(Enum field, string value)
+        {
+            TS lst = new TS();
+            foreach (T t in this)
+            {
+                if (MatchLikeData(field, value, t))
+                    lst.Add(t);
+            }
+            return lst;
+        }
+
         public List<T> Sort(Enum field, ListSortDirection direction)
         {
             return Sort(field.ToString(), direction);
@@ -57,6 +68,14 @@ namespace hwj.DBUtility.Entity
         {
             FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), field.ToString()));
             return f.Property.GetValue(entity, null).Equals(value);
+        }
+        private bool MatchLikeData(Enum field, string value, T entity)
+        {
+            FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), field.ToString()));
+            object obj = f.Property.GetValue(entity, null);
+            if (obj != null)
+                return obj.ToString().IndexOf(value) > -1;
+            return false;
         }
 
         //public void SetSession(string key)
