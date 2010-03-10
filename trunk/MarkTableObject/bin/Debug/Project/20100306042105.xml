@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>kjhkjhk</Name>
+  <MainPath>kj</MainPath>
+  <BusinessNameSpace>jhk</BusinessNameSpace>
+  <BusinessPath />
+  <DataAccessNameSpace>k</DataAccessNameSpace>
+  <DataAccessPath />
+  <EntityNameSpace>jhk</EntityNameSpace>
+  <EntityPath />
+  <ConnectionDataSource>MSSQL</ConnectionDataSource>
+  <ConnectionString />
+  <FileName>20100306042105.xml</FileName>
+  <Key>20100306042105</Key>
+</ProjectInfo>

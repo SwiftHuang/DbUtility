@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>6</Name>
+  <MainPath>6</MainPath>
+  <BusinessNameSpace>6</BusinessNameSpace>
+  <BusinessPath>6</BusinessPath>
+  <DataAccessNameSpace>6</DataAccessNameSpace>
+  <DataAccessPath>6</DataAccessPath>
+  <EntityNameSpace>6</EntityNameSpace>
+  <EntityPath>6</EntityPath>
+  <ConnectionDataSource>MSSQL</ConnectionDataSource>
+  <ConnectionString>Data Source=192.168.1.200;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=113502</ConnectionString>
+  <FileName>20100306035835.xml</FileName>
+  <Key>20100306035835</Key>
+</ProjectInfo>

@@ -100,6 +100,7 @@ namespace hwj.MarkTableObject.Entity
         public string BaseColumnName { get; set; }
 
         public string DefaultValue { get; set; }
+        public string DataTypeName { get; set; }
         public string Description { get; set; }
     }
 
