@@ -33,12 +33,17 @@ namespace Test.DB.Entity
             ///
             /// </summary>
             Status,
+            /// <summary>
+            /// 
+            /// </summary>
+            Amount,
         }
 
         #region Model
         private Int32 _id;
         private String _name;
         private String _status;
+        private Decimal _amount;
         /// <summary>
         /// [PK/Un-Null/int(4)]
         /// </summary>
@@ -65,6 +70,15 @@ namespace Test.DB.Entity
         {
             set { AddAssigned("Status"); _status = value; }
             get { return _status; }
+        }
+        /// <summary>
+        /// [Allow Null/char(1)/Default:('N')]
+        /// </summary>
+        [FieldMapping("Amount", DbType.Decimal)]
+        public Decimal Amount
+        {
+            set { AddAssigned("Amount"); _amount = value; }
+            get { return _amount; }
         }
         #endregion Model
 

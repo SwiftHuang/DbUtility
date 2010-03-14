@@ -60,7 +60,16 @@ namespace Test.DB.BLL
         {
             return da.GetList();
         }
-
+        public static tbTestOutputs GetAllListOrderByName()
+        {
+            SortParams sp = new SortParams();
+            sp.AddParam(tbTestOutput.Fields.Name, Enums.OrderBy.Ascending);
+            return da.GetList(null, null, sp);
+        }
+        public static DataTable GetTable()
+        {
+            return da.GetDataTable();
+        }
         public static tbTestOutputPage GetPage(int pageIndex, int pageSize)
         {
             int RecordCount;
