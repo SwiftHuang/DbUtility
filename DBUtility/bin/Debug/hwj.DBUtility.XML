@@ -651,5 +651,14 @@
             每页记录数
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.Entity.BaseList`2.BinarySearch(hwj.DBUtility.TableMapping.FieldMappingInfo,System.String)">
+            <summary>
+             二分法
+            </summary>
+            <param name="list"></param>
+            <param name="fieldMappingInfo"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -434,6 +434,10 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region DataTable
+        public DataTable GetDataTable()
+        {
+            return GetDataTable(null, null, null, null);
+        }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
