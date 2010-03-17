@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="txtXML.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="txtXML.Text" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;RTTKT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;PEOMSTR&gt;
+    &lt;ConnInfo&gt;
+      &lt;IsSqlSentence&gt;false&lt;/IsSqlSentence&gt;
+      &lt;TableName&gt;PEOMSTR&lt;/TableName&gt;
+      &lt;DefaultSelect&gt;select * from [PEOMSTR](nolock)&lt;/DefaultSelect&gt;
+      &lt;ConnectionKey&gt;EMOS&lt;/ConnectionKey&gt;
+      &lt;PrimaryKeys&gt;
+        &lt;string&gt;BKGREF&lt;/string&gt;
+        &lt;string&gt;COMPANYCODE&lt;/string&gt;
+      &lt;/PrimaryKeys&gt;
+    &lt;/ConnInfo&gt;
+    &lt;COMPANYCODE&gt;GT&lt;/COMPANYCODE&gt;
+    &lt;BKGREF&gt;98GETDQ5J6&lt;/BKGREF&gt;
+    &lt;pseudo_inv /&gt;
+    &lt;CRSSINEIN_inv /&gt;
+    &lt;agency_arc_iata_num /&gt;
+    &lt;iss_off_code /&gt;
+    &lt;salesperson&gt;hrh&lt;/salesperson&gt;
+    &lt;ApproveOn&gt;0001-01-01T00:00:00&lt;/ApproveOn&gt;
+    &lt;ISTOUR&gt;P&lt;/ISTOUR&gt;
+    &lt;PNR&gt;DQ5J6&lt;/PNR&gt;
+    &lt;CRSSINEIN /&gt;
+    &lt;COD1 /&gt;
+    &lt;COD2 /&gt;
+    &lt;COD3 /&gt;
+    &lt;DEADLINE&gt;2009-08-20T00:00:00&lt;/DEADLINE&gt;
+    &lt;CLTODE&gt;GA0017&lt;/CLTODE&gt;
+    &lt;CLTNAME&gt;HARLEM HUANG FIT&lt;/CLTNAME&gt;
+    &lt;CLTADDR /&gt;
+    &lt;STAFFCODE&gt;HRH       &lt;/STAFFCODE&gt;
+    &lt;TEAMCODE&gt;GC1  &lt;/TEAMCODE&gt;
+    &lt;FIRSTPAX&gt;/方巨机&lt;/FIRSTPAX&gt;
+    &lt;PHONE /&gt;
+    &lt;FAX /&gt;
+    &lt;EMAIL /&gt;
+    &lt;MASTERPNR&gt;98GETDQ5J6&lt;/MASTERPNR&gt;
+    &lt;TOURCODE /&gt;
+    &lt;CONTACTPERSON /&gt;
+    &lt;DEPARTDATE&gt;2009-09-11T00:00:00&lt;/DEPARTDATE&gt;
+    &lt;TTLSELLCURR&gt;CNY&lt;/TTLSELLCURR&gt;
+    &lt;TTLSELLAMT&gt;1800.00&lt;/TTLSELLAMT&gt;
+    &lt;TTLSELLTAXCURR&gt;CNY&lt;/TTLSELLTAXCURR&gt;
+    &lt;TTLSELLTAX&gt;200.00&lt;/TTLSELLTAX&gt;
+    &lt;TTLCOSTCURR&gt;CNY&lt;/TTLCOSTCURR&gt;
+    &lt;TTLCOSTAMT&gt;1746.00&lt;/TTLCOSTAMT&gt;
+    &lt;TTLCOSTTAXCURR&gt;CNY&lt;/TTLCOSTTAXCURR&gt;
+    &lt;TTLCOSTTAX&gt;200.00&lt;/TTLCOSTTAX&gt;
+    &lt;INVCURR&gt;CNY&lt;/INVCURR&gt;
+    &lt;INVAMT&gt;1800.00&lt;/INVAMT&gt;
+    &lt;INVTAXCURR&gt;CNY&lt;/INVTAXCURR&gt;
+    &lt;INVTAX&gt;200.00&lt;/INVTAX&gt;
+    &lt;DOCCURR&gt;CNY&lt;/DOCCURR&gt;
+    &lt;DOCAMT&gt;1746.00&lt;/DOCAMT&gt;
+    &lt;DOCTAXCURR&gt;CNY&lt;/DOCTAXCURR&gt;
+    &lt;DOCTAX&gt;200.00&lt;/DOCTAX&gt;
+    &lt;TTLSELLGST&gt;0.00&lt;/TTLSELLGST&gt;
+    &lt;TTLCOSTGST&gt;0.00&lt;/TTLCOSTGST&gt;
+    &lt;TTLINVGST&gt;0.00&lt;/TTLINVGST&gt;
+    &lt;TTLDOCGST&gt;0.00&lt;/TTLDOCGST&gt;
+    &lt;INVCOUNT&gt;1&lt;/INVCOUNT&gt;
+    &lt;DOCCOUNT&gt;4&lt;/DOCCOUNT&gt;
+    &lt;RMK1 /&gt;
+    &lt;RMK2 /&gt;
+    &lt;RMK3 /&gt;
+    &lt;RMK4 /&gt;
+    &lt;SOURCESYSTEM&gt;TS&lt;/SOURCESYSTEM&gt;
+    &lt;SOURCE&gt;AGENT&lt;/SOURCE&gt;
+    &lt;CREATEON&gt;2009-08-20T13:05:03.593&lt;/CREATEON&gt;
+    &lt;CREATEBY&gt;HRH&lt;/CREATEBY&gt;
+    &lt;UPDATEON&gt;2009-08-20T13:13:36.06&lt;/UPDATEON&gt;
+    &lt;UPDATEBY&gt;HRH&lt;/UPDATEBY&gt;
+    &lt;SOURCEREF /&gt;
+    &lt;pseudo /&gt;
+    &lt;MstrRemark /&gt;
+    &lt;BookingNo&gt;0&lt;/BookingNo&gt;
+  &lt;/PEOMSTR&gt;
+  &lt;TIKET&gt;
+    &lt;ConnInfo&gt;
+      &lt;IsSqlSentence&gt;false&lt;/IsSqlSentence&gt;
+      &lt;TableName&gt;PEOTKT&lt;/TableName&gt;
+      &lt;DefaultSelect&gt;select * from [PEOTKT](nolock)&lt;/DefaultSelect&gt;
+      &lt;ConnectionKey&gt;EMOS&lt;/ConnectionKey&gt;
+      &lt;PrimaryKeys&gt;
+        &lt;string&gt;CompanyCode&lt;/string&gt;
+        &lt;string&gt;Ticket&lt;/string&gt;
+        &lt;string&gt;TktSeq&lt;/string&gt;
+        &lt;string&gt;Airline&lt;/string&gt;
+      &lt;/PrimaryKeys&gt;
+    &lt;/ConnInfo&gt;
+    &lt;CompanyCode&gt;GT&lt;/CompanyCode&gt;
+    &lt;Ticket&gt;3623784674&lt;/Ticket&gt;
+    &lt;FareCalData /&gt;
+    &lt;pseudo /&gt;
+    &lt;sinein /&gt;
+    &lt;gstpct&gt;0&lt;/gstpct&gt;
+    &lt;gstamt&gt;0&lt;/gstamt&gt;
+    &lt;nst /&gt;
+    &lt;SOURCESYSTEM&gt;IUR&lt;/SOURCESYSTEM&gt;
+    &lt;commission_per&gt;3.00&lt;/commission_per&gt;
+    &lt;add_payment /&gt;
+    &lt;iss_off_code /&gt;
+    &lt;tour_code /&gt;
+    &lt;org_iss /&gt;
+    &lt;iss_in_exchange /&gt;
+    &lt;ControlNum /&gt;
+    &lt;MISpaidfare&gt;0.00&lt;/MISpaidfare&gt;
+    &lt;ENDORSEMENTS /&gt;
+    &lt;Destination /&gt;
+    &lt;AirReason /&gt;
+    &lt;INTDOM&gt;D&lt;/INTDOM&gt;
+    &lt;PAXAIR&gt;ADT&lt;/PAXAIR&gt;
+    &lt;tkttype&gt;P&lt;/tkttype&gt;
+    &lt;FullFareTax&gt;50&lt;/FullFareTax&gt;
+    &lt;SellCurr /&gt;
+    &lt;SellFare&gt;0.00&lt;/SellFare&gt;
+    &lt;CorpCurr /&gt;
+    &lt;CorpFare&gt;0.00&lt;/CorpFare&gt;
+    &lt;COD4 /&gt;
+    &lt;COD5 /&gt;
+    &lt;COD6 /&gt;
+    &lt;PaidFareWOTax&gt;450.00&lt;/PaidFareWOTax&gt;
+    &lt;LowFareWOTax&gt;0.00&lt;/LowFareWOTax&gt;
+    &lt;CorpFareWOTax&gt;0.00&lt;/CorpFareWOTax&gt;
+    &lt;GemsCode /&gt;
+    &lt;TransactionFee&gt;0.00&lt;/TransactionFee&gt;
+    &lt;FullFareWOTax&gt;450.00&lt;/FullFareWOTax&gt;
+    &lt;AirlineTicket /&gt;
+    &lt;TktSeq&gt;01&lt;/TktSeq&gt;
+    &lt;BKGREF&gt;98GETDQ5J6&lt;/BKGREF&gt;
+    &lt;PNR&gt;DQ5J6&lt;/PNR&gt;
+    &lt;CltCode /&gt;
+    &lt;SuppCode&gt;GBSP105&lt;/SuppCode&gt;
+    &lt;InvNum /&gt;
+    &lt;Jqty&gt;1.00&lt;/Jqty&gt;
+    &lt;AirCode&gt;784&lt;/AirCode&gt;
+    &lt;Airline&gt;CZ&lt;/Airline&gt;
+    &lt;PaxName&gt;方巨铿&lt;/PaxName&gt;
+    &lt;DepartOn&gt;2009-09-11T00:00:00&lt;/DepartOn&gt;
+    &lt;COD1 /&gt;
+    &lt;COD2 /&gt;
+    &lt;COD3 /&gt;
+    &lt;Commission&gt;13.5000&lt;/Commission&gt;
+    &lt;LocalFareCurr&gt;CNY&lt;/LocalFareCurr&gt;
+    &lt;LocalFareAmt&gt;500.00&lt;/LocalFareAmt&gt;
+    &lt;ForeignFareCurr /&gt;
+    &lt;ForeignFareAmt&gt;0.00&lt;/ForeignFareAmt&gt;
+    &lt;Discount&gt;0.00&lt;/Discount&gt;
+    &lt;FormPay /&gt;
+    &lt;Routing&gt;CAN/NKG&lt;/Routing&gt;
+    &lt;FullCurr&gt;CNY&lt;/FullCurr&gt;
+    &lt;FullFare&gt;450.00&lt;/FullFare&gt;
+    &lt;PaidCurr&gt;CNY&lt;/PaidCurr&gt;
+    &lt;PaidFare&gt;0.00&lt;/PaidFare&gt;
+    &lt;LowCurr&gt;CNY&lt;/LowCurr&gt;
+    &lt;LowFare&gt;0.00&lt;/LowFare&gt;
+    &lt;NetCurr&gt;CNY&lt;/NetCurr&gt;
+    &lt;NetFare&gt;436.50&lt;/NetFare&gt;
+    &lt;FareBasis /&gt;
+    &lt;FareType&gt;S&lt;/FareType&gt;
+    &lt;TotalTax&gt;50.00&lt;/TotalTax&gt;
+    &lt;Security&gt;0.00&lt;/Security&gt;
+    &lt;QSurcharge&gt;0&lt;/QSurcharge&gt;
+    &lt;BranchCode&gt;G&lt;/BranchCode&gt;
+    &lt;TeamCode&gt;GC1  &lt;/TeamCode&gt;
+    &lt;IssueOn&gt;2009-08-20T13:05:03.95&lt;/IssueOn&gt;
+    &lt;IssueBy&gt;HRH&lt;/IssueBy&gt;
+    &lt;VoidOn&gt;0001-01-01T00:00:00&lt;/VoidOn&gt;
+    &lt;voidteam /&gt;
+    &lt;voidreason /&gt;
+    &lt;CreateOn&gt;2009-08-20T13:05:03.95&lt;/CreateOn&gt;
+    &lt;CreateBy&gt;HRH&lt;/CreateBy&gt;
+    &lt;UpdateOn&gt;0001-01-01T00:00:00&lt;/UpdateOn&gt;
+    &lt;TaxAmount1&gt;50&lt;/TaxAmount1&gt;
+    &lt;TaxID1&gt;CN&lt;/TaxID1&gt;
+    &lt;TaxAmount2&gt;0&lt;/TaxAmount2&gt;
+    &lt;TaxID2&gt;YQ&lt;/TaxID2&gt;
+    &lt;TaxAmount3&gt;0&lt;/TaxAmount3&gt;
+    &lt;TaxID3 /&gt;
+    &lt;FareCalType /&gt;
+    &lt;CompressPrintInd /&gt;
+  &lt;/TIKET&gt;
+  &lt;TKTDETAIL&gt;
+    &lt;UO_PEOTKTDETAIL&gt;
+      &lt;ConnInfo&gt;
+        &lt;IsSqlSentence&gt;false&lt;/IsSqlSentence&gt;
+        &lt;TableName&gt;PEOTKTDETAIL&lt;/TableName&gt;
+        &lt;DefaultSelect&gt;select * from [PEOTKTDETAIL](nolock)&lt;/DefaultSelect&gt;
+        &lt;ConnectionKey&gt;EMOS&lt;/ConnectionKey&gt;
+        &lt;PrimaryKeys&gt;
+          &lt;string&gt;CompanyCode&lt;/string&gt;
+          &lt;string&gt;Ticket&lt;/string&gt;
+          &lt;string&gt;TktSeq&lt;/string&gt;
+          &lt;string&gt;SegNum&lt;/string&gt;
+          &lt;string&gt;AirLine&lt;/string&gt;
+        &lt;/PrimaryKeys&gt;
+      &lt;/ConnInfo&gt;
+      &lt;CompanyCode&gt;GT&lt;/CompanyCode&gt;
+      &lt;Ticket&gt;3623784674&lt;/Ticket&gt;
+      &lt;AirCode&gt;CZ&lt;/AirCode&gt;
+      &lt;TktSeq&gt;01&lt;/TktSeq&gt;
+      &lt;SegNum&gt;00001&lt;/SegNum&gt;
+      &lt;AirLine&gt;784&lt;/AirLine&gt;
+      &lt;Flight&gt;CZ3513&lt;/Flight&gt;
+      &lt;Class&gt;R&lt;/Class&gt;
+      &lt;Seat /&gt;
+      &lt;DepartCity&gt;CAN&lt;/DepartCity&gt;
+      &lt;ArrivalCity&gt;NKG&lt;/ArrivalCity&gt;
+      &lt;DepartDATE&gt;2009-09-11T00:00:00&lt;/DepartDATE&gt;
+      &lt;DepartTime&gt;0830&lt;/DepartTime&gt;
+      &lt;ArrDATE&gt;2009-09-11T00:00:00&lt;/ArrDATE&gt;
+      &lt;ArrTime&gt;1015&lt;/ArrTime&gt;
+      &lt;ElapsedTime&gt;0000&lt;/ElapsedTime&gt;
+      &lt;StopOverNum&gt;0&lt;/StopOverNum&gt;
+      &lt;StopOverCity /&gt;
+      &lt;FareAmt&gt;0.00&lt;/FareAmt&gt;
+      &lt;FareBasic /&gt;
+      &lt;Commission&gt;0.0000&lt;/Commission&gt;
+      &lt;ValidStart&gt;0001-01-01T00:00:00&lt;/ValidStart&gt;
+      &lt;ValidEnd&gt;0001-01-01T00:00:00&lt;/ValidEnd&gt;
+      &lt;CreateOn&gt;2009-08-20T13:05:03.967&lt;/CreateOn&gt;
+      &lt;CreateBy&gt;HRH&lt;/CreateBy&gt;
+      &lt;UpdateOn&gt;0001-01-01T00:00:00&lt;/UpdateOn&gt;
+      &lt;GSTAMT&gt;0&lt;/GSTAMT&gt;
+      &lt;EQP /&gt;
+      &lt;service /&gt;
+      &lt;status /&gt;
+      &lt;fare_basis_code /&gt;
+      &lt;DepartTerm /&gt;
+      &lt;ArrivalTerm /&gt;
+      &lt;freq_fight_num /&gt;
+      &lt;AirlinePNR&gt;DQ5J6&lt;/AirlinePNR&gt;
+    &lt;/UO_PEOTKTDETAIL&gt;
+  &lt;/TKTDETAIL&gt;
+&lt;/RTTKT&gt;</value>
+  </data>
+  <metadata name="btnGeneral.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>
