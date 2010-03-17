@@ -36,6 +36,11 @@
             "是否显示验证错误信息(只有ContentType不为None时有效)"
             </summary>
         </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
+            <summary>
+            内容是否改变(在Validating/Validated有效)
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
@@ -58,18 +63,27 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChange(System.Int32)">
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32)">
             <summary>
             执行分页事件
             </summary>
             <param name="pageIndex">页数</param>
         </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChange(System.Int32,System.Int32)">
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32)">
             <summary>
             执行分页事件
             </summary>
             <param name="pageIndex">页数</param>
             <param name="pageSize">每页记录数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="sortName"></param>
+            <param name="sort"></param>
         </member>
         <member name="P:hwj.UserControls.DataList.DataListPage.PageIndex">
             <summary>
@@ -94,11 +108,6 @@
         <member name="P:hwj.UserControls.DataList.DataListPage.SelectAllVisible">
             <summary>
             显示全选CheckBox
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.DataGridView">
-            <summary>
-            设置CheckBox列所在的DataGridView
             </summary>
         </member>
         <member name="P:hwj.UserControls.DataList.DataListPage.CheckBoxColumn">
@@ -175,6 +184,11 @@
         <member name="P:hwj.UserControls.Suggest.SuggestBox.DropDownStyle">
             <summary>
             获取或设置SuggestBox Dropdown的显示方式
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xRadioButton.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
             </summary>
         </member>
         <member name="T:hwj.UserControls.Properties.Resources">
@@ -265,9 +279,34 @@
             设置引发hwj.UserControls.ValueChanged事件的对象
             </summary>
         </member>
+        <member name="E:hwj.UserControls.DataList.xDataGridView.DataBinding">
+            <summary>
+            为DataGridView绑定数据
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Numberic">
+            <summary>
+            数字(含正负小数点)
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
+            <summary>
+            整数
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
             </summary>
         </member>
     </members>

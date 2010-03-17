@@ -4,6 +4,107 @@
         <name>hwj.CommonLibrary</name>
     </assembly>
     <members>
+        <member name="M:hwj.CommonLibrary.Object.NetHelper.GetHostName">
+            <summary>
+            获取本机名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NetHelper.GetHostIPAddress">
+            <summary>
+            获取本机IP地址(多个)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NetHelper.GetFirstHostIPAddress">
+            <summary>
+            获取本机IP地址(第一个)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:hwj.CommonLibrary.Function.DecimalToChinese.EndOfInt">
+            <summary>
+            整(当没有 角分 时)
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.Function.DecimalToChinese.NumLevelExponent">
+            <summary>
+            数位的指数
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.Function.DecimalToChinese.NumLeverChineseSign">
+            <summary>
+            数位的中文字符
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.Function.DecimalToChinese.NumChineseCharacter">
+            <summary>
+            大写字符
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.IsValidated``1(``0)">
+            <summary>
+            正则表达验证数字是否合法
+            </summary>
+            <param name="Num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.GetNumLevel(System.Double)">
+            <summary>
+            获取数字的数位　使用log
+            </summary>
+            <param name="Num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.IsDumpLevel(System.Double)">
+            <summary>
+            是否跳位
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.IsBigThanTillion(System.String)">
+            <summary>
+            是否大于兆，如果大于就把字符串分为两部分，
+            一部分是兆以前的数字
+            另一部分是兆以后的数字
+            </summary>
+            <param name="Num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.SplitNum(System.String)">
+            <summary>
+            把数字字符串由‘兆’分开两个
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.ContactNumChinese(System.Double[])">
+            <summary>
+            合并分开的数组中文货币字符
+            </summary>
+            <param name="tillionNums"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.CalculateChineseSign(System.Double,System.Nullable{hwj.CommonLibrary.Function.DecimalToChinese.NumLevel},System.Boolean,System.Boolean)">
+            <summary>
+            计算中文字符串
+            </summary>
+            <param name="Num">数字</param>
+            <param name="NL">数位级别 比如1000万的 数位级别为万</param>
+            <param name="IsExceptTen">是否以‘壹拾’开头</param>
+            <returns>中文大写</returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Function.DecimalToChinese.ConvertToChinese(System.Decimal,System.Boolean)">
+            <summary>
+            外部调用的转换方法
+            </summary>
+            <param name="Num"></param>
+            <returns></returns>
+        </member>
+        <member name="T:hwj.CommonLibrary.Function.DecimalToChinese.NumLevel">
+            <summary>
+            数位
+            </summary>
+        </member>
         <member name="T:hwj.CommonLibrary.WebSite.JSHelper">
             <summary>
             JavaScript Helper
@@ -24,6 +125,16 @@
             <param name="Text"></param> 
             <param name="sKey"></param> 
             <returns></returns> 
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.EmailTo">
+            <summary>
+            多个收件人请用逗号分隔
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.EmailCC">
+            <summary>
+            多个抄送人请用逗号分隔
+            </summary>
         </member>
         <member name="T:hwj.CommonLibrary.WebSite.WebCache">
             <summary>
@@ -140,6 +251,26 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.StreamToBytes(System.IO.Stream)">
+            <summary>
+            将 Stream 转成 byte[]
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.BytesToStream(System.Byte[])">
+            <summary>
+            将 byte[] 转成 Stream
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.StreamToFile(System.IO.Stream,System.String)">
+            <summary>
+            将 Stream 写入文件
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.FileToStream(System.String)">
+            <summary>
+            从文件读取 Stream
+            </summary>
+        </member>
         <member name="T:hwj.CommonLibrary.WebSite.Base.BasePage">
             <summary>
             所有页面的基类
@@ -253,6 +384,22 @@
             是否奇数值
             </summary>
             <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetChinese(System.Decimal)">
+            <summary>
+            将阿拉伯数字转为大写中文数字
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetBreakSeqNum(System.Collections.Generic.List{System.Int32},System.Int32,System.Int32)">
+            <summary>
+            计算断号
+            </summary>
+            <param name="CurrentSeqList">当前的序号列表</param>
+            <param name="MinSeqNum">最小序号</param>
+            <param name="MaxSeqNum">最大序号</param>
             <returns></returns>
         </member>
     </members>
