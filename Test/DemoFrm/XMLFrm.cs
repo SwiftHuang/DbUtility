@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Test.DemoFrm
 {
@@ -21,11 +22,33 @@ namespace Test.DemoFrm
             try
             {
                 eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXmlExcludeXMLNS<eMosBooking.RTTKT>(txtXML.Text);
+                txtOutput.Text = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(obj);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnTestTime_Click(object sender, EventArgs e)
+        {
+            int times = 0;
+            double Seconds = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Reset();
+                stopWatch.Start();
+
+                eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXmlExcludeXMLNS<eMosBooking.RTTKT>(txtXML.Text);
+
+                TimeSpan ts = stopWatch.Elapsed;
+                stopWatch.Stop();
+                Seconds += ts.TotalSeconds;
+
+                times++;
+            }
+            lblTime.Text = (Seconds / times).ToString();
         }
     }
 }

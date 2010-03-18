@@ -355,10 +355,69 @@
       &lt;freq_fight_num /&gt;
       &lt;AirlinePNR&gt;DQ5J6&lt;/AirlinePNR&gt;
     &lt;/UO_PEOTKTDETAIL&gt;
+    &lt;UO_PEOTKTDETAIL&gt;
+      &lt;ConnInfo&gt;
+        &lt;IsSqlSentence&gt;false&lt;/IsSqlSentence&gt;
+        &lt;TableName&gt;PEOTKTDETAIL&lt;/TableName&gt;
+        &lt;DefaultSelect&gt;select * from [PEOTKTDETAIL](nolock)&lt;/DefaultSelect&gt;
+        &lt;ConnectionKey&gt;EMOS&lt;/ConnectionKey&gt;
+        &lt;PrimaryKeys&gt;
+          &lt;string&gt;CompanyCode&lt;/string&gt;
+          &lt;string&gt;Ticket&lt;/string&gt;
+          &lt;string&gt;TktSeq&lt;/string&gt;
+          &lt;string&gt;SegNum&lt;/string&gt;
+          &lt;string&gt;AirLine&lt;/string&gt;
+        &lt;/PrimaryKeys&gt;
+      &lt;/ConnInfo&gt;
+      &lt;CompanyCode&gt;GG&lt;/CompanyCode&gt;
+      &lt;Ticket&gt;000000000&lt;/Ticket&gt;
+      &lt;AirCode&gt;CZ&lt;/AirCode&gt;
+      &lt;TktSeq&gt;01&lt;/TktSeq&gt;
+      &lt;SegNum&gt;00001&lt;/SegNum&gt;
+      &lt;AirLine&gt;784&lt;/AirLine&gt;
+      &lt;Flight&gt;CZ3513&lt;/Flight&gt;
+      &lt;Class&gt;R&lt;/Class&gt;
+      &lt;Seat /&gt;
+      &lt;DepartCity&gt;CAN&lt;/DepartCity&gt;
+      &lt;ArrivalCity&gt;NKG&lt;/ArrivalCity&gt;
+      &lt;DepartDATE&gt;2009-09-11T00:00:00&lt;/DepartDATE&gt;
+      &lt;DepartTime&gt;0830&lt;/DepartTime&gt;
+      &lt;ArrDATE&gt;2009-09-11T00:00:00&lt;/ArrDATE&gt;
+      &lt;ArrTime&gt;1015&lt;/ArrTime&gt;
+      &lt;ElapsedTime&gt;0000&lt;/ElapsedTime&gt;
+      &lt;StopOverNum&gt;0&lt;/StopOverNum&gt;
+      &lt;StopOverCity /&gt;
+      &lt;FareAmt&gt;0.00&lt;/FareAmt&gt;
+      &lt;FareBasic /&gt;
+      &lt;Commission&gt;0.0000&lt;/Commission&gt;
+      &lt;ValidStart&gt;0001-01-01T00:00:00&lt;/ValidStart&gt;
+      &lt;ValidEnd&gt;0001-01-01T00:00:00&lt;/ValidEnd&gt;
+      &lt;CreateOn&gt;2009-08-20T13:05:03.967&lt;/CreateOn&gt;
+      &lt;CreateBy&gt;HRH&lt;/CreateBy&gt;
+      &lt;UpdateOn&gt;0001-01-01T00:00:00&lt;/UpdateOn&gt;
+      &lt;GSTAMT&gt;0&lt;/GSTAMT&gt;
+      &lt;EQP /&gt;
+      &lt;service /&gt;
+      &lt;status /&gt;
+      &lt;fare_basis_code /&gt;
+      &lt;DepartTerm /&gt;
+      &lt;ArrivalTerm /&gt;
+      &lt;freq_fight_num /&gt;
+      &lt;AirlinePNR&gt;DQ5J6&lt;/AirlinePNR&gt;
+    &lt;/UO_PEOTKTDETAIL&gt;
   &lt;/TKTDETAIL&gt;
 &lt;/RTTKT&gt;</value>
   </data>
   <metadata name="btnGeneral.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtOutput.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnTestTime.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="lblTime.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
