@@ -28,43 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.loginComboBox1 = new hwj.UserControls.Other.LoginComboBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlsFrm));
             this.btnAddText = new hwj.UserControls.CommonControls.xButton();
+            this.loginComboBox1 = new hwj.UserControls.Other.LoginComboBox();
             this.SuspendLayout();
-            // 
-            // loginComboBox1
-            // 
-            this.loginComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.loginComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.loginComboBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.loginComboBox1.FileName = "LoginCBO";
-            this.loginComboBox1.FormattingEnabled = true;
-            this.loginComboBox1.Location = new System.Drawing.Point(497, 164);
-            this.loginComboBox1.Name = "loginComboBox1";
-            this.loginComboBox1.OldBackColor = System.Drawing.SystemColors.Window;
-            this.loginComboBox1.Size = new System.Drawing.Size(121, 20);
-            this.loginComboBox1.TabIndex = 0;
             // 
             // btnAddText
             // 
+            this.btnAddText.AccessibleDescription = null;
+            this.btnAddText.AccessibleName = null;
+            resources.ApplyResources(this.btnAddText, "btnAddText");
+            this.btnAddText.BackgroundImage = null;
             this.btnAddText.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnAddText.Location = new System.Drawing.Point(543, 190);
+            this.btnAddText.Font = null;
             this.btnAddText.Name = "btnAddText";
-            this.btnAddText.Size = new System.Drawing.Size(75, 23);
-            this.btnAddText.TabIndex = 1;
-            this.btnAddText.Text = "Add";
             this.btnAddText.UseVisualStyleBackColor = true;
             this.btnAddText.Click += new System.EventHandler(this.btnAddText_Click);
             // 
+            // loginComboBox1
+            // 
+            this.loginComboBox1.AccessibleDescription = null;
+            this.loginComboBox1.AccessibleName = null;
+            resources.ApplyResources(this.loginComboBox1, "loginComboBox1");
+            this.loginComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.loginComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.loginComboBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.loginComboBox1.BackgroundImage = null;
+            this.loginComboBox1.DefaultDisplayLastRecord = true;
+            this.loginComboBox1.FileName = "LoginCBO";
+            this.loginComboBox1.Font = null;
+            this.loginComboBox1.FormattingEnabled = true;
+            this.loginComboBox1.Name = "loginComboBox1";
+            this.loginComboBox1.OldBackColor = System.Drawing.SystemColors.Window;
+            // 
             // ControlsFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 479);
+            this.BackgroundImage = null;
             this.Controls.Add(this.btnAddText);
             this.Controls.Add(this.loginComboBox1);
+            this.Font = null;
+            this.Icon = null;
             this.Name = "ControlsFrm";
-            this.Text = "ControlsFrm";
             this.ResumeLayout(false);
 
         }

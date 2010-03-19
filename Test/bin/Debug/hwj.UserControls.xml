@@ -41,6 +41,33 @@
             内容是否改变(在Validating/Validated有效)
             </summary>
         </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.LoginComboBox.components">
+            <summary>
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.LoginComboBox.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.LoginComboBox.InitializeComponent">
+            <summary>
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
@@ -193,53 +220,69 @@
         </member>
         <member name="T:hwj.UserControls.Properties.Resources">
             <summary>
-              强类型资源类，用于查找本地化字符串等。
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.ResourceManager">
             <summary>
-              返回此类使用的缓存 ResourceManager 实例。
+              Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.Culture">
             <summary>
-              为使用此强类型资源类的所有资源查找
-              重写当前线程的 CurrentUICulture 属性。
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ClearHistory">
+            <summary>
+              Looks up a localized string similar to 清空记录.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.ErrorInfo">
             <summary>
-              查找类似 错误信息 的本地化字符串。
+              Looks up a localized string similar to 错误信息.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.Information">
             <summary>
-              查找类似 提示信息 的本地化字符串。
+              Looks up a localized string similar to 提示信息.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.InvalidEmail">
             <summary>
-              查找类似 [{0}]为无效的电子邮箱格式 的本地化字符串。
+              Looks up a localized string similar to [{0}]为无效的电子邮箱格式.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.InvalidNumberic">
             <summary>
-              查找类似 [{0}]为无效的数字格式 的本地化字符串。
+              Looks up a localized string similar to [{0}]为无效的数字格式.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.NoRecord">
             <summary>
-              查找类似 当前找不到你所需要的记录 的本地化字符串。
+              Looks up a localized string similar to 当前找不到你所需要的记录.
             </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.OpenFile">
+            <summary>
+              Looks up a localized string similar to 打开文件.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.OpenFileException">
+             <summary>
+               Looks up a localized string similar to 打开文件异常!
+            -{0}.
+             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.PageRecordCount">
             <summary>
-              查找类似 共{0}条记录 的本地化字符串。
+              Looks up a localized string similar to 共{0}条记录.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.ReturnRecord">
             <summary>
-              查找类似 {0}条记录 的本地化字符串。
+              Looks up a localized string similar to {0}条记录.
             </summary>
         </member>
         <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshRowFooter">
@@ -297,16 +340,6 @@
         <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
             <summary>
             整数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedHandle">
-            <summary>
-            设置引发hwj.UserControls.ValueChanged事件的对象
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xComboBox.IsRequired">
-            <summary>
-            获取或设置为必填控件
             </summary>
         </member>
     </members>
