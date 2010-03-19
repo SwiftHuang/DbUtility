@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6FA437B2-1559-4971-883C-7804D7CBBE31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -93,6 +93,10 @@
     <Compile Include="PDFReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DemoFrm\ControlsFrm.en-US.resx">
+      <DependentUpon>ControlsFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="DemoFrm\ControlsFrm.resx">
       <DependentUpon>ControlsFrm.cs</DependentUpon>
     </EmbeddedResource>
