@@ -20,6 +20,8 @@ namespace Test.DemoFrm
 
         private void btnAddText_Click(object sender, EventArgs e)
         {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.LoadFrom(@"C:\Microsoft.ReportViewer.WinForms.dll");
+            assembly.GetName().GetPublicKeyToken();
             loginComboBox1.AddText();
         }
     }

@@ -99,6 +99,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DemoFrm\ControlsFrm.resx">
       <DependentUpon>ControlsFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DemoFrm\XMLFrm.resx">
       <DependentUpon>XMLFrm.cs</DependentUpon>
