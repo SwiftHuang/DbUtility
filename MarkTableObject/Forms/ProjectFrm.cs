@@ -49,15 +49,17 @@ namespace hwj.MarkTableObject.Forms
                 prj.EntityPath = txtEntityPath.Text.Trim();
                 prj.ConnectionString = txtConnStr.Text.Trim();
                 prj.ConnectionDataSource = ConnectionDataSource;
-                prj.Key = DateTime.Now.ToString("yyyyMMddhhmmss");
-                prj.FileName = prj.Key + ".xml";
+                if (Project == null)
+                    prj.Key = DateTime.Now.ToString("yyyyMMddhhmmss");
+                else
+                    prj.Key = Project.Key;
+                prj.FileName = Common.GetProjectFileName(prj.Key);
 
                 string xml = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(prj);
-                string xmlPath = Properties.Settings.Default.ProjectPath + "\\" + prj.FileName;
-                if (!Directory.Exists(Properties.Settings.Default.ProjectPath))
-                    Directory.CreateDirectory(Properties.Settings.Default.ProjectPath);
+                if (!Directory.Exists(Path.GetDirectoryName(prj.FileName)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(prj.FileName));
 
-                using (StreamWriter sw = new StreamWriter(xmlPath, false))
+                using (StreamWriter sw = new StreamWriter(prj.FileName, false))
                 {
                     sw.Write(xml);
                 }
@@ -69,6 +71,27 @@ namespace hwj.MarkTableObject.Forms
                 throw ex;
             }
 
+        }
+
+        private void ProjectFrm_Load(object sender, EventArgs e)
+        {
+            InitData();
+        }
+        private void InitData()
+        {
+            if (Project != null)
+            {
+                txtPrjName.Text = Project.Name;
+                txtPrjPath.Text = Project.MainPath;
+                txtBLLName.Text = Project.BusinessNameSpace;
+                txtBLLPath.Text = Project.BusinessPath;
+                txtDALName.Text = Project.DataAccessNameSpace;
+                txtDALPath.Text = Project.DataAccessPath;
+                txtEntityName.Text = Project.EntityNameSpace;
+                txtEntityPath.Text = Project.EntityPath;
+                txtConnStr.Text = Project.ConnectionString;
+                ConnectionDataSource = Project.ConnectionDataSource;
+            }
         }
 
     }

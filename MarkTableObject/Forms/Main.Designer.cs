@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("项 目");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -39,12 +40,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsMenuGeneral = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMenuSetting = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMenuConn = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.treeMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -67,30 +74,32 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tvServers, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.27307F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.72693F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(182, 509);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tvServers
             // 
-            this.tvServers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvServers.Indent = 10;
-            this.tvServers.Location = new System.Drawing.Point(3, 29);
+            this.tvServers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvServers.Location = new System.Drawing.Point(3, 28);
             this.tvServers.Name = "tvServers";
             treeNode1.Name = "NodeProject";
             treeNode1.Text = "项 目";
             this.tvServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            this.tvServers.Size = new System.Drawing.Size(176, 477);
+            this.tvServers.Size = new System.Drawing.Size(176, 478);
             this.tvServers.TabIndex = 0;
+            this.tvServers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvServers_MouseDown);
             // 
             // toolStrip1
             // 
@@ -151,6 +160,42 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // treeMenu
+            // 
+            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsMenuConn,
+            this.toolStripSeparator1,
+            this.tsMenuGeneral,
+            this.tsMenuSetting});
+            this.treeMenu.Name = "treeMenu";
+            this.treeMenu.Size = new System.Drawing.Size(125, 76);
+            // 
+            // tsMenuGeneral
+            // 
+            this.tsMenuGeneral.Name = "tsMenuGeneral";
+            this.tsMenuGeneral.Size = new System.Drawing.Size(124, 22);
+            this.tsMenuGeneral.Text = "批量生成";
+            this.tsMenuGeneral.Click += new System.EventHandler(this.tsMenuGeneral_Click);
+            // 
+            // tsMenuSetting
+            // 
+            this.tsMenuSetting.Name = "tsMenuSetting";
+            this.tsMenuSetting.Size = new System.Drawing.Size(124, 22);
+            this.tsMenuSetting.Text = "属 性";
+            this.tsMenuSetting.Click += new System.EventHandler(this.tsMenuSetting_Click);
+            // 
+            // tsMenuConn
+            // 
+            this.tsMenuConn.Name = "tsMenuConn";
+            this.tsMenuConn.Size = new System.Drawing.Size(124, 22);
+            this.tsMenuConn.Text = "连 接";
+            this.tsMenuConn.Click += new System.EventHandler(this.tsMenuConn_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -170,6 +215,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.treeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +232,11 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tBtnAddPrj;
+        private System.Windows.Forms.ContextMenuStrip treeMenu;
+        private System.Windows.Forms.ToolStripMenuItem tsMenuGeneral;
+        private System.Windows.Forms.ToolStripMenuItem tsMenuSetting;
+        private System.Windows.Forms.ToolStripMenuItem tsMenuConn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
     }
 }

@@ -419,6 +419,7 @@
             this.Name = "ProjectFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ProjectFrm";
+            this.Load += new System.EventHandler(this.ProjectFrm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

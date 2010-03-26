@@ -44,5 +44,30 @@ namespace hwj.MarkTableObject.BLL.MSSQL
             }
             return list;
         }
+        public static void GetTableList(string connectionString, out List<string> tableList, out List<string> viewList)
+        {
+            tableList = new List<string>();
+            viewList = new List<string>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                DataTable tb = connection.GetSchema("Tables");
+                DataView dv = tb.DefaultView;
+                dv.RowFilter = "TABLE_TYPE='BASE TABLE'";
+                dv.Sort = "TABLE_NAME";
+                foreach (DataRowView r in dv)
+                {
+                    tableList.Add(r["TABLE_NAME"].ToString());
+                }
+
+                dv.RowFilter = "TABLE_TYPE='VIEW'";
+                dv.Sort = "TABLE_NAME";
+                foreach (DataRowView r in dv)
+                {
+                    viewList.Add(r["TABLE_NAME"].ToString());
+                }
+            }
+        }
     }
 }
