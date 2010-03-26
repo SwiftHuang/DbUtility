@@ -29,9 +29,10 @@ namespace hwj.MarkTableObject
 
                 if (treeNode.Tag != null)
                 {
-                    XmlAttribute attrFileName = doc.CreateAttribute("FileName");
-                    attrFileName.Value = treeNode.Tag.ToString();
-                    element.Attributes.Append(attrFileName);
+                    XmlAttribute attrKey = doc.CreateAttribute("Key");
+                    attrKey.Value = treeNode.Tag.ToString();
+                    element.Attributes.Append(attrKey);
+
                 }
                 //element.AppendChild(doc.CreateCDataSection(treeNode.Tag.ToString()));
                 xmlNode.AppendChild(element);
@@ -66,8 +67,8 @@ namespace hwj.MarkTableObject
                 }
                 TreeNode newTreeNode = new TreeNode();
                 newTreeNode.Text = var.Attributes["Title"].Value;
-                if (var.Attributes["FileName"] != null)
-                    newTreeNode.Tag = var.Attributes["FileName"].Value;
+                if (var.Attributes["Key"] != null)
+                    newTreeNode.Tag = var.Attributes["Key"].Value;
 
                 if (var.HasChildNodes)
                 {

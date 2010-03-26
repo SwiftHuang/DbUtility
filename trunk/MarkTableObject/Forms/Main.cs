@@ -41,26 +41,88 @@ namespace hwj.MarkTableObject.Forms
         {
             XMLHelper.GetMenu(ref tvServers);
         }
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    string connectionString = txtConn.Text;
-        //    //string sql = "EXEC [SP_RPT_ARAPBalances]	'GT','1001','G113','','AR','PRM'";// txtSql.Text;
-        //    string sql = txtSql.Text;
 
-        //    connectionString = "Data Source=192.168.1.200;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=113502";
-        //    Entity.EntityInfo inf = new hwj.MarkTableObject.Entity.EntityInfo();
-        //    inf.EntityName = "ARTx";
-        //    inf.ConnectionString = connectionString;
-        //    textBox1.Text = BLL.BuilderEntity.CreatEntity(inf, ConnType.MSSQL, DBModule.Table);
-        //}
+        private void tvServers_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Point ClickPoint = new Point(e.X, e.Y);
+                TreeNode CurrentNode = tvServers.GetNodeAt(ClickPoint);
+                if (CurrentNode != null)
+                {
+                    switch (CurrentNode.Level)
+                    {
+                        case 1:
+                            CurrentNode.ContextMenuStrip = treeMenu;
+                            break;
+                        default:
+                            break;
+                    }
+                    tvServers.SelectedNode = CurrentNode;
+                }
+            }
 
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    Entity.EntityInfo inf = new hwj.MarkTableObject.Entity.EntityInfo();
-        //    inf.EntityName = "ARTx";
-        //    inf.ConnectionString = "Provider=SQLOLEDB;Data Source=192.168.1.200;Password=113502;User ID=sa;Initial Catalog=eAccount";
-        //    textBox1.Text = BLL.BuilderEntity.CreatEntity(inf, ConnType.OleDb, DBModule.Table);
-        //}
+        }
 
+        private void tsMenuGeneral_Click(object sender, EventArgs e)
+        {
+            if (tvServers.SelectedNode.Tag != null)
+            {
+                List<string> tableList = new List<string>();
+                List<string> viewList = new List<string>();
+                Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
+
+                BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
+
+                GeneralFrm frm = new GeneralFrm();
+                frm.ProjectInfo = prj;
+                frm.TableList = tableList;
+                frm.ViewList = viewList;
+                frm.ShowDialog();
+            }
+        }
+
+        private void tsMenuSetting_Click(object sender, EventArgs e)
+        {
+            if (tvServers.SelectedNode.Tag != null)
+            {
+                Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
+                ProjectFrm frm = new ProjectFrm();
+                frm.Project = prj;
+                frm.ShowDialog();
+            }
+        }
+
+        private void tsMenuConn_Click(object sender, EventArgs e)
+        {
+            if (tvServers.SelectedNode.Tag != null)
+            {
+                Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
+
+                List<string> tableList = new List<string>();
+                List<string> viewList = new List<string>();
+
+                BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
+
+                TreeNode tableNode = new TreeNode("表");
+                foreach (string s in tableList)
+                {
+                    tableNode.Nodes.Add(s);
+                }
+                tvServers.SelectedNode.Nodes.Add(tableNode);
+
+                TreeNode viewNode = new TreeNode("视图");
+                foreach (string s in viewList)
+                {
+                    viewNode.Nodes.Add(s);
+                }
+                tvServers.SelectedNode.Nodes.Add(viewNode);
+            }
+        }
+        private Entity.ProjectInfo GetProjectInfo(TreeNode node)
+        {
+            string fileName = Common.GetProjectFileName(node.Tag.ToString());
+            return Common.GetProjectInfo(fileName);
+        }
     }
 }

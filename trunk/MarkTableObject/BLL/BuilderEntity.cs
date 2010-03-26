@@ -6,11 +6,27 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using hwj.CommonLibrary.Object;
 using hwj.MarkTableObject.Entity;
+using System.IO;
 
 namespace hwj.MarkTableObject.BLL
 {
     public class BuilderEntity
     {
+        public static void CreateTableFile(ProjectInfo projectInfo, string tableName)
+        {
+            EntityInfo e = new EntityInfo();
+            e.ConnectionString = projectInfo.ConnectionString;
+            e.EntityName = tableName;
+            e.EntityPath = string.Format("{0}tb{1}.cs", projectInfo.EntityPath, tableName);
+
+            string text = CreatEntity(e, projectInfo.ConnectionDataSource, DBModule.Table);
+            hwj.MarkTableObject.Common.CreateFile(e.EntityPath);
+            using (StreamWriter sw = new StreamWriter(e.EntityPath, false, System.Text.Encoding.UTF8))
+            {
+                sw.Write(text);
+            }
+
+        }
         public static string CreatEntity(EntityInfo entity, ConnectionDataSourceType connType, DBModule module)
         {
             string strModule = string.Empty;

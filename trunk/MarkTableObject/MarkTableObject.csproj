@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\MSSQL\BuilderBLL.cs" />
+    <Compile Include="BLL\MSSQL\BuilderDAL.cs" />
     <Compile Include="BLL\OleDb\BuilderColumn.cs" />
     <Compile Include="BLL\BuilderEntity.cs" />
     <Compile Include="BLL\Common.cs" />
@@ -61,6 +63,12 @@
     <Compile Include="Forms\DatabaseFrm.Designer.cs">
       <DependentUpon>DatabaseFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GeneralFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GeneralFrm.Designer.cs">
+      <DependentUpon>GeneralFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DatabaseFrm.resx">
       <DependentUpon>DatabaseFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GeneralFrm.resx">
+      <DependentUpon>GeneralFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
