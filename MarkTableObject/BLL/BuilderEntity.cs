@@ -14,38 +14,12 @@ namespace hwj.MarkTableObject.BLL
     {
         public static void CreateTableFile(ProjectInfo projectInfo, string tableName)
         {
-            EntityInfo e = new EntityInfo();
-            e.ConnectionString = projectInfo.ConnectionString;
-            e.EntityName = tableName;
-            e.EntityPath = string.Format("{0}tb{1}.cs", projectInfo.EntityPath, tableName);
-
-            string text = CreatEntity(e, projectInfo.ConnectionDataSource, DBModule.Table);
-            hwj.MarkTableObject.Common.CreateFile(e.EntityPath);
-            using (StreamWriter sw = new StreamWriter(e.EntityPath, false, System.Text.Encoding.UTF8))
-            {
-                sw.Write(text);
-            }
-
+            EntityInfo e = new EntityInfo(projectInfo, DBModule.Table, tableName);
+            string text = CreatEntity(e);
+            hwj.MarkTableObject.Common.CreateFile(e.FileName, text);
         }
-        public static string CreatEntity(EntityInfo entity, ConnectionDataSourceType connType, DBModule module)
+        public static string CreatEntity(EntityInfo entity)
         {
-            string strModule = string.Empty;
-            switch (module)
-            {
-                case DBModule.Table:
-                    entity.ColumnInfoList = GetColumnInfoForTable(connType, entity.ConnectionString, entity.EntityName);
-                    strModule = "Table:";
-                    break;
-                case DBModule.View:
-                    strModule = "View:";
-                    break;
-                case DBModule.SP:
-                    strModule = "SP:";
-                    break;
-                default:
-                    break;
-            }
-
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine("using System;");
             strclass.AppendLine("using System.Collections.Generic;");
@@ -57,20 +31,34 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("namespace " + entity.NameSpace);
             strclass.AppendLine("{");
             strclass.AppendLine(1, "/// <summary>");
-            strclass.AppendLine(1, "/// " + strModule + entity.EntityName);
+            strclass.AppendLine(1, "/// " + entity.Module.ToString() + ":" + entity.TableName);
             strclass.AppendLine(1, "/// </summary>");
             strclass.AppendLine(1, "[Serializable]");
-            strclass.AppendLine(1, "public class " + entity.EntityName + " : BaseTable<" + entity.EntityName + ">");
-            strclass.AppendLine(1, "{");
-            strclass.AppendLine(2, "public " + entity.EntityName + "()");
-            strclass.AppendLine(3, ": base(DBTableName)");
-            strclass.AppendLine(2, "{ }");
-            strclass.AppendLine(CreatTableName(entity.EntityName));
+            if (entity.Module == DBModule.SQL)
+            {
+                strclass.AppendLine(1, "public class " + entity.EntityName + " : BaseSqlTable<" + entity.EntityName + ">");
+                strclass.AppendLine(1, "{");
+                strclass.AppendLine(2, "public " + entity.EntityName + "()");
+                strclass.AppendLine(3, ": base(CommandText)");
+                strclass.AppendLine(2, "{ }");
+                strclass.AppendLine(2, @"public const string CommandText = @""" + entity.CommandText.Replace("\r\n", "") + "\";");
+            }
+            else
+            {
+                strclass.AppendLine(1, "public class " + entity.EntityName + " : BaseTable<" + entity.EntityName + ">");
+                strclass.AppendLine(1, "{");
+                strclass.AppendLine(2, "public " + entity.EntityName + "()");
+                strclass.AppendLine(3, ": base(DBTableName)");
+                strclass.AppendLine(2, "{ }");
+                strclass.AppendLine(CreatTableName(entity.EntityName));
+            }
+            strclass.AppendLine("");
             strclass.AppendLine(CreatFieldsEnum(entity));
             strclass.AppendLine(CreatModelMethod(entity));
             strclass.AppendLine(1, "}");
             strclass.AppendLine(1, "public class " + entity.EntityName + "s : BaseList<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
-            strclass.AppendLine(1, "public class " + entity.EntityName + "Page : PageResult<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
+            if (entity.Module != DBModule.SP)
+                strclass.AppendLine(1, "public class " + entity.EntityName + "Page : PageResult<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
             strclass.AppendLine("}");
             strclass.AppendLine("");
 
@@ -78,8 +66,8 @@ namespace hwj.MarkTableObject.BLL
         }
         private static string CreatTableName(string modelName)
         {
-            if (modelName.IndexOf("tb") != -1)
-                modelName = modelName.Substring(2);
+            //if (modelName.IndexOf("tb") != -1)
+            //    modelName = modelName.Substring(2);
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public const string DBTableName = \"" + modelName + "\";");
             return strclass.ToString();
@@ -160,8 +148,11 @@ namespace hwj.MarkTableObject.BLL
                         strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
                     strclass2.AppendLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                     strclass2.AppendLine(2, "{");
-                    strclass2.AppendLine(3, "set{AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value;}");
-                    strclass2.AppendLine(3, "get{return " + "_" + columnName.ToLower() + ";}");
+                    if (entity.Module == DBModule.Table)
+                        strclass2.AppendLine(3, "set{ AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value; }");
+                    else
+                        strclass2.AppendLine(3, "set{ _" + columnName.ToLower() + "=value; }");
+                    strclass2.AppendLine(3, "get{ return " + "_" + columnName.ToLower() + "; }");
                     strclass2.AppendLine(2, "}");
                 }
                 tmpColumnName = c.ColumnName;
@@ -183,16 +174,16 @@ namespace hwj.MarkTableObject.BLL
             return "DbType." + SetFirstUpper(columnType);
         }
 
-        private static ColumnInfos GetColumnInfoForTable(ConnectionDataSourceType connType, string connectionString, string tablName)
+        private static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
         {
-            switch (connType)
+            switch (entity.ConnType)
             {
                 case ConnectionDataSourceType.MSSQL:
-                    return BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(connectionString, tablName);
+                    return BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(entity);
                 case ConnectionDataSourceType.MYSQL:
                     break;
                 case ConnectionDataSourceType.OleDb:
-                    return BLL.OleDb.BuilderColumn.GetColumnInfoForTable(connectionString, tablName);
+                    return BLL.OleDb.BuilderColumn.GetColumnInfoForTable(entity);
                 default:
                     break;
             }

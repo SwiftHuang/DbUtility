@@ -34,27 +34,36 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\MSSQL\BuilderBLL.cs" />
-    <Compile Include="BLL\MSSQL\BuilderDAL.cs" />
+    <Compile Include="BLL\BuilderBLL.cs" />
+    <Compile Include="BLL\BuilderDAL.cs" />
     <Compile Include="BLL\OleDb\BuilderColumn.cs" />
     <Compile Include="BLL\BuilderEntity.cs" />
     <Compile Include="BLL\Common.cs" />
     <Compile Include="BLL\MSSQL\BuilderColumn.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Components\GenSQLCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\GenSQLCtrl.Designer.cs">
+      <DependentUpon>GenSQLCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\MSSQLCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\MSSQLCtrl.Designer.cs">
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\BLLInfo.cs" />
     <Compile Include="Entity\ColumnInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entity\DALInfo.cs" />
     <Compile Include="Entity\EntityInfo.cs" />
     <Compile Include="Entity\ProjectInfo.cs" />
     <Compile Include="Forms\DatabaseFrm.cs">
@@ -83,6 +92,9 @@
       <DependentUpon>ProjectFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\GenSQLCtrl.resx">
+      <DependentUpon>GenSQLCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\MSSQLCtrl.resx">
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </EmbeddedResource>

@@ -26,7 +26,7 @@ namespace hwj.MarkTableObject.Forms
             if (prj.Project != null)
             {
                 TreeNode node = new TreeNode(prj.Project.Name);
-                node.Tag = prj.Project.FileName;
+                node.Tag = prj.Project.Key;
                 tvServers.Nodes[0].Nodes.Add(node);
                 XMLHelper.SaveTreeView(tvServers);
             }

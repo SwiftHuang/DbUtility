@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace hwj.MarkTableObject
 {
@@ -15,11 +16,16 @@ namespace hwj.MarkTableObject
     {
         Table,
         View,
+        SQL,
         SP,
     }
 
     public class Common
     {
+        public static Entity.ProjectInfo GetProjectInfoByKey(string key)
+        {
+            return GetProjectInfo(GetProjectFileName(key));
+        }
         public static Entity.ProjectInfo GetProjectInfo(string fileName)
         {
             string xml = hwj.CommonLibrary.Object.FileHelper.ReadFile(fileName);
@@ -29,7 +35,7 @@ namespace hwj.MarkTableObject
         {
             return string.Format("{0}\\{1}.xml", Properties.Settings.Default.ProjectPath, key);
         }
-        public static void CreateFile(string fileName)
+        public static void CreateFile(string fileName, string text)
         {
             if (!File.Exists(fileName))
             {
@@ -39,6 +45,27 @@ namespace hwj.MarkTableObject
                 else
                     using (File.Create(fileName)) { }
             }
+            using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
+            {
+                sw.Write(text);
+            }
+        }
+
+        public static void MsgError(string text, Exception ex)
+        {
+            MessageBox.Show(text);
+        }
+        public static void MsgInfo(string text)
+        {
+            MessageBox.Show(text);
+        }
+        public static void MsgWarn(string text, Exception ex)
+        {
+            MessageBox.Show(text);
+        }
+        public static void MsgWarn(string text)
+        {
+            MessageBox.Show(text);
         }
     }
 }
