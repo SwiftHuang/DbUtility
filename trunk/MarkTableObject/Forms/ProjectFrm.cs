@@ -41,28 +41,27 @@ namespace hwj.MarkTableObject.Forms
                 ProjectInfo prj = new ProjectInfo();
                 prj.Name = txtPrjName.Text.Trim();
                 prj.MainPath = txtPrjPath.Text.Trim();
-                prj.BusinessNameSpace = txtBLLName.Text.Trim();
+                prj.BusinessNamespace = txtBLLName.Text.Trim();
                 prj.BusinessPath = txtBLLPath.Text.Trim();
-                prj.DataAccessNameSpace = txtDALName.Text.Trim();
+                prj.BusinessPrefixChar = txtBLLPrefixChar.Text.Trim();
+                prj.BusinessConnection = txtBLLConnection.Text.Trim();
+                prj.DataAccessNamespace = txtDALName.Text.Trim();
                 prj.DataAccessPath = txtDALPath.Text.Trim();
-                prj.EntityNameSpace = txtEntityName.Text.Trim();
+                prj.DataAccessPrefixChar = txtDALPrefixChar.Text.Trim();
+                prj.EntityNamespace = txtEntityName.Text.Trim();
                 prj.EntityPath = txtEntityPath.Text.Trim();
+                prj.EntityPrefixChar = txtEntityPrefixChar.Text.Trim();
                 prj.ConnectionString = txtConnStr.Text.Trim();
                 prj.ConnectionDataSource = ConnectionDataSource;
+                prj.DataSourceName = lblDataSource.Text;
                 if (Project == null)
                     prj.Key = DateTime.Now.ToString("yyyyMMddhhmmss");
                 else
                     prj.Key = Project.Key;
                 prj.FileName = Common.GetProjectFileName(prj.Key);
 
-                string xml = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(prj);
-                if (!Directory.Exists(Path.GetDirectoryName(prj.FileName)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(prj.FileName));
+                prj.SaveXML();
 
-                using (StreamWriter sw = new StreamWriter(prj.FileName, false))
-                {
-                    sw.Write(xml);
-                }
                 Project = prj;
                 this.Close();
             }
@@ -83,14 +82,32 @@ namespace hwj.MarkTableObject.Forms
             {
                 txtPrjName.Text = Project.Name;
                 txtPrjPath.Text = Project.MainPath;
-                txtBLLName.Text = Project.BusinessNameSpace;
+
+                txtBLLName.Text = Project.BusinessNamespace;
                 txtBLLPath.Text = Project.BusinessPath;
-                txtDALName.Text = Project.DataAccessNameSpace;
+                txtBLLPrefixChar.Text = Project.BusinessPrefixChar;
+                txtBLLConnection.Text = Project.BusinessConnection;
+
+                txtDALName.Text = Project.DataAccessNamespace;
                 txtDALPath.Text = Project.DataAccessPath;
-                txtEntityName.Text = Project.EntityNameSpace;
+                txtDALPrefixChar.Text = Project.DataAccessPrefixChar;
+
+                txtEntityName.Text = Project.EntityNamespace;
                 txtEntityPath.Text = Project.EntityPath;
+                txtEntityPrefixChar.Text = Project.EntityPrefixChar;
+
                 txtConnStr.Text = Project.ConnectionString;
+                lblDataSource.Text = Project.DataSourceName;
                 ConnectionDataSource = Project.ConnectionDataSource;
+            }
+        }
+
+        private void btnBLLPath_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtBLLPath.Text = folderBrowserDialog1.SelectedPath;
             }
         }
 

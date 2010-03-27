@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Data;
 
 namespace hwj.MarkTableObject
 {
@@ -56,7 +58,6 @@ namespace hwj.MarkTableObject
             XmlNode2TreeNode(xmlNodes, treeView.Nodes);
             treeView.EndUpdate();
         }
-
         private static void XmlNode2TreeNode(XmlNodeList xmlNode, TreeNodeCollection treeNode)
         {
             foreach (XmlNode var in xmlNode)
@@ -82,6 +83,32 @@ namespace hwj.MarkTableObject
 
                 treeNode.Add(newTreeNode);
             }
+        }
+
+        public static DataTable GetPrjDataTable()
+        {
+
+            DataTable tb = new DataTable();
+            tb.Columns.Add("Title");
+            tb.Columns.Add("Key");
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load("Menu.xml");
+            XmlNodeList xmlNodes = xmlDoc.DocumentElement.ChildNodes;
+            if (xmlNodes.Count > 0)
+            {
+                foreach (XmlNode var in xmlNodes[0].ChildNodes)
+                {
+                    if (var.NodeType != XmlNodeType.Element)
+                        continue;
+
+                    DataRow r = tb.NewRow();
+                    r["Title"] = var.Attributes["Title"].Value;
+                    if (var.Attributes["Key"] != null)
+                        r["Key"] = var.Attributes["Key"].Value;
+                    tb.Rows.Add(r);
+                }
+            }
+            return tb;
         }
 
     }

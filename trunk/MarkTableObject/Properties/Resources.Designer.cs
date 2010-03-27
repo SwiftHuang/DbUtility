@@ -59,5 +59,14 @@ namespace hwj.MarkTableObject.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 无效的项目信息! 的本地化字符串。
+        /// </summary>
+        internal static string InvalidProjectInfo {
+            get {
+                return ResourceManager.GetString("InvalidProjectInfo", resourceCulture);
+            }
+        }
     }
 }

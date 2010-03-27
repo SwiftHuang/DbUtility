@@ -10,16 +10,19 @@ namespace hwj.MarkTableObject.BLL.MSSQL
 {
     public class BuilderColumn
     {
-        public static ColumnInfos GetColumnInfoForTable(string connectionString, string tableName)
+        public static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
         {
             ColumnInfos list = new ColumnInfos();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(entity.ConnectionString))
             {
-                SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}", tableName), connection);
+                SqlCommand command = null;
+                if (entity.Module == DBModule.SQL)
+                    command = new SqlCommand(entity.CommandText, connection);
+                else
+                    command = new SqlCommand(string.Format("SELECT * FROM {0}", entity.TableName), connection);
 
                 connection.Open();
-                DataTable tb1 = connection.GetSchema("Columns", new string[] { null, null, tableName });
+                DataTable tb1 = connection.GetSchema("Columns", new string[] { null, null, entity.TableName });
                 DataView dv = tb1.DefaultView;
 
                 SqlDataReader reader = command.ExecuteReader(CommandBehavior.KeyInfo);

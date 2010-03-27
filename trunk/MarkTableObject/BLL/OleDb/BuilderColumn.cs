@@ -11,16 +11,16 @@ namespace hwj.MarkTableObject.BLL.OleDb
     public class BuilderColumn
     {
 
-        public static ColumnInfos GetColumnInfoForTable(string connectionString, string tableName)
+        public static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
         {
             ColumnInfos list = new ColumnInfos();
 
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(entity.ConnectionString))
             {
-                OleDbCommand command = new OleDbCommand(string.Format("SELECT * FROM {0}", tableName), connection);
+                OleDbCommand command = new OleDbCommand(string.Format("SELECT * FROM {0}", entity.TableName), connection);
 
                 connection.Open();
-                DataTable tb1 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName });
+                DataTable tb1 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, entity.TableName });
                 DataView dv = tb1.DefaultView;
 
                 OleDbDataReader reader = command.ExecuteReader(CommandBehavior.KeyInfo);
@@ -45,6 +45,6 @@ namespace hwj.MarkTableObject.BLL.OleDb
             }
             return list;
         }
-        
+
     }
 }
