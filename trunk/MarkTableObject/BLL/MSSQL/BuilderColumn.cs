@@ -16,7 +16,7 @@ namespace hwj.MarkTableObject.BLL.MSSQL
             using (SqlConnection connection = new SqlConnection(entity.ConnectionString))
             {
                 SqlCommand command = null;
-                if (entity.Module == DBModule.SQL)
+                if (entity.Module == DBModule.SQL || entity.Module == DBModule.SP)
                     command = new SqlCommand(entity.CommandText, connection);
                 else
                     command = new SqlCommand(string.Format("SELECT * FROM {0}", entity.TableName), connection);
@@ -27,8 +27,11 @@ namespace hwj.MarkTableObject.BLL.MSSQL
 
                 SqlDataReader reader = command.ExecuteReader(CommandBehavior.KeyInfo);
                 DataTable tb = reader.GetSchemaTable();
+                int index = 0;
                 foreach (DataRow r in tb.Rows)
                 {
+                    if (index >= reader.VisibleFieldCount)
+                        break;
                     ColumnInfo c = BLL.Common.GetColumnInfo(r);
                     c.DataTypeName = BLL.Common.GetStringValue(r["DataTypeName"]);
 
@@ -42,11 +45,28 @@ namespace hwj.MarkTableObject.BLL.MSSQL
                     }
 
                     list.Add(c);
+                    index++;
                 }
                 reader.Close();
             }
             return list;
         }
+        public static SPParamColumnInfos GetColumnInfoForSPParam(EntityInfo entity)
+        {
+            SPParamColumnInfos list = new SPParamColumnInfos();
+            using (SqlConnection connection = new SqlConnection(entity.ConnectionString))
+            {
+                connection.Open();
+                DataTable tb = connection.GetSchema("ProcedureParameters", new string[] { null, null, entity.SPName });
+                foreach (DataRow r in tb.Rows)
+                {
+                    SPParamColumnInfo c = BLL.Common.GetSPParamColumnInfo(r);
+                    list.Add(c);
+                }
+            }
+            return list;
+        }
+
         public static void GetTableList(string connectionString, out List<string> tableList, out List<string> viewList)
         {
             tableList = new List<string>();

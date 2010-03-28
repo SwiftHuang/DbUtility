@@ -66,6 +66,7 @@
     <Compile Include="Entity\DALInfo.cs" />
     <Compile Include="Entity\EntityInfo.cs" />
     <Compile Include="Entity\ProjectInfo.cs" />
+    <Compile Include="Entity\SPParamColumnInfo.cs" />
     <Compile Include="Forms\DatabaseFrm.cs">
       <SubType>Form</SubType>
     </Compile>

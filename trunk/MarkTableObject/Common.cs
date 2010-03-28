@@ -33,7 +33,7 @@ namespace hwj.MarkTableObject
         }
         public static string GetProjectFileName(string key)
         {
-            return string.Format("{0}\\{1}.xml", Properties.Settings.Default.ProjectPath, key);
+            return string.Format("{0}\\{1}\\{2}.xml", Properties.Settings.Default.MainPath, Properties.Settings.Default.ProjectPath, key);
         }
         public static void CreateFile(string fileName, string text)
         {

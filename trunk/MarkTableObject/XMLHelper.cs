@@ -10,6 +10,8 @@ namespace hwj.MarkTableObject
 {
     public class XMLHelper
     {
+        public static string MenuPath = string.Format("{0}\\Menu.xml", Properties.Settings.Default.MainPath);
+        
         public static void SaveTreeView(TreeView treeView)
         {
             XmlDocument doc = new XmlDocument();
@@ -17,7 +19,7 @@ namespace hwj.MarkTableObject
             XmlNode root = doc.DocumentElement;
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "utf-8", "yes"), root);
             TreeNode2Xml(treeView.Nodes, root);
-            doc.Save("Menu.xml");
+            doc.Save(MenuPath);
         }
         private static void TreeNode2Xml(TreeNodeCollection treeNodes, XmlNode xmlNode)
         {
@@ -49,7 +51,7 @@ namespace hwj.MarkTableObject
         {
             TreeView tv = new TreeView();
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("Menu.xml");
+            xmlDoc.Load(MenuPath);
 
             XmlNodeList xmlNodes = xmlDoc.DocumentElement.ChildNodes;
 
@@ -92,7 +94,7 @@ namespace hwj.MarkTableObject
             tb.Columns.Add("Title");
             tb.Columns.Add("Key");
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("Menu.xml");
+            xmlDoc.Load(MenuPath);
             XmlNodeList xmlNodes = xmlDoc.DocumentElement.ChildNodes;
             if (xmlNodes.Count > 0)
             {

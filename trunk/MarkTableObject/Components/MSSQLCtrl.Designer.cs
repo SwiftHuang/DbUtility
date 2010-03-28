@@ -174,7 +174,7 @@
             this.txtServer.SetValueToControl = null;
             this.txtServer.Size = new System.Drawing.Size(314, 21);
             this.txtServer.TabIndex = 3;
-            this.txtServer.Text = "192.168.1.200";
+            this.txtServer.Text = "127.0.0.1";
             this.txtServer.TextIsChanged = false;
             // 
             // cboServerType
@@ -221,7 +221,6 @@
             this.txtUser.SetValueToControl = null;
             this.txtUser.Size = new System.Drawing.Size(314, 21);
             this.txtUser.TabIndex = 6;
-            this.txtUser.Text = "sa";
             this.txtUser.TextIsChanged = false;
             // 
             // txtPassword
@@ -238,7 +237,6 @@
             this.txtPassword.SetValueToControl = null;
             this.txtPassword.Size = new System.Drawing.Size(314, 21);
             this.txtPassword.TabIndex = 7;
-            this.txtPassword.Text = "113502";
             this.txtPassword.TextIsChanged = false;
             // 
             // MSSQLCtrl
