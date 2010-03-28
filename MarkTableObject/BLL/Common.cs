@@ -56,5 +56,15 @@ namespace hwj.MarkTableObject.BLL
             c.BaseColumnName = BLL.Common.GetStringValue(dataRow["BaseColumnName"]);
             return c;
         }
+
+        public static SPParamColumnInfo GetSPParamColumnInfo(DataRow row)
+        {
+            SPParamColumnInfo c = new SPParamColumnInfo();
+            c.IsResult = BLL.Common.GetStringValue(row["IS_RESULT"]);
+            c.ParameterName = BLL.Common.GetStringValue(row["PARAMETER_NAME"]).Replace("@", string.Empty);
+            c.DataType = BLL.Common.GetStringValue(row["DATA_TYPE"]);
+            c.ParameterMode = BLL.Common.GetStringValue(row["PARAMETER_MODE"]);
+            return c;
+        }
     }
 }

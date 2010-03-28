@@ -15,6 +15,7 @@ namespace hwj.MarkTableObject.BLL
         public static void CreateTableFile(ProjectInfo projectInfo, string tableName)
         {
             EntityInfo e = new EntityInfo(projectInfo, DBModule.Table, tableName);
+            e.InitColumnInfoList();
             string text = CreatEntity(e);
             hwj.MarkTableObject.Common.CreateFile(e.FileName, text);
         }
@@ -34,14 +35,14 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(1, "/// " + entity.Module.ToString() + ":" + entity.TableName);
             strclass.AppendLine(1, "/// </summary>");
             strclass.AppendLine(1, "[Serializable]");
-            if (entity.Module == DBModule.SQL)
+            if (entity.Module == DBModule.SQL || entity.Module == DBModule.SP)
             {
                 strclass.AppendLine(1, "public class " + entity.EntityName + " : BaseSqlTable<" + entity.EntityName + ">");
                 strclass.AppendLine(1, "{");
                 strclass.AppendLine(2, "public " + entity.EntityName + "()");
                 strclass.AppendLine(3, ": base(CommandText)");
                 strclass.AppendLine(2, "{ }");
-                strclass.AppendLine(2, @"public const string CommandText = @""" + entity.CommandText.Replace("\r\n", "") + "\";");
+                strclass.AppendLine(2, @"public const string CommandText = @""" + entity.CommandText.Replace("\r\n", "\r\n".PadRight(48, ' ')) + "\";");
             }
             else
             {
@@ -50,7 +51,7 @@ namespace hwj.MarkTableObject.BLL
                 strclass.AppendLine(2, "public " + entity.EntityName + "()");
                 strclass.AppendLine(3, ": base(DBTableName)");
                 strclass.AppendLine(2, "{ }");
-                strclass.AppendLine(CreatTableName(entity.EntityName));
+                strclass.AppendLine(CreatTableName(entity.TableName));
             }
             strclass.AppendLine("");
             strclass.AppendLine(CreatFieldsEnum(entity));

@@ -33,5 +33,21 @@ namespace hwj.MarkTableObject.Entity
             BLLName = PrefixChar + tableName;
             FileName = string.Format("{0}\\{1}.cs", prjInfo.BusinessPath.TrimEnd('\\'), BLLName);
         }
+
+        public BLLInfo(ProjectInfo prjInfo, DBModule module, string tableName, string commandText, ColumnInfos columnInfos)
+        {
+            DALInfo = new DALInfo(prjInfo, module, tableName);
+            EntityInfo = DALInfo.EntityInfo;
+            EntityInfo.CommandText = commandText;
+            EntityInfo.InitColumnInfoList(columnInfos);
+            Namespace = prjInfo.BusinessNamespace;
+            ConnType = prjInfo.ConnectionDataSource;
+            Module = module;
+            PrefixChar = prjInfo.BusinessPrefixChar;
+            Connection = prjInfo.BusinessConnection;
+
+            BLLName = PrefixChar + tableName;
+            FileName = string.Format("{0}\\{1}.cs", prjInfo.BusinessPath.TrimEnd('\\'), BLLName);
+        }
     }
 }

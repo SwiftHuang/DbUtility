@@ -31,5 +31,14 @@ namespace hwj.MarkTableObject.Properties {
                 return ((string)(this["ProjectPath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\HWJ_TableObj")]
+        public string MainPath {
+            get {
+                return ((string)(this["MainPath"]));
+            }
+        }
     }
 }

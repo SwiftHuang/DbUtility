@@ -122,7 +122,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(2, "}");
             return strclass.ToString();
         }
-        public static string CreatUpdateMethod(BLLInfo inf)
+        private static string CreatUpdateMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             if (inf.EntityInfo.PKColumnInfoList.Count > 0)
@@ -142,7 +142,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(2, "}");
             return strclass.ToString();
         }
-        public static string CreatDeleteMethod(BLLInfo inf)
+        private static string CreatDeleteMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public static bool Delete(" + inf.EntityInfo.PKColumnParam + ")");
@@ -157,7 +157,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(2, "}");
             return strclass.ToString();
         }
-        public static string CreatGetEntityMethod(BLLInfo inf)
+        private static string CreatGetEntityMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + " GetEntity(" + inf.EntityInfo.PKColumnParam + ")");
@@ -173,7 +173,7 @@ namespace hwj.MarkTableObject.BLL
             return strclass.ToString();
 
         }
-        public static string CreatGetListMethod(BLLInfo inf)
+        private static string CreatGetListMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + "s GetList(" + inf.EntityInfo.PKColumnParam + ")");
@@ -208,7 +208,7 @@ namespace hwj.MarkTableObject.BLL
             return strclass.ToString();
 
         }
-        public static string CreatGetAllListMethod(BLLInfo inf)
+        private static string CreatGetAllListMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + "s GetAllList()");
@@ -218,7 +218,7 @@ namespace hwj.MarkTableObject.BLL
 
             return strclass.ToString();
         }
-        public static string CreatGetPageMethod(BLLInfo inf)
+        private static string CreatGetPageMethod(BLLInfo inf)
         {
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + "Page GetPage(int pageIndex, int pageSize)");

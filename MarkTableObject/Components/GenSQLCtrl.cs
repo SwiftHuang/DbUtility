@@ -12,11 +12,13 @@ namespace hwj.MarkTableObject.Components
     public partial class GenSQLCtrl : UserControl
     {
         ProjectInfo PrjInfo = null;
-        EntityInfo EntInfo = null;
+        EntityInfo EntyInfo = null;
+        DBModule Module = DBModule.SQL;
         public GenSQLCtrl()
         {
             InitializeComponent();
-
+            dgList.AutoGenerateColumns = false;
+            cboSQLType.SelectedIndex = 0;
         }
 
         private void cboPrjInfo_SelectedIndexChanged(object sender, EventArgs e)
@@ -27,10 +29,28 @@ namespace hwj.MarkTableObject.Components
                 PrjInfo = Common.GetProjectInfoByKey(cboPrjInfo.SelectedValue.ToString());
             }
         }
+        private void cboSQLType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                if (cboSQLType.SelectedIndex == 0)
+                {
+                    Module = DBModule.SQL;
+                    tblSP.Visible = false;
+                }
+                else
+                {
+                    Module = DBModule.SP;
+                    tblSP.Visible = true;
+                }
+                if (cboSQLType.SelectedItem != null)
+                    gpSQL.Text = cboSQLType.SelectedItem.ToString();
+            }
+        }
 
         private void GenSQLCtrl_Enter(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            if (!DesignMode && cboPrjInfo.DataSource == null)
             {
                 cboPrjInfo.DisplayMember = "Title";
                 cboPrjInfo.ValueMember = "Key";
@@ -42,12 +62,19 @@ namespace hwj.MarkTableObject.Components
         {
             try
             {
-                EntInfo = new EntityInfo(PrjInfo, DBModule.SQL, txtTableName.Text.Trim());
-                EntInfo.CommandText = txtSQL.Text.Trim();
+                EntyInfo = new EntityInfo(PrjInfo, Module, txtTableName.Text.Trim());
+                EntyInfo.CommandText = txtSQL.Text.Trim();
+                EntyInfo.SPName = txtSPName.Text.Trim();
                 switch (PrjInfo.ConnectionDataSource)
                 {
                     case ConnectionDataSourceType.MSSQL:
-                        dgList.DataSource = BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(EntInfo);
+                        dgList.DataSource = BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(EntyInfo);
+                        if (Module == DBModule.SP)
+                        {
+                            EntyInfo.SPParamInfos = BLL.MSSQL.BuilderColumn.GetColumnInfoForSPParam(EntyInfo);
+                            EntyInfo.InitSPParamString();
+                            txtSPParam.Text = EntyInfo.SPParamString;
+                        }
                         break;
                     case ConnectionDataSourceType.MYSQL:
                         break;
@@ -56,22 +83,47 @@ namespace hwj.MarkTableObject.Components
                     default:
                         break;
                 }
+
             }
             catch (Exception ex)
             {
                 Common.MsgWarn(ex.Message, ex);
             }
         }
-
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            ColumnInfos colList = dgList.DataSource as ColumnInfos;
-            if (colList != null)
+            try
             {
-                EntInfo.InitColumnInfoList(colList);
-                TextBox txt = tpEntity.Controls["txtEntityCode"] as TextBox;
-                txt.Text = BLL.BuilderEntity.CreatEntity(EntInfo);
+                ColumnInfos colList = dgList.DataSource as ColumnInfos;
+                if (colList != null)
+                {
+                    BLLInfo inf = new BLLInfo(PrjInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
+                    inf.EntityInfo.SPParamInfos = EntyInfo.SPParamInfos;
+                    inf.EntityInfo.SPParamString = EntyInfo.SPParamString;
+                    inf.EntityInfo.CommandText = EntyInfo.CommandText;
+                    TextBox txt = tpEntity.Controls["txtEntityCode"] as TextBox;
+                    if (txt != null)
+                        txt.Text = BLL.BuilderEntity.CreatEntity(inf.EntityInfo);
+
+                    txt = tpBLL.Controls["txtBLLCode"] as TextBox;
+                    if (txt != null)
+                    {
+                        txt.Text = BLL.BuilderBLL.CreateBLLCode(inf, DBModule.SQL, false, false, false, false, true, Module == DBModule.SQL, true, false);
+                    }
+
+                    txt = tpDAL.Controls["txtDALCode"] as TextBox;
+                    if (txt != null)
+                        txt.Text = BLL.BuilderDAL.CreateDALCode(inf.DALInfo);
+
+                    tabGen.SelectedTab = tpEntity;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.MsgError(ex.Message, ex);
             }
         }
+
+
     }
 }

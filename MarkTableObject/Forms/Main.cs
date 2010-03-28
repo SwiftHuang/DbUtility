@@ -14,6 +14,7 @@ namespace hwj.MarkTableObject.Forms
         public Main()
         {
             InitializeComponent();
+
         }
 
 
@@ -39,6 +40,8 @@ namespace hwj.MarkTableObject.Forms
 
         private void InitData()
         {
+            if (!System.IO.File.Exists(XMLHelper.MenuPath))
+                XMLHelper.SaveTreeView(tvServers);
             XMLHelper.GetMenu(ref tvServers);
         }
 
@@ -97,6 +100,8 @@ namespace hwj.MarkTableObject.Forms
         {
             if (tvServers.SelectedNode.Tag != null)
             {
+                tvServers.SelectedNode.Nodes.Clear();
+
                 Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
 
                 List<string> tableList = new List<string>();
