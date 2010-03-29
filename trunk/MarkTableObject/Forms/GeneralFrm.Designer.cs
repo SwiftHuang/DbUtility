@@ -59,14 +59,16 @@
             this.txtBLLPrefixChar = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.chkAdd = new System.Windows.Forms.CheckBox();
-            this.chkDelete = new System.Windows.Forms.CheckBox();
             this.chkUpdate = new System.Windows.Forms.CheckBox();
+            this.chkDelete = new System.Windows.Forms.CheckBox();
             this.chkGetList = new System.Windows.Forms.CheckBox();
             this.chkGetPage = new System.Windows.Forms.CheckBox();
             this.chkExists = new System.Windows.Forms.CheckBox();
             this.chkGetAllList = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtBLLConnection = new System.Windows.Forms.TextBox();
+            this.btnCancel = new hwj.UserControls.CommonControls.xButton();
+            this.btnPre = new hwj.UserControls.CommonControls.xButton();
             this.gpEntity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gpDAL.SuspendLayout();
@@ -79,7 +81,7 @@
             // btnGeneral
             // 
             this.btnGeneral.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGeneral.Location = new System.Drawing.Point(612, 346);
+            this.btnGeneral.Location = new System.Drawing.Point(531, 346);
             this.btnGeneral.Name = "btnGeneral";
             this.btnGeneral.Size = new System.Drawing.Size(75, 23);
             this.btnGeneral.TabIndex = 0;
@@ -447,19 +449,6 @@
             this.chkAdd.Text = "Add";
             this.chkAdd.UseVisualStyleBackColor = true;
             // 
-            // chkDelete
-            // 
-            this.chkDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkDelete.AutoSize = true;
-            this.chkDelete.Checked = true;
-            this.chkDelete.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDelete.Location = new System.Drawing.Point(197, 4);
-            this.chkDelete.Name = "chkDelete";
-            this.chkDelete.Size = new System.Drawing.Size(60, 16);
-            this.chkDelete.TabIndex = 0;
-            this.chkDelete.Text = "Delete";
-            this.chkDelete.UseVisualStyleBackColor = true;
-            // 
             // chkUpdate
             // 
             this.chkUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -472,6 +461,19 @@
             this.chkUpdate.TabIndex = 0;
             this.chkUpdate.Text = "Update";
             this.chkUpdate.UseVisualStyleBackColor = true;
+            // 
+            // chkDelete
+            // 
+            this.chkDelete.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkDelete.AutoSize = true;
+            this.chkDelete.Checked = true;
+            this.chkDelete.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDelete.Location = new System.Drawing.Point(197, 4);
+            this.chkDelete.Name = "chkDelete";
+            this.chkDelete.Size = new System.Drawing.Size(60, 16);
+            this.chkDelete.TabIndex = 0;
+            this.chkDelete.Text = "Delete";
+            this.chkDelete.UseVisualStyleBackColor = true;
             // 
             // chkGetList
             // 
@@ -541,6 +543,28 @@
             this.txtBLLConnection.Size = new System.Drawing.Size(586, 21);
             this.txtBLLConnection.TabIndex = 1;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnCancel.Location = new System.Drawing.Point(612, 346);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "取 消";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnPre
+            // 
+            this.btnPre.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnPre.Location = new System.Drawing.Point(450, 346);
+            this.btnPre.Name = "btnPre";
+            this.btnPre.Size = new System.Drawing.Size(75, 23);
+            this.btnPre.TabIndex = 0;
+            this.btnPre.Text = "上一步";
+            this.btnPre.UseVisualStyleBackColor = true;
+            this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
+            // 
             // GeneralFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -552,10 +576,12 @@
             this.Controls.Add(this.gpDAL);
             this.Controls.Add(this.chkEntity);
             this.Controls.Add(this.gpEntity);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnPre);
             this.Controls.Add(this.btnGeneral);
             this.Name = "GeneralFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "GeneralFrm";
+            this.Text = "生成文件";
             this.Load += new System.EventHandler(this.GeneralFrm_Load);
             this.gpEntity.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -614,5 +640,7 @@
         private System.Windows.Forms.CheckBox chkGetAllList;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtBLLConnection;
+        private hwj.UserControls.CommonControls.xButton btnCancel;
+        private hwj.UserControls.CommonControls.xButton btnPre;
     }
 }

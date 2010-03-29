@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("项 目");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("项 目");
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsMenuConn = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,12 +139,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tvServers.Location = new System.Drawing.Point(3, 28);
             this.tvServers.Name = "tvServers";
-            treeNode1.Name = "NodeProject";
-            treeNode1.Text = "项 目";
+            treeNode2.Name = "NodeProject";
+            treeNode2.Text = "项 目";
             this.tvServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.tvServers.Size = new System.Drawing.Size(228, 628);
             this.tvServers.TabIndex = 0;
+            this.tvServers.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvServers_NodeMouseDoubleClick);
             this.tvServers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvServers_MouseDown);
             // 
             // toolStrip1
@@ -161,11 +161,11 @@
             // tBtnAddPrj
             // 
             this.tBtnAddPrj.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tBtnAddPrj.Image = ((System.Drawing.Image)(resources.GetObject("tBtnAddPrj.Image")));
+            this.tBtnAddPrj.Image = global::hwj.MarkTableObject.Properties.Resources.add;
             this.tBtnAddPrj.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tBtnAddPrj.Name = "tBtnAddPrj";
             this.tBtnAddPrj.Size = new System.Drawing.Size(23, 22);
-            this.tBtnAddPrj.Text = "toolStripButton1";
+            this.tBtnAddPrj.Text = "添加项目";
             this.tBtnAddPrj.Click += new System.EventHandler(this.tBtnAddPrj_Click);
             // 
             // tabControl1
@@ -202,9 +202,12 @@
             // 
             // genSQLCtrl2
             // 
+            this.genSQLCtrl2.ClassName = "SqlEntity";
             this.genSQLCtrl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.genSQLCtrl2.Location = new System.Drawing.Point(3, 3);
+            this.genSQLCtrl2.Module = hwj.MarkTableObject.DBModule.SQL;
             this.genSQLCtrl2.Name = "genSQLCtrl2";
+            this.genSQLCtrl2.PrjInfo = null;
             this.genSQLCtrl2.Size = new System.Drawing.Size(729, 627);
             this.genSQLCtrl2.TabIndex = 0;
             // 
@@ -217,7 +220,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "代码生成工具";
             this.Load += new System.EventHandler(this.Main_Load);
             this.treeMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

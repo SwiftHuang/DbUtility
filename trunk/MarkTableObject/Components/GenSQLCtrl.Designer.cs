@@ -62,10 +62,10 @@
             this.txtSPParam = new System.Windows.Forms.TextBox();
             this.tpEntity = new System.Windows.Forms.TabPage();
             this.txtEntityCode = new System.Windows.Forms.TextBox();
-            this.tpBLL = new System.Windows.Forms.TabPage();
-            this.txtBLLCode = new System.Windows.Forms.TextBox();
             this.tpDAL = new System.Windows.Forms.TabPage();
             this.txtDALCode = new System.Windows.Forms.TextBox();
+            this.tpBLL = new System.Windows.Forms.TabPage();
+            this.txtBLLCode = new System.Windows.Forms.TextBox();
             this.gpSQL.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgList)).BeginInit();
@@ -75,8 +75,8 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tblSP.SuspendLayout();
             this.tpEntity.SuspendLayout();
-            this.tpBLL.SuspendLayout();
             this.tpDAL.SuspendLayout();
+            this.tpBLL.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpSQL
@@ -358,7 +358,9 @@
             this.cboSQLType.FormattingEnabled = true;
             this.cboSQLType.Items.AddRange(new object[] {
             "SQL语句",
-            "存储过程"});
+            "存储过程",
+            "生成表",
+            "生成视图"});
             this.cboSQLType.Location = new System.Drawing.Point(679, 5);
             this.cboSQLType.Name = "cboSQLType";
             this.cboSQLType.Size = new System.Drawing.Size(121, 20);
@@ -485,6 +487,29 @@
             this.txtEntityCode.TabIndex = 0;
             this.txtEntityCode.WordWrap = false;
             // 
+            // tpDAL
+            // 
+            this.tpDAL.Controls.Add(this.txtDALCode);
+            this.tpDAL.Location = new System.Drawing.Point(4, 4);
+            this.tpDAL.Name = "tpDAL";
+            this.tpDAL.Size = new System.Drawing.Size(809, 542);
+            this.tpDAL.TabIndex = 2;
+            this.tpDAL.Text = "数据层代码";
+            this.tpDAL.UseVisualStyleBackColor = true;
+            // 
+            // txtDALCode
+            // 
+            this.txtDALCode.AcceptsReturn = true;
+            this.txtDALCode.AcceptsTab = true;
+            this.txtDALCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDALCode.Location = new System.Drawing.Point(0, 0);
+            this.txtDALCode.Multiline = true;
+            this.txtDALCode.Name = "txtDALCode";
+            this.txtDALCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtDALCode.Size = new System.Drawing.Size(809, 542);
+            this.txtDALCode.TabIndex = 1;
+            this.txtDALCode.WordWrap = false;
+            // 
             // tpBLL
             // 
             this.tpBLL.Controls.Add(this.txtBLLCode);
@@ -509,29 +534,6 @@
             this.txtBLLCode.TabIndex = 1;
             this.txtBLLCode.WordWrap = false;
             // 
-            // tpDAL
-            // 
-            this.tpDAL.Controls.Add(this.txtDALCode);
-            this.tpDAL.Location = new System.Drawing.Point(4, 4);
-            this.tpDAL.Name = "tpDAL";
-            this.tpDAL.Size = new System.Drawing.Size(809, 542);
-            this.tpDAL.TabIndex = 2;
-            this.tpDAL.Text = "数据层代码";
-            this.tpDAL.UseVisualStyleBackColor = true;
-            // 
-            // txtDALCode
-            // 
-            this.txtDALCode.AcceptsReturn = true;
-            this.txtDALCode.AcceptsTab = true;
-            this.txtDALCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDALCode.Location = new System.Drawing.Point(0, 0);
-            this.txtDALCode.Multiline = true;
-            this.txtDALCode.Name = "txtDALCode";
-            this.txtDALCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDALCode.Size = new System.Drawing.Size(809, 542);
-            this.txtDALCode.TabIndex = 1;
-            this.txtDALCode.WordWrap = false;
-            // 
             // GenSQLCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -553,10 +555,10 @@
             this.tblSP.PerformLayout();
             this.tpEntity.ResumeLayout(false);
             this.tpEntity.PerformLayout();
-            this.tpBLL.ResumeLayout(false);
-            this.tpBLL.PerformLayout();
             this.tpDAL.ResumeLayout(false);
             this.tpDAL.PerformLayout();
+            this.tpBLL.ResumeLayout(false);
+            this.tpBLL.PerformLayout();
             this.ResumeLayout(false);
 
         }
