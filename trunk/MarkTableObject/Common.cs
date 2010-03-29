@@ -35,6 +35,11 @@ namespace hwj.MarkTableObject
         {
             return string.Format("{0}\\{1}\\{2}.xml", Properties.Settings.Default.MainPath, Properties.Settings.Default.ProjectPath, key);
         }
+
+        public static void CreateFile(string fileName)
+        {
+            CreateFile(fileName, null);
+        }
         public static void CreateFile(string fileName, string text)
         {
             if (!File.Exists(fileName))
@@ -45,9 +50,12 @@ namespace hwj.MarkTableObject
                 else
                     using (File.Create(fileName)) { }
             }
-            using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
+            if (!string.IsNullOrEmpty(text))
             {
-                sw.Write(text);
+                using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
+                {
+                    sw.Write(text);
+                }
             }
         }
 

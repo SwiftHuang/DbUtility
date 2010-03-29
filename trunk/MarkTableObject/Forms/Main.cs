@@ -41,7 +41,10 @@ namespace hwj.MarkTableObject.Forms
         private void InitData()
         {
             if (!System.IO.File.Exists(XMLHelper.MenuPath))
+            {
+                Common.CreateFile(XMLHelper.MenuPath);
                 XMLHelper.SaveTreeView(tvServers);
+            }
             XMLHelper.GetMenu(ref tvServers);
         }
 
