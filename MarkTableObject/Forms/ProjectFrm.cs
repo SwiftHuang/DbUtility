@@ -111,5 +111,23 @@ namespace hwj.MarkTableObject.Forms
             }
         }
 
+        private void btnDALPath_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtDALPath.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void btnEntityPath_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtEntityPath.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
     }
 }

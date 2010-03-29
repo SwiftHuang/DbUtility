@@ -167,6 +167,7 @@
             this.btnEntityPath.TabIndex = 1;
             this.btnEntityPath.Text = "浏览";
             this.btnEntityPath.UseVisualStyleBackColor = true;
+            this.btnEntityPath.Click += new System.EventHandler(this.btnEntityPath_Click);
             // 
             // panel2
             // 
@@ -202,6 +203,7 @@
             this.btnDALPath.TabIndex = 1;
             this.btnDALPath.Text = "浏览";
             this.btnDALPath.UseVisualStyleBackColor = true;
+            this.btnDALPath.Click += new System.EventHandler(this.btnDALPath_Click);
             // 
             // panel1
             // 
@@ -640,7 +642,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 417);
+            this.ClientSize = new System.Drawing.Size(590, 419);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox2);
