@@ -11,9 +11,47 @@ namespace hwj.MarkTableObject.Components
 {
     public partial class GenSQLCtrl : UserControl
     {
-        ProjectInfo PrjInfo = null;
         EntityInfo EntyInfo = null;
-        DBModule Module = DBModule.SQL;
+        public ProjectInfo PrjInfo { get; set; }
+        private DBModule _Module = DBModule.SQL;
+        public DBModule Module
+        {
+            get { return _Module; }
+            set
+            {
+                _Module = value;
+                switch (_Module)
+                {
+                    case DBModule.Table:
+                        cboSQLType.SelectedIndex = 2;
+                        break;
+                    case DBModule.View:
+                        cboSQLType.SelectedIndex = 3;
+                        break;
+                    case DBModule.SQL:
+                        cboSQLType.SelectedIndex = 0;
+                        break;
+                    case DBModule.SP:
+                        cboSQLType.SelectedIndex = 1;
+                        break;
+                    default:
+                        Module = DBModule.SQL;
+                        cboSQLType.SelectedIndex = 0;
+                        break;
+                }
+            }
+        }
+        private string _ClassName = "SqlEntity";
+        public string ClassName
+        {
+            get { return _ClassName; }
+            set
+            {
+                _ClassName = value;
+                txtTableName.Text = value;
+            }
+        }
+
         public GenSQLCtrl()
         {
             InitializeComponent();
@@ -37,11 +75,25 @@ namespace hwj.MarkTableObject.Components
                 {
                     Module = DBModule.SQL;
                     tblSP.Visible = false;
+                    txtTableName.ReadOnly = false;
                 }
-                else
+                else if (cboSQLType.SelectedIndex == 1)
                 {
                     Module = DBModule.SP;
                     tblSP.Visible = true;
+                    txtTableName.ReadOnly = false;
+                }
+                else if (cboSQLType.SelectedIndex == 2)
+                {
+                    Module = DBModule.Table;
+                    tblSP.Visible = false;
+                    txtTableName.ReadOnly = true;
+                }
+                else if (cboSQLType.SelectedIndex == 3)
+                {
+                    Module = DBModule.View;
+                    tblSP.Visible = false;
+                    txtTableName.ReadOnly = true;
                 }
                 if (cboSQLType.SelectedItem != null)
                     gpSQL.Text = cboSQLType.SelectedItem.ToString();

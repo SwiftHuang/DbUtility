@@ -17,6 +17,20 @@ namespace hwj.MarkTableObject.Forms
 
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            InitData();
+        }
+
+        private void InitData()
+        {
+            if (!System.IO.File.Exists(XMLHelper.MenuPath))
+            {
+                Common.CreateFile(XMLHelper.MenuPath);
+                XMLHelper.SaveTreeView(tvServers);
+            }
+            XMLHelper.GetMenu(ref tvServers);
+        }
 
         private void tBtnAddPrj_Click(object sender, EventArgs e)
         {
@@ -31,21 +45,6 @@ namespace hwj.MarkTableObject.Forms
                 tvServers.Nodes[0].Nodes.Add(node);
                 XMLHelper.SaveTreeView(tvServers);
             }
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-            InitData();
-        }
-
-        private void InitData()
-        {
-            if (!System.IO.File.Exists(XMLHelper.MenuPath))
-            {
-                Common.CreateFile(XMLHelper.MenuPath);
-                XMLHelper.SaveTreeView(tvServers);
-            }
-            XMLHelper.GetMenu(ref tvServers);
         }
 
         private void tvServers_MouseDown(object sender, MouseEventArgs e)
@@ -74,20 +73,22 @@ namespace hwj.MarkTableObject.Forms
         {
             if (tvServers.SelectedNode.Tag != null)
             {
-                List<string> tableList = new List<string>();
-                List<string> viewList = new List<string>();
-                Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
-
-                BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
-
-                GeneralFrm frm = new GeneralFrm();
-                frm.ProjectInfo = prj;
-                frm.TableList = tableList;
-                frm.ViewList = viewList;
+                SelectObjFrm frm = new SelectObjFrm();
+                frm.PrjInfo = GetProjectInfo(tvServers.SelectedNode);
                 frm.ShowDialog();
+                //List<string> tableList = new List<string>();
+                //List<string> viewList = new List<string>();
+                //Entity.ProjectInfo prj = GetProjectInfo(tvServers.SelectedNode);
+
+                //BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
+
+                //GeneralFrm frm = new GeneralFrm();
+                //frm.ProjectInfo = prj;
+                //frm.TableList = tableList;
+                //frm.ViewList = viewList;
+
             }
         }
-
         private void tsMenuSetting_Click(object sender, EventArgs e)
         {
             if (tvServers.SelectedNode.Tag != null)
@@ -98,7 +99,6 @@ namespace hwj.MarkTableObject.Forms
                 frm.ShowDialog();
             }
         }
-
         private void tsMenuConn_Click(object sender, EventArgs e)
         {
             if (tvServers.SelectedNode.Tag != null)
@@ -113,24 +113,50 @@ namespace hwj.MarkTableObject.Forms
                 BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
 
                 TreeNode tableNode = new TreeNode("表");
+                tableNode.Tag = "TABLE";
                 foreach (string s in tableList)
                 {
-                    tableNode.Nodes.Add(s);
+                    TreeNode t = new TreeNode(s);
+                    t.Tag = tvServers.SelectedNode.Tag;
+                    tableNode.Nodes.Add(t);
                 }
                 tvServers.SelectedNode.Nodes.Add(tableNode);
 
                 TreeNode viewNode = new TreeNode("视图");
+                viewNode.Tag = "VIEW";
                 foreach (string s in viewList)
                 {
-                    viewNode.Nodes.Add(s);
+                    TreeNode t = new TreeNode(s);
+                    t.Tag = tvServers.SelectedNode.Tag;
+                    viewNode.Nodes.Add(t);
                 }
                 tvServers.SelectedNode.Nodes.Add(viewNode);
             }
         }
+
         private Entity.ProjectInfo GetProjectInfo(TreeNode node)
         {
             string fileName = Common.GetProjectFileName(node.Tag.ToString());
             return Common.GetProjectInfo(fileName);
         }
+
+        private void tvServers_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 1)
+                tsMenuConn_Click(null, null);
+            else if (e.Node.Level == 3)
+            {
+                if (e.Node.Parent.Tag != null)
+                {
+                    if (e.Node.Parent.Tag.ToString() == "TABLE")
+                    {
+                    }
+                    else if (e.Node.Parent.Tag.ToString() == "VIEW")
+                    {
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -10,18 +10,28 @@ namespace hwj.MarkTableObject.Forms
 {
     public partial class GeneralFrm : Form
     {
+        private SelectObjFrm SelObjFrm = null;
         public Entity.ProjectInfo ProjectInfo { get; set; }
         public List<string> TableList { get; set; }
         public List<string> ViewList { get; set; }
+
         public GeneralFrm()
         {
             InitializeComponent();
+        }
+
+
+        public void SetSelctFrm(SelectObjFrm frm)
+        {
+            SelObjFrm = frm;
         }
 
         private void GeneralFrm_Load(object sender, EventArgs e)
         {
             if (ProjectInfo != null)
             {
+                btnPre.Visible = SelObjFrm != null;
+
                 txtBLLNameSpace.Text = ProjectInfo.BusinessNamespace;
                 lblBLLFileName.Text = ProjectInfo.BusinessPath;
                 txtBLLPrefixChar.Text = ProjectInfo.BusinessPrefixChar;
@@ -66,6 +76,17 @@ namespace hwj.MarkTableObject.Forms
             ProjectInfo.EntityNamespace = txtEntityNameSpace.Text.Trim();
             ProjectInfo.EntityPrefixChar = txtEntityPrefixChar.Text.Trim();
             ProjectInfo.SaveXML();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPre_Click(object sender, EventArgs e)
+        {
+            if (SelObjFrm != null)
+                SelObjFrm.Show();
         }
     }
 }

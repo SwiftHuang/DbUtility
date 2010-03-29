@@ -651,7 +651,7 @@
             this.MinimumSize = new System.Drawing.Size(596, 443);
             this.Name = "ProjectFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ProjectFrm";
+            this.Text = "项 目";
             this.Load += new System.EventHandler(this.ProjectFrm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
