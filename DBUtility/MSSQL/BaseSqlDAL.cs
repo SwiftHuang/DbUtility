@@ -23,6 +23,61 @@ namespace hwj.DBUtility.MSSQL
 
         }
 
+        #region Get Entity
+        public T GetEntity()
+        {
+            return GetEntity(null);
+        }
+        public T GetEntity(FilterParams filterParam)
+        {
+            return GetEntity(null, filterParam, null);
+        }
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetEntity(displayFields, filterParam, null);
+        }
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            return GetEntity(SqlEntity.CommandText, SqlEntity.Parameters);
+        }
+        public T GetEntity(string sql, List<SqlParameter> parameters)
+        {
+            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity<T, TS>.CreateSingleEntity(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
+
+        #region GetList
+        public TS GetList()
+        {
+            return GetList(null, null, null, null);
+        }
+        public TS GetList(DisplayFields displayFields)
+        {
+            return GetList(displayFields, null, null, null);
+        }
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetList(displayFields, filterParam, null, null);
+        }
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            return GetList(displayFields, filterParam, sortParams, null);
+        }
         public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
@@ -46,6 +101,6 @@ namespace hwj.DBUtility.MSSQL
                     reader.Close();
             }
         }
-
+        #endregion
     }
 }

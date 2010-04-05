@@ -4,7 +4,7 @@ using hwj.DBUtility.TableMapping;
 namespace hwj.DBUtility.Entity
 {
     public class PageResult<T, TS>
-        where T : BaseTable<T>, new()
+        where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
         /// <summary>
