@@ -4,7 +4,8 @@ using System.Xml.Serialization;
 
 namespace hwj.DBUtility.TableMapping
 {
-    public abstract class BaseTable<T> where T : class, new()
+    public abstract class BaseTable<T> : BaseSqlTable<T>
+        where T : class, new()
     {
         public BaseTable(string tableName)
         {

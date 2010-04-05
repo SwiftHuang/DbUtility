@@ -9,7 +9,7 @@ using System.ComponentModel;
 namespace hwj.DBUtility.Entity
 {
     public class BaseList<T, TS> : List<T>
-        where T : BaseTable<T>, new()
+        where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
         private Enum tmpField;

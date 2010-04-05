@@ -7,7 +7,10 @@ namespace hwj.DBUtility.TableMapping
     public class BaseSqlTable<T> where T : class, new()
     {
         private string CommandText = string.Empty;
+        public BaseSqlTable()
+        {
 
+        }
         public BaseSqlTable(string commandText)
         {
             CommandText = commandText;
