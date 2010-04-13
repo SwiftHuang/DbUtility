@@ -117,93 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnAddText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 190</value>
-  </data>
-  <data name="btnAddText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnAddText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnAddText.Text" xml:space="preserve">
-    <value>增加</value>
-  </data>
-  <data name="&gt;&gt;btnAddText.Name" xml:space="preserve">
-    <value>btnAddText</value>
-  </data>
-  <data name="&gt;&gt;btnAddText.Type" xml:space="preserve">
-    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnAddText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnAddText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="loginComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 164</value>
-  </data>
-  <data name="loginComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
-  </data>
-  <data name="loginComboBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;loginComboBox1.Name" xml:space="preserve">
-    <value>loginComboBox1</value>
-  </data>
-  <data name="&gt;&gt;loginComboBox1.Type" xml:space="preserve">
-    <value>hwj.UserControls.Other.LoginComboBox, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;loginComboBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;loginComboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="xButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 220</value>
-  </data>
-  <data name="xButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="xButton1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="xButton1.Text" xml:space="preserve">
-    <value>xButton1</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Name" xml:space="preserve">
-    <value>xButton1</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Type" xml:space="preserve">
-    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;xButton1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>786, 479</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>ControlsFrm</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ControlsFrm</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="xTextBox1.Text" xml:space="preserve">
+    <value>&lt;?xml version="1.0"?&gt;
+&lt;tbCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CompanyCode xmlns="http://tempuri.org/"&gt;GT&lt;/CompanyCode&gt;
+  &lt;Cltcode xmlns="http://tempuri.org/"&gt;GJ0015  &lt;/Cltcode&gt;
+  &lt;Cltname xmlns="http://tempuri.org/"&gt;深圳巨邦国际旅行社&lt;/Cltname&gt;
+  &lt;TeamCode xmlns="http://tempuri.org/"&gt;GWT&lt;/TeamCode&gt;
+  &lt;Masteracct xmlns="http://tempuri.org/"&gt;GJ0015  &lt;/Masteracct&gt;
+  &lt;Addr1 xmlns="http://tempuri.org/"&gt;深圳深南东路3085号骏庭酒店3楼303室&lt;/Addr1&gt;
+  &lt;Addr2 xmlns="http://tempuri.org/" /&gt;
+  &lt;Addr3 xmlns="http://tempuri.org/" /&gt;
+  &lt;Addr4 xmlns="http://tempuri.org/" /&gt;
+  &lt;Addr5 xmlns="http://tempuri.org/" /&gt;
+  &lt;Citycode xmlns="http://tempuri.org/"&gt;SZX&lt;/Citycode&gt;
+  &lt;Countrycode xmlns="http://tempuri.org/"&gt;CN&lt;/Countrycode&gt;
+  &lt;Postcode xmlns="http://tempuri.org/" /&gt;
+  &lt;BillAddr1 xmlns="http://tempuri.org/" /&gt;
+  &lt;BillAddr2 xmlns="http://tempuri.org/" /&gt;
+  &lt;BillAddr3 xmlns="http://tempuri.org/" /&gt;
+  &lt;BillAddr4 xmlns="http://tempuri.org/" /&gt;
+  &lt;BillAddr5 xmlns="http://tempuri.org/" /&gt;
+  &lt;BillPostal xmlns="http://tempuri.org/" /&gt;
+  &lt;BillCity xmlns="http://tempuri.org/"&gt;SZX&lt;/BillCity&gt;
+  &lt;BillCountry xmlns="http://tempuri.org/"&gt;CN&lt;/BillCountry&gt;
+  &lt;Phone1 xmlns="http://tempuri.org/"&gt;(0)(755)25165576&lt;/Phone1&gt;
+  &lt;Fax1 xmlns="http://tempuri.org/"&gt;(0)(755)2511128&lt;/Fax1&gt;
+  &lt;Title1 xmlns="http://tempuri.org/" /&gt;
+  &lt;Contact1 xmlns="http://tempuri.org/" /&gt;
+  &lt;Title2 xmlns="http://tempuri.org/" /&gt;
+  &lt;Contact2 xmlns="http://tempuri.org/" /&gt;
+  &lt;Currcode xmlns="http://tempuri.org/"&gt;CNY&lt;/Currcode&gt;
+  &lt;PayMethod xmlns="http://tempuri.org/"&gt;CHQ&lt;/PayMethod&gt;
+  &lt;PayTermType xmlns="http://tempuri.org/"&gt;D&lt;/PayTermType&gt;
+  &lt;PayTermDays xmlns="http://tempuri.org/"&gt;0&lt;/PayTermDays&gt;
+  &lt;BankGLAcct xmlns="http://tempuri.org/"&gt;10215&lt;/BankGLAcct&gt;
+  &lt;CtrlGLAcct xmlns="http://tempuri.org/"&gt;113&lt;/CtrlGLAcct&gt;
+  &lt;SttCopies xmlns="http://tempuri.org/"&gt;1&lt;/SttCopies&gt;
+  &lt;Remarks xmlns="http://tempuri.org/" /&gt;
+  &lt;Prftup xmlns="http://tempuri.org/"&gt;0.00&lt;/Prftup&gt;
+  &lt;Prftdown xmlns="http://tempuri.org/"&gt;0.00&lt;/Prftdown&gt;
+  &lt;Category xmlns="http://tempuri.org/"&gt;I&lt;/Category&gt;
+  &lt;Email1 xmlns="http://tempuri.org/" /&gt;
+  &lt;AcctStatus xmlns="http://tempuri.org/"&gt;1&lt;/AcctStatus&gt;
+  &lt;StatementAddr1 xmlns="http://tempuri.org/" /&gt;
+  &lt;StatementAddr2 xmlns="http://tempuri.org/" /&gt;
+  &lt;StatementAddr3 xmlns="http://tempuri.org/" /&gt;
+  &lt;StatementAddr4 xmlns="http://tempuri.org/" /&gt;
+  &lt;StatementAddr5 xmlns="http://tempuri.org/" /&gt;
+  &lt;BranchCode xmlns="http://tempuri.org/"&gt;G&lt;/BranchCode&gt;
+  &lt;GemsCode xmlns="http://tempuri.org/" /&gt;
+  &lt;Deposit xmlns="http://tempuri.org/"&gt;0.00&lt;/Deposit&gt;
+  &lt;Createon xmlns="http://tempuri.org/"&gt;2007-06-08T10:25:07.093&lt;/Createon&gt;
+  &lt;Createby xmlns="http://tempuri.org/"&gt;AML&lt;/Createby&gt;
+  &lt;Updateon xmlns="http://tempuri.org/"&gt;2009-06-09T09:52:16.403&lt;/Updateon&gt;
+  &lt;Updateby xmlns="http://tempuri.org/"&gt;MTA&lt;/Updateby&gt;
+&lt;/tbCustomer&gt;</value>
   </data>
 </root>
