@@ -87,6 +87,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entity\DALInfo.cs" />
+    <Compile Include="Entity\DatabaseInfo.cs" />
     <Compile Include="Entity\EntityInfo.cs" />
     <Compile Include="Entity\ProjectInfo.cs" />
     <Compile Include="Entity\SPParamColumnInfo.cs" />

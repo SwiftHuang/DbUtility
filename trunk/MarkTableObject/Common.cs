@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace hwj.MarkTableObject
 {
-    public enum ConnectionDataSourceType
+    public enum DatabaseEnum
     {
         MSSQL,
         MYSQL,
@@ -22,6 +22,7 @@ namespace hwj.MarkTableObject
 
     public class Common
     {
+        public static string MainPath = string.Empty;
         public static Entity.ProjectInfo GetProjectInfoByKey(string key)
         {
             return GetProjectInfo(GetProjectFileName(key));
@@ -33,7 +34,7 @@ namespace hwj.MarkTableObject
         }
         public static string GetProjectFileName(string key)
         {
-            return string.Format("{0}\\{1}\\{2}.xml", Properties.Settings.Default.MainPath, Properties.Settings.Default.ProjectPath, key);
+            return string.Format("{0}\\Project\\{1}.xml", MainPath, key);
         }
 
         public static void CreateFile(string fileName)
@@ -61,19 +62,19 @@ namespace hwj.MarkTableObject
 
         public static void MsgError(string text, Exception ex)
         {
-            MessageBox.Show(text);
+            MessageBox.Show(text, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         public static void MsgInfo(string text)
         {
-            MessageBox.Show(text);
+            MessageBox.Show(text, Properties.Resources.MsgInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public static void MsgWarn(string text, Exception ex)
         {
-            MessageBox.Show(text);
+            MessageBox.Show(text, Properties.Resources.MsgWarn, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         public static void MsgWarn(string text)
         {
-            MessageBox.Show(text);
+            MessageBox.Show(text, Properties.Resources.MsgWarn, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

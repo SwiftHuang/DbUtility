@@ -32,26 +32,26 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstGenObj = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnTurnLeft = new System.Windows.Forms.Button();
+            this.btnTurnRight = new System.Windows.Forms.Button();
             this.btnNext = new hwj.UserControls.CommonControls.xButton();
             this.btnCancel = new hwj.UserControls.CommonControls.xButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpTable = new System.Windows.Forms.TabPage();
             this.tpView = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lstGenViewObj = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lstViewObj = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpTable.SuspendLayout();
             this.tpView.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstPrjObj
@@ -96,23 +96,25 @@
             this.lstGenObj.TabIndex = 0;
             this.lstGenObj.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstGenObj_MouseDoubleClick);
             // 
-            // button3
+            // btnTurnLeft
             // 
-            this.button3.Location = new System.Drawing.Point(338, 121);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(46, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = ">>>";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnTurnLeft.Location = new System.Drawing.Point(338, 121);
+            this.btnTurnLeft.Name = "btnTurnLeft";
+            this.btnTurnLeft.Size = new System.Drawing.Size(46, 23);
+            this.btnTurnLeft.TabIndex = 3;
+            this.btnTurnLeft.Text = ">>>";
+            this.btnTurnLeft.UseVisualStyleBackColor = true;
+            this.btnTurnLeft.Click += new System.EventHandler(this.btnTurnLeft_Click);
             // 
-            // button4
+            // btnTurnRight
             // 
-            this.button4.Location = new System.Drawing.Point(338, 160);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(46, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "<<<";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnTurnRight.Location = new System.Drawing.Point(338, 160);
+            this.btnTurnRight.Name = "btnTurnRight";
+            this.btnTurnRight.Size = new System.Drawing.Size(46, 23);
+            this.btnTurnRight.TabIndex = 3;
+            this.btnTurnRight.Text = "<<<";
+            this.btnTurnRight.UseVisualStyleBackColor = true;
+            this.btnTurnRight.Click += new System.EventHandler(this.btnTurnRight_Click);
             // 
             // btnNext
             // 
@@ -123,6 +125,7 @@
             this.btnNext.TabIndex = 4;
             this.btnNext.Text = "下一步";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnCancel
             // 
@@ -148,8 +151,8 @@
             // 
             // tpTable
             // 
-            this.tpTable.Controls.Add(this.button4);
-            this.tpTable.Controls.Add(this.button3);
+            this.tpTable.Controls.Add(this.btnTurnRight);
+            this.tpTable.Controls.Add(this.btnTurnLeft);
             this.tpTable.Controls.Add(this.groupBox1);
             this.tpTable.Controls.Add(this.groupBox2);
             this.tpTable.Location = new System.Drawing.Point(4, 22);
@@ -174,25 +177,25 @@
             this.tpView.Text = "选择视图";
             this.tpView.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // groupBox4
             // 
-            this.groupBox3.Controls.Add(this.listBox1);
-            this.groupBox3.Location = new System.Drawing.Point(8, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 402);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "项目对象";
+            this.groupBox4.Controls.Add(this.lstGenViewObj);
+            this.groupBox4.Location = new System.Drawing.Point(405, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(317, 402);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "生成对象";
             // 
-            // listBox1
+            // lstGenViewObj
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(3, 17);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(311, 376);
-            this.listBox1.TabIndex = 0;
+            this.lstGenViewObj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstGenViewObj.FormattingEnabled = true;
+            this.lstGenViewObj.ItemHeight = 12;
+            this.lstGenViewObj.Location = new System.Drawing.Point(3, 17);
+            this.lstGenViewObj.Name = "lstGenViewObj";
+            this.lstGenViewObj.Size = new System.Drawing.Size(311, 376);
+            this.lstGenViewObj.TabIndex = 0;
             // 
             // button1
             // 
@@ -212,25 +215,25 @@
             this.button2.Text = ">>>";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // groupBox3
             // 
-            this.groupBox4.Controls.Add(this.listBox2);
-            this.groupBox4.Location = new System.Drawing.Point(405, 6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(317, 402);
-            this.groupBox4.TabIndex = 6;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "生成对象";
+            this.groupBox3.Controls.Add(this.lstViewObj);
+            this.groupBox3.Location = new System.Drawing.Point(8, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(317, 402);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "项目对象";
             // 
-            // listBox2
+            // lstViewObj
             // 
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(3, 17);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(311, 376);
-            this.listBox2.TabIndex = 0;
+            this.lstViewObj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstViewObj.FormattingEnabled = true;
+            this.lstViewObj.ItemHeight = 12;
+            this.lstViewObj.Location = new System.Drawing.Point(3, 17);
+            this.lstViewObj.Name = "lstViewObj";
+            this.lstViewObj.Size = new System.Drawing.Size(311, 376);
+            this.lstViewObj.TabIndex = 0;
             // 
             // SelectObjFrm
             // 
@@ -252,8 +255,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tpTable.ResumeLayout(false);
             this.tpView.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,16 +269,16 @@
         private System.Windows.Forms.ListBox lstGenObj;
         private hwj.UserControls.CommonControls.xButton btnCancel;
         private hwj.UserControls.CommonControls.xButton btnNext;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnTurnLeft;
+        private System.Windows.Forms.Button btnTurnRight;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tpTable;
         private System.Windows.Forms.TabPage tpView;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lstGenViewObj;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lstViewObj;
     }
 }

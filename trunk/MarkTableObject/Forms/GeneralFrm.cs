@@ -18,6 +18,8 @@ namespace hwj.MarkTableObject.Forms
         public GeneralFrm()
         {
             InitializeComponent();
+            TableList = new List<string>();
+            ViewList = new List<string>();
         }
 
 
@@ -65,6 +67,7 @@ namespace hwj.MarkTableObject.Forms
                     BLL.BuilderBLL.CreateTableFile(ProjectInfo, s,
                         chkExists.Checked, chkAdd.Checked, chkUpdate.Checked, chkDelete.Checked, chkEntity.Checked, chkGetPage.Checked, chkGetList.Checked, chkGetAllList.Checked);
             }
+            Common.MsgInfo("操作完成");
         }
         private void UpdateProjectInfo()
         {

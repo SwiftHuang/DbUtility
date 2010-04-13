@@ -10,8 +10,8 @@ namespace hwj.MarkTableObject
 {
     public class XMLHelper
     {
-        public static string MenuPath = string.Format("{0}\\Menu.xml", Properties.Settings.Default.MainPath);
-        
+        public static string MenuPath = string.Format("{0}\\Menu.xml", Common.MainPath);
+
         public static void SaveTreeView(TreeView treeView)
         {
             XmlDocument doc = new XmlDocument();

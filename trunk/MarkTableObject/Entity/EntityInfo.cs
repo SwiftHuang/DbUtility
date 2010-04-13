@@ -18,7 +18,7 @@ namespace hwj.MarkTableObject.Entity
         public string SPName { get; set; }
         public SPParamColumnInfos SPParamInfos { get; set; }
         public string SPParamString { get; set; }
-        public ConnectionDataSourceType ConnType { get; set; }
+        public DatabaseEnum ConnType { get; set; }
         public DBModule Module { get; set; }
         public string CommandText { get; set; }
         /// <summary>
@@ -34,8 +34,8 @@ namespace hwj.MarkTableObject.Entity
         public EntityInfo(ProjectInfo prjInfo, DBModule module, string tableName)
         {
             Module = module;
-            ConnType = prjInfo.ConnectionDataSource;
-            ConnectionString = prjInfo.ConnectionString;
+            ConnType = prjInfo.Database.DatabaseType;
+            ConnectionString = prjInfo.Database.ConnectionString;
             NameSpace = prjInfo.EntityNamespace;
             TableName = tableName;
             PrefixChar = prjInfo.EntityPrefixChar;
@@ -52,7 +52,7 @@ namespace hwj.MarkTableObject.Entity
         {
             switch (this.ConnType)
             {
-                case ConnectionDataSourceType.MSSQL:
+                case DatabaseEnum.MSSQL:
                     StringBuilder sb = new StringBuilder();
                     PKColumnInfoList = new ColumnInfos();
                     ColumnInfoList = columnInfoList;
@@ -67,9 +67,9 @@ namespace hwj.MarkTableObject.Entity
                     }
                     PKColumnParam = sb.ToString().TrimEnd(',').Trim();
                     break;
-                case ConnectionDataSourceType.MYSQL:
+                case DatabaseEnum.MYSQL:
                     break;
-                case ConnectionDataSourceType.OleDb:
+                case DatabaseEnum.OleDb:
                     break;
                 default:
                     break;
@@ -106,12 +106,12 @@ namespace hwj.MarkTableObject.Entity
             string strType = string.Empty;
             switch (this.ConnType)
             {
-                case ConnectionDataSourceType.MSSQL:
+                case DatabaseEnum.MSSQL:
                     strType = DBType2NetTypeForMSSQL(col.DataType).ToString();
                     break;
-                case ConnectionDataSourceType.MYSQL:
+                case DatabaseEnum.MYSQL:
                     break;
-                case ConnectionDataSourceType.OleDb:
+                case DatabaseEnum.OleDb:
                     break;
                 default:
                     break;

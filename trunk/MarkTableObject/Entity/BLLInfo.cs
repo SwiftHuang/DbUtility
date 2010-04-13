@@ -17,7 +17,7 @@ namespace hwj.MarkTableObject.Entity
         public string PrefixChar { get; set; }
         public string Connection { get; set; }
         public string BLLName { get; set; }
-        public ConnectionDataSourceType ConnType { get; set; }
+        public DatabaseEnum ConnType { get; set; }
 
         public BLLInfo(ProjectInfo prjInfo, DBModule module, string tableName)
         {
@@ -25,7 +25,7 @@ namespace hwj.MarkTableObject.Entity
             EntityInfo = DALInfo.EntityInfo;
             EntityInfo.InitColumnInfoList();
             Namespace = prjInfo.BusinessNamespace;
-            ConnType = prjInfo.ConnectionDataSource;
+            ConnType = prjInfo.Database.DatabaseType;
             Module = module;
             PrefixChar = prjInfo.BusinessPrefixChar;
             Connection = prjInfo.BusinessConnection;
@@ -41,7 +41,7 @@ namespace hwj.MarkTableObject.Entity
             EntityInfo.CommandText = commandText;
             EntityInfo.InitColumnInfoList(columnInfos);
             Namespace = prjInfo.BusinessNamespace;
-            ConnType = prjInfo.ConnectionDataSource;
+            ConnType = prjInfo.Database.DatabaseType;
             Module = module;
             PrefixChar = prjInfo.BusinessPrefixChar;
             Connection = prjInfo.BusinessConnection;

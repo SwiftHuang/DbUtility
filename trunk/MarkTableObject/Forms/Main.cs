@@ -110,7 +110,7 @@ namespace hwj.MarkTableObject.Forms
                 List<string> tableList = new List<string>();
                 List<string> viewList = new List<string>();
 
-                BLL.MSSQL.BuilderColumn.GetTableList(prj.ConnectionString, out tableList, out viewList);
+                BLL.MSSQL.BuilderColumn.GetTableList(prj.Database.ConnectionString, out tableList, out viewList);
 
                 TreeNode tableNode = new TreeNode("表");
                 tableNode.Tag = "TABLE";

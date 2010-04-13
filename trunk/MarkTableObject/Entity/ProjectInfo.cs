@@ -26,13 +26,13 @@ namespace hwj.MarkTableObject.Entity
         public string EntityPath { get; set; }
         public string EntityPrefixChar { get; set; }
 
-        public ConnectionDataSourceType ConnectionDataSource { get; set; }
-        public string ConnectionString { get; set; }
-        public string DataSourceName { get; set; }
+        //public string DataSourceName { get; set; }
+        public DatabaseInfo Database { get; set; }
+
 
         public ProjectInfo()
         {
-
+            
         }
 
         public void SaveXML()

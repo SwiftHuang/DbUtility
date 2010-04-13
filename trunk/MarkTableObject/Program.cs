@@ -14,6 +14,7 @@ namespace hwj.MarkTableObject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Common.MainPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TableObject";
             Application.Run(new Forms.Main());
         }
     }
