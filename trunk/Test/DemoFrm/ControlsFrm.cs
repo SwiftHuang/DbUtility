@@ -24,5 +24,10 @@ namespace Test.DemoFrm
             assembly.GetName().GetPublicKeyToken();
             loginComboBox1.AddText();
         }
+
+        private void xButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
