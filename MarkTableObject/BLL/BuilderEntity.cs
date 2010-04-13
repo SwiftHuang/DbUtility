@@ -179,11 +179,11 @@ namespace hwj.MarkTableObject.BLL
         {
             switch (entity.ConnType)
             {
-                case ConnectionDataSourceType.MSSQL:
+                case DatabaseEnum.MSSQL:
                     return BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(entity);
-                case ConnectionDataSourceType.MYSQL:
+                case DatabaseEnum.MYSQL:
                     break;
-                case ConnectionDataSourceType.OleDb:
+                case DatabaseEnum.OleDb:
                     return BLL.OleDb.BuilderColumn.GetColumnInfoForTable(entity);
                 default:
                     break;

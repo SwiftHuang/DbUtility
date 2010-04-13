@@ -141,6 +141,7 @@
             this.Name = "DatabaseFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "数据库";
+            this.Load += new System.EventHandler(this.DatabaseFrm_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

@@ -37,7 +37,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnRefreshDB = new hwj.UserControls.CommonControls.xButton();
             this.cboDatabase = new hwj.UserControls.CommonControls.xComboBox();
-            this.txtServer = new hwj.UserControls.CommonControls.xTextBox();
+            this.txtDataSource = new hwj.UserControls.CommonControls.xTextBox();
             this.cboServerType = new hwj.UserControls.CommonControls.xComboBox();
             this.cboVerificationType = new hwj.UserControls.CommonControls.xComboBox();
             this.txtUser = new hwj.UserControls.CommonControls.xTextBox();
@@ -59,7 +59,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnRefreshDB, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.cboDatabase, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtServer, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtDataSource, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.cboServerType, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.cboVerificationType, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtUser, 1, 3);
@@ -162,20 +162,20 @@
             this.cboDatabase.TabIndex = 2;
             this.cboDatabase.Click += new System.EventHandler(this.cboDatabase_Click);
             // 
-            // txtServer
+            // txtDataSource
             // 
-            this.txtServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtServer.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel1.SetColumnSpan(this.txtServer, 2);
-            this.txtServer.Format = null;
-            this.txtServer.Location = new System.Drawing.Point(80, 3);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.OldBackColor = System.Drawing.SystemColors.Window;
-            this.txtServer.SetValueToControl = null;
-            this.txtServer.Size = new System.Drawing.Size(314, 21);
-            this.txtServer.TabIndex = 3;
-            this.txtServer.Text = "127.0.0.1";
-            this.txtServer.TextIsChanged = false;
+            this.txtDataSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDataSource.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtDataSource, 2);
+            this.txtDataSource.Format = null;
+            this.txtDataSource.Location = new System.Drawing.Point(80, 3);
+            this.txtDataSource.Name = "txtDataSource";
+            this.txtDataSource.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtDataSource.SetValueToControl = null;
+            this.txtDataSource.Size = new System.Drawing.Size(314, 21);
+            this.txtDataSource.TabIndex = 3;
+            this.txtDataSource.Text = "127.0.0.1";
+            this.txtDataSource.TextIsChanged = false;
             // 
             // cboServerType
             // 
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Label label6;
         private hwj.UserControls.CommonControls.xButton btnRefreshDB;
         private hwj.UserControls.CommonControls.xComboBox cboDatabase;
-        private hwj.UserControls.CommonControls.xTextBox txtServer;
+        private hwj.UserControls.CommonControls.xTextBox txtDataSource;
         private hwj.UserControls.CommonControls.xComboBox cboServerType;
         private hwj.UserControls.CommonControls.xComboBox cboVerificationType;
         private hwj.UserControls.CommonControls.xTextBox txtUser;

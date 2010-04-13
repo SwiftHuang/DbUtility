@@ -117,9 +117,9 @@ namespace hwj.MarkTableObject.Components
                 EntyInfo = new EntityInfo(PrjInfo, Module, txtTableName.Text.Trim());
                 EntyInfo.CommandText = txtSQL.Text.Trim();
                 EntyInfo.SPName = txtSPName.Text.Trim();
-                switch (PrjInfo.ConnectionDataSource)
+                switch (PrjInfo.Database.DatabaseType)
                 {
-                    case ConnectionDataSourceType.MSSQL:
+                    case DatabaseEnum.MSSQL:
                         dgList.DataSource = BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(EntyInfo);
                         if (Module == DBModule.SP)
                         {
@@ -128,9 +128,9 @@ namespace hwj.MarkTableObject.Components
                             txtSPParam.Text = EntyInfo.SPParamString;
                         }
                         break;
-                    case ConnectionDataSourceType.MYSQL:
+                    case DatabaseEnum.MYSQL:
                         break;
-                    case ConnectionDataSourceType.OleDb:
+                    case DatabaseEnum.OleDb:
                         break;
                     default:
                         break;

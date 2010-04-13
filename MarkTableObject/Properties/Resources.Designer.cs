@@ -75,11 +75,47 @@ namespace hwj.MarkTableObject.Properties {
         }
         
         /// <summary>
+        ///   查找类似 生成成功! 的本地化字符串。
+        /// </summary>
+        internal static string GenerateComplete {
+            get {
+                return ResourceManager.GetString("GenerateComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无效的项目信息! 的本地化字符串。
         /// </summary>
         internal static string InvalidProjectInfo {
             get {
                 return ResourceManager.GetString("InvalidProjectInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 程序错误 的本地化字符串。
+        /// </summary>
+        internal static string MsgError {
+            get {
+                return ResourceManager.GetString("MsgError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 程序提示 的本地化字符串。
+        /// </summary>
+        internal static string MsgInfo {
+            get {
+                return ResourceManager.GetString("MsgInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 程序警告 的本地化字符串。
+        /// </summary>
+        internal static string MsgWarn {
+            get {
+                return ResourceManager.GetString("MsgWarn", resourceCulture);
             }
         }
     }

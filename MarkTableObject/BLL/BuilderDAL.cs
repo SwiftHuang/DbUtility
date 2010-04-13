@@ -27,13 +27,13 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("using System.Text;");
             switch (dalInfo.ConnType)
             {
-                case ConnectionDataSourceType.MSSQL:
+                case DatabaseEnum.MSSQL:
                     strclass.AppendLine("using System.Data.SqlClient;");
                     break;
-                case ConnectionDataSourceType.MYSQL:
+                case DatabaseEnum.MYSQL:
                     strclass.AppendLine("using MySql.Data.MySqlClient;");
                     break;
-                case ConnectionDataSourceType.OleDb:
+                case DatabaseEnum.OleDb:
                     strclass.AppendLine("using System.Data.OleDb;");
                     break;
                 default:

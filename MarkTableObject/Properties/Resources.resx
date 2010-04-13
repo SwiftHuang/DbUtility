@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidProjectInfo" xml:space="preserve">
-    <value>无效的项目信息!</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GenerateComplete" xml:space="preserve">
+    <value>生成成功!</value>
+  </data>
+  <data name="InvalidProjectInfo" xml:space="preserve">
+    <value>无效的项目信息!</value>
+  </data>
+  <data name="MsgError" xml:space="preserve">
+    <value>程序错误</value>
+  </data>
+  <data name="MsgInfo" xml:space="preserve">
+    <value>程序提示</value>
+  </data>
+  <data name="MsgWarn" xml:space="preserve">
+    <value>程序警告</value>
   </data>
 </root>

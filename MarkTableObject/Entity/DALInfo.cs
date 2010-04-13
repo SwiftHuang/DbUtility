@@ -9,7 +9,7 @@ namespace hwj.MarkTableObject.Entity
         public EntityInfo EntityInfo { get; set; }
         public string Namespace { get; set; }
         public string FileName { get; set; }
-        public ConnectionDataSourceType ConnType { get; set; }
+        public DatabaseEnum ConnType { get; set; }
         public DBModule Module { get; set; }
         /// <summary>
         /// 前缀字符
@@ -21,7 +21,7 @@ namespace hwj.MarkTableObject.Entity
         {
             EntityInfo = new EntityInfo(prjInfo, module, tableName);
             Namespace = prjInfo.DataAccessNamespace;
-            ConnType = prjInfo.ConnectionDataSource;
+            ConnType = prjInfo.Database.DatabaseType;
             Module = module;
             PrefixChar = prjInfo.DataAccessPrefixChar;
 

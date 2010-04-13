@@ -59,7 +59,6 @@
             this.txtDALPrefixChar = new hwj.UserControls.CommonControls.xTextBox();
             this.txtEntityPrefixChar = new hwj.UserControls.CommonControls.xTextBox();
             this.txtPrjName = new hwj.UserControls.CommonControls.xTextBox();
-            this.txtPrjPath = new hwj.UserControls.CommonControls.xTextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtBLLConnection = new hwj.UserControls.CommonControls.xTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -73,6 +72,9 @@
             this.btnSave = new hwj.UserControls.CommonControls.xButton();
             this.btnClose = new hwj.UserControls.CommonControls.xButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.txtPrjPath = new hwj.UserControls.CommonControls.xTextBox();
+            this.btnPrjPath = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,6 +82,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -90,6 +93,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 2, 4);
@@ -114,7 +118,6 @@
             this.tableLayoutPanel1.Controls.Add(this.txtDALPrefixChar, 4, 5);
             this.tableLayoutPanel1.Controls.Add(this.txtEntityPrefixChar, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.txtPrjName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtPrjPath, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label17, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtBLLConnection, 2, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -153,6 +156,7 @@
             this.txtEntityPath.Location = new System.Drawing.Point(3, 2);
             this.txtEntityPath.Name = "txtEntityPath";
             this.txtEntityPath.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtEntityPath.ReadOnly = true;
             this.txtEntityPath.SetValueToControl = null;
             this.txtEntityPath.Size = new System.Drawing.Size(396, 21);
             this.txtEntityPath.TabIndex = 0;
@@ -167,6 +171,7 @@
             this.btnEntityPath.TabIndex = 1;
             this.btnEntityPath.Text = "浏览";
             this.btnEntityPath.UseVisualStyleBackColor = true;
+            this.btnEntityPath.Visible = false;
             this.btnEntityPath.Click += new System.EventHandler(this.btnEntityPath_Click);
             // 
             // panel2
@@ -189,6 +194,7 @@
             this.txtDALPath.Location = new System.Drawing.Point(3, 2);
             this.txtDALPath.Name = "txtDALPath";
             this.txtDALPath.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtDALPath.ReadOnly = true;
             this.txtDALPath.SetValueToControl = null;
             this.txtDALPath.Size = new System.Drawing.Size(396, 21);
             this.txtDALPath.TabIndex = 0;
@@ -203,6 +209,7 @@
             this.btnDALPath.TabIndex = 1;
             this.btnDALPath.Text = "浏览";
             this.btnDALPath.UseVisualStyleBackColor = true;
+            this.btnDALPath.Visible = false;
             this.btnDALPath.Click += new System.EventHandler(this.btnDALPath_Click);
             // 
             // panel1
@@ -225,6 +232,7 @@
             this.txtBLLPath.Location = new System.Drawing.Point(3, 2);
             this.txtBLLPath.Name = "txtBLLPath";
             this.txtBLLPath.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtBLLPath.ReadOnly = true;
             this.txtBLLPath.SetValueToControl = null;
             this.txtBLLPath.Size = new System.Drawing.Size(396, 21);
             this.txtBLLPath.TabIndex = 0;
@@ -239,6 +247,7 @@
             this.btnBLLPath.TabIndex = 1;
             this.btnBLLPath.Text = "浏览";
             this.btnBLLPath.UseVisualStyleBackColor = true;
+            this.btnBLLPath.Visible = false;
             this.btnBLLPath.Click += new System.EventHandler(this.btnBLLPath_Click);
             // 
             // label1
@@ -476,20 +485,6 @@
             this.txtPrjName.TabIndex = 1;
             this.txtPrjName.TextIsChanged = false;
             // 
-            // txtPrjPath
-            // 
-            this.txtPrjPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrjPath.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel1.SetColumnSpan(this.txtPrjPath, 4);
-            this.txtPrjPath.Format = null;
-            this.txtPrjPath.Location = new System.Drawing.Point(68, 28);
-            this.txtPrjPath.Name = "txtPrjPath";
-            this.txtPrjPath.OldBackColor = System.Drawing.SystemColors.Window;
-            this.txtPrjPath.SetValueToControl = null;
-            this.txtPrjPath.Size = new System.Drawing.Size(501, 21);
-            this.txtPrjPath.TabIndex = 3;
-            this.txtPrjPath.TextIsChanged = false;
-            // 
             // label17
             // 
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -638,6 +633,43 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.panel4, 4);
+            this.panel4.Controls.Add(this.txtPrjPath);
+            this.panel4.Controls.Add(this.btnPrjPath);
+            this.panel4.Location = new System.Drawing.Point(65, 25);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(507, 25);
+            this.panel4.TabIndex = 11;
+            // 
+            // txtPrjPath
+            // 
+            this.txtPrjPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPrjPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjPath.Format = null;
+            this.txtPrjPath.Location = new System.Drawing.Point(3, 2);
+            this.txtPrjPath.Name = "txtPrjPath";
+            this.txtPrjPath.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjPath.ReadOnly = true;
+            this.txtPrjPath.SetValueToControl = null;
+            this.txtPrjPath.Size = new System.Drawing.Size(461, 21);
+            this.txtPrjPath.TabIndex = 0;
+            this.txtPrjPath.TextIsChanged = false;
+            // 
+            // btnPrjPath
+            // 
+            this.btnPrjPath.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnPrjPath.Location = new System.Drawing.Point(464, 0);
+            this.btnPrjPath.Name = "btnPrjPath";
+            this.btnPrjPath.Size = new System.Drawing.Size(43, 25);
+            this.btnPrjPath.TabIndex = 1;
+            this.btnPrjPath.Text = "浏览";
+            this.btnPrjPath.UseVisualStyleBackColor = true;
+            this.btnPrjPath.Click += new System.EventHandler(this.btnPrjPath_Click);
+            // 
             // ProjectFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -665,6 +697,8 @@
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -676,7 +710,6 @@
         private System.Windows.Forms.Label label2;
         private hwj.UserControls.CommonControls.xTextBox txtPrjName;
         private System.Windows.Forms.GroupBox groupBox1;
-        private hwj.UserControls.CommonControls.xTextBox txtPrjPath;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -716,5 +749,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label17;
         private hwj.UserControls.CommonControls.xTextBox txtBLLConnection;
+        private System.Windows.Forms.Panel panel4;
+        private hwj.UserControls.CommonControls.xTextBox txtPrjPath;
+        private System.Windows.Forms.Button btnPrjPath;
     }
 }
