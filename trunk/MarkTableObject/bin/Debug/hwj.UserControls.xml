@@ -21,6 +21,26 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ShowContentError">
+            <summary>
+            "是否显示验证错误信息(只有ContentType不为None时有效)"
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
+            <summary>
+            内容是否改变(在Validating/Validated有效)
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
@@ -48,37 +68,152 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="F:hwj.UserControls.CommonControls.ContentType.Numberic">
-            <summary>
-            数字(含正负小数点)
-            </summary>
-        </member>
-        <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
-            <summary>
-            整数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.IsRequired">
-            <summary>
-            获取或设置为必填控件
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedHandle">
+        <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
             </summary>
         </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.ShowContentError">
-            <summary>
-            "是否显示验证错误信息(只有ContentType不为None时有效)"
+        <member name="F:hwj.UserControls.DataList.DataListPage.components">
+            <summary> 
+            必需的设计器变量。
             </summary>
         </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
-            <summary>
-            内容是否改变(在Validating/Validated有效)
+        <member name="M:hwj.UserControls.DataList.DataListPage.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedHandle">
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="sortName"></param>
+            <param name="sort"></param>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageIndex">
+            <summary>
+            获取或设置当前页数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageSize">
+            <summary>
+            获取或设置每页显示的记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageNum">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.SelectAllVisible">
+            <summary>
+            显示全选CheckBox
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.CheckBoxColumn">
+            <summary>
+            设置CheckBox列
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.ValueChangedHandle.IsChanged">
+            <summary>
+            获取是否有控件的值发生改变
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Function.Verify.RequiredHandle.RequiredControls">
+            <summary>
+            获取或设置必填的控件名称
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Add(System.Windows.Forms.Control)">
+            <summary>
+            添加必填控件
+            </summary>
+            <param name="control"></param>
+        </member>
+        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Remove(System.Windows.Forms.Control)">
+            <summary>
+            移除必填控件
+            </summary>
+            <param name="control"></param>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.HasRequired">
+            <summary>
+            获取是否存在没完整填写的控件
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedValue(System.String)">
+            <summary>
+            设置SelectedValue,不触发任何处理
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedText(System.String)">
+            <summary>
+            设置SelectedText,不触发任何处理
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.EmptyValue">
+            <summary>
+            如果TextBox.Text为空时,SelectedValue的值.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.MaxRecords">
+            <summary>
+            返回最大记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.DropDownStyle">
+            <summary>
+            获取或设置SuggestBox Dropdown的显示方式
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xRadioButton.ValueChangedHandle">
             <summary>
             设置引发hwj.UserControls.ValueChanged事件的对象
             </summary>
@@ -150,134 +285,6 @@
               Looks up a localized string similar to {0}条记录.
             </summary>
         </member>
-        <member name="P:hwj.UserControls.CommonControls.xRadioButton.ValueChangedHandle">
-            <summary>
-            设置引发hwj.UserControls.ValueChanged事件的对象
-            </summary>
-        </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32)">
-            <summary>
-            执行分页事件
-            </summary>
-            <param name="pageIndex">页数</param>
-        </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32)">
-            <summary>
-            执行分页事件
-            </summary>
-            <param name="pageIndex">页数</param>
-            <param name="pageSize">每页记录数</param>
-        </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32,System.String,System.ComponentModel.ListSortDirection)">
-            <summary>
-            执行分页事件
-            </summary>
-            <param name="pageIndex">页数</param>
-            <param name="pageSize">每页记录数</param>
-            <param name="sortName"></param>
-            <param name="sort"></param>
-        </member>
-        <member name="F:hwj.UserControls.DataList.DataListPage.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:hwj.UserControls.DataList.DataListPage.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.PageIndex">
-            <summary>
-            获取或设置当前页数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.PageSize">
-            <summary>
-            获取或设置每页显示的记录数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.RecordCount">
-            <summary>
-            记录总数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.PageNum">
-            <summary>
-            总页数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.SelectAllVisible">
-            <summary>
-            显示全选CheckBox
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.DataList.DataListPage.CheckBoxColumn">
-            <summary>
-            设置CheckBox列
-            </summary>
-        </member>
-        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedValue(System.String)">
-            <summary>
-            设置SelectedValue,不触发任何处理
-            </summary>
-            <param name="value"></param>
-        </member>
-        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedText(System.String)">
-            <summary>
-            设置SelectedText,不触发任何处理
-            </summary>
-            <param name="text"></param>
-        </member>
-        <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:hwj.UserControls.Suggest.SuggestBox.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:hwj.UserControls.Suggest.SuggestBox.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.Suggest.SuggestBox.EmptyValue">
-            <summary>
-            如果TextBox.Text为空时,SelectedValue的值.
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.Suggest.SuggestBox.MaxRecords">
-            <summary>
-            返回最大记录数
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.Suggest.SuggestBox.DropDownStyle">
-            <summary>
-            获取或设置SuggestBox Dropdown的显示方式
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedHandle">
-            <summary>
-            设置引发hwj.UserControls.ValueChanged事件的对象
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.Function.Verify.ValueChangedHandle.IsChanged">
-            <summary>
-            获取是否有控件的值发生改变
-            </summary>
-        </member>
         <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshRowFooter">
             <summary>
             刷新行尾
@@ -320,26 +327,19 @@
             为DataGridView绑定数据
             </summary>
         </member>
-        <member name="F:hwj.UserControls.Function.Verify.RequiredHandle.RequiredControls">
+        <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedHandle">
             <summary>
-            获取或设置必填的控件名称
+            设置引发hwj.UserControls.ValueChanged事件的对象
             </summary>
         </member>
-        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Add(System.Windows.Forms.Control)">
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Numberic">
             <summary>
-            添加必填控件
+            数字(含正负小数点)
             </summary>
-            <param name="control"></param>
         </member>
-        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Remove(System.Windows.Forms.Control)">
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
             <summary>
-            移除必填控件
-            </summary>
-            <param name="control"></param>
-        </member>
-        <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.HasRequired">
-            <summary>
-            获取是否存在没完整填写的控件
+            整数
             </summary>
         </member>
     </members>

@@ -57,6 +57,8 @@ namespace hwj.MarkTableObject.Forms
         private void btnDBSet_Click(object sender, EventArgs e)
         {
             DatabaseFrm db = new DatabaseFrm();
+            if (Project == null)
+                Project = new ProjectInfo();
             db.Database = Project.Database;
             db.ShowDialog();
             Project.Database = db.Database;
@@ -89,7 +91,7 @@ namespace hwj.MarkTableObject.Forms
                 //prj.Database.ConnectionString = txtConnStr.Text.Trim();
                 //prj.Database.DatabaseType = ConnectionDataSource;
                 //prj.Database.ServerVersion = lblDataSource.Text;
-                if (Project == null)
+                if (Project == null || (Project != null && string.IsNullOrEmpty(Project.Key)))
                     prj.Key = DateTime.Now.ToString("yyyyMMddhhmmss");
                 else
                     prj.Key = Project.Key;
