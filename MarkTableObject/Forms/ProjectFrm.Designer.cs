@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.txtPrjPath = new hwj.UserControls.CommonControls.xTextBox();
+            this.btnPrjPath = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtEntityPath = new hwj.UserControls.CommonControls.xTextBox();
             this.btnEntityPath = new System.Windows.Forms.Button();
@@ -72,17 +75,14 @@
             this.btnSave = new hwj.UserControls.CommonControls.xButton();
             this.btnClose = new hwj.UserControls.CommonControls.xButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.txtPrjPath = new hwj.UserControls.CommonControls.xTextBox();
-            this.btnPrjPath = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -136,6 +136,43 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 226);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.panel4, 4);
+            this.panel4.Controls.Add(this.txtPrjPath);
+            this.panel4.Controls.Add(this.btnPrjPath);
+            this.panel4.Location = new System.Drawing.Point(65, 25);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(507, 25);
+            this.panel4.TabIndex = 3;
+            // 
+            // txtPrjPath
+            // 
+            this.txtPrjPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPrjPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjPath.Format = null;
+            this.txtPrjPath.Location = new System.Drawing.Point(3, 2);
+            this.txtPrjPath.Name = "txtPrjPath";
+            this.txtPrjPath.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjPath.ReadOnly = true;
+            this.txtPrjPath.SetValueToControl = null;
+            this.txtPrjPath.Size = new System.Drawing.Size(461, 21);
+            this.txtPrjPath.TabIndex = 0;
+            this.txtPrjPath.TextIsChanged = false;
+            // 
+            // btnPrjPath
+            // 
+            this.btnPrjPath.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnPrjPath.Location = new System.Drawing.Point(464, 0);
+            this.btnPrjPath.Name = "btnPrjPath";
+            this.btnPrjPath.Size = new System.Drawing.Size(43, 25);
+            this.btnPrjPath.TabIndex = 1;
+            this.btnPrjPath.Text = "浏览";
+            this.btnPrjPath.UseVisualStyleBackColor = true;
+            this.btnPrjPath.Click += new System.EventHandler(this.btnPrjPath_Click);
+            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -146,7 +183,7 @@
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(442, 25);
-            this.panel3.TabIndex = 24;
+            this.panel3.TabIndex = 26;
             // 
             // txtEntityPath
             // 
@@ -171,7 +208,6 @@
             this.btnEntityPath.TabIndex = 1;
             this.btnEntityPath.Text = "浏览";
             this.btnEntityPath.UseVisualStyleBackColor = true;
-            this.btnEntityPath.Visible = false;
             this.btnEntityPath.Click += new System.EventHandler(this.btnEntityPath_Click);
             // 
             // panel2
@@ -184,7 +220,7 @@
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(442, 25);
-            this.panel2.TabIndex = 17;
+            this.panel2.TabIndex = 19;
             // 
             // txtDALPath
             // 
@@ -209,7 +245,6 @@
             this.btnDALPath.TabIndex = 1;
             this.btnDALPath.Text = "浏览";
             this.btnDALPath.UseVisualStyleBackColor = true;
-            this.btnDALPath.Visible = false;
             this.btnDALPath.Click += new System.EventHandler(this.btnDALPath_Click);
             // 
             // panel1
@@ -222,7 +257,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 25);
-            this.panel1.TabIndex = 10;
+            this.panel1.TabIndex = 12;
             // 
             // txtBLLPath
             // 
@@ -247,7 +282,6 @@
             this.btnBLLPath.TabIndex = 1;
             this.btnBLLPath.Text = "浏览";
             this.btnBLLPath.UseVisualStyleBackColor = true;
-            this.btnBLLPath.Visible = false;
             this.btnBLLPath.Click += new System.EventHandler(this.btnBLLPath_Click);
             // 
             // label1
@@ -277,7 +311,7 @@
             this.label4.Location = new System.Drawing.Point(3, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 12);
-            this.label4.TabIndex = 11;
+            this.label4.TabIndex = 13;
             this.label4.Text = "数据层:";
             // 
             // label5
@@ -287,7 +321,7 @@
             this.label5.Location = new System.Drawing.Point(3, 181);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 12);
-            this.label5.TabIndex = 18;
+            this.label5.TabIndex = 20;
             this.label5.Text = "实体层:";
             // 
             // label2
@@ -333,7 +367,7 @@
             this.txtDALName.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtDALName.SetValueToControl = null;
             this.txtDALName.Size = new System.Drawing.Size(291, 21);
-            this.txtDALName.TabIndex = 13;
+            this.txtDALName.TabIndex = 15;
             this.txtDALName.TextIsChanged = false;
             // 
             // txtEntityName
@@ -346,7 +380,7 @@
             this.txtEntityName.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtEntityName.SetValueToControl = null;
             this.txtEntityName.Size = new System.Drawing.Size(291, 21);
-            this.txtEntityName.TabIndex = 20;
+            this.txtEntityName.TabIndex = 22;
             this.txtEntityName.TextIsChanged = false;
             // 
             // label11
@@ -366,7 +400,7 @@
             this.label12.Location = new System.Drawing.Point(68, 131);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 12);
-            this.label12.TabIndex = 12;
+            this.label12.TabIndex = 14;
             this.label12.Text = "命名空间:";
             // 
             // label13
@@ -376,7 +410,7 @@
             this.label13.Location = new System.Drawing.Point(68, 181);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(59, 12);
-            this.label13.TabIndex = 19;
+            this.label13.TabIndex = 21;
             this.label13.Text = "命名空间:";
             // 
             // label14
@@ -386,7 +420,7 @@
             this.label14.Location = new System.Drawing.Point(68, 106);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(59, 12);
-            this.label14.TabIndex = 9;
+            this.label14.TabIndex = 11;
             this.label14.Text = "保存路径:";
             // 
             // txtBLLPrefixChar
@@ -410,7 +444,7 @@
             this.label7.Location = new System.Drawing.Point(68, 156);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 12);
-            this.label7.TabIndex = 16;
+            this.label7.TabIndex = 18;
             this.label7.Text = "保存路径:";
             // 
             // label8
@@ -420,7 +454,7 @@
             this.label8.Location = new System.Drawing.Point(68, 207);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 12);
-            this.label8.TabIndex = 23;
+            this.label8.TabIndex = 25;
             this.label8.Text = "保存路径:";
             // 
             // label15
@@ -430,7 +464,7 @@
             this.label15.Location = new System.Drawing.Point(430, 131);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 12);
-            this.label15.TabIndex = 14;
+            this.label15.TabIndex = 16;
             this.label15.Text = "前缀字符:";
             // 
             // label16
@@ -440,7 +474,7 @@
             this.label16.Location = new System.Drawing.Point(430, 181);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(59, 12);
-            this.label16.TabIndex = 21;
+            this.label16.TabIndex = 23;
             this.label16.Text = "前缀字符:";
             // 
             // txtDALPrefixChar
@@ -453,7 +487,7 @@
             this.txtDALPrefixChar.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtDALPrefixChar.SetValueToControl = null;
             this.txtDALPrefixChar.Size = new System.Drawing.Size(74, 21);
-            this.txtDALPrefixChar.TabIndex = 15;
+            this.txtDALPrefixChar.TabIndex = 17;
             this.txtDALPrefixChar.Text = "DA";
             this.txtDALPrefixChar.TextIsChanged = false;
             // 
@@ -467,7 +501,7 @@
             this.txtEntityPrefixChar.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtEntityPrefixChar.SetValueToControl = null;
             this.txtEntityPrefixChar.Size = new System.Drawing.Size(74, 21);
-            this.txtEntityPrefixChar.TabIndex = 22;
+            this.txtEntityPrefixChar.TabIndex = 24;
             this.txtEntityPrefixChar.Text = "tb";
             this.txtEntityPrefixChar.TextIsChanged = false;
             // 
@@ -633,43 +667,6 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.panel4, 4);
-            this.panel4.Controls.Add(this.txtPrjPath);
-            this.panel4.Controls.Add(this.btnPrjPath);
-            this.panel4.Location = new System.Drawing.Point(65, 25);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(507, 25);
-            this.panel4.TabIndex = 11;
-            // 
-            // txtPrjPath
-            // 
-            this.txtPrjPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrjPath.BackColor = System.Drawing.SystemColors.Window;
-            this.txtPrjPath.Format = null;
-            this.txtPrjPath.Location = new System.Drawing.Point(3, 2);
-            this.txtPrjPath.Name = "txtPrjPath";
-            this.txtPrjPath.OldBackColor = System.Drawing.SystemColors.Window;
-            this.txtPrjPath.ReadOnly = true;
-            this.txtPrjPath.SetValueToControl = null;
-            this.txtPrjPath.Size = new System.Drawing.Size(461, 21);
-            this.txtPrjPath.TabIndex = 0;
-            this.txtPrjPath.TextIsChanged = false;
-            // 
-            // btnPrjPath
-            // 
-            this.btnPrjPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPrjPath.Location = new System.Drawing.Point(464, 0);
-            this.btnPrjPath.Name = "btnPrjPath";
-            this.btnPrjPath.Size = new System.Drawing.Size(43, 25);
-            this.btnPrjPath.TabIndex = 1;
-            this.btnPrjPath.Text = "浏览";
-            this.btnPrjPath.UseVisualStyleBackColor = true;
-            this.btnPrjPath.Click += new System.EventHandler(this.btnPrjPath_Click);
-            // 
             // ProjectFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -687,6 +684,8 @@
             this.Load += new System.EventHandler(this.ProjectFrm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -697,8 +696,6 @@
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
