@@ -18,12 +18,32 @@ namespace hwj.DBUtility
         public object FieldValue { get; set; }
         public Enums.Relation Operator { get; set; }
         public Enums.Expression Expression { get; set; }
+        public bool IsUnicode { get; set; }
         /// <summary>
         /// 自定义参数名(防止From To的情况下相同的参数名)
         /// </summary>
         public string ParamName { get; set; }
         #endregion
-
+        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = paramName;
+            IsUnicode = isUnicode;
+        }
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = paramName;
+            IsUnicode = isUnicode;
+        }
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
             : base()
         {
@@ -32,6 +52,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = exp;
             ParamName = paramName;
+            IsUnicode = true;
         }
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
             : base()
@@ -41,6 +62,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = exp;
             ParamName = paramName;
+            IsUnicode = true;
         }
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
             : base()
@@ -50,6 +72,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = exp;
             ParamName = null;
+            IsUnicode = true;
         }
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
             : base()
@@ -59,6 +82,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = exp;
             ParamName = null;
+            IsUnicode = true;
         }
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper)
             : base()
@@ -68,6 +92,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = Enums.Expression.Comma;
             ParamName = null;
+            IsUnicode = true;
         }
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper)
             : base()
@@ -77,6 +102,7 @@ namespace hwj.DBUtility
             Operator = oper;
             Expression = Enums.Expression.Comma;
             ParamName = null;
+            IsUnicode = true;
         }
         public SqlParam(Enum fieldName, object fieldValue)
             : base()
@@ -86,6 +112,7 @@ namespace hwj.DBUtility
             Operator = Enums.Relation.Equal;
             Expression = Enums.Expression.Comma;
             ParamName = null;
+            IsUnicode = true;
         }
         public SqlParam(string fieldName, object fieldValue)
             : base()
@@ -95,6 +122,7 @@ namespace hwj.DBUtility
             Operator = Enums.Relation.Equal;
             Expression = Enums.Expression.Comma;
             ParamName = null;
+            IsUnicode = true;
         }
     }
 

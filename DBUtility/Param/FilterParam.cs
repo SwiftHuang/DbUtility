@@ -49,6 +49,10 @@ namespace hwj.DBUtility
         }
 
         #region Add Param
+        public void AddParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+        {
+            this.Add(new SqlParam(fieldName, fieldValue, oper, exp, paramName, isUnicode));
+        }
         /// <summary>
         /// 
         /// </summary>
