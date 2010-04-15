@@ -202,7 +202,13 @@ namespace hwj.DBUtility.MSSQL
             }
             else if (isPage)
             {
-                sbStr.Append("N\'");//.Append('\'');
+                //List<FieldMappingInfo> FieldInfos = FieldMappingInfo.GetFieldMapping(typeof(T));
+                //if (FieldInfos != null)
+                //{
+                //}else
+                if (para.IsUnicode)
+                    sbStr.Append("N");//.Append('\'');
+                sbStr.Append('\'');
                 if (IsDatabaseDate(para))
                     sbStr.Append(_MsSqlGetDate);
                 else
@@ -212,7 +218,7 @@ namespace hwj.DBUtility.MSSQL
             else if (IsDatabaseDate(para))
                 sbStr.Append(_MsSqlGetDate);
             else
-                sbStr.AppendFormat(__MsSqlParam, para.ParamName != null ? para.ParamName : para.FieldName);
+                sbStr.AppendFormat(__MsSqlParam, !string.IsNullOrEmpty(para.ParamName) ? para.ParamName : para.FieldName);
 
             sbStr.Append(Enums.ExpressionString(para.Expression));
             return sbStr.ToString();
