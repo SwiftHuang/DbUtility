@@ -21,7 +21,9 @@ namespace Test.DemoFrm
         {
             try
             {
-                eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
+                HotelSvc.AcctInvvchResult obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<HotelSvc.AcctInvvchResult>(txtXML.Text, true);
+                //eMosBooking.RTINV obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTINV>(txtXML.Text, true);
+                //Acct.tbCustomer obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Acct.tbCustomer>(txtXML.Text, true);
                 txtOutput.Text = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(obj);
             }
             catch (Exception ex)
@@ -40,8 +42,9 @@ namespace Test.DemoFrm
                 stopWatch.Reset();
                 stopWatch.Start();
 
+                //eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text);
                 eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
-
+                //Acct.tbCustomer obj = hwj.CommonLibrary.Object.SerializationHelper.FromXmlExcludeXMLNS<Acct.tbCustomer>(txtXML.Text);
                 TimeSpan ts = stopWatch.Elapsed;
                 stopWatch.Stop();
                 Seconds += ts.TotalSeconds;

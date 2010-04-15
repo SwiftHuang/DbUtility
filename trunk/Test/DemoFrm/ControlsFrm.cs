@@ -25,9 +25,9 @@ namespace Test.DemoFrm
             loginComboBox1.AddText();
         }
 
-        private void xButton1_Click(object sender, EventArgs e)
+        private void txtAmt_Validating(object sender, CancelEventArgs e)
         {
-            
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace hwj.DBUtility.MSSQL
     /// </summary>
     public abstract class DbHelperSQL
     {
-       
+
         public DbHelperSQL()
         {
         }
@@ -912,6 +912,7 @@ namespace hwj.DBUtility.MSSQL
                 conn.Open();
             cmd.Connection = conn;
             cmd.CommandText = cmdText;
+            cmd.CommandTimeout = 120;
             if (trans != null)
                 cmd.Transaction = trans;
             cmd.CommandType = CommandType.Text;//cmdType;
@@ -934,6 +935,7 @@ namespace hwj.DBUtility.MSSQL
                 conn.Open();
             cmd.Connection = conn;
             cmd.CommandText = cmdText;
+            cmd.CommandTimeout = 120;
             if (trans != null)
                 cmd.Transaction = trans;
             cmd.CommandType = CommandType.Text;//cmdType;

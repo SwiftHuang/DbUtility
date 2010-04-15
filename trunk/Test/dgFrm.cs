@@ -20,7 +20,7 @@ namespace Test
         private void btnGet_Click(object sender, EventArgs e)
         {
             //dgList.DataSource = DB.BLL.BOTestOutput.GetAllList();
-            dgList.DataSource = Acct.BLL.BOAptx.GetList("GT", "0000000099");
+            //dgList.DataSource = Acct.BLL.BOAptx.GetList("GT", "0000000099");
             //dgList.DataSource = Acct.BLL.BOSqlEntity.GetList("GT");
         }
     }
