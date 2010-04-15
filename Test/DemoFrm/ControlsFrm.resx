@@ -118,13 +118,98 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="xTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 163</value>
+  </data>
+  <data name="xTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="xTextBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="xTextBox1.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="xTextBox1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;xTextBox1.Name" xml:space="preserve">
+    <value>xTextBox1</value>
+  </data>
+  <data name="&gt;&gt;xTextBox1.Type" xml:space="preserve">
+    <value>hwj.UserControls.CommonControls.xTextBox, hwj.UserControls, Version=2.1.0.5, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;xTextBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;xTextBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtTestAmtTxt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="txtTestAmtTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 190</value>
+  </data>
+  <data name="txtTestAmtTxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="txtTestAmtTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="txtTestAmtTxt.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="&gt;&gt;txtTestAmtTxt.Name" xml:space="preserve">
+    <value>txtTestAmtTxt</value>
+  </data>
+  <data name="&gt;&gt;txtTestAmtTxt.Type" xml:space="preserve">
+    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.5, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTestAmtTxt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtTestAmtTxt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtAmt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 163</value>
+  </data>
+  <data name="txtAmt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="txtAmt.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="txtAmt.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="txtAmt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtAmt.Name" xml:space="preserve">
+    <value>txtAmt</value>
+  </data>
+  <data name="&gt;&gt;txtAmt.Type" xml:space="preserve">
+    <value>hwj.UserControls.CommonControls.xTextBox, hwj.UserControls, Version=2.1.0.5, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtAmt.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtAmt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnAddText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnAddText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 190</value>
+    <value>699, 49</value>
   </data>
   <data name="btnAddText.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnAddText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -135,16 +220,16 @@
     <value>btnAddText</value>
   </data>
   <data name="&gt;&gt;btnAddText.Type" xml:space="preserve">
-    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
+    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.5, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnAddText.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnAddText.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="loginComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 164</value>
+    <value>653, 23</value>
   </data>
   <data name="loginComboBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 20</value>
@@ -156,37 +241,13 @@
     <value>loginComboBox1</value>
   </data>
   <data name="&gt;&gt;loginComboBox1.Type" xml:space="preserve">
-    <value>hwj.UserControls.Other.LoginComboBox, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
+    <value>hwj.UserControls.Other.LoginComboBox, hwj.UserControls, Version=2.1.0.5, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;loginComboBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;loginComboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="xButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 220</value>
-  </data>
-  <data name="xButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="xButton1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="xButton1.Text" xml:space="preserve">
-    <value>xButton1</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Name" xml:space="preserve">
-    <value>xButton1</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Type" xml:space="preserve">
-    <value>hwj.UserControls.CommonControls.xButton, hwj.UserControls, Version=2.1.0.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;xButton1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;xButton1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -196,6 +257,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>786, 479</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>ControlsFrm</value>
