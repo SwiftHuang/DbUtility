@@ -1,0 +1,286 @@
+﻿<?xml version="1.0"?>
+<RTTKT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PEOMSTR xmlns="http://tempuri.org/">
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOMSTR</TableName>
+      <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>BKGREF</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>GT</COMPANYCODE>
+    <BKGREF>98GETDQ5J6</BKGREF>
+    <pseudo_inv />
+    <CRSSINEIN_inv />
+    <agency_arc_iata_num />
+    <iss_off_code />
+    <salesperson>hrh</salesperson>
+    <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+    <ISTOUR>P</ISTOUR>
+    <PNR>DQ5J6</PNR>
+    <CRSSINEIN />
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <DEADLINE>2009-08-20T00:00:00</DEADLINE>
+    <CLTODE>GA0017</CLTODE>
+    <CLTNAME>HARLEM HUANG FIT</CLTNAME>
+    <CLTADDR />
+    <STAFFCODE>HRH       </STAFFCODE>
+    <TEAMCODE>GC1  </TEAMCODE>
+    <FIRSTPAX>/方巨机</FIRSTPAX>
+    <PHONE />
+    <FAX />
+    <EMAIL />
+    <MASTERPNR>98GETDQ5J6</MASTERPNR>
+    <TOURCODE />
+    <CONTACTPERSON />
+    <DEPARTDATE>2009-09-11T00:00:00</DEPARTDATE>
+    <TTLSELLCURR>CNY</TTLSELLCURR>
+    <TTLSELLAMT>1800.00</TTLSELLAMT>
+    <TTLSELLTAXCURR>CNY</TTLSELLTAXCURR>
+    <TTLSELLTAX>200.00</TTLSELLTAX>
+    <TTLCOSTCURR>CNY</TTLCOSTCURR>
+    <TTLCOSTAMT>1746.00</TTLCOSTAMT>
+    <TTLCOSTTAXCURR>CNY</TTLCOSTTAXCURR>
+    <TTLCOSTTAX>200.00</TTLCOSTTAX>
+    <INVCURR>CNY</INVCURR>
+    <INVAMT>1800.00</INVAMT>
+    <INVTAXCURR>CNY</INVTAXCURR>
+    <INVTAX>200.00</INVTAX>
+    <DOCCURR>CNY</DOCCURR>
+    <DOCAMT>1746.00</DOCAMT>
+    <DOCTAXCURR>CNY</DOCTAXCURR>
+    <DOCTAX>200.00</DOCTAX>
+    <TTLSELLGST>0.00</TTLSELLGST>
+    <TTLCOSTGST>0.00</TTLCOSTGST>
+    <TTLINVGST>0.00</TTLINVGST>
+    <TTLDOCGST>0.00</TTLDOCGST>
+    <INVCOUNT>1</INVCOUNT>
+    <DOCCOUNT>4</DOCCOUNT>
+    <RMK1 />
+    <RMK2 />
+    <RMK3 />
+    <RMK4 />
+    <SOURCESYSTEM>TS</SOURCESYSTEM>
+    <SOURCE>AGENT</SOURCE>
+    <CREATEON>2009-08-20T13:05:03.593</CREATEON>
+    <CREATEBY>HRH</CREATEBY>
+    <UPDATEON>2009-08-20T13:13:36.06</UPDATEON>
+    <UPDATEBY>HRH</UPDATEBY>
+    <SOURCEREF />
+    <pseudo />
+    <MstrRemark />
+    <BookingNo>0</BookingNo>
+  </PEOMSTR>
+  <TIKET xmlns="http://tempuri.org/">
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOTKT</TableName>
+      <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>CompanyCode</string>
+        <string>Ticket</string>
+        <string>TktSeq</string>
+        <string>Airline</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <CompanyCode>GT</CompanyCode>
+    <Ticket>3623784674</Ticket>
+    <FareCalData />
+    <pseudo />
+    <sinein />
+    <gstpct>0</gstpct>
+    <gstamt>0</gstamt>
+    <nst />
+    <SOURCESYSTEM>IUR</SOURCESYSTEM>
+    <commission_per>3.00</commission_per>
+    <add_payment />
+    <iss_off_code />
+    <tour_code />
+    <org_iss />
+    <iss_in_exchange />
+    <ControlNum />
+    <MISpaidfare>0.00</MISpaidfare>
+    <ENDORSEMENTS />
+    <Destination />
+    <AirReason />
+    <INTDOM>D</INTDOM>
+    <PAXAIR>ADT</PAXAIR>
+    <tkttype>P</tkttype>
+    <FullFareTax>50</FullFareTax>
+    <SellCurr />
+    <SellFare>0.00</SellFare>
+    <CorpCurr />
+    <CorpFare>0.00</CorpFare>
+    <COD4 />
+    <COD5 />
+    <COD6 />
+    <PaidFareWOTax>450.00</PaidFareWOTax>
+    <LowFareWOTax>0.00</LowFareWOTax>
+    <CorpFareWOTax>0.00</CorpFareWOTax>
+    <GemsCode />
+    <TransactionFee>0.00</TransactionFee>
+    <FullFareWOTax>450.00</FullFareWOTax>
+    <AirlineTicket />
+    <TktSeq>01</TktSeq>
+    <BKGREF>98GETDQ5J6</BKGREF>
+    <PNR>DQ5J6</PNR>
+    <CltCode />
+    <SuppCode>GBSP105</SuppCode>
+    <InvNum />
+    <Jqty>1.00</Jqty>
+    <AirCode>784</AirCode>
+    <Airline>CZ</Airline>
+    <PaxName>方巨铿</PaxName>
+    <DepartOn>2009-09-11T00:00:00</DepartOn>
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <Commission>13.5000</Commission>
+    <LocalFareCurr>CNY</LocalFareCurr>
+    <LocalFareAmt>500.00</LocalFareAmt>
+    <ForeignFareCurr />
+    <ForeignFareAmt>0.00</ForeignFareAmt>
+    <Discount>0.00</Discount>
+    <FormPay />
+    <Routing>CAN/NKG</Routing>
+    <FullCurr>CNY</FullCurr>
+    <FullFare>450.00</FullFare>
+    <PaidCurr>CNY</PaidCurr>
+    <PaidFare>0.00</PaidFare>
+    <LowCurr>CNY</LowCurr>
+    <LowFare>0.00</LowFare>
+    <NetCurr>CNY</NetCurr>
+    <NetFare>436.50</NetFare>
+    <FareBasis />
+    <FareType>S</FareType>
+    <TotalTax>50.00</TotalTax>
+    <Security>0.00</Security>
+    <QSurcharge>0</QSurcharge>
+    <BranchCode>G</BranchCode>
+    <TeamCode>GC1  </TeamCode>
+    <IssueOn>2009-08-20T13:05:03.95</IssueOn>
+    <IssueBy>HRH</IssueBy>
+    <VoidOn>0001-01-01T00:00:00</VoidOn>
+    <voidteam />
+    <voidreason />
+    <CreateOn>2009-08-20T13:05:03.95</CreateOn>
+    <CreateBy>HRH</CreateBy>
+    <UpdateOn>0001-01-01T00:00:00</UpdateOn>
+    <TaxAmount1>50</TaxAmount1>
+    <TaxID1>CN</TaxID1>
+    <TaxAmount2>0</TaxAmount2>
+    <TaxID2>YQ</TaxID2>
+    <TaxAmount3>0</TaxAmount3>
+    <TaxID3 />
+    <FareCalType />
+    <CompressPrintInd />
+  </TIKET>
+  <TKTDETAIL xmlns="http://tempuri.org/">
+    <UO_PEOTKTDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOTKTDETAIL</TableName>
+        <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>SegNum</string>
+          <string>AirLine</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>GT</CompanyCode>
+      <Ticket>3623784674</Ticket>
+      <AirCode>CZ</AirCode>
+      <TktSeq>01</TktSeq>
+      <SegNum>00001</SegNum>
+      <AirLine>784</AirLine>
+      <Flight>CZ3513</Flight>
+      <Class>R</Class>
+      <Seat />
+      <DepartCity>CAN</DepartCity>
+      <ArrivalCity>NKG</ArrivalCity>
+      <DepartDATE>2009-09-11T00:00:00</DepartDATE>
+      <DepartTime>0830</DepartTime>
+      <ArrDATE>2009-09-11T00:00:00</ArrDATE>
+      <ArrTime>1015</ArrTime>
+      <ElapsedTime>0000</ElapsedTime>
+      <StopOverNum>0</StopOverNum>
+      <StopOverCity />
+      <FareAmt>0.00</FareAmt>
+      <FareBasic />
+      <Commission>0.0000</Commission>
+      <ValidStart>0001-01-01T00:00:00</ValidStart>
+      <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+      <CreateOn>2009-08-20T13:05:03.967</CreateOn>
+      <CreateBy>HRH</CreateBy>
+      <UpdateOn>0001-01-01T00:00:00</UpdateOn>
+      <GSTAMT>0</GSTAMT>
+      <EQP />
+      <service />
+      <status />
+      <fare_basis_code />
+      <DepartTerm />
+      <ArrivalTerm />
+      <freq_fight_num />
+      <AirlinePNR>DQ5J6</AirlinePNR>
+    </UO_PEOTKTDETAIL>
+    <UO_PEOTKTDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOTKTDETAIL</TableName>
+        <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>SegNum</string>
+          <string>AirLine</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>GG</CompanyCode>
+      <Ticket>000000000</Ticket>
+      <AirCode>CZ</AirCode>
+      <TktSeq>01</TktSeq>
+      <SegNum>00001</SegNum>
+      <AirLine>784</AirLine>
+      <Flight>CZ3513</Flight>
+      <Class>R</Class>
+      <Seat />
+      <DepartCity>CAN</DepartCity>
+      <ArrivalCity>NKG</ArrivalCity>
+      <DepartDATE>2009-09-11T00:00:00</DepartDATE>
+      <DepartTime>0830</DepartTime>
+      <ArrDATE>2009-09-11T00:00:00</ArrDATE>
+      <ArrTime>1015</ArrTime>
+      <ElapsedTime>0000</ElapsedTime>
+      <StopOverNum>0</StopOverNum>
+      <StopOverCity />
+      <FareAmt>0.00</FareAmt>
+      <FareBasic />
+      <Commission>0.0000</Commission>
+      <ValidStart>0001-01-01T00:00:00</ValidStart>
+      <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+      <CreateOn>2009-08-20T13:05:03.967</CreateOn>
+      <CreateBy>HRH</CreateBy>
+      <UpdateOn>0001-01-01T00:00:00</UpdateOn>
+      <GSTAMT>0</GSTAMT>
+      <EQP />
+      <service />
+      <status />
+      <fare_basis_code />
+      <DepartTerm />
+      <ArrivalTerm />
+      <freq_fight_num />
+      <AirlinePNR>DQ5J6</AirlinePNR>
+    </UO_PEOTKTDETAIL>
+  </TKTDETAIL>
+</RTTKT>

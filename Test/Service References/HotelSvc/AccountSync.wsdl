@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.hkwtl.com/ad/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.hkwtl.com/ad/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.hkwtl.com/ad/">
+      <s:element name="SyncExRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncExRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncExRateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateAcctInvvchResult">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateAcctInvvchResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateAcctInvvchResultResult" type="tns:AcctInvvchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AcctInvvchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Docnum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Txndate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Lastupdate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Createdate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Action" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvvchInfo" type="tns:Invvch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Invvch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="V_Bkgref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Seqnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Staffcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Teamcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Printdate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Vchtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Vchnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Invnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Suppcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Suppname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Suppaddr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Supptel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Suppfax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Hotelcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Hotelname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Hoteladdr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Hoteltel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Hotelfax" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Arrival" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Depart" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Arrdesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Depdesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Remark1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Remark2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Cfmby" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Formpay" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Costcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Costamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Vchref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Cod1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Cod2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Reasoncode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Numofcopy" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Ratetype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Ratename" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Adultnum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Childnum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Voiddate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Voidby" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Void2jba" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Hkdamt" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Createon" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="V_Updateon" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Printby" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Printteam" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Voidteam" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Agentcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Agentname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Agentaddr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Agenttel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Agentfax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Crterms" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Sellcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="I_Sellamt" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="I_Hkdamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Void2jba" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="I_Numofcopy" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="I_Tax" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Analysiscode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Custref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Contactperson" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="I_Payment" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Invtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Paydesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Arpurgeref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Content" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="V_Content" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_Otherref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Typecode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ttltaxcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ttltaxamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ttlcommcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ttlcommamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Taxdesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Costtaxcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Costtaxamt" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Taxper" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ttlbftaxsellamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Invvchdetail" type="tns:ArrayOfInvvchdetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="Peoinpax" type="tns:ArrayOfPeoinpax" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInvvchdetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Invvchdetail" nillable="true" type="tns:Invvchdetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Invvchdetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Bkgref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Segnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Invvchnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seqnum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rooms" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Night" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Servtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Servdesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Roomtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amtcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Acctcurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Acctamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Detailtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Itemname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Itemtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Roomcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Startdate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Enddate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sellcur" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ttlsellamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Costcur" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ttlcostamt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Display" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Typecode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPeoinpax">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Peoinpax" nillable="true" type="tns:Peoinpax" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Peoinpax">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Invnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seqnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Paxseq" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Paxname" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInvoiceList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInvoiceListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInvoiceListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePeoAcctUpStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePeoAcctUpStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePeoAcctUpStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SyncExRateSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncExRate" />
+  </wsdl:message>
+  <wsdl:message name="SyncExRateSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncExRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateAcctInvvchResultSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAcctInvvchResult" />
+  </wsdl:message>
+  <wsdl:message name="CreateAcctInvvchResultSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAcctInvvchResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInvoiceList" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInvoiceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePeoAcctUpStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePeoAcctUpStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePeoAcctUpStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePeoAcctUpStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AccountSyncSoap">
+    <wsdl:operation name="SyncExRate">
+      <wsdl:input message="tns:SyncExRateSoapIn" />
+      <wsdl:output message="tns:SyncExRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAcctInvvchResult">
+      <wsdl:input message="tns:CreateAcctInvvchResultSoapIn" />
+      <wsdl:output message="tns:CreateAcctInvvchResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceList">
+      <wsdl:input message="tns:GetInvoiceListSoapIn" />
+      <wsdl:output message="tns:GetInvoiceListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePeoAcctUpStatus">
+      <wsdl:input message="tns:UpdatePeoAcctUpStatusSoapIn" />
+      <wsdl:output message="tns:UpdatePeoAcctUpStatusSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccountSyncSoap" type="tns:AccountSyncSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SyncExRate">
+      <soap:operation soapAction="http://www.hkwtl.com/ad/SyncExRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAcctInvvchResult">
+      <soap:operation soapAction="http://www.hkwtl.com/ad/CreateAcctInvvchResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceList">
+      <soap:operation soapAction="http://www.hkwtl.com/ad/GetInvoiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePeoAcctUpStatus">
+      <soap:operation soapAction="http://www.hkwtl.com/ad/UpdatePeoAcctUpStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AccountSyncSoap12" type="tns:AccountSyncSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SyncExRate">
+      <soap12:operation soapAction="http://www.hkwtl.com/ad/SyncExRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAcctInvvchResult">
+      <soap12:operation soapAction="http://www.hkwtl.com/ad/CreateAcctInvvchResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceList">
+      <soap12:operation soapAction="http://www.hkwtl.com/ad/GetInvoiceList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePeoAcctUpStatus">
+      <soap12:operation soapAction="http://www.hkwtl.com/ad/UpdatePeoAcctUpStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccountSync">
+    <wsdl:port name="AccountSyncSoap" binding="tns:AccountSyncSoap">
+      <soap:address location="http://10.100.133.83/HotelSearch/AccountSync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AccountSyncSoap12" binding="tns:AccountSyncSoap12">
+      <soap12:address location="http://10.100.133.83/HotelSearch/AccountSync.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
