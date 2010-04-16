@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CustomerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCustomerStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_Customer">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CustomerResult" type="tns:tbCustomer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCustomer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCustomer">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cltcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cltname" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Masteracct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Citycode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Countrycode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillPostal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayTermType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayTermDays" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Controller" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CtrlGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SttGroup" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SttCopies" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prftup" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prftdown" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExrateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AcctStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Internal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GemsCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GemsCustCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Salesperson" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Deposit" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesGroup" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Createon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Createby" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Updateon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Updateby" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SyncOn" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCustomer" abstract="true" />
+      <s:element name="SupplierList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SupplierListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSupplierStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSupplierStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateSupplierStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExRateDtList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExRateDtListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExRateDtListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateExRateDtStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateExRateDtStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateExRateDtStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_ExchangeRate">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_ExchangeRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_ExchangeRateResult" type="tns:tbExrateDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbExrateDetail">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbExrateDetail">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RateSeq" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SourceCurr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TargetCurr" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PeriodStart" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="PeriodEnd" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ExRate" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Operator" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Variance" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SyncOn" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbExrateDetail" abstract="true" />
+      <s:element name="CustCrLmtList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustCrLmtListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustCrLmtListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustCrLmtStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustCrLmtStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCustCrLmtStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CustomerListSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerList" />
+  </wsdl:message>
+  <wsdl:message name="CustomerListSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_Customer" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SupplierListSoapIn">
+    <wsdl:part name="parameters" element="tns:SupplierList" />
+  </wsdl:message>
+  <wsdl:message name="SupplierListSoapOut">
+    <wsdl:part name="parameters" element="tns:SupplierListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSupplierStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSupplierStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExRateDtListSoapIn">
+    <wsdl:part name="parameters" element="tns:ExRateDtList" />
+  </wsdl:message>
+  <wsdl:message name="ExRateDtListSoapOut">
+    <wsdl:part name="parameters" element="tns:ExRateDtListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateExRateDtStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateExRateDtStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateExRateDtStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateExRateDtStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ExchangeRateSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_ExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ExchangeRateSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_ExchangeRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustCrLmtListSoapIn">
+    <wsdl:part name="parameters" element="tns:CustCrLmtList" />
+  </wsdl:message>
+  <wsdl:message name="CustCrLmtListSoapOut">
+    <wsdl:part name="parameters" element="tns:CustCrLmtListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustCrLmtStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustCrLmtStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustCrLmtStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustCrLmtStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AcctDataSoap">
+    <wsdl:operation name="CustomerList">
+      <wsdl:input message="tns:CustomerListSoapIn" />
+      <wsdl:output message="tns:CustomerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <wsdl:input message="tns:UpdateCustomerStatusSoapIn" />
+      <wsdl:output message="tns:UpdateCustomerStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <wsdl:input message="tns:Demo_CustomerSoapIn" />
+      <wsdl:output message="tns:Demo_CustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <wsdl:input message="tns:SupplierListSoapIn" />
+      <wsdl:output message="tns:SupplierListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <wsdl:input message="tns:UpdateSupplierStatusSoapIn" />
+      <wsdl:output message="tns:UpdateSupplierStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDtList">
+      <wsdl:input message="tns:ExRateDtListSoapIn" />
+      <wsdl:output message="tns:ExRateDtListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExRateDtStatus">
+      <wsdl:input message="tns:UpdateExRateDtStatusSoapIn" />
+      <wsdl:output message="tns:UpdateExRateDtStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <wsdl:input message="tns:Demo_ExchangeRateSoapIn" />
+      <wsdl:output message="tns:Demo_ExchangeRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <wsdl:input message="tns:CustCrLmtListSoapIn" />
+      <wsdl:output message="tns:CustCrLmtListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <wsdl:input message="tns:UpdateCustCrLmtStatusSoapIn" />
+      <wsdl:output message="tns:UpdateCustCrLmtStatusSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AcctDataSoap" type="tns:AcctDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CustomerList">
+      <soap:operation soapAction="http://tempuri.org/CustomerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateCustomerStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <soap:operation soapAction="http://tempuri.org/Demo_Customer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <soap:operation soapAction="http://tempuri.org/SupplierList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateSupplierStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDtList">
+      <soap:operation soapAction="http://tempuri.org/ExRateDtList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExRateDtStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateExRateDtStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <soap:operation soapAction="http://tempuri.org/Demo_ExchangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <soap:operation soapAction="http://tempuri.org/CustCrLmtList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateCustCrLmtStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AcctDataSoap12" type="tns:AcctDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CustomerList">
+      <soap12:operation soapAction="http://tempuri.org/CustomerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateCustomerStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <soap12:operation soapAction="http://tempuri.org/Demo_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <soap12:operation soapAction="http://tempuri.org/SupplierList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateSupplierStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDtList">
+      <soap12:operation soapAction="http://tempuri.org/ExRateDtList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExRateDtStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateExRateDtStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <soap12:operation soapAction="http://tempuri.org/Demo_ExchangeRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <soap12:operation soapAction="http://tempuri.org/CustCrLmtList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateCustCrLmtStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AcctData">
+    <wsdl:port name="AcctDataSoap" binding="tns:AcctDataSoap">
+      <soap:address location="http://localhost/AcctSvc/AcctData.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AcctDataSoap12" binding="tns:AcctDataSoap12">
+      <soap12:address location="http://localhost/AcctSvc/AcctData.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
