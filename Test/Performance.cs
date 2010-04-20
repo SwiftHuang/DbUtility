@@ -151,5 +151,39 @@ namespace Test
             lblGetList.Text = (Seconds / times).ToString();
         }
 
+        private void btnBreakNum_Click(object sender, EventArgs e)
+        {
+            int times = 0;
+            int max = 1000000;
+            double Seconds = 0;
+            List<int> rs = new List<int>();
+            List<int> list = new List<int>();
+            for (int x = 0; x < max; x++)
+            {
+                list.Add(x);
+            }
+            list.Remove(10);
+            list.Remove(100);
+            list.Remove(1000);
+            list.Remove(5000);
+            //list.RemoveAt(50001);
+
+            for (int i = 0; i < 10; i++)
+            {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Reset();
+                stopWatch.Start();
+
+                rs = hwj.CommonLibrary.Object.NumberHelper.GetBreakSeqNum(list, 0, max);
+
+                TimeSpan ts = stopWatch.Elapsed;
+                stopWatch.Stop();
+                Seconds += ts.TotalSeconds;
+
+                times++;
+            }
+            lblBreakNum.Text = (Seconds / times).ToString();
+        }
+
     }
 }
