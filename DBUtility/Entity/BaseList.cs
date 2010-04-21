@@ -26,24 +26,24 @@ namespace hwj.DBUtility.Entity
         }
         public T ExFind(Enum field, object value)
         {
-            if (field != null && value != null && field.Equals(tmpField) && value.Equals(tmpValue))
-                return tmpFindObj;
-            else
-            {
-                FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), field.ToString()));
+            //if (field != null && value != null && field.Equals(tmpField) && value.Equals(tmpValue))
+            //    return tmpFindObj;
+            //else
+            //{
+            FieldMappingInfo f = new FieldMappingInfo(FieldMappingInfo.GetFieldInfo(typeof(T), field.ToString()));
 
-                foreach (T t in this)
+            foreach (T t in this)
+            {
+                if (MatchData(f, value, t))
                 {
-                    if (MatchData(f, value, t))
-                    {
-                        tmpField = field;
-                        tmpValue = value;
-                        tmpFindObj = t;
-                        return t;
-                    }
+                    //tmpField = field;
+                    //tmpValue = value;
+                    //tmpFindObj = t;
+                    return t;
                 }
-                return null;
             }
+            return null;
+            //}
         }
         public T BinarySearch(Enum field, string value)
         {
@@ -152,7 +152,22 @@ namespace hwj.DBUtility.Entity
 
             return null;
         }
+        //private void ClearTemp()
+        //{
+        //    tmpValue = null;
+        //    tmpFindObj = null;
+        //}
+        //public new bool Remove(T item)
+        //{
+        //    ClearTemp();
+        //    return this.Remove(item);
 
+        //}
+        //public new TS RemoveAt(int index)
+        //{
+        //    ClearTemp();
+        //    return this.RemoveAt(index);
+        //}
 
         //public void SetSession(string key)
         //{
