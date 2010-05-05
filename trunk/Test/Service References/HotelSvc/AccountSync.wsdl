@@ -116,8 +116,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="Costtaxamt" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="Taxper" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Ttlbftaxsellamt" type="s:decimal" />
-          <s:element minOccurs="0" maxOccurs="1" name="Invvchdetail" type="tns:ArrayOfInvvchdetail" />
-          <s:element minOccurs="0" maxOccurs="1" name="Peoinpax" type="tns:ArrayOfPeoinpax" />
+          <s:element minOccurs="0" maxOccurs="1" name="Invvchdetails" type="tns:ArrayOfInvvchdetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="Peoinpaxs" type="tns:ArrayOfPeoinpax" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfInvvchdetail">

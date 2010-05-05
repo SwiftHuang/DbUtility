@@ -142,6 +142,28 @@
             设置CheckBox列
             </summary>
         </member>
+        <member name="F:hwj.UserControls.Other.MaskedDateTimePicker.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.MaskedDateTimePicker.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.MaskedDateTimePicker.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Other.MaskedDateTimePicker.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.Function.Verify.ValueChangedHandle.IsChanged">
             <summary>
             获取是否有控件的值发生改变
@@ -247,6 +269,11 @@
         <member name="P:hwj.UserControls.Properties.Resources.Information">
             <summary>
               Looks up a localized string similar to 提示信息.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidDate">
+            <summary>
+              Looks up a localized string similar to 无效的日期.
             </summary>
         </member>
         <member name="P:hwj.UserControls.Properties.Resources.InvalidEmail">
