@@ -98,10 +98,6 @@
     <Compile Include="PDFReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DemoFrm\ControlsFrm.en-US.resx">
-      <DependentUpon>ControlsFrm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="DemoFrm\ControlsFrm.resx">
       <DependentUpon>ControlsFrm.cs</DependentUpon>
       <SubType>Designer</SubType>

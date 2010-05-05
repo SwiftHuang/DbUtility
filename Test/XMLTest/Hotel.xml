@@ -1,57 +1,58 @@
 <?xml version="1.0"?>
 <AcctInvvchResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Docnum>UI176912</Docnum>
-  <Txndate>2009-01-12T11:49:26</Txndate>
+  <Docnum>UI178568</Docnum>
+  <Txndate>2009-02-16T19:45:45</Txndate>
   <Lastupdate>0001-01-01T00:00:00</Lastupdate>
-  <Createdate>2009-01-12T11:49:26.56</Createdate>
+  <Createdate>2009-02-16T19:45:44.687</Createdate>
   <Action>I</Action>
   <InvvchInfo>
-    <V_Bkgref>W010484964</V_Bkgref>
+    <V_Bkgref>W010492567</V_Bkgref>
     <V_Seqnum>00001</V_Seqnum>
-    <V_Staffcode>IVW</V_Staffcode>
+    <V_Staffcode>XYM</V_Staffcode>
     <V_Teamcode>HHT</V_Teamcode>
-    <V_Printdate>2009-01-12T00:00:00</V_Printdate>
+    <V_Printdate>2009-02-16T00:00:00</V_Printdate>
     <V_Vchtype>HOTEL</V_Vchtype>
-    <V_Vchnum>UV176912</V_Vchnum>
-    <V_Invnum>UI176912</V_Invnum>
-    <V_Suppcode>TXGONA</V_Suppcode>
+    <V_Vchnum>UV178568</V_Vchnum>
+    <V_Invnum>UI178568</V_Invnum>
+    <V_Suppcode>NGBCRO</V_Suppcode>
     <V_Suppname />
     <V_Suppaddr />
     <V_Supptel />
     <V_Suppfax />
-    <V_Hotelcode>22092</V_Hotelcode>
-    <V_Hotelname>Hotel One Taichung</V_Hotelname>
-    <V_Hoteladdr>No. 532, Ying-Tsai Road                 
-Taichung                                
-Taiwan</V_Hoteladdr>
-    <V_Hoteltel>(886) 4-23031234</V_Hoteltel>
-    <V_Hotelfax>(886) 4-23726666</V_Hotelfax>
-    <V_Arrival>2009-01-18T00:00:00</V_Arrival>
-    <V_Depart>2009-01-19T00:00:00</V_Depart>
-    <V_Arrdesc>Flight  .      .</V_Arrdesc>
+    <V_Hotelcode>25900</V_Hotelcode>
+    <V_Hotelname>Crowne Plaza City Centre</V_Hotelname>
+    <V_Hoteladdr>
+      129 Yaohang Street
+      Ningbo, China 315010
+    </V_Hoteladdr>
+    <V_Hoteltel>(86) 574-56199999</V_Hoteltel>
+    <V_Hotelfax>(86) 574-56199866</V_Hotelfax>
+    <V_Arrival>2009-02-17T00:00:00</V_Arrival>
+    <V_Depart>2009-02-18T00:00:00</V_Depart>
+    <V_Arrdesc>Flight  KA640  1320</V_Arrdesc>
     <V_Depdesc>Flight  .      .</V_Depdesc>
-    <V_Remark1>REQ DOUBLE BED &amp; NON SMOKING ROOM</V_Remark1>
+    <V_Remark1>*RQ NON SMKG FLR/RQ KING SIZE BED</V_Remark1>
     <V_Remark2 />
     <V_Cfmby>FAX</V_Cfmby>
     <V_Formpay>Please Bill Westminster Travel Ltd (New Asiandreams holiday)</V_Formpay>
-    <V_Costcurr>TWD</V_Costcurr>
-    <V_Costamt>3500.00</V_Costamt>
+    <V_Costcurr>CNY</V_Costcurr>
+    <V_Costamt>420.00</V_Costamt>
     <V_Vchref />
     <V_Cod1 />
     <V_Cod2 />
     <V_Reasoncode />
     <V_Numofcopy>1</V_Numofcopy>
     <V_Ratetype>F</V_Ratetype>
-    <V_Ratename>FIT CONTRACT RATE</V_Ratename>
+    <V_Ratename>Promotion Rate</V_Ratename>
     <V_Adultnum>1</V_Adultnum>
     <V_Childnum>0</V_Childnum>
     <V_Voiddate>0001-01-01T00:00:00</V_Voiddate>
     <V_Voidby />
     <V_Void2jba />
-    <V_Hkdamt>879.00</V_Hkdamt>
-    <V_Createon>2009-01-12T11:49:26</V_Createon>
-    <V_Updateon>2009-01-12T11:49:26</V_Updateon>
-    <V_Printby>IVW</V_Printby>
+    <V_Hkdamt>479.00</V_Hkdamt>
+    <V_Createon>2009-02-16T19:45:45</V_Createon>
+    <V_Updateon>2009-02-16T19:45:45</V_Updateon>
+    <V_Printby>XYM</V_Printby>
     <V_Printteam>HHT</V_Printteam>
     <V_Voidteam />
     <I_Agentcode>20768</I_Agentcode>
@@ -61,38 +62,39 @@ Taiwan</V_Hoteladdr>
     <I_Agentfax />
     <I_Crterms />
     <I_Sellcurr>HKD</I_Sellcurr>
-    <I_Sellamt>900.00</I_Sellamt>
-    <I_Hkdamt>900.00</I_Hkdamt>
+    <I_Sellamt>525.00</I_Sellamt>
+    <I_Hkdamt>525.00</I_Hkdamt>
     <I_Void2jba />
     <I_Numofcopy>1</I_Numofcopy>
     <I_Tax>0.00</I_Tax>
     <I_Analysiscode />
-    <I_Custref>91HGMQWWXG/HB0239/KR</I_Custref>
+    <I_Custref>92HGS42JB4/HI0302/CL</I_Custref>
     <I_Contactperson />
     <I_Payment>0.00</I_Payment>
     <I_Invtype />
     <I_Paydesc />
     <I_Arpurgeref />
-    <I_Content>HOTEL RESERVATION INVOICE
-                            ====================
-                                                                                  INVOICE NO. UI176912
-TO     : LI/SAI MING MR
+    <I_Content>
+      HOTEL RESERVATION INVOICE
+      ====================
+      INVOICE NO. UI178568
+      TO     : ANDRIST/PATRICK ALAIN MR
 
-HOTEL:                                                    Date: Jan 12, 2009
-           
-           
-           
-           
+      HOTEL:                                                    Date: Feb 16, 2009
 
-1.   Our reference        : W010484964-00001/214086/IVW
-      Requirement         : 1 Single (Standard) - w/ ABF (Jan 18 - 19, 2009/@ HKD900)
-      Arrive                   : Jan 18, 2009 FLT:Flight  .      .
-      Depart                 : Jan 19, 2009 FLT:Flight  .      .
-      Rate name           : FIT CONTRACT RATE                       
+
+
+
+
+      1.   Our reference        : W010492567-00001/409265/XYM
+      Requirement         : 1 Single (Standard) - Rm only (Feb 17 - 18, 2009/@ HKD525)
+      Arrive                   : Feb 17, 2009 FLT:Flight  KA640  1320
+      Depart                 : Feb 18, 2009 FLT:Flight  .      .
+      Rate name           : Promotion Rate
       Terms of payment : Please Bill Westminster Travel Ltd (New Asiandreams holiday)
-      Remarks          : REQ DOUBLE BED &amp; NON SMOKING ROOM
-      Confirmed by 	      : FAX                 
-      Prepared by   	      : 
+      Remarks          : *RQ NON SMKG FLR/RQ KING SIZE BED
+      Confirmed by 	      : FAX
+      Prepared by   	      :
       ------------------------------------------------------------
 
 
@@ -104,28 +106,30 @@ HOTEL:                                                    Date: Jan 12, 2009
       ------------------------------
       Please sign and return via fax
 
-Overdue interest is levied at 2% mth, Please return a copy of the invoice with a crossed cheque payable to WESTMINSTER TRAVEL LTD
+      Overdue interest is levied at 2% mth, Please return a copy of the invoice with a crossed cheque payable to WESTMINSTER TRAVEL LTD
 
-** END OF INVOICE **</I_Content>
-    <V_Content>HOTEL RESERVATION VOUCHER
-                            ====================
-                                                                                  VOUCHER NO. UV176912
-TO     : LI/SAI MING MR
+      ** END OF INVOICE **
+    </I_Content>
+    <V_Content>
+      HOTEL RESERVATION VOUCHER
+      ====================
+      VOUCHER NO. UV178568
+      TO     : ANDRIST/PATRICK ALAIN MR
 
-HOTEL: Hotel One Taichung                                 Date: Jan 12, 2009
-           No. 532, Ying-Tsai Road                 
-           Taichung                                
-           Taiwan 
+      HOTEL: Crowne Plaza City Centre                           Date: Feb 16, 2009
+      129 Yaohang Street
+      Ningbo, China 315010
 
-1.   Our reference        : W010484964-00001/214086/IVW
-      Requirement         : 1 Single (Standard) - w/ ABF (Jan 18 - 19, 2009)
-      Arrive                   : Jan 18, 2009 FLT:Flight  .      .
-      Depart                 : Jan 19, 2009 FLT:Flight  .      .
-      Rate name           : FIT CONTRACT RATE                       
+
+      1.   Our reference        : W010492567-00001/409265/XYM
+      Requirement         : 1 Single (Standard) - Rm only (Feb 17 - 18, 2009)
+      Arrive                   : Feb 17, 2009 FLT:Flight  KA640  1320
+      Depart                 : Feb 18, 2009 FLT:Flight  .      .
+      Rate name           : Promotion Rate
       Terms of payment : Please Bill Westminster Travel Ltd (New Asiandreams holiday)
-      Remarks          : REQ DOUBLE BED &amp; NON SMOKING ROOM
-      Confirmed by 	      : FAX                 
-      Prepared by   	      : 
+      Remarks          : *RQ NON SMKG FLR/RQ KING SIZE BED
+      Confirmed by 	      : FAX
+      Prepared by   	      :
       ------------------------------------------------------------
 
 
@@ -137,7 +141,8 @@ HOTEL: Hotel One Taichung                                 Date: Jan 12, 2009
       ------------------------------
       Please sign and return via fax
 
-** END OF VOUCHER **</V_Content>
+      ** END OF VOUCHER **
+    </V_Content>
     <I_Otherref />
     <Typecode>HKG3</Typecode>
     <Ttltaxcurr>HKD</Ttltaxcurr>
@@ -148,72 +153,72 @@ HOTEL: Hotel One Taichung                                 Date: Jan 12, 2009
     <Costtaxcurr>SGD</Costtaxcurr>
     <Costtaxamt>0.00</Costtaxamt>
     <Taxper>0</Taxper>
-    <Ttlbftaxsellamt>900.00</Ttlbftaxsellamt>
-    <Invvchdetail>
+    <Ttlbftaxsellamt>525.00</Ttlbftaxsellamt>
+    <Invvchdetails>
       <Invvchdetail>
-        <Bkgref>W010484964</Bkgref>
+        <Bkgref>W010492567</Bkgref>
         <Segnum>00001</Segnum>
-        <Invvchnum>UI176912</Invvchnum>
+        <Invvchnum>UI178568</Invvchnum>
         <Seqnum>001</Seqnum>
         <Rooms>1</Rooms>
         <Night>1</Night>
         <Servtype>HTL</Servtype>
-        <Servdesc>1 Single (Standard) - w/ ABF Jan 18 - 19, 2009</Servdesc>
+        <Servdesc>1 Single (Standard) - Rm only Feb 17 - 18, 2009</Servdesc>
         <Roomtype>R</Roomtype>
         <Amtcurr />
         <Amt>0.00</Amt>
         <Acctcurr>HKD</Acctcurr>
-        <Acctamt>900.00</Acctamt>
+        <Acctamt>525.00</Acctamt>
         <Detailtype>HTL</Detailtype>
         <Status>HK</Status>
-        <Itemname>Single (Standard) - w/ ABF</Itemname>
+        <Itemname>Single (Standard) - Rm only</Itemname>
         <Itemtype>R</Itemtype>
-        <Roomcode>1B</Roomcode>
-        <Startdate>2009-01-18T00:00:00</Startdate>
-        <Enddate>2009-01-19T00:00:00</Enddate>
+        <Roomcode>1A</Roomcode>
+        <Startdate>2009-02-17T00:00:00</Startdate>
+        <Enddate>2009-02-18T00:00:00</Enddate>
         <Sellcur>HKD</Sellcur>
-        <Ttlsellamt>900.00</Ttlsellamt>
-        <Costcur>TWD</Costcur>
-        <Ttlcostamt>3500.00</Ttlcostamt>
+        <Ttlsellamt>525.00</Ttlsellamt>
+        <Costcur>CNY</Costcur>
+        <Ttlcostamt>420.00</Ttlcostamt>
         <Display>Y</Display>
         <Typecode />
       </Invvchdetail>
       <Invvchdetail>
-        <Bkgref>W010484964</Bkgref>
+        <Bkgref>W010492567</Bkgref>
         <Segnum>00001</Segnum>
-        <Invvchnum>UV176912</Invvchnum>
+        <Invvchnum>UV178568</Invvchnum>
         <Seqnum>001</Seqnum>
         <Rooms>1</Rooms>
         <Night>1</Night>
         <Servtype>HTL</Servtype>
-        <Servdesc>1 Single (Standard) - w/ ABF Jan 18 - 19, 2009</Servdesc>
+        <Servdesc>1 Single (Standard) - Rm only Feb 17 - 18, 2009</Servdesc>
         <Roomtype>R</Roomtype>
         <Amtcurr />
         <Amt>0.00</Amt>
         <Acctcurr>HKD</Acctcurr>
-        <Acctamt>900.00</Acctamt>
+        <Acctamt>525.00</Acctamt>
         <Detailtype>HTL</Detailtype>
         <Status>HK</Status>
-        <Itemname>Single (Standard) - w/ ABF</Itemname>
+        <Itemname>Single (Standard) - Rm only</Itemname>
         <Itemtype>R</Itemtype>
-        <Roomcode>1B</Roomcode>
-        <Startdate>2009-01-18T00:00:00</Startdate>
-        <Enddate>2009-01-19T00:00:00</Enddate>
+        <Roomcode>1A</Roomcode>
+        <Startdate>2009-02-17T00:00:00</Startdate>
+        <Enddate>2009-02-18T00:00:00</Enddate>
         <Sellcur>HKD</Sellcur>
-        <Ttlsellamt>900.00</Ttlsellamt>
-        <Costcur>TWD</Costcur>
-        <Ttlcostamt>3500.00</Ttlcostamt>
+        <Ttlsellamt>525.00</Ttlsellamt>
+        <Costcur>CNY</Costcur>
+        <Ttlcostamt>420.00</Ttlcostamt>
         <Display>Y</Display>
         <Typecode />
       </Invvchdetail>
-    </Invvchdetail>
-    <Peoinpax>
+    </Invvchdetails>
+    <Peoinpaxs>
       <Peoinpax>
-        <Invnum>UI176912</Invnum>
+        <Invnum>UI178568</Invnum>
         <Seqnum>101</Seqnum>
         <Paxseq>1</Paxseq>
-        <Paxname>LI/SAI MING MR</Paxname>
+        <Paxname>ANDRIST/PATRICK ALAIN MR</Paxname>
       </Peoinpax>
-    </Peoinpax>
+    </Peoinpaxs>
   </InvvchInfo>
 </AcctInvvchResult>

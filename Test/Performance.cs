@@ -30,7 +30,6 @@ namespace Test
 
 
                 DB.Entity.tbTestOutputs tmp = list.ExFindAll(DB.Entity.tbTestOutput.Fields.Name, "Vinson Test 980");
-
                 TimeSpan ts = stopWatch.Elapsed;
                 stopWatch.Stop();
                 Seconds += ts.TotalSeconds;

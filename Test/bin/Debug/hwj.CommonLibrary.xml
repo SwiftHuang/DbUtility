@@ -402,5 +402,15 @@
             <param name="MaxSeqNum">最大序号</param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetBreakSeqNum(System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算断号
+            </summary>
+            <param name="CurrentSeqList">序号列表</param>
+            <param name="MinSeqNum">最小序号</param>
+            <param name="MaxSeqNum">最大序号</param>
+            <param name="top">返回个数</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

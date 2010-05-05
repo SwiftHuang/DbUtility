@@ -358,10 +358,10 @@ namespace Test.HotelSvc {
         private decimal TtlbftaxsellamtField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Test.HotelSvc.Invvchdetail[] InvvchdetailField;
+        private Test.HotelSvc.Invvchdetail[] InvvchdetailsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Test.HotelSvc.Peoinpax[] PeoinpaxField;
+        private Test.HotelSvc.Peoinpax[] PeoinpaxsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1388,27 +1388,27 @@ namespace Test.HotelSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=78)]
-        public Test.HotelSvc.Invvchdetail[] Invvchdetail {
+        public Test.HotelSvc.Invvchdetail[] Invvchdetails {
             get {
-                return this.InvvchdetailField;
+                return this.InvvchdetailsField;
             }
             set {
-                if ((object.ReferenceEquals(this.InvvchdetailField, value) != true)) {
-                    this.InvvchdetailField = value;
-                    this.RaisePropertyChanged("Invvchdetail");
+                if ((object.ReferenceEquals(this.InvvchdetailsField, value) != true)) {
+                    this.InvvchdetailsField = value;
+                    this.RaisePropertyChanged("Invvchdetails");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=79)]
-        public Test.HotelSvc.Peoinpax[] Peoinpax {
+        public Test.HotelSvc.Peoinpax[] Peoinpaxs {
             get {
-                return this.PeoinpaxField;
+                return this.PeoinpaxsField;
             }
             set {
-                if ((object.ReferenceEquals(this.PeoinpaxField, value) != true)) {
-                    this.PeoinpaxField = value;
-                    this.RaisePropertyChanged("Peoinpax");
+                if ((object.ReferenceEquals(this.PeoinpaxsField, value) != true)) {
+                    this.PeoinpaxsField = value;
+                    this.RaisePropertyChanged("Peoinpaxs");
                 }
             }
         }
