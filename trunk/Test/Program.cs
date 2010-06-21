@@ -21,8 +21,8 @@ namespace Test
             //Application.Run(new Form1());
             //Application.Run(new Performance());
             //Application.Run(new DemoFrm.XMLFrm());
-            Application.Run(new DemoFrm.ControlsFrm());
-            //Application.Run(new dgFrm());
+            //Application.Run(new DemoFrm.ControlsFrm());
+            Application.Run(new dgFrm());
             //Application.Run(new Suggest());
         }
 

@@ -5,7 +5,7 @@ using hwj.DBUtility;
 using hwj.DBUtility.Entity;
 using hwj.DBUtility.TableMapping;
 
-namespace Acct.Entity
+namespace Test.DB.Entity
 {
     /// <summary>
     /// Table:Aptx
@@ -201,6 +201,14 @@ namespace Acct.Entity
             ///
             /// </summary>
             LastPayDate,
+            /// <summary>
+            ///
+            /// </summary>
+            LastPayNum,
+            /// <summary>
+            ///
+            /// </summary>
+            LastReptNum,
         }
 
         #region Model
@@ -249,68 +257,70 @@ namespace Acct.Entity
         private DateTime _updateon;
         private String _updateby;
         private DateTime _lastpaydate;
+        private String _lastpaynum;
+        private String _lastreptnum;
         /// <summary>
         /// [PK/Un-Null/char(2)]
         /// </summary>
-        [FieldMapping("CompanyCode", DbType.String)]
+        [FieldMapping("CompanyCode", DbType.AnsiStringFixedLength)]
         public String CompanyCode
         {
-            set{ AddAssigned("CompanyCode"); _companycode=value; }
-            get{ return _companycode; }
+            set { AddAssigned("CompanyCode"); _companycode = value; }
+            get { return _companycode; }
         }
         /// <summary>
         /// [PK/Un-Null/char(10)]
         /// </summary>
-        [FieldMapping("APTxNum", DbType.String)]
+        [FieldMapping("APTxNum", DbType.AnsiStringFixedLength)]
         public String APTxNum
         {
-            set{ AddAssigned("APTxNum"); _aptxnum=value; }
-            get{ return _aptxnum; }
+            set { AddAssigned("APTxNum"); _aptxnum = value; }
+            get { return _aptxnum; }
         }
         /// <summary>
         /// [Un-Null/varchar(5)]
         /// </summary>
-        [FieldMapping("APTxType", DbType.String)]
+        [FieldMapping("APTxType", DbType.AnsiString)]
         public String APTxType
         {
-            set{ AddAssigned("APTxType"); _aptxtype=value; }
-            get{ return _aptxtype; }
+            set { AddAssigned("APTxType"); _aptxtype = value; }
+            get { return _aptxtype; }
         }
         /// <summary>
         /// [Un-Null/varchar(5)]
         /// </summary>
-        [FieldMapping("DocType", DbType.String)]
+        [FieldMapping("DocType", DbType.AnsiString)]
         public String DocType
         {
-            set{ AddAssigned("DocType"); _doctype=value; }
-            get{ return _doctype; }
+            set { AddAssigned("DocType"); _doctype = value; }
+            get { return _doctype; }
         }
         /// <summary>
         /// [Un-Null/varchar(20)]
         /// </summary>
-        [FieldMapping("DocNum", DbType.String)]
+        [FieldMapping("DocNum", DbType.AnsiString)]
         public String DocNum
         {
-            set{ AddAssigned("DocNum"); _docnum=value; }
-            get{ return _docnum; }
+            set { AddAssigned("DocNum"); _docnum = value; }
+            get { return _docnum; }
         }
         /// <summary>
         /// [Allow Null/varchar(10)]
         /// </summary>
-        [FieldMapping("GLTxNum", DbType.String)]
+        [FieldMapping("GLTxNum", DbType.AnsiString)]
         public String GLTxNum
         {
-            set{ AddAssigned("GLTxNum"); _gltxnum=value; }
-            get{ return _gltxnum; }
+            set { AddAssigned("GLTxNum"); _gltxnum = value; }
+            get { return _gltxnum; }
         }
         /// <summary>
         /// [Un-Null/char(8)]
         /// </summary>
-        [FieldMapping("SuppCode", DbType.String)]
+        [FieldMapping("SuppCode", DbType.AnsiStringFixedLength)]
         public String SuppCode
         {
-            set{ AddAssigned("SuppCode"); _suppcode=value; }
-            get{ return _suppcode; }
+            set { AddAssigned("SuppCode"); _suppcode = value; }
+            get { return _suppcode; }
         }
         /// <summary>
         /// [Allow Null/nvarchar(50)/Default:('')]
@@ -318,35 +328,35 @@ namespace Acct.Entity
         [FieldMapping("SuppRef", DbType.String)]
         public String SuppRef
         {
-            set{ AddAssigned("SuppRef"); _suppref=value; }
-            get{ return _suppref; }
+            set { AddAssigned("SuppRef"); _suppref = value; }
+            get { return _suppref; }
         }
         /// <summary>
         /// [Un-Null/varchar(20)]
         /// </summary>
-        [FieldMapping("CtrlGLCode", DbType.String)]
+        [FieldMapping("CtrlGLCode", DbType.AnsiString)]
         public String CtrlGLCode
         {
-            set{ AddAssigned("CtrlGLCode"); _ctrlglcode=value; }
-            get{ return _ctrlglcode; }
+            set { AddAssigned("CtrlGLCode"); _ctrlglcode = value; }
+            get { return _ctrlglcode; }
         }
         /// <summary>
         /// [Un-Null/varchar(4)]
         /// </summary>
-        [FieldMapping("CalendarCode", DbType.String)]
+        [FieldMapping("CalendarCode", DbType.AnsiString)]
         public String CalendarCode
         {
-            set{ AddAssigned("CalendarCode"); _calendarcode=value; }
-            get{ return _calendarcode; }
+            set { AddAssigned("CalendarCode"); _calendarcode = value; }
+            get { return _calendarcode; }
         }
         /// <summary>
         /// [Un-Null/varchar(4)]
         /// </summary>
-        [FieldMapping("PeriodPost", DbType.String)]
+        [FieldMapping("PeriodPost", DbType.AnsiString)]
         public String PeriodPost
         {
-            set{ AddAssigned("PeriodPost"); _periodpost=value; }
-            get{ return _periodpost; }
+            set { AddAssigned("PeriodPost"); _periodpost = value; }
+            get { return _periodpost; }
         }
         /// <summary>
         /// [Un-Null/datetime(8)]
@@ -354,8 +364,8 @@ namespace Acct.Entity
         [FieldMapping("DocDate", DbType.DateTime)]
         public DateTime DocDate
         {
-            set{ AddAssigned("DocDate"); _docdate=value; }
-            get{ return _docdate; }
+            set { AddAssigned("DocDate"); _docdate = value; }
+            get { return _docdate; }
         }
         /// <summary>
         /// [Un-Null/datetime(8)]
@@ -363,26 +373,26 @@ namespace Acct.Entity
         [FieldMapping("DueDate", DbType.DateTime)]
         public DateTime DueDate
         {
-            set{ AddAssigned("DueDate"); _duedate=value; }
-            get{ return _duedate; }
+            set { AddAssigned("DueDate"); _duedate = value; }
+            get { return _duedate; }
         }
         /// <summary>
         /// [Un-Null/varchar(5)]
         /// </summary>
-        [FieldMapping("ExRateCode", DbType.String)]
+        [FieldMapping("ExRateCode", DbType.AnsiString)]
         public String ExRateCode
         {
-            set{ AddAssigned("ExRateCode"); _exratecode=value; }
-            get{ return _exratecode; }
+            set { AddAssigned("ExRateCode"); _exratecode = value; }
+            get { return _exratecode; }
         }
         /// <summary>
         /// [Allow Null/varchar(4)]
         /// </summary>
-        [FieldMapping("PayMethod", DbType.String)]
+        [FieldMapping("PayMethod", DbType.AnsiString)]
         public String PayMethod
         {
-            set{ AddAssigned("PayMethod"); _paymethod=value; }
-            get{ return _paymethod; }
+            set { AddAssigned("PayMethod"); _paymethod = value; }
+            get { return _paymethod; }
         }
         /// <summary>
         /// [Allow Null/nvarchar(50)]
@@ -390,44 +400,44 @@ namespace Acct.Entity
         [FieldMapping("APTxDesc", DbType.String)]
         public String APTxDesc
         {
-            set{ AddAssigned("APTxDesc"); _aptxdesc=value; }
-            get{ return _aptxdesc; }
+            set { AddAssigned("APTxDesc"); _aptxdesc = value; }
+            get { return _aptxdesc; }
         }
         /// <summary>
         /// [Allow Null/varchar(10)]
         /// </summary>
-        [FieldMapping("MasterPnr", DbType.String)]
+        [FieldMapping("MasterPnr", DbType.AnsiString)]
         public String MasterPnr
         {
-            set{ AddAssigned("MasterPnr"); _masterpnr=value; }
-            get{ return _masterpnr; }
+            set { AddAssigned("MasterPnr"); _masterpnr = value; }
+            get { return _masterpnr; }
         }
         /// <summary>
         /// [Allow Null/varchar(10)]
         /// </summary>
-        [FieldMapping("BkgNum", DbType.String)]
+        [FieldMapping("BkgNum", DbType.AnsiString)]
         public String BkgNum
         {
-            set{ AddAssigned("BkgNum"); _bkgnum=value; }
-            get{ return _bkgnum; }
+            set { AddAssigned("BkgNum"); _bkgnum = value; }
+            get { return _bkgnum; }
         }
         /// <summary>
         /// [Allow Null/varchar(10)]
         /// </summary>
-        [FieldMapping("BkgOwner", DbType.String)]
+        [FieldMapping("BkgOwner", DbType.AnsiString)]
         public String BkgOwner
         {
-            set{ AddAssigned("BkgOwner"); _bkgowner=value; }
-            get{ return _bkgowner; }
+            set { AddAssigned("BkgOwner"); _bkgowner = value; }
+            get { return _bkgowner; }
         }
         /// <summary>
         /// [Un-Null/varchar(3)]
         /// </summary>
-        [FieldMapping("CurrTxn", DbType.String)]
+        [FieldMapping("CurrTxn", DbType.AnsiString)]
         public String CurrTxn
         {
-            set{ AddAssigned("CurrTxn"); _currtxn=value; }
-            get{ return _currtxn; }
+            set { AddAssigned("CurrTxn"); _currtxn = value; }
+            get { return _currtxn; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -435,8 +445,8 @@ namespace Acct.Entity
         [FieldMapping("AmtTxn", DbType.Decimal)]
         public Decimal AmtTxn
         {
-            set{ AddAssigned("AmtTxn"); _amttxn=value; }
-            get{ return _amttxn; }
+            set { AddAssigned("AmtTxn"); _amttxn = value; }
+            get { return _amttxn; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -444,17 +454,17 @@ namespace Acct.Entity
         [FieldMapping("OAmtTxn", DbType.Decimal)]
         public Decimal OAmtTxn
         {
-            set{ AddAssigned("OAmtTxn"); _oamttxn=value; }
-            get{ return _oamttxn; }
+            set { AddAssigned("OAmtTxn"); _oamttxn = value; }
+            get { return _oamttxn; }
         }
         /// <summary>
         /// [Un-Null/varchar(3)]
         /// </summary>
-        [FieldMapping("CurrPrm", DbType.String)]
+        [FieldMapping("CurrPrm", DbType.AnsiString)]
         public String CurrPrm
         {
-            set{ AddAssigned("CurrPrm"); _currprm=value; }
-            get{ return _currprm; }
+            set { AddAssigned("CurrPrm"); _currprm = value; }
+            get { return _currprm; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -462,8 +472,8 @@ namespace Acct.Entity
         [FieldMapping("AmtPrm", DbType.Decimal)]
         public Decimal AmtPrm
         {
-            set{ AddAssigned("AmtPrm"); _amtprm=value; }
-            get{ return _amtprm; }
+            set { AddAssigned("AmtPrm"); _amtprm = value; }
+            get { return _amtprm; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -471,17 +481,17 @@ namespace Acct.Entity
         [FieldMapping("OAmtPrm", DbType.Decimal)]
         public Decimal OAmtPrm
         {
-            set{ AddAssigned("OAmtPrm"); _oamtprm=value; }
-            get{ return _oamtprm; }
+            set { AddAssigned("OAmtPrm"); _oamtprm = value; }
+            get { return _oamtprm; }
         }
         /// <summary>
         /// [Un-Null/varchar(3)]
         /// </summary>
-        [FieldMapping("CurrSec", DbType.String)]
+        [FieldMapping("CurrSec", DbType.AnsiString)]
         public String CurrSec
         {
-            set{ AddAssigned("CurrSec"); _currsec=value; }
-            get{ return _currsec; }
+            set { AddAssigned("CurrSec"); _currsec = value; }
+            get { return _currsec; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -489,8 +499,8 @@ namespace Acct.Entity
         [FieldMapping("AmtSec", DbType.Decimal)]
         public Decimal AmtSec
         {
-            set{ AddAssigned("AmtSec"); _amtsec=value; }
-            get{ return _amtsec; }
+            set { AddAssigned("AmtSec"); _amtsec = value; }
+            get { return _amtsec; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -498,17 +508,17 @@ namespace Acct.Entity
         [FieldMapping("OAmtSec", DbType.Decimal)]
         public Decimal OAmtSec
         {
-            set{ AddAssigned("OAmtSec"); _oamtsec=value; }
-            get{ return _oamtsec; }
+            set { AddAssigned("OAmtSec"); _oamtsec = value; }
+            get { return _oamtsec; }
         }
         /// <summary>
         /// [Un-Null/varchar(3)]
         /// </summary>
-        [FieldMapping("CurrRpt", DbType.String)]
+        [FieldMapping("CurrRpt", DbType.AnsiString)]
         public String CurrRpt
         {
-            set{ AddAssigned("CurrRpt"); _currrpt=value; }
-            get{ return _currrpt; }
+            set { AddAssigned("CurrRpt"); _currrpt = value; }
+            get { return _currrpt; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -516,8 +526,8 @@ namespace Acct.Entity
         [FieldMapping("AmtRpt", DbType.Decimal)]
         public Decimal AmtRpt
         {
-            set{ AddAssigned("AmtRpt"); _amtrpt=value; }
-            get{ return _amtrpt; }
+            set { AddAssigned("AmtRpt"); _amtrpt = value; }
+            get { return _amtrpt; }
         }
         /// <summary>
         /// [Un-Null/decimal(17)]
@@ -525,8 +535,8 @@ namespace Acct.Entity
         [FieldMapping("OAmtRpt", DbType.Decimal)]
         public Decimal OAmtRpt
         {
-            set{ AddAssigned("OAmtRpt"); _oamtrpt=value; }
-            get{ return _oamtrpt; }
+            set { AddAssigned("OAmtRpt"); _oamtrpt = value; }
+            get { return _oamtrpt; }
         }
         /// <summary>
         /// [Allow Null/datetime(8)]
@@ -534,53 +544,53 @@ namespace Acct.Entity
         [FieldMapping("SettleOn", DbType.DateTime)]
         public DateTime SettleOn
         {
-            set{ AddAssigned("SettleOn"); _settleon=value; }
-            get{ return _settleon; }
+            set { AddAssigned("SettleOn"); _settleon = value; }
+            get { return _settleon; }
         }
         /// <summary>
         /// [Allow Null/varchar(1)]
         /// </summary>
-        [FieldMapping("Source", DbType.String)]
+        [FieldMapping("Source", DbType.AnsiString)]
         public String Source
         {
-            set{ AddAssigned("Source"); _source=value; }
-            get{ return _source; }
+            set { AddAssigned("Source"); _source = value; }
+            get { return _source; }
         }
         /// <summary>
         /// [Allow Null/varchar(1)]
         /// </summary>
-        [FieldMapping("BranchCode", DbType.String)]
+        [FieldMapping("BranchCode", DbType.AnsiString)]
         public String BranchCode
         {
-            set{ AddAssigned("BranchCode"); _branchcode=value; }
-            get{ return _branchcode; }
+            set { AddAssigned("BranchCode"); _branchcode = value; }
+            get { return _branchcode; }
         }
         /// <summary>
         /// [Un-Null/varchar(3)]
         /// </summary>
-        [FieldMapping("TeamCode", DbType.String)]
+        [FieldMapping("TeamCode", DbType.AnsiString)]
         public String TeamCode
         {
-            set{ AddAssigned("TeamCode"); _teamcode=value; }
-            get{ return _teamcode; }
+            set { AddAssigned("TeamCode"); _teamcode = value; }
+            get { return _teamcode; }
         }
         /// <summary>
         /// [Allow Null/varchar(1)/Default:('N')]
         /// </summary>
-        [FieldMapping("APStatus", DbType.String)]
+        [FieldMapping("APStatus", DbType.AnsiString)]
         public String APStatus
         {
-            set{ AddAssigned("APStatus"); _apstatus=value; }
-            get{ return _apstatus; }
+            set { AddAssigned("APStatus"); _apstatus = value; }
+            get { return _apstatus; }
         }
         /// <summary>
         /// [Allow Null/varchar(10)]
         /// </summary>
-        [FieldMapping("PurgeRef", DbType.String)]
+        [FieldMapping("PurgeRef", DbType.AnsiString)]
         public String PurgeRef
         {
-            set{ AddAssigned("PurgeRef"); _purgeref=value; }
-            get{ return _purgeref; }
+            set { AddAssigned("PurgeRef"); _purgeref = value; }
+            get { return _purgeref; }
         }
         /// <summary>
         /// [Allow Null/datetime(8)]
@@ -588,8 +598,8 @@ namespace Acct.Entity
         [FieldMapping("PurgeOn", DbType.DateTime)]
         public DateTime PurgeOn
         {
-            set{ AddAssigned("PurgeOn"); _purgeon=value; }
-            get{ return _purgeon; }
+            set { AddAssigned("PurgeOn"); _purgeon = value; }
+            get { return _purgeon; }
         }
         /// <summary>
         /// [Allow Null/datetime(8)]
@@ -597,17 +607,17 @@ namespace Acct.Entity
         [FieldMapping("PostOn", DbType.DateTime)]
         public DateTime PostOn
         {
-            set{ AddAssigned("PostOn"); _poston=value; }
-            get{ return _poston; }
+            set { AddAssigned("PostOn"); _poston = value; }
+            get { return _poston; }
         }
         /// <summary>
         /// [Allow Null/varchar(50)]
         /// </summary>
-        [FieldMapping("PostBy", DbType.String)]
+        [FieldMapping("PostBy", DbType.AnsiString)]
         public String PostBy
         {
-            set{ AddAssigned("PostBy"); _postby=value; }
-            get{ return _postby; }
+            set { AddAssigned("PostBy"); _postby = value; }
+            get { return _postby; }
         }
         /// <summary>
         /// [Un-Null/datetime(8)]
@@ -615,17 +625,17 @@ namespace Acct.Entity
         [FieldMapping("CreateOn", DbType.DateTime)]
         public DateTime CreateOn
         {
-            set{ AddAssigned("CreateOn"); _createon=value; }
-            get{ return _createon; }
+            set { AddAssigned("CreateOn"); _createon = value; }
+            get { return _createon; }
         }
         /// <summary>
         /// [Un-Null/varchar(10)]
         /// </summary>
-        [FieldMapping("CreateBy", DbType.String)]
+        [FieldMapping("CreateBy", DbType.AnsiString)]
         public String CreateBy
         {
-            set{ AddAssigned("CreateBy"); _createby=value; }
-            get{ return _createby; }
+            set { AddAssigned("CreateBy"); _createby = value; }
+            get { return _createby; }
         }
         /// <summary>
         /// [Un-Null/datetime(8)]
@@ -633,17 +643,17 @@ namespace Acct.Entity
         [FieldMapping("UpdateOn", DbType.DateTime)]
         public DateTime UpdateOn
         {
-            set{ AddAssigned("UpdateOn"); _updateon=value; }
-            get{ return _updateon; }
+            set { AddAssigned("UpdateOn"); _updateon = value; }
+            get { return _updateon; }
         }
         /// <summary>
         /// [Un-Null/varchar(10)]
         /// </summary>
-        [FieldMapping("UpdateBy", DbType.String)]
+        [FieldMapping("UpdateBy", DbType.AnsiString)]
         public String UpdateBy
         {
-            set{ AddAssigned("UpdateBy"); _updateby=value; }
-            get{ return _updateby; }
+            set { AddAssigned("UpdateBy"); _updateby = value; }
+            get { return _updateby; }
         }
         /// <summary>
         /// [Allow Null/datetime(8)]
@@ -651,8 +661,26 @@ namespace Acct.Entity
         [FieldMapping("LastPayDate", DbType.DateTime)]
         public DateTime LastPayDate
         {
-            set{ AddAssigned("LastPayDate"); _lastpaydate=value; }
-            get{ return _lastpaydate; }
+            set { AddAssigned("LastPayDate"); _lastpaydate = value; }
+            get { return _lastpaydate; }
+        }
+        /// <summary>
+        /// [Allow Null/char(10)]
+        /// </summary>
+        [FieldMapping("LastPayNum", DbType.AnsiStringFixedLength)]
+        public String LastPayNum
+        {
+            set { AddAssigned("LastPayNum"); _lastpaynum = value; }
+            get { return _lastpaynum; }
+        }
+        /// <summary>
+        /// [Allow Null/char(10)]
+        /// </summary>
+        [FieldMapping("LastReptNum", DbType.AnsiStringFixedLength)]
+        public String LastReptNum
+        {
+            set { AddAssigned("LastReptNum"); _lastreptnum = value; }
+            get { return _lastreptnum; }
         }
         #endregion Model
 
