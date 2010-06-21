@@ -5,9 +5,9 @@ using System.Text;
 using System.Data.SqlClient;
 using hwj.DBUtility;
 using hwj.DBUtility.MSSQL;
-using Acct.Entity;
+using Test.DB.Entity;
 
-namespace Acct.DAL
+namespace Test.DB.DAL
 {
     /// <summary>
     /// DataAccess [Table:Aptx]

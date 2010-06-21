@@ -2,10 +2,10 @@
 using System.Data;
 using System.Collections.Generic;
 using hwj.DBUtility;
-using Acct.DAL;
-using Acct.Entity;
+using Test.DB.DAL;
+using Test.DB.Entity;
 
-namespace Acct.BLL
+namespace Test.DB.BLL
 {
     /// <summary>
     /// Business [BOAptx]
@@ -57,6 +57,8 @@ namespace Acct.BLL
             FilterParams fp = new FilterParams();
             fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
             fp.AddParam(tbAptx.Fields.APTxNum, APTxNum, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.UpdateBy, "", Enums.Relation.Equal, Enums.Expression.AND);
+            //fp.AddParam(tbAptx.Fields.APTxDesc, "", Enums.Relation.Equal, Enums.Expression.AND);
             return da.GetList(null, fp);
         }
 
