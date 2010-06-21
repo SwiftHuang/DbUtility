@@ -71,31 +71,31 @@
             this.tsMenuGeneral,
             this.tsMenuSetting});
             this.treeMenu.Name = "treeMenu";
-            this.treeMenu.Size = new System.Drawing.Size(119, 76);
+            this.treeMenu.Size = new System.Drawing.Size(125, 76);
             // 
             // tsMenuConn
             // 
             this.tsMenuConn.Name = "tsMenuConn";
-            this.tsMenuConn.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuConn.Size = new System.Drawing.Size(124, 22);
             this.tsMenuConn.Text = "连 接";
             this.tsMenuConn.Click += new System.EventHandler(this.tsMenuConn_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // tsMenuGeneral
             // 
             this.tsMenuGeneral.Name = "tsMenuGeneral";
-            this.tsMenuGeneral.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuGeneral.Size = new System.Drawing.Size(124, 22);
             this.tsMenuGeneral.Text = "批量生成";
             this.tsMenuGeneral.Click += new System.EventHandler(this.tsMenuGeneral_Click);
             // 
             // tsMenuSetting
             // 
             this.tsMenuSetting.Name = "tsMenuSetting";
-            this.tsMenuSetting.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuSetting.Size = new System.Drawing.Size(124, 22);
             this.tsMenuSetting.Text = "属 性";
             this.tsMenuSetting.Click += new System.EventHandler(this.tsMenuSetting_Click);
             // 
@@ -181,10 +181,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(735, 634);
+            this.tabPage1.Size = new System.Drawing.Size(735, 633);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "首 页";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -192,10 +192,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.genSQLCtrl2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(735, 634);
+            this.tabPage2.Size = new System.Drawing.Size(735, 633);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "生成代码";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -208,7 +208,7 @@
             this.genSQLCtrl2.Module = hwj.MarkTableObject.DBModule.SQL;
             this.genSQLCtrl2.Name = "genSQLCtrl2";
             this.genSQLCtrl2.PrjInfo = null;
-            this.genSQLCtrl2.Size = new System.Drawing.Size(729, 628);
+            this.genSQLCtrl2.Size = new System.Drawing.Size(729, 627);
             this.genSQLCtrl2.TabIndex = 0;
             // 
             // Main
@@ -220,7 +220,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "代码生成工具 Ver 0.0.2.1";
+            this.Text = "代码生成工具 Ver 0.0.3.0";
             this.Load += new System.EventHandler(this.Main_Load);
             this.treeMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

@@ -144,9 +144,9 @@ namespace hwj.MarkTableObject.BLL
                     if (cisnull)
                         _sUnNull = string.Empty;
                     if (IsIdentity)
-                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(columnType), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(c), _sUnNull));
                     else
-                        strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(columnType), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(c), _sUnNull));
                     strclass2.AppendLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                     strclass2.AppendLine(2, "{");
                     if (entity.Module == DBModule.Table)
@@ -170,9 +170,20 @@ namespace hwj.MarkTableObject.BLL
                 value = "Int32";
             return (value.Substring(0, 1).ToUpper() + value.Substring(1)).Replace("System.", "");
         }
-        private static string GetTypeCode(string columnType)
+        private static string GetTypeCode(ColumnInfo column)
         {
-            return "DbType." + SetFirstUpper(columnType);
+            if (column.DataType == "System.String")
+            {
+                if (column.DataTypeName.ToLower() == "char")
+                    return "DbType.AnsiStringFixedLength";
+                else if (column.DataTypeName.ToLower() == "varchar")
+                    return "DbType.AnsiString";
+                else if (column.DataTypeName.ToLower() == "nchar")
+                    return "DbType.StringFixedLength";
+                else if (column.DataTypeName.ToLower() == "nvarchar")
+                    return "DbType.String";
+            }
+            return "DbType." + SetFirstUpper(column.DataType);
         }
 
         private static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
