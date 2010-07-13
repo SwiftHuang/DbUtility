@@ -34,6 +34,7 @@
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnTestTime = new hwj.UserControls.CommonControls.xButton();
             this.lblTime = new System.Windows.Forms.Label();
+            this.btnClean = new hwj.UserControls.CommonControls.xButton();
             this.SuspendLayout();
             // 
             // txtXML
@@ -91,11 +92,23 @@
             this.lblTime.TabIndex = 3;
             this.lblTime.Text = "label1";
             // 
+            // btnClean
+            // 
+            this.btnClean.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnClean.Location = new System.Drawing.Point(355, 419);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(75, 23);
+            this.btnClean.TabIndex = 4;
+            this.btnClean.Text = "Clean";
+            this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            // 
             // XMLFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 454);
+            this.Controls.Add(this.btnClean);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.btnTestTime);
             this.Controls.Add(this.btnGeneral);
@@ -115,5 +128,6 @@
         private System.Windows.Forms.TextBox txtOutput;
         private hwj.UserControls.CommonControls.xButton btnTestTime;
         private System.Windows.Forms.Label lblTime;
+        private hwj.UserControls.CommonControls.xButton btnClean;
     }
 }

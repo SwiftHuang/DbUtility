@@ -20,8 +20,18 @@ namespace Test
         private void btnGet_Click(object sender, EventArgs e)
         {
             //dgList.DataSource = DB.BLL.BOTestOutput.GetAllList();
-            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT", "0000000099");
+            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT", 100);
             //dgList.DataSource = Acct.BLL.BOSqlEntity.GetList("GT");
+        }
+
+        private void dgList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void xButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Vinson");
         }
     }
 }
