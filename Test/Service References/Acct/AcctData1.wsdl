@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://wtl.eAccount.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://wtl.eAccount.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://wtl.eAccount.org/">
+      <s:element name="CustomerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCustomerStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_Customer">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CustomerResult" type="tns:tbCustomer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCustomer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCustomer">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cltcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cltname" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Masteracct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Citycode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Countrycode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillAddr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillPostal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BillCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Currcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayTermType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PayTermDays" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Controller" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CtrlGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SttGroup" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SttCopies" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prftup" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Prftdown" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExrateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AcctStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatementAddr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Internal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GemsCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GemsCustCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Salesperson" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Deposit" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesGroup" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Createon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Createby" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Updateon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Updateby" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SyncOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="TxnFee" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TxnFeeDesc" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCustomer" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCustomer" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCustomer" />
+      <s:element name="SupplierList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SupplierListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSupplierStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSupplierStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateSupplierStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_Supplier">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_SupplierResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_SupplierResult" type="tns:tbSupplier" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbSupplier">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbSupplier">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuppCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuppName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Addr5" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CityCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Fax2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Contact2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayTermType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PayTerm" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CtrlGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AcctStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Barter" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Internal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Controller" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Deposit" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="SyncOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="IsBSP" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankInfo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbSupplier" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbSupplier" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbSupplier" />
+      <s:element name="ExRateDetailListByToday">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExRateDetailListByTodayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExRateDetailListByTodayResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_ExchangeRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_ExchangeRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_ExchangeRateResult" type="tns:ExRateDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExRateDetail">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOfExRateDetail">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SourceCurr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TargetCurr" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ExRate" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Operator" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Variance" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="TxnDate" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOfExRateDetail" />
+      <s:element name="CustCrLmtList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustCrLmtListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustCrLmtListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustCrLmtStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustCrLmtStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCustCrLmtStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_CustomerCrLmt">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CustomerCrLmtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CustomerCrLmtResult" type="tns:tbCustomerCrLmt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCustomerCrLmt">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCustomerCrLmt">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CltCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CltLevel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MasterAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrlAmt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="InsuredAmt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatusMsg" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="WarnPercent" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrlOutAmt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms1" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms2" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms3" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms4" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms5" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms6" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal1" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal2" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal3" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal4" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal5" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal6" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="ChkCrTerms" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ChkCrBal" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastCalculatedOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrCtrlKey" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="FirstInvDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SyncOn" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCustomerCrLmt" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCustomerCrLmt" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCustomerCrLmt" />
+      <s:element name="CrApprovalList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrApprovalListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrApprovalListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_CrApproval">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CrApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CrApprovalResult" type="tns:tbCrApproval" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCrApproval">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCrApproval">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApprovalCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CodeDesc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApprovalPwd" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ApprovalLevel" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="EffectiveOn" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ExpiredOn" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCrApproval" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCrApproval" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCrApproval" />
+      <s:element name="CrControlKeyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrControlKeyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrControlKeyListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_CrControlKey">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CrControlKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CrControlKeyResult" type="tns:tbCrControlKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCrControlKey">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCrControlKey">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Companycode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrCtrlKey" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms1Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms2Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms3Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms4Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms5Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrTerms6Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal1Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal2Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal3Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal4Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal5Factor" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrBal6Factor" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms1Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms2Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms3Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms4Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms5Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrTerms6Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal1Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal2Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal3Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal4Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal5Msg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrBal6Msg" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCrControlKey" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCrControlKey" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCrControlKey" />
+      <s:element name="CreditCardInfoList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditCardInfoListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCardInfoListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_CreditCardInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CreditCardInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CreditCardInfoResult" type="tns:tbCreditCardInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCreditCardInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCreditCardInfo">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="RefKey" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Recordtype" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Refcode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Reftype" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cardseq" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cardtype" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cardnum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Cardholder" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Expirymonth" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Expiryyear" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefDesc" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="effectivedate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="expirydate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Createon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Createby" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Updateon" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Updateby" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCreditCardInfo" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCreditCardInfo" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCreditCardInfo" />
+      <s:element name="CurrencyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CurrencyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_Currency">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_CurrencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_CurrencyResult" type="tns:tbCurrency" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tbCurrency">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCurrency">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrencyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrencyName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SmallUnit" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="Variance" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCurrency" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCurrency" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCurrency" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CustomerListSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerList" />
+  </wsdl:message>
+  <wsdl:message name="CustomerListSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_Customer" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SupplierListSoapIn">
+    <wsdl:part name="parameters" element="tns:SupplierList" />
+  </wsdl:message>
+  <wsdl:message name="SupplierListSoapOut">
+    <wsdl:part name="parameters" element="tns:SupplierListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSupplierStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSupplierStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_SupplierSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_Supplier" />
+  </wsdl:message>
+  <wsdl:message name="Demo_SupplierSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_SupplierResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExRateDetailListByTodaySoapIn">
+    <wsdl:part name="parameters" element="tns:ExRateDetailListByToday" />
+  </wsdl:message>
+  <wsdl:message name="ExRateDetailListByTodaySoapOut">
+    <wsdl:part name="parameters" element="tns:ExRateDetailListByTodayResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ExchangeRateSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_ExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ExchangeRateSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_ExchangeRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustCrLmtListSoapIn">
+    <wsdl:part name="parameters" element="tns:CustCrLmtList" />
+  </wsdl:message>
+  <wsdl:message name="CustCrLmtListSoapOut">
+    <wsdl:part name="parameters" element="tns:CustCrLmtListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustCrLmtStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustCrLmtStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustCrLmtStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustCrLmtStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerCrLmtSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_CustomerCrLmt" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CustomerCrLmtSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CustomerCrLmtResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrApprovalListSoapIn">
+    <wsdl:part name="parameters" element="tns:CrApprovalList" />
+  </wsdl:message>
+  <wsdl:message name="CrApprovalListSoapOut">
+    <wsdl:part name="parameters" element="tns:CrApprovalListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CrApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_CrApproval" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CrApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CrApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrControlKeyListSoapIn">
+    <wsdl:part name="parameters" element="tns:CrControlKeyList" />
+  </wsdl:message>
+  <wsdl:message name="CrControlKeyListSoapOut">
+    <wsdl:part name="parameters" element="tns:CrControlKeyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CrControlKeySoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_CrControlKey" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CrControlKeySoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CrControlKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreditCardInfoListSoapIn">
+    <wsdl:part name="parameters" element="tns:CreditCardInfoList" />
+  </wsdl:message>
+  <wsdl:message name="CreditCardInfoListSoapOut">
+    <wsdl:part name="parameters" element="tns:CreditCardInfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CreditCardInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_CreditCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CreditCardInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CreditCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CurrencyListSoapIn">
+    <wsdl:part name="parameters" element="tns:CurrencyList" />
+  </wsdl:message>
+  <wsdl:message name="CurrencyListSoapOut">
+    <wsdl:part name="parameters" element="tns:CurrencyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CurrencySoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_Currency" />
+  </wsdl:message>
+  <wsdl:message name="Demo_CurrencySoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_CurrencyResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AcctDataSoap">
+    <wsdl:operation name="CustomerList">
+      <wsdl:input message="tns:CustomerListSoapIn" />
+      <wsdl:output message="tns:CustomerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <wsdl:input message="tns:UpdateCustomerStatusSoapIn" />
+      <wsdl:output message="tns:UpdateCustomerStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <wsdl:input message="tns:Demo_CustomerSoapIn" />
+      <wsdl:output message="tns:Demo_CustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <wsdl:input message="tns:SupplierListSoapIn" />
+      <wsdl:output message="tns:SupplierListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <wsdl:input message="tns:UpdateSupplierStatusSoapIn" />
+      <wsdl:output message="tns:UpdateSupplierStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Supplier">
+      <wsdl:input message="tns:Demo_SupplierSoapIn" />
+      <wsdl:output message="tns:Demo_SupplierSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDetailListByToday">
+      <wsdl:input message="tns:ExRateDetailListByTodaySoapIn" />
+      <wsdl:output message="tns:ExRateDetailListByTodaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <wsdl:input message="tns:Demo_ExchangeRateSoapIn" />
+      <wsdl:output message="tns:Demo_ExchangeRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <wsdl:input message="tns:CustCrLmtListSoapIn" />
+      <wsdl:output message="tns:CustCrLmtListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <wsdl:input message="tns:UpdateCustCrLmtStatusSoapIn" />
+      <wsdl:output message="tns:UpdateCustCrLmtStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CustomerCrLmt">
+      <wsdl:input message="tns:Demo_CustomerCrLmtSoapIn" />
+      <wsdl:output message="tns:Demo_CustomerCrLmtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrApprovalList">
+      <wsdl:input message="tns:CrApprovalListSoapIn" />
+      <wsdl:output message="tns:CrApprovalListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrApproval">
+      <wsdl:input message="tns:Demo_CrApprovalSoapIn" />
+      <wsdl:output message="tns:Demo_CrApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrControlKeyList">
+      <wsdl:input message="tns:CrControlKeyListSoapIn" />
+      <wsdl:output message="tns:CrControlKeyListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrControlKey">
+      <wsdl:input message="tns:Demo_CrControlKeySoapIn" />
+      <wsdl:output message="tns:Demo_CrControlKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardInfoList">
+      <wsdl:input message="tns:CreditCardInfoListSoapIn" />
+      <wsdl:output message="tns:CreditCardInfoListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CreditCardInfo">
+      <wsdl:input message="tns:Demo_CreditCardInfoSoapIn" />
+      <wsdl:output message="tns:Demo_CreditCardInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CurrencyList">
+      <wsdl:input message="tns:CurrencyListSoapIn" />
+      <wsdl:output message="tns:CurrencyListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Currency">
+      <wsdl:input message="tns:Demo_CurrencySoapIn" />
+      <wsdl:output message="tns:Demo_CurrencySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AcctDataSoap" type="tns:AcctDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CustomerList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CustomerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <soap:operation soapAction="http://wtl.eAccount.org/UpdateCustomerStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_Customer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <soap:operation soapAction="http://wtl.eAccount.org/SupplierList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <soap:operation soapAction="http://wtl.eAccount.org/UpdateSupplierStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Supplier">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_Supplier" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDetailListByToday">
+      <soap:operation soapAction="http://wtl.eAccount.org/ExRateDetailListByToday" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_ExchangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CustCrLmtList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <soap:operation soapAction="http://wtl.eAccount.org/UpdateCustCrLmtStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CustomerCrLmt">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_CustomerCrLmt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrApprovalList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CrApprovalList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrApproval">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_CrApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrControlKeyList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CrControlKeyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrControlKey">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_CrControlKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardInfoList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CreditCardInfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CreditCardInfo">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_CreditCardInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrencyList">
+      <soap:operation soapAction="http://wtl.eAccount.org/CurrencyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Currency">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_Currency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AcctDataSoap12" type="tns:AcctDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CustomerList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CustomerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerStatus">
+      <soap12:operation soapAction="http://wtl.eAccount.org/UpdateCustomerStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Customer">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/SupplierList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierStatus">
+      <soap12:operation soapAction="http://wtl.eAccount.org/UpdateSupplierStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Supplier">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_Supplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExRateDetailListByToday">
+      <soap12:operation soapAction="http://wtl.eAccount.org/ExRateDetailListByToday" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ExchangeRate">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_ExchangeRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustCrLmtList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CustCrLmtList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustCrLmtStatus">
+      <soap12:operation soapAction="http://wtl.eAccount.org/UpdateCustCrLmtStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CustomerCrLmt">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_CustomerCrLmt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrApprovalList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CrApprovalList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrApproval">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_CrApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrControlKeyList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CrControlKeyList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CrControlKey">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_CrControlKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditCardInfoList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CreditCardInfoList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_CreditCardInfo">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_CreditCardInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrencyList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/CurrencyList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_Currency">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_Currency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AcctData">
+    <wsdl:port name="AcctDataSoap" binding="tns:AcctDataSoap">
+      <soap:address location="http://10.100.133.83/AcctSvc/AcctData.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AcctDataSoap12" binding="tns:AcctDataSoap12">
+      <soap12:address location="http://10.100.133.83/AcctSvc/AcctData.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

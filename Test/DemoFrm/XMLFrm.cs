@@ -21,7 +21,9 @@ namespace Test.DemoFrm
         {
             try
             {
-                HotelSvc.AcctInvvchResult obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<HotelSvc.AcctInvvchResult>(txtXML.Text, true);
+
+                Test.Acct.tbCrControlKey obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Test.Acct.tbCrControlKey>(txtXML.Text, true);
+                //HotelSvc.AcctInvvchResult obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<HotelSvc.AcctInvvchResult>(txtXML.Text, true);
                 //eMosBooking.RTINV obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTINV>(txtXML.Text, true);
                 //eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
                 //Acct.tbCustomer obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Acct.tbCustomer>(txtXML.Text, true);

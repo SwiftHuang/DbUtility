@@ -17,11 +17,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/AcctSvc/AcctData.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.100.133.83/AcctSvc/AcctData.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AcctData.wsdl" MetadataType="Wsdl" ID="7f78ceaf-d3ab-4f86-96b5-8e30a0776d4f" SourceId="1" SourceUrl="http://localhost/AcctSvc/AcctData.asmx?wsdl" />
-    <MetadataFile FileName="AcctData.disco" MetadataType="Disco" ID="6b99ccdc-ecac-483d-8f51-84c236c3c841" SourceId="1" SourceUrl="http://localhost/AcctSvc/AcctData.asmx?disco" />
+    <MetadataFile FileName="AcctData1.disco" MetadataType="Disco" ID="66c233f6-1905-4531-8222-3595c746de7e" SourceId="1" SourceUrl="http://10.100.133.83/AcctSvc/AcctData.asmx?disco" />
+    <MetadataFile FileName="AcctData1.wsdl" MetadataType="Wsdl" ID="bbb6f3e7-4693-45f1-8eb0-3f0cee016ca2" SourceId="1" SourceUrl="http://10.100.133.83/AcctSvc/AcctData.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
