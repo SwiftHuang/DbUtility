@@ -22,10 +22,10 @@ namespace Test.DemoFrm
             try
             {
 
-                Test.Acct.tbCrControlKey obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Test.Acct.tbCrControlKey>(txtXML.Text, true);
+                //Test.Acct.tbCrControlKey obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Test.Acct.tbCrControlKey>(txtXML.Text, true);
                 //HotelSvc.AcctInvvchResult obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<HotelSvc.AcctInvvchResult>(txtXML.Text, true);
                 //eMosBooking.RTINV obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTINV>(txtXML.Text, true);
-                //eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
+                eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
                 //Acct.tbCustomer obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<Acct.tbCustomer>(txtXML.Text, true);
                 txtOutput.Text = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(obj);
             }
@@ -45,8 +45,8 @@ namespace Test.DemoFrm
                 stopWatch.Reset();
                 stopWatch.Start();
 
-                //eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text);
-                eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
+                eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text);
+                //eMosBooking.RTTKT obj = hwj.CommonLibrary.Object.SerializationHelper.FromXml<eMosBooking.RTTKT>(txtXML.Text, true);
                 //Acct.tbCustomer obj = hwj.CommonLibrary.Object.SerializationHelper.FromXmlExcludeXMLNS<Acct.tbCustomer>(txtXML.Text);
                 TimeSpan ts = stopWatch.Elapsed;
                 stopWatch.Stop();
@@ -55,6 +55,11 @@ namespace Test.DemoFrm
                 times++;
             }
             lblTime.Text = (Seconds / times).ToString();
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            txtXML.Clear();
         }
     }
 }
