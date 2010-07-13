@@ -20,10 +20,24 @@ namespace hwj.DBUtility.Entity
         private object tmpBSValue = null;
         private T tmpBSObj = null;
 
+        public bool Exists(Enum field, object value)
+        {
+            T obj = Find(field, value);
+            if (obj != null)
+                return true;
+            else
+                return false;
+        }
         public T Find(Enum field, object value)
         {
             return ExFind(field, value);
         }
+        /// <summary>
+        /// 请使用Find代替ExFind
+        /// </summary>
+        /// <param name="field">列枚举</param>
+        /// <param name="value">列值</param>
+        /// <returns></returns>
         public T ExFind(Enum field, object value)
         {
             //if (field != null && value != null && field.Equals(tmpField) && value.Equals(tmpValue))
@@ -64,6 +78,12 @@ namespace hwj.DBUtility.Entity
         {
             return ExFindAll(field, value);
         }
+        /// <summary>
+        /// 请使用FindAll代替ExFindAll
+        /// </summary>
+        /// <param name="field">列枚举</param>
+        /// <param name="value">列值</param>
+        /// <returns></returns>
         public TS ExFindAll(Enum field, object value)
         {
             TS lst = new TS();
