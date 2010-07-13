@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<tbCrControlKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Companycode>WM</Companycode>
+  <CrCtrlKey>JTT</CrCtrlKey>
+  <CrTerms1Factor>0</CrTerms1Factor>
+  <CrTerms2Factor>0</CrTerms2Factor>
+  <CrTerms3Factor>0</CrTerms3Factor>
+  <CrTerms4Factor>0</CrTerms4Factor>
+  <CrTerms5Factor>0</CrTerms5Factor>
+  <CrTerms6Factor>0</CrTerms6Factor>
+  <CrBal1Factor>120</CrBal1Factor>
+  <CrBal2Factor>130</CrBal2Factor>
+  <CrBal3Factor>140</CrBal3Factor>
+  <CrBal4Factor>150</CrBal4Factor>
+  <CrBal5Factor>160</CrBal5Factor>
+  <CrBal6Factor>300</CrBal6Factor>
+  <CrTerms1Msg>Warning message                                                                                                         </CrTerms1Msg>
+  <CrTerms2Msg>Manager Approval                                                                                                        </CrTerms2Msg>
+  <CrTerms3Msg>Credit staff &amp; Cecilia                                                                                                  </CrTerms3Msg>
+  <CrTerms4Msg>Stefanie Approval                                                                                                       </CrTerms4Msg>
+  <CrTerms5Msg>Peggy Approval                                                                                                          </CrTerms5Msg>
+  <CrTerms6Msg>Boss Approval                                                                                                           </CrTerms6Msg>
+  <CrBal1Msg>Level 1 warning Message                                                                                                 </CrBal1Msg>
+  <CrBal2Msg>Level 2 Manager Approval                                                                                                </CrBal2Msg>
+  <CrBal3Msg>Level 3 Credit Staff and Cecilia                                                                                        </CrBal3Msg>
+  <CrBal4Msg>Stefanie approval                                                                                                       </CrBal4Msg>
+  <CrBal5Msg>Approved by FC                                                                                                          </CrBal5Msg>
+  <CrBal6Msg>Boss approval                                                                                                           </CrBal6Msg>
+  <CreateOn>2003-11-17T16:06:13.653</CreateOn>
+  <CreateBy>AMN</CreateBy>
+  <UpdateOn>2007-11-01T18:17:08.747</UpdateOn>
+  <UpdateBy>AMN</UpdateBy>
+</tbCrControlKey>
