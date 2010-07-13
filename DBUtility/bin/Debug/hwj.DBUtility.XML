@@ -605,6 +605,22 @@
             <param name="parameters">存储过程参数</param>
             <returns>SqlCommand 对象实例</returns>
         </member>
+        <member name="M:hwj.DBUtility.Entity.BaseList`2.ExFind(System.Enum,System.Object)">
+            <summary>
+            请使用Find代替ExFind
+            </summary>
+            <param name="field">列枚举</param>
+            <param name="value">列值</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Entity.BaseList`2.ExFindAll(System.Enum,System.Object)">
+            <summary>
+            请使用FindAll代替ExFindAll
+            </summary>
+            <param name="field">列枚举</param>
+            <param name="value">列值</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.Entity.BaseList`2.BinarySearch(hwj.DBUtility.TableMapping.FieldMappingInfo,System.String)">
             <summary>
              二分法
