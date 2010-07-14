@@ -99,6 +99,11 @@
             相似(like)
             </summary>
         </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.NotLike">
+            <summary>
+            不想死(Not Like)
+            </summary>
+        </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IN">
             <summary>
             包含(in)
