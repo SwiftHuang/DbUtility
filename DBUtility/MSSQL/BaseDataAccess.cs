@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace hwj.DBUtility.MSSQL
@@ -27,6 +28,15 @@ namespace hwj.DBUtility.MSSQL
         public BaseDataAccess(string connectionString)
         {
             ConnectionString = connectionString;
+        }
+
+        public int ExecuteSql(string sql, List<SqlParameter> parameters)
+        {
+            return DbHelper.ExecuteSql(ConnectionString, sql, parameters);
+        }
+        public bool ExecuteSqlTran(SqlList list)
+        {
+            return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
         }
     }
 }
