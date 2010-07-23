@@ -489,14 +489,5 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        public int ExecuteSql(string sql, List<SqlParameter> parameters)
-        {
-            return DbHelper.ExecuteSql(ConnectionString, sql, parameters);
-        }
-        public bool ExecuteSqlTran(SqlList list)
-        {
-            return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
-        }
-
     }
 }
