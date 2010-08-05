@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetStaffViewCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="staffCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStaffViewCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStaffViewCompanyResult" type="tns:ArrayOfUO_COMPANY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUO_COMPANY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UO_COMPANY" nillable="true" type="tns:UO_COMPANY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UO_COMPANY">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UOBaseOfUO_COMPANYUOList_COMPANY">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="COMPANYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="COMPANYNAME" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ADDR1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ADDR2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ADDR3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ADDR4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CITYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="COUNTRYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="POSTAL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ENCODING" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="GSTTAX" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="LOCALCURR" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FOREIGNCURR" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ACTIVE" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CREATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CREATEBY" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UPDATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UPDATEBY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CRS" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Pseudo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="emailaddress" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="undoc_default_amt" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="enablePMC" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="enableCLC" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="viewReminder" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="enableVRC" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="enableMSRS" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UOBaseOfUO_COMPANYUOList_COMPANY">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CommonBaseOfUO_COMPANYUOList_COMPANY" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CommonBaseOfUO_COMPANYUOList_COMPANY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConnectionInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSqlSentence" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultSelect" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConnectionKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryKeys" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConnectionString" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStaffViewBranch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="staffCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companys" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStaffViewBranchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStaffViewBranchResult" type="tns:ArrayOfUO_BRANCH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUO_BRANCH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UO_BRANCH" nillable="true" type="tns:UO_BRANCH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UO_BRANCH">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UOBaseOfUO_BRANCHUOList_BRANCH">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="COMPANYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BRANCHCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BRANCHNAME" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="branchaddr1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="branchaddr2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="branchaddr3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="branchaddr4" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="postal" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CONTACTPERSON" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CONTACTPHONE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CITY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="COUNTRY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="footer" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CREATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CREATEBY" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UPDATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UPDATEBY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="fax" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IATA" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UOBaseOfUO_BRANCHUOList_BRANCH">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CommonBaseOfUO_BRANCHUOList_BRANCH" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CommonBaseOfUO_BRANCHUOList_BRANCH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStaffViewTeam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="staffCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branchs" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyCodes" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStaffViewTeamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStaffViewTeamResult" type="tns:ArrayOfUO_TEAM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUO_TEAM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UO_TEAM" nillable="true" type="tns:UO_TEAM" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UO_TEAM">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UOBaseOfUO_TEAMUOList_TEAM">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="COMPANYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BRANCHCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TEAMCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TEAMNAME" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CREATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CREATEBY" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UPDATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UPDATEBY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="crs" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="pseudo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cltcode1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cltcode2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cltcode3" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UOBaseOfUO_TEAMUOList_TEAM">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CommonBaseOfUO_TEAMUOList_TEAM" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CommonBaseOfUO_TEAMUOList_TEAM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStaffViewStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companycode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="staffCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="teams" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyCodes" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStaffViewStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStaffViewStaffResult" type="tns:ArrayOfUO_PEOSTAFF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUO_PEOSTAFF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UO_PEOSTAFF" nillable="true" type="tns:UO_PEOSTAFF" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UO_PEOSTAFF">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UOBaseOfUO_PEOSTAFFUOList_PEOSTAFF">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="COMPANYCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BRANCHCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TEAMCODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PHONE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="JOBTITLE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SINECODE" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UPLIMIT" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="LOWLIMIT" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFNUM" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="EFFECTIVEDATE" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="SUSPENDDATE" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="CREATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CREATEBY" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UPDATEON" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UPDATEBY" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Sine" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CODE" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cltcode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UOBaseOfUO_PEOSTAFFUOList_PEOSTAFF">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CommonBaseOfUO_PEOSTAFFUOList_PEOSTAFF" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CommonBaseOfUO_PEOSTAFFUOList_PEOSTAFF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SyncSupplier">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncSupplierResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncSupplierResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCrApproval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCrApprovalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCrApprovalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCreditCardInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCreditCardInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCreditCardInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCustCreditLimit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCustCreditLimitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCustCreditLimitResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCreditControlKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCreditControlKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCreditControlKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncExrate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncExrateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncExrateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCurrency">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCurrencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCurrencyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncCustomerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetStaffViewCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:GetStaffViewCompany" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:GetStaffViewCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewBranchSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStaffViewBranch" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewBranchSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStaffViewBranchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewTeamSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStaffViewTeam" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewTeamSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStaffViewTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStaffViewStaff" />
+  </wsdl:message>
+  <wsdl:message name="GetStaffViewStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStaffViewStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncSupplierSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncSupplier" />
+  </wsdl:message>
+  <wsdl:message name="SyncSupplierSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncSupplierResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCrApprovalSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCrApproval" />
+  </wsdl:message>
+  <wsdl:message name="SyncCrApprovalSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCrApprovalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCreditCardInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCreditCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="SyncCreditCardInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCreditCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustCreditLimitSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCustCreditLimit" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustCreditLimitSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCustCreditLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCreditControlKeySoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCreditControlKey" />
+  </wsdl:message>
+  <wsdl:message name="SyncCreditControlKeySoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCreditControlKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncExrateSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncExrate" />
+  </wsdl:message>
+  <wsdl:message name="SyncExrateSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncExrateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCurrencySoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCurrency" />
+  </wsdl:message>
+  <wsdl:message name="SyncCurrencySoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCurrencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCustomer" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCustomerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AdminSoap">
+    <wsdl:operation name="GetStaffViewCompany">
+      <wsdl:input message="tns:GetStaffViewCompanySoapIn" />
+      <wsdl:output message="tns:GetStaffViewCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewBranch">
+      <wsdl:input message="tns:GetStaffViewBranchSoapIn" />
+      <wsdl:output message="tns:GetStaffViewBranchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewTeam">
+      <wsdl:input message="tns:GetStaffViewTeamSoapIn" />
+      <wsdl:output message="tns:GetStaffViewTeamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewStaff">
+      <wsdl:input message="tns:GetStaffViewStaffSoapIn" />
+      <wsdl:output message="tns:GetStaffViewStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncSupplier">
+      <wsdl:input message="tns:SyncSupplierSoapIn" />
+      <wsdl:output message="tns:SyncSupplierSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCrApproval">
+      <wsdl:input message="tns:SyncCrApprovalSoapIn" />
+      <wsdl:output message="tns:SyncCrApprovalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditCardInfo">
+      <wsdl:input message="tns:SyncCreditCardInfoSoapIn" />
+      <wsdl:output message="tns:SyncCreditCardInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustCreditLimit">
+      <wsdl:input message="tns:SyncCustCreditLimitSoapIn" />
+      <wsdl:output message="tns:SyncCustCreditLimitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditControlKey">
+      <wsdl:input message="tns:SyncCreditControlKeySoapIn" />
+      <wsdl:output message="tns:SyncCreditControlKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncExrate">
+      <wsdl:input message="tns:SyncExrateSoapIn" />
+      <wsdl:output message="tns:SyncExrateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCurrency">
+      <wsdl:input message="tns:SyncCurrencySoapIn" />
+      <wsdl:output message="tns:SyncCurrencySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustomer">
+      <wsdl:input message="tns:SyncCustomerSoapIn" />
+      <wsdl:output message="tns:SyncCustomerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AdminSoap" type="tns:AdminSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStaffViewCompany">
+      <soap:operation soapAction="http://tempuri.org/GetStaffViewCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewBranch">
+      <soap:operation soapAction="http://tempuri.org/GetStaffViewBranch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewTeam">
+      <soap:operation soapAction="http://tempuri.org/GetStaffViewTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewStaff">
+      <soap:operation soapAction="http://tempuri.org/GetStaffViewStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncSupplier">
+      <soap:operation soapAction="http://tempuri.org/SyncSupplier" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCrApproval">
+      <soap:operation soapAction="http://tempuri.org/SyncCrApproval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditCardInfo">
+      <soap:operation soapAction="http://tempuri.org/SyncCreditCardInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustCreditLimit">
+      <soap:operation soapAction="http://tempuri.org/SyncCustCreditLimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditControlKey">
+      <soap:operation soapAction="http://tempuri.org/SyncCreditControlKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncExrate">
+      <soap:operation soapAction="http://tempuri.org/SyncExrate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCurrency">
+      <soap:operation soapAction="http://tempuri.org/SyncCurrency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustomer">
+      <soap:operation soapAction="http://tempuri.org/SyncCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AdminSoap12" type="tns:AdminSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStaffViewCompany">
+      <soap12:operation soapAction="http://tempuri.org/GetStaffViewCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewBranch">
+      <soap12:operation soapAction="http://tempuri.org/GetStaffViewBranch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewTeam">
+      <soap12:operation soapAction="http://tempuri.org/GetStaffViewTeam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffViewStaff">
+      <soap12:operation soapAction="http://tempuri.org/GetStaffViewStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncSupplier">
+      <soap12:operation soapAction="http://tempuri.org/SyncSupplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCrApproval">
+      <soap12:operation soapAction="http://tempuri.org/SyncCrApproval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditCardInfo">
+      <soap12:operation soapAction="http://tempuri.org/SyncCreditCardInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustCreditLimit">
+      <soap12:operation soapAction="http://tempuri.org/SyncCustCreditLimit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCreditControlKey">
+      <soap12:operation soapAction="http://tempuri.org/SyncCreditControlKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncExrate">
+      <soap12:operation soapAction="http://tempuri.org/SyncExrate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCurrency">
+      <soap12:operation soapAction="http://tempuri.org/SyncCurrency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SyncCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Admin">
+    <wsdl:port name="AdminSoap" binding="tns:AdminSoap">
+      <soap:address location="http://10.100.133.83/eMos2Acct/Admin.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AdminSoap12" binding="tns:AdminSoap12">
+      <soap12:address location="http://10.100.133.83/eMos2Acct/Admin.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

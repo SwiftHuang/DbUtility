@@ -1,0 +1,214 @@
+﻿<?xml version="1.0"?>
+<RTXO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PEOMSTR>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOMSTR</TableName>
+      <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>BKGREF</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>GT</COMPANYCODE>
+    <BKGREF>98GBKOTEPV</BKGREF>
+    <pseudo_inv>TE18</pseudo_inv>
+    <CRSSINEIN_inv>MC</CRSSINEIN_inv>
+    <agency_arc_iata_num>08 30429 5</agency_arc_iata_num>
+    <iss_off_code>08304295</iss_off_code>
+    <salesperson>VVO</salesperson>
+    <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+    <ISTOUR>P</ISTOUR>
+    <PNR>KOTEPV</PNR>
+    <CRSSINEIN>MC</CRSSINEIN>
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <DEADLINE>2009-08-13T00:00:00</DEADLINE>
+    <CLTODE>GW0007</CLTODE>
+    <CLTNAME>炜峰票务</CLTNAME>
+    <CLTADDR />
+    <STAFFCODE>VVO       </STAFFCODE>
+    <TEAMCODE>GWT</TEAMCODE>
+    <FIRSTPAX>HUIFANG MS/KONG</FIRSTPAX>
+    <PHONE />
+    <FAX />
+    <EMAIL />
+    <MASTERPNR>98GBKOTEPV</MASTERPNR>
+    <TOURCODE />
+    <CONTACTPERSON />
+    <DEPARTDATE>2009-08-13T00:00:00</DEPARTDATE>
+    <TTLSELLCURR>CNY</TTLSELLCURR>
+    <TTLSELLAMT>6110.00</TTLSELLAMT>
+    <TTLSELLTAXCURR>CNY</TTLSELLTAXCURR>
+    <TTLSELLTAX>624.00</TTLSELLTAX>
+    <TTLCOSTCURR>CNY</TTLCOSTCURR>
+    <TTLCOSTAMT>6083.05</TTLCOSTAMT>
+    <TTLCOSTTAXCURR>CNY</TTLCOSTTAXCURR>
+    <TTLCOSTTAX>618.00</TTLCOSTTAX>
+    <INVCURR>CNY</INVCURR>
+    <INVAMT>6110.00</INVAMT>
+    <INVTAXCURR>CNY</INVTAXCURR>
+    <INVTAX>624.00</INVTAX>
+    <DOCCURR>CNY</DOCCURR>
+    <DOCAMT>6083.05</DOCAMT>
+    <DOCTAXCURR>CNY</DOCTAXCURR>
+    <DOCTAX>618.00</DOCTAX>
+    <TTLSELLGST>0.00</TTLSELLGST>
+    <TTLCOSTGST>0.00</TTLCOSTGST>
+    <TTLINVGST>0.00</TTLINVGST>
+    <TTLDOCGST>0.00</TTLDOCGST>
+    <INVCOUNT>1</INVCOUNT>
+    <DOCCOUNT>1</DOCCOUNT>
+    <RMK1 />
+    <RMK2 />
+    <RMK3 />
+    <RMK4 />
+    <SOURCESYSTEM>IUR</SOURCESYSTEM>
+    <SOURCE>AGENT</SOURCE>
+    <CREATEON>2009-08-06T15:29:33.2</CREATEON>
+    <CREATEBY>VVO</CREATEBY>
+    <UPDATEON>2009-08-06T18:33:09.827</UPDATEON>
+    <UPDATEBY>VVO</UPDATEBY>
+    <SOURCEREF />
+    <pseudo>6BMD</pseudo>
+    <MstrRemark />
+    <BookingNo>0</BookingNo>
+  </PEOMSTR>
+  <SUMMARY>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOXO</TableName>
+      <DefaultSelect>select * from [PEOXO](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>XONUM</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>GT</COMPANYCODE>
+    <XONUM>GX00010276</XONUM>
+    <BKGREF>98GBKOTEPV</BKGREF>
+    <SUPPCODE>WH0001  </SUPPCODE>
+    <SUPPNAME>WESTMINSTER HONG KONG OFFICE (HWT)</SUPPNAME>
+    <SUPPADDR>||||||</SUPPADDR>
+    <SUPPTEL />
+    <SUPPFAX />
+    <STAFFCODE>VVO</STAFFCODE>
+    <TEAMCODE>GWT</TEAMCODE>
+    <DEPARTDATE>2009-08-13T00:00:00</DEPARTDATE>
+    <FORMPAY>CREDIT</FORMPAY>
+    <COSTCURR>HKD</COSTCURR>
+    <COSTAMT>7601.00</COSTAMT>
+    <TAXCURR>HKD</TAXCURR>
+    <TAXAMT>701.00</TAXAMT>
+    <HKDAMT>6701.05</HKDAMT>
+    <REMARK1 />
+    <REMARK2>(select top 1 rtrim(isnull(firstpax, '')) from peomstr where bkgref = </REMARK2>
+    <XOREF>//</XOREF>
+    <RMK1>-</RMK1>
+    <RMK2>-</RMK2>
+    <RMK3 />
+    <RMK4 />
+    <RMK5 />
+    <RMK6 />
+    <VOIDON>0001-01-01T00:00:00</VOIDON>
+    <CREATEON>2009-08-06T15:33:41</CREATEON>
+    <CREATEBY>VVO</CREATEBY>
+    <UPDATEON>2009-08-06T15:33:41.467</UPDATEON>
+    <UPDATEBY>VVO</UPDATEBY>
+    <gstpct>0.00</gstpct>
+    <gstamt>0.00</gstamt>
+    <airRmk />
+    <staffname>VIVIEN OU/GWT</staffname>
+    <stafftel>(8620)38114033</stafftel>
+    <gstair>0</gstair>
+    <gsthotel>0.00</gsthotel>
+    <gstother>0.00</gstother>
+    <CostExcludeTax>6900.00</CostExcludeTax>
+    <ATTN />
+  </SUMMARY>
+  <PASSENGERS>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <INVNUM>GX00010276</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>1</PAXSEQ>
+      <PAXNAME>KONG/HUIFANG MS//ADT/ADT/ADT</PAXNAME>
+      <INVTYPE>X</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+  </PASSENGERS>
+  <PEOXOSEG>
+    <UO_PEOXOSEG>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOXOSEG</TableName>
+        <DefaultSelect>select * from [PEOXOSEG](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>XONUM</string>
+          <string>SEGNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <XONUM>GX00010276</XONUM>
+      <SEGNUM>00001</SEGNUM>
+      <SERVTYPE>AIR</SERVTYPE>
+      <SERVNAME>CX882    H     HKG   LAX   13Aug2009      1615   KOTEPV </SERVNAME>
+      <SERVDESC>1415   14Aug2009      KOTEPV</SERVDESC>
+      <CREATEON>2009-08-06T15:33:41.467</CREATEON>
+      <CREATEBY>VVO</CREATEBY>
+      <GSTAMT>0</GSTAMT>
+      <Remark />
+    </UO_PEOXOSEG>
+  </PEOXOSEG>
+  <PEOXODETAIL>
+    <UO_PEOXODETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOXODETAIL</TableName>
+        <DefaultSelect>select * from [PEOXODETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>XONUM</string>
+          <string>SEGNUM</string>
+          <string>SEQNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <XONUM>GX00010276</XONUM>
+      <SEGNUM>00001</SEGNUM>
+      <SEQNUM>00001</SEQNUM>
+      <DETLTYPE>ADT</DETLTYPE>
+      <QTY>1</QTY>
+      <RMNTS>0</RMNTS>
+      <RATENAME />
+      <ITEMNAME>ADT</ITEMNAME>
+      <COSTCURR>HKD</COSTCURR>
+      <COSTAMT>6900.00</COSTAMT>
+      <HKDAMT>6083.04</HKDAMT>
+      <TAXCURR>HKD</TAXCURR>
+      <TAXAMT>701.00</TAXAMT>
+      <CREATEON>2009-08-06T15:33:41.467</CREATEON>
+      <CREATEBY>VVO</CREATEBY>
+      <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+      <GST>0</GST>
+    </UO_PEOXODETAIL>
+  </PEOXODETAIL>
+</RTXO>

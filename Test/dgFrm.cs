@@ -14,13 +14,14 @@ namespace Test
         public dgFrm()
         {
             InitializeComponent();
-            //dgList.AutoGenerateColumns = false;
+            dgList.AutoGenerateColumns = false;
+            dataListPage1.CheckBoxColumn = Column1;
         }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
             //dgList.DataSource = DB.BLL.BOTestOutput.GetAllList();
-            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT", 100);
+
             //dgList.DataSource = Acct.BLL.BOSqlEntity.GetList("GT");
         }
 
@@ -32,6 +33,22 @@ namespace Test
         private void xButton1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Vinson");
+        }
+
+        private void dgFrm_Load(object sender, EventArgs e)
+        {
+            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT", 100);
+            hwj.UserControls.DataList.xDataGridViewTextBoxCell cell1 = dgList[Column3.Index, 0] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
+            cell1.ContentType = hwj.UserControls.CommonControls.ContentType.Numberic;
+
+            hwj.UserControls.DataList.xDataGridViewTextBoxCell cell2 = dgList[Column3.Index, 1] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
+            cell2.ContentType = hwj.UserControls.CommonControls.ContentType.Numberic;
+            cell2.Style.Format = "N1";
+            cell2.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            //hwj.UserControls.DataList.xDataGridViewTextBoxCell cell3 = dgList[Column2.Index, 2] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
+            //cell3.ContentType = hwj.UserControls.CommonControls.ContentType.Email;
+            ////btnGet.PerformClick();
         }
     }
 }

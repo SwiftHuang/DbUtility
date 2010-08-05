@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="efaff3d0-377d-41d6-87fc-97b1d44f729c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e99df38c-f69c-452d-b985-8e8a0655a193" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -17,11 +17,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/eMosSVC/booking.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.100.133.83/eMos2Acct/Admin.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="booking1.disco" MetadataType="Disco" ID="eab861e9-7ba5-409a-9a2c-8bcdbbee2669" SourceId="1" SourceUrl="http://localhost/eMosSVC/booking.asmx?disco" />
-    <MetadataFile FileName="booking1.wsdl" MetadataType="Wsdl" ID="8565dadd-7d60-4cff-991a-e314016f4187" SourceId="1" SourceUrl="http://localhost/eMosSVC/booking.asmx?wsdl" />
+    <MetadataFile FileName="Admin.wsdl" MetadataType="Wsdl" ID="1e473afc-e0b7-4f45-a609-b5e242ba24c5" SourceId="1" SourceUrl="http://10.100.133.83/eMos2Acct/Admin.asmx?wsdl" />
+    <MetadataFile FileName="Admin.disco" MetadataType="Disco" ID="b692605d-8ba5-4101-a6a1-1e7fde2c5174" SourceId="1" SourceUrl="http://10.100.133.83/eMos2Acct/Admin.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />

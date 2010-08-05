@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<tbSupplier xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CompanyCode>WM</CompanyCode>
+  <SuppCode>AA0006  </SuppCode>
+  <SuppName>AAC GROUP CO LTD                                  </SuppName>
+  <Addr1>97 SOI SUKHUMVIT 38                               </Addr1>
+  <Addr2>SUKHUMVIT RD PHAKANONG                            </Addr2>
+  <Addr3>KLONGTOEY BANGKOK 10110                           </Addr3>
+  <Phone1>662 381 1700        </Phone1>
+  <Fax1>662 381 1300        </Fax1>
+  <Contact1>REQUESTED BY KATHY 04/01/08                       </Contact1>
+  <Title1 />
+  <Title2 />
+  <CurrCode>THB</CurrCode>
+  <PayTermType>D  </PayTermType>
+  <PayTerm>0</PayTerm>
+  <BankGLAcct>7807811</BankGLAcct>
+  <CtrlGLAcct>8008001</CtrlGLAcct>
+  <AcctStatus>1</AcctStatus>
+  <ExRateCode>DAY </ExRateCode>
+  <Remarks />
+  <Barter />
+  <Internal />
+  <Controller />
+  <Deposit>0.00</Deposit>
+  <SyncOn>0001-01-01T00:00:00</SyncOn>
+  <IsBSP>N</IsBSP>
+  <BankInfo />
+  <CreateOn>2008-01-04T17:45:30.81</CreateOn>
+  <CreateBy>AML</CreateBy>
+  <UpdateOn>2008-01-04T17:45:30.81</UpdateOn>
+  <UpdateBy>AML</UpdateBy>
+</tbSupplier>
