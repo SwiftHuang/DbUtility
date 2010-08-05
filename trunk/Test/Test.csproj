@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6FA437B2-1559-4971-883C-7804D7CBBE31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -132,7 +132,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\eMosBooking\booking.wsdl" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -160,7 +159,7 @@
       <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControl\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>
@@ -176,9 +175,6 @@
     <WCFMetadataStorage Include="Service References\Acct\" />
     <WCFMetadataStorage Include="Service References\eMosBooking\" />
     <WCFMetadataStorage Include="Service References\HotelSvc\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\eMosBooking\booking.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\eMosBooking\configuration.svcinfo" />
@@ -282,10 +278,15 @@
     <None Include="Service References\Acct\Test.Acct.tbSupplier.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\eMosBooking\booking1.disco" />
+    <None Include="Service References\eMosBooking\booking1.wsdl" />
     <Content Include="XMLTest\CrControlKey.xml" />
     <Content Include="XMLTest\Customer.xml" />
     <Content Include="XMLTest\eMos Bkg.xml" />
     <Content Include="XMLTest\eMos Bkg2.xml" />
+    <Content Include="XMLTest\eMos_INV.xml" />
+    <Content Include="XMLTest\eMos_TKT.xml" />
+    <Content Include="XMLTest\eMos_XO.xml" />
     <Content Include="XMLTest\Hotel.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

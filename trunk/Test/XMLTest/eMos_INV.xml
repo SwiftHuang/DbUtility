@@ -1,0 +1,253 @@
+﻿<?xml version="1.0"?>
+<RTINV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PEOMSTR>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOMSTR</TableName>
+      <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>BKGREF</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>GT</COMPANYCODE>
+    <BKGREF>98GETPSYTG</BKGREF>
+    <pseudo_inv />
+    <CRSSINEIN_inv />
+    <agency_arc_iata_num />
+    <iss_off_code />
+    <salesperson>hdz</salesperson>
+    <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+    <ISTOUR>P</ISTOUR>
+    <PNR>PSYTG</PNR>
+    <CRSSINEIN />
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <DEADLINE>2009-08-06T00:00:00</DEADLINE>
+    <CLTODE>GR0002</CLTODE>
+    <CLTNAME>上海人头马贸易有限公司(PHOEBE XIAO)</CLTNAME>
+    <CLTADDR />
+    <STAFFCODE>HDZ       </STAFFCODE>
+    <TEAMCODE>GC1  </TEAMCODE>
+    <FIRSTPAX>/赵晓斌</FIRSTPAX>
+    <PHONE />
+    <FAX />
+    <EMAIL />
+    <MASTERPNR>98GETPSYTG</MASTERPNR>
+    <TOURCODE />
+    <CONTACTPERSON />
+    <DEPARTDATE>2009-08-11T00:00:00</DEPARTDATE>
+    <TTLSELLCURR>CNY</TTLSELLCURR>
+    <TTLSELLAMT>1030.00</TTLSELLAMT>
+    <TTLSELLTAXCURR>CNY</TTLSELLTAXCURR>
+    <TTLSELLTAX>50.00</TTLSELLTAX>
+    <TTLCOSTCURR>CNY</TTLCOSTCURR>
+    <TTLCOSTAMT>999.10</TTLCOSTAMT>
+    <TTLCOSTTAXCURR>CNY</TTLCOSTTAXCURR>
+    <TTLCOSTTAX>50.00</TTLCOSTTAX>
+    <INVCURR>CNY</INVCURR>
+    <INVAMT>1030.00</INVAMT>
+    <INVTAXCURR>CNY</INVTAXCURR>
+    <INVTAX>50.00</INVTAX>
+    <DOCCURR>CNY</DOCCURR>
+    <DOCAMT>999.10</DOCAMT>
+    <DOCTAXCURR>CNY</DOCTAXCURR>
+    <DOCTAX>50.00</DOCTAX>
+    <TTLSELLGST>0.00</TTLSELLGST>
+    <TTLCOSTGST>0.00</TTLCOSTGST>
+    <TTLINVGST>0.00</TTLINVGST>
+    <TTLDOCGST>0.00</TTLDOCGST>
+    <INVCOUNT>1</INVCOUNT>
+    <DOCCOUNT>1</DOCCOUNT>
+    <RMK1 />
+    <RMK2 />
+    <RMK3 />
+    <RMK4 />
+    <SOURCESYSTEM>TS</SOURCESYSTEM>
+    <SOURCE>AGENT</SOURCE>
+    <CREATEON>2009-08-06T13:52:18.42</CREATEON>
+    <CREATEBY>HDZ</CREATEBY>
+    <UPDATEON>2009-08-06T14:03:13.78</UPDATEON>
+    <UPDATEBY>HDZ</UPDATEBY>
+    <SOURCEREF />
+    <pseudo />
+    <MstrRemark />
+    <BookingNo>0</BookingNo>
+  </PEOMSTR>
+  <PenInv>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOINV</TableName>
+      <DefaultSelect>select * from [PEOINV](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>INVNUM</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>GT</COMPANYCODE>
+    <INVNUM>GI00028294</INVNUM>
+    <CHQ_ISSUEDATE>2009-08-06T14:03:13</CHQ_ISSUEDATE>
+    <BANKCODE />
+    <PAY_RMK />
+    <ChqNo />
+    <gstpct>0.00</gstpct>
+    <gstamt>0.00</gstamt>
+    <SellExcludeTax>1030.00</SellExcludeTax>
+    <invdtcurr>CNY</invdtcurr>
+    <invdtsum>1080.00</invdtsum>
+    <BKGREF>98GETPSYTG</BKGREF>
+    <CLTCODE>GR0002  </CLTCODE>
+    <CLTNAME>上海人头马贸易有限公司</CLTNAME>
+    <CLTADDR>&lt;br&gt;&lt;br&gt;&lt;br&gt;</CLTADDR>
+    <STAFFCODE>HDZ       </STAFFCODE>
+    <TEAMCODE>GC1  </TEAMCODE>
+    <SELLCURR>CNY</SELLCURR>
+    <SELLAMT>1080.00</SELLAMT>
+    <TAXCURR>CNY</TAXCURR>
+    <TAXAMT>50.00</TAXAMT>
+    <HKDAMT>1080.00</HKDAMT>
+    <ANALYSISCODE />
+    <CUSTREF />
+    <CONTACTPERSON />
+    <RMK1>-</RMK1>
+    <RMK2>-</RMK2>
+    <RMK3>-</RMK3>
+    <RMK4>-</RMK4>
+    <RMK5>-</RMK5>
+    <RMK6>-</RMK6>
+    <INVTYPE>CSH</INVTYPE>
+    <INVFORMAT>D</INVFORMAT>
+    <VOIDON>0001-01-01T00:00:00</VOIDON>
+    <CREATEON>2009-08-06T14:03:13</CREATEON>
+    <CREATEBY>HDZ</CREATEBY>
+    <UPDATEON>2009-08-06T14:03:13.497</UPDATEON>
+    <UPDATEBY>HDZ</UPDATEBY>
+    <ATTN> </ATTN>
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <CR_card_expiry>0001-01-01T00:00:00</CR_card_expiry>
+    <CR_amt>0</CR_amt>
+    <RECINV>INV</RECINV>
+    <PAYER />
+  </PenInv>
+  <PEOINVSEG>
+    <UO_PEOINVSEG>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVSEG</TableName>
+        <DefaultSelect>select * from [PEOINVSEG](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEGNUM</string>
+          <string>SERVTYPE</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <INVNUM>GI00028294</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SERVTYPE>AIR</SERVTYPE>
+      <SERVNAME>3U8773   Y     11Aug2009      2000   CTU   NNG   </SERVNAME>
+      <SERVDESC>2135   11Aug2009      PSYTG </SERVDESC>
+      <CREATEON>2009-08-06T14:03:13.513</CREATEON>
+      <CREATEBY>HDZ</CREATEBY>
+      <GSTAMT>0.00</GSTAMT>
+      <SEGTYPE>AIR</SEGTYPE>
+      <ReasonCode />
+    </UO_PEOINVSEG>
+  </PEOINVSEG>
+  <PEOINVDETAIL>
+    <UO_PEOINVDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVDETAIL</TableName>
+        <DefaultSelect>select * from [PEOINVDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>SEQNUM</string>
+          <string>INVNUM</string>
+          <string>COMPANYCODE</string>
+          <string>SEGNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <INVNUM>GI00028294</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SEQNUM>00001</SEQNUM>
+      <DETLTYPE>ADT</DETLTYPE>
+      <UNITPRICE>0.00</UNITPRICE>
+      <QTY>1</QTY>
+      <RMNTS>1</RMNTS>
+      <RATENAME />
+      <ITEMNAME>ADT</ITEMNAME>
+      <SELLCURR>CNY</SELLCURR>
+      <SELLAMT>1030.00</SELLAMT>
+      <TAXCURR>CNY</TAXCURR>
+      <TAXAMT>50.00</TAXAMT>
+      <HKDAMT>1080.00</HKDAMT>
+      <CREATEON>2009-08-06T14:03:13.513</CREATEON>
+      <CREATEBY>HDZ</CREATEBY>
+      <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+      <SHOWDETAILFEE>N</SHOWDETAILFEE>
+      <AMTFEE>0.00</AMTFEE>
+      <DISCOUNT_MARKUP_PER>0</DISCOUNT_MARKUP_PER>
+      <INVOICE_NETT_GROSS>0.00</INVOICE_NETT_GROSS>
+    </UO_PEOINVDETAIL>
+  </PEOINVDETAIL>
+  <PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>GT</COMPANYCODE>
+      <INVNUM>GI00028294</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>1</PAXSEQ>
+      <PAXNAME>赵晓斌///ADT/ADT/ADT/ADT</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+  </PEOINPAX>
+  <PEOINVTKTref>
+    <UO_PEOINVTKTref>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKTref</TableName>
+        <DefaultSelect>select * from [PEOINVTKTref](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>BkgRef</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>GT</CompanyCode>
+      <Ticket>3616664422</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>98GETPSYTG</BkgRef>
+      <InvNum>GI00028294</InvNum>
+      <CreateOn>2009-08-06T14:03:13.513</CreateOn>
+      <CreateBy>HDZ</CreateBy>
+      <UpdateOn>2009-08-06T14:03:13.513</UpdateOn>
+      <UpdateBy>HDZ</UpdateBy>
+    </UO_PEOINVTKTref>
+  </PEOINVTKTref>
+  <PEOINVTKT />
+  <Creditcardsales />
+</RTINV>

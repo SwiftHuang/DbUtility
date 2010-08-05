@@ -12,7 +12,7 @@ namespace Test.DB.BLL
     /// </summary>
     public class BOAptx
     {
-        private static DAAptx da = new DAAptx("Data Source=192.168.1.200;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=113502");
+        private static DAAptx da = new DAAptx("Data Source=10.100.133.83;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=gzuat");
         public BOAptx()
         { }
         public static bool Exists(string CompanyCode, string APTxNum)
@@ -66,6 +66,7 @@ namespace Test.DB.BLL
         {
             FilterParams fp = new FilterParams();
             fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            //fp.AddParam(tbAptx.Fields.PurgeRef, "BP%", Enums.Relation.NotLike, Enums.Expression.AND);
             return da.GetList(null, fp, null, top);
         }
 

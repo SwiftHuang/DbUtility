@@ -1583,6 +1583,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="PEOINVTKTref" type="tns:ArrayOfUO_PEOINVTKTref" />
           <s:element minOccurs="0" maxOccurs="1" name="PEOINVTKT" type="tns:ArrayOfUO_PEOINVTKT" />
           <s:element minOccurs="0" maxOccurs="1" name="Creditcardsales" type="tns:ArrayOfUO_Creditcardsales" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tickets" type="tns:ArrayOfRTTKT" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsNCRR" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="UO_PEOINV">
@@ -1862,6 +1864,11 @@
           <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfRTTKT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RTTKT" nillable="true" type="tns:RTTKT" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetPeoMstr">
         <s:complexType>
           <s:sequence>
@@ -2050,6 +2057,7 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="PNR" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gds" type="tns:GDS_Types" />
             <s:element minOccurs="0" maxOccurs="1" name="tickets" type="tns:ArrayOfString" />
             <s:element minOccurs="0" maxOccurs="1" name="cltCode" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="adcomTxno" type="s:string" />
@@ -2058,6 +2066,15 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:simpleType name="GDS_Types">
+        <s:restriction base="s:string">
+          <s:enumeration value="Abacus" />
+          <s:enumeration value="Galieo" />
+          <s:enumeration value="Amadeus" />
+          <s:enumeration value="TravelSky" />
+          <s:enumeration value="Worldspan" />
+        </s:restriction>
+      </s:simpleType>
       <s:element name="RetrieveBooking_IURResponse">
         <s:complexType>
           <s:sequence>
@@ -2079,6 +2096,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="PNR" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Bkgref" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceSystem" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="UO_PeoMstr">
@@ -2583,6 +2601,9 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="booking" type="tns:RetrieveIURBooking" />
             <s:element minOccurs="0" maxOccurs="1" name="airSegment4Invoice" type="tns:ArrayOfAirlineSegment" />
+            <s:element minOccurs="0" maxOccurs="1" name="invrmk" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="staffcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="teamcode" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="isAllowInvoice" type="s:boolean" />
             <s:element minOccurs="1" maxOccurs="1" name="isAllowEInvoice" type="s:boolean" />
             <s:element minOccurs="0" maxOccurs="1" name="recipient" type="s:string" />
@@ -2631,6 +2652,47 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="UpdateStatus4AcctSyncResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Add1Segment4Account">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bkgref" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="segtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sellCurr" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sellAmt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="sellTax" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="costCurr" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="costAmt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="costTax" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="supplierCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Add1Segment4AccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Add1Segment4AccountResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBookingView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StaffCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bkgref" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBookingViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckBookingViewResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2762,6 +2824,18 @@
   <wsdl:message name="UpdateStatus4AcctSyncSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateStatus4AcctSyncResponse" />
   </wsdl:message>
+  <wsdl:message name="Add1Segment4AccountSoapIn">
+    <wsdl:part name="parameters" element="tns:Add1Segment4Account" />
+  </wsdl:message>
+  <wsdl:message name="Add1Segment4AccountSoapOut">
+    <wsdl:part name="parameters" element="tns:Add1Segment4AccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckBookingViewSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckBookingView" />
+  </wsdl:message>
+  <wsdl:message name="CheckBookingViewSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckBookingViewResponse" />
+  </wsdl:message>
   <wsdl:portType name="BookingSoap">
     <wsdl:operation name="GetTourCodeListByCodeDesc">
       <wsdl:input message="tns:GetTourCodeListByCodeDescSoapIn" />
@@ -2846,6 +2920,14 @@
     <wsdl:operation name="UpdateStatus4AcctSync">
       <wsdl:input message="tns:UpdateStatus4AcctSyncSoapIn" />
       <wsdl:output message="tns:UpdateStatus4AcctSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Add1Segment4Account">
+      <wsdl:input message="tns:Add1Segment4AccountSoapIn" />
+      <wsdl:output message="tns:Add1Segment4AccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBookingView">
+      <wsdl:input message="tns:CheckBookingViewSoapIn" />
+      <wsdl:output message="tns:CheckBookingViewSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BookingSoap" type="tns:BookingSoap">
@@ -3032,6 +3114,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateStatus4AcctSync">
       <soap:operation soapAction="http://tempuri.org/UpdateStatus4AcctSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add1Segment4Account">
+      <soap:operation soapAction="http://tempuri.org/Add1Segment4Account" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBookingView">
+      <soap:operation soapAction="http://tempuri.org/CheckBookingView" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3231,13 +3331,31 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Add1Segment4Account">
+      <soap12:operation soapAction="http://tempuri.org/Add1Segment4Account" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBookingView">
+      <soap12:operation soapAction="http://tempuri.org/CheckBookingView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Booking">
     <wsdl:port name="BookingSoap" binding="tns:BookingSoap">
-      <soap:address location="http://10.100.133.83/eMos2Acct/booking.asmx" />
+      <soap:address location="http://localhost/eMosSVC/booking.asmx" />
     </wsdl:port>
     <wsdl:port name="BookingSoap12" binding="tns:BookingSoap12">
-      <soap12:address location="http://10.100.133.83/eMos2Acct/booking.asmx" />
+      <soap12:address location="http://localhost/eMosSVC/booking.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
