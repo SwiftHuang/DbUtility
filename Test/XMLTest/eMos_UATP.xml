@@ -1,0 +1,1500 @@
+False	WM-HC00036172-I	2010/08/05 18:04:41	XML 文档(1499, 4)中有错误。	PEOINV	HC00036172	<?xml version="1.0"?>
+<RTINV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PEOMSTR>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOMSTR</TableName>
+      <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>BKGREF</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>WM</COMPANYCODE>
+    <BKGREF>WMH0001584</BKGREF>
+    <salesperson />
+    <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+    <ISTOUR>P</ISTOUR>
+    <ANALYSISCODE />
+    <PNR />
+    <CRSSINEIN />
+    <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+    <CLTODE>HN0400</CLTODE>
+    <CLTNAME>AON HONG KONG LTD</CLTNAME>
+    <CLTADDR />
+    <STAFFCODE>CRW       </STAFFCODE>
+    <TEAMCODE>HSD  </TEAMCODE>
+    <FIRSTPAX>CHAN AA</FIRSTPAX>
+    <PHONE />
+    <FAX />
+    <EMAIL />
+    <MASTERPNR>WMH0001584</MASTERPNR>
+    <TOURCODE>TC004CXOCT06</TOURCODE>
+    <CONTACTPERSON />
+    <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+    <TTLSELLCURR>HKD</TTLSELLCURR>
+    <TTLSELLAMT>49288.00</TTLSELLAMT>
+    <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+    <TTLSELLTAX>8880.00</TTLSELLTAX>
+    <TTLCOSTCURR>HKD</TTLCOSTCURR>
+    <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+    <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+    <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+    <INVCURR>HKD</INVCURR>
+    <INVAMT>36852.00</INVAMT>
+    <INVTAXCURR>HKD</INVTAXCURR>
+    <INVTAX>7620.00</INVTAX>
+    <DOCCURR>HKD</DOCCURR>
+    <DOCAMT>32560.00</DOCAMT>
+    <DOCTAXCURR>HKD</DOCTAXCURR>
+    <DOCTAX>8870.00</DOCTAX>
+    <TTLSELLGST>0.00</TTLSELLGST>
+    <TTLCOSTGST>0.00</TTLCOSTGST>
+    <TTLINVGST>0.00</TTLINVGST>
+    <TTLDOCGST>0.00</TTLDOCGST>
+    <INVCOUNT>230</INVCOUNT>
+    <DOCCOUNT>30</DOCCOUNT>
+    <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+    <SOURCE>Agent</SOURCE>
+    <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+    <CREATEBY>CRW</CREATEBY>
+    <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+    <UPDATEBY>CRW</UPDATEBY>
+    <MstrRemark />
+    <BookingNo>0</BookingNo>
+  </PEOMSTR>
+  <PenInv>
+    <ConnInfo>
+      <IsSqlSentence>false</IsSqlSentence>
+      <TableName>PEOINV</TableName>
+      <DefaultSelect>select * from [PEOINV](nolock)</DefaultSelect>
+      <ConnectionKey>EMOS</ConnectionKey>
+      <PrimaryKeys>
+        <string>INVNUM</string>
+        <string>COMPANYCODE</string>
+      </PrimaryKeys>
+    </ConnInfo>
+    <COMPANYCODE>WM</COMPANYCODE>
+    <INVNUM>HC00036172</INVNUM>
+    <CHQ_ISSUEDATE>0001-01-01T00:00:00</CHQ_ISSUEDATE>
+    <gstpct>7.00</gstpct>
+    <gstamt>0.00</gstamt>
+    <SellExcludeTax>3160.00</SellExcludeTax>
+    <mstrinvnum>HC00036172</mstrinvnum>
+    <invdtcurr>HKD</invdtcurr>
+    <invdtsum>3910.00</invdtsum>
+    <CNReason>Wrong invoice amount                                        </CNReason>
+    <BKGREF>WMH0001584</BKGREF>
+    <CLTCODE>HA0011  </CLTCODE>
+    <CLTNAME>A I TRAVEL SERVICES (5)</CLTNAME>
+    <CLTADDR>UNIT 29 1/F TOWER I&lt;br&gt;SOUTH SEA CENTRE&lt;br&gt;75 MODY RD&lt;br&gt;KOWLOON</CLTADDR>
+    <STAFFCODE>CRW       </STAFFCODE>
+    <TEAMCODE>HSD  </TEAMCODE>
+    <SELLCURR>HKD</SELLCURR>
+    <SELLAMT>3910.00</SELLAMT>
+    <TAXCURR>HKD</TAXCURR>
+    <TAXAMT>750.00</TAXAMT>
+    <HKDAMT>3910.00</HKDAMT>
+    <ANALYSISCODE />
+    <CUSTREF>//</CUSTREF>
+    <CONTACTPERSON />
+    <RMK1>-</RMK1>
+    <RMK2>-</RMK2>
+    <RMK3 />
+    <RMK4 />
+    <PAYMENT>UAT</PAYMENT>
+    <INVTYPE>UAT</INVTYPE>
+    <VOIDON>0001-01-01T00:00:00</VOIDON>
+    <VoidREASON>bbb</VoidREASON>
+    <VOID2JBA>HI00036481</VOID2JBA>
+    <CREATEON>2009-09-14T15:59:11</CREATEON>
+    <CREATEBY>CRW</CREATEBY>
+    <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+    <UPDATEBY>CRW</UPDATEBY>
+    <ATTN> </ATTN>
+    <COD1 />
+    <COD2 />
+    <COD3 />
+    <CR_card_holder />
+    <CR_card_no>1234567890123456</CR_card_no>
+    <CR_card_type>AX</CR_card_type>
+    <CR_card_expiry>2003-01-01T00:00:00</CR_card_expiry>
+    <CR_amt>3910.00</CR_amt>
+    <CR_curr>HKD</CR_curr>
+    <CR_approval_code />
+    <CR_ta />
+    <RECINV>INV</RECINV>
+  </PenInv>
+  <PEOINVSEG>
+    <UO_PEOINVSEG>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVSEG</TableName>
+        <DefaultSelect>select * from [PEOINVSEG](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEGNUM</string>
+          <string>SERVTYPE</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SERVTYPE>AIR</SERVTYPE>
+      <SERVNAME>BA1511   S     03Oct2009      1025   FLA   LHR   </SERVNAME>
+      <SERVDESC>1205   03Oct2009            </SERVDESC>
+      <CREATEON>2009-09-14T15:57:00.827</CREATEON>
+      <CREATEBY>CRW</CREATEBY>
+      <GSTAMT>0.00</GSTAMT>
+      <SEGTYPE>AIR</SEGTYPE>
+    </UO_PEOINVSEG>
+  </PEOINVSEG>
+  <PEOINVDETAIL>
+    <UO_PEOINVDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVDETAIL</TableName>
+        <DefaultSelect>select * from [PEOINVDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>SEQNUM</string>
+          <string>INVNUM</string>
+          <string>COMPANYCODE</string>
+          <string>SEGNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SEQNUM>00002</SEQNUM>
+      <DETLTYPE>CHD</DETLTYPE>
+      <UNITPRICE>0.00</UNITPRICE>
+      <QTY>2</QTY>
+      <RMNTS>1</RMNTS>
+      <RATENAME />
+      <ITEMNAME>CHD</ITEMNAME>
+      <SELLCURR>HKD</SELLCURR>
+      <SELLAMT>600.00</SELLAMT>
+      <TAXCURR>HKD</TAXCURR>
+      <TAXAMT>150.00</TAXAMT>
+      <HKDAMT>750.00</HKDAMT>
+      <CREATEON>2009-09-14T15:57:00.827</CREATEON>
+      <CREATEBY>CRW</CREATEBY>
+      <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+      <SHOWDETAILFEE>N</SHOWDETAILFEE>
+      <AMTFEE>0.00</AMTFEE>
+      <DISCOUNT_MARKUP_PER>0</DISCOUNT_MARKUP_PER>
+      <INVOICE_NETT_GROSS>0.00</INVOICE_NETT_GROSS>
+    </UO_PEOINVDETAIL>
+    <UO_PEOINVDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVDETAIL</TableName>
+        <DefaultSelect>select * from [PEOINVDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>SEQNUM</string>
+          <string>INVNUM</string>
+          <string>COMPANYCODE</string>
+          <string>SEGNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SEQNUM>00001</SEQNUM>
+      <DETLTYPE>ADT</DETLTYPE>
+      <UNITPRICE>0.00</UNITPRICE>
+      <QTY>2</QTY>
+      <RMNTS>1</RMNTS>
+      <RATENAME />
+      <ITEMNAME>ADT</ITEMNAME>
+      <SELLCURR>HKD</SELLCURR>
+      <SELLAMT>690.00</SELLAMT>
+      <TAXCURR>HKD</TAXCURR>
+      <TAXAMT>150.00</TAXAMT>
+      <HKDAMT>840.00</HKDAMT>
+      <CREATEON>2009-09-14T15:57:00.827</CREATEON>
+      <CREATEBY>CRW</CREATEBY>
+      <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+      <SHOWDETAILFEE>N</SHOWDETAILFEE>
+      <AMTFEE>0.00</AMTFEE>
+      <DISCOUNT_MARKUP_PER>0</DISCOUNT_MARKUP_PER>
+      <INVOICE_NETT_GROSS>0.00</INVOICE_NETT_GROSS>
+    </UO_PEOINVDETAIL>
+    <UO_PEOINVDETAIL>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVDETAIL</TableName>
+        <DefaultSelect>select * from [PEOINVDETAIL](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>SEQNUM</string>
+          <string>INVNUM</string>
+          <string>COMPANYCODE</string>
+          <string>SEGNUM</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEGNUM>00001</SEGNUM>
+      <SEQNUM>00003</SEQNUM>
+      <DETLTYPE>INF</DETLTYPE>
+      <UNITPRICE>0.00</UNITPRICE>
+      <QTY>1</QTY>
+      <RMNTS>1</RMNTS>
+      <RATENAME />
+      <ITEMNAME>INF</ITEMNAME>
+      <SELLCURR>HKD</SELLCURR>
+      <SELLAMT>580.00</SELLAMT>
+      <TAXCURR>HKD</TAXCURR>
+      <TAXAMT>150.00</TAXAMT>
+      <HKDAMT>730.00</HKDAMT>
+      <CREATEON>2009-09-14T15:57:00.827</CREATEON>
+      <CREATEBY>CRW</CREATEBY>
+      <UPDATEON>0001-01-01T00:00:00</UPDATEON>
+      <SHOWDETAILFEE>N</SHOWDETAILFEE>
+      <AMTFEE>0.00</AMTFEE>
+      <DISCOUNT_MARKUP_PER>0</DISCOUNT_MARKUP_PER>
+      <INVOICE_NETT_GROSS>0.00</INVOICE_NETT_GROSS>
+    </UO_PEOINVDETAIL>
+  </PEOINVDETAIL>
+  <PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>1</PAXSEQ>
+      <PAXNAME>CHAN/AA/MR/ADT/ADT/ADT</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>2</PAXSEQ>
+      <PAXNAME>CHAN/BB/MISS/CHD/CHD/CHD</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>3</PAXSEQ>
+      <PAXNAME>CHAN/CC/MSTR/CHD/CHD/CHD</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>4</PAXSEQ>
+      <PAXNAME>CHAN/DD/INF/INF/INF/INF</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+    <UO_PEOINPAX>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINPAX</TableName>
+        <DefaultSelect>select * from [PEOINPAX](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>COMPANYCODE</string>
+          <string>INVNUM</string>
+          <string>SEQNUM</string>
+          <string>PAXSEQ</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <COMPANYCODE>WM</COMPANYCODE>
+      <INVNUM>HC00036172</INVNUM>
+      <SEQNUM>00001</SEQNUM>
+      <PAXSEQ>5</PAXSEQ>
+      <PAXNAME>LEE/CC/MS/ADT/ADT/ADT</PAXNAME>
+      <INVTYPE>I</INVTYPE>
+      <sell>0</sell>
+    </UO_PEOINPAX>
+  </PEOINPAX>
+  <PEOINVTKTref />
+  <PEOINVTKT>
+    <UO_PEOINVTKT>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKT</TableName>
+        <DefaultSelect>select * from [PEOINVTKT](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>WM</CompanyCode>
+      <Ticket>1411111111</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>WMH0001584</BkgRef>
+      <InvNum>HC00036172</InvNum>
+      <CreateOn>2009-09-14T15:57:00.857</CreateOn>
+      <CreateBy>CRW</CreateBy>
+      <UpdateOn>2009-09-14T15:57:00.857</UpdateOn>
+      <UpdateBy>CRW</UpdateBy>
+    </UO_PEOINVTKT>
+    <UO_PEOINVTKT>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKT</TableName>
+        <DefaultSelect>select * from [PEOINVTKT](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>WM</CompanyCode>
+      <Ticket>1411111112</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>WMH0001584</BkgRef>
+      <InvNum>HC00036172</InvNum>
+      <CreateOn>2009-09-14T15:57:00.857</CreateOn>
+      <CreateBy>CRW</CreateBy>
+      <UpdateOn>2009-09-14T15:57:00.857</UpdateOn>
+      <UpdateBy>CRW</UpdateBy>
+    </UO_PEOINVTKT>
+    <UO_PEOINVTKT>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKT</TableName>
+        <DefaultSelect>select * from [PEOINVTKT](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>WM</CompanyCode>
+      <Ticket>1411111113</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>WMH0001584</BkgRef>
+      <InvNum>HC00036172</InvNum>
+      <CreateOn>2009-09-14T15:57:00.857</CreateOn>
+      <CreateBy>CRW</CreateBy>
+      <UpdateOn>2009-09-14T15:57:00.857</UpdateOn>
+      <UpdateBy>CRW</UpdateBy>
+    </UO_PEOINVTKT>
+    <UO_PEOINVTKT>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKT</TableName>
+        <DefaultSelect>select * from [PEOINVTKT](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>WM</CompanyCode>
+      <Ticket>1411111114</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>WMH0001584</BkgRef>
+      <InvNum>HC00036172</InvNum>
+      <CreateOn>2009-09-14T15:57:00.857</CreateOn>
+      <CreateBy>CRW</CreateBy>
+      <UpdateOn>2009-09-14T15:57:00.857</UpdateOn>
+      <UpdateBy>CRW</UpdateBy>
+    </UO_PEOINVTKT>
+    <UO_PEOINVTKT>
+      <ConnInfo>
+        <IsSqlSentence>false</IsSqlSentence>
+        <TableName>PEOINVTKT</TableName>
+        <DefaultSelect>select * from [PEOINVTKT](nolock)</DefaultSelect>
+        <ConnectionKey>EMOS</ConnectionKey>
+        <PrimaryKeys>
+          <string>CompanyCode</string>
+          <string>Ticket</string>
+          <string>TktSeq</string>
+          <string>InvNum</string>
+        </PrimaryKeys>
+      </ConnInfo>
+      <CompanyCode>WM</CompanyCode>
+      <Ticket>1411111116</Ticket>
+      <TktSeq>01</TktSeq>
+      <BkgRef>WMH0001584</BkgRef>
+      <InvNum>HC00036172</InvNum>
+      <CreateOn>2009-09-14T15:57:00.857</CreateOn>
+      <CreateBy>CRW</CreateBy>
+      <UpdateOn>2009-09-14T15:57:00.857</UpdateOn>
+      <UpdateBy>CRW</UpdateBy>
+    </UO_PEOINVTKT>
+  </PEOINVTKT>
+  <Creditcardsales />
+  <Tickets>
+    <RTTKT>
+      <PEOMSTR>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOMSTR</TableName>
+          <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>BKGREF</string>
+            <string>COMPANYCODE</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <COMPANYCODE>WM</COMPANYCODE>
+        <BKGREF>WMH0001584</BKGREF>
+        <salesperson />
+        <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+        <ISTOUR>P</ISTOUR>
+        <ANALYSISCODE />
+        <PNR />
+        <CRSSINEIN />
+        <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+        <CLTODE>HN0400</CLTODE>
+        <CLTNAME>AON HONG KONG LTD</CLTNAME>
+        <CLTADDR />
+        <STAFFCODE>CRW       </STAFFCODE>
+        <TEAMCODE>HSD  </TEAMCODE>
+        <FIRSTPAX>CHAN AA</FIRSTPAX>
+        <PHONE />
+        <FAX />
+        <EMAIL />
+        <MASTERPNR>WMH0001584</MASTERPNR>
+        <TOURCODE>TC004CXOCT06</TOURCODE>
+        <CONTACTPERSON />
+        <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+        <TTLSELLCURR>HKD</TTLSELLCURR>
+        <TTLSELLAMT>49288.00</TTLSELLAMT>
+        <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+        <TTLSELLTAX>8880.00</TTLSELLTAX>
+        <TTLCOSTCURR>HKD</TTLCOSTCURR>
+        <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+        <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+        <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+        <INVCURR>HKD</INVCURR>
+        <INVAMT>36852.00</INVAMT>
+        <INVTAXCURR>HKD</INVTAXCURR>
+        <INVTAX>7620.00</INVTAX>
+        <DOCCURR>HKD</DOCCURR>
+        <DOCAMT>32560.00</DOCAMT>
+        <DOCTAXCURR>HKD</DOCTAXCURR>
+        <DOCTAX>8870.00</DOCTAX>
+        <TTLSELLGST>0.00</TTLSELLGST>
+        <TTLCOSTGST>0.00</TTLCOSTGST>
+        <TTLINVGST>0.00</TTLINVGST>
+        <TTLDOCGST>0.00</TTLDOCGST>
+        <INVCOUNT>230</INVCOUNT>
+        <DOCCOUNT>30</DOCCOUNT>
+        <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+        <SOURCE>Agent</SOURCE>
+        <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+        <CREATEBY>CRW</CREATEBY>
+        <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+        <UPDATEBY>CRW</UPDATEBY>
+        <MstrRemark />
+        <BookingNo>0</BookingNo>
+      </PEOMSTR>
+      <TIKET>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOTKT</TableName>
+          <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>CompanyCode</string>
+            <string>Ticket</string>
+            <string>TktSeq</string>
+            <string>Airline</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <CompanyCode>WM</CompanyCode>
+        <Ticket>1411111111</Ticket>
+        <FareCalData />
+        <gstpct>0</gstpct>
+        <gstamt>0</gstamt>
+        <SOURCESYSTEM>eMOS</SOURCESYSTEM>
+        <commission_per>0.00</commission_per>
+        <tour_code />
+        <iss_in_exchange />
+        <MISpaidfare>0.00</MISpaidfare>
+        <ENDORSEMENTS>NON-ENDORSE/NON-REROUTE/SUBJ TO REFUND CHARGE/UA/ACVNA</ENDORSEMENTS>
+        <Destination>LHR</Destination>
+        <AirReason>99</AirReason>
+        <INTDOM>I</INTDOM>
+        <PAXAIR>ADT</PAXAIR>
+        <Class>V</Class>
+        <tkttype>P</tkttype>
+        <FullFareTax>150</FullFareTax>
+        <SellFare>0</SellFare>
+        <CorpFare>0</CorpFare>
+        <COD4 />
+        <COD5 />
+        <COD6 />
+        <PaidFareWOTax>695.00</PaidFareWOTax>
+        <LowFareWOTax>0.00</LowFareWOTax>
+        <CorpFareWOTax>0.00</CorpFareWOTax>
+        <GemsCode />
+        <TransactionFee>0.00</TransactionFee>
+        <FullFareWOTax>690.00</FullFareWOTax>
+        <AirlineTicket />
+        <TktSeq>01</TktSeq>
+        <BKGREF>WMH0001584</BKGREF>
+        <PNR />
+        <CltCode>HN0400</CltCode>
+        <SuppCode>HBSP105</SuppCode>
+        <InvNum>HI00036845</InvNum>
+        <Jqty>1.00</Jqty>
+        <AirCode>125</AirCode>
+        <Airline>BA</Airline>
+        <PaxName>CHAN AA</PaxName>
+        <DepartOn>2009-10-03T00:00:00</DepartOn>
+        <COD1 />
+        <COD2 />
+        <COD3 />
+        <Commission>0.00</Commission>
+        <LocalFareAmt>0</LocalFareAmt>
+        <ForeignFareAmt>0</ForeignFareAmt>
+        <Discount>0.00</Discount>
+        <FormPay>*AX1234567890123456#0809</FormPay>
+        <Routing>FLA/LHR</Routing>
+        <FullCurr>HKD</FullCurr>
+        <FullFare>690.00</FullFare>
+        <PaidCurr>HKD</PaidCurr>
+        <PaidFare>0.00</PaidFare>
+        <LowCurr>HKD</LowCurr>
+        <LowFare>0.00</LowFare>
+        <NetCurr>HKD</NetCurr>
+        <NetFare>660.00</NetFare>
+        <FareType>N</FareType>
+        <TotalTax>150.00</TotalTax>
+        <Security>0.00</Security>
+        <QSurcharge>0</QSurcharge>
+        <BranchCode>H</BranchCode>
+        <TeamCode>HSD  </TeamCode>
+        <IssueOn>2009-09-14T00:00:00</IssueOn>
+        <IssueBy>CRW       </IssueBy>
+        <VoidOn>0001-01-01T00:00:00</VoidOn>
+        <CreateOn>2009-09-14T11:23:53.937</CreateOn>
+        <CreateBy>CRW</CreateBy>
+        <UpdateOn>2010-02-26T17:38:22.437</UpdateOn>
+        <UpdateBy>CRW</UpdateBy>
+        <TaxAmount1>150</TaxAmount1>
+        <TaxID1>TX</TaxID1>
+        <TaxAmount2>0</TaxAmount2>
+        <TaxID2 />
+        <TaxAmount3>0</TaxAmount3>
+        <TaxID3 />
+      </TIKET>
+      <TKTDETAIL>
+        <UO_PEOTKTDETAIL>
+          <ConnInfo>
+            <IsSqlSentence>false</IsSqlSentence>
+            <TableName>PEOTKTDETAIL</TableName>
+            <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+            <ConnectionKey>EMOS</ConnectionKey>
+            <PrimaryKeys>
+              <string>CompanyCode</string>
+              <string>Ticket</string>
+              <string>TktSeq</string>
+              <string>SegNum</string>
+              <string>AirLine</string>
+            </PrimaryKeys>
+          </ConnInfo>
+          <CompanyCode>WM</CompanyCode>
+          <Ticket>1411111111</Ticket>
+          <AirCode>125</AirCode>
+          <TktSeq>01</TktSeq>
+          <SegNum>00004</SegNum>
+          <AirLine>BA</AirLine>
+          <Flight>BA1511</Flight>
+          <Class>S</Class>
+          <Seat />
+          <DepartCity>FLA</DepartCity>
+          <ArrivalCity>LHR</ArrivalCity>
+          <DepartDATE>2009-10-03T00:00:00</DepartDATE>
+          <DepartTime>1025</DepartTime>
+          <ArrDATE>2009-10-03T00:00:00</ArrDATE>
+          <ArrTime>1205</ArrTime>
+          <ElapsedTime>0000</ElapsedTime>
+          <StopOverNum>0</StopOverNum>
+          <StopOverCity />
+          <FareAmt>0</FareAmt>
+          <FareBasic />
+          <Commission>0</Commission>
+          <ValidStart>0001-01-01T00:00:00</ValidStart>
+          <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+          <CreateOn>2009-09-14T11:23:54.077</CreateOn>
+          <CreateBy>CRW</CreateBy>
+          <UpdateOn>2009-09-14T11:23:54.077</UpdateOn>
+          <UpdateBy>CRW</UpdateBy>
+          <GSTAMT>0</GSTAMT>
+        </UO_PEOTKTDETAIL>
+      </TKTDETAIL>
+    </RTTKT>
+    <RTTKT>
+      <PEOMSTR>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOMSTR</TableName>
+          <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>BKGREF</string>
+            <string>COMPANYCODE</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <COMPANYCODE>WM</COMPANYCODE>
+        <BKGREF>WMH0001584</BKGREF>
+        <salesperson />
+        <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+        <ISTOUR>P</ISTOUR>
+        <ANALYSISCODE />
+        <PNR />
+        <CRSSINEIN />
+        <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+        <CLTODE>HN0400</CLTODE>
+        <CLTNAME>AON HONG KONG LTD</CLTNAME>
+        <CLTADDR />
+        <STAFFCODE>CRW       </STAFFCODE>
+        <TEAMCODE>HSD  </TEAMCODE>
+        <FIRSTPAX>CHAN AA</FIRSTPAX>
+        <PHONE />
+        <FAX />
+        <EMAIL />
+        <MASTERPNR>WMH0001584</MASTERPNR>
+        <TOURCODE>TC004CXOCT06</TOURCODE>
+        <CONTACTPERSON />
+        <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+        <TTLSELLCURR>HKD</TTLSELLCURR>
+        <TTLSELLAMT>49288.00</TTLSELLAMT>
+        <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+        <TTLSELLTAX>8880.00</TTLSELLTAX>
+        <TTLCOSTCURR>HKD</TTLCOSTCURR>
+        <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+        <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+        <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+        <INVCURR>HKD</INVCURR>
+        <INVAMT>36852.00</INVAMT>
+        <INVTAXCURR>HKD</INVTAXCURR>
+        <INVTAX>7620.00</INVTAX>
+        <DOCCURR>HKD</DOCCURR>
+        <DOCAMT>32560.00</DOCAMT>
+        <DOCTAXCURR>HKD</DOCTAXCURR>
+        <DOCTAX>8870.00</DOCTAX>
+        <TTLSELLGST>0.00</TTLSELLGST>
+        <TTLCOSTGST>0.00</TTLCOSTGST>
+        <TTLINVGST>0.00</TTLINVGST>
+        <TTLDOCGST>0.00</TTLDOCGST>
+        <INVCOUNT>230</INVCOUNT>
+        <DOCCOUNT>30</DOCCOUNT>
+        <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+        <SOURCE>Agent</SOURCE>
+        <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+        <CREATEBY>CRW</CREATEBY>
+        <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+        <UPDATEBY>CRW</UPDATEBY>
+        <MstrRemark />
+        <BookingNo>0</BookingNo>
+      </PEOMSTR>
+      <TIKET>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOTKT</TableName>
+          <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>CompanyCode</string>
+            <string>Ticket</string>
+            <string>TktSeq</string>
+            <string>Airline</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <CompanyCode>WM</CompanyCode>
+        <Ticket>1411111112</Ticket>
+        <FareCalData />
+        <gstpct>0</gstpct>
+        <gstamt>0</gstamt>
+        <SOURCESYSTEM>eMOS</SOURCESYSTEM>
+        <commission_per>0.00</commission_per>
+        <tour_code />
+        <iss_in_exchange />
+        <MISpaidfare>0.00</MISpaidfare>
+        <ENDORSEMENTS>NON-ENDORSE/NON-REROUTE/SUBJ TO REFUND CHARGE/UA/ACVNA</ENDORSEMENTS>
+        <Destination>LHR</Destination>
+        <AirReason>99</AirReason>
+        <INTDOM>I</INTDOM>
+        <PAXAIR>ADT</PAXAIR>
+        <Class>V</Class>
+        <tkttype>P</tkttype>
+        <FullFareTax>150</FullFareTax>
+        <SellFare>0</SellFare>
+        <CorpFare>0</CorpFare>
+        <COD4 />
+        <COD5 />
+        <PaidFareWOTax>695.00</PaidFareWOTax>
+        <LowFareWOTax>0.00</LowFareWOTax>
+        <CorpFareWOTax>0.00</CorpFareWOTax>
+        <GemsCode />
+        <TransactionFee>0.00</TransactionFee>
+        <FullFareWOTax>690.00</FullFareWOTax>
+        <AirlineTicket />
+        <TktSeq>01</TktSeq>
+        <BKGREF>WMH0001584</BKGREF>
+        <PNR />
+        <CltCode>HA0011</CltCode>
+        <SuppCode>HBSP105</SuppCode>
+        <InvNum>HI00036845</InvNum>
+        <Jqty>1.00</Jqty>
+        <AirCode>125</AirCode>
+        <Airline>BA</Airline>
+        <PaxName>LEE CC</PaxName>
+        <DepartOn>2009-10-03T00:00:00</DepartOn>
+        <COD1 />
+        <COD2 />
+        <COD3 />
+        <Commission>0.00</Commission>
+        <LocalFareAmt>0</LocalFareAmt>
+        <ForeignFareAmt>0</ForeignFareAmt>
+        <Discount>0.00</Discount>
+        <FormPay>*AX1234567890123456#0809</FormPay>
+        <Routing>FLA/LHR</Routing>
+        <FullCurr>HKD</FullCurr>
+        <FullFare>690.00</FullFare>
+        <PaidCurr>HKD</PaidCurr>
+        <PaidFare>0.00</PaidFare>
+        <LowCurr>HKD</LowCurr>
+        <LowFare>0.00</LowFare>
+        <NetCurr>HKD</NetCurr>
+        <NetFare>660.00</NetFare>
+        <FareType>N</FareType>
+        <TotalTax>150.00</TotalTax>
+        <Security>0.00</Security>
+        <QSurcharge>0</QSurcharge>
+        <BranchCode>H</BranchCode>
+        <TeamCode>HSD  </TeamCode>
+        <IssueOn>2009-09-14T00:00:00</IssueOn>
+        <IssueBy>CRW       </IssueBy>
+        <VoidOn>0001-01-01T00:00:00</VoidOn>
+        <CreateOn>2009-09-14T11:33:02.747</CreateOn>
+        <CreateBy>CRW</CreateBy>
+        <UpdateOn>2010-02-26T17:38:22.577</UpdateOn>
+        <UpdateBy>CRW</UpdateBy>
+        <TaxAmount1>150</TaxAmount1>
+        <TaxID1>TX</TaxID1>
+        <TaxAmount2>0</TaxAmount2>
+        <TaxID2 />
+        <TaxAmount3>0</TaxAmount3>
+        <TaxID3 />
+      </TIKET>
+      <TKTDETAIL>
+        <UO_PEOTKTDETAIL>
+          <ConnInfo>
+            <IsSqlSentence>false</IsSqlSentence>
+            <TableName>PEOTKTDETAIL</TableName>
+            <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+            <ConnectionKey>EMOS</ConnectionKey>
+            <PrimaryKeys>
+              <string>CompanyCode</string>
+              <string>Ticket</string>
+              <string>TktSeq</string>
+              <string>SegNum</string>
+              <string>AirLine</string>
+            </PrimaryKeys>
+          </ConnInfo>
+          <CompanyCode>WM</CompanyCode>
+          <Ticket>1411111112</Ticket>
+          <AirCode>125</AirCode>
+          <TktSeq>01</TktSeq>
+          <SegNum>00004</SegNum>
+          <AirLine>BA</AirLine>
+          <Flight>BA1511</Flight>
+          <Class>S</Class>
+          <Seat />
+          <DepartCity>FLA</DepartCity>
+          <ArrivalCity>LHR</ArrivalCity>
+          <DepartDATE>2009-10-03T00:00:00</DepartDATE>
+          <DepartTime>1025</DepartTime>
+          <ArrDATE>2009-10-03T00:00:00</ArrDATE>
+          <ArrTime>1205</ArrTime>
+          <ElapsedTime>0000</ElapsedTime>
+          <StopOverNum>0</StopOverNum>
+          <StopOverCity />
+          <FareAmt>0</FareAmt>
+          <FareBasic />
+          <Commission>0</Commission>
+          <ValidStart>0001-01-01T00:00:00</ValidStart>
+          <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+          <CreateOn>2009-09-14T11:33:02.92</CreateOn>
+          <CreateBy>CRW</CreateBy>
+          <UpdateOn>2009-09-14T11:33:02.92</UpdateOn>
+          <UpdateBy>CRW</UpdateBy>
+          <GSTAMT>0</GSTAMT>
+        </UO_PEOTKTDETAIL>
+      </TKTDETAIL>
+    </RTTKT>
+    <RTTKT>
+      <PEOMSTR>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOMSTR</TableName>
+          <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>BKGREF</string>
+            <string>COMPANYCODE</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <COMPANYCODE>WM</COMPANYCODE>
+        <BKGREF>WMH0001584</BKGREF>
+        <salesperson />
+        <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+        <ISTOUR>P</ISTOUR>
+        <ANALYSISCODE />
+        <PNR />
+        <CRSSINEIN />
+        <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+        <CLTODE>HN0400</CLTODE>
+        <CLTNAME>AON HONG KONG LTD</CLTNAME>
+        <CLTADDR />
+        <STAFFCODE>CRW       </STAFFCODE>
+        <TEAMCODE>HSD  </TEAMCODE>
+        <FIRSTPAX>CHAN AA</FIRSTPAX>
+        <PHONE />
+        <FAX />
+        <EMAIL />
+        <MASTERPNR>WMH0001584</MASTERPNR>
+        <TOURCODE>TC004CXOCT06</TOURCODE>
+        <CONTACTPERSON />
+        <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+        <TTLSELLCURR>HKD</TTLSELLCURR>
+        <TTLSELLAMT>49288.00</TTLSELLAMT>
+        <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+        <TTLSELLTAX>8880.00</TTLSELLTAX>
+        <TTLCOSTCURR>HKD</TTLCOSTCURR>
+        <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+        <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+        <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+        <INVCURR>HKD</INVCURR>
+        <INVAMT>36852.00</INVAMT>
+        <INVTAXCURR>HKD</INVTAXCURR>
+        <INVTAX>7620.00</INVTAX>
+        <DOCCURR>HKD</DOCCURR>
+        <DOCAMT>32560.00</DOCAMT>
+        <DOCTAXCURR>HKD</DOCTAXCURR>
+        <DOCTAX>8870.00</DOCTAX>
+        <TTLSELLGST>0.00</TTLSELLGST>
+        <TTLCOSTGST>0.00</TTLCOSTGST>
+        <TTLINVGST>0.00</TTLINVGST>
+        <TTLDOCGST>0.00</TTLDOCGST>
+        <INVCOUNT>230</INVCOUNT>
+        <DOCCOUNT>30</DOCCOUNT>
+        <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+        <SOURCE>Agent</SOURCE>
+        <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+        <CREATEBY>CRW</CREATEBY>
+        <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+        <UPDATEBY>CRW</UPDATEBY>
+        <MstrRemark />
+        <BookingNo>0</BookingNo>
+      </PEOMSTR>
+      <TIKET>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOTKT</TableName>
+          <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>CompanyCode</string>
+            <string>Ticket</string>
+            <string>TktSeq</string>
+            <string>Airline</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <CompanyCode>WM</CompanyCode>
+        <Ticket>1411111113</Ticket>
+        <FareCalData />
+        <gstpct>0</gstpct>
+        <gstamt>0</gstamt>
+        <SOURCESYSTEM>eMOS</SOURCESYSTEM>
+        <commission_per>0.00</commission_per>
+        <tour_code />
+        <iss_in_exchange />
+        <MISpaidfare>0.00</MISpaidfare>
+        <ENDORSEMENTS>NON-ENDORSE/NON-REROUTE/SUBJ TO REFUND CHARGE/UA/ACVNA</ENDORSEMENTS>
+        <Destination>LHR</Destination>
+        <AirReason>99</AirReason>
+        <INTDOM>I</INTDOM>
+        <PAXAIR>CHD</PAXAIR>
+        <Class>V</Class>
+        <tkttype>P</tkttype>
+        <FullFareTax>150</FullFareTax>
+        <SellFare>0</SellFare>
+        <CorpFare>0</CorpFare>
+        <COD4 />
+        <COD5 />
+        <PaidFareWOTax>604.00</PaidFareWOTax>
+        <LowFareWOTax>0.00</LowFareWOTax>
+        <CorpFareWOTax>0.00</CorpFareWOTax>
+        <GemsCode />
+        <TransactionFee>0.00</TransactionFee>
+        <FullFareWOTax>600.00</FullFareWOTax>
+        <AirlineTicket />
+        <TktSeq>01</TktSeq>
+        <BKGREF>WMH0001584</BKGREF>
+        <PNR />
+        <CltCode>HA0011</CltCode>
+        <SuppCode>HBSP105</SuppCode>
+        <InvNum>HI00036845</InvNum>
+        <Jqty>1.00</Jqty>
+        <AirCode>125</AirCode>
+        <Airline>BA</Airline>
+        <PaxName>CHAN BB</PaxName>
+        <DepartOn>2009-10-03T00:00:00</DepartOn>
+        <COD1 />
+        <COD2 />
+        <COD3 />
+        <Commission>0.00</Commission>
+        <LocalFareAmt>0</LocalFareAmt>
+        <ForeignFareAmt>0</ForeignFareAmt>
+        <Discount>0.00</Discount>
+        <FormPay>*AX1234567890123456#0809</FormPay>
+        <Routing>FLA/LHR</Routing>
+        <FullCurr>HKD</FullCurr>
+        <FullFare>600.00</FullFare>
+        <PaidCurr>HKD</PaidCurr>
+        <PaidFare>0.00</PaidFare>
+        <LowCurr>HKD</LowCurr>
+        <LowFare>0.00</LowFare>
+        <NetCurr>HKD</NetCurr>
+        <NetFare>580.00</NetFare>
+        <FareType>N</FareType>
+        <TotalTax>150.00</TotalTax>
+        <Security>0.00</Security>
+        <QSurcharge>0</QSurcharge>
+        <BranchCode>H</BranchCode>
+        <TeamCode>HSD  </TeamCode>
+        <IssueOn>2009-09-14T00:00:00</IssueOn>
+        <IssueBy>CRW       </IssueBy>
+        <VoidOn>0001-01-01T00:00:00</VoidOn>
+        <CreateOn>2009-09-14T11:35:10.28</CreateOn>
+        <CreateBy>CRW</CreateBy>
+        <UpdateOn>2010-02-26T17:38:22.7</UpdateOn>
+        <UpdateBy>CRW</UpdateBy>
+        <TaxAmount1>150</TaxAmount1>
+        <TaxID1>TX</TaxID1>
+        <TaxAmount2>0</TaxAmount2>
+        <TaxID2 />
+        <TaxAmount3>0</TaxAmount3>
+        <TaxID3 />
+      </TIKET>
+      <TKTDETAIL>
+        <UO_PEOTKTDETAIL>
+          <ConnInfo>
+            <IsSqlSentence>false</IsSqlSentence>
+            <TableName>PEOTKTDETAIL</TableName>
+            <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+            <ConnectionKey>EMOS</ConnectionKey>
+            <PrimaryKeys>
+              <string>CompanyCode</string>
+              <string>Ticket</string>
+              <string>TktSeq</string>
+              <string>SegNum</string>
+              <string>AirLine</string>
+            </PrimaryKeys>
+          </ConnInfo>
+          <CompanyCode>WM</CompanyCode>
+          <Ticket>1411111113</Ticket>
+          <AirCode>125</AirCode>
+          <TktSeq>01</TktSeq>
+          <SegNum>00004</SegNum>
+          <AirLine>BA</AirLine>
+          <Flight>BA1511</Flight>
+          <Class>S</Class>
+          <Seat />
+          <DepartCity>FLA</DepartCity>
+          <ArrivalCity>LHR</ArrivalCity>
+          <DepartDATE>2009-10-03T00:00:00</DepartDATE>
+          <DepartTime>1025</DepartTime>
+          <ArrDATE>2009-10-03T00:00:00</ArrDATE>
+          <ArrTime>1205</ArrTime>
+          <ElapsedTime>0000</ElapsedTime>
+          <StopOverNum>0</StopOverNum>
+          <StopOverCity />
+          <FareAmt>0</FareAmt>
+          <FareBasic />
+          <Commission>0</Commission>
+          <ValidStart>0001-01-01T00:00:00</ValidStart>
+          <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+          <CreateOn>2009-09-14T11:35:10.42</CreateOn>
+          <CreateBy>CRW</CreateBy>
+          <UpdateOn>2009-09-14T11:35:10.42</UpdateOn>
+          <UpdateBy>CRW</UpdateBy>
+          <GSTAMT>0</GSTAMT>
+        </UO_PEOTKTDETAIL>
+      </TKTDETAIL>
+    </RTTKT>
+    <RTTKT>
+      <PEOMSTR>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOMSTR</TableName>
+          <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>BKGREF</string>
+            <string>COMPANYCODE</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <COMPANYCODE>WM</COMPANYCODE>
+        <BKGREF>WMH0001584</BKGREF>
+        <salesperson />
+        <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+        <ISTOUR>P</ISTOUR>
+        <ANALYSISCODE />
+        <PNR />
+        <CRSSINEIN />
+        <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+        <CLTODE>HN0400</CLTODE>
+        <CLTNAME>AON HONG KONG LTD</CLTNAME>
+        <CLTADDR />
+        <STAFFCODE>CRW       </STAFFCODE>
+        <TEAMCODE>HSD  </TEAMCODE>
+        <FIRSTPAX>CHAN AA</FIRSTPAX>
+        <PHONE />
+        <FAX />
+        <EMAIL />
+        <MASTERPNR>WMH0001584</MASTERPNR>
+        <TOURCODE>TC004CXOCT06</TOURCODE>
+        <CONTACTPERSON />
+        <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+        <TTLSELLCURR>HKD</TTLSELLCURR>
+        <TTLSELLAMT>49288.00</TTLSELLAMT>
+        <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+        <TTLSELLTAX>8880.00</TTLSELLTAX>
+        <TTLCOSTCURR>HKD</TTLCOSTCURR>
+        <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+        <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+        <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+        <INVCURR>HKD</INVCURR>
+        <INVAMT>36852.00</INVAMT>
+        <INVTAXCURR>HKD</INVTAXCURR>
+        <INVTAX>7620.00</INVTAX>
+        <DOCCURR>HKD</DOCCURR>
+        <DOCAMT>32560.00</DOCAMT>
+        <DOCTAXCURR>HKD</DOCTAXCURR>
+        <DOCTAX>8870.00</DOCTAX>
+        <TTLSELLGST>0.00</TTLSELLGST>
+        <TTLCOSTGST>0.00</TTLCOSTGST>
+        <TTLINVGST>0.00</TTLINVGST>
+        <TTLDOCGST>0.00</TTLDOCGST>
+        <INVCOUNT>230</INVCOUNT>
+        <DOCCOUNT>30</DOCCOUNT>
+        <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+        <SOURCE>Agent</SOURCE>
+        <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+        <CREATEBY>CRW</CREATEBY>
+        <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+        <UPDATEBY>CRW</UPDATEBY>
+        <MstrRemark />
+        <BookingNo>0</BookingNo>
+      </PEOMSTR>
+      <TIKET>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOTKT</TableName>
+          <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>CompanyCode</string>
+            <string>Ticket</string>
+            <string>TktSeq</string>
+            <string>Airline</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <CompanyCode>WM</CompanyCode>
+        <Ticket>1411111114</Ticket>
+        <FareCalData />
+        <gstpct>0</gstpct>
+        <gstamt>0</gstamt>
+        <SOURCESYSTEM>eMOS</SOURCESYSTEM>
+        <commission_per>0.00</commission_per>
+        <tour_code />
+        <iss_in_exchange />
+        <MISpaidfare>0.00</MISpaidfare>
+        <ENDORSEMENTS>NON-ENDORSE/NON-REROUTE/SUBJ TO REFUND CHARGE/UA/ACVNA</ENDORSEMENTS>
+        <Destination>LHR</Destination>
+        <AirReason>99</AirReason>
+        <INTDOM>I</INTDOM>
+        <PAXAIR>CHD</PAXAIR>
+        <Class>V</Class>
+        <tkttype>P</tkttype>
+        <FullFareTax>150</FullFareTax>
+        <SellFare>0</SellFare>
+        <CorpFare>0</CorpFare>
+        <COD4 />
+        <COD5 />
+        <PaidFareWOTax>604.00</PaidFareWOTax>
+        <LowFareWOTax>0.00</LowFareWOTax>
+        <CorpFareWOTax>0.00</CorpFareWOTax>
+        <GemsCode />
+        <TransactionFee>0.00</TransactionFee>
+        <FullFareWOTax>600.00</FullFareWOTax>
+        <AirlineTicket />
+        <TktSeq>01</TktSeq>
+        <BKGREF>WMH0001584</BKGREF>
+        <PNR />
+        <CltCode>HA0011</CltCode>
+        <SuppCode>HBSP105</SuppCode>
+        <InvNum>HI00036833</InvNum>
+        <Jqty>1.00</Jqty>
+        <AirCode>125</AirCode>
+        <Airline>BA</Airline>
+        <PaxName>CHAN CC</PaxName>
+        <DepartOn>2009-10-03T00:00:00</DepartOn>
+        <COD1 />
+        <COD2 />
+        <COD3 />
+        <Commission>0.00</Commission>
+        <LocalFareAmt>0</LocalFareAmt>
+        <ForeignFareAmt>0</ForeignFareAmt>
+        <Discount>0.00</Discount>
+        <FormPay>*AX1234567890123456#0809</FormPay>
+        <Routing>FLA/LHR</Routing>
+        <FullCurr>HKD</FullCurr>
+        <FullFare>600.00</FullFare>
+        <PaidCurr>HKD</PaidCurr>
+        <PaidFare>0.00</PaidFare>
+        <LowCurr>HKD</LowCurr>
+        <LowFare>0.00</LowFare>
+        <NetCurr>HKD</NetCurr>
+        <NetFare>580.00</NetFare>
+        <FareType>N</FareType>
+        <TotalTax>150.00</TotalTax>
+        <Security>0.00</Security>
+        <QSurcharge>0</QSurcharge>
+        <BranchCode>H</BranchCode>
+        <TeamCode>HSD  </TeamCode>
+        <IssueOn>2009-09-14T00:00:00</IssueOn>
+        <IssueBy>CRW       </IssueBy>
+        <VoidOn>0001-01-01T00:00:00</VoidOn>
+        <CreateOn>2009-09-14T11:37:44.983</CreateOn>
+        <CreateBy>CRW</CreateBy>
+        <UpdateOn>2010-02-26T17:11:25.513</UpdateOn>
+        <UpdateBy>CRW</UpdateBy>
+        <TaxAmount1>150</TaxAmount1>
+        <TaxID1>TX</TaxID1>
+        <TaxAmount2>0</TaxAmount2>
+        <TaxID2 />
+        <TaxAmount3>0</TaxAmount3>
+        <TaxID3 />
+      </TIKET>
+      <TKTDETAIL>
+        <UO_PEOTKTDETAIL>
+          <ConnInfo>
+            <IsSqlSentence>false</IsSqlSentence>
+            <TableName>PEOTKTDETAIL</TableName>
+            <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+            <ConnectionKey>EMOS</ConnectionKey>
+            <PrimaryKeys>
+              <string>CompanyCode</string>
+              <string>Ticket</string>
+              <string>TktSeq</string>
+              <string>SegNum</string>
+              <string>AirLine</string>
+            </PrimaryKeys>
+          </ConnInfo>
+          <CompanyCode>WM</CompanyCode>
+          <Ticket>1411111114</Ticket>
+          <AirCode>125</AirCode>
+          <TktSeq>01</TktSeq>
+          <SegNum>00004</SegNum>
+          <AirLine>BA</AirLine>
+          <Flight>BA1511</Flight>
+          <Class>S</Class>
+          <Seat />
+          <DepartCity>FLA</DepartCity>
+          <ArrivalCity>LHR</ArrivalCity>
+          <DepartDATE>2009-10-03T00:00:00</DepartDATE>
+          <DepartTime>1025</DepartTime>
+          <ArrDATE>2009-10-03T00:00:00</ArrDATE>
+          <ArrTime>1205</ArrTime>
+          <ElapsedTime>0000</ElapsedTime>
+          <StopOverNum>0</StopOverNum>
+          <StopOverCity />
+          <FareAmt>0</FareAmt>
+          <FareBasic />
+          <Commission>0</Commission>
+          <ValidStart>0001-01-01T00:00:00</ValidStart>
+          <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+          <CreateOn>2009-09-14T11:37:45.233</CreateOn>
+          <CreateBy>CRW</CreateBy>
+          <UpdateOn>2009-09-14T11:37:45.233</UpdateOn>
+          <UpdateBy>CRW</UpdateBy>
+          <GSTAMT>0</GSTAMT>
+        </UO_PEOTKTDETAIL>
+      </TKTDETAIL>
+    </RTTKT>
+    <RTTKT>
+      <PEOMSTR>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOMSTR</TableName>
+          <DefaultSelect>select * from [PEOMSTR](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>BKGREF</string>
+            <string>COMPANYCODE</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <COMPANYCODE>WM</COMPANYCODE>
+        <BKGREF>WMH0001584</BKGREF>
+        <salesperson />
+        <ApproveOn>0001-01-01T00:00:00</ApproveOn>
+        <ISTOUR>P</ISTOUR>
+        <ANALYSISCODE />
+        <PNR />
+        <CRSSINEIN />
+        <DEADLINE>2009-09-07T00:00:00</DEADLINE>
+        <CLTODE>HN0400</CLTODE>
+        <CLTNAME>AON HONG KONG LTD</CLTNAME>
+        <CLTADDR />
+        <STAFFCODE>CRW       </STAFFCODE>
+        <TEAMCODE>HSD  </TEAMCODE>
+        <FIRSTPAX>CHAN AA</FIRSTPAX>
+        <PHONE />
+        <FAX />
+        <EMAIL />
+        <MASTERPNR>WMH0001584</MASTERPNR>
+        <TOURCODE>TC004CXOCT06</TOURCODE>
+        <CONTACTPERSON />
+        <DEPARTDATE>2009-09-14T00:00:00</DEPARTDATE>
+        <TTLSELLCURR>HKD</TTLSELLCURR>
+        <TTLSELLAMT>49288.00</TTLSELLAMT>
+        <TTLSELLTAXCURR>HKD</TTLSELLTAXCURR>
+        <TTLSELLTAX>8880.00</TTLSELLTAX>
+        <TTLCOSTCURR>HKD</TTLCOSTCURR>
+        <TTLCOSTAMT>1914.74</TTLCOSTAMT>
+        <TTLCOSTTAXCURR>HKD</TTLCOSTTAXCURR>
+        <TTLCOSTTAX>8880.00</TTLCOSTTAX>
+        <INVCURR>HKD</INVCURR>
+        <INVAMT>36852.00</INVAMT>
+        <INVTAXCURR>HKD</INVTAXCURR>
+        <INVTAX>7620.00</INVTAX>
+        <DOCCURR>HKD</DOCCURR>
+        <DOCAMT>32560.00</DOCAMT>
+        <DOCTAXCURR>HKD</DOCTAXCURR>
+        <DOCTAX>8870.00</DOCTAX>
+        <TTLSELLGST>0.00</TTLSELLGST>
+        <TTLCOSTGST>0.00</TTLCOSTGST>
+        <TTLINVGST>0.00</TTLINVGST>
+        <TTLDOCGST>0.00</TTLDOCGST>
+        <INVCOUNT>230</INVCOUNT>
+        <DOCCOUNT>30</DOCCOUNT>
+        <SOURCESYSTEM>EMOS</SOURCESYSTEM>
+        <SOURCE>Agent</SOURCE>
+        <CREATEON>2009-09-14T09:54:23.857</CREATEON>
+        <CREATEBY>CRW</CREATEBY>
+        <UPDATEON>2010-02-26T17:38:23</UPDATEON>
+        <UPDATEBY>CRW</UPDATEBY>
+        <MstrRemark />
+        <BookingNo>0</BookingNo>
+      </PEOMSTR>
+      <TIKET>
+        <ConnInfo>
+          <IsSqlSentence>false</IsSqlSentence>
+          <TableName>PEOTKT</TableName>
+          <DefaultSelect>select * from [PEOTKT](nolock)</DefaultSelect>
+          <ConnectionKey>EMOS</ConnectionKey>
+          <PrimaryKeys>
+            <string>CompanyCode</string>
+            <string>Ticket</string>
+            <string>TktSeq</string>
+            <string>Airline</string>
+          </PrimaryKeys>
+        </ConnInfo>
+        <CompanyCode>WM</CompanyCode>
+        <Ticket>1411111116</Ticket>
+        <FareCalData />
+        <gstpct>0</gstpct>
+        <gstamt>0</gstamt>
+        <SOURCESYSTEM>eMOS</SOURCESYSTEM>
+        <commission_per>0.00</commission_per>
+        <tour_code />
+        <iss_in_exchange />
+        <MISpaidfare>0.00</MISpaidfare>
+        <ENDORSEMENTS>NON-ENDORSE/NON-REROUTE/SUBJ TO REFUND CHARGE/UA/ACVNA</ENDORSEMENTS>
+        <Destination>LHR</Destination>
+        <AirReason>99</AirReason>
+        <INTDOM>I</INTDOM>
+        <PAXAIR>INF</PAXAIR>
+        <Class>V</Class>
+        <tkttype>P</tkttype>
+        <FullFareTax>150</FullFareTax>
+        <SellFare>0</SellFare>
+        <CorpFare>0</CorpFare>
+        <COD4 />
+        <COD5 />
+        <PaidFareWOTax>583.00</PaidFareWOTax>
+        <LowFareWOTax>0.00</LowFareWOTax>
+        <CorpFareWOTax>0.00</CorpFareWOTax>
+        <GemsCode />
+        <TransactionFee>0.00</TransactionFee>
+        <FullFareWOTax>580.00</FullFareWOTax>
+        <AirlineTicket />
+        <TktSeq>01</TktSeq>
+        <BKGREF>WMH0001584</BKGREF>
+        <PNR />
+        <CltCode>HA0011</CltCode>
+        <SuppCode>HBSP105</SuppCode>
+        <InvNum>HI00036833</InvNum>
+        <Jqty>1.00</Jqty>
+        <AirCode>125</AirCode>
+        <Airline>BA</Airline>
+        <PaxName>CHAN DD</PaxName>
+        <DepartOn>2009-10-03T00:00:00</DepartOn>
+        <COD1 />
+        <COD2 />
+        <COD3 />
+        <Commission>0.00</Commission>
+        <LocalFareAmt>0</LocalFareAmt>
+        <ForeignFareAmt>0</ForeignFareAmt>
+        <Discount>0.00</Discount>
+        <FormPay>*AX1234567890123456#0809</FormPay>
+        <Routing>FLA/LHR</Routing>
+        <FullCurr>HKD</FullCurr>
+        <FullFare>580.00</FullFare>
+        <PaidCurr>HKD</PaidCurr>
+        <PaidFare>0.00</PaidFare>
+        <LowCurr>HKD</LowCurr>
+        <LowFare>0.00</LowFare>
+        <NetCurr>HKD</NetCurr>
+        <NetFare>560.00</NetFare>
+        <FareType>N</FareType>
+        <TotalTax>150.00</TotalTax>
+        <Security>0.00</Security>
+        <QSurcharge>0</QSurcharge>
+        <BranchCode>H</BranchCode>
+        <TeamCode>HSD  </TeamCode>
+        <IssueOn>2009-09-14T00:00:00</IssueOn>
+        <IssueBy>CRW       </IssueBy>
+        <VoidOn>0001-01-01T00:00:00</VoidOn>
+        <CreateOn>2009-09-14T11:41:15.48</CreateOn>
+        <CreateBy>CRW</CreateBy>
+        <UpdateOn>2010-02-26T17:11:25.67</UpdateOn>
+        <UpdateBy>CRW</UpdateBy>
+        <TaxAmount1>150</TaxAmount1>
+        <TaxID1>TX</TaxID1>
+        <TaxAmount2>0</TaxAmount2>
+        <TaxID2 />
+        <TaxAmount3>0</TaxAmount3>
+        <TaxID3 />
+      </TIKET>
+      <TKTDETAIL>
+        <UO_PEOTKTDETAIL>
+          <ConnInfo>
+            <IsSqlSentence>false</IsSqlSentence>
+            <TableName>PEOTKTDETAIL</TableName>
+            <DefaultSelect>select * from [PEOTKTDETAIL](nolock)</DefaultSelect>
+            <ConnectionKey>EMOS</ConnectionKey>
+            <PrimaryKeys>
+              <string>CompanyCode</string>
+              <string>Ticket</string>
+              <string>TktSeq</string>
+              <string>SegNum</string>
+              <string>AirLine</string>
+            </PrimaryKeys>
+          </ConnInfo>
+          <CompanyCode>WM</CompanyCode>
+          <Ticket>1411111116</Ticket>
+          <AirCode>125</AirCode>
+          <TktSeq>01</TktSeq>
+          <SegNum>00004</SegNum>
+          <AirLine>BA</AirLine>
+          <Flight>BA1511</Flight>
+          <Class>S</Class>
+          <Seat />
+          <DepartCity>FLA</DepartCity>
+          <ArrivalCity>LHR</ArrivalCity>
+          <DepartDATE>2009-10-03T00:00:00</DepartDATE>
+          <DepartTime>1025</DepartTime>
+          <ArrDATE>2009-10-03T00:00:00</ArrDATE>
+          <ArrTime>1205</ArrTime>
+          <ElapsedTime>0000</ElapsedTime>
+          <StopOverNum>0</StopOverNum>
+          <StopOverCity />
+          <FareAmt>0</FareAmt>
+          <FareBasic />
+          <Commission>0</Commission>
+          <ValidStart>0001-01-01T00:00:00</ValidStart>
+          <ValidEnd>0001-01-01T00:00:00</ValidEnd>
+          <CreateOn>2009-09-14T11:41:15.637</CreateOn>
+          <CreateBy>CRW</CreateBy>
+          <UpdateOn>2009-09-14T11:41:15.637</UpdateOn>
+          <UpdateBy>CRW</UpdateBy>
+          <GSTAMT>0</GSTAMT>
+        </UO_PEOTKTDETAIL>
+      </TKTDETAIL>
+    </RTTKT>
+  </Tickets>
+  <IsNCRR>Y</IsNCRR>
+</RTINV>
