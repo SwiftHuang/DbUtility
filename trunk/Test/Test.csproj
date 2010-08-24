@@ -260,6 +260,12 @@
     <None Include="Service References\Acct\Test.Acct.ExRateDetail.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Acct\Test.Acct.PayInfo1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Acct\Test.Acct.ReptInfo1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Acct\Test.Acct.tbCrApproval.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -278,8 +284,8 @@
     <None Include="Service References\Acct\Test.Acct.tbSupplier.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\eMosBooking\booking1.disco" />
-    <None Include="Service References\eMosBooking\booking1.wsdl" />
+    <None Include="Service References\eMosBooking\booking.wsdl" />
+    <None Include="Service References\eMosBooking\booking.disco" />
     <Content Include="XMLTest\CrControlKey.xml" />
     <Content Include="XMLTest\Customer.xml" />
     <Content Include="XMLTest\eMos Bkg.xml" />

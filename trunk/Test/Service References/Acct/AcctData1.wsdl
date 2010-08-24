@@ -566,6 +566,436 @@
         </s:complexContent>
       </s:complexType>
       <s:complexType name="BaseSqlTableOftbCurrency" />
+      <s:element name="PaymentList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PaymentListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PaymentListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePaymentStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePaymentStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePaymentStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_PayInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_PayInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_PayInfoResult" type="tns:PayInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PayInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ApList" type="tns:ArrayOfTbAptx" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArList" type="tns:ArrayOfTbArtx" />
+          <s:element minOccurs="0" maxOccurs="1" name="CmPaytx" type="tns:tbCmPaytx" />
+          <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfTbCmPaytxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTbAptx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbAptx" nillable="true" type="tns:tbAptx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbAptx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbAptx">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="APTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="APTxType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GLTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuppCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SuppRef" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CtrlGLCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CalendarCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodPost" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DocDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="DueDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="APTxDesc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MasterPnr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BkgNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BkgOwner" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="SettleOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="APStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PurgeRef" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PurgeOn" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="PostOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastPayDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastPayNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastReptNum" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbAptx" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbAptx" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbAptx" />
+      <s:complexType name="ArrayOfTbArtx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbArtx" nillable="true" type="tns:tbArtx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbArtx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbArtx">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ARTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ARTxType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GLTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CltCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CtrlGLCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CalendarCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodPost" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IssueOn" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="DueDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ARTxDesc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MasterPnr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BkgNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BkgOwner" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="OAmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="SettleOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ARStatus" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustRef" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PurgeRef" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PurgeOn" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="PostOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastPayDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Void2Jba" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DisputeCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbArtx" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbArtx" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbArtx" />
+      <s:complexType name="tbCmPaytx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCmPaytx">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CalendarCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodPost" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PayDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayDesc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GLTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrintOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrintBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrintCopy" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ChqNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Payee" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayeeAddr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="VoidOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidBy" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidPayNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidReason" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpFileName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreditCardno" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ApproveOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApproveBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PostOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCmPaytx" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCmPaytx" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCmPaytx" />
+      <s:complexType name="ArrayOfTbCmPaytxDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbCmPaytxDetail" nillable="true" type="tns:tbCmPaytxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbCmPaytxDetail">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCmPaytxDetail">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SeqNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefDocNum" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="RefDocDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayDesc" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PayDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="IsInterBranch" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCmPaytxDetail" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCmPaytxDetail" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCmPaytxDetail" />
+      <s:element name="ReceiptList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReceiptListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiptListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateReceiptStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateReceiptStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateReceiptStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo_ReptInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="Demo_ReptInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Demo_ReptInfoResult" type="tns:ReptInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReptInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ApList" type="tns:ArrayOfTbAptx" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArList" type="tns:ArrayOfTbArtx" />
+          <s:element minOccurs="0" maxOccurs="1" name="CmRepttx" type="tns:tbCmRepttx" />
+          <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfTbCmRepttxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbCmRepttx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCmRepttx">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OtherRefNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CalendarCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodPost" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ReptDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="BankGLAcct" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptDesc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExRateCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GLTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrintOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PrintBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrintCopy" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptBankCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ChqBankCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ChqNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Payer" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PayerAddr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreditCardno" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="VoidOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidBy" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidReptNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VoidReason" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ApproveOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApproveBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PostOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCmRepttx" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCmRepttx" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCmRepttx" />
+      <s:complexType name="ArrayOfTbCmRepttxDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbCmRepttxDetail" nillable="true" type="tns:tbCmRepttxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbCmRepttxDetail">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseTableOftbCmRepttxDetail">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SeqNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefTxNum" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefDocNum" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="RefDocDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrTxn" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtTxn" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrPrm" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtPrm" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrSec" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtSec" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrRpt" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AmtRpt" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReptDesc" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ReptDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="IsInterBranch" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UpdateOn" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateBy" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TeamCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseTableOftbCmRepttxDetail" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSqlTableOftbCmRepttxDetail" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSqlTableOftbCmRepttxDetail" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="CustomerListSoapIn">
@@ -682,6 +1112,42 @@
   <wsdl:message name="Demo_CurrencySoapOut">
     <wsdl:part name="parameters" element="tns:Demo_CurrencyResponse" />
   </wsdl:message>
+  <wsdl:message name="PaymentListSoapIn">
+    <wsdl:part name="parameters" element="tns:PaymentList" />
+  </wsdl:message>
+  <wsdl:message name="PaymentListSoapOut">
+    <wsdl:part name="parameters" element="tns:PaymentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePaymentStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePaymentStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePaymentStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePaymentStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_PayInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_PayInfo" />
+  </wsdl:message>
+  <wsdl:message name="Demo_PayInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_PayInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptListSoapIn">
+    <wsdl:part name="parameters" element="tns:ReceiptList" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptListSoapOut">
+    <wsdl:part name="parameters" element="tns:ReceiptListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateReceiptStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateReceiptStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateReceiptStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateReceiptStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ReptInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo_ReptInfo" />
+  </wsdl:message>
+  <wsdl:message name="Demo_ReptInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:Demo_ReptInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="AcctDataSoap">
     <wsdl:operation name="CustomerList">
       <wsdl:input message="tns:CustomerListSoapIn" />
@@ -758,6 +1224,30 @@
     <wsdl:operation name="Demo_Currency">
       <wsdl:input message="tns:Demo_CurrencySoapIn" />
       <wsdl:output message="tns:Demo_CurrencySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentList">
+      <wsdl:input message="tns:PaymentListSoapIn" />
+      <wsdl:output message="tns:PaymentListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaymentStatus">
+      <wsdl:input message="tns:UpdatePaymentStatusSoapIn" />
+      <wsdl:output message="tns:UpdatePaymentStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_PayInfo">
+      <wsdl:input message="tns:Demo_PayInfoSoapIn" />
+      <wsdl:output message="tns:Demo_PayInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiptList">
+      <wsdl:input message="tns:ReceiptListSoapIn" />
+      <wsdl:output message="tns:ReceiptListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceiptStatus">
+      <wsdl:input message="tns:UpdateReceiptStatusSoapIn" />
+      <wsdl:output message="tns:UpdateReceiptStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ReptInfo">
+      <wsdl:input message="tns:Demo_ReptInfoSoapIn" />
+      <wsdl:output message="tns:Demo_ReptInfoSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AcctDataSoap" type="tns:AcctDataSoap">
@@ -933,6 +1423,60 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="PaymentList">
+      <soap:operation soapAction="http://wtl.eAccount.org/PaymentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaymentStatus">
+      <soap:operation soapAction="http://wtl.eAccount.org/UpdatePaymentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_PayInfo">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_PayInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiptList">
+      <soap:operation soapAction="http://wtl.eAccount.org/ReceiptList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceiptStatus">
+      <soap:operation soapAction="http://wtl.eAccount.org/UpdateReceiptStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ReptInfo">
+      <soap:operation soapAction="http://wtl.eAccount.org/Demo_ReptInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="AcctDataSoap12" type="tns:AcctDataSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1100,6 +1644,60 @@
     </wsdl:operation>
     <wsdl:operation name="Demo_Currency">
       <soap12:operation soapAction="http://wtl.eAccount.org/Demo_Currency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/PaymentList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaymentStatus">
+      <soap12:operation soapAction="http://wtl.eAccount.org/UpdatePaymentStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_PayInfo">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_PayInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiptList">
+      <soap12:operation soapAction="http://wtl.eAccount.org/ReceiptList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceiptStatus">
+      <soap12:operation soapAction="http://wtl.eAccount.org/UpdateReceiptStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo_ReptInfo">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Demo_ReptInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
