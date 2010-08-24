@@ -1004,6 +1004,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="PEOMSTR" type="tns:UO_PEOMSTR" />
           <s:element minOccurs="0" maxOccurs="1" name="TIKET" type="tns:UO_PEOTKT" />
           <s:element minOccurs="0" maxOccurs="1" name="TKTDETAIL" type="tns:ArrayOfUO_PEOTKTDETAIL" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSameMstrInvNum" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="UO_PEOTKT">
@@ -1583,8 +1584,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="PEOINVTKTref" type="tns:ArrayOfUO_PEOINVTKTref" />
           <s:element minOccurs="0" maxOccurs="1" name="PEOINVTKT" type="tns:ArrayOfUO_PEOINVTKT" />
           <s:element minOccurs="0" maxOccurs="1" name="Creditcardsales" type="tns:ArrayOfUO_Creditcardsales" />
-          <s:element minOccurs="0" maxOccurs="1" name="Tickets" type="tns:ArrayOfRTTKT" />
-          <s:element minOccurs="0" maxOccurs="1" name="IsNCRR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvTkts" type="tns:ArrayOfInvTkt" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="UO_PEOINV">
@@ -1864,9 +1864,15 @@
           <s:element minOccurs="0" maxOccurs="1" name="ConnInfo" type="tns:ConnectionInformation" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="ArrayOfRTTKT">
+      <s:complexType name="ArrayOfInvTkt">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="RTTKT" nillable="true" type="tns:RTTKT" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InvTkt" nillable="true" type="tns:InvTkt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InvTkt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ticket" type="tns:UO_PEOTKT" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSameMstrInvNum" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetPeoMstr">
@@ -3352,10 +3358,10 @@
   </wsdl:binding>
   <wsdl:service name="Booking">
     <wsdl:port name="BookingSoap" binding="tns:BookingSoap">
-      <soap:address location="http://localhost/eMosSVC/booking.asmx" />
+      <soap:address location="http://10.100.133.83/eMos2Acct/booking.asmx" />
     </wsdl:port>
     <wsdl:port name="BookingSoap12" binding="tns:BookingSoap12">
-      <soap12:address location="http://localhost/eMosSVC/booking.asmx" />
+      <soap12:address location="http://10.100.133.83/eMos2Acct/booking.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

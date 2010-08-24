@@ -8526,6 +8526,1421 @@ namespace Test.eMosBooking {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class InvTkt : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private UO_PEOTKT ticketField;
+        
+        private bool isSameMstrInvNumField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public UO_PEOTKT Ticket {
+            get {
+                return this.ticketField;
+            }
+            set {
+                this.ticketField = value;
+                this.RaisePropertyChanged("Ticket");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public bool IsSameMstrInvNum {
+            get {
+                return this.isSameMstrInvNumField;
+            }
+            set {
+                this.isSameMstrInvNumField = value;
+                this.RaisePropertyChanged("IsSameMstrInvNum");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UO_PEOTKT : UOBaseOfUO_PEOTKTUOList_PEOTKT {
+        
+        private string companyCodeField;
+        
+        private string ticketField;
+        
+        private string fareCalDataField;
+        
+        private string pseudoField;
+        
+        private string sineinField;
+        
+        private decimal gstpctField;
+        
+        private decimal gstamtField;
+        
+        private string nstField;
+        
+        private string sOURCESYSTEMField;
+        
+        private decimal commission_perField;
+        
+        private string add_paymentField;
+        
+        private string iss_off_codeField;
+        
+        private string tour_codeField;
+        
+        private string org_issField;
+        
+        private string iss_in_exchangeField;
+        
+        private string controlNumField;
+        
+        private decimal mISpaidfareField;
+        
+        private string eNDORSEMENTSField;
+        
+        private string destinationField;
+        
+        private string airReasonField;
+        
+        private string iNTDOMField;
+        
+        private string pAXAIRField;
+        
+        private string classField;
+        
+        private string tkttypeField;
+        
+        private decimal fullFareTaxField;
+        
+        private string sellCurrField;
+        
+        private decimal sellFareField;
+        
+        private string corpCurrField;
+        
+        private decimal corpFareField;
+        
+        private string cOD4Field;
+        
+        private string cOD5Field;
+        
+        private string cOD6Field;
+        
+        private decimal paidFareWOTaxField;
+        
+        private decimal lowFareWOTaxField;
+        
+        private decimal corpFareWOTaxField;
+        
+        private string gemsCodeField;
+        
+        private decimal transactionFeeField;
+        
+        private decimal fullFareWOTaxField;
+        
+        private string airlineTicketField;
+        
+        private string tktSeqField;
+        
+        private string bKGREFField;
+        
+        private string pNRField;
+        
+        private string cltCodeField;
+        
+        private string suppCodeField;
+        
+        private string invNumField;
+        
+        private decimal jqtyField;
+        
+        private string airCodeField;
+        
+        private string airlineField;
+        
+        private string paxNameField;
+        
+        private System.DateTime departOnField;
+        
+        private string cOD1Field;
+        
+        private string cOD2Field;
+        
+        private string cOD3Field;
+        
+        private decimal commissionField;
+        
+        private string localFareCurrField;
+        
+        private decimal localFareAmtField;
+        
+        private string foreignFareCurrField;
+        
+        private decimal foreignFareAmtField;
+        
+        private decimal discountField;
+        
+        private string formPayField;
+        
+        private string routingField;
+        
+        private string fullCurrField;
+        
+        private decimal fullFareField;
+        
+        private string paidCurrField;
+        
+        private decimal paidFareField;
+        
+        private string lowCurrField;
+        
+        private decimal lowFareField;
+        
+        private string netCurrField;
+        
+        private decimal netFareField;
+        
+        private string fareBasisField;
+        
+        private string fareTypeField;
+        
+        private decimal totalTaxField;
+        
+        private decimal securityField;
+        
+        private decimal qSurchargeField;
+        
+        private string branchCodeField;
+        
+        private string teamCodeField;
+        
+        private System.DateTime issueOnField;
+        
+        private string issueByField;
+        
+        private System.DateTime voidOnField;
+        
+        private string voidByField;
+        
+        private string voidteamField;
+        
+        private string voidreasonField;
+        
+        private System.DateTime createOnField;
+        
+        private string createByField;
+        
+        private System.DateTime updateOnField;
+        
+        private string updateByField;
+        
+        private string taxAmount1Field;
+        
+        private string taxID1Field;
+        
+        private string taxAmount2Field;
+        
+        private string taxID2Field;
+        
+        private string taxAmount3Field;
+        
+        private string taxID3Field;
+        
+        private string fareCalTypeField;
+        
+        private string compressPrintIndField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string CompanyCode {
+            get {
+                return this.companyCodeField;
+            }
+            set {
+                this.companyCodeField = value;
+                this.RaisePropertyChanged("CompanyCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Ticket {
+            get {
+                return this.ticketField;
+            }
+            set {
+                this.ticketField = value;
+                this.RaisePropertyChanged("Ticket");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string FareCalData {
+            get {
+                return this.fareCalDataField;
+            }
+            set {
+                this.fareCalDataField = value;
+                this.RaisePropertyChanged("FareCalData");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string pseudo {
+            get {
+                return this.pseudoField;
+            }
+            set {
+                this.pseudoField = value;
+                this.RaisePropertyChanged("pseudo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string sinein {
+            get {
+                return this.sineinField;
+            }
+            set {
+                this.sineinField = value;
+                this.RaisePropertyChanged("sinein");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public decimal gstpct {
+            get {
+                return this.gstpctField;
+            }
+            set {
+                this.gstpctField = value;
+                this.RaisePropertyChanged("gstpct");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public decimal gstamt {
+            get {
+                return this.gstamtField;
+            }
+            set {
+                this.gstamtField = value;
+                this.RaisePropertyChanged("gstamt");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string nst {
+            get {
+                return this.nstField;
+            }
+            set {
+                this.nstField = value;
+                this.RaisePropertyChanged("nst");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string SOURCESYSTEM {
+            get {
+                return this.sOURCESYSTEMField;
+            }
+            set {
+                this.sOURCESYSTEMField = value;
+                this.RaisePropertyChanged("SOURCESYSTEM");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public decimal commission_per {
+            get {
+                return this.commission_perField;
+            }
+            set {
+                this.commission_perField = value;
+                this.RaisePropertyChanged("commission_per");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string add_payment {
+            get {
+                return this.add_paymentField;
+            }
+            set {
+                this.add_paymentField = value;
+                this.RaisePropertyChanged("add_payment");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string iss_off_code {
+            get {
+                return this.iss_off_codeField;
+            }
+            set {
+                this.iss_off_codeField = value;
+                this.RaisePropertyChanged("iss_off_code");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string tour_code {
+            get {
+                return this.tour_codeField;
+            }
+            set {
+                this.tour_codeField = value;
+                this.RaisePropertyChanged("tour_code");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string org_iss {
+            get {
+                return this.org_issField;
+            }
+            set {
+                this.org_issField = value;
+                this.RaisePropertyChanged("org_iss");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string iss_in_exchange {
+            get {
+                return this.iss_in_exchangeField;
+            }
+            set {
+                this.iss_in_exchangeField = value;
+                this.RaisePropertyChanged("iss_in_exchange");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string ControlNum {
+            get {
+                return this.controlNumField;
+            }
+            set {
+                this.controlNumField = value;
+                this.RaisePropertyChanged("ControlNum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public decimal MISpaidfare {
+            get {
+                return this.mISpaidfareField;
+            }
+            set {
+                this.mISpaidfareField = value;
+                this.RaisePropertyChanged("MISpaidfare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string ENDORSEMENTS {
+            get {
+                return this.eNDORSEMENTSField;
+            }
+            set {
+                this.eNDORSEMENTSField = value;
+                this.RaisePropertyChanged("ENDORSEMENTS");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string Destination {
+            get {
+                return this.destinationField;
+            }
+            set {
+                this.destinationField = value;
+                this.RaisePropertyChanged("Destination");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public string AirReason {
+            get {
+                return this.airReasonField;
+            }
+            set {
+                this.airReasonField = value;
+                this.RaisePropertyChanged("AirReason");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string INTDOM {
+            get {
+                return this.iNTDOMField;
+            }
+            set {
+                this.iNTDOMField = value;
+                this.RaisePropertyChanged("INTDOM");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string PAXAIR {
+            get {
+                return this.pAXAIRField;
+            }
+            set {
+                this.pAXAIRField = value;
+                this.RaisePropertyChanged("PAXAIR");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public string Class {
+            get {
+                return this.classField;
+            }
+            set {
+                this.classField = value;
+                this.RaisePropertyChanged("Class");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string tkttype {
+            get {
+                return this.tkttypeField;
+            }
+            set {
+                this.tkttypeField = value;
+                this.RaisePropertyChanged("tkttype");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public decimal FullFareTax {
+            get {
+                return this.fullFareTaxField;
+            }
+            set {
+                this.fullFareTaxField = value;
+                this.RaisePropertyChanged("FullFareTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public string SellCurr {
+            get {
+                return this.sellCurrField;
+            }
+            set {
+                this.sellCurrField = value;
+                this.RaisePropertyChanged("SellCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public decimal SellFare {
+            get {
+                return this.sellFareField;
+            }
+            set {
+                this.sellFareField = value;
+                this.RaisePropertyChanged("SellFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public string CorpCurr {
+            get {
+                return this.corpCurrField;
+            }
+            set {
+                this.corpCurrField = value;
+                this.RaisePropertyChanged("CorpCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public decimal CorpFare {
+            get {
+                return this.corpFareField;
+            }
+            set {
+                this.corpFareField = value;
+                this.RaisePropertyChanged("CorpFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        public string COD4 {
+            get {
+                return this.cOD4Field;
+            }
+            set {
+                this.cOD4Field = value;
+                this.RaisePropertyChanged("COD4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        public string COD5 {
+            get {
+                return this.cOD5Field;
+            }
+            set {
+                this.cOD5Field = value;
+                this.RaisePropertyChanged("COD5");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        public string COD6 {
+            get {
+                return this.cOD6Field;
+            }
+            set {
+                this.cOD6Field = value;
+                this.RaisePropertyChanged("COD6");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public decimal PaidFareWOTax {
+            get {
+                return this.paidFareWOTaxField;
+            }
+            set {
+                this.paidFareWOTaxField = value;
+                this.RaisePropertyChanged("PaidFareWOTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        public decimal LowFareWOTax {
+            get {
+                return this.lowFareWOTaxField;
+            }
+            set {
+                this.lowFareWOTaxField = value;
+                this.RaisePropertyChanged("LowFareWOTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        public decimal CorpFareWOTax {
+            get {
+                return this.corpFareWOTaxField;
+            }
+            set {
+                this.corpFareWOTaxField = value;
+                this.RaisePropertyChanged("CorpFareWOTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        public string GemsCode {
+            get {
+                return this.gemsCodeField;
+            }
+            set {
+                this.gemsCodeField = value;
+                this.RaisePropertyChanged("GemsCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        public decimal TransactionFee {
+            get {
+                return this.transactionFeeField;
+            }
+            set {
+                this.transactionFeeField = value;
+                this.RaisePropertyChanged("TransactionFee");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
+        public decimal FullFareWOTax {
+            get {
+                return this.fullFareWOTaxField;
+            }
+            set {
+                this.fullFareWOTaxField = value;
+                this.RaisePropertyChanged("FullFareWOTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
+        public string AirlineTicket {
+            get {
+                return this.airlineTicketField;
+            }
+            set {
+                this.airlineTicketField = value;
+                this.RaisePropertyChanged("AirlineTicket");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        public string TktSeq {
+            get {
+                return this.tktSeqField;
+            }
+            set {
+                this.tktSeqField = value;
+                this.RaisePropertyChanged("TktSeq");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        public string BKGREF {
+            get {
+                return this.bKGREFField;
+            }
+            set {
+                this.bKGREFField = value;
+                this.RaisePropertyChanged("BKGREF");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
+        public string PNR {
+            get {
+                return this.pNRField;
+            }
+            set {
+                this.pNRField = value;
+                this.RaisePropertyChanged("PNR");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
+        public string CltCode {
+            get {
+                return this.cltCodeField;
+            }
+            set {
+                this.cltCodeField = value;
+                this.RaisePropertyChanged("CltCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
+        public string SuppCode {
+            get {
+                return this.suppCodeField;
+            }
+            set {
+                this.suppCodeField = value;
+                this.RaisePropertyChanged("SuppCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
+        public string InvNum {
+            get {
+                return this.invNumField;
+            }
+            set {
+                this.invNumField = value;
+                this.RaisePropertyChanged("InvNum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
+        public decimal Jqty {
+            get {
+                return this.jqtyField;
+            }
+            set {
+                this.jqtyField = value;
+                this.RaisePropertyChanged("Jqty");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
+        public string AirCode {
+            get {
+                return this.airCodeField;
+            }
+            set {
+                this.airCodeField = value;
+                this.RaisePropertyChanged("AirCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
+        public string Airline {
+            get {
+                return this.airlineField;
+            }
+            set {
+                this.airlineField = value;
+                this.RaisePropertyChanged("Airline");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
+        public string PaxName {
+            get {
+                return this.paxNameField;
+            }
+            set {
+                this.paxNameField = value;
+                this.RaisePropertyChanged("PaxName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
+        public System.DateTime DepartOn {
+            get {
+                return this.departOnField;
+            }
+            set {
+                this.departOnField = value;
+                this.RaisePropertyChanged("DepartOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
+        public string COD1 {
+            get {
+                return this.cOD1Field;
+            }
+            set {
+                this.cOD1Field = value;
+                this.RaisePropertyChanged("COD1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
+        public string COD2 {
+            get {
+                return this.cOD2Field;
+            }
+            set {
+                this.cOD2Field = value;
+                this.RaisePropertyChanged("COD2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
+        public string COD3 {
+            get {
+                return this.cOD3Field;
+            }
+            set {
+                this.cOD3Field = value;
+                this.RaisePropertyChanged("COD3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
+        public decimal Commission {
+            get {
+                return this.commissionField;
+            }
+            set {
+                this.commissionField = value;
+                this.RaisePropertyChanged("Commission");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
+        public string LocalFareCurr {
+            get {
+                return this.localFareCurrField;
+            }
+            set {
+                this.localFareCurrField = value;
+                this.RaisePropertyChanged("LocalFareCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
+        public decimal LocalFareAmt {
+            get {
+                return this.localFareAmtField;
+            }
+            set {
+                this.localFareAmtField = value;
+                this.RaisePropertyChanged("LocalFareAmt");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
+        public string ForeignFareCurr {
+            get {
+                return this.foreignFareCurrField;
+            }
+            set {
+                this.foreignFareCurrField = value;
+                this.RaisePropertyChanged("ForeignFareCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
+        public decimal ForeignFareAmt {
+            get {
+                return this.foreignFareAmtField;
+            }
+            set {
+                this.foreignFareAmtField = value;
+                this.RaisePropertyChanged("ForeignFareAmt");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
+        public decimal Discount {
+            get {
+                return this.discountField;
+            }
+            set {
+                this.discountField = value;
+                this.RaisePropertyChanged("Discount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
+        public string FormPay {
+            get {
+                return this.formPayField;
+            }
+            set {
+                this.formPayField = value;
+                this.RaisePropertyChanged("FormPay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
+        public string Routing {
+            get {
+                return this.routingField;
+            }
+            set {
+                this.routingField = value;
+                this.RaisePropertyChanged("Routing");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
+        public string FullCurr {
+            get {
+                return this.fullCurrField;
+            }
+            set {
+                this.fullCurrField = value;
+                this.RaisePropertyChanged("FullCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
+        public decimal FullFare {
+            get {
+                return this.fullFareField;
+            }
+            set {
+                this.fullFareField = value;
+                this.RaisePropertyChanged("FullFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
+        public string PaidCurr {
+            get {
+                return this.paidCurrField;
+            }
+            set {
+                this.paidCurrField = value;
+                this.RaisePropertyChanged("PaidCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
+        public decimal PaidFare {
+            get {
+                return this.paidFareField;
+            }
+            set {
+                this.paidFareField = value;
+                this.RaisePropertyChanged("PaidFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
+        public string LowCurr {
+            get {
+                return this.lowCurrField;
+            }
+            set {
+                this.lowCurrField = value;
+                this.RaisePropertyChanged("LowCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
+        public decimal LowFare {
+            get {
+                return this.lowFareField;
+            }
+            set {
+                this.lowFareField = value;
+                this.RaisePropertyChanged("LowFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
+        public string NetCurr {
+            get {
+                return this.netCurrField;
+            }
+            set {
+                this.netCurrField = value;
+                this.RaisePropertyChanged("NetCurr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
+        public decimal NetFare {
+            get {
+                return this.netFareField;
+            }
+            set {
+                this.netFareField = value;
+                this.RaisePropertyChanged("NetFare");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
+        public string FareBasis {
+            get {
+                return this.fareBasisField;
+            }
+            set {
+                this.fareBasisField = value;
+                this.RaisePropertyChanged("FareBasis");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
+        public string FareType {
+            get {
+                return this.fareTypeField;
+            }
+            set {
+                this.fareTypeField = value;
+                this.RaisePropertyChanged("FareType");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
+        public decimal TotalTax {
+            get {
+                return this.totalTaxField;
+            }
+            set {
+                this.totalTaxField = value;
+                this.RaisePropertyChanged("TotalTax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=72)]
+        public decimal Security {
+            get {
+                return this.securityField;
+            }
+            set {
+                this.securityField = value;
+                this.RaisePropertyChanged("Security");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=73)]
+        public decimal QSurcharge {
+            get {
+                return this.qSurchargeField;
+            }
+            set {
+                this.qSurchargeField = value;
+                this.RaisePropertyChanged("QSurcharge");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=74)]
+        public string BranchCode {
+            get {
+                return this.branchCodeField;
+            }
+            set {
+                this.branchCodeField = value;
+                this.RaisePropertyChanged("BranchCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=75)]
+        public string TeamCode {
+            get {
+                return this.teamCodeField;
+            }
+            set {
+                this.teamCodeField = value;
+                this.RaisePropertyChanged("TeamCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=76)]
+        public System.DateTime IssueOn {
+            get {
+                return this.issueOnField;
+            }
+            set {
+                this.issueOnField = value;
+                this.RaisePropertyChanged("IssueOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=77)]
+        public string IssueBy {
+            get {
+                return this.issueByField;
+            }
+            set {
+                this.issueByField = value;
+                this.RaisePropertyChanged("IssueBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=78)]
+        public System.DateTime VoidOn {
+            get {
+                return this.voidOnField;
+            }
+            set {
+                this.voidOnField = value;
+                this.RaisePropertyChanged("VoidOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=79)]
+        public string VoidBy {
+            get {
+                return this.voidByField;
+            }
+            set {
+                this.voidByField = value;
+                this.RaisePropertyChanged("VoidBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=80)]
+        public string voidteam {
+            get {
+                return this.voidteamField;
+            }
+            set {
+                this.voidteamField = value;
+                this.RaisePropertyChanged("voidteam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=81)]
+        public string voidreason {
+            get {
+                return this.voidreasonField;
+            }
+            set {
+                this.voidreasonField = value;
+                this.RaisePropertyChanged("voidreason");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=82)]
+        public System.DateTime CreateOn {
+            get {
+                return this.createOnField;
+            }
+            set {
+                this.createOnField = value;
+                this.RaisePropertyChanged("CreateOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=83)]
+        public string CreateBy {
+            get {
+                return this.createByField;
+            }
+            set {
+                this.createByField = value;
+                this.RaisePropertyChanged("CreateBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=84)]
+        public System.DateTime UpdateOn {
+            get {
+                return this.updateOnField;
+            }
+            set {
+                this.updateOnField = value;
+                this.RaisePropertyChanged("UpdateOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=85)]
+        public string UpdateBy {
+            get {
+                return this.updateByField;
+            }
+            set {
+                this.updateByField = value;
+                this.RaisePropertyChanged("UpdateBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=86)]
+        public string TaxAmount1 {
+            get {
+                return this.taxAmount1Field;
+            }
+            set {
+                this.taxAmount1Field = value;
+                this.RaisePropertyChanged("TaxAmount1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=87)]
+        public string TaxID1 {
+            get {
+                return this.taxID1Field;
+            }
+            set {
+                this.taxID1Field = value;
+                this.RaisePropertyChanged("TaxID1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=88)]
+        public string TaxAmount2 {
+            get {
+                return this.taxAmount2Field;
+            }
+            set {
+                this.taxAmount2Field = value;
+                this.RaisePropertyChanged("TaxAmount2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=89)]
+        public string TaxID2 {
+            get {
+                return this.taxID2Field;
+            }
+            set {
+                this.taxID2Field = value;
+                this.RaisePropertyChanged("TaxID2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=90)]
+        public string TaxAmount3 {
+            get {
+                return this.taxAmount3Field;
+            }
+            set {
+                this.taxAmount3Field = value;
+                this.RaisePropertyChanged("TaxAmount3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=91)]
+        public string TaxID3 {
+            get {
+                return this.taxID3Field;
+            }
+            set {
+                this.taxID3Field = value;
+                this.RaisePropertyChanged("TaxID3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=92)]
+        public string FareCalType {
+            get {
+                return this.fareCalTypeField;
+            }
+            set {
+                this.fareCalTypeField = value;
+                this.RaisePropertyChanged("FareCalType");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=93)]
+        public string CompressPrintInd {
+            get {
+                return this.compressPrintIndField;
+            }
+            set {
+                this.compressPrintIndField = value;
+                this.RaisePropertyChanged("CompressPrintInd");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKT))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UOBaseOfUO_PEOTKTUOList_PEOTKT : CommonBaseOfUO_PEOTKTUOList_PEOTKT {
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UOBaseOfUO_PEOTKTUOList_PEOTKT))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKT))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class CommonBaseOfUO_PEOTKTUOList_PEOTKT : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private ConnectionInformation connInfoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public ConnectionInformation ConnInfo {
+            get {
+                return this.connInfoField;
+            }
+            set {
+                this.connInfoField = value;
+                this.RaisePropertyChanged("ConnInfo");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UOBaseOfUO_CreditcardsalesUOList_Creditcardsales))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_Creditcardsales))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
@@ -10883,9 +12298,7 @@ namespace Test.eMosBooking {
         
         private UO_Creditcardsales[] creditcardsalesField;
         
-        private RTTKT[] ticketsField;
-        
-        private string isNCRRField;
+        private InvTkt[] invTktsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -10985,25 +12398,13 @@ namespace Test.eMosBooking {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Order=8)]
-        public RTTKT[] Tickets {
+        public InvTkt[] InvTkts {
             get {
-                return this.ticketsField;
+                return this.invTktsField;
             }
             set {
-                this.ticketsField = value;
-                this.RaisePropertyChanged("Tickets");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string IsNCRR {
-            get {
-                return this.isNCRRField;
-            }
-            set {
-                this.isNCRRField = value;
-                this.RaisePropertyChanged("IsNCRR");
+                this.invTktsField = value;
+                this.RaisePropertyChanged("InvTkts");
             }
         }
         
@@ -12134,1992 +13535,6 @@ namespace Test.eMosBooking {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class CommonBaseOfUO_PEOINPAXUOList_PEOINPAX : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private ConnectionInformation connInfoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ConnectionInformation ConnInfo {
-            get {
-                return this.connInfoField;
-            }
-            set {
-                this.connInfoField = value;
-                this.RaisePropertyChanged("ConnInfo");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class RTTKT : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private UO_PEOMSTR pEOMSTRField;
-        
-        private UO_PEOTKT tIKETField;
-        
-        private UO_PEOTKTDETAIL[] tKTDETAILField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public UO_PEOMSTR PEOMSTR {
-            get {
-                return this.pEOMSTRField;
-            }
-            set {
-                this.pEOMSTRField = value;
-                this.RaisePropertyChanged("PEOMSTR");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public UO_PEOTKT TIKET {
-            get {
-                return this.tIKETField;
-            }
-            set {
-                this.tIKETField = value;
-                this.RaisePropertyChanged("TIKET");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=2)]
-        public UO_PEOTKTDETAIL[] TKTDETAIL {
-            get {
-                return this.tKTDETAILField;
-            }
-            set {
-                this.tKTDETAILField = value;
-                this.RaisePropertyChanged("TKTDETAIL");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class UO_PEOTKT : UOBaseOfUO_PEOTKTUOList_PEOTKT {
-        
-        private string companyCodeField;
-        
-        private string ticketField;
-        
-        private string fareCalDataField;
-        
-        private string pseudoField;
-        
-        private string sineinField;
-        
-        private decimal gstpctField;
-        
-        private decimal gstamtField;
-        
-        private string nstField;
-        
-        private string sOURCESYSTEMField;
-        
-        private decimal commission_perField;
-        
-        private string add_paymentField;
-        
-        private string iss_off_codeField;
-        
-        private string tour_codeField;
-        
-        private string org_issField;
-        
-        private string iss_in_exchangeField;
-        
-        private string controlNumField;
-        
-        private decimal mISpaidfareField;
-        
-        private string eNDORSEMENTSField;
-        
-        private string destinationField;
-        
-        private string airReasonField;
-        
-        private string iNTDOMField;
-        
-        private string pAXAIRField;
-        
-        private string classField;
-        
-        private string tkttypeField;
-        
-        private decimal fullFareTaxField;
-        
-        private string sellCurrField;
-        
-        private decimal sellFareField;
-        
-        private string corpCurrField;
-        
-        private decimal corpFareField;
-        
-        private string cOD4Field;
-        
-        private string cOD5Field;
-        
-        private string cOD6Field;
-        
-        private decimal paidFareWOTaxField;
-        
-        private decimal lowFareWOTaxField;
-        
-        private decimal corpFareWOTaxField;
-        
-        private string gemsCodeField;
-        
-        private decimal transactionFeeField;
-        
-        private decimal fullFareWOTaxField;
-        
-        private string airlineTicketField;
-        
-        private string tktSeqField;
-        
-        private string bKGREFField;
-        
-        private string pNRField;
-        
-        private string cltCodeField;
-        
-        private string suppCodeField;
-        
-        private string invNumField;
-        
-        private decimal jqtyField;
-        
-        private string airCodeField;
-        
-        private string airlineField;
-        
-        private string paxNameField;
-        
-        private System.DateTime departOnField;
-        
-        private string cOD1Field;
-        
-        private string cOD2Field;
-        
-        private string cOD3Field;
-        
-        private decimal commissionField;
-        
-        private string localFareCurrField;
-        
-        private decimal localFareAmtField;
-        
-        private string foreignFareCurrField;
-        
-        private decimal foreignFareAmtField;
-        
-        private decimal discountField;
-        
-        private string formPayField;
-        
-        private string routingField;
-        
-        private string fullCurrField;
-        
-        private decimal fullFareField;
-        
-        private string paidCurrField;
-        
-        private decimal paidFareField;
-        
-        private string lowCurrField;
-        
-        private decimal lowFareField;
-        
-        private string netCurrField;
-        
-        private decimal netFareField;
-        
-        private string fareBasisField;
-        
-        private string fareTypeField;
-        
-        private decimal totalTaxField;
-        
-        private decimal securityField;
-        
-        private decimal qSurchargeField;
-        
-        private string branchCodeField;
-        
-        private string teamCodeField;
-        
-        private System.DateTime issueOnField;
-        
-        private string issueByField;
-        
-        private System.DateTime voidOnField;
-        
-        private string voidByField;
-        
-        private string voidteamField;
-        
-        private string voidreasonField;
-        
-        private System.DateTime createOnField;
-        
-        private string createByField;
-        
-        private System.DateTime updateOnField;
-        
-        private string updateByField;
-        
-        private string taxAmount1Field;
-        
-        private string taxID1Field;
-        
-        private string taxAmount2Field;
-        
-        private string taxID2Field;
-        
-        private string taxAmount3Field;
-        
-        private string taxID3Field;
-        
-        private string fareCalTypeField;
-        
-        private string compressPrintIndField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string CompanyCode {
-            get {
-                return this.companyCodeField;
-            }
-            set {
-                this.companyCodeField = value;
-                this.RaisePropertyChanged("CompanyCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Ticket {
-            get {
-                return this.ticketField;
-            }
-            set {
-                this.ticketField = value;
-                this.RaisePropertyChanged("Ticket");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string FareCalData {
-            get {
-                return this.fareCalDataField;
-            }
-            set {
-                this.fareCalDataField = value;
-                this.RaisePropertyChanged("FareCalData");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string pseudo {
-            get {
-                return this.pseudoField;
-            }
-            set {
-                this.pseudoField = value;
-                this.RaisePropertyChanged("pseudo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string sinein {
-            get {
-                return this.sineinField;
-            }
-            set {
-                this.sineinField = value;
-                this.RaisePropertyChanged("sinein");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public decimal gstpct {
-            get {
-                return this.gstpctField;
-            }
-            set {
-                this.gstpctField = value;
-                this.RaisePropertyChanged("gstpct");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public decimal gstamt {
-            get {
-                return this.gstamtField;
-            }
-            set {
-                this.gstamtField = value;
-                this.RaisePropertyChanged("gstamt");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string nst {
-            get {
-                return this.nstField;
-            }
-            set {
-                this.nstField = value;
-                this.RaisePropertyChanged("nst");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string SOURCESYSTEM {
-            get {
-                return this.sOURCESYSTEMField;
-            }
-            set {
-                this.sOURCESYSTEMField = value;
-                this.RaisePropertyChanged("SOURCESYSTEM");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public decimal commission_per {
-            get {
-                return this.commission_perField;
-            }
-            set {
-                this.commission_perField = value;
-                this.RaisePropertyChanged("commission_per");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string add_payment {
-            get {
-                return this.add_paymentField;
-            }
-            set {
-                this.add_paymentField = value;
-                this.RaisePropertyChanged("add_payment");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public string iss_off_code {
-            get {
-                return this.iss_off_codeField;
-            }
-            set {
-                this.iss_off_codeField = value;
-                this.RaisePropertyChanged("iss_off_code");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string tour_code {
-            get {
-                return this.tour_codeField;
-            }
-            set {
-                this.tour_codeField = value;
-                this.RaisePropertyChanged("tour_code");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public string org_iss {
-            get {
-                return this.org_issField;
-            }
-            set {
-                this.org_issField = value;
-                this.RaisePropertyChanged("org_iss");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string iss_in_exchange {
-            get {
-                return this.iss_in_exchangeField;
-            }
-            set {
-                this.iss_in_exchangeField = value;
-                this.RaisePropertyChanged("iss_in_exchange");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public string ControlNum {
-            get {
-                return this.controlNumField;
-            }
-            set {
-                this.controlNumField = value;
-                this.RaisePropertyChanged("ControlNum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public decimal MISpaidfare {
-            get {
-                return this.mISpaidfareField;
-            }
-            set {
-                this.mISpaidfareField = value;
-                this.RaisePropertyChanged("MISpaidfare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
-        public string ENDORSEMENTS {
-            get {
-                return this.eNDORSEMENTSField;
-            }
-            set {
-                this.eNDORSEMENTSField = value;
-                this.RaisePropertyChanged("ENDORSEMENTS");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public string Destination {
-            get {
-                return this.destinationField;
-            }
-            set {
-                this.destinationField = value;
-                this.RaisePropertyChanged("Destination");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
-        public string AirReason {
-            get {
-                return this.airReasonField;
-            }
-            set {
-                this.airReasonField = value;
-                this.RaisePropertyChanged("AirReason");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
-        public string INTDOM {
-            get {
-                return this.iNTDOMField;
-            }
-            set {
-                this.iNTDOMField = value;
-                this.RaisePropertyChanged("INTDOM");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public string PAXAIR {
-            get {
-                return this.pAXAIRField;
-            }
-            set {
-                this.pAXAIRField = value;
-                this.RaisePropertyChanged("PAXAIR");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public string Class {
-            get {
-                return this.classField;
-            }
-            set {
-                this.classField = value;
-                this.RaisePropertyChanged("Class");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public string tkttype {
-            get {
-                return this.tkttypeField;
-            }
-            set {
-                this.tkttypeField = value;
-                this.RaisePropertyChanged("tkttype");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public decimal FullFareTax {
-            get {
-                return this.fullFareTaxField;
-            }
-            set {
-                this.fullFareTaxField = value;
-                this.RaisePropertyChanged("FullFareTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
-        public string SellCurr {
-            get {
-                return this.sellCurrField;
-            }
-            set {
-                this.sellCurrField = value;
-                this.RaisePropertyChanged("SellCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
-        public decimal SellFare {
-            get {
-                return this.sellFareField;
-            }
-            set {
-                this.sellFareField = value;
-                this.RaisePropertyChanged("SellFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
-        public string CorpCurr {
-            get {
-                return this.corpCurrField;
-            }
-            set {
-                this.corpCurrField = value;
-                this.RaisePropertyChanged("CorpCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
-        public decimal CorpFare {
-            get {
-                return this.corpFareField;
-            }
-            set {
-                this.corpFareField = value;
-                this.RaisePropertyChanged("CorpFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public string COD4 {
-            get {
-                return this.cOD4Field;
-            }
-            set {
-                this.cOD4Field = value;
-                this.RaisePropertyChanged("COD4");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public string COD5 {
-            get {
-                return this.cOD5Field;
-            }
-            set {
-                this.cOD5Field = value;
-                this.RaisePropertyChanged("COD5");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public string COD6 {
-            get {
-                return this.cOD6Field;
-            }
-            set {
-                this.cOD6Field = value;
-                this.RaisePropertyChanged("COD6");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
-        public decimal PaidFareWOTax {
-            get {
-                return this.paidFareWOTaxField;
-            }
-            set {
-                this.paidFareWOTaxField = value;
-                this.RaisePropertyChanged("PaidFareWOTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
-        public decimal LowFareWOTax {
-            get {
-                return this.lowFareWOTaxField;
-            }
-            set {
-                this.lowFareWOTaxField = value;
-                this.RaisePropertyChanged("LowFareWOTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public decimal CorpFareWOTax {
-            get {
-                return this.corpFareWOTaxField;
-            }
-            set {
-                this.corpFareWOTaxField = value;
-                this.RaisePropertyChanged("CorpFareWOTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
-        public string GemsCode {
-            get {
-                return this.gemsCodeField;
-            }
-            set {
-                this.gemsCodeField = value;
-                this.RaisePropertyChanged("GemsCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
-        public decimal TransactionFee {
-            get {
-                return this.transactionFeeField;
-            }
-            set {
-                this.transactionFeeField = value;
-                this.RaisePropertyChanged("TransactionFee");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public decimal FullFareWOTax {
-            get {
-                return this.fullFareWOTaxField;
-            }
-            set {
-                this.fullFareWOTaxField = value;
-                this.RaisePropertyChanged("FullFareWOTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
-        public string AirlineTicket {
-            get {
-                return this.airlineTicketField;
-            }
-            set {
-                this.airlineTicketField = value;
-                this.RaisePropertyChanged("AirlineTicket");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
-        public string TktSeq {
-            get {
-                return this.tktSeqField;
-            }
-            set {
-                this.tktSeqField = value;
-                this.RaisePropertyChanged("TktSeq");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
-        public string BKGREF {
-            get {
-                return this.bKGREFField;
-            }
-            set {
-                this.bKGREFField = value;
-                this.RaisePropertyChanged("BKGREF");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
-        public string PNR {
-            get {
-                return this.pNRField;
-            }
-            set {
-                this.pNRField = value;
-                this.RaisePropertyChanged("PNR");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
-        public string CltCode {
-            get {
-                return this.cltCodeField;
-            }
-            set {
-                this.cltCodeField = value;
-                this.RaisePropertyChanged("CltCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
-        public string SuppCode {
-            get {
-                return this.suppCodeField;
-            }
-            set {
-                this.suppCodeField = value;
-                this.RaisePropertyChanged("SuppCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
-        public string InvNum {
-            get {
-                return this.invNumField;
-            }
-            set {
-                this.invNumField = value;
-                this.RaisePropertyChanged("InvNum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
-        public decimal Jqty {
-            get {
-                return this.jqtyField;
-            }
-            set {
-                this.jqtyField = value;
-                this.RaisePropertyChanged("Jqty");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
-        public string AirCode {
-            get {
-                return this.airCodeField;
-            }
-            set {
-                this.airCodeField = value;
-                this.RaisePropertyChanged("AirCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
-        public string Airline {
-            get {
-                return this.airlineField;
-            }
-            set {
-                this.airlineField = value;
-                this.RaisePropertyChanged("Airline");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
-        public string PaxName {
-            get {
-                return this.paxNameField;
-            }
-            set {
-                this.paxNameField = value;
-                this.RaisePropertyChanged("PaxName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
-        public System.DateTime DepartOn {
-            get {
-                return this.departOnField;
-            }
-            set {
-                this.departOnField = value;
-                this.RaisePropertyChanged("DepartOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
-        public string COD1 {
-            get {
-                return this.cOD1Field;
-            }
-            set {
-                this.cOD1Field = value;
-                this.RaisePropertyChanged("COD1");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
-        public string COD2 {
-            get {
-                return this.cOD2Field;
-            }
-            set {
-                this.cOD2Field = value;
-                this.RaisePropertyChanged("COD2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
-        public string COD3 {
-            get {
-                return this.cOD3Field;
-            }
-            set {
-                this.cOD3Field = value;
-                this.RaisePropertyChanged("COD3");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
-        public decimal Commission {
-            get {
-                return this.commissionField;
-            }
-            set {
-                this.commissionField = value;
-                this.RaisePropertyChanged("Commission");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
-        public string LocalFareCurr {
-            get {
-                return this.localFareCurrField;
-            }
-            set {
-                this.localFareCurrField = value;
-                this.RaisePropertyChanged("LocalFareCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
-        public decimal LocalFareAmt {
-            get {
-                return this.localFareAmtField;
-            }
-            set {
-                this.localFareAmtField = value;
-                this.RaisePropertyChanged("LocalFareAmt");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
-        public string ForeignFareCurr {
-            get {
-                return this.foreignFareCurrField;
-            }
-            set {
-                this.foreignFareCurrField = value;
-                this.RaisePropertyChanged("ForeignFareCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
-        public decimal ForeignFareAmt {
-            get {
-                return this.foreignFareAmtField;
-            }
-            set {
-                this.foreignFareAmtField = value;
-                this.RaisePropertyChanged("ForeignFareAmt");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
-        public decimal Discount {
-            get {
-                return this.discountField;
-            }
-            set {
-                this.discountField = value;
-                this.RaisePropertyChanged("Discount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
-        public string FormPay {
-            get {
-                return this.formPayField;
-            }
-            set {
-                this.formPayField = value;
-                this.RaisePropertyChanged("FormPay");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
-        public string Routing {
-            get {
-                return this.routingField;
-            }
-            set {
-                this.routingField = value;
-                this.RaisePropertyChanged("Routing");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
-        public string FullCurr {
-            get {
-                return this.fullCurrField;
-            }
-            set {
-                this.fullCurrField = value;
-                this.RaisePropertyChanged("FullCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
-        public decimal FullFare {
-            get {
-                return this.fullFareField;
-            }
-            set {
-                this.fullFareField = value;
-                this.RaisePropertyChanged("FullFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
-        public string PaidCurr {
-            get {
-                return this.paidCurrField;
-            }
-            set {
-                this.paidCurrField = value;
-                this.RaisePropertyChanged("PaidCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
-        public decimal PaidFare {
-            get {
-                return this.paidFareField;
-            }
-            set {
-                this.paidFareField = value;
-                this.RaisePropertyChanged("PaidFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
-        public string LowCurr {
-            get {
-                return this.lowCurrField;
-            }
-            set {
-                this.lowCurrField = value;
-                this.RaisePropertyChanged("LowCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
-        public decimal LowFare {
-            get {
-                return this.lowFareField;
-            }
-            set {
-                this.lowFareField = value;
-                this.RaisePropertyChanged("LowFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
-        public string NetCurr {
-            get {
-                return this.netCurrField;
-            }
-            set {
-                this.netCurrField = value;
-                this.RaisePropertyChanged("NetCurr");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
-        public decimal NetFare {
-            get {
-                return this.netFareField;
-            }
-            set {
-                this.netFareField = value;
-                this.RaisePropertyChanged("NetFare");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
-        public string FareBasis {
-            get {
-                return this.fareBasisField;
-            }
-            set {
-                this.fareBasisField = value;
-                this.RaisePropertyChanged("FareBasis");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
-        public string FareType {
-            get {
-                return this.fareTypeField;
-            }
-            set {
-                this.fareTypeField = value;
-                this.RaisePropertyChanged("FareType");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
-        public decimal TotalTax {
-            get {
-                return this.totalTaxField;
-            }
-            set {
-                this.totalTaxField = value;
-                this.RaisePropertyChanged("TotalTax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=72)]
-        public decimal Security {
-            get {
-                return this.securityField;
-            }
-            set {
-                this.securityField = value;
-                this.RaisePropertyChanged("Security");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=73)]
-        public decimal QSurcharge {
-            get {
-                return this.qSurchargeField;
-            }
-            set {
-                this.qSurchargeField = value;
-                this.RaisePropertyChanged("QSurcharge");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=74)]
-        public string BranchCode {
-            get {
-                return this.branchCodeField;
-            }
-            set {
-                this.branchCodeField = value;
-                this.RaisePropertyChanged("BranchCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=75)]
-        public string TeamCode {
-            get {
-                return this.teamCodeField;
-            }
-            set {
-                this.teamCodeField = value;
-                this.RaisePropertyChanged("TeamCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=76)]
-        public System.DateTime IssueOn {
-            get {
-                return this.issueOnField;
-            }
-            set {
-                this.issueOnField = value;
-                this.RaisePropertyChanged("IssueOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=77)]
-        public string IssueBy {
-            get {
-                return this.issueByField;
-            }
-            set {
-                this.issueByField = value;
-                this.RaisePropertyChanged("IssueBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=78)]
-        public System.DateTime VoidOn {
-            get {
-                return this.voidOnField;
-            }
-            set {
-                this.voidOnField = value;
-                this.RaisePropertyChanged("VoidOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=79)]
-        public string VoidBy {
-            get {
-                return this.voidByField;
-            }
-            set {
-                this.voidByField = value;
-                this.RaisePropertyChanged("VoidBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=80)]
-        public string voidteam {
-            get {
-                return this.voidteamField;
-            }
-            set {
-                this.voidteamField = value;
-                this.RaisePropertyChanged("voidteam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=81)]
-        public string voidreason {
-            get {
-                return this.voidreasonField;
-            }
-            set {
-                this.voidreasonField = value;
-                this.RaisePropertyChanged("voidreason");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=82)]
-        public System.DateTime CreateOn {
-            get {
-                return this.createOnField;
-            }
-            set {
-                this.createOnField = value;
-                this.RaisePropertyChanged("CreateOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=83)]
-        public string CreateBy {
-            get {
-                return this.createByField;
-            }
-            set {
-                this.createByField = value;
-                this.RaisePropertyChanged("CreateBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=84)]
-        public System.DateTime UpdateOn {
-            get {
-                return this.updateOnField;
-            }
-            set {
-                this.updateOnField = value;
-                this.RaisePropertyChanged("UpdateOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=85)]
-        public string UpdateBy {
-            get {
-                return this.updateByField;
-            }
-            set {
-                this.updateByField = value;
-                this.RaisePropertyChanged("UpdateBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=86)]
-        public string TaxAmount1 {
-            get {
-                return this.taxAmount1Field;
-            }
-            set {
-                this.taxAmount1Field = value;
-                this.RaisePropertyChanged("TaxAmount1");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=87)]
-        public string TaxID1 {
-            get {
-                return this.taxID1Field;
-            }
-            set {
-                this.taxID1Field = value;
-                this.RaisePropertyChanged("TaxID1");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=88)]
-        public string TaxAmount2 {
-            get {
-                return this.taxAmount2Field;
-            }
-            set {
-                this.taxAmount2Field = value;
-                this.RaisePropertyChanged("TaxAmount2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=89)]
-        public string TaxID2 {
-            get {
-                return this.taxID2Field;
-            }
-            set {
-                this.taxID2Field = value;
-                this.RaisePropertyChanged("TaxID2");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=90)]
-        public string TaxAmount3 {
-            get {
-                return this.taxAmount3Field;
-            }
-            set {
-                this.taxAmount3Field = value;
-                this.RaisePropertyChanged("TaxAmount3");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=91)]
-        public string TaxID3 {
-            get {
-                return this.taxID3Field;
-            }
-            set {
-                this.taxID3Field = value;
-                this.RaisePropertyChanged("TaxID3");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=92)]
-        public string FareCalType {
-            get {
-                return this.fareCalTypeField;
-            }
-            set {
-                this.fareCalTypeField = value;
-                this.RaisePropertyChanged("FareCalType");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=93)]
-        public string CompressPrintInd {
-            get {
-                return this.compressPrintIndField;
-            }
-            set {
-                this.compressPrintIndField = value;
-                this.RaisePropertyChanged("CompressPrintInd");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKT))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class UOBaseOfUO_PEOTKTUOList_PEOTKT : CommonBaseOfUO_PEOTKTUOList_PEOTKT {
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UOBaseOfUO_PEOTKTUOList_PEOTKT))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKT))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class CommonBaseOfUO_PEOTKTUOList_PEOTKT : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private ConnectionInformation connInfoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public ConnectionInformation ConnInfo {
-            get {
-                return this.connInfoField;
-            }
-            set {
-                this.connInfoField = value;
-                this.RaisePropertyChanged("ConnInfo");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class UO_PEOTKTDETAIL : UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL {
-        
-        private string companyCodeField;
-        
-        private string ticketField;
-        
-        private string airCodeField;
-        
-        private string tktSeqField;
-        
-        private string segNumField;
-        
-        private string airLineField;
-        
-        private string flightField;
-        
-        private string classField;
-        
-        private string seatField;
-        
-        private string departCityField;
-        
-        private string arrivalCityField;
-        
-        private System.DateTime departDATEField;
-        
-        private string departTimeField;
-        
-        private System.DateTime arrDATEField;
-        
-        private string arrTimeField;
-        
-        private string elapsedTimeField;
-        
-        private int stopOverNumField;
-        
-        private string stopOverCityField;
-        
-        private decimal fareAmtField;
-        
-        private string fareBasicField;
-        
-        private decimal commissionField;
-        
-        private System.DateTime validStartField;
-        
-        private System.DateTime validEndField;
-        
-        private System.DateTime createOnField;
-        
-        private string createByField;
-        
-        private System.DateTime updateOnField;
-        
-        private string updateByField;
-        
-        private decimal gSTAMTField;
-        
-        private string eQPField;
-        
-        private string serviceField;
-        
-        private string statusField;
-        
-        private string fare_basis_codeField;
-        
-        private string departTermField;
-        
-        private string arrivalTermField;
-        
-        private string freq_fight_numField;
-        
-        private string airlinePNRField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string CompanyCode {
-            get {
-                return this.companyCodeField;
-            }
-            set {
-                this.companyCodeField = value;
-                this.RaisePropertyChanged("CompanyCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Ticket {
-            get {
-                return this.ticketField;
-            }
-            set {
-                this.ticketField = value;
-                this.RaisePropertyChanged("Ticket");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string AirCode {
-            get {
-                return this.airCodeField;
-            }
-            set {
-                this.airCodeField = value;
-                this.RaisePropertyChanged("AirCode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string TktSeq {
-            get {
-                return this.tktSeqField;
-            }
-            set {
-                this.tktSeqField = value;
-                this.RaisePropertyChanged("TktSeq");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string SegNum {
-            get {
-                return this.segNumField;
-            }
-            set {
-                this.segNumField = value;
-                this.RaisePropertyChanged("SegNum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string AirLine {
-            get {
-                return this.airLineField;
-            }
-            set {
-                this.airLineField = value;
-                this.RaisePropertyChanged("AirLine");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string Flight {
-            get {
-                return this.flightField;
-            }
-            set {
-                this.flightField = value;
-                this.RaisePropertyChanged("Flight");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string Class {
-            get {
-                return this.classField;
-            }
-            set {
-                this.classField = value;
-                this.RaisePropertyChanged("Class");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string Seat {
-            get {
-                return this.seatField;
-            }
-            set {
-                this.seatField = value;
-                this.RaisePropertyChanged("Seat");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string DepartCity {
-            get {
-                return this.departCityField;
-            }
-            set {
-                this.departCityField = value;
-                this.RaisePropertyChanged("DepartCity");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string ArrivalCity {
-            get {
-                return this.arrivalCityField;
-            }
-            set {
-                this.arrivalCityField = value;
-                this.RaisePropertyChanged("ArrivalCity");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public System.DateTime DepartDATE {
-            get {
-                return this.departDATEField;
-            }
-            set {
-                this.departDATEField = value;
-                this.RaisePropertyChanged("DepartDATE");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string DepartTime {
-            get {
-                return this.departTimeField;
-            }
-            set {
-                this.departTimeField = value;
-                this.RaisePropertyChanged("DepartTime");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public System.DateTime ArrDATE {
-            get {
-                return this.arrDATEField;
-            }
-            set {
-                this.arrDATEField = value;
-                this.RaisePropertyChanged("ArrDATE");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string ArrTime {
-            get {
-                return this.arrTimeField;
-            }
-            set {
-                this.arrTimeField = value;
-                this.RaisePropertyChanged("ArrTime");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public string ElapsedTime {
-            get {
-                return this.elapsedTimeField;
-            }
-            set {
-                this.elapsedTimeField = value;
-                this.RaisePropertyChanged("ElapsedTime");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public int StopOverNum {
-            get {
-                return this.stopOverNumField;
-            }
-            set {
-                this.stopOverNumField = value;
-                this.RaisePropertyChanged("StopOverNum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
-        public string StopOverCity {
-            get {
-                return this.stopOverCityField;
-            }
-            set {
-                this.stopOverCityField = value;
-                this.RaisePropertyChanged("StopOverCity");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public decimal FareAmt {
-            get {
-                return this.fareAmtField;
-            }
-            set {
-                this.fareAmtField = value;
-                this.RaisePropertyChanged("FareAmt");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
-        public string FareBasic {
-            get {
-                return this.fareBasicField;
-            }
-            set {
-                this.fareBasicField = value;
-                this.RaisePropertyChanged("FareBasic");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
-        public decimal Commission {
-            get {
-                return this.commissionField;
-            }
-            set {
-                this.commissionField = value;
-                this.RaisePropertyChanged("Commission");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public System.DateTime ValidStart {
-            get {
-                return this.validStartField;
-            }
-            set {
-                this.validStartField = value;
-                this.RaisePropertyChanged("ValidStart");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public System.DateTime ValidEnd {
-            get {
-                return this.validEndField;
-            }
-            set {
-                this.validEndField = value;
-                this.RaisePropertyChanged("ValidEnd");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public System.DateTime CreateOn {
-            get {
-                return this.createOnField;
-            }
-            set {
-                this.createOnField = value;
-                this.RaisePropertyChanged("CreateOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public string CreateBy {
-            get {
-                return this.createByField;
-            }
-            set {
-                this.createByField = value;
-                this.RaisePropertyChanged("CreateBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
-        public System.DateTime UpdateOn {
-            get {
-                return this.updateOnField;
-            }
-            set {
-                this.updateOnField = value;
-                this.RaisePropertyChanged("UpdateOn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
-        public string UpdateBy {
-            get {
-                return this.updateByField;
-            }
-            set {
-                this.updateByField = value;
-                this.RaisePropertyChanged("UpdateBy");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
-        public decimal GSTAMT {
-            get {
-                return this.gSTAMTField;
-            }
-            set {
-                this.gSTAMTField = value;
-                this.RaisePropertyChanged("GSTAMT");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
-        public string EQP {
-            get {
-                return this.eQPField;
-            }
-            set {
-                this.eQPField = value;
-                this.RaisePropertyChanged("EQP");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public string service {
-            get {
-                return this.serviceField;
-            }
-            set {
-                this.serviceField = value;
-                this.RaisePropertyChanged("service");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public string status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-                this.RaisePropertyChanged("status");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public string fare_basis_code {
-            get {
-                return this.fare_basis_codeField;
-            }
-            set {
-                this.fare_basis_codeField = value;
-                this.RaisePropertyChanged("fare_basis_code");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
-        public string DepartTerm {
-            get {
-                return this.departTermField;
-            }
-            set {
-                this.departTermField = value;
-                this.RaisePropertyChanged("DepartTerm");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
-        public string ArrivalTerm {
-            get {
-                return this.arrivalTermField;
-            }
-            set {
-                this.arrivalTermField = value;
-                this.RaisePropertyChanged("ArrivalTerm");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public string freq_fight_num {
-            get {
-                return this.freq_fight_numField;
-            }
-            set {
-                this.freq_fight_numField = value;
-                this.RaisePropertyChanged("freq_fight_num");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
-        public string AirlinePNR {
-            get {
-                return this.airlinePNRField;
-            }
-            set {
-                this.airlinePNRField = value;
-                this.RaisePropertyChanged("AirlinePNR");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKTDETAIL))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL : CommonBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL {
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKTDETAIL))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class CommonBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ConnectionInformation connInfoField;
         
@@ -17751,6 +17166,637 @@ namespace Test.eMosBooking {
             set {
                 this.mISTKTDETAILField = value;
                 this.RaisePropertyChanged("MISTKTDETAIL");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKTDETAIL))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class CommonBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private ConnectionInformation connInfoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public ConnectionInformation ConnInfo {
+            get {
+                return this.connInfoField;
+            }
+            set {
+                this.connInfoField = value;
+                this.RaisePropertyChanged("ConnInfo");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UO_PEOTKTDETAIL))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL : CommonBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UO_PEOTKTDETAIL : UOBaseOfUO_PEOTKTDETAILUOList_PEOTKTDETAIL {
+        
+        private string companyCodeField;
+        
+        private string ticketField;
+        
+        private string airCodeField;
+        
+        private string tktSeqField;
+        
+        private string segNumField;
+        
+        private string airLineField;
+        
+        private string flightField;
+        
+        private string classField;
+        
+        private string seatField;
+        
+        private string departCityField;
+        
+        private string arrivalCityField;
+        
+        private System.DateTime departDATEField;
+        
+        private string departTimeField;
+        
+        private System.DateTime arrDATEField;
+        
+        private string arrTimeField;
+        
+        private string elapsedTimeField;
+        
+        private int stopOverNumField;
+        
+        private string stopOverCityField;
+        
+        private decimal fareAmtField;
+        
+        private string fareBasicField;
+        
+        private decimal commissionField;
+        
+        private System.DateTime validStartField;
+        
+        private System.DateTime validEndField;
+        
+        private System.DateTime createOnField;
+        
+        private string createByField;
+        
+        private System.DateTime updateOnField;
+        
+        private string updateByField;
+        
+        private decimal gSTAMTField;
+        
+        private string eQPField;
+        
+        private string serviceField;
+        
+        private string statusField;
+        
+        private string fare_basis_codeField;
+        
+        private string departTermField;
+        
+        private string arrivalTermField;
+        
+        private string freq_fight_numField;
+        
+        private string airlinePNRField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string CompanyCode {
+            get {
+                return this.companyCodeField;
+            }
+            set {
+                this.companyCodeField = value;
+                this.RaisePropertyChanged("CompanyCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Ticket {
+            get {
+                return this.ticketField;
+            }
+            set {
+                this.ticketField = value;
+                this.RaisePropertyChanged("Ticket");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string AirCode {
+            get {
+                return this.airCodeField;
+            }
+            set {
+                this.airCodeField = value;
+                this.RaisePropertyChanged("AirCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string TktSeq {
+            get {
+                return this.tktSeqField;
+            }
+            set {
+                this.tktSeqField = value;
+                this.RaisePropertyChanged("TktSeq");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string SegNum {
+            get {
+                return this.segNumField;
+            }
+            set {
+                this.segNumField = value;
+                this.RaisePropertyChanged("SegNum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string AirLine {
+            get {
+                return this.airLineField;
+            }
+            set {
+                this.airLineField = value;
+                this.RaisePropertyChanged("AirLine");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string Flight {
+            get {
+                return this.flightField;
+            }
+            set {
+                this.flightField = value;
+                this.RaisePropertyChanged("Flight");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string Class {
+            get {
+                return this.classField;
+            }
+            set {
+                this.classField = value;
+                this.RaisePropertyChanged("Class");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string Seat {
+            get {
+                return this.seatField;
+            }
+            set {
+                this.seatField = value;
+                this.RaisePropertyChanged("Seat");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string DepartCity {
+            get {
+                return this.departCityField;
+            }
+            set {
+                this.departCityField = value;
+                this.RaisePropertyChanged("DepartCity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string ArrivalCity {
+            get {
+                return this.arrivalCityField;
+            }
+            set {
+                this.arrivalCityField = value;
+                this.RaisePropertyChanged("ArrivalCity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public System.DateTime DepartDATE {
+            get {
+                return this.departDATEField;
+            }
+            set {
+                this.departDATEField = value;
+                this.RaisePropertyChanged("DepartDATE");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string DepartTime {
+            get {
+                return this.departTimeField;
+            }
+            set {
+                this.departTimeField = value;
+                this.RaisePropertyChanged("DepartTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public System.DateTime ArrDATE {
+            get {
+                return this.arrDATEField;
+            }
+            set {
+                this.arrDATEField = value;
+                this.RaisePropertyChanged("ArrDATE");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string ArrTime {
+            get {
+                return this.arrTimeField;
+            }
+            set {
+                this.arrTimeField = value;
+                this.RaisePropertyChanged("ArrTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string ElapsedTime {
+            get {
+                return this.elapsedTimeField;
+            }
+            set {
+                this.elapsedTimeField = value;
+                this.RaisePropertyChanged("ElapsedTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public int StopOverNum {
+            get {
+                return this.stopOverNumField;
+            }
+            set {
+                this.stopOverNumField = value;
+                this.RaisePropertyChanged("StopOverNum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string StopOverCity {
+            get {
+                return this.stopOverCityField;
+            }
+            set {
+                this.stopOverCityField = value;
+                this.RaisePropertyChanged("StopOverCity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public decimal FareAmt {
+            get {
+                return this.fareAmtField;
+            }
+            set {
+                this.fareAmtField = value;
+                this.RaisePropertyChanged("FareAmt");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public string FareBasic {
+            get {
+                return this.fareBasicField;
+            }
+            set {
+                this.fareBasicField = value;
+                this.RaisePropertyChanged("FareBasic");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public decimal Commission {
+            get {
+                return this.commissionField;
+            }
+            set {
+                this.commissionField = value;
+                this.RaisePropertyChanged("Commission");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public System.DateTime ValidStart {
+            get {
+                return this.validStartField;
+            }
+            set {
+                this.validStartField = value;
+                this.RaisePropertyChanged("ValidStart");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public System.DateTime ValidEnd {
+            get {
+                return this.validEndField;
+            }
+            set {
+                this.validEndField = value;
+                this.RaisePropertyChanged("ValidEnd");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public System.DateTime CreateOn {
+            get {
+                return this.createOnField;
+            }
+            set {
+                this.createOnField = value;
+                this.RaisePropertyChanged("CreateOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public string CreateBy {
+            get {
+                return this.createByField;
+            }
+            set {
+                this.createByField = value;
+                this.RaisePropertyChanged("CreateBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public System.DateTime UpdateOn {
+            get {
+                return this.updateOnField;
+            }
+            set {
+                this.updateOnField = value;
+                this.RaisePropertyChanged("UpdateOn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public string UpdateBy {
+            get {
+                return this.updateByField;
+            }
+            set {
+                this.updateByField = value;
+                this.RaisePropertyChanged("UpdateBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public decimal GSTAMT {
+            get {
+                return this.gSTAMTField;
+            }
+            set {
+                this.gSTAMTField = value;
+                this.RaisePropertyChanged("GSTAMT");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public string EQP {
+            get {
+                return this.eQPField;
+            }
+            set {
+                this.eQPField = value;
+                this.RaisePropertyChanged("EQP");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        public string service {
+            get {
+                return this.serviceField;
+            }
+            set {
+                this.serviceField = value;
+                this.RaisePropertyChanged("service");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        public string fare_basis_code {
+            get {
+                return this.fare_basis_codeField;
+            }
+            set {
+                this.fare_basis_codeField = value;
+                this.RaisePropertyChanged("fare_basis_code");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public string DepartTerm {
+            get {
+                return this.departTermField;
+            }
+            set {
+                this.departTermField = value;
+                this.RaisePropertyChanged("DepartTerm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        public string ArrivalTerm {
+            get {
+                return this.arrivalTermField;
+            }
+            set {
+                this.arrivalTermField = value;
+                this.RaisePropertyChanged("ArrivalTerm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        public string freq_fight_num {
+            get {
+                return this.freq_fight_numField;
+            }
+            set {
+                this.freq_fight_numField = value;
+                this.RaisePropertyChanged("freq_fight_num");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        public string AirlinePNR {
+            get {
+                return this.airlinePNRField;
+            }
+            set {
+                this.airlinePNRField = value;
+                this.RaisePropertyChanged("AirlinePNR");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.1433")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class RTTKT : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private UO_PEOMSTR pEOMSTRField;
+        
+        private UO_PEOTKT tIKETField;
+        
+        private UO_PEOTKTDETAIL[] tKTDETAILField;
+        
+        private bool isSameMstrInvNumField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public UO_PEOMSTR PEOMSTR {
+            get {
+                return this.pEOMSTRField;
+            }
+            set {
+                this.pEOMSTRField = value;
+                this.RaisePropertyChanged("PEOMSTR");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public UO_PEOTKT TIKET {
+            get {
+                return this.tIKETField;
+            }
+            set {
+                this.tIKETField = value;
+                this.RaisePropertyChanged("TIKET");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=2)]
+        public UO_PEOTKTDETAIL[] TKTDETAIL {
+            get {
+                return this.tKTDETAILField;
+            }
+            set {
+                this.tKTDETAILField = value;
+                this.RaisePropertyChanged("TKTDETAIL");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public bool IsSameMstrInvNum {
+            get {
+                return this.isSameMstrInvNumField;
+            }
+            set {
+                this.isSameMstrInvNumField = value;
+                this.RaisePropertyChanged("IsSameMstrInvNum");
             }
         }
         

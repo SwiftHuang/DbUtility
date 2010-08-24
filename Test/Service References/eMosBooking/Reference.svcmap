@@ -17,11 +17,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/eMosSVC/booking.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://10.100.133.83/eMos2Acct/booking.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="booking1.disco" MetadataType="Disco" ID="eab861e9-7ba5-409a-9a2c-8bcdbbee2669" SourceId="1" SourceUrl="http://localhost/eMosSVC/booking.asmx?disco" />
-    <MetadataFile FileName="booking1.wsdl" MetadataType="Wsdl" ID="8565dadd-7d60-4cff-991a-e314016f4187" SourceId="1" SourceUrl="http://localhost/eMosSVC/booking.asmx?wsdl" />
+    <MetadataFile FileName="booking.wsdl" MetadataType="Wsdl" ID="d8db0aff-41b2-4a21-a51f-79133d9754cb" SourceId="1" SourceUrl="http://10.100.133.83/eMos2Acct/booking.asmx?wsdl" />
+    <MetadataFile FileName="booking.disco" MetadataType="Disco" ID="537a9c42-2eaf-4429-a974-ffceef921550" SourceId="1" SourceUrl="http://10.100.133.83/eMos2Acct/booking.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
