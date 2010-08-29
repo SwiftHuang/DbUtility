@@ -57,6 +57,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(CreatFieldsEnum(entity));
             strclass.AppendLine(CreatModelMethod(entity));
             strclass.AppendLine(1, "}");
+            strclass.AppendLine(1, "[Serializable]");
             strclass.AppendLine(1, "public class " + entity.EntityName + "s : BaseList<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
             if (entity.Module != DBModule.SP)
                 strclass.AppendLine(1, "public class " + entity.EntityName + "Page : PageResult<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
