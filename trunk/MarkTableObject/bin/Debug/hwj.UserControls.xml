@@ -45,6 +45,11 @@
               Looks up a localized string similar to [{0}]为无效的电子邮箱格式.
             </summary>
         </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidInputString">
+            <summary>
+              Looks up a localized string similar to 请输入{0}个以上的字符.
+            </summary>
+        </member>
         <member name="P:hwj.UserControls.Properties.Resources.InvalidNumberic">
             <summary>
               Looks up a localized string similar to [{0}]为无效的数字格式.
@@ -96,26 +101,6 @@
         <member name="P:hwj.UserControls.Other.MaskedDateTimePicker.IsRequired">
             <summary>
             获取或设置为必填控件
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.IsRequired">
-            <summary>
-            获取或设置为必填控件
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedHandle">
-            <summary>
-            设置引发hwj.UserControls.ValueChanged事件的对象
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.ShowContentError">
-            <summary>
-            "是否显示验证错误信息(只有ContentType不为None时有效)"
-            </summary>
-        </member>
-        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
-            <summary>
-            内容是否改变(在Validating/Validated有效)
             </summary>
         </member>
         <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedHandle">
@@ -290,6 +275,11 @@
             获取或设置SuggestBox Dropdown的显示方式
             </summary>
         </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.SearchMinLength">
+            <summary>
+            获取或设置触发搜索的字符最小长度
+            </summary>
+        </member>
         <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshRowFooter">
             <summary>
             刷新行尾
@@ -337,11 +327,6 @@
             获取是否有控件的值发生改变
             </summary>
         </member>
-        <member name="F:hwj.UserControls.Function.Verify.RequiredHandle.RequiredControls">
-            <summary>
-            获取或设置必填的控件名称
-            </summary>
-        </member>
         <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Add(System.Windows.Forms.Control)">
             <summary>
             添加必填控件
@@ -353,6 +338,11 @@
             移除必填控件
             </summary>
             <param name="control"></param>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.RequiredControls">
+            <summary>
+            获取或设置必填的控件名称
+            </summary>
         </member>
         <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.HasRequired">
             <summary>
@@ -367,6 +357,26 @@
         <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
             <summary>
             整数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ShowContentError">
+            <summary>
+            "是否显示验证错误信息(只有ContentType不为None时有效)"
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
+            <summary>
+            内容是否改变(在Validating/Validated有效)
             </summary>
         </member>
     </members>

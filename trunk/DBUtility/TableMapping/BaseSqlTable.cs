@@ -4,7 +4,8 @@ using System.Text;
 
 namespace hwj.DBUtility.TableMapping
 {
-    public class BaseSqlTable<T> where T : class, new()
+    [Serializable]
+    public abstract class BaseSqlTable<T> where T : class, new()
     {
         private string CommandText = string.Empty;
         public BaseSqlTable()
