@@ -220,7 +220,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "代码生成工具 Ver 0.0.3.1";
+            this.Text = "代码生成工具 Ver 0.0.3.2";
             this.Load += new System.EventHandler(this.Main_Load);
             this.treeMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
