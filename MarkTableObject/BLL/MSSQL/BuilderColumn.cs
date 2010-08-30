@@ -19,7 +19,7 @@ namespace hwj.MarkTableObject.BLL.MSSQL
                 if (entity.Module == DBModule.SQL || entity.Module == DBModule.SP)
                     command = new SqlCommand(entity.CommandText, connection);
                 else
-                    command = new SqlCommand(string.Format("SELECT * FROM {0}", entity.TableName), connection);
+                    command = new SqlCommand(string.Format("SELECT Top 1 * FROM {0}", entity.TableName), connection);
 
                 connection.Open();
                 DataTable tb1 = connection.GetSchema("Columns", new string[] { null, null, entity.TableName });
