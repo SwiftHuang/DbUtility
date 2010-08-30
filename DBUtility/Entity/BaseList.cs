@@ -8,6 +8,7 @@ using System.ComponentModel;
 
 namespace hwj.DBUtility.Entity
 {
+    [Serializable]
     public class BaseList<T, TS> : List<T>
         where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
