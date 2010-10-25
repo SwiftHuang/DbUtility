@@ -256,13 +256,22 @@ namespace hwj.DBUtility.MSSQL
                             strList = new string[] { sp.FieldValue.ToString() };
                         else
                             strList = (string[])sp.FieldValue;
-                        foreach (string s in strList)
+
+                        foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                         {
-                            SqlParameter p = new SqlParameter();
-                            p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
-                            p.Value = s;
-                            LstDP.Add(p);
-                            index++;
+                            if (sp.FieldName == f.FieldName)
+                            {
+                                foreach (string s in strList)
+                                {
+                                    SqlParameter p = new SqlParameter();
+                                    p.DbType = f.DataTypeCode;
+                                    p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
+                                    p.Value = s;
+                                    LstDP.Add(p);
+                                    index++;
+                                }
+                                break;
+                            }
                         }
                     }
                     else if (sp.Operator == Enums.Relation.IsNotNull || sp.Operator == Enums.Relation.IsNull)

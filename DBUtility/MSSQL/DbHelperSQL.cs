@@ -592,7 +592,7 @@ namespace hwj.DBUtility.MSSQL
                     }
                     catch (System.Data.SqlClient.SqlException e)
                     {
-                        FormatSqlEx(SQLString, cmdParms, ref e);
+                        //FormatSqlEx(SQLString, cmdParms, ref e);
                         throw e;
                     }
                     finally
@@ -658,7 +658,6 @@ namespace hwj.DBUtility.MSSQL
                 conn.Open();
                 using (SqlTransaction trans = conn.BeginTransaction())
                 {
-                    Int32 index = 0;
                     SqlCommand cmd = new SqlCommand();
                     cmd.CommandTimeout = timeout;
                     try
@@ -700,7 +699,7 @@ namespace hwj.DBUtility.MSSQL
                             }
                             int val = cmd.ExecuteNonQuery();
                             count += val;
-                            index++;
+
                             if (myDE.EffentNextType == Enums.EffentNextType.ExcuteEffectRows && val == 0)
                             {
                                 trans.Rollback();
@@ -711,20 +710,20 @@ namespace hwj.DBUtility.MSSQL
                         trans.Commit();
                         return count;
                     }
-                    catch (SqlException e)
-                    {
-                        try
-                        {
-                            if (cmdList != null && cmdList.Count > index)
-                            {
-                                SqlEntity se = cmdList[index];
-                                FormatSqlEx(se.CommandText, se.Parameters, ref e);
-                            }
-                        }
-                        catch { }
-                        trans.Rollback();
-                        throw e;
-                    }
+                    //catch (SqlException e)
+                    //{
+                    //    try
+                    //    {
+                    //        if (cmdList != null && cmdList.Count > index)
+                    //        {
+                    //            SqlEntity se = cmdList[index];
+                    //            FormatSqlEx(se.CommandText, se.Parameters, ref e);
+                    //        }
+                    //    }
+                    //    catch { }
+                    //    trans.Rollback();
+                    //    throw e;
+                    //}
                     catch
                     {
                         trans.Rollback();
