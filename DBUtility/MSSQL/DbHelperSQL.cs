@@ -854,7 +854,8 @@ namespace hwj.DBUtility.MSSQL
                     }
                     catch (System.Data.SqlClient.SqlException e)
                     {
-                        throw e;
+                        //throw e;
+                        throw;
                     }
                     finally
                     {
@@ -883,7 +884,8 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (System.Data.SqlClient.SqlException e)
             {
-                throw e;
+                //throw e;
+                throw;
             }
 
         }
