@@ -877,7 +877,14 @@ namespace hwj.DBUtility.MSSQL
             SqlCommand cmd = new SqlCommand();
             try
             {
-                PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                //防止多线程的时候，同时Add的错误
+                SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
+                for (int i = 0, j = cmdParms.Count; i < j; i++)
+                {
+                    clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
+                }
+
+                PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
                 SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return myReader;
@@ -947,7 +954,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        public static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
+        internal static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
