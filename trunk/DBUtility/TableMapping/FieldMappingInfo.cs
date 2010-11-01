@@ -66,6 +66,10 @@ namespace hwj.DBUtility.TableMapping
             }
             return null;
         }
+        public FieldMappingInfo Clone()
+        {
+            return (this.MemberwiseClone() as FieldMappingInfo);
+        }
         #endregion
     }
 }
