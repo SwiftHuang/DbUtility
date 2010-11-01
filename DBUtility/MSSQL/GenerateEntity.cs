@@ -103,15 +103,18 @@ namespace hwj.DBUtility.MSSQL
                 try
                 {
                     f.FieldIndex = reader.GetOrdinal(f.FieldName);
+                    //Clone的原因在于在多线程的环境下，因为共用了同一个Cache的FieldMappingInfo List对象，所以造成相同地址的内容被改变的情况
+                    datalist.Add(f.Clone());
+
+                    if (reader.FieldCount == datalist.Count)
+                        break;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    f.FieldIndex = -1;
+                    //f.FieldIndex = -1;
                 }
-                datalist.Add(f);
             }
             return datalist;
-
         }
         #endregion
     }
