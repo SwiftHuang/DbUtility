@@ -877,14 +877,21 @@ namespace hwj.DBUtility.MSSQL
             SqlCommand cmd = new SqlCommand();
             try
             {
-                //防止多线程的时候，同时Add的错误
-                SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
-                for (int i = 0, j = cmdParms.Count; i < j; i++)
+                if (cmdParms == null)
                 {
-                    clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
+                    PrepareCommand(cmd, connection, null, SQLString, cmdParms);
                 }
+                else
+                {
+                    //防止多线程的时候，同时Add的错误
+                    SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
+                    for (int i = 0, j = cmdParms.Count; i < j; i++)
+                    {
+                        clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
+                    }
 
-                PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
+                    PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
+                }
                 SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return myReader;
