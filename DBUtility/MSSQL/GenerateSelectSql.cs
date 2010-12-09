@@ -40,7 +40,7 @@ namespace hwj.DBUtility.MSSQL
         {
             string sMaxCount = string.Empty;
 
-            if (maxCount.HasValue && maxCount > 0)
+            if (maxCount.HasValue && maxCount >= 0)
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
