@@ -209,10 +209,20 @@ namespace hwj.DBUtility.MSSQL
                 if (para.IsUnicode)
                     sbStr.Append("N");//.Append('\'');
                 sbStr.Append('\'');
+
                 if (IsDatabaseDate(para))
                     sbStr.Append(_MsSqlGetDate);
                 else
-                    sbStr.Append(para.FieldValue.ToString());
+                {
+                    if (para.Operator == Enums.Relation.Like || para.Operator == Enums.Relation.NotLike)
+                    {
+                        sbStr.Append(para.FieldValue.ToString().Replace("'", "''").Replace("[", "[[]"));
+                    }
+                    else
+                    {
+                        sbStr.Append(para.FieldValue.ToString().Replace("'", "''"));
+                    }
+                }
                 sbStr.Append('\'');//.Append('\'');
             }
             else if (IsDatabaseDate(para))
