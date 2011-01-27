@@ -126,10 +126,11 @@ namespace hwj.DBUtility.MSSQL
         {
             if (listParam != null && listParam.Count > 0)
             {
+                string strWhere = "WHERE ";
                 StringBuilder sbWhere = new StringBuilder();
                 int index = 0;
                 if (!isPage)
-                    sbWhere.Append("WHERE ");
+                    sbWhere.Append(strWhere);
                 foreach (SqlParam para in listParam)
                 {
                     if (string.IsNullOrEmpty(para.FieldName))
@@ -180,7 +181,10 @@ namespace hwj.DBUtility.MSSQL
                         sbWhere.Append(GetCondition(para, true, isPage));
                 }
                 //格式化最后的表达式，
-                return base.TrimSql(sbWhere.ToString());
+                if (sbWhere.ToString() == strWhere)
+                    return string.Empty;
+                else
+                    return base.TrimSql(sbWhere.ToString());
             }
             else
                 return string.Empty;
