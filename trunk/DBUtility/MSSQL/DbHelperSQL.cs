@@ -629,7 +629,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             string cmdText = myDE.Key.ToString();
                             SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
-                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms);
                             int val = cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
                         }
@@ -806,7 +806,7 @@ namespace hwj.DBUtility.MSSQL
                                     q.Value = indentity;
                                 }
                             }
-                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms);
                             int val = cmd.ExecuteNonQuery();
                             foreach (SqlParameter q in cmdParms)
                             {
@@ -877,21 +877,21 @@ namespace hwj.DBUtility.MSSQL
             SqlCommand cmd = new SqlCommand();
             try
             {
-                if (cmdParms == null)
-                {
-                    PrepareCommand(cmd, connection, null, SQLString, cmdParms);
-                }
-                else
-                {
-                    //防止多线程的时候，同时Add的错误
-                    SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
-                    for (int i = 0, j = cmdParms.Count; i < j; i++)
-                    {
-                        clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
-                    }
+                //if (cmdParms == null)
+                //{
+                PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                //}
+                //else
+                //{
+                //    //防止多线程的时候，同时Add的错误
+                //    SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
+                //    for (int i = 0, j = cmdParms.Count; i < j; i++)
+                //    {
+                //        clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
+                //    }
 
-                    PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
-                }
+                //    PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
+                //}
                 SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return myReader;
@@ -914,7 +914,7 @@ namespace hwj.DBUtility.MSSQL
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                PrepareCommand4Arry(cmd, connection, null, SQLString, cmdParms);
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
                     DataSet ds = new DataSet();
@@ -938,7 +938,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
 
-        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
+        private static void PrepareCommand4Arry(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
@@ -948,9 +948,17 @@ namespace hwj.DBUtility.MSSQL
             if (trans != null)
                 cmd.Transaction = trans;
             cmd.CommandType = CommandType.Text;//cmdType;
+
             if (cmdParms != null)
             {
-                foreach (SqlParameter parameter in cmdParms)
+                //防止多线程的时候，同时Add的错误
+                SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Length];
+                for (int i = 0, j = cmdParms.Length; i < j; i++)
+                {
+                    clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
+                }
+
+                foreach (SqlParameter parameter in clonedParameters)
                 {
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
                         (parameter.Value == null))
@@ -963,26 +971,30 @@ namespace hwj.DBUtility.MSSQL
         }
         internal static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
         {
-            if (conn.State != ConnectionState.Open)
-                conn.Open();
-            cmd.Connection = conn;
-            cmd.CommandText = cmdText;
-            cmd.CommandTimeout = 120;
-            if (trans != null)
-                cmd.Transaction = trans;
-            cmd.CommandType = CommandType.Text;//cmdType;
             if (cmdParms != null)
-            {
-                foreach (SqlParameter parameter in cmdParms)
-                {
-                    if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
-                        (parameter.Value == null))
-                    {
-                        parameter.Value = DBNull.Value;
-                    }
-                    cmd.Parameters.Add(parameter);
-                }
-            }
+                PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms.ToArray());
+            else
+                PrepareCommand4Arry(cmd, conn, trans, cmdText, null);
+            //if (conn.State != ConnectionState.Open)
+            //    conn.Open();
+            //cmd.Connection = conn;
+            //cmd.CommandText = cmdText;
+            //cmd.CommandTimeout = 120;
+            //if (trans != null)
+            //    cmd.Transaction = trans;
+            //cmd.CommandType = CommandType.Text;//cmdType;
+            //if (cmdParms != null)
+            //{
+            //    foreach (SqlParameter parameter in cmdParms)
+            //    {
+            //        if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
+            //            (parameter.Value == null))
+            //        {
+            //            parameter.Value = DBNull.Value;
+            //        }
+            //        cmd.Parameters.Add(parameter);
+            //    }
+            //}
         }
         #endregion
 
