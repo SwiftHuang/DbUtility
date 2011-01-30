@@ -39,7 +39,7 @@ namespace hwj.DBUtility.MSSQL
         public BaseDAL(string ConnectionString)
             : base(ConnectionString)
         {
-           
+
         }
 
         #region Insert
