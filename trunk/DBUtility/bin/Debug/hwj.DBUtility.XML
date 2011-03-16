@@ -189,6 +189,30 @@
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回SqlDataReader
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回Object
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
             <summary>
             执行插入数据
@@ -328,7 +352,7 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:hwj.DBUtility.Entity.Reverser`1" -->
+        <!-- 对于成员“T:hwj.DBUtility.Entity.Reverser`1”忽略有格式错误的 XML 注释 -->
         <member name="M:hwj.DBUtility.Entity.Reverser`1.#ctor(System.Type,System.String,System.ComponentModel.ListSortDirection)">
             <summary>
             构造函数
