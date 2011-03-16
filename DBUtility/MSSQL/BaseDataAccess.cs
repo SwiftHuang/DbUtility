@@ -30,13 +30,40 @@ namespace hwj.DBUtility.MSSQL
             ConnectionString = connectionString;
         }
 
+        public bool ExecuteSqlTran(SqlList list)
+        {
+            return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
+        }
+
+        /// <summary>
+        /// 执行SQL语句，返回影响的记录数
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public int ExecuteSql(string sql, List<SqlParameter> parameters)
         {
             return DbHelper.ExecuteSql(ConnectionString, sql, parameters);
         }
-        public bool ExecuteSqlTran(SqlList list)
+        /// <summary>
+        /// 执行SQL语句，返回SqlDataReader
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public SqlDataReader ExecuteReader(string sql, List<SqlParameter> parameters)
         {
-            return DbHelperSQL.ExecuteSqlTran(ConnectionString, list) > 0;
+            return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters);
+        }
+        /// <summary>
+        /// 执行SQL语句，返回Object
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public object ExecuteScalar(string sql, List<SqlParameter> parameters)
+        {
+            return DbHelperSQL.GetSingle(ConnectionString, sql, parameters);
         }
     }
 }
