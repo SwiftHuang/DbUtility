@@ -1,4 +1,4 @@
-False	WM-HC00036172-I	2010/08/05 18:04:41	XML 文档(1499, 4)中有错误。	PEOINV	HC00036172	<?xml version="1.0"?>
+<?xml version="1.0"?>
 <RTINV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PEOMSTR>
     <ConnInfo>

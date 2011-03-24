@@ -12,7 +12,9 @@ namespace Test.DB.BLL
     /// </summary>
     public class BOAptx
     {
-        private static DAAptx da = new DAAptx("Data Source=10.100.133.83;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=gzuat");
+        //private static DAAptx da = new DAAptx("Data Source=10.100.133.83;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=gzuat");
+        private static DAAptx da = new DAAptx("Data Source=127.0.0.1;Initial Catalog=eAccount;Integrated Security=True");
+
         public BOAptx()
         { }
         public static bool Exists(string CompanyCode, string APTxNum)
@@ -62,12 +64,12 @@ namespace Test.DB.BLL
             return da.GetList(null, fp);
         }
 
-        public static tbAptxs GetList(string CompanyCode, int top)
+        public static tbAptxs GetList(string CompanyCode)
         {
             FilterParams fp = new FilterParams();
             fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
             //fp.AddParam(tbAptx.Fields.PurgeRef, "BP%", Enums.Relation.NotLike, Enums.Expression.AND);
-            return da.GetList(null, fp, null, top);
+            return da.GetList(null, fp);
         }
 
         public static tbAptxPage GetPage(int pageIndex, int pageSize)

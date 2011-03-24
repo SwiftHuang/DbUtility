@@ -32,13 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataListPage1 = new hwj.UserControls.DataList.DataListPage();
             this.dgList = new hwj.UserControls.DataList.xDataGridView();
-            this.xButton1 = new hwj.UserControls.CommonControls.xButton();
-            this.btnGet = new hwj.UserControls.CommonControls.xButton();
             this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new hwj.UserControls.DataList.xDataGridViewTextBoxColumn();
             this.Column4 = new hwj.UserControls.DataList.xDataGridViewNumbericColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.xButton1 = new hwj.UserControls.CommonControls.xButton();
+            this.btnGet = new hwj.UserControls.CommonControls.xButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,28 +80,7 @@
             this.dgList.SumColumnName = ((System.Collections.Generic.List<string>)(resources.GetObject("dgList.SumColumnName")));
             this.dgList.TabIndex = 0;
             this.dgList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgList_CellValueChanged);
-            // 
-            // xButton1
-            // 
-            this.xButton1.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.xButton1.Location = new System.Drawing.Point(583, 341);
-            this.xButton1.Name = "xButton1";
-            this.xButton1.Size = new System.Drawing.Size(75, 23);
-            this.xButton1.TabIndex = 2;
-            this.xButton1.Text = "xButton1";
-            this.xButton1.UseVisualStyleBackColor = true;
-            this.xButton1.Click += new System.EventHandler(this.xButton1_Click);
-            // 
-            // btnGet
-            // 
-            this.btnGet.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGet.Location = new System.Drawing.Point(744, 341);
-            this.btnGet.Name = "btnGet";
-            this.btnGet.Size = new System.Drawing.Size(75, 23);
-            this.btnGet.TabIndex = 1;
-            this.btnGet.Text = "Get";
-            this.btnGet.UseVisualStyleBackColor = true;
-            this.btnGet.Click += new System.EventHandler(this.btnGet_Click);
+            this.dgList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgList_CellContentClick);
             // 
             // Column1
             // 
@@ -133,6 +112,28 @@
             // 
             this.Column5.HeaderText = "Column5";
             this.Column5.Name = "Column5";
+            // 
+            // xButton1
+            // 
+            this.xButton1.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.xButton1.Location = new System.Drawing.Point(583, 341);
+            this.xButton1.Name = "xButton1";
+            this.xButton1.Size = new System.Drawing.Size(75, 23);
+            this.xButton1.TabIndex = 2;
+            this.xButton1.Text = "xButton1";
+            this.xButton1.UseVisualStyleBackColor = true;
+            this.xButton1.Click += new System.EventHandler(this.xButton1_Click);
+            // 
+            // btnGet
+            // 
+            this.btnGet.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnGet.Location = new System.Drawing.Point(744, 341);
+            this.btnGet.Name = "btnGet";
+            this.btnGet.Size = new System.Drawing.Size(75, 23);
+            this.btnGet.TabIndex = 1;
+            this.btnGet.Text = "Get";
+            this.btnGet.UseVisualStyleBackColor = true;
+            this.btnGet.Click += new System.EventHandler(this.btnGet_Click);
             // 
             // dgFrm
             // 
