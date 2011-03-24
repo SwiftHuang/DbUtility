@@ -59,6 +59,70 @@ namespace Test.DemoFrm
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bgw2.RunWorkerAsync();
+            bgw1.RunWorkerAsync();
+        }
+
+        private void bgw1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                //DB.BLL.BOAptx.GetList("GT"); 
+                DB.BLL.BOAptx.GetEntity("GT", "0000049903");
+            }
+
+        }
+
+        private void bgw2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                //DB.BLL.BOAptx.GetList("GT") ;
+                DB.BLL.BOAptx.GetEntity("GT", "0000049903");
+            }
+        }
+
+        private void bgw1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+
+            }
+        }
+
+        private void bgw2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+
+            }
+        }
+
+        private void ControlsFrm_Load(object sender, EventArgs e)
+        {
+            DataTable tb = new DataTable();
+            tb.ReadXml(@"C:\AccountChartL1_6.xml");
+            suggestBoxView1.ValueMember = tb.Columns[0].ColumnName;
+            suggestBoxView1.FirstMember = tb.Columns[8].ColumnName;
+            //suggestBoxView1.SecondMember = tb.Columns[1].ColumnName;
+            //suggestBoxView1.SecondColumnMode = true;
+            suggestBoxView1.DataSource = tb;
+            suggestBoxView1.FilterString = string.Format("{1} Like '%{0}%' or {2} Like '%{0}%'", hwj.UserControls.Suggest.View.SuggestBoxView.ValueFlag, suggestBoxView1.ValueMember, suggestBoxView1.FirstMember);
+        }
+
+        private void suggestBoxView1_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void suggestBoxView1_OnSelected(hwj.UserControls.Suggest.View.SelectedItem e)
+        {
+            xTextBox2.Text = e.Key;
+            xTextBox3.Text = e.FirstColumnValue;
+        }
+
 
     }
 }

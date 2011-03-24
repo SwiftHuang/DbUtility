@@ -6,8 +6,8 @@
   <TeamCode xmlns="http://tempuri.org/">GWT</TeamCode>
   <Masteracct xmlns="http://tempuri.org/">GJ0015  </Masteracct>
   <Addr1 xmlns="http://tempuri.org/">深圳深南东路3085号骏庭酒店3楼303室</Addr1>
-  <Addr2 xmlns="http://tempuri.org/" />
-  <Addr3 xmlns="http://tempuri.org/" />
+  <Addr2 xmlns="http://tempuri.org/">1</Addr2>
+  <Addr3 xmlns="http://tempuri.org/"></Addr3>
   <Addr4 xmlns="http://tempuri.org/" />
   <Addr5 xmlns="http://tempuri.org/" />
   <Citycode xmlns="http://tempuri.org/">SZX</Citycode>
@@ -40,7 +40,7 @@
   <Category xmlns="http://tempuri.org/">I</Category>
   <Email1 xmlns="http://tempuri.org/" />
   <AcctStatus xmlns="http://tempuri.org/">1</AcctStatus>
-  <StatementAddr1 xmlns="http://tempuri.org/" />
+  <StatementAddr1 xmlns="http://tempuri.org/" >1</StatementAddr1>
   <StatementAddr2 xmlns="http://tempuri.org/" />
   <StatementAddr3 xmlns="http://tempuri.org/" />
   <StatementAddr4 xmlns="http://tempuri.org/" />

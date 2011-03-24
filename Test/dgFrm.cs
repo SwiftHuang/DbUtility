@@ -23,6 +23,8 @@ namespace Test
             //dgList.DataSource = DB.BLL.BOTestOutput.GetAllList();
 
             //dgList.DataSource = Acct.BLL.BOSqlEntity.GetList("GT");
+            hwj.UserControls.DataList.xDataGridViewTextBoxCell cell = dgList[Column1.Index, 1] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
+            cell.ContentType = hwj.UserControls.CommonControls.ContentType.Numberic;
         }
 
         private void dgList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -37,7 +39,7 @@ namespace Test
 
         private void dgFrm_Load(object sender, EventArgs e)
         {
-            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT", 100);
+            dgList.DataSource = Test.DB.BLL.BOAptx.GetList("GT");
             hwj.UserControls.DataList.xDataGridViewTextBoxCell cell1 = dgList[Column3.Index, 0] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
             cell1.ContentType = hwj.UserControls.CommonControls.ContentType.Numberic;
 
@@ -49,6 +51,11 @@ namespace Test
             //hwj.UserControls.DataList.xDataGridViewTextBoxCell cell3 = dgList[Column2.Index, 2] as hwj.UserControls.DataList.xDataGridViewTextBoxCell;
             //cell3.ContentType = hwj.UserControls.CommonControls.ContentType.Email;
             ////btnGet.PerformClick();
+        }
+
+        private void dgList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
