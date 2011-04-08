@@ -12,7 +12,9 @@ namespace hwj.DBUtility.MSSQL
     /// </summary>
     public abstract class DbHelperSQL
     {
-
+        /// <summary>
+        /// DbHeplerSQL
+        /// </summary>
         public DbHelperSQL()
         {
         }
@@ -117,26 +119,17 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
-        #endregion
-
-        #region  执行简单SQL语句
-
-        /// <summary>
-        /// 执行SQL语句，返回影响的记录数
-        /// </summary>
-        /// <param name="SQLString">SQL语句</param>
-        /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string ConnectionString, string SQLString)
+        public static bool ClearDatabaseLog(string ConnectionString, string databsae)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
+                using (SqlCommand cmd = new SqlCommand("exec sp_ClearDatabaseLog '" + databsae + "'", connection))
                 {
                     try
                     {
                         connection.Open();
-                        int rows = cmd.ExecuteNonQuery();
-                        return rows;
+                        cmd.ExecuteNonQuery();
+                        return true;
                     }
                     catch (System.Data.SqlClient.SqlException e)
                     {
@@ -151,433 +144,39 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-
-        public static int ExecuteSqlByTime(string ConnectionString, string SQLString, int Times)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
-                {
-                    try
-                    {
-                        connection.Open();
-                        cmd.CommandTimeout = Times;
-                        int rows = cmd.ExecuteNonQuery();
-                        return rows;
-                    }
-                    catch (System.Data.SqlClient.SqlException e)
-                    {
-                        connection.Close();
-                        throw e;
-                    }
-                    finally
-                    {
-                        cmd.Dispose();
-                        connection.Close();
-                    }
-                }
-            }
-        }
-
-        ///// <summary>
-        ///// 执行Sql和Oracle滴混合事务
-        ///// </summary>
-        ///// <param name="list">SQL命令行列表</param>
-        ///// <param name="oracleCmdSqlList">Oracle命令行列表</param>
-        ///// <returns>执行结果 0-由于SQL造成事务失败 -1 由于Oracle造成事务失败 1-整体事务执行成功</returns>
-        //public  int ExecuteSqlTran(List<CommandInfo> list, List<CommandInfo> oracleCmdSqlList)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(connectionString))
-        //    {
-        //        conn.Open();
-        //        SqlCommand cmd = new SqlCommand();
-        //        cmd.Connection = conn;
-        //        SqlTransaction tx = conn.BeginTransaction();
-        //        cmd.Transaction = tx;
-        //        try
-        //        {
-        //            foreach (CommandInfo myDE in list)
-        //            {
-        //                string cmdText = myDE.CommandText;
-        //                SqlParameter[] cmdParms = (SqlParameter[])myDE.Parameters;
-        //                PrepareCommand(cmd, conn, tx, cmdText, cmdParms);
-        //                if (myDE.EffentNextType == EffentNextType.SolicitationEvent)
-        //                {
-        //                    if (myDE.CommandText.ToLower().IndexOf("count(") == -1)
-        //                    {
-        //                        tx.Rollback();
-        //                        throw new Exception("违背要求"+myDE.CommandText+"必须符合select count(..的格式");
-        //                        //return 0;
-        //                    }
-
-        //                    object obj = cmd.ExecuteScalar();
-        //                    bool isHave = false;
-        //                    if (obj == null && obj == DBNull.Value)
-        //                    {
-        //                        isHave = false;
-        //                    }
-        //                    isHave = Convert.ToInt32(obj) > 0;
-        //                    if (isHave)
-        //                    {
-        //                        //引发事件
-        //                        myDE.OnSolicitationEvent();
-        //                    }
-        //                }
-        //                if (myDE.EffentNextType == EffentNextType.WhenHaveContine || myDE.EffentNextType == EffentNextType.WhenNoHaveContine)
-        //                {
-        //                    if (myDE.CommandText.ToLower().IndexOf("count(") == -1)
-        //                    {
-        //                        tx.Rollback();
-        //                        throw new Exception("SQL:违背要求" + myDE.CommandText + "必须符合select count(..的格式");
-        //                        //return 0;
-        //                    }
-
-        //                    object obj = cmd.ExecuteScalar();
-        //                    bool isHave = false;
-        //                    if (obj == null && obj == DBNull.Value)
-        //                    {
-        //                        isHave = false;
-        //                    }
-        //                    isHave = Convert.ToInt32(obj) > 0;
-
-        //                    if (myDE.EffentNextType == EffentNextType.WhenHaveContine && !isHave)
-        //                    {
-        //                        tx.Rollback();
-        //                        throw new Exception("SQL:违背要求" + myDE.CommandText + "返回值必须大于0");
-        //                        //return 0;
-        //                    }
-        //                    if (myDE.EffentNextType == EffentNextType.WhenNoHaveContine && isHave)
-        //                    {
-        //                        tx.Rollback();
-        //                        throw new Exception("SQL:违背要求" + myDE.CommandText + "返回值必须等于0");
-        //                        //return 0;
-        //                    }
-        //                    continue;
-        //                }
-        //                int val = cmd.ExecuteNonQuery();
-        //                if (myDE.EffentNextType == EffentNextType.ExcuteEffectRows && val == 0)
-        //                {
-        //                    tx.Rollback();
-        //                    throw new Exception("SQL:违背要求" + myDE.CommandText + "必须有影响行");
-        //                    //return 0;
-        //                }
-        //                cmd.Parameters.Clear();
-        //            }
-        //            string oraConnectionString = PubConstant.GetConnectionString("ConnectionStringPPC");
-        //            bool res = OracleHelper.ExecuteSqlTran(oraConnectionString, oracleCmdSqlList);
-        //            if (!res)
-        //            {
-        //                tx.Rollback();
-        //                throw new Exception("Oracle执行失败");
-        //                // return -1;
-        //            }
-        //            tx.Commit();
-        //            return 1;
-        //        }
-        //        catch (System.Data.SqlClient.SqlException e)
-        //        {
-        //            tx.Rollback();
-        //            throw e;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            tx.Rollback();
-        //            throw e;
-        //        }
-        //    }
-        //}        
-        /// <summary>
-        /// 执行多条SQL语句，实现数据库事务。
-        /// </summary>
-        /// <param name="SQLStringList">多条SQL语句</param>		
-        public static int ExecuteSqlTran(string ConnectionString, List<String> SQLStringList)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = connection;
-                SqlTransaction tx = connection.BeginTransaction();
-                cmd.Transaction = tx;
-                try
-                {
-                    int count = 0;
-                    for (int n = 0; n < SQLStringList.Count; n++)
-                    {
-                        string strsql = SQLStringList[n];
-                        if (strsql.Trim().Length > 1)
-                        {
-                            cmd.CommandText = strsql;
-                            count += cmd.ExecuteNonQuery();
-                        }
-                    }
-                    tx.Commit();
-                    return count;
-                }
-                catch
-                {
-                    tx.Rollback();
-                    return 0;
-                }
-                finally
-                {
-                    cmd.Dispose();
-                    connection.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// 执行带一个存储过程参数的的SQL语句。
-        /// </summary>
-        /// <param name="SQLString">SQL语句</param>
-        /// <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-        /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string ConnectionString, string SQLString, string content)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(SQLString, connection);
-                System.Data.SqlClient.SqlParameter myParameter = new System.Data.SqlClient.SqlParameter("@content", SqlDbType.NText);
-                myParameter.Value = content;
-                cmd.Parameters.Add(myParameter);
-                try
-                {
-                    connection.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows;
-                }
-                catch (System.Data.SqlClient.SqlException e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    cmd.Dispose();
-                    connection.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// 执行带一个存储过程参数的的SQL语句。
-        /// </summary>
-        /// <param name="SQLString">SQL语句</param>
-        /// <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-        /// <returns>影响的记录数</returns>
-        public static object ExecuteSqlGet(string ConnectionString, string SQLString, string content)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(SQLString, connection);
-                System.Data.SqlClient.SqlParameter myParameter = new System.Data.SqlClient.SqlParameter("@content", SqlDbType.NText);
-                myParameter.Value = content;
-                cmd.Parameters.Add(myParameter);
-                try
-                {
-                    connection.Open();
-                    object obj = cmd.ExecuteScalar();
-                    if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return obj;
-                    }
-                }
-                catch (System.Data.SqlClient.SqlException e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    cmd.Dispose();
-                    connection.Close();
-                }
-            }
-        }
-        /// <summary>
-        /// 向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
-        /// </summary>
-        /// <param name="strSQL">SQL语句</param>
-        /// <param name="fs">图像字节,数据库的字段类型为image的情况</param>
-        /// <returns>影响的记录数</returns>
-        public static int ExecuteSqlInsertImg(string ConnectionString, string strSQL, byte[] fs)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(strSQL, connection);
-                System.Data.SqlClient.SqlParameter myParameter = new System.Data.SqlClient.SqlParameter("@fs", SqlDbType.Image);
-                myParameter.Value = fs;
-                cmd.Parameters.Add(myParameter);
-                try
-                {
-                    connection.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows;
-                }
-                catch (System.Data.SqlClient.SqlException e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    cmd.Dispose();
-                    connection.Close();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 执行一条计算查询结果语句，返回查询结果（object）。
-        /// </summary>
-        /// <param name="SQLString">计算查询结果语句</param>
-        /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string ConnectionString, string SQLString)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
-                {
-                    try
-                    {
-                        connection.Open();
-                        object obj = cmd.ExecuteScalar();
-                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return obj;
-                        }
-                    }
-                    catch (System.Data.SqlClient.SqlException e)
-                    {
-                        connection.Close();
-                        throw e;
-                    }
-                    finally
-                    {
-                        cmd.Dispose();
-                        connection.Close();
-                    }
-                }
-            }
-        }
-        public static object GetSingle(string ConnectionString, string SQLString, int Times)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
-                {
-                    try
-                    {
-                        connection.Open();
-                        cmd.CommandTimeout = Times;
-                        object obj = cmd.ExecuteScalar();
-                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return obj;
-                        }
-                    }
-                    catch (System.Data.SqlClient.SqlException e)
-                    {
-                        connection.Close();
-                        throw e;
-                    }
-                    finally
-                    {
-                        cmd.Dispose();
-                        connection.Close();
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
-        /// </summary>
-        /// <param name="strSQL">查询语句</param>
-        /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string ConnectionString, string strSQL)
-        {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            SqlCommand cmd = new SqlCommand(strSQL, connection);
-            try
-            {
-                connection.Open();
-                SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                return myReader;
-            }
-            catch (System.Data.SqlClient.SqlException e)
-            {
-                throw e;
-            }
-        }
-        /// <summary>
-        /// 执行查询语句，返回DataSet
-        /// </summary>
-        /// <param name="SQLString">查询语句</param>
-        /// <returns>DataSet</returns>
-        public static DataSet Query(string ConnectionString, string SQLString)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                DataSet ds = new DataSet();
-                try
-                {
-                    connection.Open();
-                    SqlDataAdapter command = new SqlDataAdapter(SQLString, connection);
-                    command.Fill(ds, "ds");
-                }
-                catch (System.Data.SqlClient.SqlException ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return ds;
-            }
-        }
-        public static DataSet Query(string ConnectionString, string SQLString, int Times)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                DataSet ds = new DataSet();
-                try
-                {
-                    connection.Open();
-                    SqlDataAdapter command = new SqlDataAdapter(SQLString, connection);
-                    command.SelectCommand.CommandTimeout = Times;
-                    command.Fill(ds, "ds");
-                }
-                catch (System.Data.SqlClient.SqlException ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return ds;
-            }
-        }
-
         #endregion
 
         #region 执行带参数的SQL语句
-
         /// <summary>
-        /// 执行SQL语句，返回影响的记录数
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
         /// <param name="SQLString">SQL语句</param>
-        /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        /// <returns>查询结果（object）</returns>
+        public static object GetSingle(string ConnectionString, string SQLString)
+        {
+            return GetSingle(ConnectionString, SQLString, null, -1);
+        }
+        /// <summary>
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <returns>查询结果（object）</returns>
+        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        {
+            return GetSingle(ConnectionString, SQLString, cmdParms, -1);
+        }
+        /// <summary>
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns>查询结果（object）</returns>
+        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -585,7 +184,70 @@ namespace hwj.DBUtility.MSSQL
                 {
                     try
                     {
-                        PrepareCommand(cmd, connection, null, SQLString, cmdParms);
+                        PrepareCommand(cmd, connection, null, SQLString, cmdParms, timeout);
+                        object obj = cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return obj;
+                        }
+                    }
+                    catch (System.Data.SqlClient.SqlException e)
+                    {
+                        //throw e;
+                        throw;
+                    }
+                    finally
+                    {
+                        cmd.Dispose();
+                        connection.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 执行SQL语句，返回影响的记录数
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <returns>影响的记录数</returns>
+        public static int ExecuteSql(string ConnectionString, string SQLString)
+        {
+            return ExecuteSql(ConnectionString, SQLString, null, -1);
+        }
+        /// <summary>
+        /// 执行SQL语句，返回影响的记录数
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件参数</param>
+        /// <returns></returns>
+        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        {
+            return ExecuteSql(ConnectionString, SQLString, cmdParms, -1);
+        }
+        /// <summary>
+        /// 执行SQL语句，返回影响的记录数
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        PrepareCommand(cmd, connection, null, SQLString, cmdParms, timeout);
                         int rows = cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
                         return rows;
@@ -607,50 +269,20 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTran(string ConnectionString, Hashtable SQLStringList)
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="cmdList">多条SQL语句</param>
+        /// <returns></returns>
+        public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList)
         {
-            ExecuteSqlTran(ConnectionString, SQLStringList, 30);
-        }
-
-        public static void ExecuteSqlTran(string ConnectionString, Hashtable SQLStringList, int timeout)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
-            {
-                conn.Open();
-                using (SqlTransaction trans = conn.BeginTransaction())
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandTimeout = timeout;
-                    try
-                    {
-                        //循环
-                        foreach (DictionaryEntry myDE in SQLStringList)
-                        {
-                            string cmdText = myDE.Key.ToString();
-                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
-                            PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms);
-                            int val = cmd.ExecuteNonQuery();
-                            cmd.Parameters.Clear();
-                        }
-                        trans.Commit();
-                    }
-                    catch
-                    {
-                        trans.Rollback();
-                        throw;
-                    }
-                }
-            }
+            return ExecuteSqlTran(ConnectionString, cmdList, -1);
         }
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList)
-        {
-            return ExecuteSqlTran(ConnectionString, cmdList, 30);
-        }
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="cmdList">多条SQL语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
         public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -659,7 +291,7 @@ namespace hwj.DBUtility.MSSQL
                 using (SqlTransaction trans = conn.BeginTransaction())
                 {
                     SqlCommand cmd = new SqlCommand();
-                    cmd.CommandTimeout = timeout;
+                    //cmd.CommandTimeout = timeout;
                     try
                     {
                         int count = 0;
@@ -667,7 +299,7 @@ namespace hwj.DBUtility.MSSQL
                         foreach (SqlEntity myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
-                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters);
+                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters, timeout);
 
                             if (myDE.EffentNextType == Enums.EffentNextType.WhenHaveContine || myDE.EffentNextType == Enums.EffentNextType.WhenNoHaveContine)
                             {
@@ -732,166 +364,44 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        /// <summary>
-        /// 执行多条SQL语句，实现数据库事务。
-        /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList SQLStringList)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
-            {
-                conn.Open();
-                using (SqlTransaction trans = conn.BeginTransaction())
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    try
-                    {
-                        int indentity = 0;
-                        //循环
-                        foreach (SqlEntity myDE in SQLStringList)
-                        {
-                            string cmdText = myDE.CommandText;
-                            foreach (SqlParameter q in myDE.Parameters)
-                            {
-                                if (q.Direction == ParameterDirection.InputOutput)
-                                {
-                                    q.Value = indentity;
-                                }
-                            }
-                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters);
-                            int val = cmd.ExecuteNonQuery();
-                            foreach (SqlParameter q in myDE.Parameters)
-                            {
-                                if (q.Direction == ParameterDirection.Output)
-                                {
-                                    indentity = Convert.ToInt32(q.Value);
-                                }
-                            }
-                            cmd.Parameters.Clear();
-                        }
-                        trans.Commit();
-                    }
-                    catch
-                    {
-                        trans.Rollback();
-                        throw;
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// 执行多条SQL语句，实现数据库事务。
-        /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        public static void ExecuteSqlTranWithIndentity(string ConnectionString, Hashtable SQLStringList)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
-            {
-                conn.Open();
-                using (SqlTransaction trans = conn.BeginTransaction())
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    try
-                    {
-                        int indentity = 0;
-                        //循环
-                        foreach (DictionaryEntry myDE in SQLStringList)
-                        {
-                            string cmdText = myDE.Key.ToString();
-                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
-                            foreach (SqlParameter q in cmdParms)
-                            {
-                                if (q.Direction == ParameterDirection.InputOutput)
-                                {
-                                    q.Value = indentity;
-                                }
-                            }
-                            PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms);
-                            int val = cmd.ExecuteNonQuery();
-                            foreach (SqlParameter q in cmdParms)
-                            {
-                                if (q.Direction == ParameterDirection.Output)
-                                {
-                                    indentity = Convert.ToInt32(q.Value);
-                                }
-                            }
-                            cmd.Parameters.Clear();
-                        }
-                        trans.Commit();
-                    }
-                    catch
-                    {
-                        trans.Rollback();
-                        throw;
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// 执行一条计算查询结果语句，返回查询结果（object）。
-        /// </summary>
-        /// <param name="SQLString">计算查询结果语句</param>
-        /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    try
-                    {
-                        PrepareCommand(cmd, connection, null, SQLString, cmdParms);
-                        object obj = cmd.ExecuteScalar();
-                        cmd.Parameters.Clear();
-                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return obj;
-                        }
-                    }
-                    catch (System.Data.SqlClient.SqlException e)
-                    {
-                        //throw e;
-                        throw;
-                    }
-                    finally
-                    {
-                        cmd.Dispose();
-                        connection.Close();
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
-        /// <param name="strSQL">查询语句</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
         /// <returns>SqlDataReader</returns>
+        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString)
+        {
+            return ExecuteReader(ConnectionString, SQLString, null);
+        }
+        /// <summary>
+        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
+        /// <param name="cmdParms">查询条件</param>
+        /// <returns></returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        {
+            return ExecuteReader(ConnectionString, SQLString, cmdParms, -1);
+        }
+        /// <summary>
+        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
+        /// <param name="cmdParms">查询条件</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
             try
             {
-                //if (cmdParms == null)
-                //{
-                PrepareCommand(cmd, connection, null, SQLString, cmdParms);
-                //}
-                //else
-                //{
-                //    //防止多线程的时候，同时Add的错误
-                //    SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Count];
-                //    for (int i = 0, j = cmdParms.Count; i < j; i++)
-                //    {
-                //        clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
-                //    }
+                PrepareCommand(cmd, connection, null, SQLString, cmdParms, timeout);
 
-                //    PrepareCommand(cmd, connection, null, SQLString, clonedParameters);
-                //}
                 SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return myReader;
@@ -907,14 +417,38 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 执行查询语句，返回DataSet
         /// </summary>
-        /// <param name="SQLString">查询语句</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <returns></returns>
+        public static DataSet Query(string ConnectionString, string SQLString)
+        {
+            return Query(ConnectionString, SQLString, null);
+        }
+        /// <summary>
+        /// 执行查询语句，返回DataSet
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">查询条件</param>
         /// <returns>DataSet</returns>
         public static DataSet Query(string ConnectionString, string SQLString, params SqlParameter[] cmdParms)
+        {
+            return Query(ConnectionString, SQLString, -1, cmdParms);
+        }
+        /// <summary>
+        /// 执行查询语句，返回DataSet
+        /// </summary>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="cmdParms">查询条件</param>
+        /// <returns>DataSet</returns>
+        public static DataSet Query(string ConnectionString, string SQLString, int timeout, params SqlParameter[] cmdParms)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                PrepareCommand4Arry(cmd, connection, null, SQLString, cmdParms);
+                PrepareCommand4Arry(cmd, connection, null, SQLString, cmdParms, timeout);
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
                     DataSet ds = new DataSet();
@@ -937,64 +471,52 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-
-        private static void PrepareCommand4Arry(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
+        /// <summary>
+        /// 执行多条SQL语句，实现数据库事务。
+        /// </summary>
+        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList cmdList)
         {
-            if (conn.State != ConnectionState.Open)
-                conn.Open();
-            cmd.Connection = conn;
-            cmd.CommandText = cmdText;
-            cmd.CommandTimeout = 120;
-            if (trans != null)
-                cmd.Transaction = trans;
-            cmd.CommandType = CommandType.Text;//cmdType;
-
-            if (cmdParms != null)
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                //防止多线程的时候，同时Add的错误
-                SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Length];
-                for (int i = 0, j = cmdParms.Length; i < j; i++)
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
                 {
-                    clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
-                }
-
-                foreach (SqlParameter parameter in clonedParameters)
-                {
-                    if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
-                        (parameter.Value == null))
+                    SqlCommand cmd = new SqlCommand();
+                    try
                     {
-                        parameter.Value = DBNull.Value;
+                        int indentity = 0;
+                        //循环
+                        foreach (SqlEntity myDE in cmdList)
+                        {
+                            string cmdText = myDE.CommandText;
+                            foreach (SqlParameter q in myDE.Parameters)
+                            {
+                                if (q.Direction == ParameterDirection.InputOutput)
+                                {
+                                    q.Value = indentity;
+                                }
+                            }
+                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters, -1);
+                            int val = cmd.ExecuteNonQuery();
+                            foreach (SqlParameter q in myDE.Parameters)
+                            {
+                                if (q.Direction == ParameterDirection.Output)
+                                {
+                                    indentity = Convert.ToInt32(q.Value);
+                                }
+                            }
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
                     }
-                    cmd.Parameters.Add(parameter);
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
                 }
             }
-        }
-        internal static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms)
-        {
-            if (cmdParms != null)
-                PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms.ToArray());
-            else
-                PrepareCommand4Arry(cmd, conn, trans, cmdText, null);
-            //if (conn.State != ConnectionState.Open)
-            //    conn.Open();
-            //cmd.Connection = conn;
-            //cmd.CommandText = cmdText;
-            //cmd.CommandTimeout = 120;
-            //if (trans != null)
-            //    cmd.Transaction = trans;
-            //cmd.CommandType = CommandType.Text;//cmdType;
-            //if (cmdParms != null)
-            //{
-            //    foreach (SqlParameter parameter in cmdParms)
-            //    {
-            //        if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
-            //            (parameter.Value == null))
-            //        {
-            //            parameter.Value = DBNull.Value;
-            //        }
-            //        cmd.Parameters.Add(parameter);
-            //    }
-            //}
         }
         #endregion
 
@@ -1039,7 +561,7 @@ namespace hwj.DBUtility.MSSQL
                 return dataSet;
             }
         }
-        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName, int Times)
+        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName, int timeout)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1047,7 +569,7 @@ namespace hwj.DBUtility.MSSQL
                 connection.Open();
                 SqlDataAdapter sqlDA = new SqlDataAdapter();
                 sqlDA.SelectCommand = BuildQueryCommand(connection, storedProcName, parameters);
-                sqlDA.SelectCommand.CommandTimeout = Times;
+                sqlDA.SelectCommand.CommandTimeout = timeout;
                 sqlDA.Fill(dataSet, tableName);
                 connection.Close();
                 return dataSet;
@@ -1120,29 +642,55 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        public static bool ClearDatabaseLog(string ConnectionString, string databsae)
+        #region Private Function
+        private static void PrepareCommand4Arry(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms, int timeout)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+            cmd.Connection = conn;
+            cmd.CommandText = cmdText;
+            if (timeout >= 0)
             {
-                using (SqlCommand cmd = new SqlCommand("exec sp_ClearDatabaseLog '" + databsae + "'", connection))
+                cmd.CommandTimeout = timeout;
+            }
+            else
+            {
+                cmd.CommandTimeout = 120;
+            }
+
+            if (trans != null)
+                cmd.Transaction = trans;
+            cmd.CommandType = CommandType.Text;//cmdType;
+
+            if (cmdParms != null)
+            {
+                //防止多线程的时候，同时Add的错误
+                SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Length];
+                for (int i = 0, j = cmdParms.Length; i < j; i++)
                 {
-                    try
-                    {
-                        connection.Open();
-                        cmd.ExecuteNonQuery();
-                        return true;
-                    }
-                    catch (System.Data.SqlClient.SqlException e)
-                    {
-                        connection.Close();
-                        throw e;
-                    }
-                    finally
-                    {
-                        cmd.Dispose();
-                        connection.Close();
-                    }
+                    clonedParameters[i] = (SqlParameter)((ICloneable)cmdParms[i]).Clone();
                 }
+
+                foreach (SqlParameter parameter in clonedParameters)
+                {
+                    if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
+                        (parameter.Value == null))
+                    {
+                        parameter.Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add(parameter);
+                }
+            }
+        }
+        internal static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms, int timeout)
+        {
+            if (cmdParms != null)
+            {
+                PrepareCommand4Arry(cmd, conn, trans, cmdText, cmdParms.ToArray(), timeout);
+            }
+            else
+            {
+                PrepareCommand4Arry(cmd, conn, trans, cmdText, null, timeout);
             }
         }
 
@@ -1155,6 +703,7 @@ namespace hwj.DBUtility.MSSQL
             }
             catch { }
         }
+        #endregion
     }
 
 }

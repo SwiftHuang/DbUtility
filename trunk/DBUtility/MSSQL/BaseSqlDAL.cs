@@ -85,7 +85,11 @@ namespace hwj.DBUtility.MSSQL
         }
         public TS GetList(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
+            return GetList(sql, parameters, -1);
+        }
+        public TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters, timeout);
             try
             {
                 if (reader.HasRows)
