@@ -36,8 +36,14 @@ namespace hwj.DBUtility.MSSQL
         //}
         #endregion
 
-        public BaseDAL(string ConnectionString)
-            : base(ConnectionString)
+        public BaseDAL(string connectionString)
+            : base(connectionString)
+        {
+
+        }
+
+        public BaseDAL(string connectionString, int timeout)
+            : base(connectionString, timeout)
         {
 
         }
@@ -67,20 +73,11 @@ namespace hwj.DBUtility.MSSQL
         }
         public Int64 GetInsertID()
         {
-            return Convert.ToInt64(DbHelper.GetSingle(ConnectionString, GenUpdateSql.InsertLastIDSql()));
+            return Convert.ToInt64(ExecuteScalar(GenUpdateSql.InsertLastIDSql()));
         }
         #endregion
 
         #region Update
-        /// <summary>
-        /// 执行数据更新
-        /// </summary>
-        /// <param name="param">更新字段</param>
-        /// <returns></returns>
-        public bool Update(UpdateParam param)
-        {
-            return Update(param, null);
-        }
         /// <summary>
         /// 获取更新的Sql对象
         /// </summary>
@@ -98,11 +95,6 @@ namespace hwj.DBUtility.MSSQL
             //    return InsertSqlLog(se, "UPDATE");
             //else
             return se;
-        }
-        public bool Update(UpdateParam updateParam, FilterParams filterParam)
-        {
-            _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
-            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
         /// <summary>
         /// 获取更新的Sql对象
@@ -122,6 +114,33 @@ namespace hwj.DBUtility.MSSQL
             //else
             return se;
         }
+
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="param">更新字段</param>
+        /// <returns></returns>
+        public bool Update(UpdateParam param)
+        {
+            return Update(param, null);
+        }
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="updateParam">更新字段</param>
+        /// <param name="filterParam">更新条件</param>
+        /// <returns></returns>
+        public bool Update(UpdateParam updateParam, FilterParams filterParam)
+        {
+            _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
+            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+        }
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="entity">更新实体</param>
+        /// <param name="filterParam">更新条件</param>
+        /// <returns></returns>
         public bool Update(T entity, FilterParams filterParam)
         {
             _SqlEntity = UpdateSqlEntity(entity, filterParam);
@@ -130,10 +149,6 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Delete
-        public bool Delete()
-        {
-            return Delete(null);
-        }
         /// <summary>
         /// 获取删除的Sql对象
         /// </summary>
@@ -146,18 +161,33 @@ namespace hwj.DBUtility.MSSQL
             //else
             return new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam));
         }
+
+        /// <summary>
+        /// 删除全部记录
+        /// </summary>
+        /// <returns></returns>
+        public bool Delete()
+        {
+            return Delete(null);
+        }
+        /// <summary>
+        /// 删除记录
+        /// </summary>
+        /// <param name="filterParam">删除条件</param>
+        /// <returns></returns>
         public bool Delete(FilterParams filterParam)
         {
             _SqlEntity = DeleteSqlEntity(filterParam);
             return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
         }
+
         /// <summary>
         /// 彻底清除表的内容(重置自动增量),请慎用
         /// </summary>
         /// <returns></returns>
         public bool Truncate()
         {
-            if (DbHelper.ExecuteSql(ConnectionString, GenUpdateSql.TruncateSql(TableName)) > 0)
+            if (ExecuteSql(GenUpdateSql.TruncateSql(TableName)) > 0)
                 return true;
             else
                 return false;
@@ -206,10 +236,14 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Get Entity
+        /// <summary>
+        /// 获取数据库服务器时间
+        /// </summary>
+        /// <returns></returns>
         public DateTime GetServerDateTime()
         {
             DateTime tmpDateTime = DateTime.MinValue;
-            object tmp = DbHelper.GetSingle(ConnectionString, GenSelectSql.SelectServerDateTime());
+            object tmp = ExecuteScalar(GenSelectSql.SelectServerDateTime());
 
             if (tmp != null)
                 DateTime.TryParse(tmp.ToString(), out tmpDateTime);
@@ -234,7 +268,11 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
+            return GetEntity(sql, parameters, Timeout);
+        }
+        public T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
             try
             {
                 if (reader.HasRows)
@@ -276,7 +314,11 @@ namespace hwj.DBUtility.MSSQL
         }
         public TS GetList(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
+            return GetList(sql, parameters, Timeout);
+        }
+        public TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
             try
             {
                 if (reader.HasRows)
@@ -296,7 +338,7 @@ namespace hwj.DBUtility.MSSQL
 
         #region Get Page
         /// <summary>
-        /// 获取分页对象(单主键,以主键作为排序)
+        /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
         /// <param name="filterParam">筛选条件</param>
@@ -304,6 +346,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
+        /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
         public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
@@ -319,8 +362,26 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
+        /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
         public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        {
+            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, Timeout, out TotalCount);
+        }
+        /// <summary>
+        /// 获取分页对象(单主键,以主键作为排序,支持分组)
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序(只能填一个字段)</param>
+        /// <param name="groupParam">分组条件</param>
+        /// <param name="PK">分页依据</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="times">超时时间(秒)</param>
+        /// <param name="TotalCount">返回记录数</param>
+        /// <returns></returns>
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
             _SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
 
@@ -328,7 +389,7 @@ namespace hwj.DBUtility.MSSQL
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
+                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters, times);
                 SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -358,25 +419,42 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="PK"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="TotalCount"></param>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序</param>
+        /// <param name="PK">主键</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
         public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        {
+            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, Timeout, out TotalCount);
+        }
+        /// <summary>
+        /// 获取分页对象(支持多主键、多排序)
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序</param>
+        /// <param name="PK">主键</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="TotalCount">返回记录数</param>
+        /// <returns></returns>
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
             _SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters);
+                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters, timeout);
                 SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -420,20 +498,30 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 返回表的记录数
         /// </summary>
-        /// <param name="whereParam">条件参数</param>
+        /// <param name="filterParam">条件参数</param>
         /// <returns>记录数</returns>
         public int RecordCount(FilterParams filterParam)
         {
             _SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
-            return Convert.ToInt32(DbHelper.GetSingle(ConnectionString, SqlEntity.CommandText, SqlEntity.Parameters));
+            return Convert.ToInt32(ExecuteScalar(SqlEntity.CommandText, SqlEntity.Parameters));
         }
+        /// <summary>
+        /// 返回表的记录数
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <returns></returns>
         public int RecordCount(string sql, List<SqlParameter> parameters)
         {
-            return Convert.ToInt32(DbHelper.GetSingle(ConnectionString, sql, parameters));
+            return Convert.ToInt32(ExecuteScalar(sql, parameters));
         }
         #endregion
 
         #region DataTable
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetDataTable()
         {
             return GetDataTable(null, null, null, null);
@@ -485,7 +573,19 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName)
         {
-            return GenerateEntity<T, TS>.CreateDataTable(DbHelper.ExecuteReader(ConnectionString, sql, cmdParams), tableName);
+            return GetDataTable(sql, cmdParams, tableName, Timeout);
+        }
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="cmdParams">SQL参数</param>
+        /// <param name="tableName"></param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName, int timeout)
+        {
+            return GenerateEntity<T, TS>.CreateDataTable(ExecuteReader(sql, cmdParams, timeout), tableName);
         }
         #endregion
 
