@@ -109,7 +109,20 @@ namespace hwj.DBUtility.MSSQL
             SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
             SE.Parameters.Add(new SqlParameter("@PageSize", pageSize));
             SE.Parameters.Add(new SqlParameter("@DisplayField", GenDisplayFieldsSql(displayFields)));
-            SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
+            //SQL的SP_PageView没有修正这个没有Order的问题，现在只靠代码来处理。
+            if (sortParams != null && sortParams.Count > 0)
+            {
+                SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
+            }
+            else
+            {
+                SortParams sort = new SortParams();
+                foreach (Enum e in PK)
+                {
+                    sort.AddParam(e, Enums.OrderBy.Ascending);
+                }
+                SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sort, true)));
+            }
             SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
             return SE;
         }
