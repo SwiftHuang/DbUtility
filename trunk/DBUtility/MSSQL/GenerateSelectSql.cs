@@ -188,10 +188,15 @@ namespace hwj.DBUtility.MSSQL
                             }
                         }
 
-                        sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
+                        if (!string.IsNullOrEmpty(inSql.ToString()))
+                        {
+                            sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
+                        }
                     }
                     else
+                    {
                         sbWhere.Append(GetCondition(para, true, isPage));
+                    }
                 }
                 //格式化最后的表达式，
                 if (sbWhere.ToString() == strWhere)

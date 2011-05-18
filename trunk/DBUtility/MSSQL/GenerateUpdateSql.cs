@@ -132,10 +132,16 @@ namespace hwj.DBUtility.MSSQL
                             inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
                             index++;
                         }
-                        sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
+
+                        if (!string.IsNullOrEmpty(inSql.ToString()))
+                        {
+                            sbWhere.AppendFormat(_MsSqlFieldFmt, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
+                        }
                     }
                     else
+                    {
                         sbWhere.Append(GetCondition(para, true, isPage));
+                    }
                 }
                 //格式化最后的表达式，
                 return base.TrimSql(sbWhere.ToString());
