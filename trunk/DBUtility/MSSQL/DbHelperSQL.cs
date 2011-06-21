@@ -342,23 +342,12 @@ namespace hwj.DBUtility.MSSQL
                         trans.Commit();
                         return count;
                     }
-                    //catch (SqlException e)
-                    //{
-                    //    try
-                    //    {
-                    //        if (cmdList != null && cmdList.Count > index)
-                    //        {
-                    //            SqlEntity se = cmdList[index];
-                    //            FormatSqlEx(se.CommandText, se.Parameters, ref e);
-                    //        }
-                    //    }
-                    //    catch { }
-                    //    trans.Rollback();
-                    //    throw e;
-                    //}
                     catch
                     {
-                        trans.Rollback();
+                        if (trans.Connection != null)
+                        {
+                            trans.Rollback();
+                        }
                         throw;
                     }
                 }
