@@ -4,6 +4,48 @@
         <name>hwj.CommonLibrary</name>
     </assembly>
     <members>
+        <member name="M:hwj.CommonLibrary.Object.SerializationHelper.CompareObject(System.Object,System.Object)">
+            <summary>
+            比较两个对象之间的属性值(支持子类,但子类对边没有使用ignorePropertys)
+            </summary>
+            <param name="obj1">对象1</param>
+            <param name="obj2">对象2</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.SerializationHelper.CompareObject(System.Object,System.Object,System.Collections.Generic.List{System.String}@)">
+            <summary>
+            比较两个对象之间的属性值(支持子类,但子类对边没有使用ignorePropertys)
+            </summary>
+            <param name="obj1">对象1</param>
+            <param name="obj2">对象2</param>
+            <param name="mismatchingList">返回属性值不一致的属性名列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.SerializationHelper.CompareObjectIgnorePropertys(System.Object,System.Object,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@)">
+            <summary>
+            比较两个对象之间的属性值(支持子类,但子类对边没有使用ignorePropertys)
+            </summary>
+            <param name="obj1">对象1</param>
+            <param name="obj2">对象2</param>
+            <param name="ignorePropertys">忽略的属性列表</param>
+            <param name="mismatchingList">返回属性值不一致的属性名列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.SerializationHelper.CompareObject(System.Object,System.Object,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@)">
+            <summary>
+            比较两个对象之间的属性值(支持子类,但子类对边没有使用CheckPropertys)
+            </summary>
+            <param name="obj1">对象1</param>
+            <param name="obj2">对象2</param>
+            <param name="CheckPropertys">对比属性列表</param>
+            <param name="mismatchingList">返回属性值不一致的属性名列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.MemoryHelper.ReleaseMemory">
+            <summary>
+            释放物理内存
+            </summary>
+        </member>
         <member name="M:hwj.CommonLibrary.Object.NetHelper.GetHostName">
             <summary>
             获取本机名称
@@ -21,6 +63,66 @@
             获取本机IP地址(第一个)
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.IsError">
+            <summary>
+            是否错误
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.FirstError">
+            <summary>
+            获取首个Error对象
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.ErrorList">
+            <summary>
+            错误列表
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.Error.Code">
+            <summary>
+            错误编号
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.Error.Message">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.ReturnObject.Error.Exception">
+            <summary>
+            错误对象
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.WSReturnObject.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.WSReturnObject.Ext1">
+            <summary>
+            扩展参数1
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.WSReturnObject.Ext2">
+            <summary>
+            扩展参数2
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.WSReturnObject.Ext3">
+            <summary>
+            扩展参数3
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Email.SmtpInfoList.LastSuccess">
+            <summary>
+            获取最后一次成功发送的SMTP配置。
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Email.SmtpInfoList.Interval">
+            <summary>
+            获取或设置SMTP配置发送失败后，间隔几多分钟后重新使用。
+            </summary>
         </member>
         <member name="F:hwj.CommonLibrary.Function.DecimalToChinese.EndOfInt">
             <summary>
@@ -126,6 +228,11 @@
             <param name="sKey"></param> 
             <returns></returns> 
         </member>
+        <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.ShowInvalidSmtpError">
+            <summary>
+            是否抛出SmtpList异常
+            </summary>
+        </member>
         <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.EmailTo">
             <summary>
             多个收件人请用逗号分隔
@@ -135,6 +242,103 @@
             <summary>
             多个抄送人请用逗号分隔
             </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.MultSmtpEnabled">
+            <summary>
+            获取或设置是否使用多个SMTP服务器的模式
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.SmtpList">
+            <summary>
+            获取或设置SMTP服务器列表
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.DataStructure.AdjacencyList`1.items">
+            <summary>
+            图的顶点集合
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.#ctor(System.Int32)">
+            <summary>
+            指定容量的构造方法
+            </summary>
+            <param name="capacity"></param>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.AddVertex(`0)">
+            <summary>
+            添加一个顶点
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.AddEdge(`0,`0)">
+            <summary>
+            添加无向边
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Contains(`0)">
+            <summary>
+            查找图中是否包含某项
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Find(`0)">
+            <summary>
+            查找指定项并返回
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.AddDirectedEdge(hwj.CommonLibrary.DataStructure.AdjacencyList{`0}.Vertex{`0},hwj.CommonLibrary.DataStructure.AdjacencyList{`0}.Vertex{`0})">
+            <summary>
+            添加有向边
+            </summary>
+            <param name="fromVer"></param>
+            <param name="toVer"></param>
+        </member>
+        <member name="P:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Node.adjvex">
+            <summary>
+            邻接点域
+            </summary>
+        </member>
+        <member name="P:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Node.next">
+            <summary>
+            下一个邻接点指针域
+            </summary>
+        </member>
+        <member name="T:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Vertex`1">
+            <summary>
+            嵌套类，表示存放于数组中的表头结点
+            </summary>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="F:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Vertex`1.data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Vertex`1.firstEdge">
+            <summary>
+            邻接点链表头指针
+            </summary>
+        </member>
+        <member name="F:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Vertex`1.visited">
+            <summary>
+            访问标志,遍历时使用
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.DataStructure.AdjacencyList`1.Vertex`1.#ctor(`1)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="T:hwj.CommonLibrary.WebSite.WebCache">
             <summary>
@@ -251,15 +455,62 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.CommonLibrary.Object.FileHelper.StreamToBytes(System.IO.Stream)">
+        <member name="M:hwj.CommonLibrary.Object.StringHelper.GetMSSQLConnectionString(System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
-            将 Stream 转成 byte[]
+            请使用hwj.CommonLibrary.Function.ConnectionString.GetMSSQLConnectionString()方法代替
+            </summary>
+            <param name="server"></param>
+            <param name="database"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <param name="isWindowsVerification"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.StringHelper.GetOSVersion">
+            <summary>
+            获取当前系统、版本、版本号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:hwj.CommonLibrary.Object.FileHelper">
+            <summary>
+            文件类
             </summary>
         </member>
-        <member name="M:hwj.CommonLibrary.Object.FileHelper.BytesToStream(System.Byte[])">
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.CreateFile(System.String)">
             <summary>
-            将 byte[] 转成 Stream
+            创建文件
             </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.CreateFile(System.String,System.String)">
+            <summary>
+            创建文件
+            </summary>
+            <param name="fileName"></param>
+            <param name="text"></param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.CopyFolder(System.String,System.String)">
+            <summary>
+            复制文件夹
+            </summary>
+            <param name="sourceFolder">源文件夹</param>
+            <param name="targetFolder">目标文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.DeleteFolder(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="folder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.DeleteFolder(System.IO.DirectoryInfo)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="directory"></param>
+            <returns></returns>
         </member>
         <member name="M:hwj.CommonLibrary.Object.FileHelper.StreamToFile(System.IO.Stream,System.String)">
             <summary>
@@ -270,6 +521,108 @@
             <summary>
             从文件读取 Stream
             </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            发送电子邮件
+            </summary>
+            <param name="smtpServer">SMTP服务器</param>
+            <param name="emailFrom">电子邮件的发件人地址</param>
+            <param name="emailFromPassword">发件人密码（如果该密码为空，则取消验证发件人身份）</param>
+            <param name="emailTo">收件人的地址</param>
+            <param name="cc">抄送 (CC) 收件人的地址</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.List{System.Net.Mail.Attachment})">
+            <summary>
+            发送电子邮件
+            </summary>
+            <param name="smtpServer">SMTP服务器</param>
+            <param name="emailFrom">电子邮件的发件人地址</param>
+            <param name="emailFromPassword">发件人密码（如果该密码为空，则取消验证发件人身份）</param>
+            <param name="emailTo">收件人的地址</param>
+            <param name="cc">抄送 (CC) 收件人的地址</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="attachments">此电子邮件的数据的附件集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.String[],System.String[],System.String,System.String,System.Boolean,System.Collections.Generic.List{System.Net.Mail.Attachment})">
+            <summary>
+            发送含附件的电子邮件
+            </summary>
+            <param name="smtpServer">SMTP服务器</param>
+            <param name="emailFrom">电子邮件的发件人地址</param>
+            <param name="emailFromPassword">发件人密码（如果该密码为空，则取消验证发件人身份）</param>
+            <param name="emailTo">收件人的地址集合</param>
+            <param name="cc">抄送 (CC) 收件人的地址集合</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="attachments">此电子邮件的数据的附件集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.Net.Mail.MailMessage)">
+            <summary>
+            
+            </summary>
+            <param name="smtpServer"></param>
+            <param name="emailFrom"></param>
+            <param name="emailFromPassword"></param>
+            <param name="message"></param>
+            <param name="isBodyHtml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.String,System.Boolean,hwj.CommonLibrary.Object.Email.SmtpInfoList@)">
+            <summary>
+            发送电子邮件
+            </summary>
+            <param name="emailTo">收件人的地址</param>
+            <param name="cc">抄送 (CC) 收件人的地址</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="smtpInfos">SMTP服务器集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.List{System.Net.Mail.Attachment},hwj.CommonLibrary.Object.Email.SmtpInfoList@)">
+            <summary>
+            发送含附件的电子邮件
+            </summary>
+            <param name="emailTo">收件人的地址</param>
+            <param name="cc">抄送 (CC) 收件人的地址</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="attachments">此电子邮件的数据的附件集合</param>
+            <param name="smtpInfos">SMTP服务器集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.String[],System.String[],System.String,System.String,System.Boolean,System.Collections.Generic.List{System.Net.Mail.Attachment},hwj.CommonLibrary.Object.Email.SmtpInfoList@)">
+            <summary>
+            发送含附件的电子邮件
+            </summary>
+            <param name="emailTo">>收件人的地址集合</param>
+            <param name="cc">抄送 (CC) 收件人的地址集合</param>
+            <param name="subject">电子邮件的主题行</param>
+            <param name="body">邮件正文</param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="attachments">此电子邮件的数据的附件集合</param>
+            <param name="smtpInfos">SMTP服务器集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EmailHelper.Send(System.Net.Mail.MailMessage,hwj.CommonLibrary.Object.Email.SmtpInfoList@)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="isBodyHtml">邮件正文是否为 Html 格式的值</param>
+            <param name="smtpInfos">SMTP服务器集合</param>
+            <returns></returns>
         </member>
         <member name="T:hwj.CommonLibrary.WebSite.Base.BasePage">
             <summary>
@@ -315,6 +668,66 @@
             <summary>
             分页页码
             </summary>
+        </member>
+        <member name="T:hwj.CommonLibrary.Object.TextHelper">
+            <summary>
+            文本类
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.StreamToBytes(System.IO.Stream)">
+            <summary>
+            将 Stream 转成 byte[]
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.BytesToStream(System.Byte[])">
+            <summary>
+            将 byte[] 转成 Stream
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.StreamToMemoryStream(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.StreamToMemoryStream(System.IO.Stream,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="stream"></param>
+            <param name="useGZip">使用GZip压缩</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.StringToMemoryStream(System.String)">
+            <summary>
+            字符串转为流(用Encoding.UTF8)
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.StringToMemoryStream(System.String,System.Boolean)">
+            <summary>
+            字符串转为流(用Encoding.UTF8)
+            </summary>
+            <param name="data"></param>
+            <param name="useGZip">使用GZip压缩</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.BytesToMemoryStream(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.TextHelper.BytesToMemoryStream(System.Byte[],System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="useGZip">使用GZip压缩</param>
+            <returns></returns>
         </member>
         <member name="M:hwj.CommonLibrary.Object.NumberHelper.IsNumeric(System.String)">
             <summary>
@@ -393,6 +806,13 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetEnglish(System.Decimal)">
+            <summary>
+            将阿拉伯数字转为英文
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.CommonLibrary.Object.NumberHelper.GetBreakSeqNum(System.Collections.Generic.List{System.Int32},System.Int32,System.Int32)">
             <summary>
             计算断号
@@ -410,6 +830,44 @@
             <param name="MinSeqNum">最小序号</param>
             <param name="MaxSeqNum">最大序号</param>
             <param name="top">返回个数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FTPHelper.Upload(System.String,System.String,System.String,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="ftp"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <param name="fileName">文件名(含路径)</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FTPHelper.Upload(System.String,System.String,System.String,System.IO.Stream,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="ftp"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <param name="stream">文件流</param>
+            <param name="fileName">文件名(不含路径)</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FTPHelper.Delete(System.String,System.String,System.String,System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="ftp"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <param name="fileName">文件名(不含路径)</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FTPHelper.ExistFile(System.String,System.String,System.String,System.String)">
+            <summary>
+            检查文件是否存在
+            </summary>
+            <param name="ftp"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <param name="fileName">文件名(不含路径)</param>
             <returns></returns>
         </member>
     </members>

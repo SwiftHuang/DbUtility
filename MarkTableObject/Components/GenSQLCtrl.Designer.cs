@@ -112,7 +112,7 @@
             this.groupBox2.Controls.Add(this.dgList);
             this.groupBox2.Location = new System.Drawing.Point(3, 193);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(797, 310);
+            this.groupBox2.Size = new System.Drawing.Size(797, 311);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "表信息";
@@ -143,9 +143,10 @@
             this.dgList.RowHeadersVisible = false;
             this.dgList.RowSeqVisible = true;
             this.dgList.RowTemplate.Height = 23;
-            this.dgList.Size = new System.Drawing.Size(791, 290);
+            this.dgList.Size = new System.Drawing.Size(791, 291);
             this.dgList.SumColumnName = ((System.Collections.Generic.List<string>)(resources.GetObject("dgList.SumColumnName")));
             this.dgList.TabIndex = 0;
+            this.dgList.ValueIsChanged = false;
             // 
             // colName
             // 
@@ -252,7 +253,7 @@
             this.tpMain.Location = new System.Drawing.Point(4, 4);
             this.tpMain.Name = "tpMain";
             this.tpMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMain.Size = new System.Drawing.Size(809, 542);
+            this.tpMain.Size = new System.Drawing.Size(809, 543);
             this.tpMain.TabIndex = 0;
             this.tpMain.Text = "生成代码";
             this.tpMain.UseVisualStyleBackColor = true;
@@ -278,7 +279,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 536);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 537);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnGenSql
@@ -297,18 +298,20 @@
             // 
             this.btnGenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenFile.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGenFile.Location = new System.Drawing.Point(725, 510);
+            this.btnGenFile.Location = new System.Drawing.Point(725, 511);
             this.btnGenFile.Name = "btnGenFile";
             this.btnGenFile.Size = new System.Drawing.Size(75, 23);
             this.btnGenFile.TabIndex = 6;
             this.btnGenFile.Text = "生成文件";
             this.btnGenFile.UseVisualStyleBackColor = true;
+            this.btnGenFile.Visible = false;
+            this.btnGenFile.Click += new System.EventHandler(this.btnGenFile_Click);
             // 
             // btnPreview
             // 
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnPreview.Location = new System.Drawing.Point(638, 510);
+            this.btnPreview.Location = new System.Drawing.Point(638, 511);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 5;
@@ -469,7 +472,7 @@
             this.tpEntity.Controls.Add(this.txtEntityCode);
             this.tpEntity.Location = new System.Drawing.Point(4, 4);
             this.tpEntity.Name = "tpEntity";
-            this.tpEntity.Size = new System.Drawing.Size(809, 542);
+            this.tpEntity.Size = new System.Drawing.Size(809, 543);
             this.tpEntity.TabIndex = 3;
             this.tpEntity.Text = "实体代码";
             this.tpEntity.UseVisualStyleBackColor = true;
@@ -483,7 +486,7 @@
             this.txtEntityCode.Multiline = true;
             this.txtEntityCode.Name = "txtEntityCode";
             this.txtEntityCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtEntityCode.Size = new System.Drawing.Size(809, 542);
+            this.txtEntityCode.Size = new System.Drawing.Size(809, 543);
             this.txtEntityCode.TabIndex = 0;
             this.txtEntityCode.WordWrap = false;
             // 
@@ -492,7 +495,7 @@
             this.tpDAL.Controls.Add(this.txtDALCode);
             this.tpDAL.Location = new System.Drawing.Point(4, 4);
             this.tpDAL.Name = "tpDAL";
-            this.tpDAL.Size = new System.Drawing.Size(809, 542);
+            this.tpDAL.Size = new System.Drawing.Size(809, 543);
             this.tpDAL.TabIndex = 2;
             this.tpDAL.Text = "数据层代码";
             this.tpDAL.UseVisualStyleBackColor = true;
@@ -506,7 +509,7 @@
             this.txtDALCode.Multiline = true;
             this.txtDALCode.Name = "txtDALCode";
             this.txtDALCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDALCode.Size = new System.Drawing.Size(809, 542);
+            this.txtDALCode.Size = new System.Drawing.Size(809, 543);
             this.txtDALCode.TabIndex = 1;
             this.txtDALCode.WordWrap = false;
             // 
@@ -516,7 +519,7 @@
             this.tpBLL.Location = new System.Drawing.Point(4, 4);
             this.tpBLL.Name = "tpBLL";
             this.tpBLL.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBLL.Size = new System.Drawing.Size(809, 542);
+            this.tpBLL.Size = new System.Drawing.Size(809, 543);
             this.tpBLL.TabIndex = 1;
             this.tpBLL.Text = "逻辑层代码";
             this.tpBLL.UseVisualStyleBackColor = true;
@@ -530,7 +533,7 @@
             this.txtBLLCode.Multiline = true;
             this.txtBLLCode.Name = "txtBLLCode";
             this.txtBLLCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBLLCode.Size = new System.Drawing.Size(803, 536);
+            this.txtBLLCode.Size = new System.Drawing.Size(803, 537);
             this.txtBLLCode.TabIndex = 1;
             this.txtBLLCode.WordWrap = false;
             // 

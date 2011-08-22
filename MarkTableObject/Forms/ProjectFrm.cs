@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using hwj.MarkTableObject.Entity;
 using System.IO;
+using hwj.UserControls.CommonControls;
 
 namespace hwj.MarkTableObject.Forms
 {
@@ -23,34 +24,6 @@ namespace hwj.MarkTableObject.Forms
         private void ProjectFrm_Load(object sender, EventArgs e)
         {
             InitData();
-        }
-
-        private void InitData()
-        {
-            if (Project != null)
-            {
-                txtPrjName.Text = Project.Name;
-                txtPrjPath.Text = Project.MainPath;
-
-                txtBLLName.Text = Project.BusinessNamespace;
-                txtBLLPath.Text = Project.BusinessPath;
-                txtBLLPrefixChar.Text = Project.BusinessPrefixChar;
-                txtBLLConnection.Text = Project.BusinessConnection;
-
-                txtDALName.Text = Project.DataAccessNamespace;
-                txtDALPath.Text = Project.DataAccessPath;
-                txtDALPrefixChar.Text = Project.DataAccessPrefixChar;
-
-                txtEntityName.Text = Project.EntityNamespace;
-                txtEntityPath.Text = Project.EntityPath;
-                txtEntityPrefixChar.Text = Project.EntityPrefixChar;
-                if (Project.Database != null)
-                {
-                    txtConnStr.Text = Project.Database.ConnectionString;
-                    lblDataSource.Text = Project.Database.ServerVersion;
-                    ConnectionDataSource = Project.Database.DatabaseType;
-                }
-            }
         }
 
         #region Private Event Function
@@ -109,6 +82,17 @@ namespace hwj.MarkTableObject.Forms
 
         }
 
+        private void btnPrjPath_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtPrjPath.Text = folderBrowserDialog1.SelectedPath;
+                txtBLLPath.Text = txtPrjPath.Text + "\\Business";
+                txtDALPath.Text = txtPrjPath.Text + "\\DataAccess";
+                txtEntityPath.Text = txtPrjPath.Text + "\\Entity";
+            }
+        }
         private void btnBLLPath_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
@@ -133,18 +117,58 @@ namespace hwj.MarkTableObject.Forms
                 txtEntityPath.Text = folderBrowserDialog1.SelectedPath;
             }
         }
-        #endregion
 
-        private void btnPrjPath_Click(object sender, EventArgs e)
+        private void txtPrjPath_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK)
+            this.Cursor = Cursors.AppStarting;
+            try
             {
-                txtPrjPath.Text = folderBrowserDialog1.SelectedPath;
-                txtBLLPath.Text = txtPrjPath.Text + "\\Business";
-                txtDALPath.Text = txtPrjPath.Text + "\\DataAccess";
-                txtEntityPath.Text = txtPrjPath.Text + "\\Entity";
+                xTextBox txt = sender as xTextBox;
+                if (txt != null)
+                {
+                    Common.OpenPath(txt.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.MsgWarn(ex.Message);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
             }
         }
+        #endregion
+
+        #region Private Function
+        private void InitData()
+        {
+            if (Project != null)
+            {
+                txtPrjName.Text = Project.Name;
+                txtPrjPath.Text = Project.MainPath;
+
+                txtBLLName.Text = Project.BusinessNamespace;
+                txtBLLPath.Text = Project.BusinessPath;
+                txtBLLPrefixChar.Text = Project.BusinessPrefixChar;
+                txtBLLConnection.Text = Project.BusinessConnection;
+
+                txtDALName.Text = Project.DataAccessNamespace;
+                txtDALPath.Text = Project.DataAccessPath;
+                txtDALPrefixChar.Text = Project.DataAccessPrefixChar;
+
+                txtEntityName.Text = Project.EntityNamespace;
+                txtEntityPath.Text = Project.EntityPath;
+                txtEntityPrefixChar.Text = Project.EntityPrefixChar;
+                if (Project.Database != null)
+                {
+                    txtConnStr.Text = Project.Database.ConnectionString;
+                    lblDataSource.Text = Project.Database.ServerVersion;
+                    ConnectionDataSource = Project.Database.DatabaseType;
+                }
+            }
+        }
+        #endregion
+
     }
 }

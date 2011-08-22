@@ -30,6 +30,8 @@ namespace hwj.MarkTableObject.Forms
                 XMLHelper.SaveTreeView(tvServers);
             }
             XMLHelper.GetMenu(ref tvServers);
+
+            this.Text = string.Format("代码生成工具 Ver {0}", Application.ProductVersion);
         }
 
         private void tBtnAddPrj_Click(object sender, EventArgs e)
