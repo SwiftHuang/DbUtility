@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnGeneral = new hwj.UserControls.CommonControls.xButton();
             this.gpEntity = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -69,6 +68,7 @@
             this.txtBLLConnection = new System.Windows.Forms.TextBox();
             this.btnCancel = new hwj.UserControls.CommonControls.xButton();
             this.btnPre = new hwj.UserControls.CommonControls.xButton();
+            this.btnGeneral = new hwj.UserControls.CommonControls.xButton();
             this.gpEntity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gpDAL.SuspendLayout();
@@ -78,17 +78,6 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnGeneral
-            // 
-            this.btnGeneral.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGeneral.Location = new System.Drawing.Point(531, 346);
-            this.btnGeneral.Name = "btnGeneral";
-            this.btnGeneral.Size = new System.Drawing.Size(75, 23);
-            this.btnGeneral.TabIndex = 0;
-            this.btnGeneral.Text = "生 成";
-            this.btnGeneral.UseVisualStyleBackColor = true;
-            this.btnGeneral.Click += new System.EventHandler(this.btnGeneral_Click);
-            // 
             // gpEntity
             // 
             this.gpEntity.Controls.Add(this.tableLayoutPanel1);
@@ -97,7 +86,7 @@
             this.gpEntity.Size = new System.Drawing.Size(675, 77);
             this.gpEntity.TabIndex = 1;
             this.gpEntity.TabStop = false;
-            this.gpEntity.Text = "实体设置";
+            this.gpEntity.Text = "实体设置  (鼠标双击路径,打开所在文件夹)";
             // 
             // tableLayoutPanel1
             // 
@@ -154,11 +143,13 @@
             this.lblEntityFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEntityFileName.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblEntityFileName, 3);
+            this.lblEntityFileName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblEntityFileName.Location = new System.Drawing.Point(80, 36);
             this.lblEntityFileName.Name = "lblEntityFileName";
             this.lblEntityFileName.Size = new System.Drawing.Size(586, 12);
             this.lblEntityFileName.TabIndex = 0;
             this.lblEntityFileName.Text = "--";
+            this.lblEntityFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
             // 
             // label10
             // 
@@ -210,7 +201,7 @@
             this.gpDAL.Size = new System.Drawing.Size(675, 77);
             this.gpDAL.TabIndex = 3;
             this.gpDAL.TabStop = false;
-            this.gpDAL.Text = "实体设置";
+            this.gpDAL.Text = "数据层设置  (鼠标双击路径,打开所在文件夹)";
             // 
             // tableLayoutPanel2
             // 
@@ -267,11 +258,13 @@
             this.lblDALFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDALFileName.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.lblDALFileName, 3);
+            this.lblDALFileName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDALFileName.Location = new System.Drawing.Point(80, 36);
             this.lblDALFileName.Name = "lblDALFileName";
             this.lblDALFileName.Size = new System.Drawing.Size(586, 12);
             this.lblDALFileName.TabIndex = 0;
             this.lblDALFileName.Text = "--";
+            this.lblDALFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
             // 
             // label5
             // 
@@ -311,7 +304,7 @@
             this.gpBLL.Size = new System.Drawing.Size(675, 159);
             this.gpBLL.TabIndex = 5;
             this.gpBLL.TabStop = false;
-            this.gpBLL.Text = "实体设置";
+            this.gpBLL.Text = "逻辑层设置  (鼠标双击路径,打开所在文件夹)";
             // 
             // tableLayoutPanel3
             // 
@@ -374,11 +367,13 @@
             this.lblBLLFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBLLFileName.AutoSize = true;
             this.tableLayoutPanel3.SetColumnSpan(this.lblBLLFileName, 3);
+            this.lblBLLFileName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblBLLFileName.Location = new System.Drawing.Point(80, 64);
             this.lblBLLFileName.Name = "lblBLLFileName";
             this.lblBLLFileName.Size = new System.Drawing.Size(586, 12);
             this.lblBLLFileName.TabIndex = 0;
             this.lblBLLFileName.Text = "--";
+            this.lblBLLFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
             // 
             // label8
             // 
@@ -564,6 +559,17 @@
             this.btnPre.Text = "上一步";
             this.btnPre.UseVisualStyleBackColor = true;
             this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
+            // 
+            // btnGeneral
+            // 
+            this.btnGeneral.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnGeneral.Location = new System.Drawing.Point(531, 346);
+            this.btnGeneral.Name = "btnGeneral";
+            this.btnGeneral.Size = new System.Drawing.Size(75, 23);
+            this.btnGeneral.TabIndex = 0;
+            this.btnGeneral.Text = "生 成";
+            this.btnGeneral.UseVisualStyleBackColor = true;
+            this.btnGeneral.Click += new System.EventHandler(this.btnGeneral_Click);
             // 
             // GeneralFrm
             // 

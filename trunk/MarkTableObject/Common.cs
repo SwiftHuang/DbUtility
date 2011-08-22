@@ -60,6 +60,17 @@ namespace hwj.MarkTableObject
             }
         }
 
+        public static void OpenPath(string path)
+        {
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                System.Diagnostics.Process.Start("Explorer.exe", path);
+            }
+
+        }
+
+
         public static void MsgError(string text, Exception ex)
         {
             MessageBox.Show(text, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);

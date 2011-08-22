@@ -189,6 +189,111 @@
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.#ctor(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+            <param name="timeout"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSqlTran(hwj.DBUtility.SqlList)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="list">多条SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSqlTran(hwj.DBUtility.SqlList,System.Int32)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="list">多条SQL语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteReader(System.String)">
+            <summary>
+            执行SQL语句，返回SqlDataReader
+            </summary>
+            <param name="sql">SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回SqlDataReader
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            执行SQL语句，返回SqlDataReader
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteScalar(System.String)">
+            <summary>
+            执行SQL语句，返回Object
+            </summary>
+            <param name="sql">SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行SQL语句，返回Object
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`1.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            执行SQL语句，返回Object
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="P:hwj.DBUtility.MSSQL.BaseDataAccess`1.Timeout">
+            <summary>
+            获取超时时间(秒)
+            </summary>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
             <summary>
             执行插入数据
@@ -202,13 +307,6 @@
             </summary>
             <param name="entity">Table对象</param>
             <returns>Sql对象</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(hwj.DBUtility.UpdateParam)">
-            <summary>
-            执行数据更新
-            </summary>
-            <param name="param">更新字段</param>
-            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.UpdateSqlEntity(hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
             <summary>
@@ -226,6 +324,29 @@
             <param name="filterParam">被更新的条件</param>
             <returns>Sql对象</returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(hwj.DBUtility.UpdateParam)">
+            <summary>
+            执行数据更新
+            </summary>
+            <param name="param">更新字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
+            <summary>
+            执行数据更新
+            </summary>
+            <param name="updateParam">更新字段</param>
+            <param name="filterParam">更新条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Update(`0,hwj.DBUtility.FilterParams)">
+            <summary>
+            执行数据更新
+            </summary>
+            <param name="entity">更新实体</param>
+            <param name="filterParam">更新条件</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.DeleteSqlEntity(hwj.DBUtility.FilterParams)">
             <summary>
             获取删除的Sql对象
@@ -233,15 +354,34 @@
             <param name="filterParam">被删除的条件</param>
             <returns>Sql对象</returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Delete">
+            <summary>
+            删除全部记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Delete(hwj.DBUtility.FilterParams)">
+            <summary>
+            删除记录
+            </summary>
+            <param name="filterParam">删除条件</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Truncate">
             <summary>
             彻底清除表的内容(重置自动增量),请慎用
             </summary>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetServerDateTime">
+            <summary>
+            获取数据库服务器时间
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
             <summary>
-            获取分页对象(单主键,以主键作为排序)
+            获取分页对象(单主键,以主键作为排序,支持分组)
             </summary>
             <param name="displayFields">显示字段</param>
             <param name="filterParam">筛选条件</param>
@@ -249,6 +389,7 @@
             <param name="PK">分页依据</param>
             <param name="pageNumber">页数</param>
             <param name="pageSize">每页记录数</param>
+            <param name="TotalCount">返回记录数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
@@ -262,19 +403,49 @@
             <param name="PK">分页依据</param>
             <param name="pageNumber">页数</param>
             <param name="pageSize">每页记录数</param>
+            <param name="TotalCount">返回记录数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.GroupParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取分页对象(单主键,以主键作为排序,支持分组)
+            </summary>
+            <param name="displayFields">显示字段</param>
+            <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序(只能填一个字段)</param>
+            <param name="groupParam">分组条件</param>
+            <param name="PK">分页依据</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="times">超时时间(秒)</param>
+            <param name="TotalCount">返回记录数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
             <summary>
             获取分页对象(支持多主键、多排序)
             </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="PK"></param>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="TotalCount"></param>
+            <param name="displayFields">显示字段</param>
+            <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序</param>
+            <param name="PK">主键</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="TotalCount">返回记录数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetPage(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取分页对象(支持多主键、多排序)
+            </summary>
+            <param name="displayFields">显示字段</param>
+            <param name="filterParam">筛选条件</param>
+            <param name="sortParams">排序</param>
+            <param name="PK">主键</param>
+            <param name="pageNumber">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <param name="TotalCount">返回记录数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount">
@@ -287,8 +458,22 @@
             <summary>
             返回表的记录数
             </summary>
-            <param name="whereParam">条件参数</param>
+            <param name="filterParam">条件参数</param>
             <returns>记录数</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.RecordCount(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            返回表的记录数
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">条件参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
             <summary>
@@ -326,6 +511,16 @@
             <param name="sql">SQL语句</param>
             <param name="cmdParams">SQL参数</param>
             <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Int32)">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="cmdParams">SQL参数</param>
+            <param name="tableName"></param>
+            <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "T:hwj.DBUtility.Entity.Reverser`1" -->
@@ -442,6 +637,11 @@
             Copyright (C) 2004-2008 By LiTianPing 
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.#ctor">
+            <summary>
+            DbHeplerSQL
+            </summary>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ColumnExists(System.String,System.String,System.String)">
             <summary>
             判断是否存在某表的某个字段
@@ -457,115 +657,136 @@
             <param name="TableName"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String)">
-            <summary>
-            执行SQL语句，返回影响的记录数
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Generic.List{System.String})">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">多条SQL语句</param>		
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.String)">
-            <summary>
-            执行带一个存储过程参数的的SQL语句。
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlGet(System.String,System.String,System.String)">
-            <summary>
-            执行带一个存储过程参数的的SQL语句。
-            </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="content">参数内容,比如一个字段是格式复杂的文章，有特殊符号，可以通过这个方式添加</param>
-            <returns>影响的记录数</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlInsertImg(System.String,System.String,System.Byte[])">
-            <summary>
-            向数据库里插入图像格式的字段(和上面情况类似的另一种实例)
-            </summary>
-            <param name="strSQL">SQL语句</param>
-            <param name="fs">图像字节,数据库的字段类型为image的情况</param>
-            <returns>影响的记录数</returns>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String)">
             <summary>
             执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="SQLString">计算查询结果语句</param>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
             <returns>查询结果（object）</returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String)">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
             <summary>
-            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="strSQL">查询语句</param>
-            <returns>SqlDataReader</returns>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">条件语句</param>
+            <returns>查询结果（object）</returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String)">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
             <summary>
-            执行查询语句，返回DataSet
+            执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="SQLString">查询语句</param>
-            <returns>DataSet</returns>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">条件语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String)">
+            <summary>
+            执行SQL语句，返回影响的记录数
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <returns>影响的记录数</returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
             <summary>
             执行SQL语句，返回影响的记录数
             </summary>
+            <param name="ConnectionString">连接语句</param>
             <param name="SQLString">SQL语句</param>
-            <returns>影响的记录数</returns>
+            <param name="cmdParms">条件参数</param>
+            <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,System.Collections.Hashtable)">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSql(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
             <summary>
-            执行多条SQL语句，实现数据库事务。
+            执行SQL语句，返回影响的记录数
             </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">条件参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,hwj.DBUtility.SqlList)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+            <param name="ConnectionString">连接语句</param>
+            <param name="cmdList">多条SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTran(System.String,hwj.DBUtility.SqlList,System.Int32)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="cmdList">多条SQL语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String)">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">查询语句</param>
+            <returns>SqlDataReader</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">查询语句</param>
+            <param name="cmdParms">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">查询语句</param>
+            <param name="cmdParms">查询条件</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String)">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">查询条件</param>
+            <returns>DataSet</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String,System.Int32,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行查询语句，返回DataSet
+            </summary>
+            <param name="ConnectionString">连接语句</param>
+            <param name="SQLString">SQL语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <param name="cmdParms">查询条件</param>
+            <returns>DataSet</returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,hwj.DBUtility.SqlList)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
             <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteSqlTranWithIndentity(System.String,System.Collections.Hashtable)">
-            <summary>
-            执行多条SQL语句，实现数据库事务。
-            </summary>
-            <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.GetSingle(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            执行一条计算查询结果语句，返回查询结果（object）。
-            </summary>
-            <param name="SQLString">计算查询结果语句</param>
-            <returns>查询结果（object）</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.ExecuteReader(System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
-            </summary>
-            <param name="strSQL">查询语句</param>
-            <returns>SqlDataReader</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Query(System.String,System.String,System.Data.SqlClient.SqlParameter[])">
-            <summary>
-            执行查询语句，返回DataSet
-            </summary>
-            <param name="SQLString">查询语句</param>
-            <returns>DataSet</returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDataParameter[])">
             <summary>

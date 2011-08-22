@@ -91,5 +91,26 @@ namespace hwj.MarkTableObject.Forms
             if (SelObjFrm != null)
                 SelObjFrm.Show();
         }
+
+        private void lblBLLFileName_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.AppStarting;
+            try
+            {
+                Label lbl = sender as Label;
+                if (lbl != null)
+                {
+                    Common.OpenPath(lbl.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.MsgWarn(ex.Message);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
     }
 }

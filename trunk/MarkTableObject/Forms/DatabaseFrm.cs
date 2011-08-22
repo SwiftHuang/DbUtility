@@ -48,10 +48,13 @@ namespace hwj.MarkTableObject.Forms
         private void cboDataSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (panel1.Controls.Count > 0)
+            {
                 panel1.Controls.RemoveAt(0);
+            }
+
             if (cboDataSourceType.SelectedIndex == 0)
             {
-                Components.MSSQLCtrl ctrl = new Components.MSSQLCtrl(Database);
+                Components.MSSQLSetting ctrl = new Components.MSSQLSetting(Database);
                 ctrl.Dock = DockStyle.Fill;
                 panel1.Controls.Add(ctrl);
             }
@@ -64,9 +67,11 @@ namespace hwj.MarkTableObject.Forms
         {
             if (cboDataSourceType.SelectedIndex == 0)
             {
-                Components.MSSQLCtrl ctrl = panel1.Controls[0] as Components.MSSQLCtrl;
+                Components.MSSQLSetting ctrl = panel1.Controls[0] as Components.MSSQLSetting;
                 if (ctrl != null)
+                {
                     Database = ctrl.GetDatabaseInfo();
+                }
             }
             this.Close();
         }

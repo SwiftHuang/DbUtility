@@ -176,6 +176,11 @@ namespace hwj.MarkTableObject.Components
             }
         }
 
+        private void btnGenFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

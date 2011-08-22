@@ -151,16 +151,18 @@
             // txtPrjPath
             // 
             this.txtPrjPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrjPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjPath.BackColor = System.Drawing.Color.Gainsboro;
             this.txtPrjPath.Format = null;
             this.txtPrjPath.Location = new System.Drawing.Point(3, 2);
             this.txtPrjPath.Name = "txtPrjPath";
             this.txtPrjPath.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtPrjPath.ReadOnly = true;
+            this.txtPrjPath.RequiredHandle = null;
             this.txtPrjPath.SetValueToControl = null;
             this.txtPrjPath.Size = new System.Drawing.Size(461, 21);
             this.txtPrjPath.TabIndex = 0;
             this.txtPrjPath.TextIsChanged = false;
+            this.txtPrjPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
             // 
             // btnPrjPath
             // 
@@ -188,16 +190,18 @@
             // txtEntityPath
             // 
             this.txtEntityPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEntityPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtEntityPath.BackColor = System.Drawing.Color.Gainsboro;
             this.txtEntityPath.Format = null;
             this.txtEntityPath.Location = new System.Drawing.Point(3, 2);
             this.txtEntityPath.Name = "txtEntityPath";
             this.txtEntityPath.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtEntityPath.ReadOnly = true;
+            this.txtEntityPath.RequiredHandle = null;
             this.txtEntityPath.SetValueToControl = null;
             this.txtEntityPath.Size = new System.Drawing.Size(396, 21);
             this.txtEntityPath.TabIndex = 0;
             this.txtEntityPath.TextIsChanged = false;
+            this.txtEntityPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
             // 
             // btnEntityPath
             // 
@@ -225,16 +229,18 @@
             // txtDALPath
             // 
             this.txtDALPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDALPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtDALPath.BackColor = System.Drawing.Color.Gainsboro;
             this.txtDALPath.Format = null;
             this.txtDALPath.Location = new System.Drawing.Point(3, 2);
             this.txtDALPath.Name = "txtDALPath";
             this.txtDALPath.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtDALPath.ReadOnly = true;
+            this.txtDALPath.RequiredHandle = null;
             this.txtDALPath.SetValueToControl = null;
             this.txtDALPath.Size = new System.Drawing.Size(396, 21);
             this.txtDALPath.TabIndex = 0;
             this.txtDALPath.TextIsChanged = false;
+            this.txtDALPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
             // 
             // btnDALPath
             // 
@@ -262,16 +268,18 @@
             // txtBLLPath
             // 
             this.txtBLLPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBLLPath.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBLLPath.BackColor = System.Drawing.Color.Gainsboro;
             this.txtBLLPath.Format = null;
             this.txtBLLPath.Location = new System.Drawing.Point(3, 2);
             this.txtBLLPath.Name = "txtBLLPath";
             this.txtBLLPath.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtBLLPath.ReadOnly = true;
+            this.txtBLLPath.RequiredHandle = null;
             this.txtBLLPath.SetValueToControl = null;
             this.txtBLLPath.Size = new System.Drawing.Size(396, 21);
             this.txtBLLPath.TabIndex = 0;
             this.txtBLLPath.TextIsChanged = false;
+            this.txtBLLPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
             // 
             // btnBLLPath
             // 
@@ -352,6 +360,7 @@
             this.txtBLLName.Location = new System.Drawing.Point(133, 53);
             this.txtBLLName.Name = "txtBLLName";
             this.txtBLLName.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtBLLName.RequiredHandle = null;
             this.txtBLLName.SetValueToControl = null;
             this.txtBLLName.Size = new System.Drawing.Size(291, 21);
             this.txtBLLName.TabIndex = 6;
@@ -365,6 +374,7 @@
             this.txtDALName.Location = new System.Drawing.Point(133, 128);
             this.txtDALName.Name = "txtDALName";
             this.txtDALName.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtDALName.RequiredHandle = null;
             this.txtDALName.SetValueToControl = null;
             this.txtDALName.Size = new System.Drawing.Size(291, 21);
             this.txtDALName.TabIndex = 15;
@@ -378,6 +388,7 @@
             this.txtEntityName.Location = new System.Drawing.Point(133, 178);
             this.txtEntityName.Name = "txtEntityName";
             this.txtEntityName.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtEntityName.RequiredHandle = null;
             this.txtEntityName.SetValueToControl = null;
             this.txtEntityName.Size = new System.Drawing.Size(291, 21);
             this.txtEntityName.TabIndex = 22;
@@ -431,6 +442,7 @@
             this.txtBLLPrefixChar.Location = new System.Drawing.Point(495, 53);
             this.txtBLLPrefixChar.Name = "txtBLLPrefixChar";
             this.txtBLLPrefixChar.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtBLLPrefixChar.RequiredHandle = null;
             this.txtBLLPrefixChar.SetValueToControl = null;
             this.txtBLLPrefixChar.Size = new System.Drawing.Size(74, 21);
             this.txtBLLPrefixChar.TabIndex = 8;
@@ -485,6 +497,7 @@
             this.txtDALPrefixChar.Location = new System.Drawing.Point(495, 128);
             this.txtDALPrefixChar.Name = "txtDALPrefixChar";
             this.txtDALPrefixChar.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtDALPrefixChar.RequiredHandle = null;
             this.txtDALPrefixChar.SetValueToControl = null;
             this.txtDALPrefixChar.Size = new System.Drawing.Size(74, 21);
             this.txtDALPrefixChar.TabIndex = 17;
@@ -499,6 +512,7 @@
             this.txtEntityPrefixChar.Location = new System.Drawing.Point(495, 178);
             this.txtEntityPrefixChar.Name = "txtEntityPrefixChar";
             this.txtEntityPrefixChar.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtEntityPrefixChar.RequiredHandle = null;
             this.txtEntityPrefixChar.SetValueToControl = null;
             this.txtEntityPrefixChar.Size = new System.Drawing.Size(74, 21);
             this.txtEntityPrefixChar.TabIndex = 24;
@@ -514,6 +528,7 @@
             this.txtPrjName.Location = new System.Drawing.Point(68, 3);
             this.txtPrjName.Name = "txtPrjName";
             this.txtPrjName.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtPrjName.RequiredHandle = null;
             this.txtPrjName.SetValueToControl = null;
             this.txtPrjName.Size = new System.Drawing.Size(501, 21);
             this.txtPrjName.TabIndex = 1;
@@ -538,6 +553,7 @@
             this.txtBLLConnection.Location = new System.Drawing.Point(133, 78);
             this.txtBLLConnection.Name = "txtBLLConnection";
             this.txtBLLConnection.OldBackColor = System.Drawing.SystemColors.Window;
+            this.txtBLLConnection.RequiredHandle = null;
             this.txtBLLConnection.SetValueToControl = null;
             this.txtBLLConnection.Size = new System.Drawing.Size(436, 21);
             this.txtBLLConnection.TabIndex = 10;
@@ -551,7 +567,7 @@
             this.groupBox1.Size = new System.Drawing.Size(578, 246);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "项目设置";
+            this.groupBox1.Text = "项目设置(鼠标双击路径内容,打开所在文件夹)";
             // 
             // groupBox2
             // 
@@ -617,6 +633,7 @@
             this.txtConnStr.Name = "txtConnStr";
             this.txtConnStr.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtConnStr.ReadOnly = true;
+            this.txtConnStr.RequiredHandle = null;
             this.tableLayoutPanel2.SetRowSpan(this.txtConnStr, 2);
             this.txtConnStr.SetValueToControl = null;
             this.txtConnStr.Size = new System.Drawing.Size(513, 69);

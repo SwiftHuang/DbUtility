@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8F247953-CE61-4473-A899-6E08D2D6F347}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>BA3B59AB597623A2D2976547411A92E7935C438D</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FAC60D597F7C2C22A9E04E04EBE10E07562D4ED9</ManifestCertificateThumbprint>
     <ManifestKeyFile>MarkTableObject_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
@@ -31,11 +31,12 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.0.3.2</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.0.1</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>0.0.3.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -83,6 +84,12 @@
     </Compile>
     <Compile Include="Components\MSSQLCtrl.Designer.cs">
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MSSQLSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MSSQLSetting.Designer.cs">
+      <DependentUpon>MSSQLSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\BLLInfo.cs" />
     <Compile Include="Entity\ColumnInfo.cs">
@@ -164,7 +171,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="MarkTableObject_TemporaryKey.pfx" />
+    <None Include="MarkTableObject_TemporaryKey_OLD.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -191,6 +198,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -206,11 +218,17 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MarkTableObject_TemporaryKey.pfx" />
     <None Include="Resources\add2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
