@@ -174,6 +174,18 @@ namespace hwj.DBUtility.MSSQL
 
                         if (!isPage)
                         {
+                            //string tmpFormat = _StringFormat;
+                            //FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
+
+                            //if (IsNumType(f.DataTypeCode))
+                            //{
+                            //    tmpFormat = _DecimalFormat;
+                            //}
+
+                            //foreach (string s in strList)
+                            //{
+                            //    inSql.AppendFormat(tmpFormat, s).Append(',');
+                            //}
                             foreach (string s in strList)
                             {
                                 inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
@@ -212,9 +224,13 @@ namespace hwj.DBUtility.MSSQL
             StringBuilder sbStr = new StringBuilder();
             string __MsSqlParam = string.Empty;
             if (isFilter)
+            {
                 __MsSqlParam = _MsSqlWhereParam;
+            }
             else
+            {
                 __MsSqlParam = _MsSqlParam;
+            }
 
             sbStr.AppendFormat(_MsSqlFieldFmt, para.FieldName).Append(Enums.RelationString(para.Operator));
 
@@ -224,16 +240,16 @@ namespace hwj.DBUtility.MSSQL
             }
             else if (isPage)
             {
-                //List<FieldMappingInfo> FieldInfos = FieldMappingInfo.GetFieldMapping(typeof(T));
-                //if (FieldInfos != null)
-                //{
-                //}else
                 if (para.IsUnicode)
+                {
                     sbStr.Append("N");//.Append('\'');
+                }
                 sbStr.Append('\'');
 
                 if (IsDatabaseDate(para))
+                {
                     sbStr.Append(_MsSqlGetDate);
+                }
                 else
                 {
                     if (para.Operator == Enums.Relation.Like || para.Operator == Enums.Relation.NotLike)
@@ -245,12 +261,17 @@ namespace hwj.DBUtility.MSSQL
                         sbStr.Append(para.FieldValue.ToString().Replace("'", "''"));
                     }
                 }
+
                 sbStr.Append('\'');//.Append('\'');
             }
             else if (IsDatabaseDate(para))
+            {
                 sbStr.Append(_MsSqlGetDate);
+            }
             else
+            {
                 sbStr.AppendFormat(__MsSqlParam, !string.IsNullOrEmpty(para.ParamName) ? para.ParamName : para.FieldName);
+            }
 
             sbStr.Append(Enums.ExpressionString(para.Expression));
             return sbStr.ToString();
@@ -262,19 +283,19 @@ namespace hwj.DBUtility.MSSQL
             else
                 return string.Empty;
         }
-        private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
-        {
-            object value = field.Property.GetValue(entity, null);
-            if (!IsDatabaseDate(field.DataTypeCode, value))
-            {
-                SqlParameter dp = new SqlParameter();
-                dp.DbType = field.DataTypeCode;
-                dp.ParameterName = string.Format(_MsSqlParam, field.FieldName);
-                dp.Value = CheckValue(dp, value);
-                return dp;
-            }
-            return null;
-        }
+        //private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
+        //{
+        //    object value = field.Property.GetValue(entity, null);
+        //    if (!IsDatabaseDate(field.DataTypeCode, value))
+        //    {
+        //        SqlParameter dp = new SqlParameter();
+        //        dp.DbType = field.DataTypeCode;
+        //        dp.ParameterName = string.Format(_MsSqlParam, field.FieldName);
+        //        dp.Value = CheckValue(dp, value);
+        //        return dp;
+        //    }
+        //    return null;
+        //}
         private object CheckValue(SqlParameter param, object value)
         {
             if (IsDateType(param.DbType))
@@ -348,7 +369,9 @@ namespace hwj.DBUtility.MSSQL
                 return LstDP;
             }
             else
+            {
                 return null;
+            }
         }
         #endregion
     }
