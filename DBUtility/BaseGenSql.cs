@@ -85,32 +85,37 @@ namespace hwj.DBUtility
                 sql = sql.Substring(0, sql.Length - andR);
             return sql.TrimEnd(',');
         }
-        /// <summary>
-        /// 检查非法字符
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        protected string CheckSql(string str)
-        {
-            string s = string.Empty;
-            if (str == null)
-            {
-                s = string.Empty;
-            }
-            else
-            {
-                s = str.Replace("'", "").Replace("*", "").Replace("select", "")
-                       .Replace("where", "").Replace(";", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
-            }
-            return s;
-        }
+        ///// <summary>
+        ///// 检查非法字符
+        ///// </summary>
+        ///// <param name="str"></param>
+        ///// <returns></returns>
+        //protected string CheckSql(string str)
+        //{
+        //    string s = string.Empty;
+        //    if (str == null)
+        //    {
+        //        s = string.Empty;
+        //    }
+        //    else
+        //    {
+        //        s = str.Replace("'", "").Replace("*", "").Replace("select", "")
+        //               .Replace("where", "").Replace(";", "").Replace("drop", "").Replace("DROP", "").Replace("and", "").Replace("or", "").Replace("delete", "").Replace("asc", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace(";", "").Replace("&", "").Replace("*", "");
+        //    }
+        //    return s;
+        //}
 
         protected bool IsNumType(DbType typeCode)
         {
-            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64)
+            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64
+                || typeCode == DbType.Double || typeCode == DbType.Single || typeCode == DbType.UInt16 || typeCode == DbType.UInt32 || typeCode == DbType.UInt64)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
         protected bool IsDateType(DbType typeCode)
         {
