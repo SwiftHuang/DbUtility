@@ -137,6 +137,18 @@ namespace hwj.DBUtility
             else
                 return false;
         }
+
+        protected string[] GetSQL_IN_Value(object obj)
+        {
+            if (obj == null)
+                return null;
+            else if (obj is List<string>)
+                return ((List<string>)obj).ToArray();
+            else if (obj is string)
+                return new string[] { obj.ToString() };
+            else
+                return (string[])obj;
+        }
         #endregion
     }
 }
