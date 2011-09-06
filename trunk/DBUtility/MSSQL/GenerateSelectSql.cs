@@ -8,9 +8,9 @@ namespace hwj.DBUtility.MSSQL
 {
     public class GenerateSelectSql<T> : BaseGenSelectSql<T> where T : class, new()
     {
+        //private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
         private const string _MsSqlTopCount = "top {0}";
-        private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount @TableName,@FieldKey,@Sort,@PageIndex,@PageSize,@DisplayField,@Where,@Group,@_PTotalCount output";
         private const string _MsSqlPageView = "EXEC dbo.sp_PageView @TableName,@FieldKey,@PageIndex,@PageSize,@DisplayField,@Sort,@Where,@_RecordCount output";
         private const string _MsSqlParam = "@{0}";
@@ -159,37 +159,40 @@ namespace hwj.DBUtility.MSSQL
                             sbWhere.Append(para.FieldValue);
                         }
                     }
-                    else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
+                    else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN
+                        || para.Operator == Enums.Relation.IN_InsertSQL || para.Operator == Enums.Relation.NotIN_InsertSQL)
                     {
                         StringBuilder inSql = new StringBuilder();
-                        string[] strList;
-                        if (para.FieldValue == null)
+                        string[] strList = GetSQL_IN_Value(para.FieldValue);
+                        if (strList == null)
                             continue;
-                        else if (para.FieldValue is List<string>)
-                            strList = ((List<string>)para.FieldValue).ToArray();
-                        else if (para.FieldValue is string)
-                            strList = new string[] { para.FieldValue.ToString() };
-                        else
-                            strList = (string[])para.FieldValue;
 
                         if (!isPage)
                         {
-                            //string tmpFormat = _StringFormat;
-                            //FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
-
-                            //if (IsNumType(f.DataTypeCode))
-                            //{
-                            //    tmpFormat = _DecimalFormat;
-                            //}
-
-                            //foreach (string s in strList)
-                            //{
-                            //    inSql.AppendFormat(tmpFormat, s).Append(',');
-                            //}
-                            foreach (string s in strList)
+                            if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                             {
-                                inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
-                                index++;
+                                foreach (string s in strList)
+                                {
+                                    inSql.AppendFormat(_MsSqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
+                                    index++;
+                                }
+                            }
+                            else
+                            {
+                                string tmpFormat = _StringFormat;
+                                FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
+                                if (f != null)
+                                {
+                                    if (IsNumType(f.DataTypeCode))
+                                    {
+                                        tmpFormat = _DecimalFormat;
+                                    }
+
+                                    foreach (string s in strList)
+                                    {
+                                        inSql.AppendFormat(tmpFormat, s).Append(',');
+                                    }
+                                }
                             }
                         }
                         else
@@ -320,49 +323,41 @@ namespace hwj.DBUtility.MSSQL
                         continue;
                     if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
-                        string[] strList;
-                        if (sp.FieldValue == null)
-                            continue;
-                        else if (sp.FieldValue is List<string>)
-                            strList = ((List<string>)sp.FieldValue).ToArray();
-                        else if (sp.FieldValue is string)
-                            strList = new string[] { sp.FieldValue.ToString() };
-                        else
-                            strList = (string[])sp.FieldValue;
+                        string[] strList = GetSQL_IN_Value(sp.FieldValue);
 
-                        foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                        if (strList == null)
+                            continue;
+
+                        FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);
+                        if (f != null)
                         {
-                            if (sp.FieldName == f.FieldName)
+                            foreach (string s in strList)
                             {
-                                foreach (string s in strList)
-                                {
-                                    SqlParameter p = new SqlParameter();
-                                    p.DbType = f.DataTypeCode;
-                                    p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
-                                    p.Value = s.ToString();
-                                    LstDP.Add(p);
-                                    index++;
-                                }
-                                break;
+                                SqlParameter p = new SqlParameter();
+                                p.DbType = f.DataTypeCode;
+                                p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
+                                p.Value = s.ToString();
+                                LstDP.Add(p);
+                                index++;
                             }
                         }
+                    }
+                    else if (sp.Operator == Enums.Relation.IN_InsertSQL || sp.Operator == Enums.Relation.NotIN_InsertSQL)
+                    {
                     }
                     else if (sp.Operator == Enums.Relation.IsNotNull || sp.Operator == Enums.Relation.IsNull)
                     {
                     }
                     else
                     {
-                        foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                        FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);
+                        if (f != null)
                         {
-                            if (sp.FieldName == f.FieldName)
-                            {
-                                SqlParameter dp = new SqlParameter();
-                                dp.DbType = f.DataTypeCode;
-                                dp.ParameterName = string.Format(_MsSqlWhereParam, sp.ParamName != null ? sp.ParamName : sp.FieldName);
-                                dp.Value = sp.FieldValue;
-                                LstDP.Add(dp);
-                                break;
-                            }
+                            SqlParameter dp = new SqlParameter();
+                            dp.DbType = f.DataTypeCode;
+                            dp.ParameterName = string.Format(_MsSqlWhereParam, sp.ParamName != null ? sp.ParamName : sp.FieldName);
+                            dp.Value = sp.FieldValue;
+                            LstDP.Add(dp);
                         }
                     }
                 }

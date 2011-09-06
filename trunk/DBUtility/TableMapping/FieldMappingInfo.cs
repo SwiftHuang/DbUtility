@@ -59,6 +59,11 @@ namespace hwj.DBUtility.TableMapping
         }
         public static FieldMappingInfo GetFieldInfo(Type type, string fieldName)
         {
+            if (type == null || string.IsNullOrEmpty(fieldName))
+            {
+                return null;
+            }
+
             foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(type))
             {
                 if (f.FieldName == fieldName)

@@ -50,13 +50,21 @@ namespace hwj.DBUtility
             /// </summary>
             NotLike,
             /// <summary>
-            /// 包含(in)
+            /// 包含(in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
             /// </summary>
             IN,
             /// <summary>
-            /// 不包含(not in)
+            /// 不包含(not in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
             /// </summary>
             NotIN,
+            /// <summary>
+            /// 包含(in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            /// </summary>
+            IN_InsertSQL,
+            /// <summary>
+            /// 不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            /// </summary>
+            NotIN_InsertSQL,
         }
         public static string RelationString(Relation oper)
         {
@@ -85,6 +93,10 @@ namespace hwj.DBUtility
                 case Enums.Relation.IN:
                     return " IN({0}) ";
                 case Enums.Relation.NotIN:
+                    return " NOT IN({0}) ";
+                case Enums.Relation.IN_InsertSQL:
+                    return " IN({0}) ";
+                case Enums.Relation.NotIN_InsertSQL:
                     return " NOT IN({0}) ";
                 default:
                     throw new Exception("Enums.Operator error");

@@ -106,12 +106,22 @@
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IN">
             <summary>
-            包含(in)
+            包含(in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.NotIN">
             <summary>
-            不包含(not in)
+            不包含(not in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.IN_InsertSQL">
+            <summary>
+            包含(in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.NotIN_InsertSQL">
+            <summary>
+            不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
             </summary>
         </member>
         <member name="T:hwj.DBUtility.Enums.Expression">
@@ -564,13 +574,6 @@
             格式化最后的表达式
             </summary>
             <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.BaseGenSql`1.CheckSql(System.String)">
-            <summary>
-            检查非法字符
-            </summary>
-            <param name="str"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
