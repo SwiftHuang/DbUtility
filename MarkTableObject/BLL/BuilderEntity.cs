@@ -99,8 +99,8 @@ namespace hwj.MarkTableObject.BLL
         {
             //修正视图重复字段的问题
             string tmpColumnName = string.Empty;
-            string sFieldFormat = "[FieldMapping(\"{0}\", {1}{2})]";
-            string sFieldFormat_isPK = "[FieldMapping(\"{0}\", {1}, Enums.DataHandle.UnInsert, Enums.DataHandle.UnUpdate{2})]";
+            string sFieldFormat = "[FieldMapping(\"{0}\", {1}, {2}{3})]";
+            string sFieldFormat_isPK = "[FieldMapping(\"{0}\", {1}, {2}, Enums.DataHandle.UnInsert, Enums.DataHandle.UnUpdate{3})]";
             string sUnNull = string.Empty;// ", Enums.DataHandle.UnNull";//需要时再打开该属性
             string sDescIsPK = "PK";
             string sDescCanNull = "Allow Null";
@@ -137,7 +137,7 @@ namespace hwj.MarkTableObject.BLL
                                                                (ispk ? sDescIsPK : ""),
                                                                 (cisnull ? sDescCanNull : sDescCanntNull),
                                                                 c.DataTypeName,
-                                                                c.ColumnSize,
+                                                                GetSize(c),
                                                                 string.IsNullOrEmpty(c.DefaultValue) ? "" : "Default:" + c.DefaultValue).TrimEnd('/').TrimStart('/')
                                                                 + "]");
                     strclass2.AppendLine(2, "/// </summary>");
@@ -145,16 +145,16 @@ namespace hwj.MarkTableObject.BLL
                     if (cisnull)
                         _sUnNull = string.Empty;
                     if (IsIdentity)
-                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(c), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(c), GetSize(c), _sUnNull));
                     else
-                        strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(c), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(c), GetSize(c), _sUnNull));
                     strclass2.AppendLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                     strclass2.AppendLine(2, "{");
                     if (entity.Module == DBModule.Table)
-                        strclass2.AppendLine(3, "set{ AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + "=value; }");
+                        strclass2.AppendLine(3, "set { AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + " = value; }");
                     else
-                        strclass2.AppendLine(3, "set{ _" + columnName.ToLower() + "=value; }");
-                    strclass2.AppendLine(3, "get{ return " + "_" + columnName.ToLower() + "; }");
+                        strclass2.AppendLine(3, "set { _" + columnName.ToLower() + " = value; }");
+                    strclass2.AppendLine(3, "get { return " + "_" + columnName.ToLower() + "; }");
                     strclass2.AppendLine(2, "}");
                 }
                 tmpColumnName = c.ColumnName;
@@ -185,6 +185,18 @@ namespace hwj.MarkTableObject.BLL
                     return "DbType.String";
             }
             return "DbType." + SetFirstUpper(column.DataType);
+        }
+        private static int GetSize(ColumnInfo column)
+        {
+            DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", ""), true);
+            if (hwj.DBUtility.Common.IsNumType(dbType))
+            {
+                return column.NumericPrecision;
+            }
+            else
+            {
+                return column.ColumnSize;
+            }
         }
 
         private static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
