@@ -56,8 +56,56 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Add(T entity)
         {
-            _SqlEntity = AddSqlEntity(entity);
-            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+            try
+            {
+                _SqlEntity = AddSqlEntity(entity);
+                return ExecuteSql(_SqlEntity.CommandText, _SqlEntity.Parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                Exception newEx = CheckSqlException(ex, entity);
+                if (newEx != null)
+                {
+                    throw newEx;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        /// <summary>
+        /// 执行插入数据,并返回标识值
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public decimal AddReturnIdentity(T entity)
+        {
+            try
+            {
+                _SqlEntity = AddSqlEntity(entity);
+                object obj = ExecuteScalar(string.Format("{0}SELECT SCOPE_IDENTITY() as 'SCOPE_IDENTITY()';", _SqlEntity.CommandText), _SqlEntity.Parameters);
+                if (obj is decimal)
+                {
+                    return (decimal)obj;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Exception newEx = CheckSqlException(ex, entity);
+                if (newEx != null)
+                {
+                    throw newEx;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
         /// <summary>
         /// 获取增加的Sql对象
@@ -69,7 +117,7 @@ namespace hwj.DBUtility.MSSQL
             //if (EnableSqlLog)
             //    return InsertSqlLog(new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity)), "INSERT");
             //else
-            return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity));
+            return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
         }
         public Int64 GetInsertID()
         {
@@ -143,8 +191,23 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Update(T entity, FilterParams filterParam)
         {
-            _SqlEntity = UpdateSqlEntity(entity, filterParam);
-            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+            try
+            {
+                _SqlEntity = UpdateSqlEntity(entity, filterParam);
+                return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                Exception newEx = CheckSqlException(ex, entity);
+                if (newEx != null)
+                {
+                    throw newEx;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
         #endregion
 
@@ -588,6 +651,20 @@ namespace hwj.DBUtility.MSSQL
             return GenerateEntity<T, TS>.CreateDataTable(ExecuteReader(sql, cmdParams, timeout), tableName);
         }
         #endregion
+
+        private static Exception CheckSqlException(Exception e, T entity)
+        {
+            if (e is SqlException)
+            {
+                int num = ((SqlException)e).Number;
+                if ((num == 8152 || num == 8115) && entity != null)
+                {
+                    return DbHelperSQL.Check8152(e, entity.GetTableName(), entity);
+                }
+            }
+            return null;
+        }
+
 
     }
 }
