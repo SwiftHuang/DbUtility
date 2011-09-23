@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BaseGenSelectSql.cs" />
     <Compile Include="BaseGenUpdateSql.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Entity\BaseList.cs" />
     <Compile Include="Entity\Reverser.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />

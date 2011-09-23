@@ -15,8 +15,9 @@ namespace hwj.DBUtility.TableMapping
             DataTypeCode = fieldMappingInfo.DataTypeCode;
             FieldIndex = fieldMappingInfo.FieldIndex;
             DataHandles = fieldMappingInfo.DataHandles;
+            Size = 0;
         }
-        public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, Enums.DataHandle[] dataHandles, int fieldIndex)
+        public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, int size, Enums.DataHandle[] dataHandles, int fieldIndex)
         {
             Property = property;
             FieldName = fieldName;
@@ -24,6 +25,7 @@ namespace hwj.DBUtility.TableMapping
             DataTypeCode = typeCode;
             FieldIndex = fieldIndex;
             DataHandles = dataHandles;
+            Size = size;
         }
 
         #region Property
@@ -33,6 +35,7 @@ namespace hwj.DBUtility.TableMapping
         public object NullValue { get; set; }
         public int FieldIndex { get; set; }
         public Enums.DataHandle[] DataHandles { get; set; }
+        public int Size { get; set; }
         #endregion
 
         #region Public Functions
@@ -45,9 +48,9 @@ namespace hwj.DBUtility.TableMapping
             {
                 foreach (PropertyInfo Property in type.GetProperties())
                 {
-                    foreach (FieldMappingAttribute Field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
+                    foreach (FieldMappingAttribute field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
                     {
-                        lstFieldInfo.Add(new FieldMappingInfo(Property, Field.DataFieldName, Field.DataTypeCode, Field.NullValue, Field.DataHandles, -1));
+                        lstFieldInfo.Add(new FieldMappingInfo(Property, field.DataFieldName, field.DataTypeCode, field.NullValue, field.Size, field.DataHandles, -1));
                     }
                 }
                 DBCache.SetCache(entityID, lstFieldInfo);

@@ -107,15 +107,7 @@ namespace hwj.DBUtility
 
         protected bool IsNumType(DbType typeCode)
         {
-            if (typeCode == DbType.Decimal || typeCode == DbType.Int16 || typeCode == DbType.Int32 || typeCode == DbType.Int64
-                || typeCode == DbType.Double || typeCode == DbType.Single || typeCode == DbType.UInt16 || typeCode == DbType.UInt32 || typeCode == DbType.UInt64)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Common.IsNumType(typeCode);
         }
         protected bool IsDateType(DbType typeCode)
         {

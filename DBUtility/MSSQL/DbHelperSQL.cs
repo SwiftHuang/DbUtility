@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -144,6 +145,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
         #endregion
 
         #region 执行带参数的SQL语句
@@ -196,9 +198,8 @@ namespace hwj.DBUtility.MSSQL
                             return obj;
                         }
                     }
-                    catch (System.Data.SqlClient.SqlException e)
+                    catch
                     {
-                        //throw e;
                         throw;
                     }
                     finally
@@ -252,10 +253,9 @@ namespace hwj.DBUtility.MSSQL
                         cmd.Parameters.Clear();
                         return rows;
                     }
-                    catch (System.Data.SqlClient.SqlException e)
+                    catch
                     {
-                        //FormatSqlEx(SQLString, cmdParms, ref e);
-                        throw e;
+                        throw;
                     }
                     finally
                     {
@@ -291,7 +291,7 @@ namespace hwj.DBUtility.MSSQL
                 using (SqlTransaction trans = conn.BeginTransaction())
                 {
                     SqlCommand cmd = new SqlCommand();
-                    //cmd.CommandTimeout = timeout;
+                    int index = 0;
                     try
                     {
                         int count = 0;
@@ -338,17 +338,27 @@ namespace hwj.DBUtility.MSSQL
                                 return 0;
                             }
                             cmd.Parameters.Clear();
+                            index++;
                         }
                         trans.Commit();
                         return count;
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         if (trans.Connection != null)
                         {
                             trans.Rollback();
                         }
-                        throw;
+
+                        Exception newEx = CheckSqlException(ex, cmdList[index]);
+                        if (newEx == null)
+                        {
+                            throw;
+                        }
+                        else
+                        {
+                            throw newEx;
+                        }
                     }
                 }
             }
@@ -683,6 +693,17 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
+        private static Exception CheckSqlException(Exception e, SqlEntity entity)
+        {
+            if (e is SqlException)
+            {
+                if (((SqlException)e).Number == 8152 && entity != null && entity.DataEntity != null)
+                {
+                    return Check8152(e, entity.TableName, entity.DataEntity);
+                }
+            }
+            return null;
+        }
         private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
         {
             try
@@ -691,6 +712,56 @@ namespace hwj.DBUtility.MSSQL
                 e.HelpLink = sex.ToXml();
             }
             catch { }
+        }
+        /// <summary>
+        /// 检查字符长度是否与数据相符。
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="tableName"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        internal static Exception Check8152(Exception e, string tableName, object entity)
+        {
+            string errFields = string.Empty;
+            foreach (FieldMappingInfo field in FieldMappingInfo.GetFieldMapping(entity.GetType()))
+            {
+                if (field.Size != 0)
+                {
+                    object value = field.Property.GetValue(entity, null);
+                    if (value != null)
+                    {
+                        string str = value.ToString();
+                        if (Common.IsNumType(field.DataTypeCode) && str.IndexOf('.') >= 0)
+                        {
+                            if (str.IndexOf('.') > field.Size - 2)
+                            {
+                                errFields += field.FieldName + "/";
+                            }
+                        }
+                        else if (field.DataTypeCode == DbType.Boolean)
+                        {
+
+                        }
+                        else
+                        {
+                            if (str.Length > field.Size)
+                            {
+                                errFields += field.FieldName + "/";
+                            }
+                        }
+                    }
+                }
+            }
+
+            errFields = errFields.TrimEnd('/');
+            if (!string.IsNullOrEmpty(errFields))
+            {
+                return new Exception(string.Format("{0}\r\n-Table:{1}\r\n-Field:{2}", e.Message, tableName, errFields), e);
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion
     }
