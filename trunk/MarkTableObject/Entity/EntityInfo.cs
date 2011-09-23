@@ -98,7 +98,14 @@ namespace hwj.MarkTableObject.Entity
         private string FormatParam(ColumnInfo col)
         {
             string strType = col.DataType.Replace("System.", "");
-            strType = strType.Substring(0, 1).ToLower() + strType.Substring(1);
+            if (strType == "Int32")
+            {
+                strType = "int";
+            }
+            else
+            {
+                strType = strType.Substring(0, 1).ToLower() + strType.Substring(1);
+            }
             return string.Format(" {0} {1},", strType, col.ColumnName);
         }
         private string FormatSPParam(SPParamColumnInfo col)

@@ -106,12 +106,22 @@
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IN">
             <summary>
-            包含(in)
+            包含(in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.NotIN">
             <summary>
-            不包含(not in)
+            不包含(not in) 以参数形式实现,可处理转义字符,但有参数总量限制(Max:2100)。
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.IN_InsertSQL">
+            <summary>
+            包含(in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.NotIN_InsertSQL">
+            <summary>
+            不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
             </summary>
         </member>
         <member name="T:hwj.DBUtility.Enums.Expression">
@@ -297,6 +307,13 @@
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
             <summary>
             执行插入数据
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.AddReturnIdentity(`0)">
+            <summary>
+            执行插入数据,并返回标识值
             </summary>
             <param name="entity"></param>
             <returns></returns>
@@ -566,13 +583,6 @@
             <param name="sql"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.BaseGenSql`1.CheckSql(System.String)">
-            <summary>
-            检查非法字符
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
         <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
             <summary>
             Add a left brackets
@@ -830,6 +840,15 @@
             <param name="storedProcName">存储过程名</param>
             <param name="parameters">存储过程参数</param>
             <returns>SqlCommand 对象实例</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Check8152(System.Exception,System.String,System.Object)">
+            <summary>
+            检查字符长度是否与数据相符。
+            </summary>
+            <param name="e"></param>
+            <param name="tableName"></param>
+            <param name="entity"></param>
+            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.Entity.BaseList`2.ExFind(System.Enum,System.Object)">
             <summary>
