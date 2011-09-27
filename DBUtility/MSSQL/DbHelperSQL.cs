@@ -733,12 +733,16 @@ namespace hwj.DBUtility.MSSQL
                         string str = value.ToString();
                         if (Common.IsNumType(field.DataTypeCode) && str.IndexOf('.') >= 0)
                         {
-                            if (str.IndexOf('.') > field.Size - 2)
+                            if (str.IndexOf('.') > field.Size)
                             {
                                 errFields += field.FieldName + "/";
                             }
                         }
                         else if (field.DataTypeCode == DbType.Boolean)
+                        {
+
+                        }
+                        else if (field.DataTypeCode == DbType.DateTime)
                         {
 
                         }
