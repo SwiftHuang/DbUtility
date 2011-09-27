@@ -137,7 +137,7 @@ namespace hwj.MarkTableObject.BLL
                                                                (ispk ? sDescIsPK : ""),
                                                                 (cisnull ? sDescCanNull : sDescCanntNull),
                                                                 c.DataTypeName,
-                                                                GetSize(c),
+                                                                GetSizeForComment(c),
                                                                 string.IsNullOrEmpty(c.DefaultValue) ? "" : "Default:" + c.DefaultValue).TrimEnd('/').TrimStart('/')
                                                                 + "]");
                     strclass2.AppendLine(2, "/// </summary>");
@@ -186,12 +186,38 @@ namespace hwj.MarkTableObject.BLL
             }
             return "DbType." + SetFirstUpper(column.DataType);
         }
+        private static string GetSizeForComment(ColumnInfo column)
+        {
+            DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", ""), true);
+            if (hwj.DBUtility.Common.IsNumType(dbType))
+            {
+                if (column.NumericScale == 255)
+                {
+                    return column.NumericPrecision.ToString();
+                }
+                else
+                {
+                    return string.Format("{0},{1}", column.NumericPrecision, column.NumericScale);
+                }
+            }
+            else
+            {
+                return column.ColumnSize.ToString();
+            }
+        }
         private static int GetSize(ColumnInfo column)
         {
             DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", ""), true);
             if (hwj.DBUtility.Common.IsNumType(dbType))
             {
-                return column.NumericPrecision;
+                if (column.NumericScale == 255)
+                {
+                    return column.NumericPrecision;
+                }
+                else
+                {
+                    return column.NumericPrecision - column.NumericScale;
+                }
             }
             else
             {
