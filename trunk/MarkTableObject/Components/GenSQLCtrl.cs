@@ -149,23 +149,17 @@ namespace hwj.MarkTableObject.Components
                 ColumnInfos colList = dgList.DataSource as ColumnInfos;
                 if (colList != null)
                 {
+                    PrjInfo.EntityPrefixChar = string.Empty;
                     BLLInfo inf = new BLLInfo(PrjInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
                     inf.EntityInfo.SPParamInfos = EntyInfo.SPParamInfos;
                     inf.EntityInfo.SPParamString = EntyInfo.SPParamString;
-                    inf.EntityInfo.CommandText = EntyInfo.CommandText;
-                    TextBox txt = tpEntity.Controls["txtEntityCode"] as TextBox;
-                    if (txt != null)
-                        txt.Text = BLL.BuilderEntity.CreatEntity(inf.EntityInfo);
+                    //inf.EntityInfo.CommandText = EntyInfo.CommandText;
 
-                    txt = tpBLL.Controls["txtBLLCode"] as TextBox;
-                    if (txt != null)
-                    {
-                        txt.Text = BLL.BuilderBLL.CreateBLLCode(inf, DBModule.SQL, false, false, false, false, true, Module == DBModule.SQL, true, false);
-                    }
+                    txtEntityCode.Text = BLL.BuilderEntity.CreatEntity(inf.EntityInfo);
 
-                    txt = tpDAL.Controls["txtDALCode"] as TextBox;
-                    if (txt != null)
-                        txt.Text = BLL.BuilderDAL.CreateDALCode(inf.DALInfo);
+                    txtBLLCode.Text = BLL.BuilderBLL.CreateBLLCode(inf, DBModule.SQL, false, false, false, false, true, Module == DBModule.SQL, true, false);
+
+                    txtDALCode.Text = BLL.BuilderDAL.CreateDALCode(inf.DALInfo);
 
                     tabGen.SelectedTab = tpEntity;
                 }
@@ -181,6 +175,20 @@ namespace hwj.MarkTableObject.Components
 
         }
 
+        private void btnEntityCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(txtEntityCode.Text);
+        }
+
+        private void btnDALCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(txtDALCode.Text);
+        }
+
+        private void btnBLLCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(txtBLLCode.Text);
+        }
 
     }
 }
