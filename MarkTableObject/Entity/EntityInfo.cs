@@ -7,6 +7,7 @@ namespace hwj.MarkTableObject.Entity
 {
     public class EntityInfo
     {
+        #region Property
         public string EntityName { get; set; }
         public string TableName { get; set; }
         public string ConnectionString { get; set; }
@@ -25,12 +26,12 @@ namespace hwj.MarkTableObject.Entity
         /// 前缀字符
         /// </summary>
         public string PrefixChar { get; set; }
+        #endregion
 
         public EntityInfo()
         {
             ColumnInfoList = new ColumnInfos();
         }
-
         public EntityInfo(ProjectInfo prjInfo, DBModule module, string tableName)
         {
             Module = module;
@@ -43,6 +44,8 @@ namespace hwj.MarkTableObject.Entity
             EntityName = PrefixChar + TableName;
             FileName = string.Format("{0}\\{1}.cs", prjInfo.EntityPath.TrimEnd('\\'), EntityName);
         }
+
+        #region Public Function
         public void InitColumnInfoList()
         {
             ColumnInfoList = BLL.MSSQL.BuilderColumn.GetColumnInfoForTable(this);
@@ -95,6 +98,9 @@ namespace hwj.MarkTableObject.Entity
                 CommandText = string.Format("EXEC {0} {1}", SPName, sbSql.ToString()).Trim().TrimEnd(',');
             }
         }
+        #endregion
+
+        #region Private Function
         private string FormatParam(ColumnInfo col)
         {
             string strType = col.DataType.Replace("System.", "");
@@ -106,7 +112,20 @@ namespace hwj.MarkTableObject.Entity
             {
                 strType = strType.Substring(0, 1).ToLower() + strType.Substring(1);
             }
-            return string.Format(" {0} {1},", strType, col.ColumnName);
+
+            return string.Format(" {0} {1},", strType, FormatParam(col.ColumnName));
+        }
+        private string FormatParam(string value)
+        {
+            int index = 0;
+            foreach (char c in value.ToCharArray())
+            {
+                if (c >= 'A' && c <= 'Z')
+                {
+                    index++;
+                }
+            }
+            return value.Substring(0, index).ToLower() + value.Substring(index);
         }
         private string FormatSPParam(SPParamColumnInfo col)
         {
@@ -136,5 +155,6 @@ namespace hwj.MarkTableObject.Entity
             else
                 return TypeCode.Int32;
         }
+        #endregion
     }
 }

@@ -102,6 +102,12 @@ namespace hwj.MarkTableObject.Entity
         public string DefaultValue { get; set; }
         public string DataTypeName { get; set; }
         public string Description { get; set; }
+        public bool Selected { get; set; }
+
+        public ColumnInfo()
+        {
+            Selected = true;
+        }
     }
 
     public class ColumnInfos : List<ColumnInfo>
