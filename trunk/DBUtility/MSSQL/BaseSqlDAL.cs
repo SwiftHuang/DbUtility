@@ -38,8 +38,9 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
-            return GetEntity(SqlEntity.CommandText, SqlEntity.Parameters);
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+            return GetEntity(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
         }
         public T GetEntity(string sql, List<SqlParameter> parameters)
         {
@@ -80,8 +81,9 @@ namespace hwj.DBUtility.MSSQL
         }
         public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            return GetList(SqlEntity.CommandText, SqlEntity.Parameters);
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+            return GetList(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
         }
         public TS GetList(string sql, List<SqlParameter> parameters)
         {

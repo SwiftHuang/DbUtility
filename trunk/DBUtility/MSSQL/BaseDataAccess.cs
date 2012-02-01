@@ -21,6 +21,9 @@ namespace hwj.DBUtility.MSSQL
             }
         }
         protected SqlEntity _SqlEntity = null;
+        /// <summary>
+        /// 显示执行的Sql实体
+        /// </summary>
         public SqlEntity SqlEntity
         {
             get { return _SqlEntity; }
