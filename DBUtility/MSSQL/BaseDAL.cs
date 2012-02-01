@@ -58,8 +58,9 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                _SqlEntity = AddSqlEntity(entity);
-                return ExecuteSql(_SqlEntity.CommandText, _SqlEntity.Parameters) > 0;
+                SqlEntity tmpSqlEty = AddSqlEntity(entity);
+                _SqlEntity = tmpSqlEty;
+                return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }
             catch (Exception ex)
             {
@@ -83,8 +84,9 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                _SqlEntity = AddSqlEntity(entity);
-                object obj = ExecuteScalar(string.Format("{0}SELECT SCOPE_IDENTITY() as 'SCOPE_IDENTITY()';", _SqlEntity.CommandText), _SqlEntity.Parameters);
+                SqlEntity tmpSqlEty = AddSqlEntity(entity);
+                _SqlEntity = tmpSqlEty;
+                object obj = ExecuteScalar(string.Format("{0}SELECT SCOPE_IDENTITY() as 'SCOPE_IDENTITY()';", tmpSqlEty.CommandText), tmpSqlEty.Parameters);
                 if (obj is decimal)
                 {
                     return (decimal)obj;
@@ -180,8 +182,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
-            _SqlEntity = UpdateSqlEntity(updateParam, filterParam);
-            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+            //_SqlEntity = UpdateSqlEntity(updateParam, filterParam);
+            SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
+            _SqlEntity = tmpSqlEty;
+            return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
         }
         /// <summary>
         /// 执行数据更新
@@ -193,8 +197,10 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                _SqlEntity = UpdateSqlEntity(entity, filterParam);
-                return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+                //_SqlEntity = UpdateSqlEntity(entity, filterParam);
+                SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
+                _SqlEntity = tmpSqlEty;
+                return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }
             catch (Exception ex)
             {
@@ -240,8 +246,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool Delete(FilterParams filterParam)
         {
-            _SqlEntity = DeleteSqlEntity(filterParam);
-            return ExecuteSql(SqlEntity.CommandText, SqlEntity.Parameters) > 0;
+            //_SqlEntity = DeleteSqlEntity(filterParam);
+            SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
+            _SqlEntity = tmpSqlEty;
+            return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
         }
 
         /// <summary>
@@ -326,8 +334,11 @@ namespace hwj.DBUtility.MSSQL
         }
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
-            return GetEntity(SqlEntity.CommandText, SqlEntity.Parameters);
+            //_SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+
+            return GetEntity(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
         }
         public T GetEntity(string sql, List<SqlParameter> parameters)
         {
@@ -372,8 +383,10 @@ namespace hwj.DBUtility.MSSQL
         }
         public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return GetList(SqlEntity.CommandText, SqlEntity.Parameters);
+            //_SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+            return GetList(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
         }
         public TS GetList(string sql, List<SqlParameter> parameters)
         {
@@ -446,13 +459,15 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
-            _SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            //_SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            _SqlEntity = tmpSqlEty;
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters, times);
+                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty.CommandText, tmpSqlEty.Parameters, times);
                 SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -512,12 +527,15 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
-            _SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            //_SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            _SqlEntity = tmpSqlEty;
+
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, _SqlEntity.CommandText, _SqlEntity.Parameters, timeout);
+                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty.CommandText, tmpSqlEty.Parameters, timeout);
                 SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -565,8 +583,10 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>记录数</returns>
         public int RecordCount(FilterParams filterParam)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
-            return Convert.ToInt32(ExecuteScalar(SqlEntity.CommandText, SqlEntity.Parameters));
+            //_SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+            return Convert.ToInt32(ExecuteScalar(tmpSqlEty.CommandText, tmpSqlEty.Parameters));
         }
         /// <summary>
         /// 返回表的记录数
@@ -613,8 +633,9 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            _SqlEntity = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return GetDataTable(_SqlEntity.CommandText, _SqlEntity.Parameters, tableName);
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            _SqlEntity = tmpSqlEty;
+            return GetDataTable(tmpSqlEty.CommandText, tmpSqlEty.Parameters, tableName);
         }
 
         /// <summary>
