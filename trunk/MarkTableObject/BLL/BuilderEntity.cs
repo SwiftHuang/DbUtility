@@ -88,7 +88,7 @@ namespace hwj.MarkTableObject.BLL
                     strclass.AppendLine(3, "/// <summary>");
                     strclass.AppendLine(3, "///" + c.BaseSchemaName);
                     strclass.AppendLine(3, "/// </summary>");
-                    strclass.AppendLine(3, c.ColumnName + ",");
+                    strclass.AppendLine(3, c.ColumnName.Trim().Replace(' ', '_') + ",");
                 }
                 tmpColumnName = c.ColumnName;
             }
@@ -114,7 +114,7 @@ namespace hwj.MarkTableObject.BLL
             {
                 if (tmpColumnName != c.ColumnName)
                 {
-                    string columnName = c.ColumnName;
+                    string columnName = c.ColumnName.Trim().Replace(' ', '_');
                     string columnType = c.DataType;
                     bool IsIdentity = c.IsAutoIncrement;
                     bool ispk = c.IsKey;
@@ -145,9 +145,9 @@ namespace hwj.MarkTableObject.BLL
                     if (cisnull)
                         _sUnNull = string.Empty;
                     if (IsIdentity)
-                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, columnName, GetTypeCode(c), GetSize(c), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, c.ColumnName, GetTypeCode(c), GetSize(c), _sUnNull));
                     else
-                        strclass2.AppendLine(2, string.Format(sFieldFormat, columnName, GetTypeCode(c), GetSize(c), _sUnNull));
+                        strclass2.AppendLine(2, string.Format(sFieldFormat, c.ColumnName, GetTypeCode(c), GetSize(c), _sUnNull));
                     strclass2.AppendLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                     strclass2.AppendLine(2, "{");
                     if (entity.Module == DBModule.Table)

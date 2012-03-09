@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtEntityNameSpace = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblEntityFileName = new System.Windows.Forms.Label();
+            this.lblEntityFileName = new System.Windows.Forms.LinkLabel();
             this.label10 = new System.Windows.Forms.Label();
             this.txtEntityPrefixChar = new System.Windows.Forms.TextBox();
             this.chkEntity = new System.Windows.Forms.CheckBox();
@@ -43,7 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtDALNameSpace = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblDALFileName = new System.Windows.Forms.Label();
+            this.lblDALFileName = new System.Windows.Forms.LinkLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.txtDALPrefixChar = new System.Windows.Forms.TextBox();
             this.chkBLL = new System.Windows.Forms.CheckBox();
@@ -52,7 +52,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtBLLNameSpace = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblBLLFileName = new System.Windows.Forms.Label();
+            this.lblBLLFileName = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtBLLPrefixChar = new System.Windows.Forms.TextBox();
@@ -69,6 +69,9 @@
             this.btnCancel = new hwj.UserControls.CommonControls.xButton();
             this.btnPre = new hwj.UserControls.CommonControls.xButton();
             this.btnGeneral = new hwj.UserControls.CommonControls.xButton();
+            this.cboTemplateType = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label18 = new System.Windows.Forms.Label();
             this.gpEntity.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gpDAL.SuspendLayout();
@@ -76,12 +79,13 @@
             this.gpBLL.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpEntity
             // 
             this.gpEntity.Controls.Add(this.tableLayoutPanel1);
-            this.gpEntity.Location = new System.Drawing.Point(12, 263);
+            this.gpEntity.Location = new System.Drawing.Point(12, 295);
             this.gpEntity.Name = "gpEntity";
             this.gpEntity.Size = new System.Drawing.Size(675, 77);
             this.gpEntity.TabIndex = 1;
@@ -148,8 +152,9 @@
             this.lblEntityFileName.Name = "lblEntityFileName";
             this.lblEntityFileName.Size = new System.Drawing.Size(586, 12);
             this.lblEntityFileName.TabIndex = 0;
+            this.lblEntityFileName.TabStop = true;
             this.lblEntityFileName.Text = "--";
-            this.lblEntityFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
+            this.lblEntityFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label10
             // 
@@ -174,7 +179,7 @@
             this.chkEntity.AutoSize = true;
             this.chkEntity.Checked = true;
             this.chkEntity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEntity.Location = new System.Drawing.Point(8, 261);
+            this.chkEntity.Location = new System.Drawing.Point(8, 293);
             this.chkEntity.Name = "chkEntity";
             this.chkEntity.Size = new System.Drawing.Size(72, 16);
             this.chkEntity.TabIndex = 2;
@@ -186,7 +191,7 @@
             this.chkDAL.AutoSize = true;
             this.chkDAL.Checked = true;
             this.chkDAL.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDAL.Location = new System.Drawing.Point(8, 175);
+            this.chkDAL.Location = new System.Drawing.Point(8, 207);
             this.chkDAL.Name = "chkDAL";
             this.chkDAL.Size = new System.Drawing.Size(84, 16);
             this.chkDAL.TabIndex = 4;
@@ -196,7 +201,7 @@
             // gpDAL
             // 
             this.gpDAL.Controls.Add(this.tableLayoutPanel2);
-            this.gpDAL.Location = new System.Drawing.Point(12, 177);
+            this.gpDAL.Location = new System.Drawing.Point(12, 209);
             this.gpDAL.Name = "gpDAL";
             this.gpDAL.Size = new System.Drawing.Size(675, 77);
             this.gpDAL.TabIndex = 3;
@@ -263,8 +268,9 @@
             this.lblDALFileName.Name = "lblDALFileName";
             this.lblDALFileName.Size = new System.Drawing.Size(586, 12);
             this.lblDALFileName.TabIndex = 0;
+            this.lblDALFileName.TabStop = true;
             this.lblDALFileName.Text = "--";
-            this.lblDALFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
+            this.lblDALFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label5
             // 
@@ -289,7 +295,7 @@
             this.chkBLL.AutoSize = true;
             this.chkBLL.Checked = true;
             this.chkBLL.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBLL.Location = new System.Drawing.Point(8, 7);
+            this.chkBLL.Location = new System.Drawing.Point(8, 39);
             this.chkBLL.Name = "chkBLL";
             this.chkBLL.Size = new System.Drawing.Size(84, 16);
             this.chkBLL.TabIndex = 6;
@@ -299,7 +305,7 @@
             // gpBLL
             // 
             this.gpBLL.Controls.Add(this.tableLayoutPanel3);
-            this.gpBLL.Location = new System.Drawing.Point(12, 9);
+            this.gpBLL.Location = new System.Drawing.Point(12, 41);
             this.gpBLL.Name = "gpBLL";
             this.gpBLL.Size = new System.Drawing.Size(675, 159);
             this.gpBLL.TabIndex = 5;
@@ -372,8 +378,9 @@
             this.lblBLLFileName.Name = "lblBLLFileName";
             this.lblBLLFileName.Size = new System.Drawing.Size(586, 12);
             this.lblBLLFileName.TabIndex = 0;
+            this.lblBLLFileName.TabStop = true;
             this.lblBLLFileName.Text = "--";
-            this.lblBLLFileName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblBLLFileName_MouseDoubleClick);
+            this.lblBLLFileName.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label8
             // 
@@ -540,8 +547,9 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnCancel.Location = new System.Drawing.Point(612, 346);
+            this.btnCancel.Location = new System.Drawing.Point(612, 378);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -551,8 +559,9 @@
             // 
             // btnPre
             // 
+            this.btnPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPre.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnPre.Location = new System.Drawing.Point(450, 346);
+            this.btnPre.Location = new System.Drawing.Point(450, 378);
             this.btnPre.Name = "btnPre";
             this.btnPre.Size = new System.Drawing.Size(75, 23);
             this.btnPre.TabIndex = 0;
@@ -562,8 +571,9 @@
             // 
             // btnGeneral
             // 
+            this.btnGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGeneral.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGeneral.Location = new System.Drawing.Point(531, 346);
+            this.btnGeneral.Location = new System.Drawing.Point(531, 378);
             this.btnGeneral.Name = "btnGeneral";
             this.btnGeneral.Size = new System.Drawing.Size(75, 23);
             this.btnGeneral.TabIndex = 0;
@@ -571,11 +581,51 @@
             this.btnGeneral.UseVisualStyleBackColor = true;
             this.btnGeneral.Click += new System.EventHandler(this.btnGeneral_Click);
             // 
+            // cboTemplateType
+            // 
+            this.cboTemplateType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTemplateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTemplateType.FormattingEnabled = true;
+            this.cboTemplateType.Items.AddRange(new object[] {
+            "一层DataAccess模板（实例化）（推荐）",
+            "旧有两层模板（静态方法）"});
+            this.cboTemplateType.Location = new System.Drawing.Point(80, 4);
+            this.cboTemplateType.Name = "cboTemplateType";
+            this.cboTemplateType.Size = new System.Drawing.Size(586, 20);
+            this.cboTemplateType.TabIndex = 7;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.cboTemplateType, 1, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(15, 7);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(669, 28);
+            this.tableLayoutPanel5.TabIndex = 8;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 12);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "项目模板:";
+            // 
             // GeneralFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 373);
+            this.ClientSize = new System.Drawing.Size(699, 409);
+            this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.chkBLL);
             this.Controls.Add(this.gpBLL);
             this.Controls.Add(this.chkDAL);
@@ -600,6 +650,8 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,7 +664,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtEntityNameSpace;
-        private System.Windows.Forms.Label lblEntityFileName;
+        private System.Windows.Forms.LinkLabel lblEntityFileName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkEntity;
         private System.Windows.Forms.CheckBox chkDAL;
@@ -621,14 +673,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDALNameSpace;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblDALFileName;
+        private System.Windows.Forms.LinkLabel lblDALFileName;
         private System.Windows.Forms.CheckBox chkBLL;
         private System.Windows.Forms.GroupBox gpBLL;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtBLLNameSpace;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblBLLFileName;
+        private System.Windows.Forms.LinkLabel lblBLLFileName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label5;
@@ -648,5 +700,8 @@
         private System.Windows.Forms.TextBox txtBLLConnection;
         private hwj.UserControls.CommonControls.xButton btnCancel;
         private hwj.UserControls.CommonControls.xButton btnPre;
+        private System.Windows.Forms.ComboBox cboTemplateType;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Label label18;
     }
 }

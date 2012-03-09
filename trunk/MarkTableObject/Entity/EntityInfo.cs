@@ -62,6 +62,7 @@ namespace hwj.MarkTableObject.Entity
 
                     foreach (ColumnInfo c in ColumnInfoList)
                     {
+                        c.ColumnParamName = FormatParam(c.ColumnName);
                         if (c.IsKey)
                         {
                             PKColumnInfoList.Add(c);

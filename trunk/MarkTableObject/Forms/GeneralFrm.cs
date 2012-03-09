@@ -22,12 +22,6 @@ namespace hwj.MarkTableObject.Forms
             ViewList = new List<string>();
         }
 
-
-        public void SetSelctFrm(SelectObjFrm frm)
-        {
-            SelObjFrm = frm;
-        }
-
         private void GeneralFrm_Load(object sender, EventArgs e)
         {
             if (ProjectInfo != null)
@@ -46,6 +40,7 @@ namespace hwj.MarkTableObject.Forms
                 txtEntityNameSpace.Text = ProjectInfo.EntityNamespace;
                 lblEntityFileName.Text = ProjectInfo.EntityPath;
                 txtEntityPrefixChar.Text = ProjectInfo.EntityPrefixChar;
+                cboTemplateType.SelectedIndex = ProjectInfo.Template == TemplateType.DataAccess ? 0 : 1;
             }
             else
             {
@@ -54,20 +49,9 @@ namespace hwj.MarkTableObject.Forms
             }
         }
 
-        private void btnGeneral_Click(object sender, EventArgs e)
+        public void SetSelctFrm(SelectObjFrm frm)
         {
-            UpdateProjectInfo();
-            foreach (string s in TableList)
-            {
-                if (chkEntity.Checked)
-                    BLL.BuilderEntity.CreateTableFile(ProjectInfo, s);
-                if (chkDAL.Checked)
-                    BLL.BuilderDAL.CreateTableFile(ProjectInfo, s);
-                if (chkBLL.Checked)
-                    BLL.BuilderBLL.CreateTableFile(ProjectInfo, s,
-                        chkExists.Checked, chkAdd.Checked, chkUpdate.Checked, chkDelete.Checked, chkEntity.Checked, chkGetPage.Checked, chkGetList.Checked, chkGetAllList.Checked);
-            }
-            Common.MsgInfo("操作完成");
+            SelObjFrm = frm;
         }
         private void UpdateProjectInfo()
         {
@@ -78,26 +62,56 @@ namespace hwj.MarkTableObject.Forms
             ProjectInfo.DataAccessPrefixChar = txtDALPrefixChar.Text.Trim();
             ProjectInfo.EntityNamespace = txtEntityNameSpace.Text.Trim();
             ProjectInfo.EntityPrefixChar = txtEntityPrefixChar.Text.Trim();
+            ProjectInfo.Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business;
             ProjectInfo.SaveXML();
         }
 
+        private void btnGeneral_Click(object sender, EventArgs e)
+        {
+            UpdateProjectInfo();
+
+            GeneralMethodInfo methodInfo = new GeneralMethodInfo();
+            methodInfo.Exists = chkExists.Checked;
+            methodInfo.Add = chkAdd.Checked;
+            methodInfo.Update = chkUpdate.Checked;
+            methodInfo.Delete = chkDelete.Checked;
+            methodInfo.GetEntity = chkEntity.Checked;
+            methodInfo.Page = chkGetPage.Checked;
+            methodInfo.List = chkGetList.Checked;
+            methodInfo.AllList = chkGetAllList.Checked;
+
+            foreach (string s in TableList)
+            {
+                if (chkEntity.Checked)
+                {
+                    BLL.BuilderEntity.CreateTableFile(ProjectInfo, s);
+                }
+                if (chkDAL.Checked)
+                {
+                    BLL.BuilderDAL.CreateTableFile(ProjectInfo, s, methodInfo);
+                }
+                if (chkBLL.Checked)
+                {
+                    BLL.BuilderBLL.CreateTableFile(ProjectInfo, s, methodInfo);
+                }
+            }
+            Common.MsgInfo("操作完成");
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btnPre_Click(object sender, EventArgs e)
         {
             if (SelObjFrm != null)
                 SelObjFrm.Show();
         }
-
-        private void lblBLLFileName_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void lblBLLFileName_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Cursor = Cursors.AppStarting;
             try
             {
-                Label lbl = sender as Label;
+                LinkLabel lbl = sender as LinkLabel;
                 if (lbl != null)
                 {
                     Common.OpenPath(lbl.Text);

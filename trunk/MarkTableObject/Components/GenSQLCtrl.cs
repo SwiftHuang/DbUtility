@@ -150,6 +150,14 @@ namespace hwj.MarkTableObject.Components
                 if (colList != null)
                 {
                     PrjInfo.EntityPrefixChar = string.Empty;
+                    if (cboTemplateType.SelectedIndex == 1)
+                    {
+                        PrjInfo.Template = TemplateType.Business;
+                    }
+                    else
+                    {
+                        PrjInfo.Template = TemplateType.DataAccess;
+                    }
                     BLLInfo inf = new BLLInfo(PrjInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
                     inf.EntityInfo.SPParamInfos = EntyInfo.SPParamInfos;
                     inf.EntityInfo.SPParamString = EntyInfo.SPParamString;
@@ -157,9 +165,37 @@ namespace hwj.MarkTableObject.Components
 
                     txtEntityCode.Text = BLL.BuilderEntity.CreatEntity(inf.EntityInfo);
 
-                    txtBLLCode.Text = BLL.BuilderBLL.CreateBLLCode(inf, DBModule.SQL, false, false, false, false, true, Module == DBModule.SQL, true, false);
+                    GeneralMethodInfo methodInfo = new GeneralMethodInfo();
+                    methodInfo.Exists = false;
+                    methodInfo.Add = false;
+                    methodInfo.Update = false;
+                    methodInfo.Delete = false;
+                    methodInfo.GetEntity = true;
+                    methodInfo.Page = Module == DBModule.SQL;
+                    methodInfo.List = true;
+                    methodInfo.AllList = false;
 
-                    txtDALCode.Text = BLL.BuilderDAL.CreateDALCode(inf.DALInfo);
+                    if (PrjInfo.Template == TemplateType.Business)
+                    {
+                        txtBLLCode.Text = BLL.BuilderBLL.CreateBLLCode(inf, DBModule.SQL, methodInfo);
+                    }
+                    else
+                    {
+                        if (Module == DBModule.Table)
+                        {
+                            methodInfo.Exists = true;
+                            methodInfo.Add = true;
+                            methodInfo.Update = true;
+                            methodInfo.Delete = true;
+                            methodInfo.GetEntity = true;
+                            methodInfo.Page = true;
+                            methodInfo.List = true;
+                            methodInfo.AllList = true;
+                        }
+
+                        txtBLLCode.Clear();
+                    }
+                    txtDALCode.Text = BLL.BuilderDAL.CreateDALCode(inf.DALInfo, PrjInfo.Template, methodInfo);
 
                     tabGen.SelectedTab = tpEntity;
                 }
@@ -169,22 +205,18 @@ namespace hwj.MarkTableObject.Components
                 Common.MsgError(ex.Message, ex);
             }
         }
-
         private void btnGenFile_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnEntityCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtEntityCode.Text);
         }
-
         private void btnDALCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtDALCode.Text);
         }
-
         private void btnBLLCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtBLLCode.Text);

@@ -10,7 +10,10 @@ namespace hwj.MarkTableObject.Entity
         /// 列的名称；它可能不唯一。如果无法确定该名称，则返回 null 值。此名称始终反映最近对当前视图或命令文本中的列进行的重命名。
         /// </summary>
         public string ColumnName { get; set; }
-
+        /// <summary>
+        /// 列的参数名称。
+        /// </summary>
+        public string ColumnParamName { get; set; }
         /// <summary>
         ///  列的序号。它对于行的书签列（如果有的话）为零。其他列从一开始编号。该列不能包含 null 值。
         /// </summary>
