@@ -19,7 +19,17 @@ namespace hwj.MarkTableObject
         SQL,
         SP,
     }
-
+    public enum TemplateType
+    {
+        /// <summary>
+        /// 旧有两层模板（静态方法）。
+        /// </summary>
+        Business,
+        /// <summary>
+        /// 一层DataAccess模板（实例化）（推荐）。
+        /// </summary>
+        DataAccess,
+    }
     public class Common
     {
         public static string MainPath = string.Empty;
@@ -86,6 +96,31 @@ namespace hwj.MarkTableObject
         public static void MsgWarn(string text)
         {
             MessageBox.Show(text, Properties.Resources.MsgWarn, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+
+    public class GeneralMethodInfo
+    {
+        //bool Exists, bool Add, bool Update, bool Delete, bool GetEntity, bool Page, bool List, bool AllList
+        public bool Exists { get; set; }
+        public bool Add { get; set; }
+        public bool Update { get; set; }
+        public bool Delete { get; set; }
+        public bool GetEntity { get; set; }
+        public bool Page { get; set; }
+        public bool List { get; set; }
+        public bool AllList { get; set; }
+
+        public GeneralMethodInfo()
+        {
+            Exists = false;
+            Add = false;
+            Update = false;
+            Delete = false;
+            GetEntity = false;
+            Page = false;
+            List = false;
+            AllList = false;
         }
     }
 }

@@ -61,6 +61,7 @@ namespace hwj.MarkTableObject.Forms
                 prj.EntityPath = txtEntityPath.Text.Trim();
                 prj.EntityPrefixChar = txtEntityPrefixChar.Text.Trim();
                 prj.Database = Project.Database;
+                prj.Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business;
                 //prj.Database.ConnectionString = txtConnStr.Text.Trim();
                 //prj.Database.DatabaseType = ConnectionDataSource;
                 //prj.Database.ServerVersion = lblDataSource.Text;
@@ -166,6 +167,8 @@ namespace hwj.MarkTableObject.Forms
                     lblDataSource.Text = Project.Database.ServerVersion;
                     ConnectionDataSource = Project.Database.DatabaseType;
                 }
+                cboTemplateType.SelectedIndex = Project.Template == TemplateType.DataAccess ? 0 : 1;
+
             }
         }
         #endregion

@@ -34,12 +34,21 @@
             this.txtSQL = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgList = new hwj.UserControls.DataList.xDataGridView();
+            this.colSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDataTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBaseTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAllowDBNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsAutoIncrement = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabGen = new System.Windows.Forms.TabControl();
             this.tpMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnGenSql = new hwj.UserControls.CommonControls.xButton();
             this.btnGenFile = new hwj.UserControls.CommonControls.xButton();
-            this.btnPreview = new hwj.UserControls.CommonControls.xButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cboSQLType = new System.Windows.Forms.ComboBox();
@@ -52,33 +61,26 @@
             this.txtSPName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSPParam = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnPreview = new hwj.UserControls.CommonControls.xButton();
+            this.cboTemplateType = new System.Windows.Forms.ComboBox();
             this.tpEntity = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.txtEntityCode = new System.Windows.Forms.TextBox();
+            this.btnEntityCopy = new hwj.UserControls.CommonControls.xButton();
             this.tpDAL = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtDALCode = new System.Windows.Forms.TextBox();
+            this.btnDALCopy = new hwj.UserControls.CommonControls.xButton();
             this.tpBLL = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.txtBLLCode = new System.Windows.Forms.TextBox();
-            this.colSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colAllowDBNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsAutoIncrement = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnBLLCopy = new hwj.UserControls.CommonControls.xButton();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBaseTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnEntityCopy = new hwj.UserControls.CommonControls.xButton();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDALCopy = new hwj.UserControls.CommonControls.xButton();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBLLCopy = new hwj.UserControls.CommonControls.xButton();
             this.gpSQL.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgList)).BeginInit();
@@ -87,11 +89,12 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tblSP.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tpEntity.SuspendLayout();
-            this.tpDAL.SuspendLayout();
-            this.tpBLL.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tpDAL.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tpBLL.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +131,7 @@
             this.groupBox2.Controls.Add(this.dgList);
             this.groupBox2.Location = new System.Drawing.Point(3, 193);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(797, 311);
+            this.groupBox2.Size = new System.Drawing.Size(797, 310);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "表信息";
@@ -139,6 +142,7 @@
             this.dgList.AllowUserToDeleteRows = false;
             this.dgList.AllowUserToResizeRows = false;
             this.dgList.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgList.CellReadonlyBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.dgList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSelected,
@@ -160,10 +164,112 @@
             this.dgList.RowHeadersVisible = false;
             this.dgList.RowSeqVisible = true;
             this.dgList.RowTemplate.Height = 23;
-            this.dgList.Size = new System.Drawing.Size(791, 291);
+            this.dgList.Size = new System.Drawing.Size(791, 290);
             this.dgList.SumColumnName = ((System.Collections.Generic.List<string>)(resources.GetObject("dgList.SumColumnName")));
             this.dgList.TabIndex = 0;
             this.dgList.ValueIsChanged = false;
+            // 
+            // colSelected
+            // 
+            this.colSelected.DataPropertyName = "Selected";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "False";
+            this.colSelected.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colSelected.FalseValue = "False";
+            this.colSelected.FillWeight = 40F;
+            this.colSelected.Frozen = true;
+            this.colSelected.HeaderText = "选择";
+            this.colSelected.Name = "colSelected";
+            this.colSelected.TrueValue = "True";
+            this.colSelected.Visible = false;
+            this.colSelected.Width = 40;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "ColumnName";
+            this.colName.Frozen = true;
+            this.colName.HeaderText = "列名";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 120;
+            // 
+            // colKey
+            // 
+            this.colKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colKey.DataPropertyName = "IsKey";
+            this.colKey.Frozen = true;
+            this.colKey.HeaderText = "键值";
+            this.colKey.MinimumWidth = 55;
+            this.colKey.Name = "colKey";
+            this.colKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colKey.Width = 55;
+            // 
+            // colDataTypeName
+            // 
+            this.colDataTypeName.DataPropertyName = "DataTypeName";
+            this.colDataTypeName.Frozen = true;
+            this.colDataTypeName.HeaderText = "数据库类型";
+            this.colDataTypeName.Name = "colDataTypeName";
+            this.colDataTypeName.ReadOnly = true;
+            // 
+            // colBaseTableName
+            // 
+            this.colBaseTableName.DataPropertyName = "BaseTableName";
+            this.colBaseTableName.Frozen = true;
+            this.colBaseTableName.HeaderText = "表名";
+            this.colBaseTableName.Name = "colBaseTableName";
+            this.colBaseTableName.ReadOnly = true;
+            this.colBaseTableName.Width = 120;
+            // 
+            // colDataType
+            // 
+            this.colDataType.DataPropertyName = "DataType";
+            this.colDataType.HeaderText = "数据类型";
+            this.colDataType.Name = "colDataType";
+            this.colDataType.ReadOnly = true;
+            // 
+            // colAllowDBNull
+            // 
+            this.colAllowDBNull.DataPropertyName = "AllowDBNull";
+            this.colAllowDBNull.HeaderText = "为空";
+            this.colAllowDBNull.MinimumWidth = 55;
+            this.colAllowDBNull.Name = "colAllowDBNull";
+            this.colAllowDBNull.ReadOnly = true;
+            this.colAllowDBNull.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAllowDBNull.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colAllowDBNull.Width = 55;
+            // 
+            // colIsUnique
+            // 
+            this.colIsUnique.DataPropertyName = "IsUnique";
+            this.colIsUnique.HeaderText = "IsUnique";
+            this.colIsUnique.Name = "colIsUnique";
+            this.colIsUnique.ReadOnly = true;
+            this.colIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colIsUnique.Visible = false;
+            // 
+            // colIsAutoIncrement
+            // 
+            this.colIsAutoIncrement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colIsAutoIncrement.DataPropertyName = "IsAutoIncrement";
+            this.colIsAutoIncrement.HeaderText = "自增";
+            this.colIsAutoIncrement.MinimumWidth = 55;
+            this.colIsAutoIncrement.Name = "colIsAutoIncrement";
+            this.colIsAutoIncrement.ReadOnly = true;
+            this.colIsAutoIncrement.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsAutoIncrement.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colIsAutoIncrement.Width = 55;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.FillWeight = 120F;
+            this.colDescription.HeaderText = "描述";
+            this.colDescription.MinimumWidth = 120;
+            this.colDescription.Name = "colDescription";
             // 
             // tabGen
             // 
@@ -186,7 +292,7 @@
             this.tpMain.Location = new System.Drawing.Point(4, 4);
             this.tpMain.Name = "tpMain";
             this.tpMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMain.Size = new System.Drawing.Size(809, 543);
+            this.tpMain.Size = new System.Drawing.Size(809, 542);
             this.tpMain.TabIndex = 0;
             this.tpMain.Text = "生成代码";
             this.tpMain.UseVisualStyleBackColor = true;
@@ -199,10 +305,10 @@
             this.tableLayoutPanel1.Controls.Add(this.btnGenSql, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.gpSQL, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnGenFile, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnPreview, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tblSP, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -212,7 +318,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 537);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 536);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnGenSql
@@ -231,7 +337,7 @@
             // 
             this.btnGenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenFile.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGenFile.Location = new System.Drawing.Point(725, 511);
+            this.btnGenFile.Location = new System.Drawing.Point(725, 510);
             this.btnGenFile.Name = "btnGenFile";
             this.btnGenFile.Size = new System.Drawing.Size(75, 23);
             this.btnGenFile.TabIndex = 6;
@@ -239,18 +345,6 @@
             this.btnGenFile.UseVisualStyleBackColor = true;
             this.btnGenFile.Visible = false;
             this.btnGenFile.Click += new System.EventHandler(this.btnGenFile_Click);
-            // 
-            // btnPreview
-            // 
-            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnPreview.Location = new System.Drawing.Point(638, 511);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
-            this.btnPreview.TabIndex = 5;
-            this.btnPreview.Text = "代码预览";
-            this.btnPreview.UseVisualStyleBackColor = true;
-            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -400,15 +494,72 @@
             this.txtSPParam.Size = new System.Drawing.Size(332, 21);
             this.txtSPParam.TabIndex = 3;
             // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.Controls.Add(this.btnPreview, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.cboTemplateType, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 506);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(716, 30);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnPreview.Location = new System.Drawing.Point(638, 4);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.TabIndex = 1;
+            this.btnPreview.Text = "代码预览";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // cboTemplateType
+            // 
+            this.cboTemplateType.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cboTemplateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTemplateType.FormattingEnabled = true;
+            this.cboTemplateType.Items.AddRange(new object[] {
+            "一层DataAccess模板（实例化）（推荐）",
+            "旧有两层模板（静态方法）"});
+            this.cboTemplateType.Location = new System.Drawing.Point(335, 5);
+            this.cboTemplateType.Name = "cboTemplateType";
+            this.cboTemplateType.Size = new System.Drawing.Size(297, 20);
+            this.cboTemplateType.TabIndex = 0;
+            // 
             // tpEntity
             // 
             this.tpEntity.Controls.Add(this.tableLayoutPanel3);
             this.tpEntity.Location = new System.Drawing.Point(4, 4);
             this.tpEntity.Name = "tpEntity";
-            this.tpEntity.Size = new System.Drawing.Size(809, 543);
+            this.tpEntity.Size = new System.Drawing.Size(809, 542);
             this.tpEntity.TabIndex = 3;
             this.tpEntity.Text = "实体代码";
             this.tpEntity.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.txtEntityCode, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnEntityCopy, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(809, 542);
+            this.tableLayoutPanel3.TabIndex = 1;
             // 
             // txtEntityCode
             // 
@@ -420,19 +571,46 @@
             this.txtEntityCode.Multiline = true;
             this.txtEntityCode.Name = "txtEntityCode";
             this.txtEntityCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtEntityCode.Size = new System.Drawing.Size(803, 508);
+            this.txtEntityCode.Size = new System.Drawing.Size(803, 507);
             this.txtEntityCode.TabIndex = 0;
             this.txtEntityCode.WordWrap = false;
+            // 
+            // btnEntityCopy
+            // 
+            this.btnEntityCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnEntityCopy.Location = new System.Drawing.Point(731, 516);
+            this.btnEntityCopy.Name = "btnEntityCopy";
+            this.btnEntityCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnEntityCopy.TabIndex = 1;
+            this.btnEntityCopy.Text = "复 制";
+            this.btnEntityCopy.UseVisualStyleBackColor = true;
+            this.btnEntityCopy.Click += new System.EventHandler(this.btnEntityCopy_Click);
             // 
             // tpDAL
             // 
             this.tpDAL.Controls.Add(this.tableLayoutPanel4);
             this.tpDAL.Location = new System.Drawing.Point(4, 4);
             this.tpDAL.Name = "tpDAL";
-            this.tpDAL.Size = new System.Drawing.Size(809, 543);
+            this.tpDAL.Size = new System.Drawing.Size(809, 542);
             this.tpDAL.TabIndex = 2;
             this.tpDAL.Text = "数据层代码";
             this.tpDAL.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.txtDALCode, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnDALCopy, 1, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(809, 542);
+            this.tableLayoutPanel4.TabIndex = 2;
             // 
             // txtDALCode
             // 
@@ -444,19 +622,46 @@
             this.txtDALCode.Multiline = true;
             this.txtDALCode.Name = "txtDALCode";
             this.txtDALCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDALCode.Size = new System.Drawing.Size(803, 508);
+            this.txtDALCode.Size = new System.Drawing.Size(803, 507);
             this.txtDALCode.TabIndex = 1;
             this.txtDALCode.WordWrap = false;
+            // 
+            // btnDALCopy
+            // 
+            this.btnDALCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnDALCopy.Location = new System.Drawing.Point(731, 516);
+            this.btnDALCopy.Name = "btnDALCopy";
+            this.btnDALCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnDALCopy.TabIndex = 2;
+            this.btnDALCopy.Text = "复 制";
+            this.btnDALCopy.UseVisualStyleBackColor = true;
+            this.btnDALCopy.Click += new System.EventHandler(this.btnDALCopy_Click);
             // 
             // tpBLL
             // 
             this.tpBLL.Controls.Add(this.tableLayoutPanel5);
             this.tpBLL.Location = new System.Drawing.Point(4, 4);
             this.tpBLL.Name = "tpBLL";
-            this.tpBLL.Size = new System.Drawing.Size(809, 543);
+            this.tpBLL.Size = new System.Drawing.Size(809, 542);
             this.tpBLL.TabIndex = 1;
             this.tpBLL.Text = "逻辑层代码";
             this.tpBLL.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.Controls.Add(this.txtBLLCode, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnBLLCopy, 1, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(809, 542);
+            this.tableLayoutPanel5.TabIndex = 2;
             // 
             // txtBLLCode
             // 
@@ -468,69 +673,20 @@
             this.txtBLLCode.Multiline = true;
             this.txtBLLCode.Name = "txtBLLCode";
             this.txtBLLCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBLLCode.Size = new System.Drawing.Size(803, 508);
+            this.txtBLLCode.Size = new System.Drawing.Size(803, 507);
             this.txtBLLCode.TabIndex = 1;
             this.txtBLLCode.WordWrap = false;
             // 
-            // colSelected
+            // btnBLLCopy
             // 
-            this.colSelected.DataPropertyName = "Selected";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "False";
-            this.colSelected.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colSelected.FalseValue = "False";
-            this.colSelected.FillWeight = 40F;
-            this.colSelected.Frozen = true;
-            this.colSelected.HeaderText = "选择";
-            this.colSelected.Name = "colSelected";
-            this.colSelected.TrueValue = "True";
-            this.colSelected.Visible = false;
-            this.colSelected.Width = 40;
-            // 
-            // colKey
-            // 
-            this.colKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colKey.DataPropertyName = "IsKey";
-            this.colKey.Frozen = true;
-            this.colKey.HeaderText = "键值";
-            this.colKey.MinimumWidth = 55;
-            this.colKey.Name = "colKey";
-            this.colKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colKey.Width = 55;
-            // 
-            // colAllowDBNull
-            // 
-            this.colAllowDBNull.DataPropertyName = "AllowDBNull";
-            this.colAllowDBNull.HeaderText = "为空";
-            this.colAllowDBNull.MinimumWidth = 55;
-            this.colAllowDBNull.Name = "colAllowDBNull";
-            this.colAllowDBNull.ReadOnly = true;
-            this.colAllowDBNull.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAllowDBNull.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colAllowDBNull.Width = 55;
-            // 
-            // colIsUnique
-            // 
-            this.colIsUnique.DataPropertyName = "IsUnique";
-            this.colIsUnique.HeaderText = "IsUnique";
-            this.colIsUnique.Name = "colIsUnique";
-            this.colIsUnique.ReadOnly = true;
-            this.colIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsUnique.Visible = false;
-            // 
-            // colIsAutoIncrement
-            // 
-            this.colIsAutoIncrement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colIsAutoIncrement.DataPropertyName = "IsAutoIncrement";
-            this.colIsAutoIncrement.HeaderText = "自增";
-            this.colIsAutoIncrement.MinimumWidth = 55;
-            this.colIsAutoIncrement.Name = "colIsAutoIncrement";
-            this.colIsAutoIncrement.ReadOnly = true;
-            this.colIsAutoIncrement.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsAutoIncrement.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsAutoIncrement.Width = 55;
+            this.btnBLLCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnBLLCopy.Location = new System.Drawing.Point(731, 516);
+            this.btnBLLCopy.Name = "btnBLLCopy";
+            this.btnBLLCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnBLLCopy.TabIndex = 2;
+            this.btnBLLCopy.Text = "复 制";
+            this.btnBLLCopy.UseVisualStyleBackColor = true;
+            this.btnBLLCopy.Click += new System.EventHandler(this.btnBLLCopy_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -574,129 +730,6 @@
             this.dataGridViewTextBoxColumn5.MinimumWidth = 120;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "ColumnName";
-            this.colName.Frozen = true;
-            this.colName.HeaderText = "列名";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 120;
-            // 
-            // colDataTypeName
-            // 
-            this.colDataTypeName.DataPropertyName = "DataTypeName";
-            this.colDataTypeName.Frozen = true;
-            this.colDataTypeName.HeaderText = "数据库类型";
-            this.colDataTypeName.Name = "colDataTypeName";
-            this.colDataTypeName.ReadOnly = true;
-            // 
-            // colBaseTableName
-            // 
-            this.colBaseTableName.DataPropertyName = "BaseTableName";
-            this.colBaseTableName.Frozen = true;
-            this.colBaseTableName.HeaderText = "表名";
-            this.colBaseTableName.Name = "colBaseTableName";
-            this.colBaseTableName.ReadOnly = true;
-            this.colBaseTableName.Width = 120;
-            // 
-            // colDataType
-            // 
-            this.colDataType.DataPropertyName = "DataType";
-            this.colDataType.HeaderText = "数据类型";
-            this.colDataType.Name = "colDataType";
-            this.colDataType.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "Description";
-            this.colDescription.FillWeight = 120F;
-            this.colDescription.HeaderText = "描述";
-            this.colDescription.MinimumWidth = 120;
-            this.colDescription.Name = "colDescription";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.Controls.Add(this.txtEntityCode, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnEntityCopy, 1, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(809, 543);
-            this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // btnEntityCopy
-            // 
-            this.btnEntityCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnEntityCopy.Location = new System.Drawing.Point(731, 517);
-            this.btnEntityCopy.Name = "btnEntityCopy";
-            this.btnEntityCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnEntityCopy.TabIndex = 1;
-            this.btnEntityCopy.Text = "复 制";
-            this.btnEntityCopy.UseVisualStyleBackColor = true;
-            this.btnEntityCopy.Click += new System.EventHandler(this.btnEntityCopy_Click);
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(this.txtDALCode, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btnDALCopy, 1, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(809, 543);
-            this.tableLayoutPanel4.TabIndex = 2;
-            // 
-            // btnDALCopy
-            // 
-            this.btnDALCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnDALCopy.Location = new System.Drawing.Point(731, 517);
-            this.btnDALCopy.Name = "btnDALCopy";
-            this.btnDALCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnDALCopy.TabIndex = 2;
-            this.btnDALCopy.Text = "复 制";
-            this.btnDALCopy.UseVisualStyleBackColor = true;
-            this.btnDALCopy.Click += new System.EventHandler(this.btnDALCopy_Click);
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.Controls.Add(this.txtBLLCode, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnBLLCopy, 1, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(809, 543);
-            this.tableLayoutPanel5.TabIndex = 2;
-            // 
-            // btnBLLCopy
-            // 
-            this.btnBLLCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnBLLCopy.Location = new System.Drawing.Point(731, 517);
-            this.btnBLLCopy.Name = "btnBLLCopy";
-            this.btnBLLCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnBLLCopy.TabIndex = 2;
-            this.btnBLLCopy.Text = "复 制";
-            this.btnBLLCopy.UseVisualStyleBackColor = true;
-            this.btnBLLCopy.Click += new System.EventHandler(this.btnBLLCopy_Click);
-            // 
             // GenSQLCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -716,13 +749,14 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tblSP.ResumeLayout(false);
             this.tblSP.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.tpEntity.ResumeLayout(false);
-            this.tpDAL.ResumeLayout(false);
-            this.tpBLL.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tpDAL.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tpBLL.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
@@ -780,5 +814,7 @@
         private hwj.UserControls.CommonControls.xButton btnDALCopy;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private hwj.UserControls.CommonControls.xButton btnBLLCopy;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.ComboBox cboTemplateType;
     }
 }
