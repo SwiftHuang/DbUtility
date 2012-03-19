@@ -104,7 +104,7 @@ namespace hwj.MarkTableObject.Entity
         #region Private Function
         private string FormatParam(ColumnInfo col)
         {
-            string strType = col.DataType.Replace("System.", "");
+            string strType = col.DataType.Replace("System.", "").Replace("[]", "");
             if (strType == "Int32")
             {
                 strType = "int";

@@ -97,6 +97,13 @@ namespace hwj.MarkTableObject
         {
             MessageBox.Show(text, Properties.Resources.MsgWarn, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
+        public static void InitTemplateCombox(System.Windows.Forms.ComboBox control)
+        {
+            control.Items.Add("DataAccess模板（实例化）（推荐）");
+            control.Items.Add("旧有两层模板（静态方法）");
+            control.SelectedIndex = 0;
+        }
     }
 
     public class GeneralMethodInfo

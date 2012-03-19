@@ -586,13 +586,11 @@
             this.cboTemplateType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cboTemplateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTemplateType.FormattingEnabled = true;
-            this.cboTemplateType.Items.AddRange(new object[] {
-            "一层DataAccess模板（实例化）（推荐）",
-            "旧有两层模板（静态方法）"});
             this.cboTemplateType.Location = new System.Drawing.Point(80, 4);
             this.cboTemplateType.Name = "cboTemplateType";
             this.cboTemplateType.Size = new System.Drawing.Size(586, 20);
             this.cboTemplateType.TabIndex = 7;
+            this.cboTemplateType.SelectedIndexChanged += new System.EventHandler(this.cboTemplateType_SelectedIndexChanged);
             // 
             // tableLayoutPanel5
             // 

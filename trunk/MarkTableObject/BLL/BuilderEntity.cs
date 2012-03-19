@@ -12,6 +12,7 @@ namespace hwj.MarkTableObject.BLL
 {
     public class BuilderEntity
     {
+        #region Public
         public static void CreateTableFile(ProjectInfo projectInfo, string tableName)
         {
             EntityInfo e = new EntityInfo(projectInfo, DBModule.Table, tableName);
@@ -60,12 +61,17 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine(1, "[Serializable]");
             strclass.AppendLine(1, "public class " + entity.EntityName + "s : BaseList<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
             if (entity.Module != DBModule.SP)
+            {
                 strclass.AppendLine(1, "public class " + entity.EntityName + "Page : PageResult<" + entity.EntityName + ", " + entity.EntityName + "s> { }");
+            }
             strclass.AppendLine("}");
             strclass.AppendLine("");
 
             return strclass.ToString();
         }
+        #endregion
+
+        #region Private
         private static string CreatTableName(string modelName)
         {
             //if (modelName.IndexOf("tb") != -1)
@@ -143,17 +149,27 @@ namespace hwj.MarkTableObject.BLL
                     strclass2.AppendLine(2, "/// </summary>");
                     string _sUnNull = sUnNull;
                     if (cisnull)
+                    {
                         _sUnNull = string.Empty;
+                    }
                     if (IsIdentity)
+                    {
                         strclass2.AppendLine(2, string.Format(sFieldFormat_isPK, c.ColumnName, GetTypeCode(c), GetSize(c), _sUnNull));
+                    }
                     else
+                    {
                         strclass2.AppendLine(2, string.Format(sFieldFormat, c.ColumnName, GetTypeCode(c), GetSize(c), _sUnNull));
+                    }
                     strclass2.AppendLine(2, "public " + SetFirstUpper(columnType) + isnull + " " + columnName);//属性
                     strclass2.AppendLine(2, "{");
                     if (entity.Module == DBModule.Table)
+                    {
                         strclass2.AppendLine(3, "set { AddAssigned(\"" + columnName + "\");" + " _" + columnName.ToLower() + " = value; }");
+                    }
                     else
+                    {
                         strclass2.AppendLine(3, "set { _" + columnName.ToLower() + " = value; }");
+                    }
                     strclass2.AppendLine(3, "get { return " + "_" + columnName.ToLower() + "; }");
                     strclass2.AppendLine(2, "}");
                 }
@@ -168,7 +184,9 @@ namespace hwj.MarkTableObject.BLL
         private static string SetFirstUpper(string value)
         {
             if (value == "int")
+            {
                 value = "Int32";
+            }
             return (value.Substring(0, 1).ToUpper() + value.Substring(1)).Replace("System.", "");
         }
         private static string GetTypeCode(ColumnInfo column)
@@ -176,19 +194,27 @@ namespace hwj.MarkTableObject.BLL
             if (column.DataType == "System.String")
             {
                 if (column.DataTypeName.ToLower() == "char")
+                {
                     return "DbType.AnsiStringFixedLength";
+                }
                 else if (column.DataTypeName.ToLower() == "varchar")
+                {
                     return "DbType.AnsiString";
+                }
                 else if (column.DataTypeName.ToLower() == "nchar")
+                {
                     return "DbType.StringFixedLength";
+                }
                 else if (column.DataTypeName.ToLower() == "nvarchar")
+                {
                     return "DbType.String";
+                }
             }
-            return "DbType." + SetFirstUpper(column.DataType);
+            return "DbType." + SetFirstUpper(column.DataType).Replace("[]", "");
         }
         private static string GetSizeForComment(ColumnInfo column)
         {
-            DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", ""), true);
+            DbType dbType = GetDbType(column);
             if (hwj.DBUtility.Common.IsNumType(dbType))
             {
                 if (column.NumericScale == 255)
@@ -207,7 +233,7 @@ namespace hwj.MarkTableObject.BLL
         }
         private static int GetSize(ColumnInfo column)
         {
-            DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", ""), true);
+            DbType dbType = GetDbType(column);
             if (hwj.DBUtility.Common.IsNumType(dbType))
             {
                 if (column.NumericScale == 255)
@@ -224,7 +250,6 @@ namespace hwj.MarkTableObject.BLL
                 return column.ColumnSize;
             }
         }
-
         private static ColumnInfos GetColumnInfoForTable(EntityInfo entity)
         {
             switch (entity.ConnType)
@@ -240,5 +265,11 @@ namespace hwj.MarkTableObject.BLL
             }
             return null;
         }
+        private static DbType GetDbType(ColumnInfo column)
+        {
+            DbType dbType = (DbType)System.Enum.Parse(typeof(DbType), column.DataType.Replace("System.", "").Replace("[]", ""), true);
+            return dbType;
+        }
+        #endregion
     }
 }

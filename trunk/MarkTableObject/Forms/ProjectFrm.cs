@@ -19,6 +19,7 @@ namespace hwj.MarkTableObject.Forms
         public ProjectFrm()
         {
             InitializeComponent();
+            Common.InitTemplateCombox(cboTemplateType);
         }
 
         private void ProjectFrm_Load(object sender, EventArgs e)
@@ -172,6 +173,22 @@ namespace hwj.MarkTableObject.Forms
             }
         }
         #endregion
+
+        private void cboTemplateType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTemplateType.SelectedIndex == 0)
+            {
+                txtBLLName.Enabled = false;
+                txtBLLConnection.Enabled = false;
+                txtBLLPrefixChar.Enabled = false;
+            }
+            else
+            {
+                txtBLLName.Enabled = true;
+                txtBLLConnection.Enabled = true;
+                txtBLLPrefixChar.Enabled = true;
+            }
+        }
 
     }
 }

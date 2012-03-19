@@ -10,16 +10,19 @@ namespace hwj.MarkTableObject.Forms
 {
     public partial class GeneralFrm : Form
     {
+        #region Property
         private SelectObjFrm SelObjFrm = null;
         public Entity.ProjectInfo ProjectInfo { get; set; }
         public List<string> TableList { get; set; }
         public List<string> ViewList { get; set; }
+        #endregion
 
         public GeneralFrm()
         {
             InitializeComponent();
             TableList = new List<string>();
             ViewList = new List<string>();
+            Common.InitTemplateCombox(cboTemplateType);
         }
 
         private void GeneralFrm_Load(object sender, EventArgs e)
@@ -66,6 +69,7 @@ namespace hwj.MarkTableObject.Forms
             ProjectInfo.SaveXML();
         }
 
+        #region Event Method
         private void btnGeneral_Click(object sender, EventArgs e)
         {
             UpdateProjectInfo();
@@ -126,5 +130,23 @@ namespace hwj.MarkTableObject.Forms
                 this.Cursor = Cursors.Default;
             }
         }
+        private void cboTemplateType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTemplateType.SelectedIndex == 0)
+            {
+                chkBLL.Checked = false;
+                txtBLLNameSpace.Enabled = false;
+                txtBLLConnection.Enabled = false;
+                txtBLLPrefixChar.Enabled = false;
+            }
+            else
+            {
+                chkBLL.Checked = true;
+                txtBLLNameSpace.Enabled = true;
+                txtBLLConnection.Enabled = true;
+                txtBLLPrefixChar.Enabled = true;
+            }
+        }
+        #endregion
     }
 }
