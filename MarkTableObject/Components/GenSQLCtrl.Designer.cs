@@ -48,7 +48,6 @@
             this.tpMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnGenSql = new hwj.UserControls.CommonControls.xButton();
-            this.btnGenFile = new hwj.UserControls.CommonControls.xButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cboSQLType = new System.Windows.Forms.ComboBox();
@@ -304,7 +303,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel1.Controls.Add(this.btnGenSql, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.gpSQL, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnGenFile, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tblSP, 0, 2);
@@ -332,19 +330,6 @@
             this.btnGenSql.Text = "生成表";
             this.btnGenSql.UseVisualStyleBackColor = true;
             this.btnGenSql.Click += new System.EventHandler(this.btnGenSql_Click);
-            // 
-            // btnGenFile
-            // 
-            this.btnGenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenFile.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGenFile.Location = new System.Drawing.Point(725, 510);
-            this.btnGenFile.Name = "btnGenFile";
-            this.btnGenFile.Size = new System.Drawing.Size(75, 23);
-            this.btnGenFile.TabIndex = 6;
-            this.btnGenFile.Text = "生成文件";
-            this.btnGenFile.UseVisualStyleBackColor = true;
-            this.btnGenFile.Visible = false;
-            this.btnGenFile.Click += new System.EventHandler(this.btnGenFile_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -497,6 +482,7 @@
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel6, 2);
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel6.Controls.Add(this.btnPreview, 1, 0);
@@ -507,14 +493,14 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(716, 30);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(803, 30);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // btnPreview
             // 
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnPreview.Location = new System.Drawing.Point(638, 4);
+            this.btnPreview.Location = new System.Drawing.Point(725, 4);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 1;
@@ -527,10 +513,7 @@
             this.cboTemplateType.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cboTemplateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTemplateType.FormattingEnabled = true;
-            this.cboTemplateType.Items.AddRange(new object[] {
-            "一层DataAccess模板（实例化）（推荐）",
-            "旧有两层模板（静态方法）"});
-            this.cboTemplateType.Location = new System.Drawing.Point(335, 5);
+            this.cboTemplateType.Location = new System.Drawing.Point(422, 5);
             this.cboTemplateType.Name = "cboTemplateType";
             this.cboTemplateType.Size = new System.Drawing.Size(297, 20);
             this.cboTemplateType.TabIndex = 0;
@@ -770,7 +753,6 @@
         private  System.Windows.Forms.TextBox txtSQL;
         private System.Windows.Forms.GroupBox groupBox2;
         private hwj.UserControls.DataList.xDataGridView dgList;
-        private hwj.UserControls.CommonControls.xButton btnGenFile;
         private System.Windows.Forms.TabControl tabGen;
         private System.Windows.Forms.TabPage tpMain;
         private System.Windows.Forms.TabPage tpBLL;

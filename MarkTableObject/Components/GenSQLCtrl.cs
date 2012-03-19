@@ -57,6 +57,7 @@ namespace hwj.MarkTableObject.Components
             InitializeComponent();
             dgList.AutoGenerateColumns = false;
             cboSQLType.SelectedIndex = 0;
+            Common.InitTemplateCombox(cboTemplateType);
         }
 
         private void cboPrjInfo_SelectedIndexChanged(object sender, EventArgs e)
