@@ -4,5 +4,700 @@
         <name>hwj.UserControls</name>
     </assembly>
     <members>
+        <member name="T:hwj.UserControls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ClearHistory">
+            <summary>
+              Looks up a localized string similar to 清空记录.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ConnectionSetting">
+            <summary>
+              Looks up a localized string similar to 数据库连接设置.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.EamilTips">
+            <summary>
+              Looks up a localized string similar to 填写多个Email地址,请用 &quot;{0}&quot; 分隔.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Enter">
+            <summary>
+              Looks up a localized string similar to 回车.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ErrorInfo">
+            <summary>
+              Looks up a localized string similar to 错误信息.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Information">
+            <summary>
+              Looks up a localized string similar to 提示信息.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidDate">
+            <summary>
+              Looks up a localized string similar to 无效的日期.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidEmail">
+            <summary>
+              Looks up a localized string similar to 此地址似乎拼写有误.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidEmails">
+             <summary>
+               Looks up a localized string similar to 以下地址似乎拼写有误:
+            {0}.
+             </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidInputString">
+            <summary>
+              Looks up a localized string similar to 请输入{0}个以上的字符.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidNumberic">
+            <summary>
+              Looks up a localized string similar to [{0}]为无效的数字格式.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.InvalidPassword">
+            <summary>
+              Looks up a localized string similar to 密码中不能含有 &quot;{0}&quot; 字符.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.NoRecord">
+            <summary>
+              Looks up a localized string similar to 当前找不到你所需要的记录.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.OpenFile">
+            <summary>
+              Looks up a localized string similar to 打开文件.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.OpenFileException">
+             <summary>
+               Looks up a localized string similar to 打开文件异常!
+            -{0}.
+             </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.PageRecordCount">
+            <summary>
+              Looks up a localized string similar to 共{0}条记录.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.RequiredInfo">
+            <summary>
+              Looks up a localized string similar to 提交数据前,请将资料填写完整.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.ReturnRecord">
+            <summary>
+              Looks up a localized string similar to {0}条记录.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.Space">
+            <summary>
+              Looks up a localized string similar to 空格.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Properties.Resources.TestConnectionSucceeded">
+            <summary>
+              Looks up a localized string similar to 数据库连接测试成功!.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Interface.IValueChanged.ValueChangedEnabled">
+            <summary>
+            获取或设置触发ValueChanged事件
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.MaskedDateTimePicker.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.MaskedDateTimePicker.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.MaskedDateTimePicker.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Other.MaskedDateTimePicker.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Other.MaskedDateTimePicker.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.View.SuggestView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xCheckBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xCheckedListBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xCheckedListBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xRadioButton.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xRadioButton.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.CommonControls.xTextBox.HasInvalidData">
+            <summary>
+            是否存在无效的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.UserControls.CommonControls.xTextBox.HasInvalidData(System.String@)">
+            <summary>
+            是否存在无效的数据
+            </summary>
+            <param name="error">返回错误信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.UserControls.CommonControls.xTextBox.HasInvalidData(System.String@,System.String@)">
+            <summary>
+            是否存在无效的数据
+            </summary>
+            <param name="value"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ShowContentError">
+            <summary>
+            "是否显示验证错误信息(只有ContentType不为None时有效)"
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.TextIsChanged">
+            <summary>
+            内容是否改变(在Validating/Validated有效)
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.InvalidPasswordChar">
+            <summary>
+            获取或设置禁用的密码字符。
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xTextBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Other.EmailTextBox.EmailSpliter">
+            <summary>
+            设置输入多个Email地址时的分隔符,None为单个Email地址
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Other.EmailTextBox.CustomEmailSplitString">
+            <summary>
+            获取或设置自定义分隔字符
+            </summary>
+        </member>
+        <member name="T:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum.Single">
+             <summary>
+            真没有 
+             </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum.Comma">
+             <summary>
+            逗号 
+             </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum.Semicolon">
+            <summary>
+            分号
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum.Enter">
+            <summary>
+            换行
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.EmailTextBox.EmailspliterEnum.Custom">
+            <summary>
+            自定义
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.SuggestView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.IsRequired">
+            <summary>
+            获取或设置为必填控件
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xComboBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.LoginComboBox.components">
+            <summary>
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.LoginComboBox.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.LoginComboBox.InitializeComponent">
+            <summary>
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xDateTimePicker.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.DataList.DataListPage.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.DataListPage.PerformPageChanged(System.Int32,System.Int32,System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            执行分页事件
+            </summary>
+            <param name="pageIndex">页数</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="sortName"></param>
+            <param name="sort"></param>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageIndex">
+            <summary>
+            获取或设置当前页数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageSize">
+            <summary>
+            获取或设置每页显示的记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.PageNum">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.SelectAllVisible">
+            <summary>
+            显示全选CheckBox
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.DataListPage.CheckBoxColumn">
+            <summary>
+            设置CheckBox列
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.SuggestBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedValue(System.String)">
+            <summary>
+            设置SelectedValue,不触发任何处理
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.SuggestBox.SetSelectedText(System.String)">
+            <summary>
+            设置SelectedText,不触发任何处理
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.EmptyValue">
+            <summary>
+            如果TextBox.Text为空时,SelectedValue的值.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.MaxRecords">
+            <summary>
+            返回最大记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.DropDownStyle">
+            <summary>
+            获取或设置SuggestBox Dropdown的显示方式
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.SearchMinLength">
+            <summary>
+            获取或设置触发搜索的字符最小长度
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.SuggestBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.xSplitContainer.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            非常格硬来的事情
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="F:hwj.UserControls.Other.xSplitContainer.components">
+            <summary>
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.xSplitContainer.Dispose(System.Boolean)">
+            <summary>
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.xSplitContainer.InitializeComponent">
+            <summary>
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xMaskedTextBox.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xMaskedTextBox.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Suggest.View.SuggestBoxView.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestBoxView.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestBoxView.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestBoxView.SetSelectedValue(System.String)">
+            <summary>
+            设置SelectedValue,不触发任何处理
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:hwj.UserControls.Suggest.View.SuggestBoxView.SetSelectedText(System.String)">
+            <summary>
+            设置SelectedText,不触发任何处理
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.View.SuggestBoxView.EmptyValue">
+            <summary>
+            如果TextBox.Text为空时,SelectedValue的值.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.View.SuggestBoxView.MaxRecords">
+            <summary>
+            返回最大记录数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.View.SuggestBoxView.DropDownStyle">
+            <summary>
+            获取或设置SuggestBox Dropdown的显示方式
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Suggest.View.SuggestBoxView.SearchMinLength">
+            <summary>
+            获取或设置触发搜索的字符最小长度
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Function.LanguageHelper.SetLang(System.String,System.Windows.Forms.Form,System.Type)">
+            <summary>
+            设置当前程序的界面语言
+            </summary>
+            <param name="lang">language:zh-CN, en-US</param>
+            <param name="form">窗体实例</param>
+            <param name="formType">窗体类型</param>
+        </member>
+        <member name="M:hwj.UserControls.Function.LanguageHelper.AppLang(System.Windows.Forms.Control,System.ComponentModel.ComponentResourceManager)">
+            <summary>
+            遍历窗体所有控件，针对其设置当前界面语言
+            </summary>
+            <param name="control"></param>
+            <param name="resources"></param>
+        </member>
+        <member name="M:hwj.UserControls.Function.LanguageHelper.AppLang(System.Windows.Forms.ToolStripMenuItem,System.ComponentModel.ComponentResourceManager)">
+            <summary>
+            遍历菜单
+            </summary>
+            <param name="item"></param>
+            <param name="resources"></param>
+        </member>
+        <member name="M:hwj.UserControls.DataList.xDataGridView.RefreshRowFooter">
+            <summary>
+            刷新行尾
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.DataList.xDataGridView.GetFooterValue(System.Windows.Forms.DataGridViewColumn)">
+            <summary>
+            获取行尾对应的列值
+            </summary>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.RowSeqVisible">
+            <summary>
+            显示行序列
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.RowFooterVisible">
+            <summary>
+            显示行尾
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.SumColumnName">
+            <summary>
+            获取或设置需要求和的列名
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.DisplayRows">
+            <summary>
+            获取或设置显示行数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.ValueIsChanged">
+            <summary>
+            设置ValueChangedHandle的IsChanged属性
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.CellReadonlyBackColor">
+            <summary>
+            获取或设置单元格只读时的颜色
+            </summary>
+        </member>
+        <member name="E:hwj.UserControls.DataList.xDataGridView.DataBinding">
+            <summary>
+            为DataGridView绑定数据
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.DataList.xDataGridView.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.MSSQLConnSetting.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.MSSQLConnSetting.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:hwj.UserControls.Other.MSSQLConnSetting.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.ValueChangedHandle.IsChanged">
+            <summary>
+            获取或设置是否有控件的值发生改变
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Add(System.Windows.Forms.Control)">
+            <summary>
+            添加必填控件
+            </summary>
+            <param name="control"></param>
+        </member>
+        <member name="M:hwj.UserControls.Function.Verify.RequiredHandle.Remove(System.Windows.Forms.Control)">
+            <summary>
+            移除必填控件
+            </summary>
+            <param name="control"></param>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.RequiredControls">
+            <summary>
+            获取或设置必填的控件名称
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.Function.Verify.RequiredHandle.HasRequired">
+            <summary>
+            获取是否存在没完整填写的控件
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Numberic">
+            <summary>
+            数字(含正负小数点)
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.CommonControls.ContentType.Integer">
+            <summary>
+            整数
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xNumericUpDown.ValueChangedHandle">
+            <summary>
+            设置引发hwj.UserControls.ValueChanged事件的对象
+            </summary>
+        </member>
+        <member name="P:hwj.UserControls.CommonControls.xNumericUpDown.ValueChangedEnabled">
+            <summary>
+            获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
     </members>
 </doc>
