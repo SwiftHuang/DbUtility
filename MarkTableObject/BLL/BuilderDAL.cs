@@ -73,7 +73,10 @@ namespace hwj.MarkTableObject.BLL
             }
             strclass.AppendLine(2, "}");
 
-            BLL.BuilderBLL.GeneralMethod(methodInfo, templateType, dalInfo.EntityInfo, ref strclass);
+            if (templateType == TemplateType.DataAccess)
+            {
+                BLL.BuilderBLL.GeneralMethod(methodInfo, templateType, dalInfo.EntityInfo, ref strclass);
+            }
 
             GeneralSPParams(dalInfo, ref strclass);
 
