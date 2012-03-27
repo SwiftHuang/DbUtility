@@ -17,11 +17,12 @@ namespace hwj.DBUtility.MSSQL
         public string CommandText { get; set; }
         #endregion
 
-        public BaseSqlDAL(string ConnectionString)
+        protected BaseSqlDAL(string ConnectionString)
             : base(ConnectionString)
-        {
-
-        }
+        { }
+        protected BaseSqlDAL(string connectionString, int timeout)
+            : base(connectionString, timeout)
+        { }
 
         #region Get Entity
         public T GetEntity()
