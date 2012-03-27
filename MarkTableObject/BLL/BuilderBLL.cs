@@ -285,7 +285,7 @@ namespace hwj.MarkTableObject.BLL
                 else
                 {
                     this.StaticString = string.Empty;
-                    this.DALString = "this.";
+                    this.DALString = "base.";
                 }
 
             }
