@@ -5,7 +5,7 @@ using System.Text;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class BaseDataAccess<T> where T : class, new()
+    public abstract class BaseDataAccess<T> where T : class, new()
     {
         #region Property
         private string _connectionString = string.Empty;
@@ -43,7 +43,7 @@ namespace hwj.DBUtility.MSSQL
         /// 
         /// </summary>
         /// <param name="connectionString"></param>
-        public BaseDataAccess(string connectionString)
+        protected BaseDataAccess(string connectionString)
             : this(connectionString, 120)
         { }
         /// <summary>
@@ -51,7 +51,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout"></param>
-        public BaseDataAccess(string connectionString, int timeout)
+        protected BaseDataAccess(string connectionString, int timeout)
         {
             ConnectionString = connectionString;
             _Timeout = timeout;

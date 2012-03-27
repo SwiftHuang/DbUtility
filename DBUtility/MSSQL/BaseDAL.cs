@@ -36,13 +36,13 @@ namespace hwj.DBUtility.MSSQL
         //}
         #endregion
 
-        public BaseDAL(string connectionString)
+        protected BaseDAL(string connectionString)
             : base(connectionString)
         {
 
         }
 
-        public BaseDAL(string connectionString, int timeout)
+        protected BaseDAL(string connectionString, int timeout)
             : base(connectionString, timeout)
         {
 
