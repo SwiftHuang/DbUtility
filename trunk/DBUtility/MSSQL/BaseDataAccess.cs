@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public abstract class BaseDataAccess<T> where T : class, new()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TS"></typeparam>
+    public abstract class BaseDataAccess<T, TS>
+        where T : BaseSqlTable<T>, new()
+        where TS : List<T>, new()
     {
         #region Property
         private string _connectionString = string.Empty;
         public string ConnectionString
         {
             get { return _connectionString; }
-            set
+            private set
             {
                 if (string.IsNullOrEmpty(value))
                     throw new Exception("数据连接字符不能为空");
@@ -24,7 +32,7 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 显示执行的Sql实体
         /// </summary>
-        public SqlEntity SqlEntity
+        protected SqlEntity SqlEntity
         {
             get { return _SqlEntity; }
         }
@@ -169,5 +177,81 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
         }
+
+        #region Get Entity
+       /// <summary>
+        /// 获取表对象
+       /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+       /// <returns></returns>
+        protected T GetEntity(string sql, List<SqlParameter> parameters)
+        {
+            return GetEntity(sql, parameters, Timeout);
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        protected T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity<T, TS>.CreateSingleEntity(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
+
+        #region Get List
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <returns></returns>
+        protected TS GetList(string sql, List<SqlParameter> parameters)
+        {
+            return GetList(sql, parameters, Timeout);
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        protected TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity<T, TS>.CreateListEntity(reader);
+                else
+                    return new TS();
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
     }
 }

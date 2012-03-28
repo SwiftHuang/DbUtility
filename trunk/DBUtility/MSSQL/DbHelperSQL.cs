@@ -71,9 +71,11 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
+
         /// <summary>
         /// 表是否存在
         /// </summary>
+        /// <param name="ConnectionString"></param>
         /// <param name="TableName"></param>
         /// <returns></returns>
         public static bool TabExists(string ConnectionString, string TableName)
@@ -473,7 +475,8 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        /// <param name="ConnectionString"></param>
+        /// <param name="cmdList"></param>
         public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList cmdList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
