@@ -1,112 +1,166 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.Text;
 using hwj.DBUtility.TableMapping;
+using System.Data.SqlClient;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class BaseSqlDAL<T, TS> : BaseDataAccess<T>
-        where T : BaseSqlTable<T>, new()
+    public abstract class BaseSqlDAL<T, TS> : SelectDALDependency<T, TS>
+        where T : BaseTable<T>, new()
         where TS : List<T>, new()
     {
-        protected static GenerateSelectSql<T> GenSelectSql = new GenerateSelectSql<T>();
-        private const string SqlFormat = "({0}) AS TEMPHWJ";
-
-        #region Property
-        public string CommandText { get; set; }
-        #endregion
-
-        protected BaseSqlDAL(string ConnectionString)
-            : base(ConnectionString)
-        { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString">数据连接字符串</param>
+        protected BaseSqlDAL(string connectionString)
+            : base(connectionString)
+        {
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString">数据连接字符串</param>
+        /// <param name="timeout">超时时间(秒)</param>
         protected BaseSqlDAL(string connectionString, int timeout)
             : base(connectionString, timeout)
-        { }
+        {
+        }
 
         #region Get Entity
-        public T GetEntity()
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <returns></returns>
+        public new T GetEntity()
         {
-            return GetEntity(null);
+            return base.GetEntity();
         }
-        public T GetEntity(FilterParams filterParam)
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public new T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, filterParam, null);
+            return base.GetEntity(filterParam);
         }
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetEntity(displayFields, filterParam, null);
+            return base.GetEntity(displayFields, filterParam);
         }
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <returns></returns>
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
-            _SqlEntity = tmpSqlEty;
-            return GetEntity(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
+            return base.GetEntity(displayFields, filterParam, sortParams);
         }
-        public T GetEntity(string sql, List<SqlParameter> parameters)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <returns></returns>
+        public new T GetEntity(string sql, List<SqlParameter> parameters)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters);
-            try
-            {
-                if (reader.HasRows)
-                    return GenerateEntity<T, TS>.CreateSingleEntity(reader);
-                else
-                    return null;
-            }
-            catch
-            { throw; }
-            finally
-            {
-                if (!reader.IsClosed)
-                    reader.Close();
-            }
+            return base.GetEntity(sql, parameters);
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public new T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
+        {
+            return base.GetEntity(sql, parameters, timeout);
         }
         #endregion
 
         #region GetList
-        public TS GetList()
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <returns></returns>
+        public new TS GetList()
         {
-            return GetList(null, null, null, null);
+            return base.GetList();
         }
-        public TS GetList(DisplayFields displayFields)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <returns></returns>
+        public new TS GetList(DisplayFields displayFields)
         {
-            return GetList(displayFields, null, null, null);
+            return base.GetList(displayFields);
         }
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetList(displayFields, filterParam, null, null);
+            return base.GetList(displayFields, filterParam);
         }
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <returns></returns>
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetList(displayFields, filterParam, sortParams, null);
+            return base.GetList(displayFields, filterParam, sortParams);
         }
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
+        /// <returns></returns>
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            _SqlEntity = tmpSqlEty;
-            return GetList(tmpSqlEty.CommandText, tmpSqlEty.Parameters);
+            return base.GetList(displayFields, filterParam, sortParams, maxCount);
         }
-        public TS GetList(string sql, List<SqlParameter> parameters)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <returns></returns>
+        public new TS GetList(string sql, List<SqlParameter> parameters)
         {
-            return GetList(sql, parameters, -1);
+            return base.GetList(sql, parameters);
         }
-        public TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public new TS GetList(string sql, List<SqlParameter> parameters, int timeout)
         {
-            SqlDataReader reader = DbHelper.ExecuteReader(ConnectionString, sql, parameters, timeout);
-            try
-            {
-                if (reader.HasRows)
-                    return GenerateEntity<T, TS>.CreateListEntity(reader);
-                else
-                    return new TS();
-            }
-            catch
-            { throw; }
-            finally
-            {
-                if (!reader.IsClosed)
-                    reader.Close();
-            }
+            return base.GetList(sql, parameters, timeout);
         }
         #endregion
     }

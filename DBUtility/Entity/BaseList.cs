@@ -13,9 +13,8 @@ namespace hwj.DBUtility.Entity
         where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
-        private Enum tmpField;
-        private object tmpValue = null;
-        private T tmpFindObj = null;
+        //private object tmpValue = null;
+        //private T tmpFindObj = null;
 
         private Enum tmpBSField;
         private object tmpBSValue = null;
@@ -139,7 +138,6 @@ namespace hwj.DBUtility.Entity
         /// <summary>
         ///  二分法
         /// </summary>
-        /// <param name="list"></param>
         /// <param name="fieldMappingInfo"></param>
         /// <param name="value"></param>
         /// <returns></returns>
