@@ -51,11 +51,25 @@ namespace hwj.MarkTableObject.BLL
 
             if (dalInfo.Module == DBModule.SQL || dalInfo.Module == DBModule.SP)
             {
-                strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : BaseSqlDAL<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                if (templateType == TemplateType.Business)
+                {
+                    strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : BaseSqlDAL<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                }
+                else
+                {
+                    strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : SelectDALDependency<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                }
             }
             else
             {
-                strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : BaseDAL<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                if (templateType == TemplateType.Business)
+                {
+                    strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : BaseDAL<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                }
+                else
+                {
+                    strclass.AppendLine(1, "public partial class " + dalInfo.DALName + " : DALDependency<" + dalInfo.EntityInfo.EntityName + ", " + dalInfo.EntityInfo.EntityName + "s>");
+                }
             }
 
             strclass.AppendLine(1, "{");
