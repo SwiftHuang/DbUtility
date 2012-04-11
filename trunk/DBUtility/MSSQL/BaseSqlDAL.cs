@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace hwj.DBUtility.MSSQL
 {
     public abstract class BaseSqlDAL<T, TS> : SelectDALDependency<T, TS>
-        where T : BaseTable<T>, new()
+        where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
         /// <summary>

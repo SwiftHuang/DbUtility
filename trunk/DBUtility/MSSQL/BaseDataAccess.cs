@@ -20,7 +20,7 @@ namespace hwj.DBUtility.MSSQL
         public string ConnectionString
         {
             get { return _connectionString; }
-            private set
+            set
             {
                 if (string.IsNullOrEmpty(value))
                     throw new Exception("数据连接字符不能为空");
@@ -179,12 +179,12 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region Get Entity
-       /// <summary>
+        /// <summary>
         /// 获取表对象
-       /// </summary>
+        /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
-       /// <returns></returns>
+        /// <returns></returns>
         protected T GetEntity(string sql, List<SqlParameter> parameters)
         {
             return GetEntity(sql, parameters, Timeout);
