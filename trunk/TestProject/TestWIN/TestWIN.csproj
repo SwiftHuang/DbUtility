@@ -101,12 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\CommonLibrary\CommonLibrary.csproj">
-      <Project>{EA76E51A-970B-49FE-8A42-9DE6EF898813}</Project>
-      <Name>CommonLibrary</Name>
-    </ProjectReference>
+    <Compile Include="TransferClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -131,6 +126,12 @@
     <None Include="Service References\BOClassWS\TestWIN.BOClassWS.Invoice.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

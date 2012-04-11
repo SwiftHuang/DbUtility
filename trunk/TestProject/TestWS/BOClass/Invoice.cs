@@ -11,6 +11,7 @@ namespace TestWS.BOClass
         public string InvNum { get; set; }
         public int QTY { get; set; }
         public decimal Amount { get; set; }
+        public Hotel HotelInfo { get; set; }
 
         public List<Ticket> Tickets { get; set; }
 
@@ -27,7 +28,7 @@ namespace TestWS.BOClass
                 InvNum = "GI00000001";
                 QTY = 10;
                 Amount = 1200;
-
+                HotelInfo = new Hotel(true);
                 Tickets = new List<Ticket>();
                 Tickets.Add(new Ticket(true));
             }
@@ -67,6 +68,19 @@ namespace TestWS.BOClass
             {
 
             }
+        }
+    }
+
+    public class Hotel
+    {
+        public string HotelCode { get; set; }
+        public Hotel()
+        {
+
+        }
+        public Hotel(bool hasData)
+        {
+            HotelCode = "HC0001";
         }
     }
 }
