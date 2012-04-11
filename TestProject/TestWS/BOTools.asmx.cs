@@ -20,7 +20,7 @@ namespace TestWS
         [WebMethod]
         public string HelloWorld()
         {
-            return "Hello World Vinson";
+            return "Hello World Vinson1";
         }
 
         [WebMethod]

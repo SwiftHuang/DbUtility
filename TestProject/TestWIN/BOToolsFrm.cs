@@ -23,56 +23,12 @@ namespace TestWIN
 
         private void btnGen_Click(object sender, EventArgs e)
         {
-
-            txtResult.Clear();
             MethodInfo mi = InvokeWebService(txtWSUrl.Text, string.Empty, txtMethod.Text, null, string.Empty);
-            txtResult.Text = GeneralText(mi, "invWS", "BOClassWS", "invWin", "BOClassWIN");
+            GeneralText(mi, "invWS", "BOClassWS", "invWin", "BOClassWIN");
         }
         private void btnSetData_Click(object sender, EventArgs e)
         {
-            BOClassWS.BOToolsSoapClient svc = new TestWIN.BOClassWS.BOToolsSoapClient("BOToolsSoap", txtWSUrl.Text);
-            BOClassWS.Invoice inv = svc.GetInvoice();
-
-            BOClassWIN.Invoice invWin = new TestWIN.BOClassWIN.Invoice();
-
-            if (inv != null)
-            {
-                invWin.CompanyCode = inv.CompanyCode;
-                invWin.InvNum = inv.InvNum;
-                invWin.QTY = inv.QTY;
-                invWin.Amount = inv.Amount;
-
-                if (inv.HotelInfo != null)
-                {
-                    invWin.HotelInfo = new TestWIN.BOClassWIN.Hotel();
-                    invWin.HotelInfo.HotelCode = inv.HotelInfo.HotelCode;
-                }
-
-                invWin.Tickets = new List<TestWIN.BOClassWIN.Ticket>();
-                if (inv.Tickets != null)
-                {
-                    foreach (BOClassWS.Ticket tkt in inv.Tickets)
-                    {
-                        BOClassWIN.Ticket tktWin = new TestWIN.BOClassWIN.Ticket();
-                        tktWin.TicketNum = tkt.TicketNum;
-
-                        tktWin.Details = new List<TestWIN.BOClassWIN.Ticket.TicketDetail>();
-                        if (tkt.Details != null)
-                        {
-                            foreach (BOClassWS.TicketDetail dtl in tkt.Details)
-                            {
-                                BOClassWIN.Ticket.TicketDetail dtlWin = new TestWIN.BOClassWIN.Ticket.TicketDetail();
-                                dtlWin.SegNum = dtl.SegNum;
-
-                                tktWin.Details.Add(dtlWin);
-                            }
-                        }
-
-                        invWin.Tickets.Add(tktWin);
-                    }
-                }
-            }
-
+            SetData();
         }
 
         private MethodInfo InvokeWebService(string url, string classname, string methodname, object[] args, string fileName)
@@ -171,19 +127,88 @@ namespace TestWIN
 
             return pps[0];
         }
-        private string GeneralText(MethodInfo mi, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
+        private void GeneralText(MethodInfo mi, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
         {
+            txtTranMethod.Clear();
+            txtClass.Clear();
+
             if (mi != null)
             {
-
                 object obj = Activator.CreateInstance(mi.ReturnType);
-                string s = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(obj);
+
                 TransferClass tc = new TransferClass(obj, fromClassName, fromNamespace, toClassName, toNamespace);
-                return tc.BuildTransferMethod();
+                txtTranMethod.Text = tc.BuildTransferMethod();
+                txtClass.Text = tc.BuildClass();
             }
-            return string.Empty;
         }
 
+        private void SetData()
+        {
+            BOClassWS.BOToolsSoapClient svc = new TestWIN.BOClassWS.BOToolsSoapClient("BOToolsSoap", txtWSUrl.Text);
+            BOClassWS.Invoice invWS = svc.GetInvoice();
+            BOClassWIN.Invoice invWin = new BOClassWIN.Invoice();
 
+            if (invWS != null)
+            {
+                invWin.CompanyCode = invWS.CompanyCode;
+                invWin.InvNum = invWS.InvNum;
+                invWin.QTY = invWS.QTY;
+                invWin.Amount = invWS.Amount;
+
+                if (invWS.HotelInfo != null)
+                {
+                    invWin.HotelInfo = new BOClassWIN.Hotel();
+                    invWin.HotelInfo.HotelCode = invWS.HotelInfo.HotelCode;
+                }
+
+                invWin.XOList = new List<BOClassWIN.XO>();
+                if (invWS.XOList != null)
+                {
+                    foreach (BOClassWS.XO _frXO in invWS.XOList)
+                    {
+                        BOClassWIN.XO _XO = new BOClassWIN.XO();
+                        _XO.XONum = _frXO.XONum;
+
+                        _XO.Details = new List<BOClassWIN.XODetail>();
+                        if (_frXO.Details != null)
+                        {
+                            foreach (BOClassWS.XODetail _frXODetail in _frXO.Details)
+                            {
+                                BOClassWIN.XODetail _XODetail = new BOClassWIN.XODetail();
+                                _XODetail.SegNum = _frXODetail.SegNum;
+
+                                _XO.Details.Add(_XODetail);
+                            }
+                        }
+
+                        invWin.XOList.Add(_XO);
+                    }
+                }
+
+                invWin.Tickets = new List<BOClassWIN.Ticket>();
+                if (invWS.Tickets != null)
+                {
+                    foreach (BOClassWS.Ticket _frTicket in invWS.Tickets)
+                    {
+                        BOClassWIN.Ticket _Ticket = new BOClassWIN.Ticket();
+                        _Ticket.TicketNum = _frTicket.TicketNum;
+
+                        _Ticket.Details = new List<BOClassWIN.TicketDetail>();
+                        if (_frTicket.Details != null)
+                        {
+                            foreach (BOClassWS.TicketDetail _frTicketDetail in _frTicket.Details)
+                            {
+                                BOClassWIN.TicketDetail _TicketDetail = new BOClassWIN.TicketDetail();
+                                _TicketDetail.SegNum = _frTicketDetail.SegNum;
+
+                                _Ticket.Details.Add(_TicketDetail);
+                            }
+                        }
+
+                        invWin.Tickets.Add(_Ticket);
+                    }
+                }
+            }
+        }
     }
 }
