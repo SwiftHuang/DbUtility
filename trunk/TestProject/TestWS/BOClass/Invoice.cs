@@ -12,7 +12,7 @@ namespace TestWS.BOClass
         public int QTY { get; set; }
         public decimal Amount { get; set; }
         public Hotel HotelInfo { get; set; }
-
+        public List<XO> XOList { get; set; }
         public List<Ticket> Tickets { get; set; }
 
         public Invoice()
@@ -31,6 +31,8 @@ namespace TestWS.BOClass
                 HotelInfo = new Hotel(true);
                 Tickets = new List<Ticket>();
                 Tickets.Add(new Ticket(true));
+                XOList = new List<XO>();
+                XOList.Add(new XO(true));
             }
         }
     }
@@ -68,6 +70,43 @@ namespace TestWS.BOClass
             {
 
             }
+        }
+    }
+
+    public class XO
+    {
+        public string XONum { get; set; }
+        public List<XODetail> Details { get; set; }
+
+        public XO()
+        {
+
+        }
+        public XO(bool hasData)
+        {
+            if (hasData)
+            {
+                XONum = "XO0000001";
+
+                XODetail dtl1 = new XODetail();
+                dtl1.SegNum = "X0001";
+                XODetail dtl2 = new XODetail();
+                dtl2.SegNum = "X0002";
+                Details = new List<XODetail>();
+                Details.Add(dtl1);
+                Details.Add(dtl2);
+            }
+        }
+
+    }
+
+    public class XODetail
+    {
+        public string SegNum { get; set; }
+
+        public XODetail()
+        {
+
         }
     }
 

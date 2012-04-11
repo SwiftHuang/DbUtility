@@ -6,11 +6,12 @@ namespace TestWIN.BOClassWIN
 {
     public class Invoice
     {
-        public string CompanyCode { get; set; }
-        public string InvNum { get; set; }
-        public int QTY { get; set; }
-        public decimal Amount { get; set; }
+        public String CompanyCode { get; set; }
+        public String InvNum { get; set; }
+        public Int32 QTY { get; set; }
+        public Decimal Amount { get; set; }
         public Hotel HotelInfo { get; set; }
+        public List<XO> XOList { get; set; }
         public List<Ticket> Tickets { get; set; }
 
         public Invoice()
@@ -18,67 +19,62 @@ namespace TestWIN.BOClassWIN
 
         }
 
-        //public Invoice(bool HasData)
-        //{
-        //    if (HasData)
-        //    {
-        //        CompanyCode = "GT";
-        //        InvNum = "GI00000001";
-        //        QTY = 10;
-        //        Amount = 1200;
+    }
 
-        //        Tickets = new List<Ticket>();
-        //        Tickets.Add(new Ticket(true));
-        //    }
-        //}
+    public class Hotel
+    {
+        public String HotelCode { get; set; }
+
+        public Hotel()
+        {
+
+        }
+
+    }
+
+    public class TicketDetail
+    {
+        public String SegNum { get; set; }
+
+        public TicketDetail()
+        {
+
+        }
+
     }
 
     public class Ticket
     {
-        public string TicketNum { get; set; }
+        public String TicketNum { get; set; }
         public List<TicketDetail> Details { get; set; }
 
         public Ticket()
         {
 
         }
-        //public Ticket(bool hasData)
-        //{
-        //    if (hasData)
-        //    {
-        //        TicketNum = "999122222";
 
-        //        TicketDetail dtl1 = new TicketDetail();
-        //        dtl1.SegNum = "00001";
-        //        TicketDetail dtl2 = new TicketDetail();
-        //        dtl2.SegNum = "00002";
-        //        Details = new List<TicketDetail>();
-        //        Details.Add(dtl1);
-        //        Details.Add(dtl2);
-        //    }
-        //}
-
-        public class TicketDetail
-        {
-            public string SegNum { get; set; }
-
-            public TicketDetail()
-            {
-
-            }
-        }
     }
 
-    public class Hotel
+    public class XODetail
     {
-        public string HotelCode { get; set; }
-        public Hotel()
+        public String SegNum { get; set; }
+
+        public XODetail()
         {
 
         }
-        //public Hotel(bool hasData)
-        //{
-        //    HotelCode = "HC0001";
-        //}
+
+    }
+
+    public class XO
+    {
+        public String XONum { get; set; }
+        public List<XODetail> Details { get; set; }
+
+        public XO()
+        {
+
+        }
+
     }
 }
