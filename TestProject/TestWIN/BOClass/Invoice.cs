@@ -10,7 +10,7 @@ namespace TestWIN.BOClassWIN
         public string InvNum { get; set; }
         public int QTY { get; set; }
         public decimal Amount { get; set; }
-
+        public Hotel HotelInfo { get; set; }
         public List<Ticket> Tickets { get; set; }
 
         public Invoice()
@@ -67,5 +67,18 @@ namespace TestWIN.BOClassWIN
 
             }
         }
+    }
+
+    public class Hotel
+    {
+        public string HotelCode { get; set; }
+        public Hotel()
+        {
+
+        }
+        //public Hotel(bool hasData)
+        //{
+        //    HotelCode = "HC0001";
+        //}
     }
 }

@@ -42,6 +42,12 @@ namespace TestWIN
                 invWin.QTY = inv.QTY;
                 invWin.Amount = inv.Amount;
 
+                if (inv.HotelInfo != null)
+                {
+                    invWin.HotelInfo = new TestWIN.BOClassWIN.Hotel();
+                    invWin.HotelInfo.HotelCode = inv.HotelInfo.HotelCode;
+                }
+
                 invWin.Tickets = new List<TestWIN.BOClassWIN.Ticket>();
                 if (inv.Tickets != null)
                 {
@@ -169,32 +175,11 @@ namespace TestWIN
         {
             if (mi != null)
             {
-                StringBuilder sb = new StringBuilder();
-                object obj = Activator.CreateInstance(mi.ReturnType);
 
-                foreach (FieldInfo f in obj.GetType().GetFields())
-                {
-                    if (f.FieldType.FullName.StartsWith("System."))
-                    {
-                        sb.AppendFormat("{0}.{2} = {1}.{2};", toClassName, fromClassName, f.Name);
-                        sb.AppendLine();
-                    }
-                    else if (f.FieldType.IsArray)
-                    {
-                        sb.AppendLine();
-                        sb.AppendFormat("{0}.{1} = new List<{2}.{3}>();", toClassName, f.Name, toNamespace, f.FieldType.Name.Replace("[]", ""));
-                        sb.AppendLine();
-                        sb.AppendFormat("if ({0}.{1} != null)", fromClassName, f.Name);
-                        sb.AppendLine();
-                        sb.AppendLine("{");
-                        sb.AppendFormat("foreach ({0}.{1} {2} in {3}.{4})",
-                            fromNamespace, f.FieldType.Name.Replace("[]", ""), "_" + f.FieldType.Name.Replace("[]", ""),
-                            fromClassName, f.Name);
-                        sb.AppendLine();
-                        sb.AppendLine("}");
-                    }
-                }
-                return sb.ToString();
+                object obj = Activator.CreateInstance(mi.ReturnType);
+                string s = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(obj);
+                TransferClass tc = new TransferClass(obj, fromClassName, fromNamespace, toClassName, toNamespace);
+                return tc.BuildTransferMethod();
             }
             return string.Empty;
         }
