@@ -14,7 +14,8 @@ namespace TestWIN
 {
     public partial class BOToolsFrm : Form
     {
-        private const string @namespace = "EnterpriseServerBase.WebService.DynamicWebCalling";
+        private const string @namespace = "WebService.DynamicWebCalling";
+        private Assembly assembly = null;
 
         public BOToolsFrm()
         {
@@ -23,22 +24,84 @@ namespace TestWIN
 
         private void btnGen_Click(object sender, EventArgs e)
         {
-            MethodInfo mi = InvokeWebService(txtWSUrl.Text, string.Empty, txtMethod.Text, null, string.Empty);
-            GeneralText(mi, "invWS", "BOClassWS", "invWin", "BOClassWIN");
+            try
+            {
+                //txtWSUrl.Text = "http://localhost:2212/BOTools.asmx";
+                //txtToNamespace.Text = "BOClassWIN";
+                //txtToClassName.Text = "invWin";
+                //txtFromNamespace.Text = "BOClassWS";
+                //txtFromClassName.Text = "invWS";
+
+                GeneralText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
         private void btnSetData_Click(object sender, EventArgs e)
         {
             SetData();
         }
-
-        private MethodInfo InvokeWebService(string url, string classname, string methodname, object[] args, string fileName)
+        private void btnUpdateWSTypeList_Click(object sender, EventArgs e)
         {
-
-            if ((classname == null) || (classname == ""))
+            try
             {
-                classname = GetWsClassName(url);
+                assembly = GetAssembly(txtWSUrl.Text);
+                UpdateAssembly(assembly);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void btnFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileDialog1.Filter = "程序集|*.dll|所有文件|*.*";
+                openFileDialog1.RestoreDirectory = true;
+                openFileDialog1.FilterIndex = 1;
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    txtFileName.Text = openFileDialog1.FileName;
+                }
 
+                assembly = GetAssemblyByFile(txtFileName.Text);
+
+                UpdateAssembly(assembly);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void UpdateAssembly(Assembly assembly)
+        {
+            cboTypeList.Items.Clear();
+
+            if (assembly != null)
+            {
+                foreach (Type t in assembly.GetTypes())
+                {
+                    cboTypeList.Items.Add(t);
+                }
+
+                if (cboTypeList.Items.Count > 0)
+                {
+                    btnGen.Enabled = true;
+                    cboTypeList.SelectedIndex = 0;
+                }
+                else
+                {
+                    btnGen.Enabled = false;
+                }
+            }
+        }
+
+        private Assembly GetAssembly(string url)
+        {
             try
             {
                 //获取WSDL
@@ -61,15 +124,7 @@ namespace TestWIN
                 //设定编译参数
                 CompilerParameters cplist = new CompilerParameters();
                 cplist.GenerateExecutable = false;
-
-                if (!string.IsNullOrEmpty(fileName))
-                {
-                    cplist.OutputAssembly = fileName;
-                    cplist.GenerateInMemory = false;
-                }
-                else
-                    cplist.GenerateInMemory = true;
-
+                cplist.GenerateInMemory = true;
                 cplist.ReferencedAssemblies.Add("System.dll");
                 cplist.ReferencedAssemblies.Add("System.XML.dll");
                 cplist.ReferencedAssemblies.Add("System.Web.Services.dll");
@@ -89,28 +144,9 @@ namespace TestWIN
                     throw new Exception(sb.ToString());
                 }
 
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    //生成代理实例，并调用方法
-                    Assembly assembly = cr.CompiledAssembly;
-                    Type t = assembly.GetType(@namespace + "." + classname, true, true);
-                    object obj = Activator.CreateInstance(t);
-                    MethodInfo mi = t.GetMethod(methodname);
-                    return mi;
-                    //if (mi != null)
-                    //{
-                    //    if (args == null)
-                    //        return mi.Invoke(obj, null);
-                    //    else
-                    //        return mi.Invoke(obj, args);
-                    //}
-                    //else
-                    //{
-                    //    throw new Exception(string.Format("Invalid Method Name:{0}", methodname));
-                    //}
-                }
-                else
-                    return null;
+                //生成代理实例，并调用方法
+                Assembly assembly = cr.CompiledAssembly;
+                return assembly;
             }
             catch (Exception ex)
             {
@@ -120,6 +156,11 @@ namespace TestWIN
                     throw ex;
             }
         }
+        private Assembly GetAssemblyByFile(string fileName)
+        {
+            Assembly assembly = Assembly.LoadFrom(fileName);
+            return assembly;
+        }
         private string GetWsClassName(string wsUrl)
         {
             string[] parts = wsUrl.Split('/');
@@ -127,21 +168,19 @@ namespace TestWIN
 
             return pps[0];
         }
-        private void GeneralText(MethodInfo mi, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
+        private void GeneralText()
         {
             txtTranMethod.Clear();
             txtClass.Clear();
 
-            if (mi != null)
+            if (assembly != null)
             {
-                object obj = Activator.CreateInstance(mi.ReturnType);
-
-                TransferClass tc = new TransferClass(obj, fromClassName, fromNamespace, toClassName, toNamespace);
-                txtTranMethod.Text = tc.BuildTransferMethod();
-                txtClass.Text = tc.BuildClass();
+                TransferClass tc = new TransferClass(assembly, txtFromClassName.Text, txtFromNamespace.Text, txtToClassName.Text, txtToNamespace.Text);
+                tc.Build(cboTypeList.SelectedItem.ToString());
+                txtTranMethod.Text = tc.MethodText;
+                txtClass.Text = tc.ClassText;
             }
         }
-
         private void SetData()
         {
             BOClassWS.BOToolsSoapClient svc = new TestWIN.BOClassWS.BOToolsSoapClient("BOToolsSoap", txtWSUrl.Text);
@@ -210,5 +249,18 @@ namespace TestWIN
                 }
             }
         }
+
+        private void cboTypeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtToClassName.Text))
+            {
+                txtToClassName.Text = "to" + cboTypeList.Text;
+            }
+            if (string.IsNullOrEmpty(txtFromClassName.Text))
+            {
+                txtFromClassName.Text = "frm" + cboTypeList.Text;
+            }
+        }
+
     }
 }
