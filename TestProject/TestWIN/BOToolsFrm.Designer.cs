@@ -54,6 +54,7 @@
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -88,7 +89,7 @@
             this.txtClass.Multiline = true;
             this.txtClass.Name = "txtClass";
             this.txtClass.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtClass.Size = new System.Drawing.Size(812, 292);
+            this.txtClass.Size = new System.Drawing.Size(812, 372);
             this.txtClass.TabIndex = 1;
             // 
             // btnSetData
@@ -124,16 +125,18 @@
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnFile, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnCopy, 2, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(832, 497);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(832, 606);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -155,7 +158,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 170);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(826, 324);
+            this.tabControl1.Size = new System.Drawing.Size(826, 404);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
@@ -164,7 +167,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(818, 298);
+            this.tabPage1.Size = new System.Drawing.Size(818, 378);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Class";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -175,7 +178,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(818, 298);
+            this.tabPage2.Size = new System.Drawing.Size(818, 378);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Method";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -187,7 +190,7 @@
             this.txtTranMethod.Multiline = true;
             this.txtTranMethod.Name = "txtTranMethod";
             this.txtTranMethod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTranMethod.Size = new System.Drawing.Size(812, 292);
+            this.txtTranMethod.Size = new System.Drawing.Size(812, 372);
             this.txtTranMethod.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -351,15 +354,25 @@
             this.btnFile.UseVisualStyleBackColor = true;
             this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(754, 580);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.TabIndex = 12;
+            this.btnCopy.Text = "Copy";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
             // BOToolsFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 521);
+            this.ClientSize = new System.Drawing.Size(856, 630);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "BOToolsFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Transfer Class";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -401,6 +414,7 @@
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnCopy;
     }
 }
 

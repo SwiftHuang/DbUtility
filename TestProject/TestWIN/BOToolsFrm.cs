@@ -16,6 +16,7 @@ namespace TestWIN
     {
         private const string @namespace = "WebService.DynamicWebCalling";
         private Assembly assembly = null;
+        private TransferClass.AssemblyType TransferType = TransferClass.AssemblyType.None;
 
         public BOToolsFrm()
         {
@@ -50,6 +51,7 @@ namespace TestWIN
             {
                 assembly = GetAssembly(txtWSUrl.Text);
                 UpdateAssembly(assembly);
+                TransferType = TransferClass.AssemblyType.WebService;
             }
             catch (Exception ex)
             {
@@ -71,6 +73,8 @@ namespace TestWIN
                 assembly = GetAssemblyByFile(txtFileName.Text);
 
                 UpdateAssembly(assembly);
+
+                TransferType = TransferClass.AssemblyType.DLL;
             }
             catch (Exception ex)
             {
@@ -85,7 +89,10 @@ namespace TestWIN
             {
                 foreach (Type t in assembly.GetTypes())
                 {
-                    cboTypeList.Items.Add(t);
+                    if (t.IsEnum != true)
+                    {
+                        cboTypeList.Items.Add(t);
+                    }
                 }
 
                 if (cboTypeList.Items.Count > 0)
@@ -175,7 +182,7 @@ namespace TestWIN
 
             if (assembly != null)
             {
-                TransferClass tc = new TransferClass(assembly, txtFromClassName.Text, txtFromNamespace.Text, txtToClassName.Text, txtToNamespace.Text);
+                TransferClass tc = new TransferClass(TransferType, assembly, txtFromClassName.Text, txtFromNamespace.Text, txtToClassName.Text, txtToNamespace.Text);
                 tc.Build(cboTypeList.SelectedItem.ToString());
                 txtTranMethod.Text = tc.MethodText;
                 txtClass.Text = tc.ClassText;
@@ -259,6 +266,18 @@ namespace TestWIN
             if (string.IsNullOrEmpty(txtFromClassName.Text))
             {
                 txtFromClassName.Text = "frm" + cboTypeList.Text;
+            }
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+            {
+                Clipboard.SetDataObject(txtClass.Text);
+            }
+            else
+            {
+                Clipboard.SetDataObject(txtTranMethod.Text);
             }
         }
 
