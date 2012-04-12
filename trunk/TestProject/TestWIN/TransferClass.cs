@@ -9,6 +9,21 @@ namespace TestWIN
 {
     public class TransferClass
     {
+        public enum AssemblyType
+        {
+            None,
+            DLL,
+            WebService,
+        }
+        public enum PropertyType
+        {
+            None,
+            System,
+            Arrary,
+            Class,
+        }
+        #region Property
+        public AssemblyType TransferType { get; private set; }
         public string FromClassName { get; private set; }
         public string FromNamespace { get; private set; }
         public string ToClassName { get; private set; }
@@ -18,9 +33,11 @@ namespace TestWIN
         public string ClassText { get; private set; }
         public string MethodText { get; private set; }
         public Assembly AssemblyInfo { get; private set; }
+        #endregion
 
-        public TransferClass(Assembly assembly, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
+        public TransferClass(AssemblyType type, Assembly assembly, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
         {
+            TransferType = type;
             FromClassName = fromClassName;
             FromNamespace = fromNamespace;
             ToClassName = toClassName;
@@ -43,8 +60,6 @@ namespace TestWIN
             }
         }
 
-        #region Private Member
-
         #region Bulid Class
         private string BuildClass()
         {
@@ -52,7 +67,7 @@ namespace TestWIN
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
             ss.AppendLine(spaceNum, "using System;");
             ss.AppendLine(spaceNum, "using System.Collections.Generic;");
-
+            ss.AppendLine();
             ss.AppendFormat(spaceNum, "namespace {0}", ToNamespace);
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
@@ -68,15 +83,32 @@ namespace TestWIN
         }
         private string BuildClassText(int spaceNum, Type type)
         {
+            PropertyType propType = PropertyType.None;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
+
             ss.AppendFormat(spaceNum, "public class {0}", type.Name);
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            foreach (FieldInfo f in type.GetFields())
+            if (TransferType == AssemblyType.WebService)
             {
-                ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, f));
-                ss.AppendLine();
+                foreach (FieldInfo f in type.GetFields())
+                {
+                    propType = GetPropertyType(f);
+
+                    ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, f.Name, f.FieldType.Name));
+                    ss.AppendLine();
+                }
+            }
+            else
+            {
+                foreach (PropertyInfo p in type.GetProperties())
+                {
+                    propType = GetPropertyType(p);
+
+                    ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, p.Name, p.PropertyType.Name));
+                    ss.AppendLine();
+                }
             }
 
             ss.AppendLine();
@@ -98,21 +130,21 @@ namespace TestWIN
             }
             return ss.ToString();
         }
-        private string BuildClassPropertyText(int spaceNum, FieldInfo field)
+        private string BuildClassPropertyText(int spaceNum, PropertyType propType, string propName, string typeName)
         {
             string tmp = string.Empty;
 
-            if (field.FieldType.FullName.StartsWith("System."))
+            if (propType == PropertyType.System)
             {
-                tmp = string.Format("public {0} {1} {{ get; set; }}", field.FieldType.Name, field.Name);
+                tmp = string.Format("public {0} {1} {{ get; set; }}", typeName, propName);
             }
-            else if (field.FieldType.IsArray)
+            else if (propType == PropertyType.Arrary)
             {
-                tmp = string.Format("public List<{0}> {1} {{ get; set; }}", ReplaceArrayName(field.FieldType.Name), field.Name);
+                tmp = string.Format("public List<{0}> {1} {{ get; set; }}", ReplaceArrayName(typeName), propName);
             }
-            else if (field.FieldType.IsClass && field.FieldType.FullName.StartsWith("System.") == false)
+            else if (propType == PropertyType.Class)
             {
-                tmp = string.Format("public {0} {1} {{ get; set; }}", field.FieldType.Name, field.Name);
+                tmp = string.Format("public {0} {1} {{ get; set; }}", typeName, propName);
             }
 
             return tmp;
@@ -128,39 +160,70 @@ namespace TestWIN
             }
             return string.Empty;
         }
+
         private string BuildPropertyText(object obj, string toClass, string fromClass, string toNamespace, int spaceNum)
         {
+            PropertyType propType = PropertyType.None;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
+            object o = obj;
 
-            foreach (FieldInfo f in obj.GetType().GetFields())
+            if (TransferType == AssemblyType.WebService)
             {
-                if (f.FieldType.FullName.StartsWith("System."))
+                foreach (FieldInfo f in obj.GetType().GetFields())
                 {
-                    ss.AppendFormat(spaceNum + 1, "{0}.{2} = {1}.{2};", toClass, fromClass, f.Name);
-                    ss.AppendLine();
+                    propType = GetPropertyType(f);
+
+                    if (propType == PropertyType.Arrary || propType == PropertyType.Class)
+                    {
+                        o = Activator.CreateInstance(FindType(f.FieldType.FullName));
+                    }
+
+                    ss.Append(BuildProperty(propType, o, f.Name, toClass, fromClass, toNamespace, spaceNum));
                 }
-                else if (f.FieldType.IsArray)
+            }
+            else
+            {
+                foreach (PropertyInfo p in obj.GetType().GetProperties())
                 {
-                    AddTypeList(ReplaceArrayName(f.FieldType.FullName));
-                    AddArrayTypeList(ReplaceArrayName(f.FieldType.FullName));
+                    propType = GetPropertyType(p);
 
-                    ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, f, spaceNum));
-                }
-                else if (f.FieldType.IsClass && f.FieldType.FullName.StartsWith("System.") == false)
-                {
-                    AddTypeList(ReplaceArrayName(f.FieldType.FullName));
+                    if (propType == PropertyType.Arrary || propType == PropertyType.Class)
+                    {
+                        o = Activator.CreateInstance(FindType(p.PropertyType.FullName));
+                    }
 
-                    ss.AppendLine();
-                    ss.AppendFormat(spaceNum + 1, "if ({0}.{1} != null)", fromClass, f.Name);
-                    ss.AppendLine();
-                    ss.AppendLine(spaceNum + 1, "{");
-
-                    object o = Activator.CreateInstance(FindType(f.FieldType.FullName));
-                    ss.Append(spaceNum, BuildPropertyTextForClass(o, string.Format("{0}.{1}", toClass, f.Name), string.Format("{0}.{1}", fromClass, f.Name), toNamespace, spaceNum));
-                    ss.AppendLine(spaceNum + 1, "}");
+                    ss.Append(BuildProperty(propType, o, p.Name, toClass, fromClass, toNamespace, spaceNum));
                 }
             }
 
+            return ss.ToString();
+        }
+        private string BuildProperty(PropertyType propType, object obj, string propName, string toClass, string fromClass, string toNamespace, int spaceNum)
+        {
+            StringHelper.SpaceString ss = new StringHelper.SpaceString();
+            AddTypeList(ReplaceArrayName(obj.GetType().FullName));
+
+            if (propType == PropertyType.System)
+            {
+                ss.AppendFormat(spaceNum + 1, "{0}.{2} = {1}.{2};", toClass, fromClass, propName);
+                ss.AppendLine();
+            }
+            else if (propType == PropertyType.Arrary)
+            {
+                AddArrayTypeList(ReplaceArrayName(obj.GetType().FullName));
+
+                ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, propName, spaceNum));
+            }
+            else if (propType == PropertyType.Class)
+            {
+                ss.AppendLine();
+                ss.AppendFormat(spaceNum + 1, "if ({0}.{1} != null)", fromClass, propName);
+                ss.AppendLine();
+                ss.AppendLine(spaceNum + 1, "{");
+
+                ss.Append(spaceNum, BuildPropertyTextForClass(obj, string.Format("{0}.{1}", toClass, propName), string.Format("{0}.{1}", fromClass, propName), toNamespace, spaceNum));
+                ss.AppendLine(spaceNum + 1, "}");
+            }
             return ss.ToString();
         }
         private string BuildPropertyTextForFirst(object obj, string toClass, string fromClass, string toNamespace, int spaceNum)
@@ -198,29 +261,29 @@ namespace TestWIN
 
             return ss.ToString();
         }
-        private string BuildArrayText(object obj, string toClass, string fromClass, string toNamespace, FieldInfo field, int spaceNum)
+        private string BuildArrayText(object obj, string toClass, string fromClass, string toNamespace, string propName, int spaceNum)
         {
             spaceNum++;
-            string objName = ReplaceArrayName(field.FieldType.Name);
+            string objName = obj.GetType().Name;
             string forVar = GetForeachName(objName); ;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
 
             ss.AppendLine();
-            ss.AppendFormat(spaceNum, "{0}.{1} = new List<{2}.{3}>();", toClass, field.Name, toNamespace, objName);
+            ss.AppendFormat(spaceNum, "{0}.{1} = new List<{2}.{3}>();", toClass, propName, toNamespace, objName);
             ss.AppendLine();
-            ss.AppendFormat(spaceNum, "if ({0}.{1} != null)", fromClass, field.Name);
+            ss.AppendFormat(spaceNum, "if ({0}.{1} != null)", fromClass, propName);
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            ss.AppendFormat(spaceNum + 1, "foreach ({0}.{1} {2} in {3}.{4})", FromNamespace, objName, forVar, fromClass, field.Name);
+            ss.AppendFormat(spaceNum + 1, "foreach ({0}.{1} {2} in {3}.{4})", FromNamespace, objName, forVar, fromClass, propName);
             ss.AppendLine();
             ss.AppendLine(spaceNum + 1, "{");
 
-            object o = Activator.CreateInstance(FindType(field.FieldType.FullName));
-            ss.Append(1, BuildPropertyTextForArray(o, string.Format("{0}.{1}", toClass, objName), forVar, string.Format("{0}.{1}", toNamespace, objName), spaceNum));
+            //object o = Activator.CreateInstance(FindType(field.FieldType.FullName));
+            ss.Append(1, BuildPropertyTextForArray(obj, string.Format("{0}.{1}", toClass, objName), forVar, string.Format("{0}.{1}", toNamespace, objName), spaceNum));
 
             ss.AppendLine();
-            ss.AppendFormat(spaceNum + 2, "{0}.{1}.Add({2});", toClass, field.Name, GetPrivateName(o.GetType().Name));
+            ss.AppendFormat(spaceNum + 2, "{0}.{1}.Add({2});", toClass, propName, GetPrivateName(objName));
 
             ss.AppendLine();
             ss.AppendLine(spaceNum + 1, "}");
@@ -230,6 +293,7 @@ namespace TestWIN
         }
         #endregion
 
+        #region Private Member
         private string GetPrivateName(string name)
         {
             return "_" + name;
@@ -268,6 +332,39 @@ namespace TestWIN
                 TypeList.Add(typeFullName);
             }
         }
+        private PropertyType GetPropertyType(FieldInfo f)
+        {
+            if (f.FieldType.FullName.StartsWith("System."))
+            {
+                return PropertyType.System;
+            }
+            else if (f.FieldType.IsArray)
+            {
+                return PropertyType.Arrary;
+            }
+            else if (f.FieldType.IsClass && f.FieldType.FullName.StartsWith("System.") == false)
+            {
+                return PropertyType.Class;
+            }
+            return PropertyType.None;
+        }
+        private PropertyType GetPropertyType(PropertyInfo p)
+        {
+            if (p.PropertyType.FullName.StartsWith("System."))
+            {
+                return PropertyType.System;
+            }
+            else if (p.PropertyType.IsArray)
+            {
+                return PropertyType.Arrary;
+            }
+            else if (p.PropertyType.IsClass && p.PropertyType.FullName.StartsWith("System.") == false)
+            {
+                return PropertyType.Class;
+            }
+            return PropertyType.None;
+        }
+
         #endregion
     }
 }
