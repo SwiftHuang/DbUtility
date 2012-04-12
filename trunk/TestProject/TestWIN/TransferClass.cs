@@ -13,26 +13,40 @@ namespace TestWIN
         public string FromNamespace { get; private set; }
         public string ToClassName { get; private set; }
         public string ToNamespace { get; private set; }
-        public object Instance { get; private set; }
+        public List<string> ArrayTypeList { get; private set; }
+        public List<string> TypeList { get; private set; }
+        public string ClassText { get; private set; }
+        public string MethodText { get; private set; }
+        public Assembly AssemblyInfo { get; private set; }
 
-        public TransferClass(object obj, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
+        public TransferClass(Assembly assembly, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
         {
             FromClassName = fromClassName;
             FromNamespace = fromNamespace;
             ToClassName = toClassName;
             ToNamespace = toNamespace;
-            Instance = obj;
+            AssemblyInfo = assembly;
+            ArrayTypeList = new List<string>();
+            TypeList = new List<string>();
+        }
+        public void Build(string typeFullName)
+        {
+            Build(new List<string>() { typeFullName });
+        }
+        public void Build(List<string> typeFullNameList)
+        {
+            foreach (string fullName in typeFullNameList)
+            {
+                object obj = Activator.CreateInstance(FindType(fullName));
+                MethodText = BuildTransferMethod(obj);
+                ClassText = BuildClass();
+            }
         }
 
-        public string BuildTransferMethod()
-        {
-            if (Instance != null)
-            {
-                return BuildPropertyTextForFirst(Instance, ToClassName, FromClassName, ToNamespace, 0);
-            }
-            return string.Empty;
-        }
-        public string BuildClass()
+        #region Private Member
+
+        #region Bulid Class
+        private string BuildClass()
         {
             int spaceNum = 0;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
@@ -43,18 +57,15 @@ namespace TestWIN
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            foreach (Type type in Instance.GetType().Assembly.GetTypes())
+            foreach (string s in TypeList)
             {
-                ss.Append(BuildClassText(spaceNum + 1, type));
+                ss.Append(BuildClassText(spaceNum + 1, FindType(s)));
             }
+
             ss.AppendLine();
             ss.AppendLine(spaceNum, "}");
             return ss.ToString();
         }
-
-        #region Private Member
-
-        #region Bulid Class
         private string BuildClassText(int spaceNum, Type type)
         {
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
@@ -79,6 +90,12 @@ namespace TestWIN
             ss.AppendLine(spaceNum, "}");
             ss.AppendLine();
 
+            if (ArrayTypeList.Contains(type.FullName))
+            {
+                ss.AppendFormat(spaceNum, "public class {0}s : List<{0}> {{ }}", type.Name);
+                ss.AppendLine();
+                ss.AppendLine();
+            }
             return ss.ToString();
         }
         private string BuildClassPropertyText(int spaceNum, FieldInfo field)
@@ -100,10 +117,17 @@ namespace TestWIN
 
             return tmp;
         }
-
         #endregion
 
         #region Bulid Method
+        private string BuildTransferMethod(object obj)
+        {
+            if (obj != null)
+            {
+                return BuildPropertyTextForFirst(obj, ToClassName, FromClassName, ToNamespace, 0);
+            }
+            return string.Empty;
+        }
         private string BuildPropertyText(object obj, string toClass, string fromClass, string toNamespace, int spaceNum)
         {
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
@@ -117,10 +141,15 @@ namespace TestWIN
                 }
                 else if (f.FieldType.IsArray)
                 {
+                    AddTypeList(ReplaceArrayName(f.FieldType.FullName));
+                    AddArrayTypeList(ReplaceArrayName(f.FieldType.FullName));
+
                     ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, f, spaceNum));
                 }
                 else if (f.FieldType.IsClass && f.FieldType.FullName.StartsWith("System.") == false)
                 {
+                    AddTypeList(ReplaceArrayName(f.FieldType.FullName));
+
                     ss.AppendLine();
                     ss.AppendFormat(spaceNum + 1, "if ({0}.{1} != null)", fromClass, f.Name);
                     ss.AppendLine();
@@ -189,7 +218,6 @@ namespace TestWIN
 
             object o = Activator.CreateInstance(FindType(field.FieldType.FullName));
             ss.Append(1, BuildPropertyTextForArray(o, string.Format("{0}.{1}", toClass, objName), forVar, string.Format("{0}.{1}", toNamespace, objName), spaceNum));
-            //ss.Append(1, BuildPropertyTextForArray(o, string.Format("{0}.{1}", toClass, objName), forVar, string.Format("{0}.{1}", toNamespace, string.Empty), spaceNum));
 
             ss.AppendLine();
             ss.AppendFormat(spaceNum + 2, "{0}.{1}.Add({2});", toClass, field.Name, GetPrivateName(o.GetType().Name));
@@ -214,17 +242,31 @@ namespace TestWIN
         {
             return name.Replace("[]", "");
         }
-        private Type FindType(string typeName)
+        private Type FindType(string typeFullName)
         {
-            typeName = typeName.Replace("[]", "");
-            foreach (Type t in Instance.GetType().Assembly.GetTypes())
+            typeFullName = typeFullName.Replace("[]", "");
+            foreach (Type t in AssemblyInfo.GetTypes())
             {
-                if (t.FullName == typeName)
+                if (t.FullName == typeFullName)
                 {
                     return t;
                 }
             }
             return null;
+        }
+        private void AddArrayTypeList(string typeFullName)
+        {
+            if (!ArrayTypeList.Contains(typeFullName))
+            {
+                ArrayTypeList.Add(typeFullName);
+            }
+        }
+        private void AddTypeList(string typeFullName)
+        {
+            if (!TypeList.Contains(typeFullName))
+            {
+                TypeList.Add(typeFullName);
+            }
         }
         #endregion
     }
