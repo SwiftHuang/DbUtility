@@ -351,10 +351,6 @@
             this.btnFile.UseVisualStyleBackColor = true;
             this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // BOToolsFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
