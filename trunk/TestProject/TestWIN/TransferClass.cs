@@ -29,29 +29,33 @@ namespace TestWIN
         public string ToClassName { get; private set; }
         public string ToNamespace { get; private set; }
         public List<string> ArrayTypeList { get; private set; }
-        public List<string> TypeList { get; private set; }
+        public List<string> TypeNameList { get; private set; }
         public string ClassText { get; private set; }
         public string MethodText { get; private set; }
-        public Assembly AssemblyInfo { get; private set; }
+        private List<Type> TypeList { get; set; }
         #endregion
 
-        public TransferClass(AssemblyType type, Assembly assembly, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
+        public TransferClass(AssemblyType type, string fromClassName, string fromNamespace, string toClassName, string toNamespace)
         {
             TransferType = type;
             FromClassName = fromClassName;
             FromNamespace = fromNamespace;
             ToClassName = toClassName;
             ToNamespace = toNamespace;
-            AssemblyInfo = assembly;
             ArrayTypeList = new List<string>();
-            TypeList = new List<string>();
+            TypeNameList = new List<string>();
+            TypeList = new List<Type>();
         }
-        public void Build(string typeFullName)
+        public void Build(string typeFullName, List<Assembly> assemblyList)
         {
-            Build(new List<string>() { typeFullName });
+            Build(new List<string>() { typeFullName }, assemblyList);
         }
-        public void Build(List<string> typeFullNameList)
+        public void Build(List<string> typeFullNameList, List<Assembly> assemblyList)
         {
+            foreach (Assembly a in assemblyList)
+            {
+                TypeList.AddRange(a.GetTypes());
+            }
             foreach (string fullName in typeFullNameList)
             {
                 object obj = Activator.CreateInstance(FindType(fullName));
@@ -72,7 +76,7 @@ namespace TestWIN
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            foreach (string s in TypeList)
+            foreach (string s in TypeNameList)
             {
                 ss.Append(BuildClassText(spaceNum + 1, FindType(s)));
             }
@@ -309,7 +313,7 @@ namespace TestWIN
         private Type FindType(string typeFullName)
         {
             typeFullName = typeFullName.Replace("[]", "");
-            foreach (Type t in AssemblyInfo.GetTypes())
+            foreach (Type t in TypeList)
             {
                 if (t.FullName == typeFullName)
                 {
@@ -327,9 +331,9 @@ namespace TestWIN
         }
         private void AddTypeList(string typeFullName)
         {
-            if (!TypeList.Contains(typeFullName))
+            if (!TypeNameList.Contains(typeFullName))
             {
-                TypeList.Add(typeFullName);
+                TypeNameList.Add(typeFullName);
             }
         }
         private PropertyType GetPropertyType(FieldInfo f)

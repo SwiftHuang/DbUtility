@@ -15,7 +15,8 @@ namespace TestWIN
     public partial class BOToolsFrm : Form
     {
         private const string @namespace = "WebService.DynamicWebCalling";
-        private Assembly assembly = null;
+        List<Assembly> assemblyList = new List<Assembly>();
+
         private TransferClass.AssemblyType TransferType = TransferClass.AssemblyType.None;
 
         public BOToolsFrm()
@@ -32,7 +33,6 @@ namespace TestWIN
                 //txtToClassName.Text = "invWin";
                 //txtFromNamespace.Text = "BOClassWS";
                 //txtFromClassName.Text = "invWS";
-
                 GeneralText();
             }
             catch (Exception ex)
@@ -49,8 +49,8 @@ namespace TestWIN
         {
             try
             {
-                assembly = GetAssembly(txtWSUrl.Text);
-                UpdateAssembly(assembly);
+                assemblyList.Add(GetAssembly(txtWSUrl.Text));
+                UpdateAssembly(assemblyList);
                 TransferType = TransferClass.AssemblyType.WebService;
             }
             catch (Exception ex)
@@ -62,17 +62,21 @@ namespace TestWIN
         {
             try
             {
+                openFileDialog1.Multiselect = true;
                 openFileDialog1.Filter = "程序集|*.dll|所有文件|*.*";
                 openFileDialog1.RestoreDirectory = true;
                 openFileDialog1.FilterIndex = 1;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    txtFileName.Text = openFileDialog1.FileName;
+                    foreach (string s in openFileDialog1.FileNames)
+                    {
+                        txtFileName.AppendText(s + "\r\n");
+                        assemblyList.Add(GetAssemblyByFile(s));
+                    }
+
                 }
 
-                assembly = GetAssemblyByFile(txtFileName.Text);
-
-                UpdateAssembly(assembly);
+                UpdateAssembly(assemblyList);
 
                 TransferType = TransferClass.AssemblyType.DLL;
             }
@@ -81,20 +85,22 @@ namespace TestWIN
                 MessageBox.Show(ex.Message);
             }
         }
-        private void UpdateAssembly(Assembly assembly)
+        private void UpdateAssembly(List<Assembly> assemblyList)
         {
             cboTypeList.Items.Clear();
 
-            if (assembly != null)
+            if (assemblyList != null)
             {
-                foreach (Type t in assembly.GetTypes())
+                foreach (Assembly a in assemblyList)
                 {
-                    if (t.IsEnum != true)
+                    foreach (Type t in a.GetTypes())
                     {
-                        cboTypeList.Items.Add(t);
+                        if (t.IsEnum != true)
+                        {
+                            cboTypeList.Items.Add(t);
+                        }
                     }
                 }
-
                 if (cboTypeList.Items.Count > 0)
                 {
                     btnGen.Enabled = true;
@@ -180,10 +186,10 @@ namespace TestWIN
             txtTranMethod.Clear();
             txtClass.Clear();
 
-            if (assembly != null)
+            if (assemblyList != null)
             {
-                TransferClass tc = new TransferClass(TransferType, assembly, txtFromClassName.Text, txtFromNamespace.Text, txtToClassName.Text, txtToNamespace.Text);
-                tc.Build(cboTypeList.SelectedItem.ToString());
+                TransferClass tc = new TransferClass(TransferType, txtFromClassName.Text, txtFromNamespace.Text, txtToClassName.Text, txtToNamespace.Text);
+                tc.Build(cboTypeList.SelectedItem.ToString(), assemblyList);
                 txtTranMethod.Text = tc.MethodText;
                 txtClass.Text = tc.ClassText;
             }
@@ -267,6 +273,7 @@ namespace TestWIN
             {
                 txtFromClassName.Text = "frm" + cboTypeList.Text;
             }
+            lblTypeFullName.Text = cboTypeList.SelectedItem.ToString();
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
