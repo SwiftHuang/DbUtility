@@ -53,8 +53,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnFile = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnCopy = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lblTypeFullName = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,7 +67,7 @@
             // btnGen
             // 
             this.btnGen.Enabled = false;
-            this.btnGen.Location = new System.Drawing.Point(754, 141);
+            this.btnGen.Location = new System.Drawing.Point(754, 207);
             this.btnGen.Name = "btnGen";
             this.btnGen.Size = new System.Drawing.Size(75, 23);
             this.btnGen.TabIndex = 10;
@@ -80,7 +82,6 @@
             this.txtWSUrl.Name = "txtWSUrl";
             this.txtWSUrl.Size = new System.Drawing.Size(638, 21);
             this.txtWSUrl.TabIndex = 1;
-            this.txtWSUrl.Text = "http://localhost:2212/BOTools.asmx";
             // 
             // txtClass
             // 
@@ -89,13 +90,13 @@
             this.txtClass.Multiline = true;
             this.txtClass.Name = "txtClass";
             this.txtClass.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtClass.Size = new System.Drawing.Size(812, 372);
+            this.txtClass.Size = new System.Drawing.Size(812, 306);
             this.txtClass.TabIndex = 1;
             // 
             // btnSetData
             // 
             this.btnSetData.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSetData.Location = new System.Drawing.Point(673, 141);
+            this.btnSetData.Location = new System.Drawing.Point(673, 207);
             this.btnSetData.Name = "btnSetData";
             this.btnSetData.Size = new System.Drawing.Size(75, 23);
             this.btnSetData.TabIndex = 9;
@@ -114,24 +115,27 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.txtWSUrl, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnGen, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnSetData, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnGen, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnSetData, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnUpdateWSTypeList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.cboTypeList, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnFile, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCopy, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnCopy, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblTypeFullName, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -155,10 +159,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 170);
+            this.tabControl1.Location = new System.Drawing.Point(3, 236);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(826, 404);
+            this.tabControl1.Size = new System.Drawing.Size(826, 338);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
@@ -167,7 +171,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(818, 378);
+            this.tabPage1.Size = new System.Drawing.Size(818, 312);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Class";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -210,7 +214,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label6, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtToClassName, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 84);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 150);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -295,7 +299,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 65);
+            this.label2.Location = new System.Drawing.Point(3, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 12);
             this.label2.TabIndex = 6;
@@ -314,11 +318,11 @@
             // cboTypeList
             // 
             this.cboTypeList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboTypeList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboTypeList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cboTypeList.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboTypeList.DisplayMember = "Name";
             this.cboTypeList.FormattingEnabled = true;
-            this.cboTypeList.Location = new System.Drawing.Point(110, 61);
+            this.cboTypeList.Location = new System.Drawing.Point(110, 102);
             this.cboTypeList.Name = "cboTypeList";
             this.cboTypeList.Size = new System.Drawing.Size(638, 20);
             this.cboTypeList.TabIndex = 7;
@@ -329,7 +333,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 37);
+            this.label7.Location = new System.Drawing.Point(3, 58);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 12);
             this.label7.TabIndex = 3;
@@ -337,11 +341,12 @@
             // 
             // txtFileName
             // 
-            this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFileName.Location = new System.Drawing.Point(110, 33);
+            this.txtFileName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFileName.Location = new System.Drawing.Point(110, 32);
+            this.txtFileName.Multiline = true;
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(638, 21);
+            this.txtFileName.Size = new System.Drawing.Size(638, 64);
             this.txtFileName.TabIndex = 4;
             // 
             // btnFile
@@ -363,6 +368,26 @@
             this.btnCopy.Text = "Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // lblTypeFullName
+            // 
+            this.lblTypeFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTypeFullName.AutoSize = true;
+            this.lblTypeFullName.Location = new System.Drawing.Point(110, 131);
+            this.lblTypeFullName.Name = "lblTypeFullName";
+            this.lblTypeFullName.Size = new System.Drawing.Size(638, 12);
+            this.lblTypeFullName.TabIndex = 6;
+            this.lblTypeFullName.Text = "--";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 131);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(101, 12);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Type Full Name:";
             // 
             // BOToolsFrm
             // 
@@ -415,6 +440,8 @@
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Label lblTypeFullName;
+        private System.Windows.Forms.Label label9;
     }
 }
 
