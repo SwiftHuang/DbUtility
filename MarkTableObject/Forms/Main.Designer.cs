@@ -44,7 +44,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabClassTran = new System.Windows.Forms.TabPage();
             this.genSQLCtrl2 = new hwj.MarkTableObject.Components.GenSQLCtrl();
+            this.ucClassTransfer1 = new hwj.MarkTableObject.Components.UCClassTransfer();
             this.treeMenu.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +55,7 @@
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabClassTran.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -71,31 +74,31 @@
             this.tsMenuGeneral,
             this.tsMenuSetting});
             this.treeMenu.Name = "treeMenu";
-            this.treeMenu.Size = new System.Drawing.Size(119, 76);
+            this.treeMenu.Size = new System.Drawing.Size(125, 76);
             // 
             // tsMenuConn
             // 
             this.tsMenuConn.Name = "tsMenuConn";
-            this.tsMenuConn.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuConn.Size = new System.Drawing.Size(124, 22);
             this.tsMenuConn.Text = "连 接";
             this.tsMenuConn.Click += new System.EventHandler(this.tsMenuConn_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // tsMenuGeneral
             // 
             this.tsMenuGeneral.Name = "tsMenuGeneral";
-            this.tsMenuGeneral.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuGeneral.Size = new System.Drawing.Size(124, 22);
             this.tsMenuGeneral.Text = "批量生成";
             this.tsMenuGeneral.Click += new System.EventHandler(this.tsMenuGeneral_Click);
             // 
             // tsMenuSetting
             // 
             this.tsMenuSetting.Name = "tsMenuSetting";
-            this.tsMenuSetting.Size = new System.Drawing.Size(118, 22);
+            this.tsMenuSetting.Size = new System.Drawing.Size(124, 22);
             this.tsMenuSetting.Text = "属 性";
             this.tsMenuSetting.Click += new System.EventHandler(this.tsMenuSetting_Click);
             // 
@@ -172,6 +175,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabClassTran);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -181,10 +185,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(735, 634);
+            this.tabPage1.Size = new System.Drawing.Size(735, 633);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "首 页";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -192,13 +196,23 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.genSQLCtrl2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(735, 634);
+            this.tabPage2.Size = new System.Drawing.Size(735, 633);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "生成代码";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabClassTran
+            // 
+            this.tabClassTran.Controls.Add(this.ucClassTransfer1);
+            this.tabClassTran.Location = new System.Drawing.Point(4, 22);
+            this.tabClassTran.Name = "tabClassTran";
+            this.tabClassTran.Size = new System.Drawing.Size(735, 633);
+            this.tabClassTran.TabIndex = 2;
+            this.tabClassTran.Text = "类转换";
+            this.tabClassTran.UseVisualStyleBackColor = true;
             // 
             // genSQLCtrl2
             // 
@@ -208,8 +222,16 @@
             this.genSQLCtrl2.Module = hwj.MarkTableObject.DBModule.SQL;
             this.genSQLCtrl2.Name = "genSQLCtrl2";
             this.genSQLCtrl2.PrjInfo = null;
-            this.genSQLCtrl2.Size = new System.Drawing.Size(729, 628);
+            this.genSQLCtrl2.Size = new System.Drawing.Size(729, 627);
             this.genSQLCtrl2.TabIndex = 0;
+            // 
+            // ucClassTransfer1
+            // 
+            this.ucClassTransfer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucClassTransfer1.Location = new System.Drawing.Point(0, 0);
+            this.ucClassTransfer1.Name = "ucClassTransfer1";
+            this.ucClassTransfer1.Size = new System.Drawing.Size(735, 633);
+            this.ucClassTransfer1.TabIndex = 0;
             // 
             // Main
             // 
@@ -232,6 +254,7 @@
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabClassTran.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,6 +278,8 @@
         private hwj.MarkTableObject.Components.GenSQLCtrl genSQLCtrl1;
         private System.Windows.Forms.TreeView tvServers;
         private hwj.MarkTableObject.Components.GenSQLCtrl genSQLCtrl2;
+        private System.Windows.Forms.TabPage tabClassTran;
+        private hwj.MarkTableObject.Components.UCClassTransfer ucClassTransfer1;
 
     }
 }
