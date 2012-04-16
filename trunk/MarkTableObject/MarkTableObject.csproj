@@ -31,9 +31,9 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.1.1.5</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.1.6</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,6 +82,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -92,6 +93,7 @@
     <Compile Include="BLL\BuilderEntity.cs" />
     <Compile Include="BLL\Common.cs" />
     <Compile Include="BLL\MSSQL\BuilderColumn.cs" />
+    <Compile Include="BLL\ClassTransfer.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Components\GenSQLCtrl.cs">
       <SubType>UserControl</SubType>
@@ -110,6 +112,12 @@
     </Compile>
     <Compile Include="Components\MSSQLSetting.Designer.cs">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UCClassTransfer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\UCClassTransfer.Designer.cs">
+      <DependentUpon>UCClassTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\BLLInfo.cs" />
     <Compile Include="Entity\ColumnInfo.cs">
@@ -162,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\MSSQLSetting.resx">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\UCClassTransfer.resx">
+      <DependentUpon>UCClassTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DatabaseFrm.resx">
       <DependentUpon>DatabaseFrm.cs</DependentUpon>
