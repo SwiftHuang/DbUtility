@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Microsoft.CSharp;
 using System.Web.Services.Description;
 using System.Collections.Generic;
+using TestWIN;
 
 namespace TestWIN
 {
@@ -198,22 +199,23 @@ namespace TestWIN
         {
             BOClassWS.BOToolsSoapClient svc = new TestWIN.BOClassWS.BOToolsSoapClient("BOToolsSoap", txtWSUrl.Text);
             BOClassWS.Invoice invWS = svc.GetInvoice();
-            BOClassWIN.Invoice invWin = new BOClassWIN.Invoice();
+            BOClassWIN.Invoice invWIN = new BOClassWIN.Invoice();
 
             if (invWS != null)
             {
-                invWin.CompanyCode = invWS.CompanyCode;
-                invWin.InvNum = invWS.InvNum;
-                invWin.QTY = invWS.QTY;
-                invWin.Amount = invWS.Amount;
+                invWIN.CompanyCode = invWS.CompanyCode;
+                invWIN.InvNum = invWS.InvNum;
+                invWIN.QTY = invWS.QTY;
+                invWIN.Amount = invWS.Amount;
+                invWIN.Types = (BOClassWIN.InvoiceType)Enum.Parse(typeof(BOClassWIN.InvoiceType), invWS.Types.ToString());
 
                 if (invWS.HotelInfo != null)
                 {
-                    invWin.HotelInfo = new BOClassWIN.Hotel();
-                    invWin.HotelInfo.HotelCode = invWS.HotelInfo.HotelCode;
+                    invWIN.HotelInfo = new BOClassWIN.Hotel();
+                    invWIN.HotelInfo.HotelCode = invWS.HotelInfo.HotelCode;
                 }
 
-                invWin.XOList = new List<BOClassWIN.XO>();
+                invWIN.XOList = new List<BOClassWIN.XO>();
                 if (invWS.XOList != null)
                 {
                     foreach (BOClassWS.XO _frXO in invWS.XOList)
@@ -233,11 +235,11 @@ namespace TestWIN
                             }
                         }
 
-                        invWin.XOList.Add(_XO);
+                        invWIN.XOList.Add(_XO);
                     }
                 }
 
-                invWin.Tickets = new List<BOClassWIN.Ticket>();
+                invWIN.Tickets = new List<BOClassWIN.Ticket>();
                 if (invWS.Tickets != null)
                 {
                     foreach (BOClassWS.Ticket _frTicket in invWS.Tickets)
@@ -257,7 +259,7 @@ namespace TestWIN
                             }
                         }
 
-                        invWin.Tickets.Add(_Ticket);
+                        invWIN.Tickets.Add(_Ticket);
                     }
                 }
             }

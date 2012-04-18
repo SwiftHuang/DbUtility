@@ -5,15 +5,23 @@ using System.Web;
 
 namespace TestWS.BOClass
 {
+    public enum InvoiceType
+    {
+        None,
+        Normal,
+        UATP,
+    }
     public class Invoice
     {
         public string CompanyCode { get; set; }
         public string InvNum { get; set; }
         public int QTY { get; set; }
         public decimal Amount { get; set; }
+        public InvoiceType Types { get; set; }
         public Hotel HotelInfo { get; set; }
         public List<XO> XOList { get; set; }
         public List<Ticket> Tickets { get; set; }
+
 
         public Invoice()
         {
@@ -28,6 +36,7 @@ namespace TestWS.BOClass
                 InvNum = "GI00000001";
                 QTY = 10;
                 Amount = 1200;
+                Types = InvoiceType.UATP;
                 HotelInfo = new Hotel(true);
                 Tickets = new List<Ticket>();
                 Tickets.Add(new Ticket(true));
