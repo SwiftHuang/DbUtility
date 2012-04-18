@@ -38,7 +38,7 @@ namespace hwj.MarkTableObject.Components
             }
             catch (Exception ex)
             {
-                 Common.MsgError(ex.Message, ex);
+                Common.MsgError(ex.Message, ex);
             }
         }
         private void btnFile_Click(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace hwj.MarkTableObject.Components
             //}
             txtToClassName.Text = cboTypeList.Text;
             txtFromClassName.Text = cboTypeList.Text;
-            lblTypeFullName.Text = cboTypeList.SelectedItem.ToString();
+            txtTypeFullName.Text = cboTypeList.SelectedItem.ToString();
         }
         #endregion
 
@@ -127,6 +127,7 @@ namespace hwj.MarkTableObject.Components
                         }
                     }
                 }
+                cboTypeList.Sorted = true;
                 if (cboTypeList.Items.Count > 0)
                 {
                     btnGen.Enabled = true;

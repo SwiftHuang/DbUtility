@@ -38,40 +38,40 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtTranMethod = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtFromNamespace = new System.Windows.Forms.TextBox();
-            this.txtFromVarName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtToNamespace = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtToVarName = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtToClassName = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtFromNamespace = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtFromVarName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtFromClassName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnUpdateWSTypeList = new System.Windows.Forms.Button();
             this.cboTypeList = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.btnFile = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
-            this.lblTypeFullName = new System.Windows.Forms.Label();
+            this.txtTypeFullName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtToClassName = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtFromClassName = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +90,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnUpdateWSTypeList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.cboTypeList, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnCopy, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblTypeFullName, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtTypeFullName, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtFileName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
@@ -179,7 +179,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(700, 221);
+            this.tabPage2.Size = new System.Drawing.Size(700, 168);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "转换方法";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -191,7 +191,7 @@
             this.txtTranMethod.Multiline = true;
             this.txtTranMethod.Name = "txtTranMethod";
             this.txtTranMethod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTranMethod.Size = new System.Drawing.Size(694, 215);
+            this.txtTranMethod.Size = new System.Drawing.Size(694, 162);
             this.txtTranMethod.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -210,6 +210,38 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(714, 105);
             this.tableLayoutPanel2.TabIndex = 8;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(351, 101);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "目标类型";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.txtToNamespace, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.txtToVarName, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.txtToClassName, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(345, 81);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -219,32 +251,6 @@
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 0;
             this.label3.Text = "命名空间:";
-            // 
-            // txtFromNamespace
-            // 
-            this.txtFromNamespace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFromNamespace.Location = new System.Drawing.Point(68, 3);
-            this.txtFromNamespace.Name = "txtFromNamespace";
-            this.txtFromNamespace.Size = new System.Drawing.Size(274, 21);
-            this.txtFromNamespace.TabIndex = 2;
-            // 
-            // txtFromVarName
-            // 
-            this.txtFromVarName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFromVarName.Location = new System.Drawing.Point(68, 57);
-            this.txtFromVarName.Name = "txtFromVarName";
-            this.txtFromVarName.Size = new System.Drawing.Size(274, 21);
-            this.txtFromVarName.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 12);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "命名空间:";
             // 
             // txtToNamespace
             // 
@@ -264,6 +270,83 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "变量名:";
             // 
+            // txtToVarName
+            // 
+            this.txtToVarName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtToVarName.Location = new System.Drawing.Point(68, 57);
+            this.txtToVarName.Name = "txtToVarName";
+            this.txtToVarName.Size = new System.Drawing.Size(274, 21);
+            this.txtToVarName.TabIndex = 5;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 34);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 12);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "类型名:";
+            // 
+            // txtToClassName
+            // 
+            this.txtToClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtToClassName.Location = new System.Drawing.Point(68, 30);
+            this.txtToClassName.Name = "txtToClassName";
+            this.txtToClassName.ReadOnly = true;
+            this.txtToClassName.Size = new System.Drawing.Size(274, 21);
+            this.txtToClassName.TabIndex = 3;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel4);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(360, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(351, 101);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "来源类型";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtFromNamespace, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.txtFromVarName, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label10, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.txtFromClassName, 1, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(345, 81);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 12);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "命名空间:";
+            // 
+            // txtFromNamespace
+            // 
+            this.txtFromNamespace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFromNamespace.Location = new System.Drawing.Point(68, 3);
+            this.txtFromNamespace.Name = "txtFromNamespace";
+            this.txtFromNamespace.Size = new System.Drawing.Size(274, 21);
+            this.txtFromNamespace.TabIndex = 2;
+            // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -274,13 +357,32 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "变量名:";
             // 
-            // txtToVarName
+            // txtFromVarName
             // 
-            this.txtToVarName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtToVarName.Location = new System.Drawing.Point(68, 57);
-            this.txtToVarName.Name = "txtToVarName";
-            this.txtToVarName.Size = new System.Drawing.Size(274, 21);
-            this.txtToVarName.TabIndex = 5;
+            this.txtFromVarName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFromVarName.Location = new System.Drawing.Point(68, 57);
+            this.txtFromVarName.Name = "txtFromVarName";
+            this.txtFromVarName.Size = new System.Drawing.Size(274, 21);
+            this.txtFromVarName.TabIndex = 0;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 34);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 12);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "类型名:";
+            // 
+            // txtFromClassName
+            // 
+            this.txtFromClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFromClassName.Location = new System.Drawing.Point(68, 30);
+            this.txtFromClassName.Name = "txtFromClassName";
+            this.txtFromClassName.ReadOnly = true;
+            this.txtFromClassName.Size = new System.Drawing.Size(274, 21);
+            this.txtFromClassName.TabIndex = 4;
             // 
             // label2
             // 
@@ -316,15 +418,35 @@
             this.cboTypeList.ValueMember = "FullName";
             this.cboTypeList.SelectedIndexChanged += new System.EventHandler(this.cboTypeList_SelectedIndexChanged);
             // 
-            // label7
+            // btnCopy
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 37);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 12);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "DLL文件路径:";
+            this.btnCopy.Location = new System.Drawing.Point(636, 489);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.TabIndex = 12;
+            this.btnCopy.Text = "Copy";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // txtTypeFullName
+            // 
+            this.txtTypeFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTypeFullName.Location = new System.Drawing.Point(110, 128);
+            this.txtTypeFullName.Name = "txtTypeFullName";
+            this.txtTypeFullName.ReadOnly = true;
+            this.txtTypeFullName.Size = new System.Drawing.Size(520, 21);
+            this.txtTypeFullName.TabIndex = 9;
+            this.txtTypeFullName.Text = "--";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 132);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(101, 12);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "类型全称:";
             // 
             // txtFileName
             // 
@@ -337,6 +459,16 @@
             this.txtFileName.Size = new System.Drawing.Size(520, 64);
             this.txtFileName.TabIndex = 4;
             // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 37);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 12);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "DLL文件路径:";
+            // 
             // btnFile
             // 
             this.btnFile.Location = new System.Drawing.Point(636, 32);
@@ -346,138 +478,6 @@
             this.btnFile.Text = "选择文件";
             this.btnFile.UseVisualStyleBackColor = true;
             this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Location = new System.Drawing.Point(636, 489);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnCopy.TabIndex = 12;
-            this.btnCopy.Text = "Copy";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // lblTypeFullName
-            // 
-            this.lblTypeFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTypeFullName.AutoSize = true;
-            this.lblTypeFullName.Location = new System.Drawing.Point(110, 132);
-            this.lblTypeFullName.Name = "lblTypeFullName";
-            this.lblTypeFullName.Size = new System.Drawing.Size(520, 12);
-            this.lblTypeFullName.TabIndex = 9;
-            this.lblTypeFullName.Text = "--";
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 132);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 12);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "类型全称:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(351, 101);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "目标类型";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tableLayoutPanel4);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(360, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(351, 101);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "来源类型";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.txtToNamespace, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.txtToVarName, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.txtToClassName, 1, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(345, 81);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.txtFromNamespace, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.txtFromVarName, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label10, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.txtFromClassName, 1, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 17);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(345, 81);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 34);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 12);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "类型名:";
-            // 
-            // txtToClassName
-            // 
-            this.txtToClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtToClassName.Location = new System.Drawing.Point(68, 30);
-            this.txtToClassName.Name = "txtToClassName";
-            this.txtToClassName.ReadOnly = true;
-            this.txtToClassName.Size = new System.Drawing.Size(274, 21);
-            this.txtToClassName.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 34);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 12);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "类型名:";
-            // 
-            // txtFromClassName
-            // 
-            this.txtFromClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFromClassName.Location = new System.Drawing.Point(68, 30);
-            this.txtFromClassName.Name = "txtFromClassName";
-            this.txtFromClassName.ReadOnly = true;
-            this.txtFromClassName.Size = new System.Drawing.Size(274, 21);
-            this.txtFromClassName.TabIndex = 4;
             // 
             // UCClassTransfer
             // 
@@ -495,9 +495,9 @@
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
@@ -531,7 +531,7 @@
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.Label lblTypeFullName;
+        private System.Windows.Forms.TextBox txtTypeFullName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox1;
