@@ -13,6 +13,7 @@ namespace TestWIN.BOClassWIN
         public Hotel HotelInfo { get; set; }
         public List<XO> XOList { get; set; }
         public List<Ticket> Tickets { get; set; }
+        public InvoiceType Types { get; set; }
 
         public Invoice()
         {
@@ -32,16 +33,32 @@ namespace TestWIN.BOClassWIN
 
     }
 
-    public class TicketDetail
+    public class XO
     {
-        public String SegNum { get; set; }
+        public String XONum { get; set; }
+        public List<XODetail> Details { get; set; }
 
-        public TicketDetail()
+        public XO()
         {
 
         }
 
     }
+
+    public class XOs : List<XO> { }
+
+    public class XODetail
+    {
+        public String SegNum { get; set; }
+
+        public XODetail()
+        {
+
+        }
+
+    }
+
+    public class XODetails : List<XODetail> { }
 
     public class Ticket
     {
@@ -55,26 +72,25 @@ namespace TestWIN.BOClassWIN
 
     }
 
-    public class XODetail
+    public class Tickets : List<Ticket> { }
+
+    public class TicketDetail
     {
         public String SegNum { get; set; }
 
-        public XODetail()
+        public TicketDetail()
         {
 
         }
 
     }
 
-    public class XO
+    public class TicketDetails : List<TicketDetail> { }
+
+    public enum InvoiceType
     {
-        public String XONum { get; set; }
-        public List<XODetail> Details { get; set; }
-
-        public XO()
-        {
-
-        }
-
+        None,
+        Normal,
+        UATP,
     }
 }

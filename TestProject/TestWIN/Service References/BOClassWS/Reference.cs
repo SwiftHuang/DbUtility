@@ -32,6 +32,8 @@ namespace TestWIN.BOClassWS {
         
         private decimal AmountField;
         
+        private TestWIN.BOClassWS.InvoiceType TypesField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TestWIN.BOClassWS.Hotel HotelInfoField;
         
@@ -103,7 +105,20 @@ namespace TestWIN.BOClassWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public TestWIN.BOClassWS.InvoiceType Types {
+            get {
+                return this.TypesField;
+            }
+            set {
+                if ((this.TypesField.Equals(value) != true)) {
+                    this.TypesField = value;
+                    this.RaisePropertyChanged("Types");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public TestWIN.BOClassWS.Hotel HotelInfo {
             get {
                 return this.HotelInfoField;
@@ -116,7 +131,7 @@ namespace TestWIN.BOClassWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public TestWIN.BOClassWS.XO[] XOList {
             get {
                 return this.XOListField;
@@ -129,7 +144,7 @@ namespace TestWIN.BOClassWS {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public TestWIN.BOClassWS.Ticket[] Tickets {
             get {
                 return this.TicketsField;
@@ -195,6 +210,20 @@ namespace TestWIN.BOClassWS {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvoiceType", Namespace="http://tempuri.org/")]
+    public enum InvoiceType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Normal = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UATP = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
