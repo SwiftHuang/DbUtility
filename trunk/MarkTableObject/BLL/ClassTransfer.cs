@@ -17,9 +17,10 @@ namespace hwj.MarkTableObject.BLL
         public enum PropertyType
         {
             None,
-            System,
             Arrary,
             Class,
+            Enum,
+            System,
         }
         #region Property
         public AssemblyType TransferType { get; private set; }
@@ -89,47 +90,65 @@ namespace hwj.MarkTableObject.BLL
             PropertyType propType = PropertyType.None;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
 
-            ss.AppendFormat(spaceNum, "public class {0}", type.Name);
-            ss.AppendLine();
-            ss.AppendLine(spaceNum, "{");
-
-            if (TransferType == AssemblyType.WebService)
+            if (type.IsEnum)
             {
+                ss.AppendFormat(spaceNum, "public enum {0}", type.Name);
+                ss.AppendLine();
+                ss.AppendLine(spaceNum, "{");
                 foreach (FieldInfo f in type.GetFields())
                 {
-                    propType = GetPropertyType(f);
-
-                    ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, f.Name, f.FieldType.Name));
-                    ss.AppendLine();
+                    if (f.FieldType.FullName == type.FullName)
+                    {
+                        ss.AppendFormat(spaceNum + 1, "{0},", f.Name);
+                        ss.AppendLine();
+                    }
                 }
+
+                ss.AppendLine(spaceNum, "}");
             }
             else
             {
-                foreach (PropertyInfo p in type.GetProperties())
-                {
-                    propType = GetPropertyType(p);
+                ss.AppendFormat(spaceNum, "public class {0}", type.Name);
+                ss.AppendLine();
+                ss.AppendLine(spaceNum, "{");
 
-                    ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, p.Name, p.PropertyType.Name));
+                if (TransferType == AssemblyType.WebService)
+                {
+                    foreach (FieldInfo f in type.GetFields())
+                    {
+                        propType = GetPropertyType(f);
+
+                        ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, f.Name, f.FieldType.Name));
+                        ss.AppendLine();
+                    }
+                }
+                else
+                {
+                    foreach (PropertyInfo p in type.GetProperties())
+                    {
+                        propType = GetPropertyType(p);
+
+                        ss.Append(spaceNum + 1, BuildClassPropertyText(spaceNum + 1, propType, p.Name, p.PropertyType.Name));
+                        ss.AppendLine();
+                    }
+                }
+
+                ss.AppendLine();
+                ss.AppendFormat(spaceNum + 1, "public {0}()", type.Name);
+                ss.AppendLine();
+                ss.AppendLine(spaceNum + 1, "{");
+                ss.AppendLine();
+                ss.AppendLine(spaceNum + 1, "}");
+
+                ss.AppendLine(spaceNum, "}");
+                ss.AppendLine();
+
+                if (ArrayTypeList.Contains(type.FullName))
+                {
+                    ss.AppendFormat(spaceNum, "public class {0}s : List<{0}> {{ }}", type.Name);
+                    ss.AppendLine();
                     ss.AppendLine();
                 }
-            }
-
-            ss.AppendLine();
-            ss.AppendFormat(spaceNum + 1, "public {0}()", type.Name);
-            ss.AppendLine();
-            ss.AppendLine(spaceNum + 1, "{");
-            ss.AppendLine();
-            ss.AppendLine(spaceNum + 1, "}");
-
-            ss.AppendLine();
-            ss.AppendLine(spaceNum, "}");
-            ss.AppendLine();
-
-            if (ArrayTypeList.Contains(type.FullName))
-            {
-                ss.AppendFormat(spaceNum, "public class {0}s : List<{0}> {{ }}", type.Name);
-                ss.AppendLine();
-                ss.AppendLine();
             }
             return ss.ToString();
         }
@@ -137,7 +156,7 @@ namespace hwj.MarkTableObject.BLL
         {
             string tmp = string.Empty;
 
-            if (propType == PropertyType.System)
+            if (propType == PropertyType.System || propType == PropertyType.Enum)
             {
                 tmp = string.Format("public {0} {1} {{ get; set; }}", typeName, propName);
             }
@@ -176,7 +195,7 @@ namespace hwj.MarkTableObject.BLL
                 {
                     propType = GetPropertyType(f);
 
-                    if (propType == PropertyType.Arrary || propType == PropertyType.Class)
+                    if (propType != PropertyType.None && propType != PropertyType.System)
                     {
                         o = Activator.CreateInstance(FindType(f.FieldType.FullName));
                     }
@@ -190,7 +209,7 @@ namespace hwj.MarkTableObject.BLL
                 {
                     propType = GetPropertyType(p);
 
-                    if (propType == PropertyType.Arrary || propType == PropertyType.Class)
+                    if (propType != PropertyType.None && propType != PropertyType.System)
                     {
                         o = Activator.CreateInstance(FindType(p.PropertyType.FullName));
                     }
@@ -227,6 +246,12 @@ namespace hwj.MarkTableObject.BLL
                 ss.Append(spaceNum, BuildPropertyTextForClass(obj, string.Format("{0}.{1}", toClass, propName), string.Format("{0}.{1}", fromClass, propName), toNamespace, spaceNum));
                 ss.AppendLine(spaceNum + 1, "}");
             }
+            else if (propType == PropertyType.Enum)
+            {
+                ss.AppendFormat(spaceNum + 1, "{0}.{2} = ({3}.{4})Enum.Parse(typeof({3}.{4}), {1}.{2}.ToString());", toClass, fromClass, propName, toNamespace, obj.GetType().Name);
+                ss.AppendLine();
+            }
+
             return ss.ToString();
         }
         private string BuildPropertyTextForFirst(object obj, string toClass, string fromClass, string toNamespace, int spaceNum)
@@ -309,6 +334,7 @@ namespace hwj.MarkTableObject.BLL
         {
             return name.Replace("[]", "");
         }
+
         private Type FindType(string typeFullName)
         {
             typeFullName = typeFullName.Replace("[]", "");
@@ -348,6 +374,10 @@ namespace hwj.MarkTableObject.BLL
             else if (f.FieldType.IsClass && f.FieldType.FullName.StartsWith("System.") == false)
             {
                 return PropertyType.Class;
+            }
+            else if (f.FieldType.IsEnum)
+            {
+                return PropertyType.Enum;
             }
             return PropertyType.None;
         }
