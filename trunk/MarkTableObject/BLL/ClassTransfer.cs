@@ -81,7 +81,6 @@ namespace hwj.MarkTableObject.BLL
                 ss.Append(BuildClassText(spaceNum + 1, FindType(s)));
             }
 
-            ss.AppendLine();
             ss.AppendLine(spaceNum, "}");
             return ss.ToString();
         }
@@ -105,6 +104,7 @@ namespace hwj.MarkTableObject.BLL
                 }
 
                 ss.AppendLine(spaceNum, "}");
+                ss.AppendLine();
             }
             else
             {
@@ -256,6 +256,7 @@ namespace hwj.MarkTableObject.BLL
         }
         private string BuildPropertyTextForFirst(object obj, string toClass, string fromClass, string toNamespace, int spaceNum)
         {
+            AddTypeList(ReplaceArrayName(obj.GetType().FullName));
             spaceNum = spaceNum + 1;
             StringHelper.SpaceString ss = new StringHelper.SpaceString();
             ss.AppendFormat(spaceNum, "{0}.{1} {2} = new {0}.{1}();", toNamespace, obj.GetType().Name, toClass);
