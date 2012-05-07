@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\DAEMOSSETUP.cs" />
+    <Compile Include="DB\tbEMOSSETUP.cs" />
     <Compile Include="DB\Test\BOAptx.cs" />
     <Compile Include="DB\Test\DAAptx.cs" />
     <Compile Include="DB\Test\DASqlEntity.cs" />
@@ -133,6 +135,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TransFrm.resx">
+      <DependentUpon>TransFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -162,6 +167,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TransFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransFrm.Designer.cs">
+      <DependentUpon>TransFrm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
