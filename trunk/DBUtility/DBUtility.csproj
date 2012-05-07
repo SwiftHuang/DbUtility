@@ -96,6 +96,7 @@
     <Compile Include="Entity\PageResult.cs" />
     <Compile Include="MSSQL\BaseSqlDAL.cs" />
     <Compile Include="MSSQL\SqlEntityXml.cs" />
+    <Compile Include="MSSQL\TransactionHelper.cs" />
     <Compile Include="Param\SortParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />

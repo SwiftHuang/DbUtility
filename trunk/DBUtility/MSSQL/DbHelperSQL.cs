@@ -366,6 +366,8 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
+      
+
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
@@ -696,7 +698,7 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        private static Exception CheckSqlException(Exception e, SqlEntity entity)
+        internal static Exception CheckSqlException(Exception e, SqlEntity entity)
         {
             if (e is SqlException)
             {
