@@ -22,9 +22,10 @@ namespace Test
             //Application.Run(new Performance());
             //Application.Run(new DemoFrm.XMLFrm());
             //Application.Run(new DemoFrm.ControlsFrm());
-            Application.Run(new DemoFrm.DragFrm());
+            //Application.Run(new DemoFrm.DragFrm());
             //Application.Run(new dgFrm());
             //Application.Run(new Suggest());
+            Application.Run(new TransFrm());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

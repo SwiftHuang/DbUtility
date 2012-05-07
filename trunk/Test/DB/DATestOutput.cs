@@ -18,6 +18,12 @@ namespace Test.DB.DAL
         {
             TableName = tbTestOutput.DBTableName;
         }
+        public bool GetTest()
+        {
+            return false;
+        }
     }
+
+
 }
 
