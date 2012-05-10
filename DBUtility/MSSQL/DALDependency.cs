@@ -71,7 +71,7 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 执行插入数据
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">数据实体</param>
         /// <returns></returns>
         protected bool Add(T entity)
         {
@@ -128,6 +128,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
         /// <summary>
         /// 获取增加的Sql对象
         /// </summary>
@@ -139,6 +140,16 @@ namespace hwj.DBUtility.MSSQL
             //    return InsertSqlLog(new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity)), "INSERT");
             //else
             return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
+        }
+        /// <summary>
+        /// 执行插入数据
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <param name="entity">数据实体</param>
+        /// <returns></returns>
+        public static bool Add(DBTransaction trans, T entity)
+        {
+            return ExecuteSqlByTrans(trans, AddSqlEntity(entity));
         }
         /// <summary>
         /// 获取最后一次自增ID
@@ -220,7 +231,6 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                //_SqlEntity = UpdateSqlEntity(entity, filterParam);
                 SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
                 _SqlEntity = tmpSqlEty;
                 return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
@@ -238,6 +248,32 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <param name="entity">更新实体</param>
+        /// <param name="filterParam">更新条件</param>
+        /// <returns></returns>
+        public static bool Update(DBTransaction trans, T entity, FilterParams filterParam)
+        {
+            SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
+            return ExecuteSqlByTrans(trans, tmpSqlEty);
+        }
+        /// <summary>
+        /// 执行数据更新
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <param name="updateParam">更新字段</param>
+        /// <param name="filterParam">更新条件</param>
+        /// <returns></returns>
+        public static bool Update(DBTransaction trans, UpdateParam updateParam, FilterParams filterParam)
+        {
+            SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
+            return ExecuteSqlByTrans(trans, tmpSqlEty);
+        }
+
         #endregion
 
         #region Delete
@@ -260,7 +296,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected bool Delete()
         {
-            return Delete(null);
+            return Delete(new FilterParams());
         }
         /// <summary>
         /// 删除记录
@@ -269,7 +305,6 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected bool Delete(FilterParams filterParam)
         {
-            //_SqlEntity = DeleteSqlEntity(filterParam);
             SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
             _SqlEntity = tmpSqlEty;
             return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
@@ -286,6 +321,28 @@ namespace hwj.DBUtility.MSSQL
             else
                 return false;
         }
+
+        /// <summary>
+        /// 删除记录
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <returns></returns>
+        public static bool Delete(DBTransaction trans)
+        {
+            return Delete(trans);
+        }
+        /// <summary>
+        /// 删除记录
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <param name="filterParam">删除条件</param>
+        /// <returns></returns>
+        public static bool Delete(DBTransaction trans, FilterParams filterParam)
+        {
+            SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
+            return ExecuteSqlByTrans(trans, tmpSqlEty);
+        }
+
         #endregion
 
         #region Sql Log
@@ -716,7 +773,17 @@ namespace hwj.DBUtility.MSSQL
             }
             return null;
         }
-
+        private static bool ExecuteSqlByTrans(DBTransaction trans, SqlEntity sqlEntity)
+        {
+            if (trans != null)
+            {
+                return trans.ExecuteSql(sqlEntity) > 0;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
