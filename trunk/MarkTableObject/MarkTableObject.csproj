@@ -31,7 +31,7 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.1.1.8</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.1.9</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>

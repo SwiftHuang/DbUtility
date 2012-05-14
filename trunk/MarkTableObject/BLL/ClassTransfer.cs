@@ -58,7 +58,7 @@ namespace hwj.MarkTableObject.BLL
             }
             foreach (string fullName in typeFullNameList)
             {
-                object obj = Activator.CreateInstance(FindType(fullName));
+                object obj = CreateInstance(FindType(fullName));
                 MethodText = BuildTransferMethod(obj);
                 ClassText = BuildClass();
             }
@@ -197,7 +197,7 @@ namespace hwj.MarkTableObject.BLL
 
                     if (propType != PropertyType.None && propType != PropertyType.System)
                     {
-                        o = Activator.CreateInstance(FindType(f.FieldType.FullName));
+                        o = CreateInstance(FindType(f.FieldType.FullName));
                     }
 
                     ss.Append(BuildProperty(propType, o, f.Name, toClass, fromClass, toNamespace, spaceNum));
@@ -211,7 +211,7 @@ namespace hwj.MarkTableObject.BLL
 
                     if (propType != PropertyType.None && propType != PropertyType.System)
                     {
-                        o = Activator.CreateInstance(FindType(p.PropertyType.FullName));
+                        o = CreateInstance(FindType(p.PropertyType.FullName));
                     }
 
                     ss.Append(BuildProperty(propType, o, p.Name, toClass, fromClass, toNamespace, spaceNum));
@@ -265,7 +265,14 @@ namespace hwj.MarkTableObject.BLL
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            ss.Append(BuildPropertyText(obj, toClass, fromClass, toNamespace, spaceNum));
+            if (obj.GetType().IsArray)
+            {
+                ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, obj.GetType().Name, spaceNum));
+            }
+            else
+            {
+                ss.Append(BuildPropertyText(obj, toClass, fromClass, toNamespace, spaceNum));
+            }
 
             ss.AppendLine(spaceNum, "}");
             return ss.ToString();
@@ -323,6 +330,22 @@ namespace hwj.MarkTableObject.BLL
         #endregion
 
         #region Private Member
+        private object CreateInstance(Type type)
+        {
+            try
+            {
+                return Activator.CreateInstance(type);
+            }
+            catch (Exception ex)
+            {
+                if (type != null)
+                {
+                    throw new Exception(type.FullName);
+                }
+                throw ex;
+            }
+
+        }
         private string GetPrivateName(string name)
         {
             return "_" + name;
@@ -346,7 +369,8 @@ namespace hwj.MarkTableObject.BLL
                     return t;
                 }
             }
-            return null;
+
+            throw new Exception(string.Format("Can't find type [{0}]", typeFullName));
         }
         private void AddArrayTypeList(string typeFullName)
         {
