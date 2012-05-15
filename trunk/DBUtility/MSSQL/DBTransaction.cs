@@ -173,6 +173,17 @@ namespace hwj.DBUtility.MSSQL
                 return rows;
             }
         }
+        public SqlDataReader ExecuteReader(string SQLString, List<SqlParameter> cmdParms, int timeout)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                DbHelperSQL.PrepareCommand(cmd, SqlConn, SqlTrans, SQLString, cmdParms, timeout);
+
+                SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                cmd.Parameters.Clear();
+                return myReader;
+            }
+        }
         #endregion
 
         #region IDbTransaction 成员

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using hwj.DBUtility.TableMapping;
+using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -32,7 +33,7 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 显示执行的Sql实体
         /// </summary>
-        protected SqlEntity SqlEntity
+        public SqlEntity SqlEntity
         {
             get { return _SqlEntity; }
         }
@@ -65,6 +66,8 @@ namespace hwj.DBUtility.MSSQL
             _Timeout = timeout;
         }
 
+        #region Execute
+        #region ExecuteSqlTran
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -84,7 +87,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelperSQL.ExecuteSqlTran(ConnectionString, list, timeout) > 0;
         }
+        #endregion
 
+        #region ExecuteSql
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -115,7 +120,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
         }
+        #endregion
 
+        #region ExecuteReader
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
         /// </summary>
@@ -146,7 +153,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
         }
+        #endregion
 
+        #region ExecuteScalar
         /// <summary>
         /// 执行SQL语句，返回Object
         /// </summary>
@@ -177,15 +186,62 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
         }
+        #endregion
+        #endregion
+
+        /// <summary>
+        /// 获取数据库服务器时间
+        /// </summary>
+        /// <returns></returns>
+        abstract public DateTime GetServerDateTime();
 
         #region Get Entity
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        protected T GetEntity(SqlEntity sqlEntity)
+        {
+            _SqlEntity = sqlEntity;
+            return GetEntity(sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public T GetEntity(FilterParams filterParam)
+        {
+            return GetEntity(null, filterParam, null);
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetEntity(displayFields, filterParam, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams);
+
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<SqlParameter> parameters)
+        /// 
+        public T GetEntity(string sql, List<SqlParameter> parameters)
         {
             return GetEntity(sql, parameters, Timeout);
         }
@@ -196,9 +252,78 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">条件参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
+        public T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
         {
             SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity<T, TS>.CreateSingleEntity(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        protected T GetEntityByTransaction(DBTransaction trans, SqlEntity sqlEntity)
+        {
+            _SqlEntity = sqlEntity;
+            return GetEntityByTransaction(trans, sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public T GetEntityByTransaction(DBTransaction trans, FilterParams filterParam)
+        {
+            return GetEntityByTransaction(trans, null, filterParam, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public T GetEntityByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetEntityByTransaction(trans, displayFields, filterParam, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        abstract public T GetEntityByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public T GetEntityByTransaction(DBTransaction trans, string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = trans.ExecuteReader(sql, parameters, timeout);
             try
             {
                 if (reader.HasRows)
@@ -220,10 +345,60 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取表集合
         /// </summary>
+        /// <returns></returns>
+        public TS GetList()
+        {
+            return GetList(null, null, null, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        protected TS GetList(SqlEntity sqlEntity)
+        {
+            _SqlEntity = sqlEntity;
+            return GetList(sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields)
+        {
+            return GetList(displayFields, null, null, null);
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetList(displayFields, filterParam, null, null);
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            return GetList(displayFields, filterParam, sortParams, null);
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<SqlParameter> parameters)
+        public TS GetList(string sql, List<SqlParameter> parameters)
         {
             return GetList(sql, parameters, Timeout);
         }
@@ -234,7 +409,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">条件参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        public TS GetList(string sql, List<SqlParameter> parameters, int timeout)
         {
             SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
             try
@@ -251,6 +426,175 @@ namespace hwj.DBUtility.MSSQL
                 if (!reader.IsClosed)
                     reader.Close();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        protected TS GetListByTransaction(DBTransaction trans, SqlEntity sqlEntity)
+        {
+            _SqlEntity = sqlEntity;
+            return GetListByTransaction(trans, sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <returns></returns>
+        public TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields)
+        {
+            return GetListByTransaction(trans, displayFields, null, null, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetListByTransaction(trans, displayFields, filterParam, null, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        public TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            return GetListByTransaction(trans, displayFields, filterParam, sortParams, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        abstract public TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public TS GetListByTransaction(DBTransaction trans, string sql, List<SqlParameter> parameters)
+        {
+            return GetListByTransaction(trans, sql, parameters, Timeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public TS GetListByTransaction(DBTransaction trans, string sql, List<SqlParameter> parameters, int timeout)
+        {
+            SqlDataReader reader = trans.ExecuteReader(sql, parameters, timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity<T, TS>.CreateListEntity(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
+
+        #region DataTable
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetDataTable()
+        {
+            return GetDataTable(null, null, null, null);
+        }
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        {
+            return GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        abstract public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName);
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="cmdParams"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
+        {
+            return GetDataTable(sql, cmdParams, string.Empty);
+        }
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="cmdParams">SQL参数</param>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName)
+        {
+            return GetDataTable(sql, cmdParams, tableName, Timeout);
+        }
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="cmdParams">SQL参数</param>
+        /// <param name="tableName"></param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName, int timeout)
+        {
+            return GenerateEntity<T, TS>.CreateDataTable(ExecuteReader(sql, cmdParams, timeout), tableName);
         }
         #endregion
     }
