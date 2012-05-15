@@ -414,7 +414,6 @@ namespace hwj.DBUtility.MSSQL
                 //throw e;
                 throw;
             }
-
         }
 
         /// <summary>
