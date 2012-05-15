@@ -433,7 +433,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override T GetEntityByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
             //_SqlEntity = tmpSqlEty;
             return base.GetEntityByTransaction(trans, tmpSqlEty);
         }
@@ -465,7 +465,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
             return base.GetListByTransaction(trans, tmpSqlEty);
         }
         #endregion
@@ -662,17 +662,31 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
-        /// <param name="tableName"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
         public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            _SqlEntity = tmpSqlEty;
-            return base.GetDataTable(tmpSqlEty.CommandText, tmpSqlEty.Parameters, tableName);
+            return base.GetDataTable(tmpSqlEty, tableName);
+        }
+        /// <summary>
+        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="trans">事务实体</param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="tableName">Data Table Name</param>
+        /// <returns></returns>
+        public override DataTable GetDataTableByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        {
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+            return base.GetDataTableByTransaction(trans, tmpSqlEty, tableName);
         }
         #endregion
 
@@ -699,6 +713,8 @@ namespace hwj.DBUtility.MSSQL
                 return false;
             }
         }
+
+
 
     }
 }
