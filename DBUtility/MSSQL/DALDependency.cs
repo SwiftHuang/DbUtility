@@ -148,7 +148,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="trans">事务实体</param>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        public static bool Add(DBTransaction trans, T entity)
+        public static bool Add(DbTransaction trans, T entity)
         {
             return ExecuteSqlByTrans(trans, AddSqlEntity(entity));
         }
@@ -257,7 +257,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="entity">更新实体</param>
         /// <param name="filterParam">更新条件</param>
         /// <returns></returns>
-        public static bool Update(DBTransaction trans, T entity, FilterParams filterParam)
+        public static bool Update(DbTransaction trans, T entity, FilterParams filterParam)
         {
             SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
             return ExecuteSqlByTrans(trans, tmpSqlEty);
@@ -269,7 +269,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="updateParam">更新字段</param>
         /// <param name="filterParam">更新条件</param>
         /// <returns></returns>
-        public static bool Update(DBTransaction trans, UpdateParam updateParam, FilterParams filterParam)
+        public static bool Update(DbTransaction trans, UpdateParam updateParam, FilterParams filterParam)
         {
             SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
             return ExecuteSqlByTrans(trans, tmpSqlEty);
@@ -328,7 +328,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="trans">事务实体</param>
         /// <returns></returns>
-        public static bool Delete(DBTransaction trans)
+        public static bool Delete(DbTransaction trans)
         {
             return Delete(trans);
         }
@@ -338,7 +338,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="trans">事务实体</param>
         /// <param name="filterParam">删除条件</param>
         /// <returns></returns>
-        public static bool Delete(DBTransaction trans, FilterParams filterParam)
+        public static bool Delete(DbTransaction trans, FilterParams filterParam)
         {
             SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
             return ExecuteSqlByTrans(trans, tmpSqlEty);
@@ -423,20 +423,20 @@ namespace hwj.DBUtility.MSSQL
             //_SqlEntity = tmpSqlEty;
             return base.GetEntity(tmpSqlEty);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trans"></param>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <returns></returns>
-        public override T GetEntityByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
-            return base.GetEntityByTransaction(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="trans"></param>
+        ///// <param name="displayFields"></param>
+        ///// <param name="filterParam"></param>
+        ///// <param name="sortParams"></param>
+        ///// <returns></returns>
+        //public override T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        //{
+        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
+        //    //_SqlEntity = tmpSqlEty;
+        //    return base.GetEntityByTran(trans, tmpSqlEty);
+        //}
         #endregion
 
         #region Get List
@@ -454,20 +454,20 @@ namespace hwj.DBUtility.MSSQL
             //_SqlEntity = tmpSqlEty;
             return base.GetList(tmpSqlEty);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trans"></param>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
-        /// <returns></returns>
-        public override TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            return base.GetListByTransaction(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="trans"></param>
+        ///// <param name="displayFields"></param>
+        ///// <param name="filterParam"></param>
+        ///// <param name="sortParams"></param>
+        ///// <param name="maxCount"></param>
+        ///// <returns></returns>
+        //public override TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        //{
+        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+        //    return base.GetListByTran(trans, tmpSqlEty);
+        //}
         #endregion
 
         #region Get Page
@@ -534,7 +534,7 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (reader.HasRows)
                     {
-                        TS result = GenerateEntity<T, TS>.CreateListEntity(reader);
+                        TS result = GenerateEntity.CreateListEntity<T, TS>(reader);
                         reader.Close();
                         if (cmd.Parameters.Count > 0)
                             TotalCount = int.Parse(cmd.Parameters["@_PTotalCount"].Value.ToString());
@@ -602,7 +602,7 @@ namespace hwj.DBUtility.MSSQL
                 {
                     if (reader.HasRows)
                     {
-                        TS result = GenerateEntity<T, TS>.CreateListEntity(reader);
+                        TS result = GenerateEntity.CreateListEntity<T, TS>(reader);
                         reader.Close();
                         if (cmd.Parameters.Count > 0)
                             TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
@@ -683,10 +683,10 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public override DataTable GetDataTableByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTableByTransaction(trans, tmpSqlEty, tableName);
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
+            return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
         }
         #endregion
 
@@ -702,7 +702,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return null;
         }
-        private static bool ExecuteSqlByTrans(DBTransaction trans, SqlEntity sqlEntity)
+        private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
         {
             if (trans != null)
             {
@@ -714,7 +714,36 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public static SqlEntity GetSingleSqlEntity(FilterParams filterParam)
+        {
+            return GetSingleSqlEntity(null, filterParam, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public static SqlEntity GetSingleSqlEntity(DisplayFields displayFields, FilterParams filterParam)
+        {
+            return GetSingleSqlEntity(displayFields, filterParam, null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        public static SqlEntity GetSingleSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            return new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
+        }
 
     }
 }

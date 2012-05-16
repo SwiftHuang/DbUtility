@@ -34,9 +34,9 @@ namespace hwj.DBUtility.MSSQL
         }
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
-            return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, true);
+            return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, Enums.LockType.NoLock);
         }
-        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, bool isNoLock)
+        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, Enums.LockType lockType)
         {
             string sMaxCount = string.Empty;
 
@@ -44,7 +44,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(isNoLock), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(lockType), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
         }
         /// <summary>
         /// 数据分页
@@ -279,12 +279,23 @@ namespace hwj.DBUtility.MSSQL
             sbStr.Append(Enums.ExpressionString(para.Expression));
             return sbStr.ToString();
         }
-        private string GetNoLock(bool isNoLock)
+        private string GetNoLock(Enums.LockType type)
         {
-            if (isNoLock)
-                return "(NOLOCK)";
-            else
-                return string.Empty;
+            switch (type)
+            {
+                case Enums.LockType.None:
+                    return string.Empty;
+                case Enums.LockType.NoLock:
+                    return "(NOLOCK)";
+                case Enums.LockType.HoldLock:
+                    return "(HOLDLOCK)";
+                case Enums.LockType.RowLock:
+                    return "(ROWLOCK)";
+                case Enums.LockType.UpdLock:
+                    return "(UPDLOCK)";
+                default:
+                    return "(NOLOCK)";
+            }
         }
         //private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
         //{
