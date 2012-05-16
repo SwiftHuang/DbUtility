@@ -6,7 +6,10 @@ using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class DBTransaction : System.Data.IDbTransaction
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DbTransaction : System.Data.IDbTransaction
     {
         #region Property
         public SqlTransaction SqlTrans { get; private set; }
@@ -14,13 +17,25 @@ namespace hwj.DBUtility.MSSQL
         public int Timeout { get; set; }
         #endregion
 
+        public DbTransaction()
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="connectionString"></param>
-        public DBTransaction(string connectionString)
+        public DbTransaction(string connectionString)
+            : this(connectionString, 30)
+        { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="timeout"></param>
+        public DbTransaction(string connectionString, int timeout)
         {
-            Timeout = 120;
+            Timeout = timeout;
             SqlConn = new SqlConnection(connectionString);
             SqlConn.Open();
             SqlTrans = SqlConn.BeginTransaction();
@@ -173,17 +188,105 @@ namespace hwj.DBUtility.MSSQL
                 return rows;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <param name="cmdParms"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         public SqlDataReader ExecuteReader(string SQLString, List<SqlParameter> cmdParms, int timeout)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
                 DbHelperSQL.PrepareCommand(cmd, SqlConn, SqlTrans, SQLString, cmdParms, timeout);
 
-                SqlDataReader myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                SqlDataReader myReader = cmd.ExecuteReader();
                 cmd.Parameters.Clear();
                 return myReader;
             }
         }
+
+
+        #region Get Entity
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        public T GetEntity<T>(SqlEntity sqlEntity)
+            where T : class, new()
+        {
+            return GetEntity<T>(sqlEntity.CommandText, sqlEntity.Parameters);
+        }
+
+        /// <summary>
+        /// 通过事务，获取表对象
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <returns></returns>
+        public T GetEntity<T>(string sql, List<SqlParameter> parameters)
+            where T : class, new()
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, Timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity.CreateSingleEntity<T>(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
+
+        #region Get List
+        /// <summary>
+        /// 通过事务，获取表集合
+        /// </summary>
+        /// <param name="sqlEntity">SQL实体</param>
+        /// <returns></returns>
+        protected TS GetList<T, TS>(SqlEntity sqlEntity)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<object>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(sqlEntity.CommandText, sqlEntity.Parameters);
+        }
+        /// <summary>
+        /// 通过事务，获取表集合
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(string sql, List<SqlParameter> parameters)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<object>, new()
+            where TS : List<T>, new()
+        {
+            SqlDataReader reader = ExecuteReader(sql, parameters, Timeout);
+            try
+            {
+                if (reader.HasRows)
+                    return GenerateEntity.CreateListEntity<T, TS>(reader);
+                else
+                    return null;
+            }
+            catch
+            { throw; }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+        }
+        #endregion
         #endregion
 
         #region IDbTransaction 成员

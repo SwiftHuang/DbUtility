@@ -227,6 +227,14 @@ namespace hwj.DBUtility
             /// </summary>
             SolicitationEvent
         }
+        public enum LockType
+        {
+            None,
+            NoLock,
+            HoldLock,
+            RowLock,
+            UpdLock,
+        }
     }
     //public static class EnumsExtensions
     //{

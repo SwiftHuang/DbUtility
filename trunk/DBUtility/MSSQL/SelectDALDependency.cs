@@ -62,20 +62,20 @@ namespace hwj.DBUtility.MSSQL
             return base.GetEntity(tmpSqlEty);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trans"></param>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <returns></returns>
-        public override T GetEntityByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
-            return base.GetEntityByTransaction(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="trans"></param>
+        ///// <param name="displayFields"></param>
+        ///// <param name="filterParam"></param>
+        ///// <param name="sortParams"></param>
+        ///// <returns></returns>
+        //public override T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        //{
+        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
+        //    //_SqlEntity = tmpSqlEty;
+        //    return base.GetEntityByTran(trans, tmpSqlEty);
+        //}
 
         #endregion
 
@@ -90,25 +90,25 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             //_SqlEntity = tmpSqlEty;
             return base.GetList(tmpSqlEty);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trans"></param>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
-        /// <returns></returns>
-        public override TS GetListByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
-            return base.GetListByTransaction(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="trans"></param>
+        ///// <param name="displayFields"></param>
+        ///// <param name="filterParam"></param>
+        ///// <param name="sortParams"></param>
+        ///// <param name="maxCount"></param>
+        ///// <returns></returns>
+        //public override TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        //{
+        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+        //    //_SqlEntity = tmpSqlEty;
+        //    return base.GetListByTran(trans, tmpSqlEty);
+        //}
         #endregion
 
         #region DataTable
@@ -123,7 +123,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTable(tmpSqlEty, tableName);
         }
         /// <summary>
@@ -136,10 +136,10 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public override DataTable GetDataTableByTransaction(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTableByTransaction(trans, tmpSqlEty, tableName);
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
+            return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
         }
         #endregion
 
@@ -157,6 +157,6 @@ namespace hwj.DBUtility.MSSQL
             return tmpDateTime;
         }
 
-        
+
     }
 }

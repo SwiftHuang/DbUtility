@@ -5,9 +5,7 @@ using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
-    public class GenerateEntity<T, TS>
-        where T : class, new()
-        where TS : List<T>, new()
+    public class GenerateEntity
     {
         #region Protected Functions
         internal static DataTable CreateDataTable(IDataReader reader)
@@ -49,16 +47,18 @@ namespace hwj.DBUtility.MSSQL
                 if (!reader.IsClosed) reader.Close();
             }
         }
-        internal static T CreateSingleEntity(IDataReader reader)
+        internal static T CreateSingleEntity<T>(IDataReader reader) where T : class, new()
         {
             IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
             lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
             reader.Read();
-            return CreateEntityNotClose(reader, lstFieldInfo);
+            return CreateEntityNotClose<T>(reader, lstFieldInfo);
         }
-        internal static TS CreateListEntity(IDataReader reader)
+        internal static TS CreateListEntity<T, TS>(IDataReader reader)
+            where T : class, new()
+            where TS : List<T>, new()
         {
             TS DataList = new TS();
             IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
@@ -66,14 +66,14 @@ namespace hwj.DBUtility.MSSQL
 
             while (reader.Read())
             {
-                DataList.Add(CreateEntityNotClose(reader, lstFieldInfo));
+                DataList.Add(CreateEntityNotClose<T>(reader, lstFieldInfo));
             }
             return DataList;
         }
         #endregion
 
         #region Private Functions
-        private static T CreateEntityNotClose(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo)
+        private static T CreateEntityNotClose<T>(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo) where T : class, new()
         {
             T RowInstance = new T();
             foreach (FieldMappingInfo f in lstFieldInfo)
