@@ -123,62 +123,10 @@
   <metadata name="bgw2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>191, 17</value>
   </metadata>
-  <metadata name="suggestBoxView1.SelectedValue" xml:space="preserve">
+  <metadata name="emailTextBox1.InvalidPasswordChar" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
   </metadata>
-  <metadata name="suggestBoxView1.SelectedText" xml:space="preserve">
+  <metadata name="xTextBox1.InvalidPasswordChar" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value />
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="suggestBoxView1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAA3NCSVQICAjb4U/gAAAAAXNSR0IArs4c
-        6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAAYdEVYdFNvZnR3YXJlAEFkb2Jl
-        IEZpcmV3b3Jrc0+zH04AAAAWdEVYdENyZWF0aW9uIFRpbWUAMTEvMDQvMDWLCI+SAAAEEXRFWHRYTUw6
-        Y29tLmFkb2JlLnhtcAA8P3hwYWNrZXQgYmVnaW49IiAgICIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6
-        a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBY
-        TVAgQ29yZSA0LjEtYzAzNCA0Ni4yNzI5NzYsIFNhdCBKYW4gMjcgMjAwNyAyMjozNzozNyAgICAgICAg
-        Ij4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1z
-        eW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAg
-        eG1sbnM6eGFwPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHhhcDpDcmVh
-        dG9yVG9vbD5BZG9iZSBGaXJld29ya3MgQ1MzPC94YXA6Q3JlYXRvclRvb2w+CiAgICAgICAgIDx4YXA6
-        Q3JlYXRlRGF0ZT4yMDA3LTA3LTAzVDA2OjQ3OjE2WjwveGFwOkNyZWF0ZURhdGU+CiAgICAgICAgIDx4
-        YXA6TW9kaWZ5RGF0ZT4yMDA3LTA3LTAzVDA2OjQ3OjMwWjwveGFwOk1vZGlmeURhdGU+CiAgICAgIDwv
-        cmRmOkRlc2NyaXB0aW9uPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAg
-        ICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPgogICAgICAgICA8
-        ZGM6Zm9ybWF0PmltYWdlL3BuZzwvZGM6Zm9ybWF0PgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAg
-        PC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-        ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-        ICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-        ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAg
-        ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-        ICAgICAgICAgICAgICAgICA8RcaEAAAB10lEQVQ4T6XT3W7SYBzHcXYvXoBXY/TQm/DAA6NnZMMxEHWj
-        jA0nBGycm0Mmkw0dHS9ZpxOomy+gXUFlvC0SnJElX9uSkDR2JsSDX/okTT+/p/88j+PXad/xP7F8XFGP
-        EddL3FnM4p6XCD2WKR5o/KtgBLwqVBGWS/g3VEumFvKsvyyei5iA0ewX3yBs1ojtnRB5dzZMoc1cqoZT
-        kMjky7aICYgJvfnFETG5i1SH3u9hjHU41+R+osLdB2k67eZfiAn4QlmzKaKcof3AknB5oL/TuOVOoH6p
-        2gMzwZ0RkDyCQx0xkmuD+H4I3HDFOTxQ7IHZcMEcXDjfIt0CRd9+dTB8inID//MqU7MblIr79sDO3mc8
-        YRlBb3qy36TSH9A9HZB42yCgD3YymCe6uk3l0wd7wJiDdyHD9NIugZRqieehjJG1lafsbsbOB9rtDkI0
-        y83pJJNz22auO1fxhZIIS3FuByQ83kXUR5ctiOUk/uz3KCsK8aTEyrM0mYxk/vdWxIfr3jLa1kW6bgcV
-        8eoIsb0HBtTttMwYayPfglfoZSfgtYOTGQcfUy4TGesi1YVL9KQJGrkLeL3zHDe+MxZgHvvINZzeGKHo
-        Gkq5OD5gIF/rmjmbmqbyB1CBFuCpVQLMAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="suggestBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDAAA
-        CwwBP0AiyAAAAddJREFUOE+l091u0mAcx3F2L16AV2P00JvwwAOjZ2TDMRB1o4wNJwRsnJtDJpMNHR0v
-        WacTqJsvoF1BZbwtEpyRJV/bkpA0dibEg1/6JE0/v6f/PI/j12nf8T+xfFxRjxHXS9xZzOKelwg9like
-        aPyrYAS8KlQRlkv4N1RLphbyrL8snouYgNHsF98gbNaI7Z0QeXc2TKHNXKqGU5DI5Mu2iAmICb35xREx
-        uYtUh97vYYx1ONfkfqLC3QdpOu3mX4gJ+EJZsyminKH9wJJweaC/07jlTqB+qdoDM8GdEZA8gkMdMZJr
-        g/h+CNxwxTk8UOyB2XDBHFw43yLdAkXffnUwfIpyA//zKlOzG5SK+/bAzt5nPGEZQW96st+k0h/QPR2Q
-        eNsgoA92MpgnurpN5dMHe8CYg3chw/TSLoGUaonnoYyRtZWn7G7Gzgfa7Q5CNMvN6SSTc9tmrjtX8YWS
-        CEtxbgckPN5F1EeXLYjlJP7s9ygrCvGkxMqzNJmMZP73VsSH694y2tZFum4HFfHqCLG9BwbU7bTMGGsj
-        34JX6GUn4LWDkxkHH1MuExnrItWFS/SkCRq5C3i98xw3vjMWYB77yDWc3hih6BpKuTg+YCBf65o5m5qm
-        8gdQgRbgqVUCzAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="maskedDateTimePicker1.Value" type="System.DateTime, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>01/13/2011 00:20:35</value>
   </metadata>
 </root>

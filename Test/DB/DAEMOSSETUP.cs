@@ -33,13 +33,14 @@ namespace Test.DB
             return base.Update(updateEntity, fp);
         }
 
-        public static bool Update(TransactionHelper trans, tbEMOSSETUP updateEntity, string id, string companyCode, string branchCode)
+        public static bool Update(DbTransaction trans, tbEMOSSETUP updateEntity, string id, string companyCode, string branchCode)
         {
             FilterParams fp = new FilterParams();
             fp.AddParam(tbEMOSSETUP.Fields.ID, id, Enums.Relation.Equal, Enums.Expression.AND);
             fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
             fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
-            return base.Update(updateEntity, fp);
+            return DAEMOSSETUP.Update(trans, updateEntity, fp);
+            //return  .Update(updateEntity, fp);
         }
 
         public bool Delete(string id, string companyCode, string branchCode)
@@ -60,6 +61,15 @@ namespace Test.DB
             return base.GetEntity(fp);
         }
 
+        public tbEMOSSETUP GetEntity(DbTransaction trans, string id, string companyCode, string branchCode)
+        {
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbEMOSSETUP.Fields.ID, id, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
+
+            return trans.GetEntity<tbEMOSSETUP>(DAEMOSSETUP.GetSQLEntity(fp));
+        }
     }
 }
 

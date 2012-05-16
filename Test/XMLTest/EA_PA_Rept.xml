@@ -1,0 +1,151 @@
+﻿<?xml version="1.0"?>
+<ReptInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApList />
+  <ArList>
+    <tbArtx>
+      <CompanyCode>WM</CompanyCode>
+      <ARTxNum>0000000010</ARTxNum>
+      <ARTxType>CR</ARTxType>
+      <ItemType>XXX</ItemType>
+      <ItemNum>HC00096973</ItemNum>
+      <GLTxNum>0000000029</GLTxNum>
+      <CltCode>HO0023  </CltCode>
+      <CtrlGLCode>H105101</CtrlGLCode>
+      <CalendarCode>2010</CalendarCode>
+      <PeriodPost>1001</PeriodPost>
+      <IssueOn>2010-01-02T09:32:00</IssueOn>
+      <DueDate>2010-01-23T09:32:00</DueDate>
+      <ExRateCode>DAY</ExRateCode>
+      <PayMethod>CHQ </PayMethod>
+      <ARTxDesc>9BHBGEPVMN</ARTxDesc>
+      <MasterPnr>9BHBGEPVMN</MasterPnr>
+      <BkgNum>9BHBGEPVMN</BkgNum>
+      <BkgOwner>FNL       </BkgOwner>
+      <CurrTxn>HKD</CurrTxn>
+      <AmtTxn>-807.00</AmtTxn>
+      <OAmtTxn>0.00</OAmtTxn>
+      <CurrPrm>HKD</CurrPrm>
+      <AmtPrm>-807.00</AmtPrm>
+      <OAmtPrm>0.00</OAmtPrm>
+      <CurrSec>HKD</CurrSec>
+      <AmtSec>-807.00</AmtSec>
+      <OAmtSec>0.00</OAmtSec>
+      <CurrRpt>HKD</CurrRpt>
+      <AmtRpt>-807.00</AmtRpt>
+      <OAmtRpt>0.00</OAmtRpt>
+      <SettleOn>2010-09-15T00:00:00</SettleOn>
+      <Source>P</Source>
+      <ARStatus>Y</ARStatus>
+      <BranchCode>H</BranchCode>
+      <TeamCode>HWT</TeamCode>
+      <CustRef>HI00770648</CustRef>
+      <PurgeOn>0001-01-01T00:00:00</PurgeOn>
+      <PostOn>2010-09-06T17:55:22.657</PostOn>
+      <PostBy>FNL</PostBy>
+      <CreateOn>2010-09-06T17:55:22.657</CreateOn>
+      <CreateBy>FNL</CreateBy>
+      <UpdateOn>2010-09-15T10:30:43</UpdateOn>
+      <UpdateBy>ADMIN</UpdateBy>
+      <LastPayDate>2010-09-15T00:00:00</LastPayDate>
+      <LastPayPeriod>1009</LastPayPeriod>
+      <Void2Jba>HI00770648</Void2Jba>
+    </tbArtx>
+  </ArList>
+  <CmRepttx>
+    <CompanyCode>WM</CompanyCode>
+    <ReptNum>0000000001</ReptNum>
+    <RefType>AR</RefType>
+    <RefCode>HO0023  </RefCode>
+    <OtherRefNum />
+    <PaymentType>CHQ</PaymentType>
+    <CalendarCode>2010</CalendarCode>
+    <PeriodPost>1009</PeriodPost>
+    <ReptDate>2010-09-15T00:00:00</ReptDate>
+    <BankGLAcct>H100290</BankGLAcct>
+    <ReptDesc />
+    <ExRateCode>DAY</ExRateCode>
+    <GLTxNum>0000124982</GLTxNum>
+    <ReptType>R</ReptType>
+    <CurrTxn>HKD</CurrTxn>
+    <AmtTxn>-807.00</AmtTxn>
+    <CurrPrm>HKD</CurrPrm>
+    <AmtPrm>-807.00</AmtPrm>
+    <CurrSec>HKD</CurrSec>
+    <AmtSec>-807.00</AmtSec>
+    <CurrRpt>HKD</CurrRpt>
+    <AmtRpt>-807.00</AmtRpt>
+    <PrintOn>0001-01-01T00:00:00</PrintOn>
+    <PrintCopy>0</PrintCopy>
+    <ReptBankCode />
+    <ChqBankCode />
+    <ChqNum>1</ChqNum>
+    <Payer>OCEAN KING TVL CO LTD(TKG                         </Payer>
+    <PayerAddr>
+      RM 706-7 EAST OCEAN CENTE
+      98 GRANVILLE RD  TST EAST
+      KOWLOON
+      HONG KONG
+    </PayerAddr>
+    <BranchCode>H</BranchCode>
+    <CreditCardno />
+    <VoidOn>0001-01-01T00:00:00</VoidOn>
+    <ApproveOn>2010-09-15T10:30:43</ApproveOn>
+    <ApproveBy>ADMIN</ApproveBy>
+    <PostOn>2010-09-15T10:30:43</PostOn>
+    <PostBy>ADMIN</PostBy>
+    <CreateOn>2010-09-15T10:30:43</CreateOn>
+    <CreateBy>ADMIN</CreateBy>
+    <UpdateOn>2010-09-15T10:30:43</UpdateOn>
+    <UpdateBy>ADMIN</UpdateBy>
+  </CmRepttx>
+  <Details>
+    <tbCmRepttxDetail>
+      <CompanyCode>WM</CompanyCode>
+      <ReptNum>0000000001</ReptNum>
+      <SeqNum>00001</SeqNum>
+      <RefType>AR</RefType>
+      <RefCode>HO0023  </RefCode>
+      <RefDocDate>0001-01-01T00:00:00</RefDocDate>
+      <AccountCode>H100290</AccountCode>
+      <CurrTxn>HKD</CurrTxn>
+      <AmtTxn>-807.00</AmtTxn>
+      <CurrPrm>HKD</CurrPrm>
+      <AmtPrm>-807.00</AmtPrm>
+      <CurrSec>HKD</CurrSec>
+      <AmtSec>-807.00</AmtSec>
+      <CurrRpt>HKD</CurrRpt>
+      <AmtRpt>-807.00</AmtRpt>
+      <ReptDesc>1</ReptDesc>
+      <ReptDate>2010-09-15T00:00:00</ReptDate>
+      <CreateOn>2010-09-15T10:30:43</CreateOn>
+      <CreateBy>ADMIN</CreateBy>
+      <UpdateOn>2010-09-15T10:30:43</UpdateOn>
+      <UpdateBy>ADMIN</UpdateBy>
+    </tbCmRepttxDetail>
+    <tbCmRepttxDetail>
+      <CompanyCode>WM</CompanyCode>
+      <ReptNum>0000000001</ReptNum>
+      <SeqNum>00002</SeqNum>
+      <RefType>AR</RefType>
+      <RefCode>HO0023  </RefCode>
+      <RefTxNum>0000000010</RefTxNum>
+      <RefDocNum>HC00096973</RefDocNum>
+      <RefDocDate>2010-01-02T09:32:00</RefDocDate>
+      <AccountCode>H105101</AccountCode>
+      <CurrTxn>HKD</CurrTxn>
+      <AmtTxn>807.00</AmtTxn>
+      <CurrPrm>HKD</CurrPrm>
+      <AmtPrm>807.00</AmtPrm>
+      <CurrSec>HKD</CurrSec>
+      <AmtSec>807.00</AmtSec>
+      <CurrRpt>HKD</CurrRpt>
+      <AmtRpt>807.00</AmtRpt>
+      <ReptDesc>OCEAN KING TVL CO LTD(TKG                         </ReptDesc>
+      <ReptDate>2010-09-15T00:00:00</ReptDate>
+      <CreateOn>2010-09-15T10:30:43</CreateOn>
+      <CreateBy>ADMIN</CreateBy>
+      <UpdateOn>2010-09-15T10:30:43</UpdateOn>
+      <UpdateBy>ADMIN</UpdateBy>
+    </tbCmRepttxDetail>
+  </Details>
+</ReptInfo>

@@ -21,23 +21,54 @@ namespace Test
         {
             try
             {
-
-
-                string connStr = "Data Source=192.168.123.131;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=113502";
+                //string connStr = "Data Source=192.168.123.131;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=113502";
+                string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
                 DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(connStr);
                 DB.tbEMOSSETUP setup = da.GetEntity("BKGREF", "JT", "J");
 
-                using (hwj.DBUtility.MSSQL.TransactionHelper trans = new hwj.DBUtility.MSSQL.TransactionHelper(connStr))
+                using (hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
                 {
-                    string tmp = GetNewBkgRefKey(trans, "V", "VI", "BKGREF", 1);
+                    try
+                    {
 
-                    DB.tbEMOSSETUP s1 = new Test.DB.tbEMOSSETUP();
-                    s1.BranchCode = "V";
-                    s1.CompanyCode = "VI";
-                    s1.ID = "BKGREF-BKGREF";
-                    s1.VALUE = "0000000000";
-                    trans.ExecuteSqlTran(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.AddSqlEntity(s1) }, -1);
+                        //DB.tbEMOSSETUP setup2 = da.GetEntity(trans, "BKGREF", "JT", "J");
+                        //trans.Commit();
+                        //string tmp = GetNewBkgRefKey(trans, "V", "VI", "BKGREF", 1);
 
+                        DB.tbEMOSSETUP s1 = new Test.DB.tbEMOSSETUP();
+                        s1.BranchCode = "V";
+                        s1.CompanyCode = "VI";
+                        //s1.ID = "BKGREF-BKGREF";
+                        s1.ID = "BKGREF";
+                        s1.VALUE = "0000000006";
+
+                        DB.DAEMOSSETUP.Update(trans, s1, s1.ID, s1.CompanyCode, s1.BranchCode);
+                        //trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
+
+                        using (hwj.DBUtility.MSSQL.DbTransaction trans2 = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
+                        {
+                            DB.tbEMOSSETUP setup1 = da.GetEntity(trans2, "BKGREF", "VI", "V");
+                        }
+
+                        hwj.DBUtility.FilterParams fp = new hwj.DBUtility.FilterParams();
+                        fp.AddParam(DB.tbEMOSSETUP.Fields.CompanyCode, s1.CompanyCode, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
+                        fp.AddParam(DB.tbEMOSSETUP.Fields.ID, s1.ID, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
+
+                        DB.DAEMOSSETUP.Update(trans, s1, fp);
+
+                        //trans.ExecuteSqlList(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.DeleteSqlEntity(fp) });
+
+                        s1.ID = "BKGREF8";
+                        trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
+                        //trans.ExecuteSqlTran(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.AddSqlEntity(s1) }, -1);
+                        trans.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        trans.SqlConn.Close();
+                        //throw;
+                    }
                 }
             }
             catch (Exception ex)
@@ -47,7 +78,7 @@ namespace Test
             }
         }
 
-        private string GetNewBkgRefKey(hwj.DBUtility.MSSQL.TransactionHelper trans, string branchCode, string companyCode, string moduleCode, int numOfKey)
+        private string GetNewBkgRefKey(hwj.DBUtility.MSSQL.DbTransaction trans, string branchCode, string companyCode, string moduleCode, int numOfKey)
         {
 
             SqlCommand cmd = new SqlCommand("SP_CREATEBKGKEY", trans.SqlConn, trans.SqlTrans);

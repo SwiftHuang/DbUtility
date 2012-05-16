@@ -26,6 +26,7 @@ namespace Test
             //Application.Run(new dgFrm());
             //Application.Run(new Suggest());
             Application.Run(new TransFrm());
+            //Application.Run(new FrmAsync());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

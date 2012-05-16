@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://wtl.eAccount.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://wtl.eAccount.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://wtl.eAccount.org/">
+      <s:element name="Refund">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Refund" type="tns:Refund" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Refund">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RefundType" type="tns:RefundTypeEnum" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BkgRef" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IssueBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssueOn" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SuppCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CltCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientRef" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaxName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormPay" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChqNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChargeCurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChargeAmt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="CostCurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CostTaxAmt" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CostAmt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellCurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SellTaxAmt" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SellAmt" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Routing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnUseSector" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherRemarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RefundTypeEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="TK" />
+          <s:enumeration value="VC" />
+          <s:enumeration value="MC" />
+          <s:enumeration value="XO" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RefundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WSReturnObject" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WSReturnObject">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ReturnObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Ext1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Ext2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Ext3" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ReturnObject">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsError" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstError" type="tns:Error" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorList" type="tns:ArrayOfError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Error">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Error" nillable="true" type="tns:Error" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RefundSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AcctEntrySoap">
+    <wsdl:operation name="Refund">
+      <wsdl:input message="tns:RefundSoapIn" />
+      <wsdl:output message="tns:RefundSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AcctEntrySoap" type="tns:AcctEntrySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Refund">
+      <soap:operation soapAction="http://wtl.eAccount.org/Refund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AcctEntrySoap12" type="tns:AcctEntrySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Refund">
+      <soap12:operation soapAction="http://wtl.eAccount.org/Refund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AcctEntry">
+    <wsdl:port name="AcctEntrySoap" binding="tns:AcctEntrySoap">
+      <soap:address location="http://localhost:2220/AcctSvc/AcctEntry.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AcctEntrySoap12" binding="tns:AcctEntrySoap12">
+      <soap12:address location="http://localhost:2220/AcctSvc/AcctEntry.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

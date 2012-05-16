@@ -77,76 +77,177 @@ public class AdjacencyList<T>
             tmp.next = new Node(toVer); //添加到链表未尾
         }
     }
-    public string Search(T from, T to) //仅用于测试
-    {   //打印每个节点和它的邻接点
-        string s = string.Empty;
-        string path = string.Empty;
+
+    public List<VertexRelation<T>> GetRelation()
+    {
+        List<VertexRelation<T>> lst = new List<AdjacencyList<T>.VertexRelation<T>>();
 
         foreach (Vertex<T> v in items)
         {
-            path = string.Empty;
-            if (v.data.Equals(from))
-            {
-                path = string.Format("{0}", v.data.ToString());
-            }
-            s += v.data.ToString() + ":";
+            VertexRelation<T> o = new AdjacencyList<T>.VertexRelation<T>();
+            o.Vertex = v;
+
             if (v.firstEdge != null)
             {
                 Node tmp = v.firstEdge;
                 while (tmp != null)
                 {
-                    s += tmp.adjvex.data.ToString();
-
-                    path += string.Format("->{0}", tmp.adjvex.data.ToString());
-                    if (tmp.adjvex.data.Equals(to))
-                    {
-                        Console.WriteLine(path);
-                    }
-
+                    o.VertexEdge.Add(tmp.adjvex);
                     tmp = tmp.next;
                 }
-
             }
-            s += "\r\n";
+            lst.Add(o);
         }
-        return s;
+        return lst;
     }
-    public string Search2(T from, T to) //仅用于测试
-    {   //打印每个节点和它的邻接点
-        string s = string.Empty;
-        string path = string.Empty;
+    public class VertexRelation<V>
+    {
+        public Vertex<V> Vertex { get; set; }
+        public List<Vertex<V>> VertexEdge { get; set; }
 
-        foreach (Vertex<T> v in items)
+        public VertexRelation()
         {
-            path = string.Empty;
-            if (v.data.Equals(from))
-            {
-                path = string.Format("{0}", v.data.ToString());
-
-                s += v.data.ToString() + ":";
-                if (v.firstEdge != null)
-                {
-                    Node tmp = v.firstEdge;
-                    while (tmp != null)
-                    {
-                        s += tmp.adjvex.data.ToString();
-
-                        path += string.Format("->{0}", tmp.adjvex.data.ToString());
-
-                        if (tmp.adjvex.data.Equals(to))
-                        {
-                            Console.WriteLine(path);
-                        }
-
-                        tmp = tmp.next;
-                    }
-                }
-                break;
-            }
-            s += "\r\n";
+            Vertex = null;
+            VertexEdge = new List<AdjacencyList<T>.Vertex<V>>();
         }
-        return s;
     }
+    public class Path<P>
+    {
+        public List<P> Value { get; set; }
+
+        public Path()
+        {
+            Value = new List<P>();
+        }
+    }
+    public class PathList<T> : List<Path<T>>
+    {
+    }
+
+    public PathList<T> Search(T from, T to)
+    {
+        return Search(Find(from), Find(to), from);
+    }
+    private PathList<T> Search(Vertex<T> from, Vertex<T> to, T path)
+    {
+        List<T> pathLst = new List<T>();
+        //pathLst.Add(path);
+
+        return Search(from, to, GetRelation(), new List<AdjacencyList<T>.Vertex<T>>(), ref pathLst);
+    }
+    private PathList<T> Search(Vertex<T> from, Vertex<T> to, List<VertexRelation<T>> relation, List<Vertex<T>> passed, ref List<T> path)
+    {
+        Predicate<AdjacencyList<T>.VertexRelation<T>> test = delegate(AdjacencyList<T>.VertexRelation<T> p) { return p.Vertex.Equals(from); };
+        PathList<T> result = new AdjacencyList<T>.PathList<T>();
+
+        passed.Add(from);
+
+        if (!relation.Exists(test))
+        {
+            return result;
+        }
+        else
+        {
+            foreach (Vertex<T> item in relation.Find(test).VertexEdge)
+            {
+                if (passed.Contains(item))
+                {
+                    continue;
+                }
+                if (item.Equals(to))
+                {
+                    Path<T> p = new AdjacencyList<T>.Path<T>();
+                    //path.Add(to.data);
+                    p.Value = path;
+                    p.Value.Add(to.data);
+                    result.Add(p);
+                    List<T> tmpPath = new List<T>();
+                    //tmpPath.Add(path[0]);
+                    path = tmpPath;
+
+                }
+                else
+                {
+                    path.Add(item.data);
+                    PathList<T> tmpLst = Search(item, to, relation, passed, ref path);
+                    result.AddRange(tmpLst);
+                }
+            }
+        }
+        passed.Remove(from);
+        return result;
+    }
+
+    //public string Search(T from, T to) //仅用于测试
+    //{   //打印每个节点和它的邻接点
+    //    string s = string.Empty;
+    //    string path = string.Empty;
+
+    //    foreach (Vertex<T> v in items)
+    //    {
+    //        path = string.Empty;
+    //        if (v.data.Equals(from))
+    //        {
+    //            path = string.Format("{0}", v.data.ToString());
+    //        }
+    //        s += v.data.ToString() + ":";
+    //        if (v.firstEdge != null)
+    //        {
+    //            Node tmp = v.firstEdge;
+    //            while (tmp != null)
+    //            {
+    //                s += tmp.adjvex.data.ToString();
+
+    //                path += string.Format("->{0}", tmp.adjvex.data.ToString());
+    //                if (tmp.adjvex.data.Equals(to))
+    //                {
+    //                    Console.WriteLine(path);
+    //                }
+
+    //                tmp = tmp.next;
+    //            }
+
+    //        }
+    //        s += "\r\n";
+    //    }
+    //    return s;
+    //}
+    //public string Search2(T from, T to) //仅用于测试
+    //{   //打印每个节点和它的邻接点
+    //    string s = string.Empty;
+    //    string path = string.Empty;
+
+    //    foreach (Vertex<T> v in items)
+    //    {
+    //        path = string.Empty;
+    //        if (v.data.Equals(from))
+    //        {
+    //            path = string.Format("{0}", v.data.ToString());
+
+    //            s += v.data.ToString() + ":";
+    //            if (v.firstEdge != null)
+    //            {
+    //                Node tmp = v.firstEdge;
+    //                while (tmp != null)
+    //                {
+    //                    s += tmp.adjvex.data.ToString();
+
+    //                    path += string.Format("->{0}", tmp.adjvex.data.ToString());
+
+    //                    if (tmp.adjvex.data.Equals(to))
+    //                    {
+    //                        Console.WriteLine(path);
+    //                    }
+
+    //                    tmp = tmp.next;
+    //                }
+    //            }
+    //            break;
+    //        }
+    //        s += "\r\n";
+    //    }
+    //    return s;
+    //}
 
 
     //嵌套类，表示链表中的表结点
@@ -208,10 +309,8 @@ public class AdjacencyList<T>
     }
     private void BFS(Vertex<T> v) //使用队列进行广度优先遍历
     {
-        string from = string.Empty;
         //创建一个队列
         Queue<Vertex<T>> queue = new Queue<Vertex<T>>();
-        from = v.data.ToString();
         Console.Write(v.data + " "); //访问
 
         v.visited = true; //设置访问标志
@@ -225,7 +324,6 @@ public class AdjacencyList<T>
                 if (!node.adjvex.visited)
                 {
                     Console.Write(node.adjvex.data + " "); //访问
-                    List.Add(new AdjacencyList<T>.PathObj(from, node.adjvex.data.ToString(), string.Empty));
                     node.adjvex.visited = true; //设置访问标志
                     queue.Enqueue(node.adjvex); //进队
                 }
@@ -234,23 +332,5 @@ public class AdjacencyList<T>
         }
     }
     #endregion
-    public List<PathObj> List = new List<PathObj>();
-    public class PathObj
-    {
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Path { get; set; }
 
-        public PathObj()
-        {
-
-        }
-
-        public PathObj(string from, string to, string path)
-        {
-            From = from;
-            To = to;
-            Path = path;
-        }
-    }
 }

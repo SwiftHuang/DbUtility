@@ -19,6 +19,7 @@ namespace Acct.DAL
         {
             CommandText = tbSqlEntity.CommandText;
         }
+
     }
 }
 
