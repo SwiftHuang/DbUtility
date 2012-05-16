@@ -209,6 +209,26 @@ namespace hwj.DBUtility.MSSQL
 
 
         #region Get Entity
+        public T GetEntity<T>(FilterParams fp) where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            SqlEntity sqlEty = null;
+            GenerateSelectSql<T> genSelectSql = new GenerateSelectSql<T>();
+            string tableName = string.Empty;
+
+            if (typeof(T) is hwj.DBUtility.TableMapping.BaseTable<T>)
+            {
+                string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
+                tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);
+            }
+            else if (typeof(T) is hwj.DBUtility.TableMapping.BaseSqlTable<T>)
+            {
+                string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
+                tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);
+            }
+
+            sqlEty = new SqlEntity(genSelectSql.SelectSql(tableName, null, fp, null, 1, Enums.LockType.RowLock), genSelectSql.GenParameter(fp));
+            return GetEntity<T>(sqlEty);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -342,5 +362,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion
+        //SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+        //return new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
     }
 }

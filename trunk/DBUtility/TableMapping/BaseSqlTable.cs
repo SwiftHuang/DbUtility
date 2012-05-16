@@ -21,5 +21,6 @@ namespace hwj.DBUtility.TableMapping
         {
             return CommandText;
         }
+
     }
 }
