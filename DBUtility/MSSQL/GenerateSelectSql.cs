@@ -17,6 +17,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlGetDate = "GetDate()";
         private const string _MsSqlFieldFmt = "[{0}]";
+        internal const string _ViewSqlFormat = "({0}) AS TEMPHWJ";
 
         /// <summary>
         /// SQL生成类

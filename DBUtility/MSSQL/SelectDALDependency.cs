@@ -16,7 +16,6 @@ namespace hwj.DBUtility.MSSQL
         where TS : List<T>, new()
     {
         protected static GenerateSelectSql<T> GenSelectSql = new GenerateSelectSql<T>();
-        private const string SqlFormat = "({0}) AS TEMPHWJ";
 
         #region Property
         protected string CommandText { get; set; }
@@ -57,7 +56,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
             //_SqlEntity = tmpSqlEty;
             return base.GetEntity(tmpSqlEty);
         }
@@ -90,7 +89,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             //_SqlEntity = tmpSqlEty;
             return base.GetList(tmpSqlEty);
         }
@@ -123,7 +122,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTable(tmpSqlEty, tableName);
         }
         /// <summary>
@@ -138,7 +137,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
         }
         #endregion
