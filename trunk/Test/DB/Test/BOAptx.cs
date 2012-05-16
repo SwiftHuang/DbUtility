@@ -12,8 +12,8 @@ namespace Test.DB.BLL
     /// </summary>
     public class BOAptx
     {
-        //private static DAAptx da = new DAAptx("Data Source=10.100.133.83;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=gzuat");
-        private static DAAptx da = new DAAptx("Data Source=127.0.0.1;Initial Catalog=eAccount;Integrated Security=True");
+        private static DAAptx da = new DAAptx("Data Source=10.100.133.83;Initial Catalog=eAccount;Persist Security Info=True;User ID=sa;Password=gzuat");
+        //private static DAAptx da = new DAAptx("Data Source=127.0.0.1;Initial Catalog=eAccount;Integrated Security=True");
 
         public BOAptx()
         { }
@@ -64,11 +64,33 @@ namespace Test.DB.BLL
             return da.GetList(null, fp);
         }
 
-        public static tbAptxs GetList(string CompanyCode)
+        public static tbAptxs GetList(string CompanyCode, int top)
         {
             FilterParams fp = new FilterParams();
             fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
-            //fp.AddParam(tbAptx.Fields.PurgeRef, "BP%", Enums.Relation.NotLike, Enums.Expression.AND);
+            return da.GetList(null, fp, null, top);
+        }
+
+        public static tbAptxs GetListForAPTxNumList(string CompanyCode, List<string> lst)
+        {
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.APTxNum, lst, Enums.Relation.IN, Enums.Expression.AND);
+            return da.GetList(null, fp);
+        }
+        public static tbAptxs GetListForAPTxNumList2(string CompanyCode, List<string> lst)
+        {
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.APTxNum, lst, Enums.Relation.IN_InsertSQL, Enums.Expression.AND);
+            return da.GetList(null, fp);
+        }
+
+        public static tbAptxs GetListForAmtList(string CompanyCode, List<string> lst)
+        {
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.AmtPrm, lst, Enums.Relation.IN, Enums.Expression.AND);
             return da.GetList(null, fp);
         }
 
@@ -85,6 +107,57 @@ namespace Test.DB.BLL
             return page;
         }
 
+        public static bool UpdateList(string CompanyCode, List<string> lst)
+        {
+            UpdateParam up = new UpdateParam();
+            up.AddParam(tbAptx.Fields.LastReptNum, "VIN");
+
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.LastReptNum, null, Enums.Relation.IsNull, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.APTxNum, lst, Enums.Relation.IN, Enums.Expression.AND);
+
+            return da.Update(up, fp);
+        }
+
+        public static bool UpdateList2(string CompanyCode, List<string> lst)
+        {
+            UpdateParam up = new UpdateParam();
+            up.AddParam(tbAptx.Fields.LastReptNum, null);
+
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.LastReptNum, "VIN", Enums.Relation.Equal, Enums.Expression.AND);
+            fp.AddParam(tbAptx.Fields.APTxNum, lst, Enums.Relation.IN_InsertSQL, Enums.Expression.AND);
+
+            return da.Update(up, fp);
+        }
+        public static string GetList1(string CompanyCode)
+        {
+            DisplayFields df = new DisplayFields();
+            df.Add(tbAptx.Fields.CompanyCode);
+
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+
+            return da.GetList(df, fp, null, 1)[0].CompanyCode + "|" + da.SqlEntity.CommandText;
+
+            //return da.SqlEntity;
+        }
+
+        public static string GetList2(string CompanyCode)
+        {
+            DisplayFields df = new DisplayFields();
+            df.Add(tbAptx.Fields.APTxNum);
+
+            FilterParams fp = new FilterParams();
+            fp.AddParam(tbAptx.Fields.CompanyCode, CompanyCode, Enums.Relation.Equal, Enums.Expression.AND);
+
+            tbAptx ap = da.GetList(df, fp, null, 1)[0];
+            return ap.CompanyCode + "|" + ap.APTxNum + "|" + da.SqlEntity.CommandText;
+
+            //return da.SqlEntity;
+        }
     }
 }
 

@@ -47,7 +47,8 @@ namespace Test
             a.AddEdge("B", "C");
             a.AddEdge("C", "D");
 
-            a.Search2("A", "C");
+            AdjacencyList<string>.PathList<string> lst = a.Search("A", "B");
+            AdjacencyList<string>.PathList<string> lst2 = a.Search("A", "C");
             a.DFSTraverse();
             a.BFSTraverse();
         }
