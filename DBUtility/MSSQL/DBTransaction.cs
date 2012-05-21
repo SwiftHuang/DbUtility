@@ -17,6 +17,9 @@ namespace hwj.DBUtility.MSSQL
         public int Timeout { get; set; }
         #endregion
 
+        /// <summary>
+        /// SQL事务实体
+        /// </summary>
         public DbTransaction()
         {
 
@@ -42,6 +45,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region Public Member
+        #region ExecuteSqlList
         /// <summary>
         /// 
         /// </summary>
@@ -129,7 +133,9 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+        #endregion
 
+        #region ExecuteSql
         /// <summary>
         /// 
         /// </summary>
@@ -188,6 +194,8 @@ namespace hwj.DBUtility.MSSQL
                 return rows;
             }
         }
+        #endregion
+
         /// <summary>
         /// 
         /// </summary>
@@ -207,26 +215,61 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-
+        /*暂时没处理视图里面的锁，BaseSqlTable生成Select语句没进行锁的处理*/
         #region Get Entity
-        public T GetEntity<T>(FilterParams fp) where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public T GetEntity<T>(FilterParams filterParam)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            return GetEntity<T>(null, filterParam, null, Enums.LockType.UpdLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            return GetEntity<T>(displayFields, filterParam, null, Enums.LockType.UpdLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            return GetEntity<T>(displayFields, filterParam, sortParams, Enums.LockType.UpdLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="lockType"></param>
+        /// <returns></returns>
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
         {
             SqlEntity sqlEty = null;
             GenerateSelectSql<T> genSelectSql = new GenerateSelectSql<T>();
-            string tableName = string.Empty;
+            string tableName = GetTableName<T>();
 
-            if (typeof(T) is hwj.DBUtility.TableMapping.BaseTable<T>)
-            {
-                string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
-                tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);
-            }
-            else if (typeof(T) is hwj.DBUtility.TableMapping.BaseSqlTable<T>)
-            {
-                string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
-                tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);
-            }
-
-            sqlEty = new SqlEntity(genSelectSql.SelectSql(tableName, null, fp, null, 1, Enums.LockType.RowLock), genSelectSql.GenParameter(fp));
+            sqlEty = new SqlEntity(genSelectSql.SelectSql(tableName, displayFields, filterParam, sortParams, 1, lockType), genSelectSql.GenParameter(filterParam));
             return GetEntity<T>(sqlEty);
         }
         /// <summary>
@@ -266,16 +309,97 @@ namespace hwj.DBUtility.MSSQL
                     reader.Close();
             }
         }
+
         #endregion
 
+        /*暂时没处理视图里面的锁，BaseSqlTable生成Select语句没进行锁的处理*/
         #region Get List
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(displayFields, null, null, null, Enums.LockType.RowLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(displayFields, filterParam, null, null, Enums.LockType.RowLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(displayFields, filterParam, sortParams, null, Enums.LockType.RowLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParam"></param>
+        /// <param name="sortParams"></param>
+        /// <param name="maxCount"></param>
+        /// <param name="lockType"></param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            GenerateSelectSql<T> genSelectSql = new GenerateSelectSql<T>();
+            string tableName = GetTableName<T>();
+            SqlEntity tmpSqlEty = new SqlEntity(genSelectSql.SelectSql(tableName, displayFields, filterParam, sortParams, maxCount, lockType), genSelectSql.GenParameter(filterParam));
+
+            return GetList<T, TS>(tmpSqlEty);
+        }
         /// <summary>
         /// 通过事务，获取表集合
         /// </summary>
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
         protected TS GetList<T, TS>(SqlEntity sqlEntity)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<object>, new()
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(sqlEntity.CommandText, sqlEntity.Parameters);
@@ -287,16 +411,20 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
         public TS GetList<T, TS>(string sql, List<SqlParameter> parameters)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<object>, new()
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             SqlDataReader reader = ExecuteReader(sql, parameters, Timeout);
             try
             {
                 if (reader.HasRows)
+                {
                     return GenerateEntity.CreateListEntity<T, TS>(reader);
+                }
                 else
+                {
                     return null;
+                }
             }
             catch
             { throw; }
@@ -307,6 +435,23 @@ namespace hwj.DBUtility.MSSQL
             }
         }
         #endregion
+        #endregion
+
+        #region Private Member
+        private string GetTableName<T>() where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            string tableName = string.Empty;
+            if (typeof(T).BaseType == typeof(hwj.DBUtility.TableMapping.BaseTable<T>))
+            {
+                tableName = Activator.CreateInstance<T>().GetCommandText();
+            }
+            else if (typeof(T).BaseType == typeof(hwj.DBUtility.TableMapping.BaseSqlTable<T>))
+            {
+                string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
+                tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);
+            }
+            return tableName;
+        }
         #endregion
 
         #region IDbTransaction 成员
@@ -362,7 +507,5 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion
-        //SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-        //return new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
     }
 }

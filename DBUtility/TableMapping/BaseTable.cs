@@ -8,12 +8,12 @@ namespace hwj.DBUtility.TableMapping
     public abstract class BaseTable<T> : BaseSqlTable<T>
         where T : class, new()
     {
-       
+
         public BaseTable(string tableName)
+            : base(tableName)
         {
             _assigned = new List<String>();
             DBTableName = tableName;
-
         }
 
         private string DBTableName = string.Empty;

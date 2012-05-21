@@ -690,6 +690,7 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
+        #region Private Member
         private static Exception CheckSqlException(Exception e, T entity)
         {
             if (e is SqlException)
@@ -713,37 +714,7 @@ namespace hwj.DBUtility.MSSQL
                 return false;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filterParam"></param>
-        /// <returns></returns>
-        public static SqlEntity GetSingleSqlEntity(FilterParams filterParam)
-        {
-            return GetSingleSqlEntity(null, filterParam, null);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <returns></returns>
-        public static SqlEntity GetSingleSqlEntity(DisplayFields displayFields, FilterParams filterParam)
-        {
-            return GetSingleSqlEntity(displayFields, filterParam, null);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <returns></returns>
-        public static SqlEntity GetSingleSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        {
-            return new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
-        }
+        #endregion
 
     }
 }
