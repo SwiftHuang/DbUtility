@@ -156,16 +156,16 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(hwj.DBUtility.SqlEntity)">
             <summary>
-            
+            获取表对象
             </summary>
-            <param name="sqlEntity"></param>
+            <param name="sqlEntity">SQL实体</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(hwj.DBUtility.FilterParams)">
             <summary>
             获取表对象
             </summary>
-            <param name="filterParam">查询条件</param>
+            <param name="filterParam">条件参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
@@ -173,16 +173,16 @@
             获取表对象
             </summary>
             <param name="displayFields">返回指定字段</param>
-            <param name="filterParam">查询条件</param>
+            <param name="filterParam">条件参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
             <summary>
-            
+            获取表对象
             </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
@@ -190,62 +190,16 @@
             获取表对象
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="parameters">条件参数</param>
+            <param name="parameters">SQL参数</param>
             <returns></returns>
-            
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntity(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
             <summary>
             获取表对象
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="parameters">条件参数</param>
+            <param name="parameters">SQL参数</param>
             <param name="timeout">超时时间(秒)</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.SqlEntity)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="sqlEntity"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="filterParam"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <param name="timeout"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList">
@@ -256,9 +210,9 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(hwj.DBUtility.SqlEntity)">
             <summary>
-            
+            获取表集合
             </summary>
-            <param name="sqlEntity"></param>
+            <param name="sqlEntity">SQL实体</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(hwj.DBUtility.DisplayFields)">
@@ -273,7 +227,7 @@
             获取表集合
             </summary>
             <param name="displayFields">返回指定字段</param>
-            <param name="filterParam">查询条件</param>
+            <param name="filterParam">条件参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
@@ -281,8 +235,18 @@
             获取表集合
             </summary>
             <param name="displayFields">返回指定字段</param>
-            <param name="filterParam">查询条件</param>
-            <param name="sortParams">排序方式</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            获取表集合
+            </summary>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
@@ -290,7 +254,7 @@
             获取表集合
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="parameters">条件参数</param>
+            <param name="parameters">SQL参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
@@ -298,83 +262,8 @@
             获取表集合
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="parameters">条件参数</param>
+            <param name="parameters">SQL参数</param>
             <param name="timeout">超时时间(秒)</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
-            <summary>
-            
-            </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.SqlEntity)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="sqlEntity"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <param name="timeout"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable">
@@ -383,33 +272,41 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(hwj.DBUtility.SqlEntity,System.String)">
+            <summary>
+            返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="sqlEntity">SQL实体</param>
+            <param name="tableName">Data Table Name</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
             <summary>
             返回DataTable(建议用于Report或自定义列表)
             </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
             <summary>
-            
+            返回DataTable(建议用于Report或自定义列表)
             </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
-            <param name="tableName"></param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
             <summary>
             返回DataTable(建议用于Report或自定义列表)
             </summary>
-            <param name="sql"></param>
-            <param name="cmdParams"></param>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String)">
@@ -417,8 +314,8 @@
             返回DataTable(建议用于Report或自定义列表)
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="cmdParams">SQL参数</param>
-            <param name="tableName"></param>
+            <param name="parameters">SQL参数</param>
+            <param name="tableName">Data Table Name</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTable(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Int32)">
@@ -426,8 +323,60 @@
             返回DataTable(建议用于Report或自定义列表)
             </summary>
             <param name="sql">SQL语句</param>
-            <param name="cmdParams">SQL参数</param>
-            <param name="tableName"></param>
+            <param name="parameters">SQL参数</param>
+            <param name="tableName">Data Table Name</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.SqlEntity,System.String)">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="sqlEntity">SQL实体</param>
+            <param name="tableName">Data Table Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String)">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="tableName">Data Table Name</param>
             <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
@@ -485,7 +434,7 @@
             <param name="entity">Table对象</param>
             <returns>Sql对象</returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Add(hwj.DBUtility.MSSQL.DBTransaction,`0)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Add(hwj.DBUtility.MSSQL.DbTransaction,`0)">
             <summary>
             执行插入数据
             </summary>
@@ -538,7 +487,7 @@
             <param name="filterParam">更新条件</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Update(hwj.DBUtility.MSSQL.DBTransaction,`0,hwj.DBUtility.FilterParams)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Update(hwj.DBUtility.MSSQL.DbTransaction,`0,hwj.DBUtility.FilterParams)">
             <summary>
             执行数据更新
             </summary>
@@ -547,7 +496,7 @@
             <param name="filterParam">更新条件</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Update(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Update(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
             <summary>
             执行数据更新
             </summary>
@@ -582,14 +531,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Delete(hwj.DBUtility.MSSQL.DBTransaction)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Delete(hwj.DBUtility.MSSQL.DbTransaction)">
             <summary>
             删除记录
             </summary>
             <param name="trans">事务实体</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Delete(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.FilterParams)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Delete(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.FilterParams)">
             <summary>
             删除记录
             </summary>
@@ -612,16 +561,6 @@
             <param name="sortParams">排序方式</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <returns></returns>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
             <summary>
             获取表集合
@@ -630,17 +569,6 @@
             <param name="filterParam">查询条件</param>
             <param name="sortParams">排序方式</param>
             <param name="maxCount">返回最大记录数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
@@ -737,11 +665,23 @@
             <summary>
             返回DataTable(建议用于Report或自定义列表)
             </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
-            <param name="tableName"></param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.SetAssignedStatus(System.Boolean)">
@@ -907,6 +847,26 @@
         <member name="F:hwj.DBUtility.Enums.EffentNextType.SolicitationEvent">
             <summary>
             引发事件-当前语句必须为"select count(1) from .."格式，如果不存在则继续执行，存在回滚事务
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.LockType.NoLock">
+            <summary>
+            语句执行时不发出共享锁，允许脏读 ，等于 READ UNCOMMITTED事务隔离级别
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.LockType.HoldLock">
+            <summary>
+            持有共享锁，直到整个事务完成，应该在被锁对象不需要时立即释放，等于SERIALIZABLE事务隔离级别
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.LockType.RowLock">
+            <summary>
+            强制使用行锁
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.LockType.UpdLock">
+            <summary>
+            强制在读表时使用更新而不用共享锁
             </summary>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDAL`2.Add(`0)">
@@ -1159,16 +1119,6 @@
             <param name="sortParams">排序方式</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetEntityByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
-            <summary>
-            
-            </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <returns></returns>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
             <summary>
             获取表集合
@@ -1179,32 +1129,33 @@
             <param name="maxCount">返回最大记录数</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetListByTransaction(hwj.DBUtility.MSSQL.DBTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
             <summary>
-            
+            返回DataTable(建议用于Report或自定义列表)
             </summary>
-            <param name="trans"></param>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetDataTableByTran(hwj.DBUtility.MSSQL.DbTransaction,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
+            <summary>
+            通过事务，返回DataTable(建议用于Report或自定义列表)
+            </summary>
+            <param name="trans">事务实体</param>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">条件参数</param>
+            <param name="sortParams">排序参数</param>
+            <param name="maxCount">返回记录数</param>
+            <param name="tableName">Data Table Name</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetServerDateTime">
             <summary>
             
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetDataTable(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},System.String)">
-            <summary>
-            
-            </summary>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <param name="maxCount"></param>
-            <param name="tableName"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseSqlDAL`2.#ctor(System.String)">
@@ -1252,20 +1203,37 @@
             <param name="filterParam">筛选参选</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.#ctor(System.String)">
+        <member name="T:hwj.DBUtility.MSSQL.DbTransaction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.#ctor">
+            <summary>
+            SQL事务实体
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.#ctor(System.String)">
             <summary>
             
             </summary>
             <param name="connectionString"></param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.ExecuteSqlList(hwj.DBUtility.SqlList)">
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.#ctor(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+            <param name="timeout"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteSqlList(hwj.DBUtility.SqlList)">
             <summary>
             
             </summary>
             <param name="sqlList"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.ExecuteSqlList(hwj.DBUtility.SqlList,System.Int32)">
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteSqlList(hwj.DBUtility.SqlList,System.Int32)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
@@ -1273,14 +1241,14 @@
             <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.ExecuteSql(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteSql(hwj.DBUtility.SqlEntity)">
             <summary>
             
             </summary>
             <param name="sqlEntity"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.ExecuteSql(hwj.DBUtility.SqlEntity,System.Int32)">
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteSql(hwj.DBUtility.SqlEntity,System.Int32)">
             <summary>
             
             </summary>
@@ -1288,13 +1256,146 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DBTransaction.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
             <summary>
             
             </summary>
             <param name="SQLString"></param>
             <param name="cmdParms"></param>
             <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="SQLString"></param>
+            <param name="cmdParms"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="lockType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(hwj.DBUtility.SqlEntity)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sqlEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            通过事务，获取表对象
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.DisplayFields)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="maxCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},hwj.DBUtility.Enums.LockType)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="maxCount"></param>
+            <param name="lockType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(hwj.DBUtility.SqlEntity)">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sqlEntity">SQL实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbTransaction.GetList``2(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
             <returns></returns>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.DbHelperSQL">

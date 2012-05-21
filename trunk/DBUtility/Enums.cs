@@ -230,9 +230,21 @@ namespace hwj.DBUtility
         public enum LockType
         {
             None,
+            /// <summary>
+            /// 语句执行时不发出共享锁，允许脏读 ，等于 READ UNCOMMITTED事务隔离级别
+            /// </summary>
             NoLock,
+            /// <summary>
+            /// 持有共享锁，直到整个事务完成，应该在被锁对象不需要时立即释放，等于SERIALIZABLE事务隔离级别
+            /// </summary>
             HoldLock,
+            /// <summary>
+            /// 强制使用行锁
+            /// </summary>
             RowLock,
+            /// <summary>
+            /// 强制在读表时使用更新而不用共享锁
+            /// </summary>
             UpdLock,
         }
     }
