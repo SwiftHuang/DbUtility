@@ -62,8 +62,9 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
         /// <param name="timeout">超时时间(秒)</param>
-        protected DALDependency(string connectionString, int timeout)
-            : base(connectionString, timeout)
+        /// <param name="lockType">锁类型</param>
+        protected DALDependency(string connectionString, int timeout, Enums.LockType lockType)
+            : base(connectionString, timeout, lockType)
         {
 
         }
@@ -217,7 +218,6 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
-            //_SqlEntity = UpdateSqlEntity(updateParam, filterParam);
             SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
             _SqlEntity = tmpSqlEty;
             return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
@@ -389,54 +389,18 @@ namespace hwj.DBUtility.MSSQL
 
         #region Get Entity
         /// <summary>
-        /// 获取数据库服务器时间
-        /// </summary>
-        /// <returns></returns>
-        public override DateTime GetServerDateTime()
-        {
-            DateTime tmpDateTime = DateTime.MinValue;
-            object tmp = ExecuteScalar(GenSelectSql.SelectServerDateTime());
-
-            if (tmp != null)
-                DateTime.TryParse(tmp.ToString(), out tmpDateTime);
-            return tmpDateTime;
-        }
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <returns></returns>
-        //protected T GetEntity()
-        //{
-        //    return GetEntity(null);
-        //}
-
-        /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
-        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType), GenSelectSql.GenParameter(filterParam));
+            tmpSqlEty.LockType = lockType;
             return base.GetEntity(tmpSqlEty);
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="trans"></param>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <returns></returns>
-        //public override T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        //{
-        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
-        //    //_SqlEntity = tmpSqlEty;
-        //    return base.GetEntityByTran(trans, tmpSqlEty);
-        //}
         #endregion
 
         #region Get List
@@ -447,27 +411,14 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
-        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType), GenSelectSql.GenParameter(filterParam));
+            tmpSqlEty.LockType = lockType;
             return base.GetList(tmpSqlEty);
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="trans"></param>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <param name="maxCount"></param>
-        ///// <returns></returns>
-        //public override TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        //{
-        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-        //    return base.GetListByTran(trans, tmpSqlEty);
-        //}
         #endregion
 
         #region Get Page
@@ -715,6 +666,20 @@ namespace hwj.DBUtility.MSSQL
             }
         }
         #endregion
+
+        /// <summary>
+        /// 获取数据库服务器时间
+        /// </summary>
+        /// <returns></returns>
+        public override DateTime GetServerDateTime()
+        {
+            DateTime tmpDateTime = DateTime.MinValue;
+            object tmp = ExecuteScalar(GenSelectSql.SelectServerDateTime());
+
+            if (tmp != null)
+                DateTime.TryParse(tmp.ToString(), out tmpDateTime);
+            return tmpDateTime;
+        }
 
     }
 }

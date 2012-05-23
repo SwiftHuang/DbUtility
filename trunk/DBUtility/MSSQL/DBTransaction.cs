@@ -15,6 +15,9 @@ namespace hwj.DBUtility.MSSQL
         public SqlTransaction SqlTrans { get; private set; }
         public SqlConnection SqlConn { get; private set; }
         public int Timeout { get; set; }
+        public Enums.LockType DefaultLock { get; set; }
+        public Enums.LockType SelectLock { get; set; }
+        public Enums.LockType UpdateLock { get; set; }
         #endregion
 
         /// <summary>
@@ -38,6 +41,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout"></param>
         public DbTransaction(string connectionString, int timeout)
         {
+            DefaultLock = Enums.LockType.HoldLock;
+            SelectLock = Enums.LockType.UpdLock;
+            UpdateLock = Enums.LockType.UpdLock;
             Timeout = timeout;
             SqlConn = new SqlConnection(connectionString);
             SqlConn.Open();
@@ -176,6 +182,16 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="SQLString"></param>
         /// <param name="cmdParms"></param>
+        /// <returns></returns>
+        public int ExecuteSql(string SQLString, List<SqlParameter> cmdParms)
+        {
+            return ExecuteSql(SQLString, cmdParms, Timeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <param name="cmdParms"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
         public int ExecuteSql(string SQLString, List<SqlParameter> cmdParms, int timeout)
@@ -196,6 +212,17 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
+        #region ExecuteReader
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <param name="cmdParms"></param>
+        /// <returns></returns>
+        public SqlDataReader ExecuteReader(string SQLString, List<SqlParameter> cmdParms)
+        {
+            return ExecuteReader(SQLString, cmdParms, Timeout);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -214,7 +241,45 @@ namespace hwj.DBUtility.MSSQL
                 return myReader;
             }
         }
+        #endregion
 
+        #region ExecuteScalar
+        /// <summary>
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
+        /// </summary>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns>查询结果（object）</returns>
+        public object ExecuteScalar(string SQLString, List<SqlParameter> cmdParms)
+        {
+            return ExecuteScalar(SQLString, cmdParms, Timeout);
+        }
+        /// <summary>
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
+        /// </summary>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns>查询结果（object）</returns>
+        public object ExecuteScalar(string SQLString, List<SqlParameter> cmdParms, int timeout)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                DbHelperSQL.PrepareCommand(cmd, SqlConn, SqlTrans, SQLString, cmdParms, timeout);
+                object obj = cmd.ExecuteScalar();
+                cmd.Parameters.Clear();
+                if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
+                {
+                    return null;
+                }
+                else
+                {
+                    return obj;
+                }
+            }
+        }
+        #endregion
         /*暂时没处理视图里面的锁，BaseSqlTable生成Select语句没进行锁的处理*/
         #region Get Entity
         /// <summary>

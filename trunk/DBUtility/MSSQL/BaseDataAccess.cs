@@ -16,6 +16,7 @@ namespace hwj.DBUtility.MSSQL
         where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
+        private const string Msg_InvalidConnection = "Invalid Connection!";
         #region Property
         private string _connectionString = string.Empty;
         public string ConnectionString
@@ -46,6 +47,9 @@ namespace hwj.DBUtility.MSSQL
             get { return _Timeout; }
             //set { _Timeout = value; }
         }
+        public DbTransaction Transaction { get; set; }
+        public Enums.LockType DefaultLock { get; set; }
+        public Enums.ConnectionType ConnectionType { get; set; }
         #endregion
 
         /// <summary>
@@ -53,17 +57,33 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString"></param>
         protected BaseDataAccess(string connectionString)
-            : this(connectionString, 120)
+            : this(connectionString, 120, Enums.LockType.None)
         { }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout"></param>
-        protected BaseDataAccess(string connectionString, int timeout)
+        /// <param name="lockType"></param>
+        protected BaseDataAccess(string connectionString, int timeout, Enums.LockType lockType)
         {
             ConnectionString = connectionString;
             _Timeout = timeout;
+            DefaultLock = lockType;
+            Transaction = null;
+            ConnectionType = Enums.ConnectionType.Connection;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        protected BaseDataAccess(DbTransaction trans)
+        {
+            ConnectionString = string.Empty;
+            _Timeout = 0;
+            DefaultLock = Enums.LockType.None;
+            Transaction = trans;
+            ConnectionType = Enums.ConnectionType.Transaction;
         }
 
         #region Execute
@@ -118,7 +138,15 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<SqlParameter> parameters, int timeout)
         {
-            return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
+            if (ConnectionType == Enums.ConnectionType.Transaction)
+            {
+                return Transaction.ExecuteSql(sql, parameters);
+            }
+            else
+            {
+                return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
+            }
+            throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -151,7 +179,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public SqlDataReader ExecuteReader(string sql, List<SqlParameter> parameters, int timeout)
         {
-            return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
+            if (ConnectionType == Enums.ConnectionType.Transaction)
+            {
+                return Transaction.ExecuteReader(sql, parameters);
+            }
+            else
+            {
+                return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
+            }
         }
         #endregion
 
@@ -184,7 +219,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql, List<SqlParameter> parameters, int timeout)
         {
-            return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
+            if (ConnectionType == Enums.ConnectionType.Transaction)
+            {
+                return Transaction.ExecuteScalar(sql, parameters);
+            }
+            else
+            {
+                return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
+            }
         }
         #endregion
         #endregion
@@ -213,7 +255,17 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, filterParam, null);
+            return GetEntity(null, filterParam, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public T GetEntity(FilterParams filterParam, Enums.LockType lockType)
+        {
+            return GetEntity(null, filterParam, null, lockType);
         }
         /// <summary>
         /// 获取表对象
@@ -223,7 +275,18 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetEntity(displayFields, filterParam, null);
+            return GetEntity(displayFields, filterParam, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        {
+            return GetEntity(displayFields, filterParam, null, lockType);
         }
         /// <summary>
         /// 获取表对象
@@ -232,7 +295,19 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams);
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        {
+            return GetEntity(displayFields, filterParam, sortParams, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType);
 
         /// <summary>
         /// 获取表对象
@@ -253,21 +328,29 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
         {
-            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
-            try
+            if (ConnectionType == Enums.ConnectionType.Transaction && Transaction != null)
             {
-                if (reader.HasRows)
-                    return GenerateEntity.CreateSingleEntity<T>(reader);
-                else
-                    return null;
+                return Transaction.GetEntity<T>(sql, parameters);
             }
-            catch
-            { throw; }
-            finally
+            else
             {
-                if (!reader.IsClosed)
-                    reader.Close();
+                SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+                try
+                {
+                    if (reader.HasRows)
+                        return GenerateEntity.CreateSingleEntity<T>(reader);
+                    else
+                        return null;
+                }
+                catch
+                { throw; }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
             }
+            throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -298,7 +381,17 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList(DisplayFields displayFields)
         {
-            return GetList(displayFields, null, null, null);
+            return GetList(displayFields, null, null, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, Enums.LockType lockType)
+        {
+            return GetList(displayFields, null, null, null, lockType);
         }
         /// <summary>
         /// 获取表集合
@@ -308,7 +401,18 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetList(displayFields, filterParam, null, null);
+            return GetList(displayFields, filterParam, null, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        {
+            return GetList(displayFields, filterParam, null, null, lockType);
         }
         /// <summary>
         /// 获取表集合
@@ -319,7 +423,19 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetList(displayFields, filterParam, sortParams, null);
+            return GetList(displayFields, filterParam, sortParams, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        {
+            return GetList(displayFields, filterParam, sortParams, null, lockType);
         }
         /// <summary>
         /// 获取表集合
@@ -329,7 +445,20 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount);
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        {
+            return GetList(displayFields, filterParam, sortParams, maxCount, GetLockType(Enums.LockModule.Select, DefaultLock));
+        }
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType);
 
         /// <summary>
         /// 获取表集合
@@ -350,21 +479,29 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList(string sql, List<SqlParameter> parameters, int timeout)
         {
-            SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
-            try
+            if (ConnectionType == Enums.ConnectionType.Transaction && Transaction != null)
             {
-                if (reader.HasRows)
-                    return GenerateEntity.CreateListEntity<T, TS>(reader);
-                else
-                    return new TS();
+                return Transaction.GetList<T, TS>(sql, parameters);
             }
-            catch
-            { throw; }
-            finally
+            else
             {
-                if (!reader.IsClosed)
-                    reader.Close();
+                SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+                try
+                {
+                    if (reader.HasRows)
+                        return GenerateEntity.CreateListEntity<T, TS>(reader);
+                    else
+                        return new TS();
+                }
+                catch
+                { throw; }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
             }
+            throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -688,6 +825,25 @@ namespace hwj.DBUtility.MSSQL
         #endregion
         #endregion
 
+        protected Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
+        {
+            if (ConnectionType == Enums.ConnectionType.Transaction)
+            {
+                switch (module)
+                {
+                    case Enums.LockModule.Select:
+                        return Transaction.SelectLock;
+                    case Enums.LockModule.Update:
+                        return Transaction.UpdateLock;
+                    default:
+                        return Transaction.DefaultLock;
+                }
+            }
+            else
+            {
+                return lockType;
+            }
+        }
 
     }
 }

@@ -33,20 +33,12 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
         /// <param name="timeout">超时时间(秒)</param>
-        protected SelectDALDependency(string connectionString, int timeout)
-            : base(connectionString, timeout)
+        /// <param name="lockType">锁类型</param>
+        protected SelectDALDependency(string connectionString, int timeout, Enums.LockType lockType)
+            : base(connectionString, timeout, lockType)
         { }
 
         #region Get Entity
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <returns></returns>
-        //protected T GetEntity()
-        //{
-        //    return GetEntity(null);
-        //}
-
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -54,28 +46,12 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
-        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1, lockType), GenSelectSql.GenParameter(filterParam));
+            tmpSqlEty.LockType = lockType;
             return base.GetEntity(tmpSqlEty);
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="trans"></param>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <returns></returns>
-        //public override T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        //{
-        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, 1, false), GenSelectSql.GenParameter(filterParam));
-        //    //_SqlEntity = tmpSqlEty;
-        //    return base.GetEntityByTran(trans, tmpSqlEty);
-        //}
-
         #endregion
 
         #region GetList
@@ -86,28 +62,14 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
-        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            //_SqlEntity = tmpSqlEty;
+            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, lockType), GenSelectSql.GenParameter(filterParam));
+            tmpSqlEty.LockType = lockType;
             return base.GetList(tmpSqlEty);
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="trans"></param>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <param name="maxCount"></param>
-        ///// <returns></returns>
-        //public override TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        //{
-        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(SqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, false), GenSelectSql.GenParameter(filterParam));
-        //    //_SqlEntity = tmpSqlEty;
-        //    return base.GetListByTran(trans, tmpSqlEty);
-        //}
         #endregion
 
         #region DataTable
