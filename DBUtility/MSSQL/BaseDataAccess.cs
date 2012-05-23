@@ -24,10 +24,10 @@ namespace hwj.DBUtility.MSSQL
             get { return _connectionString; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    throw new Exception("数据连接字符不能为空");
-                else
-                    _connectionString = value;
+                //if (string.IsNullOrEmpty(value))
+                //    throw new Exception("数据连接字符不能为空");
+                //else
+                _connectionString = value;
             }
         }
         protected SqlEntity _SqlEntity = null;
