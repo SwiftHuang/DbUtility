@@ -7,15 +7,30 @@ using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TS"></typeparam>
     public class BaseDAL<T, TS> : DALDependency<T, TS>
         where T : BaseTable<T>, new()
         where TS : List<T>, new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ConnectionString"></param>
         protected BaseDAL(string ConnectionString)
             : base(ConnectionString)
         { }
-        protected BaseDAL(string connectionString, int timeout)
-            : base(connectionString, timeout)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="timeout"></param>
+        /// <param name="lockType"></param>
+        protected BaseDAL(string connectionString, int timeout, Enums.LockType lockType)
+            : base(connectionString, timeout, lockType)
         { }
 
         #region Insert
@@ -106,150 +121,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return base.Truncate();
         }
-        #endregion
-
-        #region Get Entity
-        ///// <summary>
-        ///// 获取数据库服务器时间
-        ///// </summary>
-        ///// <returns></returns>
-        //public new DateTime GetServerDateTime()
-        //{
-        //    return base.GetServerDateTime();
-        //}
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <returns></returns>
-        //public new T GetEntity()
-        //{
-        //    return base.GetEntity();
-        //}
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <returns></returns>
-        //public new T GetEntity(FilterParams filterParam)
-        //{
-        //    return base.GetEntity(filterParam);
-        //}
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <returns></returns>
-        //public new T GetEntity(DisplayFields displayFields, FilterParams filterParam)
-        //{
-        //    return base.GetEntity(displayFields, filterParam);
-        //}
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <param name="sortParams">排序方式</param>
-        ///// <returns></returns>
-        //public new T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        //{
-        //    return base.GetEntity(displayFields, filterParam, sortParams);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">条件参数</param>
-        ///// <returns></returns>
-        //public new T GetEntity(string sql, List<SqlParameter> parameters)
-        //{
-        //    return base.GetEntity(sql, parameters);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">条件参数</param>
-        ///// <param name="timeout">超时时间(秒)</param>
-        ///// <returns></returns>
-        //public new T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
-        //{
-        //    return base.GetEntity(sql, parameters, timeout);
-        //}
-        #endregion
-
-        #region Get List
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <returns></returns>
-        //public new TS GetList()
-        //{
-        //    return base.GetList();
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <returns></returns>
-        //public new TS GetList(DisplayFields displayFields)
-        //{
-        //    return base.GetList(displayFields);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <returns></returns>
-        //public new TS GetList(DisplayFields displayFields, FilterParams filterParam)
-        //{
-        //    return base.GetList(displayFields, filterParam);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <param name="sortParams">排序方式</param>
-        ///// <returns></returns>
-        //public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        //{
-        //    return base.GetList(displayFields, filterParam, sortParams);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">查询条件</param>
-        ///// <param name="sortParams">排序方式</param>
-        ///// <param name="maxCount">返回最大记录数</param>
-        ///// <returns></returns>
-        //public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        //{
-        //    return base.GetList(displayFields, filterParam, sortParams, maxCount);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">条件参数</param>
-        ///// <returns></returns>
-        //public new TS GetList(string sql, List<SqlParameter> parameters)
-        //{
-        //    return base.GetList(sql, parameters);
-        //}
-        ///// <summary>
-        ///// 获取表集合
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">条件参数</param>
-        ///// <param name="timeout">超时时间(秒)</param>
-        ///// <returns></returns>
-        //public new TS GetList(string sql, List<SqlParameter> parameters, int timeout)
-        //{
-        //    return base.GetList(sql, parameters, timeout);
-        //}
         #endregion
 
         #region Get Page
@@ -364,77 +235,6 @@ namespace hwj.DBUtility.MSSQL
             return base.RecordCount(sql, parameters);
         }
         #endregion
-
-        //#region DataTable
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable()
-        //{
-        //    return base.GetDataTable();
-        //}
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <param name="maxCount"></param>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        //{
-        //    return base.GetDataTable(displayFields, filterParam, sortParams, maxCount);
-        //}
-
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <param name="displayFields"></param>
-        ///// <param name="filterParam"></param>
-        ///// <param name="sortParams"></param>
-        ///// <param name="maxCount"></param>
-        ///// <param name="tableName"></param>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
-        //{
-        //    return base.GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName);
-        //}
-
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <param name="sql"></param>
-        ///// <param name="cmdParams"></param>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable(string sql, List<SqlParameter> cmdParams)
-        //{
-        //    return base.GetDataTable(sql, cmdParams);
-        //}
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="cmdParams">SQL参数</param>
-        ///// <param name="tableName"></param>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName)
-        //{
-        //    return base.GetDataTable(sql, cmdParams, tableName);
-        //}
-        ///// <summary>
-        ///// 返回DataTable(建议用于Report或自定义列表)
-        ///// </summary>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="cmdParams">SQL参数</param>
-        ///// <param name="tableName"></param>
-        ///// <param name="timeout">超时时间(秒)</param>
-        ///// <returns></returns>
-        //public new DataTable GetDataTable(string sql, List<SqlParameter> cmdParams, string tableName, int timeout)
-        //{
-        //    return base.GetDataTable(sql, cmdParams, tableName, timeout);
-        //}
-        //#endregion
 
     }
 }

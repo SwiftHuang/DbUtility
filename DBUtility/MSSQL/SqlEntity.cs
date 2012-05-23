@@ -33,6 +33,7 @@ namespace hwj.DBUtility
         public List<SqlParameter> Parameters { get; set; }
         public object DataEntity { get; set; }
         public string TableName { get; set; }
+        public Enums.LockType LockType { get; set; }
         #endregion
 
         public SqlEntity()
