@@ -486,6 +486,12 @@
             <param name="timeout">超时时间(秒)</param>
             <param name="lockType">锁类型</param>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.MSSQL.DbTransaction)">
+            <summary>
+            
+            </summary>
+            <param name="trans"></param>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Add(`0)">
             <summary>
             执行插入数据
@@ -1212,6 +1218,12 @@
             <param name="connectionString">数据连接字符串</param>
             <param name="timeout">超时时间(秒)</param>
             <param name="lockType">锁类型</param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(hwj.DBUtility.MSSQL.DbTransaction)">
+            <summary>
+            
+            </summary>
+            <param name="trans"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
             <summary>

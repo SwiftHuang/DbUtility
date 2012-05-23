@@ -68,7 +68,15 @@ namespace hwj.DBUtility.MSSQL
         {
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        protected DALDependency(DbTransaction trans)
+            : base(trans)
+        {
+            TableName = Activator.CreateInstance<T>().GetTableName();
+        }
         #region Insert
         /// <summary>
         /// 执行插入数据

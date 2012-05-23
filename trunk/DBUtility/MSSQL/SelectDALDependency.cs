@@ -37,6 +37,15 @@ namespace hwj.DBUtility.MSSQL
         protected SelectDALDependency(string connectionString, int timeout, Enums.LockType lockType)
             : base(connectionString, timeout, lockType)
         { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trans"></param>
+        protected SelectDALDependency(DbTransaction trans)
+            : base(trans)
+        {
+           
+        }
 
         #region Get Entity
         /// <summary>
