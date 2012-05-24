@@ -12,6 +12,7 @@ namespace hwj.DBUtility.MSSQL
     public class DbTransaction : System.Data.IDbTransaction
     {
         #region Property
+        public string ConnectionString { get; set; }
         public SqlTransaction SqlTrans { get; private set; }
         public SqlConnection SqlConn { get; private set; }
         public int Timeout { get; set; }
@@ -41,16 +42,27 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout"></param>
         public DbTransaction(string connectionString, int timeout)
         {
+            ConnectionString = connectionString;
             DefaultLock = Enums.LockType.HoldLock;
             SelectLock = Enums.LockType.UpdLock;
             UpdateLock = Enums.LockType.UpdLock;
             Timeout = timeout;
-            SqlConn = new SqlConnection(connectionString);
-            SqlConn.Open();
-            SqlTrans = SqlConn.BeginTransaction();
         }
 
         #region Public Member
+        public void Begin()
+        {
+            if (SqlConn == null)
+            {
+                SqlConn = new SqlConnection(ConnectionString);
+            }
+            if (SqlConn.State != ConnectionState.Open)
+            {
+                SqlConn.Open();
+            }
+            SqlTrans = SqlConn.BeginTransaction();
+        }
+
         #region ExecuteSqlList
         /// <summary>
         /// 

@@ -403,7 +403,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
-        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType), GenSelectSql.GenParameter(filterParam));
             tmpSqlEty.LockType = lockType;
@@ -421,7 +421,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回最大记录数</param>
         /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
-        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType), GenSelectSql.GenParameter(filterParam));
             tmpSqlEty.LockType = lockType;
@@ -627,7 +627,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTable(tmpSqlEty, tableName);
