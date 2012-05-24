@@ -260,6 +260,50 @@
             获取或设置SMTP服务器列表
             </summary>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.EntityHelper.EntityToString(System.Object,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            根据对象生成对对象赋值的代码
+            </summary>
+            <param name="obj">要转换的对象</param>
+            <param name="genNamespace">生成代码的命名空间</param>
+            <param name="genClassName">生成代码的类名</param>
+            <param name="genFunName">生成代码的方法名</param>
+            <returns>生成的代码</returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EntityHelper.EntityToString(System.Object,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            根据对象生成对对象赋值的代码
+            </summary>
+            <param name="obj">要转换的对象</param>
+            <param name="genNamespace">生成代码的命名空间</param>
+            <param name="genClassName">生成代码的类名</param>
+            <param name="genFunName">生成代码的方法名</param>
+            <param name="genFunReturnType">生成代码的方法的返回类型</param>
+            <returns>生成的代码</returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EntityHelper.EntityToCSFile(System.String,System.Object,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            根据对象生成对对象赋值的代码并保存到指定文件
+            </summary>
+            <param name="fileName">保存文件的地址</param>
+            <param name="obj">要转换的对象</param>
+            <param name="genNamespace">生成代码的命名空间</param>
+            <param name="genClassName">生成代码的类名</param>
+            <param name="genFunName">生成代码的方法名</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.EntityHelper.EntityToCSFile(System.String,System.Object,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            根据对象生成对对象赋值的代码并保存到指定文件
+            </summary>
+            <param name="fileName">保存文件的地址</param>
+            <param name="obj">要转换的对象</param>
+            <param name="genNamespace">生成代码的命名空间</param>
+            <param name="genClassName">生成代码的类名</param>
+            <param name="genFunName">生成代码的方法名</param>
+            <param name="genFunReturnType">生成代码的方法的返回类型</param>
+            <returns></returns>
+        </member>
         <member name="F:hwj.CommonLibrary.DataStructure.AdjacencyList`1.items">
             <summary>
             图的顶点集合

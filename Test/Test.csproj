@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\viEMOSSETUP.cs" />
     <Compile Include="DB\DAEMOSSETUP.cs" />
     <Compile Include="DB\tbEMOSSETUP.cs" />
     <Compile Include="DB\Test\BOAptx.cs" />
