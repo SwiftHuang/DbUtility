@@ -18,6 +18,11 @@ namespace Test.DB
         {
             TableName = tbEMOSSETUP.DBTableName;
         }
+        public DAEMOSSETUP(DbTransaction trans)
+            : base(trans)
+        {
+            
+        }
 
         public bool Add(tbEMOSSETUP entity)
         {
@@ -68,7 +73,9 @@ namespace Test.DB
             fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
             fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
 
-            return trans.GetEntity<tbEMOSSETUP>(DAEMOSSETUP.GetSQLEntity(fp));
+            viEMOSSETUP vi = trans.GetEntity<viEMOSSETUP>(fp);
+            //return trans.GetEntity<tbEMOSSETUP>(DAEMOSSETUP.GetSQLEntity(fp));
+            return trans.GetEntity<tbEMOSSETUP>(fp);
         }
     }
 }

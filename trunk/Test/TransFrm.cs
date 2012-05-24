@@ -31,7 +31,9 @@ namespace Test
                     try
                     {
 
-                        //DB.tbEMOSSETUP setup2 = da.GetEntity(trans, "BKGREF", "JT", "J");
+                        DB.tbEMOSSETUP setup2 = da.GetEntity(trans, "BKGREF", "JT", "J");
+                        trans.Commit();
+                        return;
                         //trans.Commit();
                         //string tmp = GetNewBkgRefKey(trans, "V", "VI", "BKGREF", 1);
 
@@ -45,10 +47,10 @@ namespace Test
                         DB.DAEMOSSETUP.Update(trans, s1, s1.ID, s1.CompanyCode, s1.BranchCode);
                         //trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
 
-                        using (hwj.DBUtility.MSSQL.DbTransaction trans2 = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
-                        {
-                            DB.tbEMOSSETUP setup1 = da.GetEntity(trans2, "BKGREF", "VI", "V");
-                        }
+                        //using (hwj.DBUtility.MSSQL.DbTransaction trans2 = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
+                        //{
+                        //    DB.tbEMOSSETUP setup1 = da.GetEntity(trans2, "BKGREF", "VI", "V");
+                        //}
 
                         hwj.DBUtility.FilterParams fp = new hwj.DBUtility.FilterParams();
                         fp.AddParam(DB.tbEMOSSETUP.Fields.CompanyCode, s1.CompanyCode, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
@@ -93,6 +95,21 @@ namespace Test
             cmd.Parameters.Add(sp);
             cmd.ExecuteScalar();
             return sp.Value.ToString();
+        }
+
+        private void xButton2_Click(object sender, EventArgs e)
+        {
+            string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
+            hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr);
+            DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(trans);
+            
+            DB.tbEMOSSETUP s1 = da.GetEntity("BKGREF", "JT", "J");
+
+            trans.Commit();
+
+            trans.Begin();
+            DB.tbEMOSSETUP s2 = da.GetEntity("BKGREF", "JT", "J");
+            trans.Commit();
         }
     }
 }

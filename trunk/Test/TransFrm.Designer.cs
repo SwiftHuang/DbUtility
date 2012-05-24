@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.xButton1 = new hwj.UserControls.CommonControls.xButton();
+            this.xButton2 = new hwj.UserControls.CommonControls.xButton();
             this.SuspendLayout();
             // 
             // xButton1
@@ -42,11 +43,23 @@
             this.xButton1.UseVisualStyleBackColor = true;
             this.xButton1.Click += new System.EventHandler(this.xButton1_Click);
             // 
+            // xButton2
+            // 
+            this.xButton2.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.xButton2.Location = new System.Drawing.Point(197, 82);
+            this.xButton2.Name = "xButton2";
+            this.xButton2.Size = new System.Drawing.Size(75, 23);
+            this.xButton2.TabIndex = 1;
+            this.xButton2.Text = "xButton2";
+            this.xButton2.UseVisualStyleBackColor = true;
+            this.xButton2.Click += new System.EventHandler(this.xButton2_Click);
+            // 
             // TransFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.xButton2);
             this.Controls.Add(this.xButton1);
             this.Name = "TransFrm";
             this.Text = "TransFrm";
@@ -57,5 +70,6 @@
         #endregion
 
         private hwj.UserControls.CommonControls.xButton xButton1;
+        private hwj.UserControls.CommonControls.xButton xButton2;
     }
 }
