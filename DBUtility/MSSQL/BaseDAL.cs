@@ -352,7 +352,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
         /// <returns></returns>
-        public new int RecordCount(string sql, List<SqlParameter> parameters)
+        public new int RecordCount(string sql, List<IDbDataParameter> parameters)
         {
             return base.RecordCount(sql, parameters);
         }

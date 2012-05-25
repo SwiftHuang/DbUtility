@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 namespace hwj.DBUtility
 {
     public class SqlEntity
@@ -30,7 +31,7 @@ namespace hwj.DBUtility
         #region Property
         public Enums.EffentNextType EffentNextType { get; set; }
         public string CommandText { get; set; }
-        public List<SqlParameter> Parameters { get; set; }
+        public List<IDbDataParameter> Parameters { get; set; }
         public object DataEntity { get; set; }
         public string TableName { get; set; }
         public Enums.LockType LockType { get; set; }
@@ -38,11 +39,11 @@ namespace hwj.DBUtility
 
         public SqlEntity()
             : this(string.Empty, null, Enums.EffentNextType.None, null, null) { }
-        public SqlEntity(string sqlText, List<SqlParameter> para)
+        public SqlEntity(string sqlText, List<IDbDataParameter> para)
             : this(sqlText, para, Enums.EffentNextType.None, null, null) { }
-        public SqlEntity(string sqlText, List<SqlParameter> para, string tableName, object dataEntity)
+        public SqlEntity(string sqlText, List<IDbDataParameter> para, string tableName, object dataEntity)
             : this(sqlText, para, Enums.EffentNextType.None, tableName, dataEntity) { }
-        public SqlEntity(string sqlText, List<SqlParameter> para, Enums.EffentNextType type, string tableName, object dataEntity)
+        public SqlEntity(string sqlText, List<IDbDataParameter> para, Enums.EffentNextType type, string tableName, object dataEntity)
         {
             this.CommandText = sqlText;
             this.Parameters = para;

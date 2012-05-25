@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Text;
 using hwj.DBUtility.TableMapping;
 using System.Data;
+using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -44,12 +45,13 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         public int Timeout
         {
-            get { return _Timeout; }
+            get { return InnerConnection.ConnectionTimeout; }
             //set { _Timeout = value; }
         }
-        public DbTransaction Transaction { get; set; }
+        public IConnection InnerConnection { get; set; }
+        //public DbTransaction Transaction { get; set; }
         public Enums.LockType DefaultLock { get; set; }
-        public Enums.ConnectionType ConnectionType { get; set; }
+        //public Enums.ConnectionType ConnectionType { get; set; }
         #endregion
 
         /// <summary>
@@ -66,26 +68,34 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout"></param>
         /// <param name="lockType"></param>
         protected BaseDataAccess(string connectionString, int timeout, Enums.LockType lockType)
+            : this(new DbConnection(connectionString, timeout), lockType)
         {
             ConnectionString = connectionString;
-            _Timeout = timeout;
             DefaultLock = lockType;
-            Transaction = null;
-            ConnectionType = Enums.ConnectionType.Connection;
+            //Transaction = null;
+            //ConnectionType = Enums.ConnectionType.Connection;
             //Transaction = new DbTransaction(connectionString, timeout);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trans"></param>
-        protected BaseDataAccess(DbTransaction trans)
+        protected BaseDataAccess(IConnection connection, Enums.LockType lockType)
         {
-            ConnectionString = string.Empty;
-            _Timeout = 0;
-            DefaultLock = Enums.LockType.None;
-            Transaction = trans;
-            ConnectionType = Enums.ConnectionType.Transaction;
+            ConnectionString = connection.ConnectionString;
+            InnerConnection = connection;
+            _Timeout = connection.ConnectionTimeout;
+            DefaultLock = lockType;
+            //Transaction = null;
         }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="trans"></param>
+        //protected BaseDataAccess(DbTransaction trans)
+        //{
+        //    ConnectionString = string.Empty;
+        //    _Timeout = 0;
+        //    DefaultLock = Enums.LockType.None;
+        //    //Transaction = trans;
+        //    //ConnectionType = Enums.ConnectionType.Transaction;
+        //}
 
         #region Execute
         #region ExecuteSqlTran
@@ -126,7 +136,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public int ExecuteSql(string sql, List<SqlParameter> parameters)
+        public int ExecuteSql(string sql, List<IDbDataParameter> parameters)
         {
             return ExecuteSql(sql, parameters, Timeout);
         }
@@ -137,11 +147,11 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public int ExecuteSql(string sql, List<SqlParameter> parameters, int timeout)
+        public int ExecuteSql(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction)
+            if (IsUseTrans())
             {
-                return Transaction.ExecuteSql(sql, parameters);
+                return InnerConnection.ExecuteSql(sql, parameters);
             }
             else
             {
@@ -157,7 +167,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <returns></returns>
-        public SqlDataReader ExecuteReader(string sql)
+        public IDataReader ExecuteReader(string sql)
         {
             return ExecuteReader(sql, null, Timeout);
         }
@@ -167,7 +177,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        public SqlDataReader ExecuteReader(string sql, List<SqlParameter> parameters)
+        public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters)
         {
             return ExecuteReader(sql, parameters, Timeout);
         }
@@ -178,11 +188,11 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public SqlDataReader ExecuteReader(string sql, List<SqlParameter> parameters, int timeout)
+        public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction)
+            if (IsUseTrans())
             {
-                return Transaction.ExecuteReader(sql, parameters);
+                return InnerConnection.ExecuteReader(sql, parameters, timeout);
             }
             else
             {
@@ -207,7 +217,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        public object ExecuteScalar(string sql, List<SqlParameter> parameters)
+        public object ExecuteScalar(string sql, List<IDbDataParameter> parameters)
         {
             return ExecuteScalar(sql, parameters, Timeout);
         }
@@ -218,11 +228,11 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public object ExecuteScalar(string sql, List<SqlParameter> parameters, int timeout)
+        public object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction)
+            if (IsUseTrans())
             {
-                return Transaction.ExecuteScalar(sql, parameters);
+                return InnerConnection.ExecuteScalar(sql, parameters, timeout);
             }
             else
             {
@@ -316,7 +326,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<SqlParameter> parameters)
+        protected T GetEntity(string sql, List<IDbDataParameter> parameters)
         {
             return GetEntity(sql, parameters, Timeout);
         }
@@ -327,18 +337,18 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<SqlParameter> parameters, int timeout)
+        protected T GetEntity(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction && Transaction != null)
+            if (IsUseTrans())
             {
-                return Transaction.GetEntity<T>(sql, parameters);
+                return InnerConnection.GetEntity<T>(sql, parameters);
             }
             else
             {
-                SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+                IDataReader reader = ExecuteReader(sql, parameters, timeout);
                 try
                 {
-                    if (reader.HasRows)
+                    if (reader.Read())
                         return GenerateEntity.CreateSingleEntity<T>(reader);
                     else
                         return null;
@@ -467,7 +477,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<SqlParameter> parameters)
+        protected TS GetList(string sql, List<IDbDataParameter> parameters)
         {
             return GetList(sql, parameters, Timeout);
         }
@@ -478,21 +488,18 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<SqlParameter> parameters, int timeout)
+        protected TS GetList(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction && Transaction != null)
+            if (IsUseTrans())
             {
-                return Transaction.GetList<T, TS>(sql, parameters);
+                return InnerConnection.GetList<T, TS>(sql, parameters);
             }
             else
             {
-                SqlDataReader reader = ExecuteReader(sql, parameters, timeout);
+                IDataReader reader = ExecuteReader(sql, parameters, timeout);
                 try
                 {
-                    if (reader.HasRows)
-                        return GenerateEntity.CreateListEntity<T, TS>(reader);
-                    else
-                        return new TS();
+                    return GenerateEntity.CreateListEntity<T, TS>(reader);
                 }
                 catch
                 { throw; }
@@ -555,7 +562,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<SqlParameter> parameters)
+        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters)
         {
             return GetDataTable(sql, parameters, string.Empty);
         }
@@ -566,7 +573,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<SqlParameter> parameters, string tableName)
+        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName)
         {
             return GetDataTable(sql, parameters, tableName, Timeout);
         }
@@ -578,272 +585,38 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="tableName">Data Table Name</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<SqlParameter> parameters, string tableName, int timeout)
+        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName, int timeout)
         {
             return GenerateEntity.CreateDataTable(ExecuteReader(sql, parameters, timeout), tableName);
         }
         #endregion
 
-        #region Transaction
-        #region Get Entity
-        ///// <summary>
-        ///// 通过事务，获取表对象
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="sqlEntity">SQL实体</param>
-        ///// <returns></returns>
-        //protected T GetEntityByTran(DBTransaction trans, SqlEntity sqlEntity)
-        //{
-        //    _SqlEntity = sqlEntity;
-        //    return GetEntityByTran(trans, sqlEntity.CommandText, sqlEntity.Parameters);
-        //}
-
-        ///// <summary>
-        ///// 通过事务，获取表对象
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <returns></returns>
-        //public T GetEntityByTran(DBTransaction trans, FilterParams filterParam)
-        //{
-        //    return GetEntityByTran(trans, null, filterParam, null);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表对象
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <returns></returns>
-        //public T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam)
-        //{
-        //    return GetEntityByTran(trans, displayFields, filterParam, null);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表对象
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <param name="sortParams">排序参数</param>
-        ///// <returns></returns>
-        //abstract public T GetEntityByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams);
-
-        ///// <summary>
-        ///// 通过事务，获取表对象
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">SQL参数</param>
-        ///// <param name="timeout">超时时间(秒)</param>
-        ///// <returns></returns>
-        //public T GetEntityByTran(DBTransaction trans, string sql, List<SqlParameter> parameters)
-        //{
-        //    if (trans != null)
-        //    {
-        //        SqlDataReader reader = trans.ExecuteReader(sql, parameters, trans.Timeout);
-        //        try
-        //        {
-        //            if (reader.HasRows)
-        //                return GenerateEntity.CreateSingleEntity<T>(reader);
-        //            else
-        //                return null;
-        //        }
-        //        catch
-        //        { throw; }
-        //        finally
-        //        {
-        //            if (!reader.IsClosed)
-        //                reader.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Invalid DBTransaction");
-        //    }
-        //}
-        #endregion
-
-        #region Get List
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="sqlEntity">SQL实体</param>
-        ///// <returns></returns>
-        //protected TS GetListByTran(DBTransaction trans, SqlEntity sqlEntity)
-        //{
-        //    _SqlEntity = sqlEntity;
-        //    return GetListByTran(trans, sqlEntity.CommandText, sqlEntity.Parameters);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <returns></returns>
-        //public TS GetListByTran(DBTransaction trans, DisplayFields displayFields)
-        //{
-        //    return GetListByTran(trans, displayFields, null, null, null);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <returns></returns>
-        //public TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam)
-        //{
-        //    return GetListByTran(trans, displayFields, filterParam, null, null);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <param name="sortParams">排序参数</param>
-        ///// <returns></returns>
-        //public TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
-        //{
-        //    return GetListByTran(trans, displayFields, filterParam, sortParams, null);
-        //}
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <param name="sortParams">排序参数</param>
-        ///// <param name="maxCount">返回记录数</param>
-        ///// <returns></returns>
-        //abstract public TS GetListByTran(DBTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount);
-
-        ///// <summary>
-        ///// 通过事务，获取表集合
-        ///// </summary>
-        ///// <param name="trans">事务实体</param>
-        ///// <param name="sql">SQL语句</param>
-        ///// <param name="parameters">SQL参数</param>
-        ///// <param name="timeout">超时时间(秒)</param>
-        ///// <returns></returns>
-        //public TS GetListByTran(DBTransaction trans, string sql, List<SqlParameter> parameters)
-        //{
-        //    if (trans != null)
-        //    {
-        //        SqlDataReader reader = trans.ExecuteReader(sql, parameters, trans.Timeout);
-        //        try
-        //        {
-        //            if (reader.HasRows)
-        //                return GenerateEntity.CreateListEntity<T, TS>(reader);
-        //            else
-        //                return null;
-        //        }
-        //        catch
-        //        { throw; }
-        //        finally
-        //        {
-        //            if (!reader.IsClosed)
-        //                reader.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Invalid DBTransaction");
-        //    }
-        //}
-        #endregion
-
-        #region DataTable
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
-        /// <param name="sortParams">排序参数</param>
-        /// <param name="maxCount">返回记录数</param>
-        /// <returns></returns>
-        public DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
-        {
-            return GetDataTableByTran(trans, displayFields, filterParam, sortParams, maxCount, string.Empty);
-        }
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
-        /// <param name="sortParams">排序参数</param>
-        /// <param name="maxCount">返回记录数</param>
-        /// <param name="tableName">Data Table Name</param>
-        /// <returns></returns>
-        abstract public DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName);
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="sqlEntity">SQL实体</param>
-        /// <param name="tableName">Data Table Name</param>
-        /// <returns></returns>
-        protected DataTable GetDataTableByTran(DbTransaction trans, SqlEntity sqlEntity, string tableName)
-        {
-            _SqlEntity = sqlEntity;
-            return GetDataTableByTran(trans, sqlEntity.CommandText, sqlEntity.Parameters, tableName);
-        }
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="sql">SQL语句</param>
-        /// <param name="parameters">SQL参数</param>
-        /// <returns></returns>
-        public DataTable GetDataTableByTran(DbTransaction trans, string sql, List<SqlParameter> parameters)
-        {
-            return GetDataTableByTran(trans, sql, parameters, string.Empty);
-        }
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="sql">SQL语句</param>
-        /// <param name="parameters">SQL参数</param>
-        /// <param name="tableName">Data Table Name</param>
-        /// <param name="timeout">超时时间(秒)</param>
-        /// <returns></returns>
-        public DataTable GetDataTableByTran(DbTransaction trans, string sql, List<SqlParameter> parameters, string tableName)
-        {
-            if (trans != null)
-            {
-                return GenerateEntity.CreateDataTable(trans.ExecuteReader(sql, parameters, trans.Timeout), tableName);
-            }
-            else
-            {
-                throw new Exception("Invalid DBTransaction");
-            }
-        }
-        #endregion
-        #endregion
-
         protected Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
         {
-            if (ConnectionType == Enums.ConnectionType.Transaction)
+            if (IsUseTrans())
             {
                 switch (module)
                 {
                     case Enums.LockModule.Select:
-                        return Transaction.SelectLock;
+                        return InnerConnection.SelectLock;
                     case Enums.LockModule.Update:
-                        return Transaction.UpdateLock;
+                        return InnerConnection.UpdateLock;
                     default:
-                        return Transaction.DefaultLock;
+                        return InnerConnection.DefaultLock;
                 }
             }
             else
             {
                 return lockType;
             }
+        }
+        private bool IsUseTrans()
+        {
+            if (InnerConnection.InnerTransaction != null && InnerConnection.InnerTransaction.Connection != null)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

@@ -101,7 +101,7 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
-        public static bool Exists(string ConnectionString, string strSql, List<SqlParameter> cmdParms)
+        public static bool Exists(string ConnectionString, string strSql, List<IDbDataParameter> cmdParms)
         {
             object obj = DbHelperSQL.GetSingle(ConnectionString, strSql, cmdParms);
             int cmdresult;
@@ -168,7 +168,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLString">SQL语句</param>
         /// <param name="cmdParms">条件语句</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        public static object GetSingle(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
             return GetSingle(ConnectionString, SQLString, cmdParms, -1);
         }
@@ -180,11 +180,11 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="cmdParms">条件语句</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
+        public static object GetSingle(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (IDbCommand cmd = new SqlCommand())
                 {
                     try
                     {
@@ -230,7 +230,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLString">SQL语句</param>
         /// <param name="cmdParms">条件参数</param>
         /// <returns></returns>
-        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
             return ExecuteSql(ConnectionString, SQLString, cmdParms, -1);
         }
@@ -242,7 +242,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="cmdParms">条件参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public static int ExecuteSql(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
+        public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -366,7 +366,7 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-      
+
 
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
@@ -385,7 +385,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="SQLString">查询语句</param>
         /// <param name="cmdParms">查询条件</param>
         /// <returns></returns>
-        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<SqlParameter> cmdParms)
+        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
             return ExecuteReader(ConnectionString, SQLString, cmdParms, -1);
         }
@@ -397,7 +397,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="cmdParms">查询条件</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<SqlParameter> cmdParms, int timeout)
+        public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand();
@@ -493,7 +493,7 @@ namespace hwj.DBUtility.MSSQL
                         foreach (SqlEntity myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
-                            foreach (SqlParameter q in myDE.Parameters)
+                            foreach (IDbDataParameter q in myDE.Parameters)
                             {
                                 if (q.Direction == ParameterDirection.InputOutput)
                                 {
@@ -531,7 +531,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlDataReader</returns>
-        public static SqlDataReader RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters)
+        public static SqlDataReader RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters)
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
             SqlDataReader returnReader;
@@ -551,7 +551,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">存储过程参数</param>
         /// <param name="tableName">DataSet结果中的表名</param>
         /// <returns>DataSet</returns>
-        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName)
+        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, string tableName)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -564,7 +564,7 @@ namespace hwj.DBUtility.MSSQL
                 return dataSet;
             }
         }
-        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, string tableName, int timeout)
+        public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, string tableName, int timeout)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -587,7 +587,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlCommand</returns>
-        private static SqlCommand BuildQueryCommand(SqlConnection connection, string storedProcName, IDataParameter[] parameters)
+        private static SqlCommand BuildQueryCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
             SqlCommand command = new SqlCommand(storedProcName, connection);
             command.CommandType = CommandType.StoredProcedure;
@@ -615,7 +615,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">存储过程参数</param>
         /// <param name="rowsAffected">影响的行数</param>
         /// <returns></returns>
-        public static int RunProcedure(string ConnectionString, string storedProcName, IDataParameter[] parameters, out int rowsAffected)
+        public static int RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, out int rowsAffected)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -635,7 +635,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlCommand 对象实例</returns>
-        private static SqlCommand BuildIntCommand(SqlConnection connection, string storedProcName, IDataParameter[] parameters)
+        private static SqlCommand BuildIntCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
             SqlCommand command = BuildQueryCommand(connection, storedProcName, parameters);
             command.Parameters.Add(new SqlParameter("ReturnValue",
@@ -646,7 +646,7 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Private Function
-        private static void PrepareCommand4Arry(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms, int timeout)
+        private static void PrepareCommand4Arry(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, string cmdText, IDbDataParameter[] cmdParms, int timeout)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
@@ -685,7 +685,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        internal static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, List<SqlParameter> cmdParms, int timeout)
+        internal static void PrepareCommand(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, string cmdText, List<IDbDataParameter> cmdParms, int timeout)
         {
             if (cmdParms != null)
             {

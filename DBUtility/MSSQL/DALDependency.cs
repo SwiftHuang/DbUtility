@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using hwj.DBUtility.TableMapping;
+using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -72,8 +73,8 @@ namespace hwj.DBUtility.MSSQL
         /// 
         /// </summary>
         /// <param name="trans"></param>
-        protected DALDependency(DbTransaction trans)
-            : base(trans)
+        protected DALDependency(IConnection connection, Enums.LockType lockType)
+            : base(connection, lockType)
         {
             TableName = Activator.CreateInstance<T>().GetTableName();
         }
@@ -151,16 +152,16 @@ namespace hwj.DBUtility.MSSQL
             //else
             return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
         }
-        /// <summary>
-        /// 执行插入数据
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="entity">数据实体</param>
-        /// <returns></returns>
-        public static bool Add(DbTransaction trans, T entity)
-        {
-            return ExecuteSqlByTrans(trans, AddSqlEntity(entity));
-        }
+        ///// <summary>
+        ///// 执行插入数据
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <param name="entity">数据实体</param>
+        ///// <returns></returns>
+        //public static bool Add(DbTransaction trans, T entity)
+        //{
+        //    return ExecuteSqlByTrans(trans, AddSqlEntity(entity));
+        //}
         /// <summary>
         /// 获取最后一次自增ID
         /// </summary>
@@ -181,7 +182,7 @@ namespace hwj.DBUtility.MSSQL
         public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParam)
         {
             SqlEntity se = new SqlEntity();
-            List<SqlParameter> sp = new List<SqlParameter>();
+            List<IDbDataParameter> sp = new List<IDbDataParameter>();
             sp.AddRange(GenUpdateSql.GenParameter(updateParam));
             sp.AddRange(GenUpdateSql.GenParameter(filterParam));
             se = new SqlEntity(GenUpdateSql.UpdateSql(TableName, updateParam, filterParam), sp);
@@ -258,30 +259,30 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        /// <summary>
-        /// 执行数据更新
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="entity">更新实体</param>
-        /// <param name="filterParam">更新条件</param>
-        /// <returns></returns>
-        public static bool Update(DbTransaction trans, T entity, FilterParams filterParam)
-        {
-            SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
-            return ExecuteSqlByTrans(trans, tmpSqlEty);
-        }
-        /// <summary>
-        /// 执行数据更新
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="updateParam">更新字段</param>
-        /// <param name="filterParam">更新条件</param>
-        /// <returns></returns>
-        public static bool Update(DbTransaction trans, UpdateParam updateParam, FilterParams filterParam)
-        {
-            SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
-            return ExecuteSqlByTrans(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 执行数据更新
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <param name="entity">更新实体</param>
+        ///// <param name="filterParam">更新条件</param>
+        ///// <returns></returns>
+        //public static bool Update(DbTransaction trans, T entity, FilterParams filterParam)
+        //{
+        //    SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
+        //    return ExecuteSqlByTrans(trans, tmpSqlEty);
+        //}
+        ///// <summary>
+        ///// 执行数据更新
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <param name="updateParam">更新字段</param>
+        ///// <param name="filterParam">更新条件</param>
+        ///// <returns></returns>
+        //public static bool Update(DbTransaction trans, UpdateParam updateParam, FilterParams filterParam)
+        //{
+        //    SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
+        //    return ExecuteSqlByTrans(trans, tmpSqlEty);
+        //}
 
         #endregion
 
@@ -331,26 +332,26 @@ namespace hwj.DBUtility.MSSQL
                 return false;
         }
 
-        /// <summary>
-        /// 删除记录
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <returns></returns>
-        public static bool Delete(DbTransaction trans)
-        {
-            return Delete(trans);
-        }
-        /// <summary>
-        /// 删除记录
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="filterParam">删除条件</param>
-        /// <returns></returns>
-        public static bool Delete(DbTransaction trans, FilterParams filterParam)
-        {
-            SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
-            return ExecuteSqlByTrans(trans, tmpSqlEty);
-        }
+        ///// <summary>
+        ///// 删除记录
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <returns></returns>
+        //public static bool Delete(DbTransaction trans)
+        //{
+        //    return Delete(trans);
+        //}
+        ///// <summary>
+        ///// 删除记录
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <param name="filterParam">删除条件</param>
+        ///// <returns></returns>
+        //public static bool Delete(DbTransaction trans, FilterParams filterParam)
+        //{
+        //    SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
+        //    return ExecuteSqlByTrans(trans, tmpSqlEty);
+        //}
 
         #endregion
 
@@ -611,7 +612,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
         /// <returns></returns>
-        protected int RecordCount(string sql, List<SqlParameter> parameters)
+        protected int RecordCount(string sql, List<IDbDataParameter> parameters)
         {
             return Convert.ToInt32(ExecuteScalar(sql, parameters));
         }
@@ -632,21 +633,21 @@ namespace hwj.DBUtility.MSSQL
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTable(tmpSqlEty, tableName);
         }
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
-        /// <param name="sortParams">排序参数</param>
-        /// <param name="maxCount">返回记录数</param>
-        /// <param name="tableName">Data Table Name</param>
-        /// <returns></returns>
-        public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
-        }
+        ///// <summary>
+        ///// 通过事务，返回DataTable(建议用于Report或自定义列表)
+        ///// </summary>
+        ///// <param name="trans">事务实体</param>
+        ///// <param name="displayFields">返回指定字段</param>
+        ///// <param name="filterParam">条件参数</param>
+        ///// <param name="sortParams">排序参数</param>
+        ///// <param name="maxCount">返回记录数</param>
+        ///// <param name="tableName">Data Table Name</param>
+        ///// <returns></returns>
+        //public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        //{
+        //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
+        //    return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
+        //}
         #endregion
 
         #region Private Member
@@ -662,17 +663,17 @@ namespace hwj.DBUtility.MSSQL
             }
             return null;
         }
-        private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
-        {
-            if (trans != null)
-            {
-                return trans.ExecuteSql(sqlEntity) > 0;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
+        //{
+        //    if (trans != null)
+        //    {
+        //        return trans.ExecuteSql(sqlEntity) > 0;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         #endregion
 
         /// <summary>

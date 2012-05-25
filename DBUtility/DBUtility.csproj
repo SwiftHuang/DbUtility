@@ -75,6 +75,8 @@
     <Compile Include="Entity\Reverser.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interface\IConnection.cs" />
+    <Compile Include="MSSQL\DbConnection.cs" />
     <Compile Include="MSSQL\DALDependency.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
@@ -96,7 +98,6 @@
     <Compile Include="Entity\PageResult.cs" />
     <Compile Include="MSSQL\BaseSqlDAL.cs" />
     <Compile Include="MSSQL\SqlEntityXml.cs" />
-    <Compile Include="MSSQL\DbTransaction.cs" />
     <Compile Include="Param\SortParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />

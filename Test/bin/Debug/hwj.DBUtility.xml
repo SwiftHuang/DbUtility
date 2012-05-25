@@ -2012,5 +2012,239 @@
             <param name="isPage"></param>
             <returns></returns>
         </member>
+        <member name="T:hwj.DBUtility.MSSQL.DbConnection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor">
+            <summary>
+            SQL事务实体
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="connectionString"></param>
+            <param name="connectionTimeout"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.Begin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
+            <summary>
+            
+            </summary>
+            <param name="sqlList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList,System.Int32)">
+            <summary>
+            执行多条SQL语句，实现数据库事务。
+            </summary>
+            <param name="sqlList">多条SQL语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(hwj.DBUtility.SqlEntity)">
+            <summary>
+            
+            </summary>
+            <param name="sqlEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(hwj.DBUtility.SqlEntity,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="sqlEntity"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            
+            </summary>
+            <param name="SQLString"></param>
+            <param name="cmdParms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="SQLString"></param>
+            <param name="cmdParms"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            
+            </summary>
+            <param name="SQLString"></param>
+            <param name="cmdParms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="SQLString"></param>
+            <param name="cmdParms"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">条件语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.Int32)">
+            <summary>
+            执行一条计算查询结果语句，返回查询结果（object）。
+            </summary>
+            <param name="SQLString">SQL语句</param>
+            <param name="cmdParms">条件语句</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="lockType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sqlEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            通过事务，获取表对象
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="maxCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},hwj.DBUtility.Enums.LockType)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="maxCount"></param>
+            <param name="lockType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.SqlEntity)">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sqlEntity">SQL实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

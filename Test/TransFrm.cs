@@ -102,7 +102,8 @@ namespace Test
             string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
             hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr);
             DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(trans);
-            
+
+            //trans.Begin();
             DB.tbEMOSSETUP s1 = da.GetEntity("BKGREF", "JT", "J");
 
             trans.Commit();

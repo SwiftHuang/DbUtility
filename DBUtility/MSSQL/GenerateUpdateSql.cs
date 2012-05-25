@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using hwj.DBUtility.TableMapping;
+using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -205,12 +206,12 @@ namespace hwj.DBUtility.MSSQL
             else
                 return string.Empty;
         }
-        private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
+        private IDbDataParameter GetSqlParameter(FieldMappingInfo field, T entity)
         {
             object value = field.Property.GetValue(entity, null);
             if (!IsDatabaseDate(field.DataTypeCode, value))
             {
-                SqlParameter dp = new SqlParameter();
+                IDbDataParameter dp = new SqlParameter();
                 dp.DbType = field.DataTypeCode;
                 dp.ParameterName = string.Format(_MsSqlParam, field.FieldName);
                 dp.Value = CheckValue(dp, value);
@@ -218,7 +219,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return null;
         }
-        private object CheckValue(SqlParameter param, object value)
+        private object CheckValue(IDbDataParameter param, object value)
         {
             if (IsDateType(param.DbType))
             {
@@ -230,11 +231,11 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Public Functions
-        public List<SqlParameter> GenParameter(UpdateParam updateParam)
+        public List<IDbDataParameter> GenParameter(UpdateParam updateParam)
         {
             if (updateParam != null)
             {
-                List<SqlParameter> LstDP = new List<SqlParameter>();
+                List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
                 foreach (UpdateFields up in updateParam)
                 {
                     if (!IsDatabaseDate(up))
@@ -242,7 +243,7 @@ namespace hwj.DBUtility.MSSQL
                         FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), up.FieldName);
                         if (f != null)
                         {
-                            SqlParameter dp = new SqlParameter();
+                            IDbDataParameter dp = new SqlParameter();
                             dp.DbType = f.DataTypeCode;
                             dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
                             dp.Value = CheckValue(dp, up.FieldValue);
@@ -257,11 +258,11 @@ namespace hwj.DBUtility.MSSQL
                 return null;
             }
         }
-        public List<SqlParameter> GenParameter(FilterParams filterParam)
+        public List<IDbDataParameter> GenParameter(FilterParams filterParam)
         {
             if (filterParam != null)
             {
-                List<SqlParameter> LstDP = new List<SqlParameter>();
+                List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
                 int index = 0;
                 foreach (SqlParam sp in filterParam)
                 {
@@ -280,7 +281,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             foreach (string s in strList)
                             {
-                                SqlParameter p = new SqlParameter();
+                                IDbDataParameter p = new SqlParameter();
                                 p.DbType = f.DataTypeCode;
                                 p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
                                 p.Value = s;
@@ -300,7 +301,7 @@ namespace hwj.DBUtility.MSSQL
                         FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);
                         if (f != null)
                         {
-                            SqlParameter dp = new SqlParameter();
+                            IDbDataParameter dp = new SqlParameter();
                             dp.DbType = f.DataTypeCode;
                             dp.ParameterName = string.Format(_MsSqlWhereParam, sp.ParamName != null ? sp.ParamName : sp.FieldName);
                             dp.Value = sp.FieldValue;
@@ -314,16 +315,16 @@ namespace hwj.DBUtility.MSSQL
                 return null;
         }
 
-        public List<SqlParameter> GenParameter(T entity)
+        public List<IDbDataParameter> GenParameter(T entity)
         {
-            List<SqlParameter> LstDP = new List<SqlParameter>();
+            List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
             if (entity.GetAssignedStatus())
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
-                        SqlParameter dp = GetSqlParameter(f, entity);
+                        IDbDataParameter dp = GetSqlParameter(f, entity);
                         if (dp != null)
                             LstDP.Add(dp);
                     }
@@ -333,7 +334,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    SqlParameter dp = GetSqlParameter(f, entity);
+                    IDbDataParameter dp = GetSqlParameter(f, entity);
                     if (dp != null)
                         LstDP.Add(dp);
                 }
