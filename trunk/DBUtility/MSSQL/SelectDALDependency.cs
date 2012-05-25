@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using hwj.DBUtility.TableMapping;
+using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -41,10 +42,10 @@ namespace hwj.DBUtility.MSSQL
         /// 
         /// </summary>
         /// <param name="trans"></param>
-        protected SelectDALDependency(DbTransaction trans)
-            : base(trans)
+        protected SelectDALDependency(IConnection connection, Enums.LockType lockType)
+            : base(connection, lockType)
         {
-           
+
         }
 
         #region Get Entity
@@ -95,21 +96,6 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
             return base.GetDataTable(tmpSqlEty, tableName);
-        }
-        /// <summary>
-        /// 通过事务，返回DataTable(建议用于Report或自定义列表)
-        /// </summary>
-        /// <param name="trans">事务实体</param>
-        /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
-        /// <param name="sortParams">排序参数</param>
-        /// <param name="maxCount">返回记录数</param>
-        /// <param name="tableName">Data Table Name</param>
-        /// <returns></returns>
-        public override DataTable GetDataTableByTran(DbTransaction trans, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
-        {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
         }
         #endregion
 

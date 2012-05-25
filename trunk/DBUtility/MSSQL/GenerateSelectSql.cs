@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using hwj.DBUtility.TableMapping;
+using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -82,7 +83,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity SE = new SqlEntity();
             SE.CommandText = _MsSqlPaging_RowCount;
-            SE.Parameters = new List<SqlParameter>();
+            SE.Parameters = new List<IDbDataParameter>();
             SE.Parameters.Add(new SqlParameter("@TableName", tableName));
             SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
             SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
@@ -104,7 +105,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity SE = new SqlEntity();
             SE.CommandText = _MsSqlPageView;
-            SE.Parameters = new List<SqlParameter>();
+            SE.Parameters = new List<IDbDataParameter>();
             SE.Parameters.Add(new SqlParameter("@TableName", tableName));
             SE.Parameters.Add(new SqlParameter("@FieldKey", GenDisplayFieldsSql(PK, true)));
             SE.Parameters.Add(new SqlParameter("@PageIndex", pageNumber));
@@ -323,12 +324,12 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Public Functions
-        public List<SqlParameter> GenParameter(FilterParams filterParam)
+        public List<IDbDataParameter> GenParameter(FilterParams filterParam)
         {
             if (filterParam != null)
             {
                 int index = 0;
-                List<SqlParameter> LstDP = new List<SqlParameter>();
+                List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
                 foreach (SqlParam sp in filterParam)
                 {
                     if (IsDatabaseDate(sp))
@@ -345,7 +346,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             foreach (string s in strList)
                             {
-                                SqlParameter p = new SqlParameter();
+                                IDbDataParameter p = new SqlParameter();
                                 p.DbType = f.DataTypeCode;
                                 p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
                                 p.Value = s.ToString();
@@ -365,7 +366,7 @@ namespace hwj.DBUtility.MSSQL
                         FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);
                         if (f != null)
                         {
-                            SqlParameter dp = new SqlParameter();
+                            IDbDataParameter dp = new SqlParameter();
                             dp.DbType = f.DataTypeCode;
                             dp.ParameterName = string.Format(_MsSqlWhereParam, sp.ParamName != null ? sp.ParamName : sp.FieldName);
                             dp.Value = sp.FieldValue;

@@ -247,11 +247,11 @@ namespace hwj.DBUtility
             /// </summary>
             UpdLock,
         }
-        public enum ConnectionType
-        {
-            Transaction,
-            Connection,
-        }
+        //public enum ConnectionType
+        //{
+        //    Transaction,
+        //    Connection,
+        //}
         public enum LockModule
         {
             Select,

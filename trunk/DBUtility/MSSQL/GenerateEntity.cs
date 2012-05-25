@@ -53,7 +53,7 @@ namespace hwj.DBUtility.MSSQL
             lstFieldInfo = FieldMappingInfo.GetFieldMapping(typeof(T));
             lstFieldInfo = SetFieldIndex(reader, lstFieldInfo);
 
-            reader.Read();
+            //reader.Read();
             return CreateEntityNotClose<T>(reader, lstFieldInfo);
         }
         internal static TS CreateListEntity<T, TS>(IDataReader reader)
