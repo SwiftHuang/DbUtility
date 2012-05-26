@@ -76,13 +76,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interface\IConnection.cs" />
-    <Compile Include="MSSQL\DbConnection.cs" />
     <Compile Include="MSSQL\DALDependency.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DBCache.cs" />
     <Compile Include="MSSQL\BaseDataAccess.cs" />
+    <Compile Include="MSSQL\DbConnection.cs" />
     <Compile Include="MSSQL\SelectDALDependency.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />
     <Compile Include="MSSQL\DbHelper.cs">
@@ -101,6 +101,7 @@
     <Compile Include="Param\SortParam.cs" />
     <Compile Include="Param\SqlParam.cs" />
     <Compile Include="MSSQL\SqlEntity.cs" />
+    <Compile Include="LogEntity.cs" />
     <Compile Include="TableMapping\BaseSqlTable.cs" />
     <Compile Include="TableMapping\FieldMappingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Param\FilterParam.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="MSSQL\SQL_SP\sp_ClearDatabaseLog.sql" />
     <None Include="MSSQL\SQL_SP\sp_Paging_RowCount.sql" />
     <None Include="MSSQL\SQL_SP\sp_PageView.sql" />

@@ -21,7 +21,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="ConnectionString"></param>
         protected BaseDAL(string ConnectionString)
-            : base(ConnectionString)
+            : this(ConnectionString, 120, Enums.LockType.NoLock)
         { }
         /// <summary>
         /// 
