@@ -54,7 +54,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
         protected DALDependency(string connectionString)
-            : base(connectionString)
+            : this(connectionString, 30, Enums.LockType.None)
         {
 
         }
@@ -63,21 +63,23 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
         /// <param name="timeout">超时时间(秒)</param>
-        /// <param name="lockType">锁类型</param>
-        protected DALDependency(string connectionString, int timeout, Enums.LockType lockType)
-            : base(connectionString, timeout, lockType)
+        /// <param name="defaultLock">锁类型</param>
+        protected DALDependency(string connectionString, int timeout, Enums.LockType defaultLock)
+            : base(connectionString, timeout, defaultLock)
         {
 
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="trans"></param>
-        protected DALDependency(IConnection connection, Enums.LockType lockType)
-            : base(connection, lockType)
+        /// <param name="connection"></param>
+        /// <param name="lockType"></param>
+        protected DALDependency(IConnection connection)
+            : base(connection)
         {
             TableName = Activator.CreateInstance<T>().GetTableName();
         }
+
         #region Insert
         /// <summary>
         /// 执行插入数据
@@ -147,9 +149,6 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity AddSqlEntity(T entity)
         {
-            //if (EnableSqlLog)
-            //    return InsertSqlLog(new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity)), "INSERT");
-            //else
             return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
         }
         ///// <summary>
@@ -181,15 +180,18 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParam)
         {
-            SqlEntity se = new SqlEntity();
-            List<IDbDataParameter> sp = new List<IDbDataParameter>();
-            sp.AddRange(GenUpdateSql.GenParameter(updateParam));
-            sp.AddRange(GenUpdateSql.GenParameter(filterParam));
-            se = new SqlEntity(GenUpdateSql.UpdateSql(TableName, updateParam, filterParam), sp);
+            SqlEntity sqlEty = new SqlEntity();
+            List<IDbDataParameter> up = new List<IDbDataParameter>();
+            up.AddRange(GenUpdateSql.GenParameter(updateParam));
+            up.AddRange(GenUpdateSql.GenParameter(filterParam));
+
+            sqlEty = new SqlEntity();
+            sqlEty.CommandText = GenUpdateSql.UpdateSql(TableName, updateParam, filterParam);
+            sqlEty.Parameters = up;
             //if (EnableSqlLog)
             //    return InsertSqlLog(se, "UPDATE");
             //else
-            return se;
+            return sqlEty;
         }
         /// <summary>
         /// 获取更新的Sql对象
@@ -203,10 +205,9 @@ namespace hwj.DBUtility.MSSQL
             se.CommandText = GenUpdateSql.UpdateSql(entity, filterParam);
             se.Parameters = GenUpdateSql.GenParameter(entity);
             if (filterParam != null)
+            {
                 se.Parameters.AddRange(GenUpdateSql.GenParameter(filterParam));
-            //if (EnableSqlLog)
-            //    return InsertSqlLog(se, "UPDATE");
-            //else
+            }
             return se;
         }
 
@@ -297,7 +298,11 @@ namespace hwj.DBUtility.MSSQL
             //if (EnableSqlLog)
             //    return InsertSqlLog(new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam)), "DELETE");
             //else
-            return new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam));
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandText = GenUpdateSql.DeleteSql(TableName, filterParam);
+            sqlEty.Parameters = GenUpdateSql.GenParameter(filterParam);
+
+            return sqlEty;
         }
 
         /// <summary>
@@ -406,9 +411,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType), GenSelectSql.GenParameter(filterParam));
-            tmpSqlEty.LockType = lockType;
-            return base.GetEntity(tmpSqlEty);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetEntity(sqlEty);
         }
         #endregion
 
@@ -424,9 +433,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType), GenSelectSql.GenParameter(filterParam));
-            tmpSqlEty.LockType = lockType;
-            return base.GetList(tmpSqlEty);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetList(sqlEty);
         }
         #endregion
 
@@ -460,7 +473,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, Timeout, out TotalCount);
+            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultConnectionTimeout, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
@@ -477,15 +490,17 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
-            //_SqlEntity = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            tmpSqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            tmpSqlEty.LockType = Enums.LockType.NoLock;
+
             _SqlEntity = tmpSqlEty;
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty.CommandText, tmpSqlEty.Parameters, times);
+                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty);
                 SqlParameter sp = new SqlParameter("@_PTotalCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -529,7 +544,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, Timeout, out TotalCount);
+            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultConnectionTimeout, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
@@ -545,15 +560,17 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
-            //_SqlEntity = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            tmpSqlEty.CommandTimeout = timeout;
+            tmpSqlEty.LockType = Enums.LockType.NoLock;
+
             _SqlEntity = tmpSqlEty;
 
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty.CommandText, tmpSqlEty.Parameters, timeout);
+                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty);
                 SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
                 sp.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(sp);
@@ -601,10 +618,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>记录数</returns>
         protected int RecordCount(FilterParams filterParam)
         {
-            //_SqlEntity = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectCountSql(TableName, filterParam), GenSelectSql.GenParameter(filterParam));
-            _SqlEntity = tmpSqlEty;
-            return Convert.ToInt32(ExecuteScalar(tmpSqlEty.CommandText, tmpSqlEty.Parameters));
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = InnerConnection.DefaultLock;
+            sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParam);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            _SqlEntity = sqlEty;
+            return Convert.ToInt32(ExecuteScalar(sqlEty.CommandText, sqlEty.Parameters));
         }
         /// <summary>
         /// 返回表的记录数
@@ -630,8 +651,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTable(tmpSqlEty, tableName);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = base.InnerConnection.DefaultLock;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetDataTable(sqlEty, tableName);
         }
         ///// <summary>
         ///// 通过事务，返回DataTable(建议用于Report或自定义列表)

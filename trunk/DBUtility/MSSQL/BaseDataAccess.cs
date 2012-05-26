@@ -39,28 +39,10 @@ namespace hwj.DBUtility.MSSQL
         {
             get { return _SqlEntity; }
         }
-        private int _Timeout = 120;
-        /// <summary>
-        /// 获取超时时间(秒)
-        /// </summary>
-        public int Timeout
-        {
-            get { return InnerConnection.ConnectionTimeout; }
-            //set { _Timeout = value; }
-        }
         public IConnection InnerConnection { get; set; }
-        //public DbTransaction Transaction { get; set; }
-        public Enums.LockType DefaultLock { get; set; }
-        //public Enums.ConnectionType ConnectionType { get; set; }
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connectionString"></param>
-        protected BaseDataAccess(string connectionString)
-            : this(connectionString, 120, Enums.LockType.None)
-        { }
+        #region CTOR
         /// <summary>
         /// 
         /// </summary>
@@ -68,34 +50,19 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout"></param>
         /// <param name="lockType"></param>
         protected BaseDataAccess(string connectionString, int timeout, Enums.LockType lockType)
-            : this(new DbConnection(connectionString, timeout), lockType)
-        {
-            ConnectionString = connectionString;
-            DefaultLock = lockType;
-            //Transaction = null;
-            //ConnectionType = Enums.ConnectionType.Connection;
-            //Transaction = new DbTransaction(connectionString, timeout);
-        }
-        protected BaseDataAccess(IConnection connection, Enums.LockType lockType)
+            : this(new DbConnection(connectionString, timeout, lockType))
+        { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="lockType"></param>
+        protected BaseDataAccess(IConnection connection)
         {
             ConnectionString = connection.ConnectionString;
             InnerConnection = connection;
-            _Timeout = connection.ConnectionTimeout;
-            DefaultLock = lockType;
-            //Transaction = null;
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="trans"></param>
-        //protected BaseDataAccess(DbTransaction trans)
-        //{
-        //    ConnectionString = string.Empty;
-        //    _Timeout = 0;
-        //    DefaultLock = Enums.LockType.None;
-        //    //Transaction = trans;
-        //    //ConnectionType = Enums.ConnectionType.Transaction;
-        //}
+        #endregion
 
         #region Execute
         #region ExecuteSqlTran
@@ -106,7 +73,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool ExecuteSqlTran(SqlList list)
         {
-            return ExecuteSqlTran(list, Timeout);
+            return ExecuteSqlTran(list, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
@@ -128,7 +95,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql)
         {
-            return ExecuteSql(sql, null, Timeout);
+            return ExecuteSql(sql, null, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
@@ -138,7 +105,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteSql(sql, parameters, Timeout);
+            return ExecuteSql(sql, parameters, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
@@ -151,7 +118,7 @@ namespace hwj.DBUtility.MSSQL
         {
             if (IsUseTrans())
             {
-                return InnerConnection.ExecuteSql(sql, parameters);
+                return InnerConnection.ExecuteSql(sql, parameters, timeout);
             }
             else
             {
@@ -169,7 +136,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql)
         {
-            return ExecuteReader(sql, null, Timeout);
+            return ExecuteReader(sql, null, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
@@ -179,7 +146,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteReader(sql, parameters, Timeout);
+            return ExecuteReader(sql, parameters, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
@@ -209,7 +176,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql)
         {
-            return ExecuteScalar(sql, null, Timeout);
+            return ExecuteScalar(sql, null, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回Object
@@ -219,7 +186,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteScalar(sql, parameters, Timeout);
+            return ExecuteScalar(sql, parameters, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回Object
@@ -257,7 +224,7 @@ namespace hwj.DBUtility.MSSQL
         protected T GetEntity(SqlEntity sqlEntity)
         {
             _SqlEntity = sqlEntity;
-            return GetEntity(sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+            return GetEntity(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
         /// <summary>
         /// 获取表对象
@@ -266,7 +233,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, filterParam, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetEntity(null, filterParam, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表对象
@@ -286,7 +253,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetEntity(displayFields, filterParam, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetEntity(displayFields, filterParam, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表对象
@@ -308,7 +275,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetEntity(displayFields, filterParam, sortParams, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetEntity(displayFields, filterParam, sortParams, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表对象
@@ -328,7 +295,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(string sql, List<IDbDataParameter> parameters)
         {
-            return GetEntity(sql, parameters, Timeout);
+            return GetEntity(sql, parameters, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 获取表对象
@@ -382,7 +349,7 @@ namespace hwj.DBUtility.MSSQL
         protected TS GetList(SqlEntity sqlEntity)
         {
             _SqlEntity = sqlEntity;
-            return GetList(sqlEntity.CommandText, sqlEntity.Parameters, Timeout);
+            return GetList(sqlEntity.CommandText, sqlEntity.Parameters, InnerConnection.DefaultConnectionTimeout);
         }
 
         /// <summary>
@@ -392,7 +359,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields)
         {
-            return GetList(displayFields, null, null, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetList(displayFields, null, null, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表集合
@@ -412,7 +379,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetList(displayFields, filterParam, null, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetList(displayFields, filterParam, null, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表集合
@@ -434,7 +401,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetList(displayFields, filterParam, sortParams, null, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetList(displayFields, filterParam, sortParams, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表集合
@@ -458,7 +425,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            return GetList(displayFields, filterParam, sortParams, maxCount, GetLockType(Enums.LockModule.Select, DefaultLock));
+            return GetList(displayFields, filterParam, sortParams, maxCount, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
         }
         /// <summary>
         /// 获取表集合
@@ -479,7 +446,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(string sql, List<IDbDataParameter> parameters)
         {
-            return GetList(sql, parameters, Timeout);
+            return GetList(sql, parameters, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 获取表集合
@@ -575,7 +542,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName)
         {
-            return GetDataTable(sql, parameters, tableName, Timeout);
+            return GetDataTable(sql, parameters, tableName, InnerConnection.DefaultConnectionTimeout);
         }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
@@ -591,7 +558,7 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        protected Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
+        private Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
         {
             if (IsUseTrans())
             {

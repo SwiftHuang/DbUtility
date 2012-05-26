@@ -35,21 +35,26 @@ namespace hwj.DBUtility
         public object DataEntity { get; set; }
         public string TableName { get; set; }
         public Enums.LockType LockType { get; set; }
+        /// <summary>
+        /// 获取或设置在终止执行命令的尝试并生成错误之前的等待时间。(默认为30秒)
+        /// </summary>
+        public int CommandTimeout { get; set; }
         #endregion
 
         public SqlEntity()
             : this(string.Empty, null, Enums.EffentNextType.None, null, null) { }
-        public SqlEntity(string sqlText, List<IDbDataParameter> para)
-            : this(sqlText, para, Enums.EffentNextType.None, null, null) { }
+        //public SqlEntity(string sqlText, List<IDbDataParameter> para)
+        //    : this(sqlText, para, Enums.EffentNextType.None, null, null) { }
         public SqlEntity(string sqlText, List<IDbDataParameter> para, string tableName, object dataEntity)
             : this(sqlText, para, Enums.EffentNextType.None, tableName, dataEntity) { }
-        public SqlEntity(string sqlText, List<IDbDataParameter> para, Enums.EffentNextType type, string tableName, object dataEntity)
+        protected SqlEntity(string sqlText, List<IDbDataParameter> para, Enums.EffentNextType type, string tableName, object dataEntity)
         {
             this.CommandText = sqlText;
             this.Parameters = para;
             this.EffentNextType = type;
             this.TableName = tableName;
             this.DataEntity = dataEntity;
+            this.CommandTimeout = 30;
         }
     }
 

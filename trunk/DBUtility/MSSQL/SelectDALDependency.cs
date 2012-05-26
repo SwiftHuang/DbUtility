@@ -25,9 +25,9 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="ConnectionString">数据连接字符串</param>
-        protected SelectDALDependency(string ConnectionString)
-            : base(ConnectionString)
+        /// <param name="connectionString">数据连接字符串</param>
+        protected SelectDALDependency(string connectionString)
+            : this(connectionString, 30, Enums.LockType.None)
         { }
         /// <summary>
         /// 
@@ -41,9 +41,9 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="trans"></param>
-        protected SelectDALDependency(IConnection connection, Enums.LockType lockType)
-            : base(connection, lockType)
+        /// <param name="connection"></param>
+        protected SelectDALDependency(IConnection connection)
+            : base(connection)
         {
 
         }
@@ -58,9 +58,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1, lockType), GenSelectSql.GenParameter(filterParam));
-            tmpSqlEty.LockType = lockType;
-            return base.GetEntity(tmpSqlEty);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetEntity(sqlEty);
         }
         #endregion
 
@@ -76,9 +80,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, lockType), GenSelectSql.GenParameter(filterParam));
-            tmpSqlEty.LockType = lockType;
-            return base.GetList(tmpSqlEty);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetList(sqlEty);
         }
         #endregion
 
@@ -94,8 +102,13 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount), GenSelectSql.GenParameter(filterParam));
-            return base.GetDataTable(tmpSqlEty, tableName);
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.LockType = base.InnerConnection.DefaultLock;
+            sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return base.GetDataTable(sqlEty, tableName);
         }
         #endregion
 

@@ -175,14 +175,14 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
-        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="connectionString">连接语句</param>
         /// <param name="SQLString">SQL语句</param>
         /// <param name="cmdParms">条件语句</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
+        public static object GetSingle(string connectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 using (IDbCommand cmd = new SqlCommand())
                 {
@@ -478,7 +478,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="ConnectionString"></param>
         /// <param name="cmdList"></param>
-        public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList cmdList)
+        public static void ExecuteSqlTranWithIndentity(string ConnectionString, SqlList sqlList)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -490,9 +490,8 @@ namespace hwj.DBUtility.MSSQL
                     {
                         int indentity = 0;
                         //循环
-                        foreach (SqlEntity myDE in cmdList)
+                        foreach (SqlEntity myDE in sqlList)
                         {
-                            string cmdText = myDE.CommandText;
                             foreach (IDbDataParameter q in myDE.Parameters)
                             {
                                 if (q.Direction == ParameterDirection.InputOutput)
@@ -500,7 +499,7 @@ namespace hwj.DBUtility.MSSQL
                                     q.Value = indentity;
                                 }
                             }
-                            PrepareCommand(cmd, conn, trans, cmdText, myDE.Parameters, -1);
+                            PrepareCommand(cmd, conn, trans, myDE);
                             int val = cmd.ExecuteNonQuery();
                             foreach (SqlParameter q in myDE.Parameters)
                             {
@@ -684,6 +683,10 @@ namespace hwj.DBUtility.MSSQL
                     cmd.Parameters.Add(parameter);
                 }
             }
+        }
+        internal static void PrepareCommand(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, SqlEntity sqlEntity)
+        {
+            PrepareCommand(cmd, conn, trans, sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
         internal static void PrepareCommand(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, string cmdText, List<IDbDataParameter> cmdParms, int timeout)
         {
