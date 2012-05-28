@@ -73,7 +73,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool ExecuteSqlTran(SqlList list)
         {
-            return ExecuteSqlTran(list, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteSqlTran(list, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
@@ -95,7 +95,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql)
         {
-            return ExecuteSql(sql, null, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteSql(sql, null, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
@@ -105,7 +105,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteSql(sql, parameters, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteSql(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
@@ -116,14 +116,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (IsUseTrans())
-            {
-                return InnerConnection.ExecuteSql(sql, parameters, timeout);
-            }
-            else
-            {
-                return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
-            }
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.ExecuteSql(sql, parameters, timeout);
+            //}
+            //else
+            //{
+            //    return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
+            //}
             throw new Exception(Msg_InvalidConnection);
         }
         #endregion
@@ -136,7 +136,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql)
         {
-            return ExecuteReader(sql, null, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteReader(sql, null, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
@@ -146,7 +146,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteReader(sql, parameters, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteReader(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
@@ -157,14 +157,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (IsUseTrans())
-            {
-                return InnerConnection.ExecuteReader(sql, parameters, timeout);
-            }
-            else
-            {
-                return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
-            }
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.ExecuteReader(sql, parameters, timeout);
+            //}
+            //else
+            //{
+            //    return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
+            //}
         }
         #endregion
 
@@ -176,7 +176,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql)
         {
-            return ExecuteScalar(sql, null, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteScalar(sql, null, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回Object
@@ -186,7 +186,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteScalar(sql, parameters, InnerConnection.DefaultConnectionTimeout);
+            return ExecuteScalar(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行SQL语句，返回Object
@@ -197,14 +197,14 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (IsUseTrans())
-            {
-                return InnerConnection.ExecuteScalar(sql, parameters, timeout);
-            }
-            else
-            {
-                return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
-            }
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.ExecuteScalar(sql, parameters, timeout);
+            //}
+            //else
+            //{
+            //    return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
+            //}
         }
         #endregion
         #endregion
@@ -295,7 +295,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(string sql, List<IDbDataParameter> parameters)
         {
-            return GetEntity(sql, parameters, InnerConnection.DefaultConnectionTimeout);
+            return GetEntity(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 获取表对象
@@ -349,7 +349,7 @@ namespace hwj.DBUtility.MSSQL
         protected TS GetList(SqlEntity sqlEntity)
         {
             _SqlEntity = sqlEntity;
-            return GetList(sqlEntity.CommandText, sqlEntity.Parameters, InnerConnection.DefaultConnectionTimeout);
+            return GetList(sqlEntity.CommandText, sqlEntity.Parameters, InnerConnection.DefaultCommandTimeout);
         }
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(string sql, List<IDbDataParameter> parameters)
         {
-            return GetList(sql, parameters, InnerConnection.DefaultConnectionTimeout);
+            return GetList(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 获取表集合
@@ -542,7 +542,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName)
         {
-            return GetDataTable(sql, parameters, tableName, InnerConnection.DefaultConnectionTimeout);
+            return GetDataTable(sql, parameters, tableName, InnerConnection.DefaultCommandTimeout);
         }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)

@@ -48,18 +48,19 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TS"></typeparam>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.#ctor(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="connectionString"></param>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType)">
             <summary>
             
             </summary>
             <param name="connectionString"></param>
             <param name="timeout"></param>
+            <param name="lockType"></param>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.#ctor(hwj.DBUtility.Interface.IConnection)">
+            <summary>
+            
+            </summary>
+            <param name="connection"></param>
             <param name="lockType"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.ExecuteSqlTran(hwj.DBUtility.SqlList)">
@@ -399,11 +400,6 @@
             显示执行的Sql实体
             </summary>
         </member>
-        <member name="P:hwj.DBUtility.MSSQL.BaseDataAccess`2.Timeout">
-            <summary>
-            获取超时时间(秒)
-            </summary>
-        </member>
         <member name="F:hwj.DBUtility.MSSQL.DALDependency`2.GenSelectSql">
             <summary>
             
@@ -426,13 +422,14 @@
             </summary>
             <param name="connectionString">数据连接字符串</param>
             <param name="timeout">超时时间(秒)</param>
-            <param name="lockType">锁类型</param>
+            <param name="defaultLock">锁类型</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection,hwj.DBUtility.Enums.LockType)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection)">
             <summary>
             
             </summary>
-            <param name="trans"></param>
+            <param name="connection"></param>
+            <param name="lockType"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Add(`0)">
             <summary>
@@ -1145,6 +1142,11 @@
             <param name="sql"></param>
             <returns></returns>
         </member>
+        <member name="P:hwj.DBUtility.SqlEntity.CommandTimeout">
+            <summary>
+            获取或设置在终止执行命令的尝试并生成错误之前的等待时间。(默认为30秒)
+            </summary>
+        </member>
         <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
             <summary>
             Add a left brackets
@@ -1189,7 +1191,7 @@
             <summary>
             
             </summary>
-            <param name="ConnectionString">数据连接字符串</param>
+            <param name="connectionString">数据连接字符串</param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType)">
             <summary>
@@ -1199,11 +1201,11 @@
             <param name="timeout">超时时间(秒)</param>
             <param name="lockType">锁类型</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection,hwj.DBUtility.Enums.LockType)">
+        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection)">
             <summary>
             
             </summary>
-            <param name="trans"></param>
+            <param name="connection"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.GetEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
             <summary>
@@ -1427,7 +1429,7 @@
             <summary>
             执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="ConnectionString">连接语句</param>
+            <param name="connectionString">连接语句</param>
             <param name="SQLString">SQL语句</param>
             <param name="cmdParms">条件语句</param>
             <param name="timeout">超时时间(秒)</param>
@@ -1665,47 +1667,31 @@
             
             </summary>
         </member>
-        <member name="T:hwj.DBUtility.Interface.IConnection">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor">
-            <summary>
-            SQL事务实体
-            </summary>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String)">
             <summary>
-            
+            数据库连接实体
             </summary>
             <param name="connectionString"></param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32)">
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType)">
             <summary>
-            
+            数据库连接实体
             </summary>
             <param name="connectionString"></param>
-            <param name="connectionTimeout"></param>
+            <param name="timeout"></param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.Begin">
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType,System.Boolean)">
             <summary>
-            
+            数据库连接实体
             </summary>
+            <param name="connectionString"></param>
+            <param name="timeout"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
-            <summary>
-            
-            </summary>
-            <param name="sqlList"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList,System.Int32)">
             <summary>
             执行多条SQL语句，实现数据库事务。
             </summary>
             <param name="sqlList">多条SQL语句</param>
-            <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(hwj.DBUtility.SqlEntity)">
@@ -1727,16 +1713,16 @@
             <summary>
             
             </summary>
-            <param name="SQLString"></param>
-            <param name="cmdParms"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
             <summary>
             
             </summary>
-            <param name="SQLString"></param>
-            <param name="cmdParms"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
             <param name="timeout"></param>
             <returns></returns>
         </member>
@@ -1744,16 +1730,16 @@
             <summary>
             
             </summary>
-            <param name="SQLString"></param>
-            <param name="cmdParms"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
             <summary>
             
             </summary>
-            <param name="SQLString"></param>
-            <param name="cmdParms"></param>
+            <param name="sql"></param>
+            <param name="parameters"></param>
             <param name="timeout"></param>
             <returns></returns>
         </member>
@@ -1761,46 +1747,18 @@
             <summary>
             执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="cmdParms">条件语句</param>
-            <param name="timeout">超时时间(秒)</param>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">条件语句</param>
             <returns>查询结果（object）</returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
             <summary>
             执行一条计算查询结果语句，返回查询结果（object）。
             </summary>
-            <param name="SQLString">SQL语句</param>
-            <param name="cmdParms">条件语句</param>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">条件语句</param>
             <param name="timeout">超时时间(秒)</param>
             <returns>查询结果（object）</returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="filterParam"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
-            <param name="sortParams"></param>
-            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
             <summary>
@@ -1813,39 +1771,44 @@
             <param name="lockType"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType,System.Int32)">
             <summary>
             
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="sqlEntity"></param>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="lockType"></param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
+            <summary>
+            获取表对象
+            </summary>
+            <typeparam name="T">表对象</typeparam>
+            <param name="sqlEntity">SQL实体</param>
+            <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
             <summary>
-            通过事务，获取表对象
+            
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            获取表对象
+            </summary>
+            <typeparam name="T">表对象</typeparam>
             <param name="sql">SQL语句</param>
             <param name="parameters">SQL参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="TS"></typeparam>
-            <param name="displayFields"></param>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="TS"></typeparam>
-            <param name="displayFields"></param>
-            <param name="filterParam"></param>
+            <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams)">
@@ -1884,6 +1847,19 @@
             <param name="lockType"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},hwj.DBUtility.Enums.LockType,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="displayFields"></param>
+            <param name="filterParam"></param>
+            <param name="sortParams"></param>
+            <param name="maxCount"></param>
+            <param name="lockType"></param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(hwj.DBUtility.SqlEntity)">
             <summary>
             通过事务，获取表集合
@@ -1898,6 +1874,34 @@
             <param name="sql">SQL语句</param>
             <param name="parameters">SQL参数</param>
             <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetList``2(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.BeginTransaction">
+            <summary>
+            打开事务
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.CommitTransaction">
+            <summary>
+            提交事务
+            </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.RollbackTransaction">
+            <summary>
+            回滚事务
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.MSSQL.DbConnection.DefaultCommandTimeout">
+            <summary>
+            获取或设置在终止执行命令的尝试并生成错误之前的等待时间。
+            </summary>
         </member>
     </members>
 </doc>
