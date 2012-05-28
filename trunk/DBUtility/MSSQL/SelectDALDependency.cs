@@ -45,7 +45,7 @@ namespace hwj.DBUtility.MSSQL
         protected SelectDALDependency(IConnection connection)
             : base(connection)
         {
-
+            CommandText = Activator.CreateInstance<T>().GetCommandText();
         }
 
         #region Get Entity
@@ -59,7 +59,7 @@ namespace hwj.DBUtility.MSSQL
         protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = lockType;
             sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, 1, lockType);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
@@ -81,7 +81,7 @@ namespace hwj.DBUtility.MSSQL
         protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = lockType;
             sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, lockType);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
@@ -103,7 +103,7 @@ namespace hwj.DBUtility.MSSQL
         protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = base.InnerConnection.DefaultLock;
             sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);

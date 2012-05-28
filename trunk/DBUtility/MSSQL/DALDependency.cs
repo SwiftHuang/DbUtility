@@ -412,7 +412,7 @@ namespace hwj.DBUtility.MSSQL
         protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = lockType;
             sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
@@ -434,7 +434,7 @@ namespace hwj.DBUtility.MSSQL
         protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = lockType;
             sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
@@ -473,7 +473,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultConnectionTimeout, out TotalCount);
+            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
@@ -491,7 +491,7 @@ namespace hwj.DBUtility.MSSQL
         protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
-            tmpSqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            tmpSqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             tmpSqlEty.LockType = Enums.LockType.NoLock;
 
             _SqlEntity = tmpSqlEty;
@@ -544,7 +544,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultConnectionTimeout, out TotalCount);
+            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
@@ -619,7 +619,7 @@ namespace hwj.DBUtility.MSSQL
         protected int RecordCount(FilterParams filterParam)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = InnerConnection.DefaultLock;
             sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParam);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
@@ -652,7 +652,7 @@ namespace hwj.DBUtility.MSSQL
         protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultConnectionTimeout;
+            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = base.InnerConnection.DefaultLock;
             sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);

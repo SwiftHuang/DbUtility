@@ -17,7 +17,7 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取或设置在终止执行命令的尝试并生成错误之前的等待时间。
         /// </summary>
-        public int DefaultConnectionTimeout { get; private set; }
+        public int DefaultCommandTimeout { get; private set; }
         public IDbTransaction InnerTransaction { get; private set; }
         public IDbConnection InnerConnection { get; private set; }
         public Enums.LockType DefaultLock { get; set; }
@@ -54,7 +54,7 @@ namespace hwj.DBUtility.MSSQL
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql)
         {
             ConnectionString = connectionString;
-            DefaultConnectionTimeout = timeout;
+            DefaultCommandTimeout = timeout;
             InnerConnection = new SqlConnection(connectionString);
 
             DefaultLock = defaultLock;
@@ -72,21 +72,11 @@ namespace hwj.DBUtility.MSSQL
         #region Public Execute Member
         #region ExecuteSqlList
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sqlList"></param>
-        /// <returns></returns>
-        public int ExecuteSqlList(SqlList sqlList)
-        {
-            return ExecuteSqlList(sqlList, DefaultConnectionTimeout);
-        }
-        /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="sqlList">多条SQL语句</param>
-        /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public int ExecuteSqlList(SqlList sqlList, int timeout)
+        public int ExecuteSqlList(SqlList sqlList)
         {
             SqlCommand cmd = new SqlCommand();
             int index = 0;
@@ -131,7 +121,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(SqlEntity sqlEntity)
         {
-            return ExecuteSql(sqlEntity, DefaultConnectionTimeout);
+            return ExecuteSql(sqlEntity, DefaultCommandTimeout);
         }
         /// <summary>
         /// 
@@ -167,7 +157,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteSql(sql, parameters, DefaultConnectionTimeout);
+            return ExecuteSql(sql, parameters, DefaultCommandTimeout);
         }
         /// <summary>
         /// 
@@ -207,7 +197,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteReader(sql, parameters, DefaultConnectionTimeout);
+            return ExecuteReader(sql, parameters, DefaultCommandTimeout);
         }
         /// <summary>
         /// 
@@ -247,7 +237,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>查询结果（object）</returns>
         public object ExecuteScalar(string sql, List<IDbDataParameter> parameters)
         {
-            return ExecuteScalar(sql, parameters, DefaultConnectionTimeout);
+            return ExecuteScalar(sql, parameters, DefaultCommandTimeout);
         }
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
@@ -300,7 +290,7 @@ namespace hwj.DBUtility.MSSQL
         public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
         {
-            return GetEntity<T>(displayFields, filterParam, sortParams, lockType, DefaultConnectionTimeout);
+            return GetEntity<T>(displayFields, filterParam, sortParams, lockType, DefaultCommandTimeout);
         }
         /// <summary>
         /// 
@@ -349,7 +339,7 @@ namespace hwj.DBUtility.MSSQL
         public T GetEntity<T>(string sql, List<IDbDataParameter> parameters)
             where T : class, new()
         {
-            return GetEntity<T>(sql, parameters, DefaultConnectionTimeout);
+            return GetEntity<T>(sql, parameters, DefaultCommandTimeout);
         }
 
         /// <summary>
@@ -430,7 +420,7 @@ namespace hwj.DBUtility.MSSQL
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, lockType, DefaultConnectionTimeout);
+            return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, lockType, DefaultCommandTimeout);
         }
         /// <summary>
         /// 
@@ -481,7 +471,7 @@ namespace hwj.DBUtility.MSSQL
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            return GetList<T, TS>(sql, parameters, DefaultConnectionTimeout);
+            return GetList<T, TS>(sql, parameters, DefaultCommandTimeout);
         }
         /// <summary>
         /// 通过事务，获取表集合
@@ -493,7 +483,7 @@ namespace hwj.DBUtility.MSSQL
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            IDataReader reader = ExecuteReader(sql, parameters, DefaultConnectionTimeout);
+            IDataReader reader = ExecuteReader(sql, parameters, DefaultCommandTimeout);
             try
             {
                 return GenerateEntity.CreateListEntity<T, TS>(reader);
