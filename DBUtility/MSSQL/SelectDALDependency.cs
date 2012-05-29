@@ -104,7 +104,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            sqlEty.LockType = base.InnerConnection.DefaultLock;
+            sqlEty.LockType = base.InnerConnection.SelectLock;
             sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 

@@ -5,13 +5,13 @@ using System.Data;
 
 namespace hwj.DBUtility.Interface
 {
-    public interface IConnection //: System.Data.IDbConnection
+    public interface IConnection : IDisposable
     {
         string ConnectionString { get; }
         int DefaultCommandTimeout { get; }
         IDbConnection InnerConnection { get; }
         IDbTransaction InnerTransaction { get; }
-        Enums.LockType DefaultLock { get; set; }
+        //Enums.LockType DefaultLock { get; set; }
         Enums.LockType SelectLock { get; set; }
         Enums.LockType UpdateLock { get; set; }
         List<LogEntity> LogList { get; }
@@ -30,5 +30,6 @@ namespace hwj.DBUtility.Interface
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
+        void Dispose();
     }
 }
