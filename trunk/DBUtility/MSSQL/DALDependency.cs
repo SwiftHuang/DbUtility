@@ -620,7 +620,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            sqlEty.LockType = InnerConnection.DefaultLock;
+            sqlEty.LockType = InnerConnection.SelectLock;
             sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParam);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 
@@ -653,7 +653,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            sqlEty.LockType = base.InnerConnection.DefaultLock;
+            sqlEty.LockType = base.InnerConnection.SelectLock;
             sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 

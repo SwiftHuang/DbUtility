@@ -17,7 +17,7 @@ namespace hwj.DBUtility.MSSQL
         where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
-        private const string Msg_InvalidConnection = "Invalid Connection!";
+        //private const string Msg_InvalidConnection = "Invalid Connection!";
         #region Property
         private string _connectionString = string.Empty;
         public string ConnectionString
@@ -124,7 +124,7 @@ namespace hwj.DBUtility.MSSQL
             //{
             //    return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
             //}
-            throw new Exception(Msg_InvalidConnection);
+            //throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -233,7 +233,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(FilterParams filterParam)
         {
-            return GetEntity(null, filterParam, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetEntity(null, filterParam, null, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表对象
@@ -253,7 +253,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetEntity(displayFields, filterParam, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetEntity(displayFields, filterParam, null, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表对象
@@ -275,7 +275,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetEntity(displayFields, filterParam, sortParams, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetEntity(displayFields, filterParam, sortParams, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表对象
@@ -306,29 +306,29 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected T GetEntity(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (IsUseTrans())
-            {
-                return InnerConnection.GetEntity<T>(sql, parameters);
-            }
-            else
-            {
-                IDataReader reader = ExecuteReader(sql, parameters, timeout);
-                try
-                {
-                    if (reader.Read())
-                        return GenerateEntity.CreateSingleEntity<T>(reader);
-                    else
-                        return null;
-                }
-                catch
-                { throw; }
-                finally
-                {
-                    if (!reader.IsClosed)
-                        reader.Close();
-                }
-            }
-            throw new Exception(Msg_InvalidConnection);
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.GetEntity<T>(sql, parameters);
+            //}
+            //else
+            //{
+            //    IDataReader reader = ExecuteReader(sql, parameters, timeout);
+            //    try
+            //    {
+            //        if (reader.Read())
+            //            return GenerateEntity.CreateSingleEntity<T>(reader);
+            //        else
+            //            return null;
+            //    }
+            //    catch
+            //    { throw; }
+            //    finally
+            //    {
+            //        if (!reader.IsClosed)
+            //            reader.Close();
+            //    }
+            //}
+            //throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -359,7 +359,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields)
         {
-            return GetList(displayFields, null, null, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetList(displayFields, null, null, null, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表集合
@@ -379,7 +379,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
-            return GetList(displayFields, filterParam, null, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetList(displayFields, filterParam, null, null, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表集合
@@ -401,7 +401,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
-            return GetList(displayFields, filterParam, sortParams, null, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetList(displayFields, filterParam, sortParams, null, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表集合
@@ -425,7 +425,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
-            return GetList(displayFields, filterParam, sortParams, maxCount, GetLockType(Enums.LockModule.Select, InnerConnection.DefaultLock));
+            return GetList(displayFields, filterParam, sortParams, maxCount, InnerConnection.SelectLock);
         }
         /// <summary>
         /// 获取表集合
@@ -457,26 +457,26 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         protected TS GetList(string sql, List<IDbDataParameter> parameters, int timeout)
         {
-            if (IsUseTrans())
-            {
-                return InnerConnection.GetList<T, TS>(sql, parameters);
-            }
-            else
-            {
-                IDataReader reader = ExecuteReader(sql, parameters, timeout);
-                try
-                {
-                    return GenerateEntity.CreateListEntity<T, TS>(reader);
-                }
-                catch
-                { throw; }
-                finally
-                {
-                    if (!reader.IsClosed)
-                        reader.Close();
-                }
-            }
-            throw new Exception(Msg_InvalidConnection);
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.GetList<T, TS>(sql, parameters);
+            //}
+            //else
+            //{
+            //    IDataReader reader = ExecuteReader(sql, parameters, timeout);
+            //    try
+            //    {
+            //        return GenerateEntity.CreateListEntity<T, TS>(reader);
+            //    }
+            //    catch
+            //    { throw; }
+            //    finally
+            //    {
+            //        if (!reader.IsClosed)
+            //            reader.Close();
+            //    }
+            //}
+            //throw new Exception(Msg_InvalidConnection);
         }
         #endregion
 
@@ -558,33 +558,33 @@ namespace hwj.DBUtility.MSSQL
         }
         #endregion
 
-        private Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
-        {
-            if (IsUseTrans())
-            {
-                switch (module)
-                {
-                    case Enums.LockModule.Select:
-                        return InnerConnection.SelectLock;
-                    case Enums.LockModule.Update:
-                        return InnerConnection.UpdateLock;
-                    default:
-                        return InnerConnection.DefaultLock;
-                }
-            }
-            else
-            {
-                return lockType;
-            }
-        }
-        private bool IsUseTrans()
-        {
-            if (InnerConnection.InnerTransaction != null && InnerConnection.InnerTransaction.Connection != null)
-            {
-                return true;
-            }
-            return false;
-        }
+        //private Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
+        //{
+        //    if (IsUseTrans())
+        //    {
+        //        switch (module)
+        //        {
+        //            case Enums.LockModule.Select:
+        //                return InnerConnection.SelectLock;
+        //            case Enums.LockModule.Update:
+        //                return InnerConnection.UpdateLock;
+        //            default:
+        //                return InnerConnection.SelectLock;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return lockType;
+        //    }
+        //}
+        //private bool IsUseTrans()
+        //{
+        //    if (InnerConnection.InnerTransaction != null && InnerConnection.InnerTransaction.Connection != null)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
     }
 }

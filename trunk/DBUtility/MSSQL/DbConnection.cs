@@ -20,8 +20,8 @@ namespace hwj.DBUtility.MSSQL
         public int DefaultCommandTimeout { get; private set; }
         public IDbTransaction InnerTransaction { get; private set; }
         public IDbConnection InnerConnection { get; private set; }
-        public Enums.LockType DefaultLock { get; set; }
 
+        //public Enums.LockType DefaultLock { get; set; }
         public Enums.LockType SelectLock { get; set; }
         public Enums.LockType UpdateLock { get; set; }
 
@@ -57,7 +57,6 @@ namespace hwj.DBUtility.MSSQL
             DefaultCommandTimeout = timeout;
             InnerConnection = new SqlConnection(connectionString);
 
-            DefaultLock = defaultLock;
             SelectLock = Enums.LockType.UpdLock;
             UpdateLock = Enums.LockType.UpdLock;
 
@@ -597,13 +596,29 @@ namespace hwj.DBUtility.MSSQL
 
         public void Dispose()
         {
-            if (InnerTransaction != null)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                InnerTransaction.Dispose();
-            }
-            if (InnerConnection != null)
-            {
-                InnerConnection.Close();
+                if (InnerTransaction != null)
+                {
+                    InnerTransaction.Dispose();
+                    InnerTransaction = null;
+                }
+                if (InnerConnection != null)
+                {
+                    //InnerConnection.Close();
+                    InnerConnection.Dispose();
+                    InnerConnection = null;
+                }
+                if (LogList != null)
+                {
+                    LogList = null;
+                }
             }
         }
 
