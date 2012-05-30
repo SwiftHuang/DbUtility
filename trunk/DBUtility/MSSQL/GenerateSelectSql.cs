@@ -166,9 +166,11 @@ namespace hwj.DBUtility.MSSQL
                     {
                         StringBuilder inSql = new StringBuilder();
                         string[] strList = GetSQL_IN_Value(para.FieldValue);
-                        if (strList == null)
+                        if (strList == null || strList.Length == 0)
+                        {
+                            sbWhere.Append(" 1=0 ");
                             continue;
-
+                        }
                         if (!isPage)
                         {
                             if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
