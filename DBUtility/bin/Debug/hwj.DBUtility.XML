@@ -523,6 +523,17 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetEntitySqlEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType,System.Int32)">
+            <summary>
+            获取表对象的Sql对象
+            </summary>
+            <param name="displayFields">返回指定字段</param>
+            <param name="filterParam">查询条件</param>
+            <param name="sortParams">排序方式</param>
+            <param name="lockType">锁类型</param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetEntity(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
             <summary>
             获取表对象
@@ -530,6 +541,7 @@
             <param name="displayFields">返回指定字段</param>
             <param name="filterParam">查询条件</param>
             <param name="sortParams">排序方式</param>
+            <param name="lockType">锁类型</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetList(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32},hwj.DBUtility.Enums.LockType)">
