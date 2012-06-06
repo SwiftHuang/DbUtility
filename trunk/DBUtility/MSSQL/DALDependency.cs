@@ -403,25 +403,52 @@ namespace hwj.DBUtility.MSSQL
 
         #region Get Entity
         /// <summary>
+        /// 获取表对象的Sql对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="lockType">锁类型</param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType, int commandTimeout)
+        {
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = commandTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return sqlEty;
+        }
+        /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
+        /// <param name="lockType">锁类型</param>
         /// <returns></returns>
         protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            sqlEty.LockType = lockType;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty = GetEntitySqlEntity(displayFields, filterParam, sortParams, lockType, InnerConnection.DefaultCommandTimeout);
 
             return base.GetEntity(sqlEty);
         }
         #endregion
 
         #region Get List
+        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType, int commandTimeout)
+        {
+            SqlEntity sqlEty = new SqlEntity();
+            sqlEty.CommandTimeout = commandTimeout;
+            sqlEty.LockType = lockType;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+
+            return sqlEty;
+        }
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -434,10 +461,7 @@ namespace hwj.DBUtility.MSSQL
         protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            sqlEty.LockType = lockType;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty = GetListSqlEntity(displayFields, filterParam, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
 
             return base.GetList(sqlEty);
         }
