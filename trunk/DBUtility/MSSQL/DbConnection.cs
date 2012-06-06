@@ -453,7 +453,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
-        protected TS GetList<T, TS>(SqlEntity sqlEntity)
+        public TS GetList<T, TS>(SqlEntity sqlEntity)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {

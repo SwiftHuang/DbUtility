@@ -16,7 +16,22 @@ namespace hwj.DBUtility.Interface
         Enums.LockType UpdateLock { get; set; }
         List<LogEntity> LogList { get; }
 
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <typeparam name="T">表对象</typeparam>
+        /// <param name="sqlEntity">SQL实体</param>
+        /// <returns></returns>
+        T GetEntity<T>(SqlEntity sqlEntity) where T : class, new();
         T GetEntity<T>(string sql, List<IDbDataParameter> parameters) where T : class, new();
+        /// <summary>
+        /// 通过事务，获取表集合
+        /// </summary>
+        /// <param name="sqlEntity">SQL实体</param>
+        /// <returns></returns>
+        TS GetList<T, TS>(SqlEntity sqlEntity)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new();
         TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();

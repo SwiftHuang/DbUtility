@@ -1361,6 +1361,21 @@
             <param name="tableName">Data Table Name</param>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.Interface.IConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
+            <summary>
+            获取表对象
+            </summary>
+            <typeparam name="T">表对象</typeparam>
+            <param name="sqlEntity">SQL实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Interface.IConnection.GetList``2(hwj.DBUtility.SqlEntity)">
+            <summary>
+            通过事务，获取表集合
+            </summary>
+            <param name="sqlEntity">SQL实体</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.DeleteSql(System.String,hwj.DBUtility.FilterParams)">
             <summary>
             获取Delete Sql
