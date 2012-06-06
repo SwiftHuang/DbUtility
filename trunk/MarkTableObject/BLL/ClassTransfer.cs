@@ -265,14 +265,14 @@ namespace hwj.MarkTableObject.BLL
             ss.AppendLine();
             ss.AppendLine(spaceNum, "{");
 
-            if (obj.GetType().IsArray)
-            {
-                ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, obj.GetType().Name, spaceNum));
-            }
-            else
-            {
-                ss.Append(BuildPropertyText(obj, toClass, fromClass, toNamespace, spaceNum));
-            }
+            //if (IsArray(obj.GetType()))
+            //{
+            //    ss.Append(BuildArrayText(obj, toClass, fromClass, toNamespace, obj.GetType().Name, spaceNum));
+            //}
+            //else
+            //{
+            ss.Append(BuildPropertyText(obj, toClass, fromClass, toNamespace, spaceNum));
+            //}
 
             ss.AppendLine(spaceNum, "}");
             return ss.ToString();
@@ -422,7 +422,21 @@ namespace hwj.MarkTableObject.BLL
             }
             return PropertyType.None;
         }
-
+        private bool IsArray(Type type)
+        {
+            if (type != null)
+            {
+                if (type.IsArray)
+                {
+                    return true;
+                }
+                else if (type.BaseType.FullName.IndexOf("hwj.DBUtility.Entity.BaseList") > -1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }

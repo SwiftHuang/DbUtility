@@ -31,9 +31,9 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.1.1.9</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.1.10</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,7 +108,6 @@
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\MSSQLSetting.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\MSSQLSetting.Designer.cs">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
