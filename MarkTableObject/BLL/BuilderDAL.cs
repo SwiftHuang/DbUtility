@@ -23,7 +23,6 @@ namespace hwj.MarkTableObject.BLL
             StringHelper.SpaceString strclass = new StringHelper.SpaceString();
             strclass.AppendLine("using System;");
             strclass.AppendLine("using System.Collections.Generic;");
-            strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using System.Text;");
             switch (dalInfo.ConnType)
             {
@@ -39,7 +38,9 @@ namespace hwj.MarkTableObject.BLL
                 default:
                     break;
             }
+            strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using hwj.DBUtility;");
+            strclass.AppendLine("using hwj.DBUtility.Interface;");
             strclass.AppendLine("using hwj.DBUtility.MSSQL;");
             strclass.AppendLine("using " + dalInfo.EntityInfo.NameSpace + ";");
             strclass.AppendLine("");
@@ -73,19 +74,29 @@ namespace hwj.MarkTableObject.BLL
             }
 
             strclass.AppendLine(1, "{");
-            strclass.AppendLine(2, "public " + dalInfo.DALName + "(string connectionString)");
-            strclass.AppendLine(3, ": base(connectionString)");
-            strclass.AppendLine(2, "{");
 
-            if (dalInfo.Module == DBModule.SQL || dalInfo.Module == DBModule.SP)
+            if (templateType == TemplateType.DataAccess)
             {
-                strclass.AppendLine(3, "CommandText = " + dalInfo.EntityInfo.EntityName + ".CommandText;");
+                strclass.AppendLine(2, "public " + dalInfo.DALName + "(IConnection conn)");
+                strclass.AppendLine(3, ": base(conn)");
+                strclass.AppendLine(2, "{ }");
             }
             else
             {
-                strclass.AppendLine(3, "TableName = " + dalInfo.EntityInfo.EntityName + ".DBTableName;");
+                strclass.AppendLine(2, "public " + dalInfo.DALName + "(string connectionString)");
+                strclass.AppendLine(3, ": base(connectionString)");
+                strclass.AppendLine(2, "{");
+
+                if (dalInfo.Module == DBModule.SQL || dalInfo.Module == DBModule.SP)
+                {
+                    strclass.AppendLine(3, "CommandText = " + dalInfo.EntityInfo.EntityName + ".CommandText;");
+                }
+                else
+                {
+                    strclass.AppendLine(3, "TableName = " + dalInfo.EntityInfo.EntityName + ".DBTableName;");
+                }
+                strclass.AppendLine(2, "}");
             }
-            strclass.AppendLine(2, "}");
 
             if (templateType == TemplateType.DataAccess)
             {

@@ -210,29 +210,25 @@ namespace hwj.MarkTableObject.BLL
                 strclass.AppendLine(3, string.Format("return {0}GetList();", fs.DALString));
             }
             strclass.AppendLine(2, "}");
-
-            strclass.AppendLine("");
-
-            if (inf.PKColumnInfoList.Count > 0)
-            {
-                //strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + "s GetList(" + inf.EntityInfo.PKColumnParam + ", int top)");
-                strclass.AppendLine(2, string.Format("public {0}{1}s GetList({2}, int top)", fs.StaticString, inf.EntityName, inf.PKColumnParam));
-                strclass.AppendLine(2, "{");
-                GetFilterParam(inf, ref strclass);
-                strclass.AppendLine(3, string.Format("return {0}GetList(null, fp, null, top);", fs.DALString));
-            }
-            else
-            {
-                //strclass.AppendLine(2, "public static " + inf.EntityInfo.EntityName + "s GetList(int top)");
-                strclass.AppendLine(2, string.Format("public {0}{1}s GetList(int top)", fs.StaticString, inf.EntityName));
-                strclass.AppendLine(2, "{");
-                strclass.AppendLine(3, string.Format("return {0}GetList(null, null, null, top);", fs.DALString));
-            }
-            strclass.AppendLine(2, "}");
-
+            
+            //Suspend by Vinson 2012-06-06
+            //strclass.AppendLine("");
+            //if (inf.PKColumnInfoList.Count > 0)
+            //{
+            //    strclass.AppendLine(2, string.Format("public {0}{1}s GetList({2}, int top)", fs.StaticString, inf.EntityName, inf.PKColumnParam));
+            //    strclass.AppendLine(2, "{");
+            //    GetFilterParam(inf, ref strclass);
+            //    strclass.AppendLine(3, string.Format("return {0}GetList(null, fp, null, top);", fs.DALString));
+            //}
+            //else
+            //{
+            //    strclass.AppendLine(2, string.Format("public {0}{1}s GetList(int top)", fs.StaticString, inf.EntityName));
+            //    strclass.AppendLine(2, "{");
+            //    strclass.AppendLine(3, string.Format("return {0}GetList(null, null, null, top);", fs.DALString));
+            //}
+            //strclass.AppendLine(2, "}");
 
             return strclass.ToString();
-
         }
         private static string CreatGetAllListMethod(EntityInfo inf, MarkTableObject.TemplateType templateType)
         {
