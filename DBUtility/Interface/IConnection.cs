@@ -14,6 +14,7 @@ namespace hwj.DBUtility.Interface
         //Enums.LockType DefaultLock { get; set; }
         Enums.LockType SelectLock { get; set; }
         Enums.LockType UpdateLock { get; set; }
+        Enums.TransactionState TransactionState { get; set; }
         List<LogEntity> LogList { get; }
 
         /// <summary>
@@ -23,7 +24,15 @@ namespace hwj.DBUtility.Interface
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
         T GetEntity<T>(SqlEntity sqlEntity) where T : class, new();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         T GetEntity<T>(string sql, List<IDbDataParameter> parameters) where T : class, new();
+
         /// <summary>
         /// 通过事务，获取表集合
         /// </summary>
@@ -32,14 +41,68 @@ namespace hwj.DBUtility.Interface
         TS GetList<T, TS>(SqlEntity sqlEntity)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlList"></param>
+        /// <returns></returns>
         int ExecuteSqlList(SqlList sqlList);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        int ExecuteSql(SqlEntity sqlEntity);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         int ExecuteSql(string sql, List<IDbDataParameter> parameters, int timeout);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        IDataReader ExecuteReader(SqlEntity sqlEntity);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters, int timeout);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        object ExecuteScalar(SqlEntity sqlEntity);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
         object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout);
 
         void BeginTransaction();
