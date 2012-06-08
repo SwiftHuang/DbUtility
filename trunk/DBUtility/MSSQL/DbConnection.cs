@@ -24,6 +24,7 @@ namespace hwj.DBUtility.MSSQL
         //public Enums.LockType DefaultLock { get; set; }
         public Enums.LockType SelectLock { get; set; }
         public Enums.LockType UpdateLock { get; set; }
+        public Enums.TransactionState TransactionState { get; set; }
 
         public bool LogSql { get; set; }
         public List<LogEntity> LogList { get; private set; }
@@ -114,25 +115,15 @@ namespace hwj.DBUtility.MSSQL
 
         #region ExecuteSql
         /// <summary>
-        /// 
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
         public int ExecuteSql(SqlEntity sqlEntity)
         {
-            return ExecuteSql(sqlEntity, DefaultCommandTimeout);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sqlEntity"></param>
-        /// <param name="timeout"></param>
-        /// <returns></returns>
-        public int ExecuteSql(SqlEntity sqlEntity, int timeout)
-        {
             try
             {
-                return ExecuteSql(sqlEntity.CommandText, sqlEntity.Parameters, timeout);
+                return ExecuteSql(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
             }
             catch (Exception ex)
             {
@@ -149,7 +140,7 @@ namespace hwj.DBUtility.MSSQL
 
         }
         /// <summary>
-        /// 
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -159,7 +150,7 @@ namespace hwj.DBUtility.MSSQL
             return ExecuteSql(sql, parameters, DefaultCommandTimeout);
         }
         /// <summary>
-        /// 
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -188,6 +179,15 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region ExecuteReader
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        public IDataReader ExecuteReader(SqlEntity sqlEntity)
+        {
+            return ExecuteReader(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -228,6 +228,15 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region ExecuteScalar
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sqlEntity"></param>
+        /// <returns></returns>
+        public object ExecuteScalar(SqlEntity sqlEntity)
+        {
+            return ExecuteScalar(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
+        }
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -513,6 +522,7 @@ namespace hwj.DBUtility.MSSQL
                 InnerConnection.Open();
             }
             InnerTransaction = InnerConnection.BeginTransaction();
+            TransactionState = Enums.TransactionState.Begin;
         }
         /// <summary>
         /// 提交事务
@@ -527,6 +537,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 InnerConnection.Close();
             }
+            TransactionState = Enums.TransactionState.None;
         }
         /// <summary>
         /// 回滚事务
@@ -541,6 +552,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 InnerConnection.Close();
             }
+            TransactionState = Enums.TransactionState.None;
         }
         #endregion
 
@@ -620,6 +632,7 @@ namespace hwj.DBUtility.MSSQL
                     LogList = null;
                 }
             }
+            TransactionState = Enums.TransactionState.None;
         }
 
         #endregion

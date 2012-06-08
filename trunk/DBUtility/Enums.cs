@@ -257,6 +257,12 @@ namespace hwj.DBUtility
             Select,
             Update,
         }
+
+        public enum TransactionState
+        {
+            None,
+            Begin,
+        }
     }
     //public static class EnumsExtensions
     //{
