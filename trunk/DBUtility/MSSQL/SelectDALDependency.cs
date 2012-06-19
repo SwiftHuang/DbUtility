@@ -26,7 +26,7 @@ namespace hwj.DBUtility.MSSQL
         /// 
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
-        protected SelectDALDependency(string connectionString)
+        internal protected SelectDALDependency(string connectionString)
             : this(connectionString, 30, Enums.LockType.None)
         { }
         /// <summary>
@@ -35,7 +35,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="connectionString">数据连接字符串</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="lockType">锁类型</param>
-        protected SelectDALDependency(string connectionString, int timeout, Enums.LockType lockType)
+        internal protected SelectDALDependency(string connectionString, int timeout, Enums.LockType lockType)
             : base(connectionString, timeout, lockType)
         { }
         /// <summary>

@@ -28,6 +28,7 @@ namespace hwj.DBUtility.MSSQL
 
         public bool LogSql { get; set; }
         public List<LogEntity> LogList { get; private set; }
+        public bool AutoCloseConnection { get; private set; }
         #endregion
 
         #region CTOR
@@ -53,6 +54,16 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="connectionString"></param>
         /// <param name="timeout"></param>
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql)
+            : this(connectionString, timeout, defaultLock, logSql, false)
+        {
+
+        }
+        /// <summary>
+        /// 数据库连接实体
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="timeout"></param>
+        public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql, bool autoCloseConnection)
         {
             ConnectionString = connectionString;
             DefaultCommandTimeout = timeout;
@@ -66,6 +77,8 @@ namespace hwj.DBUtility.MSSQL
             {
                 LogList = new List<LogEntity>();
             }
+
+            AutoCloseConnection = autoCloseConnection;
         }
         #endregion
 
@@ -78,6 +91,24 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSqlList(SqlList sqlList)
         {
+            if (AutoCloseConnection)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        return ExecuteSqlList(conn, tran, sqlList);
+                    }
+                }
+            }
+            else
+            {
+                return ExecuteSqlList(InnerConnection, InnerTransaction, sqlList);
+            }
+        }
+        public int ExecuteSqlList(IDbConnection connection, IDbTransaction transaction, SqlList sqlList)
+        {
             SqlCommand cmd = new SqlCommand();
             int index = 0;
             try
@@ -87,7 +118,7 @@ namespace hwj.DBUtility.MSSQL
                 foreach (SqlEntity myDE in sqlList)
                 {
                     AddLog(myDE);
-                    DbHelperSQL.PrepareCommand(cmd, InnerTransaction.Connection, InnerTransaction, myDE);
+                    DbHelperSQL.PrepareCommand(cmd, connection, transaction, myDE);
 
                     int val = cmd.ExecuteNonQuery();
                     count += val;
@@ -158,12 +189,26 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public int ExecuteSql(string sql, List<IDbDataParameter> parameters, int timeout)
         {
+            if (AutoCloseConnection)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    return ExecuteSql(conn, null, sql, parameters, timeout);
+                }
+            }
+            else
+            {
+                return ExecuteSql(InnerConnection, InnerTransaction, sql, parameters, timeout);
+            }
+        }
+        private int ExecuteSql(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
+        {
             AddLog(sql, parameters, timeout);
             try
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    DbHelperSQL.PrepareCommand(cmd, InnerConnection, InnerTransaction, sql, parameters, timeout);
+                    DbHelperSQL.PrepareCommand(cmd, connection, transaction, sql, parameters, timeout);
 
                     int rows = cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
@@ -213,8 +258,16 @@ namespace hwj.DBUtility.MSSQL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     DbHelperSQL.PrepareCommand(cmd, InnerConnection, InnerTransaction, sql, parameters, timeout);
+                    SqlDataReader myReader;
+                    if (AutoCloseConnection)
+                    {
+                        myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    }
+                    else
+                    {
+                        myReader = cmd.ExecuteReader();
+                    }
 
-                    SqlDataReader myReader = cmd.ExecuteReader();
                     cmd.Parameters.Clear();
                     return myReader;
                 }
@@ -256,12 +309,26 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>查询结果（object）</returns>
         public object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout)
         {
+            if (AutoCloseConnection)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    return ExecuteScalar(conn, null, sql, parameters, timeout);
+                }
+            }
+            else
+            {
+                return ExecuteScalar(InnerConnection, InnerTransaction, sql, parameters, timeout);
+            }
+        }
+        private object ExecuteScalar(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
+        {
             AddLog(sql, parameters, timeout);
             try
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    DbHelperSQL.PrepareCommand(cmd, InnerConnection, InnerTransaction, sql, parameters, timeout);
+                    DbHelperSQL.PrepareCommand(cmd, connection, transaction, sql, parameters, timeout);
                     object obj = cmd.ExecuteScalar();
                     cmd.Parameters.Clear();
                     if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
@@ -280,6 +347,7 @@ namespace hwj.DBUtility.MSSQL
                 throw new Exception(msg, ex);
             }
         }
+
         #endregion
         #endregion
 

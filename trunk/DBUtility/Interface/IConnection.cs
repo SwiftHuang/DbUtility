@@ -7,6 +7,7 @@ namespace hwj.DBUtility.Interface
 {
     public interface IConnection : IDisposable
     {
+        bool AutoCloseConnection { get; }
         string ConnectionString { get; }
         int DefaultCommandTimeout { get; }
         IDbConnection InnerConnection { get; }
