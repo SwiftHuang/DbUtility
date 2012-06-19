@@ -50,7 +50,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout"></param>
         /// <param name="lockType"></param>
         protected BaseDataAccess(string connectionString, int timeout, Enums.LockType lockType)
-            : this(new DbConnection(connectionString, timeout, lockType))
+            : this(new DbConnection(connectionString, timeout, lockType, false, true))
         { }
         /// <summary>
         /// 

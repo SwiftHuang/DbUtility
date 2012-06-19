@@ -1788,6 +1788,13 @@
             <param name="connectionString"></param>
             <param name="timeout"></param>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType,System.Boolean,System.Boolean)">
+            <summary>
+            数据库连接实体
+            </summary>
+            <param name="connectionString"></param>
+            <param name="timeout"></param>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
             <summary>
             执行多条SQL语句，实现数据库事务。
