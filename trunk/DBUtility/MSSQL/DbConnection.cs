@@ -13,6 +13,7 @@ namespace hwj.DBUtility.MSSQL
     public class DbConnection : IConnection, IDisposable
     {
         #region Property
+        private bool disposed = false;
         public string ConnectionString { get; private set; }
         /// <summary>
         /// 获取或设置在终止执行命令的尝试并生成错误之前的等待时间。
@@ -79,6 +80,10 @@ namespace hwj.DBUtility.MSSQL
             }
 
             AutoCloseConnection = autoCloseConnection;
+        }
+        ~DbConnection()
+        {
+            Dispose(false);
         }
         #endregion
 
@@ -682,8 +687,16 @@ namespace hwj.DBUtility.MSSQL
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (!this.disposed)
             {
+                if (disposing)
+                {
+                    if (LogList != null)
+                    {
+                        LogList = null;
+                    }
+                }
+
                 if (InnerTransaction != null)
                 {
                     InnerTransaction.Dispose();
@@ -695,12 +708,10 @@ namespace hwj.DBUtility.MSSQL
                     InnerConnection.Dispose();
                     InnerConnection = null;
                 }
-                if (LogList != null)
-                {
-                    LogList = null;
-                }
+
+                TransactionState = Enums.TransactionState.None;
+                this.disposed = true;
             }
-            TransactionState = Enums.TransactionState.None;
         }
 
         #endregion
