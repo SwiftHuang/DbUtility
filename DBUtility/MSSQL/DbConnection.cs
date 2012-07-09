@@ -81,10 +81,10 @@ namespace hwj.DBUtility.MSSQL
 
             AutoCloseConnection = autoCloseConnection;
         }
-        ~DbConnection()
-        {
-            Dispose(false);
-        }
+        //~DbConnection()
+        //{
+        //    Dispose(false);
+        //}
         #endregion
 
         #region Public Execute Member

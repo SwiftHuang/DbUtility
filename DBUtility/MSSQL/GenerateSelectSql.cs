@@ -168,7 +168,7 @@ namespace hwj.DBUtility.MSSQL
                         string[] strList = GetSQL_IN_Value(para.FieldValue);
                         if (strList == null || strList.Length == 0)
                         {
-                            sbWhere.Append(" 1=0 ");
+                            sbWhere.Append(" 1=0 ").Append(Enums.ExpressionString(para.Expression));
                             continue;
                         }
                         if (!isPage)
