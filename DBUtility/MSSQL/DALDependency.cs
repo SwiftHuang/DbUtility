@@ -624,6 +624,75 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+        /// <summary>
+        /// 获取分页对象(支持多主键、多排序)
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序</param>
+        /// <param name="PK">主键</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="TotalCount">返回记录数</param>
+        /// <returns></returns>
+        protected DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        {
+            return GetPageForTable(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
+        }
+        /// <summary>
+        /// 获取分页对象(支持多主键、多排序)
+        /// </summary>
+        /// <param name="displayFields">显示字段</param>
+        /// <param name="filterParam">筛选条件</param>
+        /// <param name="sortParams">排序</param>
+        /// <param name="PK">主键</param>
+        /// <param name="pageNumber">页数</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="TotalCount">返回记录数</param>
+        /// <returns></returns>
+        protected DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        {
+            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            tmpSqlEty.CommandTimeout = timeout;
+            tmpSqlEty.LockType = Enums.LockType.NoLock;
+
+            _SqlEntity = tmpSqlEty;
+
+            TotalCount = 0;
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                DbHelper.PrepareCommand(cmd, conn, null, tmpSqlEty);
+                SqlParameter sp = new SqlParameter("@_RecordCount", DbType.Int32);
+                sp.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(sp);
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                try
+                {
+                    if (reader.HasRows)
+                    {
+                        DataTable result = GenerateEntity.CreateDataTable(reader, TableName);
+                        reader.Close();
+                        if (cmd.Parameters.Count > 0)
+                            TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
+                        cmd.Parameters.Clear();
+                        return result;
+                    }
+                    else
+                        return new DataTable(TableName);
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
+            }
+        }
         #endregion
 
         #region Record Count
