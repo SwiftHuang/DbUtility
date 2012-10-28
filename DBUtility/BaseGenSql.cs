@@ -140,10 +140,16 @@ namespace hwj.DBUtility
             {
                 return ((List<string>)obj).ToArray();
             }
-            //else if (obj is List<decimal>)
-            //{
-            //    return ((List<decimal>)obj).ToArray();
-            //}
+            else if (obj is List<int>)
+            {
+                List<int> tmpObj = obj as List<int>;
+                List<string> strLst = new List<string>();
+                foreach (int i in tmpObj)
+                {
+                    strLst.Add(i.ToString());
+                }
+                return strLst.ToArray();
+            }
             else if (obj is string)
             {
                 return new string[] { obj.ToString() };
