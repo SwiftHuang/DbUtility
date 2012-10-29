@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using hwj.DBUtility.TableMapping;
+using System.Collections;
 
 namespace hwj.DBUtility
 {
@@ -136,19 +137,19 @@ namespace hwj.DBUtility
             {
                 return null;
             }
-            else if (obj is List<string>)
+            else if (obj.GetType().IsGenericType)
             {
-                return ((List<string>)obj).ToArray();
-            }
-            else if (obj is List<int>)
-            {
-                List<int> tmpObj = obj as List<int>;
-                List<string> strLst = new List<string>();
-                foreach (int i in tmpObj)
+                Type type = obj.GetType();
+                List<string> sList = new List<string>();
+                if (Array.IndexOf(type.GetInterfaces(), typeof(IEnumerable)) > -1)
                 {
-                    strLst.Add(i.ToString());
+                    IEnumerable en = obj as IEnumerable;
+                    foreach (object t in en)
+                    {
+                        sList.Add(Convert.ToString(t));
+                    }
                 }
-                return strLst.ToArray();
+                return sList.ToArray();
             }
             else if (obj is string)
             {
