@@ -9,7 +9,7 @@ using System.ComponentModel;
 namespace hwj.DBUtility.Entity
 {
     [Serializable]
-    public class BaseList<T, TS> : List<T>
+    public class BaseList<T, TS> : List<T>, IEnumerable<T>
         where T : BaseSqlTable<T>, new()
         where TS : List<T>, new()
     {
@@ -199,5 +199,23 @@ namespace hwj.DBUtility.Entity
         //    else
         //        return null;
         //}
+
+        #region IEnumerable<T> 成员
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        #endregion
+
+        #region IEnumerable 成员
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        #endregion
     }
 }
