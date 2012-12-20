@@ -33,7 +33,7 @@
     <PublisherName>Vinson Huang</PublisherName>
     <MinimumRequiredVersion>0.1.1.10</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -95,6 +95,12 @@
     <Compile Include="BLL\MSSQL\BuilderColumn.cs" />
     <Compile Include="BLL\ClassTransfer.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Components\AssignEntity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\AssignEntity.Designer.cs">
+      <DependentUpon>AssignEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\GenSQLCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,6 +114,7 @@
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\MSSQLSetting.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\MSSQLSetting.Designer.cs">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
@@ -159,6 +166,9 @@
       <DependentUpon>ProjectFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\AssignEntity.resx">
+      <DependentUpon>AssignEntity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\GenSQLCtrl.resx">
       <DependentUpon>GenSQLCtrl.cs</DependentUpon>
       <SubType>Designer</SubType>

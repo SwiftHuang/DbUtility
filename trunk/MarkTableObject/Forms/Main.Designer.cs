@@ -44,9 +44,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabClassTran = new System.Windows.Forms.TabPage();
             this.genSQLCtrl2 = new hwj.MarkTableObject.Components.GenSQLCtrl();
+            this.tabClassTran = new System.Windows.Forms.TabPage();
             this.ucClassTransfer1 = new hwj.MarkTableObject.Components.UCClassTransfer();
+            this.tabAssingEntity = new System.Windows.Forms.TabPage();
+            this.assignEntity1 = new hwj.MarkTableObject.Components.AssignEntity();
             this.treeMenu.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -56,6 +58,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabClassTran.SuspendLayout();
+            this.tabAssingEntity.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -176,6 +179,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabClassTran);
+            this.tabControl1.Controls.Add(this.tabAssingEntity);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -204,16 +208,6 @@
             this.tabPage2.Text = "生成代码";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabClassTran
-            // 
-            this.tabClassTran.Controls.Add(this.ucClassTransfer1);
-            this.tabClassTran.Location = new System.Drawing.Point(4, 22);
-            this.tabClassTran.Name = "tabClassTran";
-            this.tabClassTran.Size = new System.Drawing.Size(735, 633);
-            this.tabClassTran.TabIndex = 2;
-            this.tabClassTran.Text = "类转换";
-            this.tabClassTran.UseVisualStyleBackColor = true;
-            // 
             // genSQLCtrl2
             // 
             this.genSQLCtrl2.ClassName = "SqlEntity";
@@ -225,6 +219,16 @@
             this.genSQLCtrl2.Size = new System.Drawing.Size(729, 627);
             this.genSQLCtrl2.TabIndex = 0;
             // 
+            // tabClassTran
+            // 
+            this.tabClassTran.Controls.Add(this.ucClassTransfer1);
+            this.tabClassTran.Location = new System.Drawing.Point(4, 22);
+            this.tabClassTran.Name = "tabClassTran";
+            this.tabClassTran.Size = new System.Drawing.Size(735, 633);
+            this.tabClassTran.TabIndex = 2;
+            this.tabClassTran.Text = "类转换";
+            this.tabClassTran.UseVisualStyleBackColor = true;
+            // 
             // ucClassTransfer1
             // 
             this.ucClassTransfer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -232,6 +236,26 @@
             this.ucClassTransfer1.Name = "ucClassTransfer1";
             this.ucClassTransfer1.Size = new System.Drawing.Size(735, 633);
             this.ucClassTransfer1.TabIndex = 0;
+            // 
+            // tabAssingEntity
+            // 
+            this.tabAssingEntity.Controls.Add(this.assignEntity1);
+            this.tabAssingEntity.Location = new System.Drawing.Point(4, 22);
+            this.tabAssingEntity.Name = "tabAssingEntity";
+            this.tabAssingEntity.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAssingEntity.Size = new System.Drawing.Size(735, 633);
+            this.tabAssingEntity.TabIndex = 3;
+            this.tabAssingEntity.Text = "DB->Class";
+            this.tabAssingEntity.UseVisualStyleBackColor = true;
+            // 
+            // assignEntity1
+            // 
+            this.assignEntity1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.assignEntity1.Location = new System.Drawing.Point(3, 3);
+            this.assignEntity1.Name = "assignEntity1";
+            this.assignEntity1.PrjInfo = null;
+            this.assignEntity1.Size = new System.Drawing.Size(729, 627);
+            this.assignEntity1.TabIndex = 0;
             // 
             // Main
             // 
@@ -255,6 +279,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabClassTran.ResumeLayout(false);
+            this.tabAssingEntity.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,6 +305,8 @@
         private hwj.MarkTableObject.Components.GenSQLCtrl genSQLCtrl2;
         private System.Windows.Forms.TabPage tabClassTran;
         private hwj.MarkTableObject.Components.UCClassTransfer ucClassTransfer1;
+        private System.Windows.Forms.TabPage tabAssingEntity;
+        private hwj.MarkTableObject.Components.AssignEntity assignEntity1;
 
     }
 }

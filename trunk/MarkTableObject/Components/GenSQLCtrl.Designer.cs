@@ -33,21 +33,9 @@
             this.gpSQL = new System.Windows.Forms.GroupBox();
             this.txtSQL = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dgList = new hwj.UserControls.DataList.xDataGridView();
-            this.colSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDataTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBaseTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAllowDBNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsAutoIncrement = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabGen = new System.Windows.Forms.TabControl();
             this.tpMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnGenSql = new hwj.UserControls.CommonControls.xButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cboSQLType = new System.Windows.Forms.ComboBox();
@@ -61,19 +49,31 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtSPParam = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnPreview = new hwj.UserControls.CommonControls.xButton();
             this.cboTemplateType = new System.Windows.Forms.ComboBox();
             this.tpEntity = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.txtEntityCode = new System.Windows.Forms.TextBox();
-            this.btnEntityCopy = new hwj.UserControls.CommonControls.xButton();
             this.tpDAL = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtDALCode = new System.Windows.Forms.TextBox();
-            this.btnDALCopy = new hwj.UserControls.CommonControls.xButton();
             this.tpBLL = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.txtBLLCode = new System.Windows.Forms.TextBox();
+            this.dgList = new hwj.UserControls.DataList.xDataGridView();
+            this.colSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDataTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBaseTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAllowDBNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsAutoIncrement = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnGenSql = new hwj.UserControls.CommonControls.xButton();
+            this.btnPreview = new hwj.UserControls.CommonControls.xButton();
+            this.btnEntityCopy = new hwj.UserControls.CommonControls.xButton();
+            this.btnDALCopy = new hwj.UserControls.CommonControls.xButton();
             this.btnBLLCopy = new hwj.UserControls.CommonControls.xButton();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +82,6 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gpSQL.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgList)).BeginInit();
             this.tabGen.SuspendLayout();
             this.tpMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -95,6 +94,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tpBLL.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgList)).BeginInit();
             this.SuspendLayout();
             // 
             // gpSQL
@@ -134,141 +134,6 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "表信息";
-            // 
-            // dgList
-            // 
-            this.dgList.AllowUserToAddRows = false;
-            this.dgList.AllowUserToDeleteRows = false;
-            this.dgList.AllowUserToResizeRows = false;
-            this.dgList.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgList.CellReadonlyBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.dgList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSelected,
-            this.colName,
-            this.colKey,
-            this.colDataTypeName,
-            this.colBaseTableName,
-            this.colDataType,
-            this.colAllowDBNull,
-            this.colIsUnique,
-            this.colIsAutoIncrement,
-            this.colDescription});
-            this.dgList.DataListPage = null;
-            this.dgList.DisplayRows = 0;
-            this.dgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgList.Location = new System.Drawing.Point(3, 17);
-            this.dgList.Name = "dgList";
-            this.dgList.RowFooterVisible = false;
-            this.dgList.RowHeadersVisible = false;
-            this.dgList.RowSeqVisible = true;
-            this.dgList.RowTemplate.Height = 23;
-            this.dgList.Size = new System.Drawing.Size(791, 290);
-            this.dgList.SumColumnName = ((System.Collections.Generic.List<string>)(resources.GetObject("dgList.SumColumnName")));
-            this.dgList.TabIndex = 0;
-            this.dgList.ValueIsChanged = false;
-            // 
-            // colSelected
-            // 
-            this.colSelected.DataPropertyName = "Selected";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "False";
-            this.colSelected.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colSelected.FalseValue = "False";
-            this.colSelected.FillWeight = 40F;
-            this.colSelected.Frozen = true;
-            this.colSelected.HeaderText = "选择";
-            this.colSelected.Name = "colSelected";
-            this.colSelected.TrueValue = "True";
-            this.colSelected.Visible = false;
-            this.colSelected.Width = 40;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "ColumnName";
-            this.colName.Frozen = true;
-            this.colName.HeaderText = "列名";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 120;
-            // 
-            // colKey
-            // 
-            this.colKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colKey.DataPropertyName = "IsKey";
-            this.colKey.Frozen = true;
-            this.colKey.HeaderText = "键值";
-            this.colKey.MinimumWidth = 55;
-            this.colKey.Name = "colKey";
-            this.colKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colKey.Width = 55;
-            // 
-            // colDataTypeName
-            // 
-            this.colDataTypeName.DataPropertyName = "DataTypeName";
-            this.colDataTypeName.Frozen = true;
-            this.colDataTypeName.HeaderText = "数据库类型";
-            this.colDataTypeName.Name = "colDataTypeName";
-            this.colDataTypeName.ReadOnly = true;
-            // 
-            // colBaseTableName
-            // 
-            this.colBaseTableName.DataPropertyName = "BaseTableName";
-            this.colBaseTableName.Frozen = true;
-            this.colBaseTableName.HeaderText = "表名";
-            this.colBaseTableName.Name = "colBaseTableName";
-            this.colBaseTableName.ReadOnly = true;
-            this.colBaseTableName.Width = 120;
-            // 
-            // colDataType
-            // 
-            this.colDataType.DataPropertyName = "DataType";
-            this.colDataType.HeaderText = "数据类型";
-            this.colDataType.Name = "colDataType";
-            this.colDataType.ReadOnly = true;
-            // 
-            // colAllowDBNull
-            // 
-            this.colAllowDBNull.DataPropertyName = "AllowDBNull";
-            this.colAllowDBNull.HeaderText = "为空";
-            this.colAllowDBNull.MinimumWidth = 55;
-            this.colAllowDBNull.Name = "colAllowDBNull";
-            this.colAllowDBNull.ReadOnly = true;
-            this.colAllowDBNull.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAllowDBNull.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colAllowDBNull.Width = 55;
-            // 
-            // colIsUnique
-            // 
-            this.colIsUnique.DataPropertyName = "IsUnique";
-            this.colIsUnique.HeaderText = "IsUnique";
-            this.colIsUnique.Name = "colIsUnique";
-            this.colIsUnique.ReadOnly = true;
-            this.colIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsUnique.Visible = false;
-            // 
-            // colIsAutoIncrement
-            // 
-            this.colIsAutoIncrement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colIsAutoIncrement.DataPropertyName = "IsAutoIncrement";
-            this.colIsAutoIncrement.HeaderText = "自增";
-            this.colIsAutoIncrement.MinimumWidth = 55;
-            this.colIsAutoIncrement.Name = "colIsAutoIncrement";
-            this.colIsAutoIncrement.ReadOnly = true;
-            this.colIsAutoIncrement.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsAutoIncrement.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsAutoIncrement.Width = 55;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "Description";
-            this.colDescription.FillWeight = 120F;
-            this.colDescription.HeaderText = "描述";
-            this.colDescription.MinimumWidth = 120;
-            this.colDescription.Name = "colDescription";
             // 
             // tabGen
             // 
@@ -318,18 +183,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 536);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnGenSql
-            // 
-            this.btnGenSql.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenSql.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGenSql.Location = new System.Drawing.Point(725, 163);
-            this.btnGenSql.Name = "btnGenSql";
-            this.btnGenSql.Size = new System.Drawing.Size(75, 23);
-            this.btnGenSql.TabIndex = 3;
-            this.btnGenSql.Text = "生成表";
-            this.btnGenSql.UseVisualStyleBackColor = true;
-            this.btnGenSql.Click += new System.EventHandler(this.btnGenSql_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -496,18 +349,6 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(803, 30);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
-            // btnPreview
-            // 
-            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnPreview.Location = new System.Drawing.Point(725, 4);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
-            this.btnPreview.TabIndex = 1;
-            this.btnPreview.Text = "代码预览";
-            this.btnPreview.UseVisualStyleBackColor = true;
-            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
-            // 
             // cboTemplateType
             // 
             this.cboTemplateType.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -558,17 +399,6 @@
             this.txtEntityCode.TabIndex = 0;
             this.txtEntityCode.WordWrap = false;
             // 
-            // btnEntityCopy
-            // 
-            this.btnEntityCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnEntityCopy.Location = new System.Drawing.Point(731, 516);
-            this.btnEntityCopy.Name = "btnEntityCopy";
-            this.btnEntityCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnEntityCopy.TabIndex = 1;
-            this.btnEntityCopy.Text = "复 制";
-            this.btnEntityCopy.UseVisualStyleBackColor = true;
-            this.btnEntityCopy.Click += new System.EventHandler(this.btnEntityCopy_Click);
-            // 
             // tpDAL
             // 
             this.tpDAL.Controls.Add(this.tableLayoutPanel4);
@@ -609,17 +439,6 @@
             this.txtDALCode.TabIndex = 1;
             this.txtDALCode.WordWrap = false;
             // 
-            // btnDALCopy
-            // 
-            this.btnDALCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnDALCopy.Location = new System.Drawing.Point(731, 516);
-            this.btnDALCopy.Name = "btnDALCopy";
-            this.btnDALCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnDALCopy.TabIndex = 2;
-            this.btnDALCopy.Text = "复 制";
-            this.btnDALCopy.UseVisualStyleBackColor = true;
-            this.btnDALCopy.Click += new System.EventHandler(this.btnDALCopy_Click);
-            // 
             // tpBLL
             // 
             this.tpBLL.Controls.Add(this.tableLayoutPanel5);
@@ -659,6 +478,187 @@
             this.txtBLLCode.Size = new System.Drawing.Size(803, 507);
             this.txtBLLCode.TabIndex = 1;
             this.txtBLLCode.WordWrap = false;
+            // 
+            // dgList
+            // 
+            this.dgList.AllowUserToAddRows = false;
+            this.dgList.AllowUserToDeleteRows = false;
+            this.dgList.AllowUserToResizeRows = false;
+            this.dgList.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgList.CellReadonlyBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.dgList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSelected,
+            this.colName,
+            this.colKey,
+            this.colDataTypeName,
+            this.colBaseTableName,
+            this.colDataType,
+            this.colAllowDBNull,
+            this.colIsUnique,
+            this.colIsAutoIncrement,
+            this.colDescription});
+            this.dgList.DataListPage = null;
+            this.dgList.DisplayRows = 0;
+            this.dgList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgList.Location = new System.Drawing.Point(3, 17);
+            this.dgList.Name = "dgList";
+            this.dgList.RowFooterVisible = false;
+            this.dgList.RowHeadersVisible = false;
+            this.dgList.RowSeqVisible = true;
+            this.dgList.RowTemplate.Height = 23;
+            this.dgList.Size = new System.Drawing.Size(791, 290);
+            this.dgList.SumColumnName = ((System.Collections.Generic.List<string>)(resources.GetObject("dgList.SumColumnName")));
+            this.dgList.TabIndex = 0;
+            this.dgList.ValueIsChanged = false;
+            // 
+            // colSelected
+            // 
+            this.colSelected.DataPropertyName = "Selected";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "False";
+            this.colSelected.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colSelected.FalseValue = "False";
+            this.colSelected.FillWeight = 40F;
+            this.colSelected.Frozen = true;
+            this.colSelected.HeaderText = "选择";
+            this.colSelected.Name = "colSelected";
+            this.colSelected.TrueValue = "True";
+            this.colSelected.Visible = false;
+            this.colSelected.Width = 40;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "ColumnName";
+            this.colName.Frozen = true;
+            this.colName.HeaderText = "列名";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 120;
+            // 
+            // colKey
+            // 
+            this.colKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colKey.DataPropertyName = "IsKey";
+            this.colKey.Frozen = true;
+            this.colKey.HeaderText = "键值";
+            this.colKey.MinimumWidth = 55;
+            this.colKey.Name = "colKey";
+            this.colKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colKey.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colKey.Width = 55;
+            // 
+            // colDataTypeName
+            // 
+            this.colDataTypeName.DataPropertyName = "DataTypeName";
+            this.colDataTypeName.Frozen = true;
+            this.colDataTypeName.HeaderText = "数据库类型";
+            this.colDataTypeName.Name = "colDataTypeName";
+            this.colDataTypeName.ReadOnly = true;
+            // 
+            // colBaseTableName
+            // 
+            this.colBaseTableName.DataPropertyName = "BaseTableName";
+            this.colBaseTableName.Frozen = true;
+            this.colBaseTableName.HeaderText = "表名";
+            this.colBaseTableName.Name = "colBaseTableName";
+            this.colBaseTableName.ReadOnly = true;
+            this.colBaseTableName.Width = 120;
+            // 
+            // colDataType
+            // 
+            this.colDataType.DataPropertyName = "DataType";
+            this.colDataType.HeaderText = "数据类型";
+            this.colDataType.Name = "colDataType";
+            this.colDataType.ReadOnly = true;
+            // 
+            // colAllowDBNull
+            // 
+            this.colAllowDBNull.DataPropertyName = "AllowDBNull";
+            this.colAllowDBNull.HeaderText = "为空";
+            this.colAllowDBNull.MinimumWidth = 55;
+            this.colAllowDBNull.Name = "colAllowDBNull";
+            this.colAllowDBNull.ReadOnly = true;
+            this.colAllowDBNull.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAllowDBNull.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colAllowDBNull.Width = 55;
+            // 
+            // colIsUnique
+            // 
+            this.colIsUnique.DataPropertyName = "IsUnique";
+            this.colIsUnique.HeaderText = "IsUnique";
+            this.colIsUnique.Name = "colIsUnique";
+            this.colIsUnique.ReadOnly = true;
+            this.colIsUnique.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsUnique.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colIsUnique.Visible = false;
+            // 
+            // colIsAutoIncrement
+            // 
+            this.colIsAutoIncrement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colIsAutoIncrement.DataPropertyName = "IsAutoIncrement";
+            this.colIsAutoIncrement.HeaderText = "自增";
+            this.colIsAutoIncrement.MinimumWidth = 55;
+            this.colIsAutoIncrement.Name = "colIsAutoIncrement";
+            this.colIsAutoIncrement.ReadOnly = true;
+            this.colIsAutoIncrement.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsAutoIncrement.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colIsAutoIncrement.Width = 55;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.FillWeight = 120F;
+            this.colDescription.HeaderText = "描述";
+            this.colDescription.MinimumWidth = 120;
+            this.colDescription.Name = "colDescription";
+            // 
+            // btnGenSql
+            // 
+            this.btnGenSql.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenSql.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnGenSql.Location = new System.Drawing.Point(725, 163);
+            this.btnGenSql.Name = "btnGenSql";
+            this.btnGenSql.Size = new System.Drawing.Size(75, 23);
+            this.btnGenSql.TabIndex = 3;
+            this.btnGenSql.Text = "生成表";
+            this.btnGenSql.UseVisualStyleBackColor = true;
+            this.btnGenSql.Click += new System.EventHandler(this.btnGenSql_Click);
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreview.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnPreview.Location = new System.Drawing.Point(725, 4);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.TabIndex = 1;
+            this.btnPreview.Text = "代码预览";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // btnEntityCopy
+            // 
+            this.btnEntityCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnEntityCopy.Location = new System.Drawing.Point(731, 516);
+            this.btnEntityCopy.Name = "btnEntityCopy";
+            this.btnEntityCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnEntityCopy.TabIndex = 1;
+            this.btnEntityCopy.Text = "复 制";
+            this.btnEntityCopy.UseVisualStyleBackColor = true;
+            this.btnEntityCopy.Click += new System.EventHandler(this.btnEntityCopy_Click);
+            // 
+            // btnDALCopy
+            // 
+            this.btnDALCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnDALCopy.Location = new System.Drawing.Point(731, 516);
+            this.btnDALCopy.Name = "btnDALCopy";
+            this.btnDALCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnDALCopy.TabIndex = 2;
+            this.btnDALCopy.Text = "复 制";
+            this.btnDALCopy.UseVisualStyleBackColor = true;
+            this.btnDALCopy.Click += new System.EventHandler(this.btnDALCopy_Click);
             // 
             // btnBLLCopy
             // 
@@ -724,7 +724,6 @@
             this.gpSQL.ResumeLayout(false);
             this.gpSQL.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgList)).EndInit();
             this.tabGen.ResumeLayout(false);
             this.tpMain.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -742,6 +741,7 @@
             this.tpBLL.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgList)).EndInit();
             this.ResumeLayout(false);
 
         }
