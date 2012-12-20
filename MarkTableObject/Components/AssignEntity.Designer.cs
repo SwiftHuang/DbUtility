@@ -34,21 +34,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cboPrjInfo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtTableName = new System.Windows.Forms.TextBox();
+            this.txtFunName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.txtFileName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtCode = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.chkAddTirm = new hwj.UserControls.CommonControls.xCheckBox();
             this.btnGenCode = new hwj.UserControls.CommonControls.xButton();
             this.btnFile = new hwj.UserControls.CommonControls.xButton();
             this.cboTypeList = new hwj.UserControls.CommonControls.xComboBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtFileName = new System.Windows.Forms.TextBox();
             this.gpSQL.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -92,7 +92,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cboPrjInfo, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtTableName, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtFunName, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.chkAddTirm, 4, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
@@ -120,7 +120,7 @@
             this.cboPrjInfo.FormattingEnabled = true;
             this.cboPrjInfo.Location = new System.Drawing.Point(68, 3);
             this.cboPrjInfo.Name = "cboPrjInfo";
-            this.cboPrjInfo.Size = new System.Drawing.Size(301, 20);
+            this.cboPrjInfo.Size = new System.Drawing.Size(289, 20);
             this.cboPrjInfo.TabIndex = 1;
             this.cboPrjInfo.SelectedIndexChanged += new System.EventHandler(this.cboPrjInfo_SelectedIndexChanged);
             // 
@@ -128,20 +128,19 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(375, 6);
+            this.label2.Location = new System.Drawing.Point(363, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
+            this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "类名:";
+            this.label2.Text = "函数名:";
             // 
-            // txtTableName
+            // txtFunName
             // 
-            this.txtTableName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTableName.Location = new System.Drawing.Point(416, 3);
-            this.txtTableName.Name = "txtTableName";
-            this.txtTableName.Size = new System.Drawing.Size(114, 21);
-            this.txtTableName.TabIndex = 3;
-            this.txtTableName.Text = "SqlEntity";
+            this.txtFunName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFunName.Location = new System.Drawing.Point(416, 3);
+            this.txtFunName.Name = "txtFunName";
+            this.txtFunName.Size = new System.Drawing.Size(114, 21);
+            this.txtFunName.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -177,15 +176,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 60);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label7
+            // txtFileName
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 12);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "DLL文件路径:";
+            this.txtFileName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFileName.Location = new System.Drawing.Point(86, 3);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.ReadOnly = true;
+            this.txtFileName.Size = new System.Drawing.Size(453, 21);
+            this.txtFileName.TabIndex = 6;
             // 
             // label4
             // 
@@ -196,6 +194,16 @@
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 3;
             this.label4.Text = "目标类型:";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "DLL文件路径:";
             // 
             // groupBox2
             // 
@@ -260,7 +268,7 @@
             this.chkAddTirm.Name = "chkAddTirm";
             this.chkAddTirm.Size = new System.Drawing.Size(84, 16);
             this.chkAddTirm.TabIndex = 4;
-            this.chkAddTirm.Text = "Tirm value";
+            this.chkAddTirm.Text = "去掉右空格";
             this.chkAddTirm.UseVisualStyleBackColor = true;
             // 
             // btnGenCode
@@ -273,7 +281,7 @@
             this.btnGenCode.TabIndex = 5;
             this.btnGenCode.Text = "生成代码";
             this.btnGenCode.UseVisualStyleBackColor = true;
-            this.btnGenCode.Click += new System.EventHandler(this.btnGenSql_Click);
+            this.btnGenCode.Click += new System.EventHandler(this.btnGenCode_Click);
             // 
             // btnFile
             // 
@@ -300,16 +308,6 @@
             this.cboTypeList.Size = new System.Drawing.Size(453, 20);
             this.cboTypeList.TabIndex = 4;
             this.cboTypeList.ValueMember = "FullName";
-            // 
-            // txtFileName
-            // 
-            this.txtFileName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFileName.Location = new System.Drawing.Point(86, 3);
-            this.txtFileName.Multiline = true;
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(453, 24);
-            this.txtFileName.TabIndex = 6;
             // 
             // AssignEntity
             // 
@@ -343,7 +341,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboPrjInfo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtTableName;
+        private System.Windows.Forms.TextBox txtFunName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
