@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using Microsoft.CSharp;
 using hwj.MarkTableObject.BLL;
 using hwj.MarkTableObject.Entity;
+using System.Data.SqlClient;
+using System.Runtime.Remoting;
 
 namespace hwj.MarkTableObject.Components
 {
@@ -29,14 +31,19 @@ namespace hwj.MarkTableObject.Components
             InitializeComponent();
         }
 
-        private void btnGenSql_Click(object sender, EventArgs e)
+        private void AssignEntity_Enter(object sender, EventArgs e)
         {
-
+            if (!DesignMode && cboPrjInfo.DataSource == null)
+            {
+                cboPrjInfo.DisplayMember = "Title";
+                cboPrjInfo.ValueMember = "Key";
+                cboPrjInfo.DataSource = XMLHelper.GetPrjDataTable();
+            }
         }
 
+        #region Event Members
         private void btnFile_Click(object sender, EventArgs e)
         {
-
             try
             {
                 txtFileName.Clear();
@@ -65,6 +72,35 @@ namespace hwj.MarkTableObject.Components
             }
 
         }
+        private void cboPrjInfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+            if (cboPrjInfo.SelectedValue != null && !string.IsNullOrEmpty(cboPrjInfo.SelectedValue.ToString()))
+            {
+                PrjInfo = Common.GetProjectInfoByKey(cboPrjInfo.SelectedValue.ToString());
+            }
+        }
+        private void btnGenCode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(this.txtFileName.Text)
+               || string.IsNullOrEmpty(this.txtSQL.Text))
+                //|| string.IsNullOrEmpty(this.txtFunName.Text))
+                {
+                    MessageBox.Show("靓仔or靓女，唔俾足料我仲想做野！");
+                    return;
+                }
+                txtCode.Clear();
+                txtCode.Text = GenerateCode();
+                Clipboard.SetDataObject(txtCode.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
 
         #region Private Members
         private void UpdateAssembly(List<Assembly> assemblyList)
@@ -163,25 +199,88 @@ namespace hwj.MarkTableObject.Components
 
             return pps[0];
         }
+
+        private string GenerateCode()
+        {
+            string targetClass = cboTypeList.SelectedItem.ToString();
+            string targetClasss = targetClass + "s";
+            ObjectHandle oh = Activator.CreateInstanceFrom(txtFileName.Text.Trim(), targetClass);
+            object obj = oh.Unwrap();
+            System.Reflection.PropertyInfo[] pis = obj.GetType().GetProperties();
+            hwj.CommonLibrary.Object.StringHelper.SpaceString ss = new hwj.CommonLibrary.Object.StringHelper.SpaceString();
+
+            using (SqlConnection conn = new SqlConnection(PrjInfo.Database.ConnectionString))
+            {
+                SqlCommand com = new SqlCommand();
+                com.CommandText = txtSQL.Text.Trim();
+                com.Connection = conn;
+                conn.Open();
+                IDataReader dr = com.ExecuteReader();
+                int count = 1;
+
+
+                ss.AppendFormat(0, "public {0} {1}()", targetClass + "s", string.Format("Get_{0}", cboTypeList.Text));
+                ss.AppendLine();
+                ss.AppendLine(0, "{");
+                ss.AppendFormat(1, "{0} lst = new {0}();", targetClasss);
+                while (dr.Read())
+                {
+                    ss.AppendLine();
+                    ss.AppendFormat(1, "#region Entity_{0}", count);
+                    ss.AppendLine();
+                    ss.AppendFormat(1, "{0} ety_{1} = new {0}();", targetClass, count);
+
+                    foreach (System.Reflection.PropertyInfo pi in pis)
+                    {
+                        if (dr[pi.Name] != null && dr[pi.Name] != DBNull.Value)
+                        {
+                            ss.AppendLine();
+                            ss.AppendFormat(1, "ety_{0}.{1} = {2};", count, pi.Name, GetValueString(pi, dr[pi.Name], chkAddTirm.Checked));
+                        }
+                    }
+                    ss.AppendLine();
+                    ss.AppendFormat(1, "lst.Add(ety_{0});", count);
+                    ss.AppendLine();
+                    ss.AppendLine(1, "#endregion");
+                    count++;
+                }
+                ss.AppendLine(1, "return lst;");
+                ss.AppendLine(0, "}");
+                return ss.ToString();
+            }
+
+            return null;
+        }
+        private string GetValueString(System.Reflection.PropertyInfo pi, object obj, bool isTrim)
+        {
+            string format = string.Empty;
+            if (pi.PropertyType == typeof(string))
+            {
+                format = "@\"{0}\"";
+                if (obj.ToString() != string.Empty && isTrim)
+                {
+                    return string.Format(format, obj.ToString().Trim());
+                }
+                else
+                {
+                    return string.Format(format, obj.ToString());
+                }
+            }
+            else if (pi.PropertyType == typeof(DateTime))
+                format = "Convert.ToDateTime(@\"{0}\")";
+            else if (pi.PropertyType == typeof(char))
+                format = "\'{0}\'";
+            else if (pi.PropertyType == typeof(decimal))
+                format = "{0}M";
+            else if (pi.PropertyType == typeof(float))
+                format = "{0}f";
+            else
+                format = "{0}";
+            return string.Format(format, obj.ToString());
+        }
         #endregion
 
-        private void cboPrjInfo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DesignMode) return;
-            if (cboPrjInfo.SelectedValue != null && !string.IsNullOrEmpty(cboPrjInfo.SelectedValue.ToString()))
-            {
-                PrjInfo = Common.GetProjectInfoByKey(cboPrjInfo.SelectedValue.ToString());
-            }
-        }
 
-        private void AssignEntity_Enter(object sender, EventArgs e)
-        {
-            if (!DesignMode && cboPrjInfo.DataSource == null)
-            {
-                cboPrjInfo.DisplayMember = "Title";
-                cboPrjInfo.ValueMember = "Key";
-                cboPrjInfo.DataSource = XMLHelper.GetPrjDataTable();
-            }
-        }
+
     }
 }
