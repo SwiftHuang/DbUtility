@@ -34,21 +34,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cboPrjInfo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtFunName = new System.Windows.Forms.TextBox();
+            this.chkAddTirm = new hwj.UserControls.CommonControls.xCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtFileName = new System.Windows.Forms.TextBox();
+            this.btnGenCode = new hwj.UserControls.CommonControls.xButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnFile = new hwj.UserControls.CommonControls.xButton();
+            this.cboTypeList = new hwj.UserControls.CommonControls.xComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.chkAddTirm = new hwj.UserControls.CommonControls.xCheckBox();
-            this.btnGenCode = new hwj.UserControls.CommonControls.xButton();
-            this.btnFile = new hwj.UserControls.CommonControls.xButton();
-            this.cboTypeList = new hwj.UserControls.CommonControls.xComboBox();
+            this.txtFunName = new System.Windows.Forms.TextBox();
             this.gpSQL.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -133,14 +133,20 @@
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "函数名:";
+            this.label2.Visible = false;
             // 
-            // txtFunName
+            // chkAddTirm
             // 
-            this.txtFunName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFunName.Location = new System.Drawing.Point(416, 3);
-            this.txtFunName.Name = "txtFunName";
-            this.txtFunName.Size = new System.Drawing.Size(114, 21);
-            this.txtFunName.TabIndex = 3;
+            this.chkAddTirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkAddTirm.AutoSize = true;
+            this.chkAddTirm.Checked = true;
+            this.chkAddTirm.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAddTirm.Location = new System.Drawing.Point(536, 4);
+            this.chkAddTirm.Name = "chkAddTirm";
+            this.chkAddTirm.Size = new System.Drawing.Size(84, 16);
+            this.chkAddTirm.TabIndex = 4;
+            this.chkAddTirm.Text = "去掉右空格";
+            this.chkAddTirm.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -185,6 +191,18 @@
             this.txtFileName.Size = new System.Drawing.Size(453, 21);
             this.txtFileName.TabIndex = 6;
             // 
+            // btnGenCode
+            // 
+            this.btnGenCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenCode.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnGenCode.Location = new System.Drawing.Point(545, 33);
+            this.btnGenCode.Name = "btnGenCode";
+            this.btnGenCode.Size = new System.Drawing.Size(75, 23);
+            this.btnGenCode.TabIndex = 5;
+            this.btnGenCode.Text = "生成代码";
+            this.btnGenCode.UseVisualStyleBackColor = true;
+            this.btnGenCode.Click += new System.EventHandler(this.btnGenCode_Click);
+            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -204,6 +222,32 @@
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 0;
             this.label7.Text = "DLL文件路径:";
+            // 
+            // btnFile
+            // 
+            this.btnFile.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnFile.Location = new System.Drawing.Point(545, 3);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(75, 23);
+            this.btnFile.TabIndex = 2;
+            this.btnFile.Text = "选择文件";
+            this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
+            // 
+            // cboTypeList
+            // 
+            this.cboTypeList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTypeList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cboTypeList.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboTypeList.BackColor = System.Drawing.SystemColors.Window;
+            this.cboTypeList.DisplayMember = "Name";
+            this.cboTypeList.FormattingEnabled = true;
+            this.cboTypeList.Location = new System.Drawing.Point(86, 35);
+            this.cboTypeList.Name = "cboTypeList";
+            this.cboTypeList.OldBackColor = System.Drawing.SystemColors.Window;
+            this.cboTypeList.Size = new System.Drawing.Size(453, 20);
+            this.cboTypeList.TabIndex = 4;
+            this.cboTypeList.ValueMember = "FullName";
             // 
             // groupBox2
             // 
@@ -258,56 +302,14 @@
             this.txtCode.Size = new System.Drawing.Size(623, 175);
             this.txtCode.TabIndex = 0;
             // 
-            // chkAddTirm
+            // txtFunName
             // 
-            this.chkAddTirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkAddTirm.AutoSize = true;
-            this.chkAddTirm.Checked = true;
-            this.chkAddTirm.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAddTirm.Location = new System.Drawing.Point(536, 4);
-            this.chkAddTirm.Name = "chkAddTirm";
-            this.chkAddTirm.Size = new System.Drawing.Size(84, 16);
-            this.chkAddTirm.TabIndex = 4;
-            this.chkAddTirm.Text = "去掉右空格";
-            this.chkAddTirm.UseVisualStyleBackColor = true;
-            // 
-            // btnGenCode
-            // 
-            this.btnGenCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenCode.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnGenCode.Location = new System.Drawing.Point(545, 33);
-            this.btnGenCode.Name = "btnGenCode";
-            this.btnGenCode.Size = new System.Drawing.Size(75, 23);
-            this.btnGenCode.TabIndex = 5;
-            this.btnGenCode.Text = "生成代码";
-            this.btnGenCode.UseVisualStyleBackColor = true;
-            this.btnGenCode.Click += new System.EventHandler(this.btnGenCode_Click);
-            // 
-            // btnFile
-            // 
-            this.btnFile.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnFile.Location = new System.Drawing.Point(545, 3);
-            this.btnFile.Name = "btnFile";
-            this.btnFile.Size = new System.Drawing.Size(75, 23);
-            this.btnFile.TabIndex = 2;
-            this.btnFile.Text = "选择文件";
-            this.btnFile.UseVisualStyleBackColor = true;
-            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
-            // 
-            // cboTypeList
-            // 
-            this.cboTypeList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboTypeList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cboTypeList.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboTypeList.BackColor = System.Drawing.SystemColors.Window;
-            this.cboTypeList.DisplayMember = "Name";
-            this.cboTypeList.FormattingEnabled = true;
-            this.cboTypeList.Location = new System.Drawing.Point(86, 35);
-            this.cboTypeList.Name = "cboTypeList";
-            this.cboTypeList.OldBackColor = System.Drawing.SystemColors.Window;
-            this.cboTypeList.Size = new System.Drawing.Size(453, 20);
-            this.cboTypeList.TabIndex = 4;
-            this.cboTypeList.ValueMember = "FullName";
+            this.txtFunName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFunName.Location = new System.Drawing.Point(416, 3);
+            this.txtFunName.Name = "txtFunName";
+            this.txtFunName.Size = new System.Drawing.Size(114, 21);
+            this.txtFunName.TabIndex = 3;
+            this.txtFunName.Visible = false;
             // 
             // AssignEntity
             // 
@@ -341,7 +343,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboPrjInfo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtFunName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
@@ -355,5 +356,6 @@
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.TextBox txtFunName;
     }
 }

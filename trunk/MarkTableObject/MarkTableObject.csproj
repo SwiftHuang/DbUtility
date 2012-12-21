@@ -13,8 +13,8 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>FAC60D597F7C2C22A9E04E04EBE10E07562D4ED9</ManifestCertificateThumbprint>
-    <ManifestKeyFile>MarkTableObject_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>26AEFF981E01D256FD6A7D1B3945EE514BB58D09</ManifestCertificateThumbprint>
+    <ManifestKeyFile>MarkTableObject_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <StartupObject>hwj.MarkTableObject.Program</StartupObject>
@@ -31,9 +31,10 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.1.1.10</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.1.12</MinimumRequiredVersion>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -231,7 +232,7 @@
       <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControl\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>
@@ -271,6 +272,7 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MarkTableObject_1_TemporaryKey.pfx" />
     <None Include="MarkTableObject_TemporaryKey.pfx" />
     <None Include="Resources\add2.png" />
   </ItemGroup>
