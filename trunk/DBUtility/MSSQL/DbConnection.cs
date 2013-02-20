@@ -619,7 +619,10 @@ namespace hwj.DBUtility.MSSQL
         {
             if (InnerTransaction != null)
             {
-                InnerTransaction.Rollback();
+                if (TransactionState == Enums.TransactionState.Begin)
+                {
+                    InnerTransaction.Rollback();
+                }
             }
             if (InnerConnection != null)
             {
