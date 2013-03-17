@@ -772,12 +772,23 @@ namespace hwj.DBUtility.MSSQL
         #region Private Member
         private static Exception CheckSqlException(Exception e, T entity)
         {
+            
+            SqlException tmpEx = null;
             if (e is SqlException)
             {
-                int num = ((SqlException)e).Number;
+                tmpEx = e as SqlException;
+            }
+            else if (e != null && e.InnerException is SqlException)
+            {
+                tmpEx = e.InnerException as SqlException;
+            }
+
+            if (tmpEx != null)
+            {
+                int num = ((SqlException)tmpEx).Number;
                 if ((num == 8152 || num == 8115) && entity != null)
                 {
-                    return DbHelperSQL.Check8152(e, entity.GetTableName(), entity);
+                    return DbHelperSQL.Check8152(tmpEx, entity.GetTableName(), entity);
                 }
             }
             return null;
