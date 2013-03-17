@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 using hwj.DBUtility.Interface;
@@ -222,8 +223,10 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
-                throw new Exception(msg, ex);
+                AddExData(ref ex, sql, parameters, timeout);
+                throw ex;
+                //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
+                //throw new Exception(msg, ex);
             }
         }
         #endregion
@@ -279,8 +282,10 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
-                throw new Exception(msg, ex);
+                AddExData(ref ex, sql, parameters, timeout);
+                throw ex;
+                //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
+                //throw new Exception(msg, ex);
             }
         }
         #endregion
@@ -348,8 +353,10 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
-                throw new Exception(msg, ex);
+                AddExData(ref ex, sql, parameters, timeout);
+                throw ex;
+                //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
+                //throw new Exception(msg, ex);
             }
         }
 
@@ -659,6 +666,14 @@ namespace hwj.DBUtility.MSSQL
             if (LogSql)
             {
                 LogList.Add(new LogEntity(sql, parameters, timeout));
+            }
+        }
+        private void AddExData(ref SqlException sqlEx, string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            if (sqlEx.Data != null)
+            {
+                string msg = FormatExMessage(sqlEx.Message, sql, parameters, timeout);
+                sqlEx.Data.Add(Common.SqlInfoKey, msg);
             }
         }
         private string FormatExMessage(string message, string sql, List<IDbDataParameter> parameters, int timeout)
