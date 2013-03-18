@@ -135,17 +135,10 @@ namespace hwj.DBUtility.MSSQL
 
                 return count;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Exception newEx = DbHelperSQL.CheckSqlException(ex, sqlList[index]);
-                if (newEx == null)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw newEx;
-                }
+                DbHelperSQL.CheckSqlException(ref ex, sqlList[index]);
+                throw;
             }
         }
         #endregion
@@ -162,17 +155,10 @@ namespace hwj.DBUtility.MSSQL
             {
                 return ExecuteSql(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Exception newEx = DbHelperSQL.CheckSqlException(ex, sqlEntity);
-                if (newEx == null)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw newEx;
-                }
+                DbHelperSQL.CheckSqlException(ref ex, sqlEntity);
+                throw;
             }
 
         }
@@ -679,7 +665,7 @@ namespace hwj.DBUtility.MSSQL
         private string FormatExMessage(string message, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(message);
+            //sb.AppendLine(message);
             sb.AppendFormat("CommandTimeout:{0}", timeout);
             sb.AppendLine();
             sb.AppendFormat("CommandText:{0}", sql);

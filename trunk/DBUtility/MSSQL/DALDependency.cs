@@ -94,17 +94,10 @@ namespace hwj.DBUtility.MSSQL
                 _SqlEntity = tmpSqlEty;
                 return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Exception newEx = CheckSqlException(ex, entity);
-                if (newEx != null)
-                {
-                    throw newEx;
-                }
-                else
-                {
-                    throw;
-                }
+                CheckSqlException(ref ex, entity);
+                throw;
             }
         }
         /// <summary>
@@ -128,17 +121,10 @@ namespace hwj.DBUtility.MSSQL
                     return -1;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Exception newEx = CheckSqlException(ex, entity);
-                if (newEx != null)
-                {
-                    throw newEx;
-                }
-                else
-                {
-                    throw;
-                }
+                CheckSqlException(ref ex, entity);
+                throw;
             }
         }
 
@@ -246,17 +232,10 @@ namespace hwj.DBUtility.MSSQL
                 _SqlEntity = tmpSqlEty;
                 return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Exception newEx = CheckSqlException(ex, entity);
-                if (newEx != null)
-                {
-                    throw newEx;
-                }
-                else
-                {
-                    throw;
-                }
+                CheckSqlException(ref ex, entity);
+                throw;
             }
         }
 
@@ -770,28 +749,16 @@ namespace hwj.DBUtility.MSSQL
         #endregion
 
         #region Private Member
-        private static Exception CheckSqlException(Exception e, T entity)
+        private static void CheckSqlException(ref SqlException e, T entity)
         {
-            
-            SqlException tmpEx = null;
-            if (e is SqlException)
+            if ((e.Number == 8152 || e.Number == 8115) && entity != null)
             {
-                tmpEx = e as SqlException;
-            }
-            else if (e != null && e.InnerException is SqlException)
-            {
-                tmpEx = e.InnerException as SqlException;
-            }
+                string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
+                Common.AddExData(e.Data, fieldStr);
 
-            if (tmpEx != null)
-            {
-                int num = ((SqlException)tmpEx).Number;
-                if ((num == 8152 || num == 8115) && entity != null)
-                {
-                    return DbHelperSQL.Check8152(tmpEx, entity.GetTableName(), entity);
-                }
             }
-            return null;
+            //}
+            //return null;
         }
         //private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
         //{

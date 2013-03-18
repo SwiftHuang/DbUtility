@@ -206,7 +206,7 @@
             <param name="parameters">存储过程参数</param>
             <returns>SqlCommand 对象实例</returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.Check8152(System.Exception,System.String,System.Object)">
+        <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.FormatMsgFor8152(System.String,System.Object)">
             <summary>
             检查字符长度是否与数据相符。
             </summary>
