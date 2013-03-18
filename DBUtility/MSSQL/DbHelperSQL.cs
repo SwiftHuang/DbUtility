@@ -345,22 +345,23 @@ namespace hwj.DBUtility.MSSQL
                         trans.Commit();
                         return count;
                     }
+                    catch (SqlException ex)
+                    {
+                        if (trans.Connection != null)
+                        {
+                            trans.Rollback();
+                        }
+                        CheckSqlException(ref ex, cmdList[index]);
+                        throw;
+                    }
                     catch (Exception ex)
                     {
                         if (trans.Connection != null)
                         {
                             trans.Rollback();
                         }
+                        throw;
 
-                        Exception newEx = CheckSqlException(ex, cmdList[index]);
-                        if (newEx == null)
-                        {
-                            throw;
-                        }
-                        else
-                        {
-                            throw newEx;
-                        }
                     }
                 }
             }
@@ -700,16 +701,13 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        internal static Exception CheckSqlException(Exception e, SqlEntity entity)
+        internal static void CheckSqlException(ref SqlException e, SqlEntity entity)
         {
-            if (e is SqlException)
+            if (e.Number == 8152 && entity != null && entity.DataEntity != null)
             {
-                if (((SqlException)e).Number == 8152 && entity != null && entity.DataEntity != null)
-                {
-                    return Check8152(e, entity.TableName, entity.DataEntity);
-                }
+                string fieldStr = FormatMsgFor8152(entity.TableName, entity.DataEntity);
+                Common.AddExData(e.Data, fieldStr);
             }
-            return null;
         }
         private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
         {
@@ -727,7 +725,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="tableName"></param>
         /// <param name="entity"></param>
         /// <returns></returns>
-        internal static Exception Check8152(Exception e, string tableName, object entity)
+        internal static string FormatMsgFor8152(string tableName, object entity)
         {
             string errFields = string.Empty;
             foreach (FieldMappingInfo field in FieldMappingInfo.GetFieldMapping(entity.GetType()))
@@ -767,7 +765,7 @@ namespace hwj.DBUtility.MSSQL
             errFields = errFields.TrimEnd('/');
             if (!string.IsNullOrEmpty(errFields))
             {
-                return new Exception(string.Format("{0}\r\n-Table:{1}\r\n-Field:{2}", e.Message, tableName, errFields), e);
+                return string.Format("Exception Fields:\r\n-Table:{0}\r\n-Field:{1}", tableName, errFields);
             }
             else
             {
