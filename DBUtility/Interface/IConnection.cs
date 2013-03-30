@@ -106,6 +106,22 @@ namespace hwj.DBUtility.Interface
         /// <returns></returns>
         object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout);
 
+        /// <summary>
+        /// 执行存储过程
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <returns></returns>
+        Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters);
+        /// <summary>
+        /// 执行存储过程
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters, int timeout);
+
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();

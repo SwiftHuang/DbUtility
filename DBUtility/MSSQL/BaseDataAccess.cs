@@ -207,6 +207,37 @@ namespace hwj.DBUtility.MSSQL
             //}
         }
         #endregion
+
+        #region Stored Procedure
+        /// <summary>
+        /// 执行存储过程
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <returns></returns>
+        public Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters)
+        {
+            return ExecuteStoredProcedure(sql, parameters, InnerConnection.DefaultCommandTimeout);
+        }
+        /// <summary>
+        /// 执行存储过程
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">SQL参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            //if (IsUseTrans())
+            //{
+            return InnerConnection.ExecuteStoredProcedure(sql, parameters, timeout);
+            //}
+            //else
+            //{
+            //    return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
+            //}
+        }
+        #endregion
         #endregion
 
         /// <summary>

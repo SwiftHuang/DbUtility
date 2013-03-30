@@ -338,6 +338,23 @@
             <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.GetServerDateTime">
             <summary>
             获取数据库服务器时间
@@ -1545,6 +1562,23 @@
             <param name="timeout"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            执行存储过程
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间(秒)</param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.SetAssignedStatus(System.Boolean)">
             <summary>
             设置是否使用赋值字段检测
@@ -1840,6 +1874,23 @@
             <param name="parameters">条件语句</param>
             <param name="timeout">超时时间(秒)</param>
             <returns>查询结果（object）</returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
             <summary>

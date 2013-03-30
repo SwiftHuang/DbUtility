@@ -347,6 +347,72 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion
+
+        #region Stored Procedure
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters)
+        {
+            return ExecuteStoredProcedure(sql, parameters, DefaultCommandTimeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            if (AutoCloseConnection)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    return ExecuteStoredProcedure(conn, null, sql, parameters, timeout);
+                }
+            }
+            else
+            {
+                return ExecuteStoredProcedure(InnerConnection, InnerTransaction, sql, parameters, timeout);
+            }
+        }
+        private Dictionary<string, object> ExecuteStoredProcedure(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            AddLog(sql, parameters, timeout);
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    DbHelperSQL.PrepareCommand(cmd, connection, transaction, sql, parameters, timeout);
+                    cmd.ExecuteNonQuery();
+
+                    Dictionary<string, object> lst = new Dictionary<string, object>();
+                    foreach (IDbDataParameter p in parameters)
+                    {
+                        if (p.Direction != ParameterDirection.Input)
+                        {
+                            lst.Add(p.ParameterName, cmd.Parameters[p.ParameterName].Value);
+                        }
+                    }
+                    cmd.Parameters.Clear();
+                    return lst;
+                }
+            }
+            catch (SqlException ex)
+            {
+                AddExData(ref ex, sql, parameters, timeout);
+                throw ex;
+                //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
+                //throw new Exception(msg, ex);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Public Get Entity/List Member
@@ -665,7 +731,7 @@ namespace hwj.DBUtility.MSSQL
         private string FormatExMessage(string message, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             StringBuilder sb = new StringBuilder();
-            //sb.AppendLine(message);
+            sb.AppendLine("SQL Information:");
             sb.AppendFormat("CommandTimeout:{0}", timeout);
             sb.AppendLine();
             sb.AppendFormat("CommandText:{0}", sql);
