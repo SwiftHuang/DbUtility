@@ -9,7 +9,7 @@ namespace hwj.DBUtility
 {
     public class Common
     {
-        public const string SqlInfoKey = "EX-SQLINFO";
+        public const string SqlInfoKey = "DBUtility-SqlInfo";
         internal static void AddExData(IDictionary data, string msg)
         {
             if (!string.IsNullOrEmpty(msg))
@@ -23,7 +23,7 @@ namespace hwj.DBUtility
                 }
                 if (!string.IsNullOrEmpty(tmpStr))
                 {
-                    tmpStr = string.Format("{0}\r\n{1}", msg, tmpStr);
+                    tmpStr = string.Format("{0}\r\n\r\n{1}", msg, tmpStr);
                 }
                 else
                 {

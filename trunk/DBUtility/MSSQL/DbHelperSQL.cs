@@ -663,7 +663,7 @@ namespace hwj.DBUtility.MSSQL
 
             if (trans != null)
                 cmd.Transaction = trans;
-            cmd.CommandType = CommandType.Text;//cmdType;
+            //cmd.CommandType = cmdType;
 
             if (cmdParms != null)
             {
