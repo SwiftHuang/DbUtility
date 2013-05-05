@@ -8,10 +8,15 @@ using System.ComponentModel;
 
 namespace hwj.DBUtility.Entity
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TS"></typeparam>
     [Serializable]
     public class BaseList<T, TS> : List<T>, IEnumerable<T>
         where T : BaseSqlTable<T>, new()
-        where TS : List<T>, new()
+        where TS : List<T>, IEnumerable<T>, new()
     {
         //private object tmpValue = null;
         //private T tmpFindObj = null;

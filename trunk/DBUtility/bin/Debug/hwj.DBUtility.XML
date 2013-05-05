@@ -2071,6 +2071,13 @@
             自定义参数名(防止From To的情况下相同的参数名)
             </summary>
         </member>
+        <member name="T:hwj.DBUtility.Entity.BaseList`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+        </member>
         <member name="M:hwj.DBUtility.Entity.BaseList`2.ExFind(System.Enum,System.Object)">
             <summary>
             请使用Find代替ExFind
