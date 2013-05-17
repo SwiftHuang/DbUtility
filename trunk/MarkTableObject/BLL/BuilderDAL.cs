@@ -40,7 +40,10 @@ namespace hwj.MarkTableObject.BLL
             }
             strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using hwj.DBUtility;");
-            strclass.AppendLine("using hwj.DBUtility.Interface;");
+            if (templateType == TemplateType.DataAccess)
+            {
+                strclass.AppendLine("using hwj.DBUtility.Interface;");
+            }
             strclass.AppendLine("using hwj.DBUtility.MSSQL;");
             strclass.AppendLine("using " + dalInfo.EntityInfo.NameSpace + ";");
             strclass.AppendLine("");
