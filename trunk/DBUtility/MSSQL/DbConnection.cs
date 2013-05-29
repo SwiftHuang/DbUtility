@@ -71,7 +71,7 @@ namespace hwj.DBUtility.MSSQL
             DefaultCommandTimeout = timeout;
             InnerConnection = new SqlConnection(connectionString);
 
-            SelectLock = Enums.LockType.UpdLock;
+            SelectLock = Enums.LockType.None;// Enums.LockType.UpdLock;
             UpdateLock = Enums.LockType.UpdLock;
 
             LogSql = logSql;
