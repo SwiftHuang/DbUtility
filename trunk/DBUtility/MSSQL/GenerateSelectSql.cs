@@ -339,8 +339,7 @@ namespace hwj.DBUtility.MSSQL
                     if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
                         string[] strList = GetSQL_IN_Value(sp.FieldValue);
-
-                        if (strList == null)
+                        if (strList == null || strList.Length == 0)
                             continue;
 
                         FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);

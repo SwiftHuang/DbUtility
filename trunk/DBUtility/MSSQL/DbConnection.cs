@@ -210,7 +210,7 @@ namespace hwj.DBUtility.MSSQL
             catch (SqlException ex)
             {
                 AddExData(ref ex, sql, parameters, timeout);
-                throw ex;
+                throw;
                 //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
                 //throw new Exception(msg, ex);
             }
@@ -269,7 +269,7 @@ namespace hwj.DBUtility.MSSQL
             catch (SqlException ex)
             {
                 AddExData(ref ex, sql, parameters, timeout);
-                throw ex;
+                throw;
                 //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
                 //throw new Exception(msg, ex);
             }
@@ -340,7 +340,7 @@ namespace hwj.DBUtility.MSSQL
             catch (SqlException ex)
             {
                 AddExData(ref ex, sql, parameters, timeout);
-                throw ex;
+                throw;
                 //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
                 //throw new Exception(msg, ex);
             }
@@ -406,7 +406,7 @@ namespace hwj.DBUtility.MSSQL
             catch (SqlException ex)
             {
                 AddExData(ref ex, sql, parameters, timeout);
-                throw ex;
+                throw;
                 //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
                 //throw new Exception(msg, ex);
             }
@@ -737,10 +737,13 @@ namespace hwj.DBUtility.MSSQL
             sb.AppendFormat("CommandText:{0}", sql);
             sb.AppendLine();
             sb.AppendLine("Parameter:");
-            foreach (IDbDataParameter p in parameters)
+            if (parameters != null)
             {
-                sb.AppendFormat("{{{0}={1}}}", p.ParameterName, p.Value);
-                sb.AppendLine();
+                foreach (IDbDataParameter p in parameters)
+                {
+                    sb.AppendFormat("{{{0}={1}}}", p.ParameterName, p.Value);
+                    sb.AppendLine();
+                }
             }
 
             return sb.ToString();
