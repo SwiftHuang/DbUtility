@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cboPrjInfo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtFunName = new System.Windows.Forms.TextBox();
             this.chkAddTirm = new hwj.UserControls.CommonControls.xCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,7 +49,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtFunName = new System.Windows.Forms.TextBox();
             this.gpSQL.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -133,7 +133,14 @@
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "函数名:";
-            this.label2.Visible = false;
+            // 
+            // txtFunName
+            // 
+            this.txtFunName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFunName.Location = new System.Drawing.Point(416, 3);
+            this.txtFunName.Name = "txtFunName";
+            this.txtFunName.Size = new System.Drawing.Size(114, 21);
+            this.txtFunName.TabIndex = 3;
             // 
             // chkAddTirm
             // 
@@ -302,15 +309,6 @@
             this.txtCode.Size = new System.Drawing.Size(623, 175);
             this.txtCode.TabIndex = 0;
             // 
-            // txtFunName
-            // 
-            this.txtFunName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFunName.Location = new System.Drawing.Point(416, 3);
-            this.txtFunName.Name = "txtFunName";
-            this.txtFunName.Size = new System.Drawing.Size(114, 21);
-            this.txtFunName.TabIndex = 3;
-            this.txtFunName.Visible = false;
-            // 
             // AssignEntity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -343,6 +341,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboPrjInfo;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtFunName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
@@ -356,6 +355,5 @@
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtFileName;
-        private System.Windows.Forms.TextBox txtFunName;
     }
 }

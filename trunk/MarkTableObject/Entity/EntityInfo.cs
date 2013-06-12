@@ -109,6 +109,10 @@ namespace hwj.MarkTableObject.Entity
             {
                 strType = "int";
             }
+            else if (strType.ToLower() == "datetime")
+            {
+                strType = "DateTime";
+            }
             else
             {
                 strType = strType.Substring(0, 1).ToLower() + strType.Substring(1);
