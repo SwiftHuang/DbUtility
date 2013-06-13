@@ -31,10 +31,10 @@
     <InstallUrl>http://10.100.133.83/TBOBJ/</InstallUrl>
     <ProductName>Table Object</ProductName>
     <PublisherName>Vinson Huang</PublisherName>
-    <MinimumRequiredVersion>0.1.1.15</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.1.1.16</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -115,7 +115,6 @@
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\MSSQLSetting.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\MSSQLSetting.Designer.cs">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
@@ -232,7 +231,7 @@
       <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControl\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>
