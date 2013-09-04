@@ -210,6 +210,13 @@ namespace hwj.MarkTableObject.BLL
                     return "DbType.String";
                 }
             }
+            if (column.DataType == "System.Byte[]")
+            {
+                if (column.DataTypeName.ToLower() == "image")
+                {
+                    return "DbType.Binary";
+                }
+            }
             return "DbType." + SetFirstUpper(column.DataType).Replace("[]", "");
         }
         private static string GetSizeForComment(ColumnInfo column)
