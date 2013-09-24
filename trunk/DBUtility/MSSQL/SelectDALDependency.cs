@@ -100,12 +100,12 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = base.InnerConnection.SelectLock;
-            sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount);
+            sqlEty.CommandText = GenSelectSql.SelectSql(string.Format(GenerateSelectSql<T>._ViewSqlFormat, CommandText), displayFields, filterParam, sortParams, maxCount, lockType);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 
             return base.GetDataTable(sqlEty, tableName);

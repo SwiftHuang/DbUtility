@@ -552,7 +552,22 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        abstract protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName);
+        protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        {
+            return GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, InnerConnection.SelectLock);
+        }
+
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParam">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="tableName">Data Table Name</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        abstract protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType);
 
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)

@@ -151,7 +151,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
-            return base.GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName);
+            return base.GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, Enums.LockType.NoLock);
         }
         #endregion
 

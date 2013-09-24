@@ -41,10 +41,10 @@ namespace hwj.DBUtility
             {
                 if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnUpdate))
                 {
-                    if (!IsDatabaseDate(field.DataTypeCode, obj))
-                        up.AddParam(field.FieldName, obj);
-                    else
-                        up.AddParam(field.FieldName, DatabaseGetDateSql);
+                    //if (!IsDatabaseDate(field.DataTypeCode, obj))
+                    up.AddParam(field.FieldName, obj);
+                    //else
+                    //    up.AddParam(field.FieldName, DatabaseGetDateSql);
                 }
             }
             else
