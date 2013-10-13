@@ -252,7 +252,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
-        protected T GetEntity(SqlEntity sqlEntity)
+        public T GetEntity(SqlEntity sqlEntity)
         {
             _SqlEntity = sqlEntity;
             return GetEntity(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
@@ -262,7 +262,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="filterParam">条件参数</param>
         /// <returns></returns>
-        protected T GetEntity(FilterParams filterParam)
+        public T GetEntity(FilterParams filterParam)
         {
             return GetEntity(null, filterParam, null, InnerConnection.SelectLock);
         }
@@ -272,7 +272,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected T GetEntity(FilterParams filterParam, Enums.LockType lockType)
+        public T GetEntity(FilterParams filterParam, Enums.LockType lockType)
         {
             return GetEntity(null, filterParam, null, lockType);
         }
@@ -282,7 +282,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="displayFields">返回指定字段</param>
         /// <param name="filterParam">条件参数</param>
         /// <returns></returns>
-        protected T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
         {
             return GetEntity(displayFields, filterParam, null, InnerConnection.SelectLock);
         }
@@ -293,7 +293,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
         {
             return GetEntity(displayFields, filterParam, null, lockType);
         }
@@ -304,7 +304,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        protected T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
             return GetEntity(displayFields, filterParam, sortParams, InnerConnection.SelectLock);
         }
@@ -316,7 +316,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract protected T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType);
+        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType);
 
         /// <summary>
         /// 获取表对象
@@ -324,7 +324,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<IDbDataParameter> parameters)
+        public T GetEntity(string sql, List<IDbDataParameter> parameters)
         {
             return GetEntity(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
@@ -335,7 +335,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected T GetEntity(string sql, List<IDbDataParameter> parameters, int timeout)
+        public T GetEntity(string sql, List<IDbDataParameter> parameters, int timeout)
         {
             //if (IsUseTrans())
             //{
@@ -368,7 +368,7 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表集合
         /// </summary>
         /// <returns></returns>
-        protected TS GetList()
+        public TS GetList()
         {
             return GetList(null, null, null, null);
         }
@@ -377,7 +377,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
-        protected TS GetList(SqlEntity sqlEntity)
+        public TS GetList(SqlEntity sqlEntity)
         {
             _SqlEntity = sqlEntity;
             return GetList(sqlEntity.CommandText, sqlEntity.Parameters, InnerConnection.DefaultCommandTimeout);
@@ -388,7 +388,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields)
+        public TS GetList(DisplayFields displayFields)
         {
             return GetList(displayFields, null, null, null, InnerConnection.SelectLock);
         }
@@ -398,7 +398,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="displayFields">返回指定字段</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, Enums.LockType lockType)
         {
             return GetList(displayFields, null, null, null, lockType);
         }
@@ -408,7 +408,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="displayFields">返回指定字段</param>
         /// <param name="filterParam">条件参数</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
         {
             return GetList(displayFields, filterParam, null, null, InnerConnection.SelectLock);
         }
@@ -419,7 +419,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
         {
             return GetList(displayFields, filterParam, null, null, lockType);
         }
@@ -430,7 +430,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
         {
             return GetList(displayFields, filterParam, sortParams, null, InnerConnection.SelectLock);
         }
@@ -442,7 +442,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             return GetList(displayFields, filterParam, sortParams, null, lockType);
         }
@@ -454,7 +454,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             return GetList(displayFields, filterParam, sortParams, maxCount, InnerConnection.SelectLock);
         }
@@ -467,7 +467,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract protected TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType);
+        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType);
 
         /// <summary>
         /// 获取表集合
@@ -475,7 +475,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<IDbDataParameter> parameters)
+        public TS GetList(string sql, List<IDbDataParameter> parameters)
         {
             return GetList(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
@@ -486,7 +486,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected TS GetList(string sql, List<IDbDataParameter> parameters, int timeout)
+        public TS GetList(string sql, List<IDbDataParameter> parameters, int timeout)
         {
             //if (IsUseTrans())
             //{
@@ -516,7 +516,7 @@ namespace hwj.DBUtility.MSSQL
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <returns></returns>
-        protected DataTable GetDataTable()
+        public DataTable GetDataTable()
         {
             return GetDataTable(null, null, null, null);
         }
@@ -526,7 +526,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sqlEntity">SQL实体</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(SqlEntity sqlEntity, string tableName)
+        public DataTable GetDataTable(SqlEntity sqlEntity, string tableName)
         {
             _SqlEntity = sqlEntity;
             return GetDataTable(sqlEntity.CommandText, sqlEntity.Parameters, tableName);
@@ -539,7 +539,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
         {
             return GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
         }
@@ -552,7 +552,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
         {
             return GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, InnerConnection.SelectLock);
         }
@@ -567,7 +567,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="tableName">Data Table Name</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract protected DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType);
+        abstract public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType);
 
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
@@ -575,7 +575,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters)
+        public DataTable GetDataTable(string sql, List<IDbDataParameter> parameters)
         {
             return GetDataTable(sql, parameters, string.Empty);
         }
@@ -586,7 +586,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName)
+        public DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName)
         {
             return GetDataTable(sql, parameters, tableName, InnerConnection.DefaultCommandTimeout);
         }
@@ -598,7 +598,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="tableName">Data Table Name</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        protected DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName, int timeout)
+        public DataTable GetDataTable(string sql, List<IDbDataParameter> parameters, string tableName, int timeout)
         {
             return GenerateEntity.CreateDataTable(ExecuteReader(sql, parameters, timeout), tableName);
         }
