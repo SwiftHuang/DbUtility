@@ -56,7 +56,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
-        protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
@@ -78,7 +78,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回最大记录数</param>
         /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
-        protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
@@ -100,7 +100,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
+        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;

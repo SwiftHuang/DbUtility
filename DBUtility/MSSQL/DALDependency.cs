@@ -86,7 +86,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        protected bool Add(T entity)
+        public bool Add(T entity)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        protected decimal AddReturnIdentity(T entity)
+        public decimal AddReturnIdentity(T entity)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace hwj.DBUtility.MSSQL
         /// 获取最后一次自增ID
         /// </summary>
         /// <returns></returns>
-        protected Int64 GetInsertID()
+        public Int64 GetInsertID()
         {
             return Convert.ToInt64(ExecuteScalar(GenUpdateSql.InsertLastIDSql()));
         }
@@ -202,7 +202,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="param">更新字段</param>
         /// <returns></returns>
-        protected bool Update(UpdateParam param)
+        public bool Update(UpdateParam param)
         {
             return Update(param, null);
         }
@@ -212,7 +212,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="updateParam">更新字段</param>
         /// <param name="filterParam">更新条件</param>
         /// <returns></returns>
-        protected bool Update(UpdateParam updateParam, FilterParams filterParam)
+        public bool Update(UpdateParam updateParam, FilterParams filterParam)
         {
             SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
             _SqlEntity = tmpSqlEty;
@@ -224,7 +224,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="entity">更新实体</param>
         /// <param name="filterParam">更新条件</param>
         /// <returns></returns>
-        protected bool Update(T entity, FilterParams filterParam)
+        public bool Update(T entity, FilterParams filterParam)
         {
             try
             {
@@ -288,7 +288,7 @@ namespace hwj.DBUtility.MSSQL
         /// 删除全部记录
         /// </summary>
         /// <returns></returns>
-        protected bool Delete()
+        public bool Delete()
         {
             return Delete(new FilterParams());
         }
@@ -297,7 +297,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="filterParam">删除条件</param>
         /// <returns></returns>
-        protected bool Delete(FilterParams filterParam)
+        public bool Delete(FilterParams filterParam)
         {
             SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
             _SqlEntity = tmpSqlEty;
@@ -308,7 +308,7 @@ namespace hwj.DBUtility.MSSQL
         /// 彻底清除表的内容(重置自动增量),请慎用
         /// </summary>
         /// <returns></returns>
-        protected bool Truncate()
+        public bool Truncate()
         {
             if (ExecuteSql(GenUpdateSql.TruncateSql(TableName)) > 0)
                 return true;
@@ -408,7 +408,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序方式</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        protected override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty = GetEntitySqlEntity(displayFields, filterParam, sortParams, lockType, InnerConnection.DefaultCommandTimeout);
@@ -437,7 +437,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回最大记录数</param>
         /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
-        protected override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty = GetListSqlEntity(displayFields, filterParam, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
@@ -458,7 +458,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             return GetPage3(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
@@ -474,7 +474,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
@@ -491,7 +491,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="times">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
@@ -545,7 +545,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
@@ -561,7 +561,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
@@ -614,7 +614,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
             return GetPageForTable(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
@@ -630,7 +630,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        protected DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
@@ -679,7 +679,7 @@ namespace hwj.DBUtility.MSSQL
         /// 返回表的记录数
         /// </summary>
         /// <returns></returns>
-        protected int RecordCount()
+        public int RecordCount()
         {
             return RecordCount(null);
         }
@@ -688,7 +688,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="filterParam">条件参数</param>
         /// <returns>记录数</returns>
-        protected int RecordCount(FilterParams filterParam)
+        public int RecordCount(FilterParams filterParam)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
@@ -705,7 +705,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">条件参数</param>
         /// <returns></returns>
-        protected int RecordCount(string sql, List<IDbDataParameter> parameters)
+        public int RecordCount(string sql, List<IDbDataParameter> parameters)
         {
             return Convert.ToInt32(ExecuteScalar(sql, parameters));
         }
@@ -721,7 +721,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        protected override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
+        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
