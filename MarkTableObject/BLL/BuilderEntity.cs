@@ -212,7 +212,7 @@ namespace hwj.MarkTableObject.BLL
             }
             if (column.DataType == "System.Byte[]")
             {
-                if (column.DataTypeName.ToLower() == "image")
+                if (column.DataTypeName.ToLower() == "image" || column.DataTypeName.ToLower() == "varbinary")
                 {
                     return "DbType.Binary";
                 }
