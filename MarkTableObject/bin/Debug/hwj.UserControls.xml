@@ -352,12 +352,6 @@
             Required designer variable.
             </summary>
         </member>
-        <member name="M:hwj.UserControls.Suggest.SuggestBox.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
         <member name="M:hwj.UserControls.Suggest.SuggestBox.InitializeComponent">
             <summary> 
             Required method for Designer support - do not modify 
@@ -687,6 +681,21 @@
         <member name="P:hwj.UserControls.CommonControls.xMaskedTextBox.ValueChangedEnabled">
             <summary>
             获取或设置ValueChanged事件的IsChanged属性
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.DraggableTabControl.beDraged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:hwj.UserControls.Other.DraggableTabControl.effect">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:hwj.UserControls.Other.DraggableTabControl.#ctor">
+            <summary>
+            
             </summary>
         </member>
         <member name="F:hwj.UserControls.CommonControls.ContentType.Numberic">
