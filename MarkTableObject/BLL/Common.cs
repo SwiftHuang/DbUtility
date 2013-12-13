@@ -24,8 +24,12 @@ namespace hwj.MarkTableObject.BLL
         }
         public static bool GetBoolValue(object value)
         {
+            bool bl = false;
             if (value != null)
-                return bool.Parse(value.ToString());
+            {
+                bool.TryParse(value.ToString(), out bl);
+                return bl;
+            }
             else
                 return false;
         }

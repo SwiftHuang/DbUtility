@@ -18,6 +18,11 @@
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <StartupObject>hwj.MarkTableObject.Program</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <PublishUrl>E:\Project\GoogleCode\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -40,11 +45,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -238,19 +238,19 @@
       <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControl\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\DBUtility\DBUtility.csproj">
-      <Project>{8F72AA55-3556-4B3B-8FD7-FC6A9B50D21B}</Project>
+      <Project>{8f72aa55-3556-4b3b-8fd7-fc6a9b50d21b}</Project>
       <Name>DBUtility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
-      <ProductName>.NET Framework Client Profile</ProductName>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
