@@ -1,39 +1,49 @@
-﻿using System;
+﻿using hwj.DBUtility.Interface;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
-using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class DbConnection : IConnection, IDisposable
     {
         #region Property
+
         private bool disposed = false;
+
         public string ConnectionString { get; private set; }
+
         /// <summary>
         /// 获取或设置在终止执行命令的尝试并生成错误之前的等待时间。
         /// </summary>
         public int DefaultCommandTimeout { get; private set; }
+
         public IDbTransaction InnerTransaction { get; private set; }
+
         public IDbConnection InnerConnection { get; private set; }
 
         //public Enums.LockType DefaultLock { get; set; }
         public Enums.LockType SelectLock { get; set; }
+
         public Enums.LockType UpdateLock { get; set; }
+
         public Enums.TransactionState TransactionState { get; set; }
 
         public bool LogSql { get; set; }
+
         public List<LogEntity> LogList { get; private set; }
+
         public bool AutoCloseConnection { get; private set; }
-        #endregion
+
+        #endregion Property
 
         #region CTOR
+
         /// <summary>
         /// 数据库连接实体
         /// </summary>
@@ -41,6 +51,7 @@ namespace hwj.DBUtility.MSSQL
         public DbConnection(string connectionString)
             : this(connectionString, 30, Enums.LockType.None)
         { }
+
         /// <summary>
         /// 数据库连接实体
         /// </summary>
@@ -50,6 +61,7 @@ namespace hwj.DBUtility.MSSQL
             : this(connectionString, timeout, defaultLock, false)
         {
         }
+
         /// <summary>
         /// 数据库连接实体
         /// </summary>
@@ -58,8 +70,8 @@ namespace hwj.DBUtility.MSSQL
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql)
             : this(connectionString, timeout, defaultLock, logSql, false)
         {
-
         }
+
         /// <summary>
         /// 数据库连接实体
         /// </summary>
@@ -82,14 +94,18 @@ namespace hwj.DBUtility.MSSQL
 
             AutoCloseConnection = autoCloseConnection;
         }
+
         //~DbConnection()
         //{
         //    Dispose(false);
         //}
-        #endregion
+
+        #endregion CTOR
 
         #region Public Execute Member
+
         #region ExecuteSqlList
+
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -113,6 +129,7 @@ namespace hwj.DBUtility.MSSQL
                 return ExecuteSqlList(InnerConnection, InnerTransaction, sqlList);
             }
         }
+
         public int ExecuteSqlList(IDbConnection connection, IDbTransaction transaction, SqlList sqlList)
         {
             SqlCommand cmd = new SqlCommand();
@@ -141,9 +158,11 @@ namespace hwj.DBUtility.MSSQL
                 throw;
             }
         }
-        #endregion
+
+        #endregion ExecuteSqlList
 
         #region ExecuteSql
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -160,8 +179,8 @@ namespace hwj.DBUtility.MSSQL
                 DbHelperSQL.CheckSqlException(ref ex, sqlEntity);
                 throw;
             }
-
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -172,6 +191,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSql(sql, parameters, DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -193,6 +213,7 @@ namespace hwj.DBUtility.MSSQL
                 return ExecuteSql(InnerConnection, InnerTransaction, sql, parameters, timeout);
             }
         }
+
         private int ExecuteSql(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             AddLog(sql, parameters, timeout);
@@ -215,11 +236,13 @@ namespace hwj.DBUtility.MSSQL
                 //throw new Exception(msg, ex);
             }
         }
-        #endregion
+
+        #endregion ExecuteSql
 
         #region ExecuteReader
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
@@ -227,8 +250,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -237,8 +261,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(sql, parameters, DefaultCommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -274,11 +299,13 @@ namespace hwj.DBUtility.MSSQL
                 //throw new Exception(msg, ex);
             }
         }
-        #endregion
+
+        #endregion ExecuteReader
 
         #region ExecuteScalar
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
@@ -286,6 +313,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteScalar(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -296,6 +324,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteScalar(sql, parameters, DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -317,6 +346,7 @@ namespace hwj.DBUtility.MSSQL
                 return ExecuteScalar(InnerConnection, InnerTransaction, sql, parameters, timeout);
             }
         }
+
         private object ExecuteScalar(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             AddLog(sql, parameters, timeout);
@@ -346,11 +376,12 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion
+        #endregion ExecuteScalar
 
         #region Stored Procedure
+
         /// <summary>
-        /// 
+        ///执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -359,8 +390,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteStoredProcedure(sql, parameters, DefaultCommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -380,6 +412,7 @@ namespace hwj.DBUtility.MSSQL
                 return ExecuteStoredProcedure(InnerConnection, InnerTransaction, sql, parameters, timeout);
             }
         }
+
         private Dictionary<string, object> ExecuteStoredProcedure(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             AddLog(sql, parameters, timeout);
@@ -411,15 +444,96 @@ namespace hwj.DBUtility.MSSQL
                 //throw new Exception(msg, ex);
             }
         }
-        #endregion
 
-        #endregion
+        /// <summary>
+        ///执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters)
+        {
+            return ExecuteStoredProcedureForDataTable(sql, parameters, DefaultCommandTimeout);
+        }
+
+        /// <summary>
+        ///执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            if (AutoCloseConnection)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    return ExecuteStoredProcedureForDataTable(conn, null, sql, parameters, timeout);
+                }
+            }
+            else
+            {
+                return ExecuteStoredProcedureForDataTable(InnerConnection, InnerTransaction, sql, parameters, timeout);
+            }
+        }
+
+        private DataTable ExecuteStoredProcedureForDataTable(IDbConnection connection, IDbTransaction transaction, string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            AddLog(sql, parameters, timeout);
+            SqlDataReader reader = null;
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    DbHelperSQL.PrepareCommand(cmd, connection, transaction, sql, parameters, timeout);
+
+                    if (AutoCloseConnection)
+                    {
+                        reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    }
+                    else
+                    {
+                        reader = cmd.ExecuteReader();
+                    }
+
+                    cmd.Parameters.Clear();
+
+                    if (reader.Read())
+                        return GenerateEntity.CreateDataTable(reader);
+                    else
+                        return null;
+                }
+            }
+            catch (SqlException ex)
+            {
+                AddExData(ref ex, sql, parameters, timeout);
+                throw;
+                //string msg = FormatExMessage(ex.Message, sql, parameters, timeout);
+                //throw new Exception(msg, ex);
+            }
+            finally
+            {
+                if (reader != null && !reader.IsClosed)
+                {
+                    reader.Close();
+                }
+            }
+        }
+
+        #endregion Stored Procedure
+
+        #endregion Public Execute Member
 
         #region Public Get Entity/List Member
+
         /*暂时没处理视图里面的锁，BaseSqlTable生成Select语句没进行锁的处理*/
+
         #region Get Entity
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="displayFields"></param>
@@ -432,8 +546,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity<T>(displayFields, filterParam, sortParams, lockType, DefaultCommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="displayFields"></param>
@@ -457,6 +572,7 @@ namespace hwj.DBUtility.MSSQL
 
             return GetEntity<T>(sqlEty);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -469,8 +585,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity<T>(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
@@ -510,12 +627,14 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion
+        #endregion Get Entity
 
         /*暂时没处理视图里面的锁，BaseSqlTable生成Select语句没进行锁的处理*/
+
         #region Get List
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
@@ -529,8 +648,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList<T, TS>(displayFields, filterParam, sortParams, null, Enums.LockType.RowLock);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
@@ -545,8 +665,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
@@ -562,8 +683,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, lockType, DefaultCommandTimeout);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
@@ -613,6 +735,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList<T, TS>(sql, parameters, DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 通过事务，获取表集合
         /// </summary>
@@ -636,10 +759,13 @@ namespace hwj.DBUtility.MSSQL
                     reader.Close();
             }
         }
-        #endregion
-        #endregion
+
+        #endregion Get List
+
+        #endregion Public Get Entity/List Member
 
         #region Public Transaction Member
+
         /// <summary>
         /// 打开事务
         /// </summary>
@@ -656,6 +782,7 @@ namespace hwj.DBUtility.MSSQL
             InnerTransaction = InnerConnection.BeginTransaction();
             TransactionState = Enums.TransactionState.Begin;
         }
+
         /// <summary>
         /// 提交事务
         /// </summary>
@@ -671,6 +798,7 @@ namespace hwj.DBUtility.MSSQL
             }
             TransactionState = Enums.TransactionState.None;
         }
+
         /// <summary>
         /// 回滚事务
         /// </summary>
@@ -689,9 +817,11 @@ namespace hwj.DBUtility.MSSQL
             }
             TransactionState = Enums.TransactionState.None;
         }
-        #endregion
+
+        #endregion Public Transaction Member
 
         #region Private Member
+
         private string GetTableName<T>() where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
         {
             string tableName = string.Empty;
@@ -706,6 +836,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return tableName;
         }
+
         private void AddLog(SqlEntity sqlEntity)
         {
             if (LogSql && sqlEntity != null)
@@ -713,6 +844,7 @@ namespace hwj.DBUtility.MSSQL
                 AddLog(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
             }
         }
+
         private void AddLog(string sql, List<IDbDataParameter> parameters, int timeout)
         {
             if (LogSql)
@@ -720,6 +852,7 @@ namespace hwj.DBUtility.MSSQL
                 LogList.Add(new LogEntity(sql, parameters, timeout));
             }
         }
+
         private void AddExData(ref SqlException sqlEx, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             if (sqlEx.Data != null)
@@ -728,6 +861,7 @@ namespace hwj.DBUtility.MSSQL
                 sqlEx.Data.Add(Common.SqlInfoKey, msg);
             }
         }
+
         private string FormatExMessage(string message, string sql, List<IDbDataParameter> parameters, int timeout)
         {
             StringBuilder sb = new StringBuilder();
@@ -748,7 +882,8 @@ namespace hwj.DBUtility.MSSQL
 
             return sb.ToString();
         }
-        #endregion
+
+        #endregion Private Member
 
         #region IDisposable 成员
 
@@ -787,7 +922,6 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion
-
+        #endregion IDisposable 成员
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 
 namespace hwj.DBUtility.Interface
@@ -8,14 +7,22 @@ namespace hwj.DBUtility.Interface
     public interface IConnection : IDisposable
     {
         bool AutoCloseConnection { get; }
+
         string ConnectionString { get; }
+
         int DefaultCommandTimeout { get; }
+
         IDbConnection InnerConnection { get; }
+
         IDbTransaction InnerTransaction { get; }
+
         //Enums.LockType DefaultLock { get; set; }
         Enums.LockType SelectLock { get; set; }
+
         Enums.LockType UpdateLock { get; set; }
+
         Enums.TransactionState TransactionState { get; set; }
+
         List<LogEntity> LogList { get; }
 
         /// <summary>
@@ -25,8 +32,9 @@ namespace hwj.DBUtility.Interface
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
         T GetEntity<T>(SqlEntity sqlEntity) where T : class, new();
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
@@ -42,8 +50,9 @@ namespace hwj.DBUtility.Interface
         TS GetList<T, TS>(SqlEntity sqlEntity)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
@@ -55,20 +64,21 @@ namespace hwj.DBUtility.Interface
             where TS : List<T>, new();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlList"></param>
         /// <returns></returns>
         int ExecuteSqlList(SqlList sqlList);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
         int ExecuteSql(SqlEntity sqlEntity);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -77,13 +87,14 @@ namespace hwj.DBUtility.Interface
         int ExecuteSql(string sql, List<IDbDataParameter> parameters, int timeout);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
         IDataReader ExecuteReader(SqlEntity sqlEntity);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -92,13 +103,14 @@ namespace hwj.DBUtility.Interface
         IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters, int timeout);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sqlEntity"></param>
         /// <returns></returns>
         object ExecuteScalar(SqlEntity sqlEntity);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -107,14 +119,15 @@ namespace hwj.DBUtility.Interface
         object ExecuteScalar(string sql, List<IDbDataParameter> parameters, int timeout);
 
         /// <summary>
-        /// 执行存储过程
+        /// 执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
         Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters);
+
         /// <summary>
-        /// 执行存储过程
+        /// 执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
@@ -122,9 +135,29 @@ namespace hwj.DBUtility.Interface
         /// <returns></returns>
         Dictionary<string, object> ExecuteStoredProcedure(string sql, List<IDbDataParameter> parameters, int timeout);
 
+        /// <summary>
+        /// 执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters);
+
+        /// <summary>
+        /// 执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters, int timeout);
+
         void BeginTransaction();
+
         void CommitTransaction();
+
         void RollbackTransaction();
+
         void Dispose();
     }
 }

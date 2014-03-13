@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
+﻿using hwj.DBUtility.Interface;
 using hwj.DBUtility.TableMapping;
+using System;
+using System.Collections.Generic;
 using System.Data;
-using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TS"></typeparam>
@@ -18,8 +16,11 @@ namespace hwj.DBUtility.MSSQL
         where TS : List<T>, new()
     {
         //private const string Msg_InvalidConnection = "Invalid Connection!";
+
         #region Property
+
         private string _connectionString = string.Empty;
+
         public string ConnectionString
         {
             get { return _connectionString; }
@@ -31,7 +32,9 @@ namespace hwj.DBUtility.MSSQL
                 _connectionString = value;
             }
         }
+
         protected SqlEntity _SqlEntity = null;
+
         /// <summary>
         /// 显示执行的Sql实体
         /// </summary>
@@ -39,12 +42,15 @@ namespace hwj.DBUtility.MSSQL
         {
             get { return _SqlEntity; }
         }
+
         public IConnection InnerConnection { get; set; }
-        #endregion
+
+        #endregion Property
 
         #region CTOR
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout"></param>
@@ -52,8 +58,9 @@ namespace hwj.DBUtility.MSSQL
         protected BaseDataAccess(string connectionString, int timeout, Enums.LockType lockType)
             : this(new DbConnection(connectionString, timeout, lockType, false, true))
         { }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="lockType"></param>
@@ -62,10 +69,13 @@ namespace hwj.DBUtility.MSSQL
             ConnectionString = connection.ConnectionString;
             InnerConnection = connection;
         }
-        #endregion
+
+        #endregion CTOR
 
         #region Execute
+
         #region ExecuteSqlTran
+
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -75,6 +85,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSqlTran(list, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -85,9 +96,11 @@ namespace hwj.DBUtility.MSSQL
         {
             return DbHelperSQL.ExecuteSqlTran(ConnectionString, list, timeout) > 0;
         }
-        #endregion
+
+        #endregion ExecuteSqlTran
 
         #region ExecuteSql
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -97,6 +110,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSql(sql, null, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -107,6 +121,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSql(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -126,9 +141,11 @@ namespace hwj.DBUtility.MSSQL
             //}
             //throw new Exception(Msg_InvalidConnection);
         }
-        #endregion
+
+        #endregion ExecuteSql
 
         #region ExecuteReader
+
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
         /// </summary>
@@ -138,6 +155,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(sql, null, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
         /// </summary>
@@ -148,6 +166,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回SqlDataReader
         /// </summary>
@@ -166,9 +185,11 @@ namespace hwj.DBUtility.MSSQL
             //    return DbHelperSQL.ExecuteReader(ConnectionString, sql, parameters, timeout);
             //}
         }
-        #endregion
+
+        #endregion ExecuteReader
 
         #region ExecuteScalar
+
         /// <summary>
         /// 执行SQL语句，返回Object
         /// </summary>
@@ -178,6 +199,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteScalar(sql, null, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回Object
         /// </summary>
@@ -188,6 +210,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteScalar(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 执行SQL语句，返回Object
         /// </summary>
@@ -206,11 +229,13 @@ namespace hwj.DBUtility.MSSQL
             //    return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
             //}
         }
-        #endregion
+
+        #endregion ExecuteScalar
 
         #region Stored Procedure
+
         /// <summary>
-        /// 执行存储过程
+        /// 执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
@@ -219,8 +244,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteStoredProcedure(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
-        /// 执行存储过程
+        /// 执行存储过程,返回Output参数的值。
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
@@ -237,8 +263,33 @@ namespace hwj.DBUtility.MSSQL
             //    return DbHelperSQL.GetSingle(ConnectionString, sql, parameters, timeout);
             //}
         }
-        #endregion
-        #endregion
+
+        /// <summary>
+        /// 执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters)
+        {
+            return ExecuteStoredProcedureForDataTable(sql, parameters, InnerConnection.DefaultCommandTimeout);
+        }
+
+        /// <summary>
+        /// 执行存储过程,并返回DataTable。
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public DataTable ExecuteStoredProcedureForDataTable(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            return InnerConnection.ExecuteStoredProcedureForDataTable(sql, parameters, timeout);
+        }
+
+        #endregion Stored Procedure
+
+        #endregion Execute
 
         /// <summary>
         /// 获取数据库服务器时间
@@ -247,6 +298,7 @@ namespace hwj.DBUtility.MSSQL
         abstract public DateTime GetServerDateTime();
 
         #region Get Entity
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -257,6 +309,7 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = sqlEntity;
             return GetEntity(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -266,6 +319,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(null, filterParam, null, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -276,6 +330,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(null, filterParam, null, lockType);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -286,6 +341,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(displayFields, filterParam, null, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -297,6 +353,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(displayFields, filterParam, null, lockType);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -308,6 +365,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(displayFields, filterParam, sortParams, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -328,6 +386,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetEntity(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -361,9 +420,11 @@ namespace hwj.DBUtility.MSSQL
             //}
             //throw new Exception(Msg_InvalidConnection);
         }
-        #endregion
+
+        #endregion Get Entity
 
         #region Get List
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -372,6 +433,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(null, null, null, null);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -392,6 +454,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, null, null, null, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -402,6 +465,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, null, null, null, lockType);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -412,6 +476,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, filterParam, null, null, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -423,6 +488,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, filterParam, null, null, lockType);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -434,6 +500,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, filterParam, sortParams, null, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -446,6 +513,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, filterParam, sortParams, null, lockType);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -458,6 +526,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(displayFields, filterParam, sortParams, maxCount, InnerConnection.SelectLock);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -479,6 +548,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetList(sql, parameters, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -509,9 +579,11 @@ namespace hwj.DBUtility.MSSQL
             //}
             //throw new Exception(Msg_InvalidConnection);
         }
-        #endregion
+
+        #endregion Get List
 
         #region DataTable
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -520,6 +592,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetDataTable(null, null, null, null);
         }
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -531,6 +604,7 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = sqlEntity;
             return GetDataTable(sqlEntity.CommandText, sqlEntity.Parameters, tableName);
         }
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -543,6 +617,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
         }
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -579,6 +654,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetDataTable(sql, parameters, string.Empty);
         }
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -590,6 +666,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetDataTable(sql, parameters, tableName, InnerConnection.DefaultCommandTimeout);
         }
+
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -602,7 +679,8 @@ namespace hwj.DBUtility.MSSQL
         {
             return GenerateEntity.CreateDataTable(ExecuteReader(sql, parameters, timeout), tableName);
         }
-        #endregion
+
+        #endregion DataTable
 
         //private Enums.LockType GetLockType(Enums.LockModule module, Enums.LockType lockType)
         //{
@@ -631,6 +709,5 @@ namespace hwj.DBUtility.MSSQL
         //    }
         //    return false;
         //}
-
     }
 }
