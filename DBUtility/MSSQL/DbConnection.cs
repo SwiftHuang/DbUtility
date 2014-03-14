@@ -500,7 +500,7 @@ namespace hwj.DBUtility.MSSQL
 
                     cmd.Parameters.Clear();
 
-                    if (reader.Read())
+                    if (reader != null && reader.HasRows)
                         return GenerateEntity.CreateDataTable(reader);
                     else
                         return null;
