@@ -45,7 +45,7 @@ namespace hwj.DBUtility.MSSQL
         #region CTOR
 
         /// <summary>
-        /// 数据库连接实体
+        /// 数据库连接实体(默认超时时间为30秒)
         /// </summary>
         /// <param name="connectionString"></param>
         public DbConnection(string connectionString)
@@ -56,9 +56,10 @@ namespace hwj.DBUtility.MSSQL
         /// 数据库连接实体
         /// </summary>
         /// <param name="connectionString"></param>
-        /// <param name="timeout"></param>
-        public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock)
-            : this(connectionString, timeout, defaultLock, false)
+        /// <param name="timeout">超时时间(单位:秒)</param>
+        /// <param name="defaultSelectLock"></param>
+        public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock)
+            : this(connectionString, timeout, defaultSelectLock, false)
         {
         }
 
@@ -66,9 +67,11 @@ namespace hwj.DBUtility.MSSQL
         /// 数据库连接实体
         /// </summary>
         /// <param name="connectionString"></param>
-        /// <param name="timeout"></param>
-        public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql)
-            : this(connectionString, timeout, defaultLock, logSql, false)
+        /// <param name="timeout">超时时间(单位:秒)</param>
+        /// <param name="defaultSelectLock"></param>
+        /// <param name="logSql"></param>
+        public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock, bool logSql)
+            : this(connectionString, timeout, defaultSelectLock, logSql, false)
         {
         }
 
@@ -76,14 +79,17 @@ namespace hwj.DBUtility.MSSQL
         /// 数据库连接实体
         /// </summary>
         /// <param name="connectionString"></param>
-        /// <param name="timeout"></param>
-        public DbConnection(string connectionString, int timeout, Enums.LockType defaultLock, bool logSql, bool autoCloseConnection)
+        /// <param name="timeout">超时时间(单位:秒)</param>
+        /// <param name="defaultSelectLock"></param>
+        /// <param name="logSql"></param>
+        /// <param name="autoCloseConnection"></param>
+        public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock, bool logSql, bool autoCloseConnection)
         {
             ConnectionString = connectionString;
             DefaultCommandTimeout = timeout;
             InnerConnection = new SqlConnection(connectionString);
 
-            SelectLock = Enums.LockType.None;// Enums.LockType.UpdLock;
+            SelectLock = defaultSelectLock;// Enums.LockType.UpdLock;
             UpdateLock = Enums.LockType.UpdLock;
 
             LogSql = logSql;
