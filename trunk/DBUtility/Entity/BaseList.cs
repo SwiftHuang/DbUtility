@@ -1,15 +1,12 @@
-﻿using System;
+﻿using hwj.DBUtility.TableMapping;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Web;
-using hwj.DBUtility;
-using hwj.DBUtility.TableMapping;
 using System.ComponentModel;
 
 namespace hwj.DBUtility.Entity
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TS"></typeparam>
@@ -33,10 +30,12 @@ namespace hwj.DBUtility.Entity
             else
                 return false;
         }
+
         public T Find(Enum field, object value)
         {
             return ExFind(field, value);
         }
+
         /// <summary>
         /// 请使用Find代替ExFind
         /// </summary>
@@ -64,6 +63,7 @@ namespace hwj.DBUtility.Entity
             return null;
             //}
         }
+
         public T BinarySearch(Enum field, string value)
         {
             if (field != null && value != null && field.Equals(tmpBSField) && value.Equals(tmpBSValue))
@@ -83,6 +83,7 @@ namespace hwj.DBUtility.Entity
         {
             return ExFindAll(field, value);
         }
+
         /// <summary>
         /// 请使用FindAll代替ExFindAll
         /// </summary>
@@ -101,6 +102,7 @@ namespace hwj.DBUtility.Entity
             }
             return lst;
         }
+
         public TS Like(Enum field, string value)
         {
             TS lst = new TS();
@@ -118,6 +120,7 @@ namespace hwj.DBUtility.Entity
         {
             return Sort(field.ToString(), direction);
         }
+
         public List<T> Sort(string fieldName, ListSortDirection direction)
         {
             Reverser<T> reverser = new Reverser<T>(this.GetType(), fieldName, direction);
@@ -129,6 +132,7 @@ namespace hwj.DBUtility.Entity
         {
             return fieldMappingInfo.Property.GetValue(entity, null).Equals(value);
         }
+
         private bool MatchLikeData(FieldMappingInfo fieldMappingInfo, string value, T entity)
         {
             object obj = fieldMappingInfo.Property.GetValue(entity, null);
@@ -136,10 +140,12 @@ namespace hwj.DBUtility.Entity
                 return obj.ToString().IndexOf(value) > -1;
             return false;
         }
+
         private bool LessThanData(FieldMappingInfo fieldMappingInfo, string value, T entity)
         {
             return value.CompareTo(fieldMappingInfo.Property.GetValue(entity, null)) < 0;
         }
+
         /// <summary>
         ///  二分法
         /// </summary>
@@ -176,6 +182,7 @@ namespace hwj.DBUtility.Entity
 
             return null;
         }
+
         //private void ClearTemp()
         //{
         //    tmpValue = null;
@@ -212,7 +219,7 @@ namespace hwj.DBUtility.Entity
             return this.GetEnumerator();
         }
 
-        #endregion
+        #endregion IEnumerable<T> 成员
 
         #region IEnumerable 成员
 
@@ -221,6 +228,6 @@ namespace hwj.DBUtility.Entity
             return this.GetEnumerator();
         }
 
-        #endregion
+        #endregion IEnumerable 成员
     }
 }
