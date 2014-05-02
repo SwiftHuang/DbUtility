@@ -49,11 +49,11 @@
             <returns></returns>
         </member>
         <member name="T:hwj.DBUtility.Entity.BaseList`2">
-            <summary>
+             <summary>
             
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="TS"></typeparam>
+             </summary>
+             <typeparam name="T"></typeparam>
+             <typeparam name="TS"></typeparam>
         </member>
         <member name="M:hwj.DBUtility.Entity.BaseList`2.ExFind(System.Enum,System.Object)">
             <summary>
@@ -941,7 +941,7 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String)">
             <summary>
-            数据库连接实体
+            数据库连接实体(默认超时时间为30秒)
             </summary>
             <param name="connectionString"></param>
         </member>
@@ -950,21 +950,27 @@
             数据库连接实体
             </summary>
             <param name="connectionString"></param>
-            <param name="timeout"></param>
+            <param name="timeout">超时时间(单位:秒)</param>
+            <param name="defaultSelectLock"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType,System.Boolean)">
             <summary>
             数据库连接实体
             </summary>
             <param name="connectionString"></param>
-            <param name="timeout"></param>
+            <param name="timeout">超时时间(单位:秒)</param>
+            <param name="defaultSelectLock"></param>
+            <param name="logSql"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType,System.Boolean,System.Boolean)">
             <summary>
             数据库连接实体
             </summary>
             <param name="connectionString"></param>
-            <param name="timeout"></param>
+            <param name="timeout">超时时间(单位:秒)</param>
+            <param name="defaultSelectLock"></param>
+            <param name="logSql"></param>
+            <param name="autoCloseConnection"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
             <summary>
@@ -1780,14 +1786,6 @@
             <param name="pageSize">每页显示记录数</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateSelectSql`1.GenFilterParamsSql(hwj.DBUtility.FilterParams,System.Boolean)">
-            <summary>
-            生成筛选SQL
-            </summary>
-            <param name="listParam"></param>
-            <param name="isPage"></param>
-            <returns></returns>
-        </member>
         <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.#ctor">
             <summary>
             SQL生成类
@@ -1797,14 +1795,6 @@
             <summary>
             返回最后插入的标识值
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:hwj.DBUtility.MSSQL.GenerateUpdateSql`1.GenFilterParamsSql(hwj.DBUtility.FilterParams,System.Boolean)">
-            <summary>
-            生成筛选SQL
-            </summary>
-            <param name="listParam"></param>
-            <param name="isPage"></param>
             <returns></returns>
         </member>
         <member name="T:hwj.DBUtility.Enums.Relation">
@@ -1874,12 +1864,24 @@
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.IN_InsertSQL">
             <summary>
-            包含(in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            包含(in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制(分页有参数长度限制)。
+            eg. Status IN ('S','E')
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.Relation.NotIN_InsertSQL">
             <summary>
-            不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制。
+            不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制(分页有参数长度限制)。
+            eg. Status IN ('S','E')
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.IN_SelectSQL">
+            <summary>
+            包含(in) 以Select SQL语句形式实现，没有数量限制。
+            </summary>
+        </member>
+        <member name="F:hwj.DBUtility.Enums.Relation.NotIN_SelectSQL">
+            <summary>
+            不包含(not in) 以Select SQL语句形式实现，没有数量限制。
             </summary>
         </member>
         <member name="T:hwj.DBUtility.Enums.Expression">
@@ -1934,7 +1936,7 @@
         </member>
         <member name="F:hwj.DBUtility.Enums.EffentNextType.None">
             <summary>
-            对其他语句无任何影响 
+            对其他语句无任何影响
             </summary>
         </member>
         <member name="F:hwj.DBUtility.Enums.EffentNextType.WhenHaveContine">
@@ -1995,6 +1997,11 @@
         <member name="P:hwj.DBUtility.Entity.PageResult`2.PageSize">
             <summary>
             每页记录数
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.Entity.PageResult`2.PageIndex">
+            <summary>
+            当前页数
             </summary>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.BaseSqlDAL`2">
