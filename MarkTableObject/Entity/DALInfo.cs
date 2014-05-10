@@ -17,13 +17,13 @@ namespace hwj.MarkTableObject.Entity
         public string PrefixChar { get; set; }
         public string DALName { get; set; }
 
-        public DALInfo(ProjectInfo prjInfo, DBModule module, string tableName)
-            : this(prjInfo, module, tableName, string.Empty, null)
+        public DALInfo(GeneralInfo genInfo, DBModule module, string tableName)
+            : this(genInfo, module, tableName, string.Empty, null)
         {
         }
-        public DALInfo(ProjectInfo prjInfo, DBModule module, string tableName, string commandText, ColumnInfos columnInfos)
+        public DALInfo(GeneralInfo genInfo, DBModule module, string tableName, string commandText, ColumnInfos columnInfos)
         {
-            EntityInfo = new EntityInfo(prjInfo, module, tableName);
+            EntityInfo = new EntityInfo(genInfo, module, tableName);
             EntityInfo.CommandText = commandText;
             if (columnInfos == null)
             {
@@ -33,13 +33,13 @@ namespace hwj.MarkTableObject.Entity
             {
                 EntityInfo.InitColumnInfoList(columnInfos);
             }
-            Namespace = prjInfo.DataAccessNamespace;
-            ConnType = prjInfo.Database.DatabaseType;
+            Namespace = genInfo.DataAccessNamespace;
+            ConnType = genInfo.Database.DatabaseType;
             Module = module;
-            PrefixChar = prjInfo.DataAccessPrefixChar;
+            PrefixChar = genInfo.DataAccessPrefixChar;
 
             DALName = PrefixChar + tableName;
-            FileName = string.Format("{0}\\{1}.cs", prjInfo.DataAccessPath.TrimEnd('\\'), DALName);
+            FileName = string.Format("{0}\\{1}.cs", genInfo.DataAccessPath.TrimEnd('\\'), DALName);
         }
 
     }

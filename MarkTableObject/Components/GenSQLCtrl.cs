@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+﻿using hwj.MarkTableObject.Entity;
+using System;
 using System.Windows.Forms;
-using hwj.MarkTableObject.Entity;
 
 namespace hwj.MarkTableObject.Components
 {
     public partial class GenSQLCtrl : UserControl
     {
-        EntityInfo EntyInfo = null;
+        private EntityInfo EntyInfo = null;
+
         public ProjectInfo PrjInfo { get; set; }
+
         private DBModule _Module = DBModule.SQL;
+
         public DBModule Module
         {
             get { return _Module; }
@@ -25,15 +23,19 @@ namespace hwj.MarkTableObject.Components
                     case DBModule.Table:
                         cboSQLType.SelectedIndex = 2;
                         break;
+
                     case DBModule.View:
                         cboSQLType.SelectedIndex = 3;
                         break;
+
                     case DBModule.SQL:
                         cboSQLType.SelectedIndex = 0;
                         break;
+
                     case DBModule.SP:
                         cboSQLType.SelectedIndex = 1;
                         break;
+
                     default:
                         Module = DBModule.SQL;
                         cboSQLType.SelectedIndex = 0;
@@ -41,7 +43,9 @@ namespace hwj.MarkTableObject.Components
                 }
             }
         }
+
         private string _ClassName = "SqlEntity";
+
         public string ClassName
         {
             get { return _ClassName; }
@@ -68,6 +72,7 @@ namespace hwj.MarkTableObject.Components
                 PrjInfo = Common.GetProjectInfoByKey(cboPrjInfo.SelectedValue.ToString());
             }
         }
+
         private void cboSQLType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -115,7 +120,8 @@ namespace hwj.MarkTableObject.Components
         {
             try
             {
-                EntyInfo = new EntityInfo(PrjInfo, Module, txtTableName.Text.Trim());
+                GeneralInfo genInfo = new GeneralInfo(PrjInfo, Module);
+                EntyInfo = new EntityInfo(genInfo, Module, txtTableName.Text.Trim());
                 EntyInfo.CommandText = txtSQL.Text.Trim();
                 EntyInfo.SPName = txtSPName.Text.Trim();
                 switch (PrjInfo.Database.DatabaseType)
@@ -129,20 +135,23 @@ namespace hwj.MarkTableObject.Components
                             txtSPParam.Text = EntyInfo.SPParamString;
                         }
                         break;
+
                     case DatabaseEnum.MYSQL:
                         break;
+
                     case DatabaseEnum.OleDb:
                         break;
+
                     default:
                         break;
                 }
-
             }
             catch (Exception ex)
             {
                 Common.MsgWarn(ex.Message, ex);
             }
         }
+
         private void btnPreview_Click(object sender, EventArgs e)
         {
             try
@@ -159,7 +168,8 @@ namespace hwj.MarkTableObject.Components
                     {
                         PrjInfo.Template = TemplateType.DataAccess;
                     }
-                    BLLInfo inf = new BLLInfo(PrjInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
+                    GeneralInfo genInfo = new GeneralInfo(PrjInfo, Module);
+                    BLLInfo inf = new BLLInfo(genInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
                     inf.EntityInfo.SPParamInfos = EntyInfo.SPParamInfos;
                     inf.EntityInfo.SPParamString = EntyInfo.SPParamString;
                     //inf.EntityInfo.CommandText = EntyInfo.CommandText;
@@ -206,22 +216,24 @@ namespace hwj.MarkTableObject.Components
                 Common.MsgError(ex.Message, ex);
             }
         }
+
         private void btnGenFile_Click(object sender, EventArgs e)
         {
-
         }
+
         private void btnEntityCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtEntityCode.Text);
         }
+
         private void btnDALCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtDALCode.Text);
         }
+
         private void btnBLLCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetDataObject(txtBLLCode.Text);
         }
-
     }
 }

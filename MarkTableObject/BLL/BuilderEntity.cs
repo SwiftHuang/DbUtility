@@ -13,9 +13,9 @@ namespace hwj.MarkTableObject.BLL
     public class BuilderEntity
     {
         #region Public
-        public static void CreateTableFile(ProjectInfo projectInfo, string tableName)
+        public static void CreateTableFile(GeneralInfo genInfo, string tableName)
         {
-            EntityInfo e = new EntityInfo(projectInfo, DBModule.Table, tableName);
+            EntityInfo e = new EntityInfo(genInfo, DBModule.Table, tableName);
             e.InitColumnInfoList();
             string text = CreatEntity(e);
             hwj.MarkTableObject.Common.CreateFile(e.FileName, text);

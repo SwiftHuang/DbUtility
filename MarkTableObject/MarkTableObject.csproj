@@ -139,6 +139,7 @@
     <Compile Include="Entity\DALInfo.cs" />
     <Compile Include="Entity\DatabaseInfo.cs" />
     <Compile Include="Entity\EntityInfo.cs" />
+    <Compile Include="Entity\GeneralInfo.cs" />
     <Compile Include="Entity\ProjectInfo.cs" />
     <Compile Include="Entity\SPParamColumnInfo.cs" />
     <Compile Include="Forms\DatabaseFrm.cs">
@@ -238,7 +239,7 @@
       <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UserControl\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>

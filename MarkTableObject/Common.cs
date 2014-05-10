@@ -30,6 +30,7 @@ namespace hwj.MarkTableObject
         /// </summary>
         DataAccess,
     }
+    
     public class Common
     {
         public static string MainPath = string.Empty;

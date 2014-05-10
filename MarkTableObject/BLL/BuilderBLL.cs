@@ -8,9 +8,9 @@ namespace hwj.MarkTableObject.BLL
 {
     public class BuilderBLL
     {
-        public static void CreateTableFile(ProjectInfo projectInfo, string tableName, GeneralMethodInfo methodInfo)
+        public static void CreateTableFile(GeneralInfo genInfo, string tableName, GeneralMethodInfo methodInfo)
         {
-            BLLInfo bllInfo = new BLLInfo(projectInfo, DBModule.Table, tableName);
+            BLLInfo bllInfo = new BLLInfo(genInfo, DBModule.Table, tableName);
             string text = CreateBLLCode(bllInfo, DBModule.Table, methodInfo);
             hwj.MarkTableObject.Common.CreateFile(bllInfo.FileName, text);
         }
