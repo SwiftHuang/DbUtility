@@ -234,11 +234,11 @@
             <returns></returns>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.DALDependency`2">
-            <summary>
+             <summary>
             
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="TS"></typeparam>
+             </summary>
+             <typeparam name="T"></typeparam>
+             <typeparam name="TS"></typeparam>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.BaseDataAccess`2">
              <summary>
@@ -646,35 +646,35 @@
             </summary>
         </member>
         <member name="F:hwj.DBUtility.MSSQL.DALDependency`2.GenSelectSql">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="F:hwj.DBUtility.MSSQL.DALDependency`2.GenUpdateSql">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(System.String)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="connectionString">数据连接字符串</param>
+             </summary>
+             <param name="connectionString">数据连接字符串</param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(System.String,System.Int32,hwj.DBUtility.Enums.LockType)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="connectionString">数据连接字符串</param>
-            <param name="timeout">超时时间(秒)</param>
-            <param name="defaultLock">锁类型</param>
+             </summary>
+             <param name="connectionString">数据连接字符串</param>
+             <param name="timeout">超时时间(秒)</param>
+             <param name="defaultLock">锁类型</param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="connection"></param>
-            <param name="lockType"></param>
+             </summary>
+             <param name="connection"></param>
+             <param name="lockType"></param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.Add(`0)">
             <summary>
@@ -797,7 +797,7 @@
             <param name="filterParam">查询条件</param>
             <param name="sortParams">排序方式</param>
             <param name="maxCount">返回最大记录数</param>
-            <param name="lockType">锁类型</param>    
+            <param name="lockType">锁类型</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.GetPage3(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.DisplayFields,System.Int32,System.Int32,System.Int32@)">
@@ -2128,7 +2128,20 @@
         </member>
         <member name="P:hwj.DBUtility.SqlParam.ParamName">
             <summary>
-            自定义参数名(防止From To的情况下相同的参数名)
+            自定义参数名(防止相同的参数名)
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.CustomText">
+            <summary>
+            自定义SQL语句条件。
+            eg. Where Field1=Field2 AND Field3='VINSON'
+            Field1=Field2可以用以下语句实现:
+            AddCustomParam("Field1=Field2", Enums.Expression.AND);
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.IsCustomText">
+            <summary>
+            是否自定义SQL语句条件
             </summary>
         </member>
         <member name="P:hwj.DBUtility.SqlEntity.CommandTimeout">
@@ -2151,6 +2164,24 @@
             获取或设置被赋值字段
             </summary>
         </member>
+        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.AddCustomSqlText(System.Enum,System.String)">
+            <summary>
+            标示列为自定义SQL语句
+            eg.INSERT INTO Table (Field1) Value(@@DBTS)
+            AddCustomSqlText("Field1","@@DBTS")
+            </summary>
+            <param name="fieldName"></param>
+            <param name="sqlText"></param>
+        </member>
+        <member name="M:hwj.DBUtility.TableMapping.BaseTable`1.AddCustomSqlText(System.String,System.String)">
+            <summary>
+            标示列为自定义SQL语句
+            eg.INSERT INTO Table (Field1) Value(@@DBTS)
+            AddCustomSqlText("Field1","@@DBTS")
+            </summary>
+            <param name="fieldName"></param>
+            <param name="sqlText"></param>
+        </member>
         <member name="M:hwj.DBUtility.FilterParams.MarkedLeftBrackets">
             <summary>
             Add a left brackets
@@ -2168,14 +2199,33 @@
             <param name="expression"></param>
         </member>
         <member name="M:hwj.DBUtility.FilterParams.AddParam(System.Enum,System.Object,hwj.DBUtility.Enums.Relation,hwj.DBUtility.Enums.Expression,System.String)">
-            <summary>
+             <summary>
             
+             </summary>
+             <param name="fieldName"></param>
+             <param name="fieldValue"></param>
+             <param name="oper"></param>
+             <param name="exp"></param>
+             <param name="paramName">自定义参数名(不需要@)</param>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.AddFieldParam(System.Enum,System.Enum,hwj.DBUtility.Enums.Relation,hwj.DBUtility.Enums.Expression)">
+            <summary>
+            列名作为表达式的值。
             </summary>
-            <param name="fieldName"></param>
-            <param name="fieldValue"></param>
+            <param name="fieldName1">列名1</param>
+            <param name="fieldName2">列名2</param>
             <param name="oper"></param>
             <param name="exp"></param>
-            <param name="paramName">自定义参数名(不需要@)</param>
+        </member>
+        <member name="M:hwj.DBUtility.FilterParams.AddCustomParam(System.String,hwj.DBUtility.Enums.Expression)">
+            <summary>
+            自定义SQL语句条件。
+            eg. Where Field1=Field2 AND Field3='VINSON'
+            Field1=Field2可以用以下语句实现:
+            AddCustomParam("Field1=Field2", Enums.Expression.AND);
+            </summary>
+            <param name="text"></param>
+            <param name="exp"></param>
         </member>
     </members>
 </doc>
