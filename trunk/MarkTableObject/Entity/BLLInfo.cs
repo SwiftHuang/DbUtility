@@ -19,25 +19,25 @@ namespace hwj.MarkTableObject.Entity
         public string BLLName { get; set; }
         public DatabaseEnum ConnType { get; set; }
 
-        public BLLInfo(ProjectInfo prjInfo, DBModule module, string tableName)
-            : this(prjInfo, module, tableName, string.Empty, null)
+        public BLLInfo(GeneralInfo genInfo, DBModule module, string tableName)
+            : this(genInfo, module, tableName, string.Empty, null)
         {
 
         }
 
-        public BLLInfo(ProjectInfo prjInfo, DBModule module, string tableName, string commandText, ColumnInfos columnInfos)
+        public BLLInfo(GeneralInfo genInfo, DBModule module, string tableName, string commandText, ColumnInfos columnInfos)
         {
-            DALInfo = new DALInfo(prjInfo, module, tableName, commandText, columnInfos);
+            DALInfo = new DALInfo(genInfo, module, tableName, commandText, columnInfos);
             EntityInfo = DALInfo.EntityInfo;
 
-            Namespace = prjInfo.BusinessNamespace;
-            ConnType = prjInfo.Database.DatabaseType;
+            Namespace = genInfo.BusinessNamespace;
+            ConnType = genInfo.Database.DatabaseType;
             Module = module;
-            PrefixChar = prjInfo.BusinessPrefixChar;
-            Connection = prjInfo.BusinessConnection;
+            PrefixChar = genInfo.BusinessPrefixChar;
+            Connection = genInfo.BusinessConnection;
 
             BLLName = PrefixChar + tableName;
-            FileName = string.Format("{0}\\{1}.cs", prjInfo.BusinessPath.TrimEnd('\\'), BLLName);
+            FileName = string.Format("{0}\\{1}.cs", genInfo.BusinessPath.TrimEnd('\\'), BLLName);
         }
     }
 }

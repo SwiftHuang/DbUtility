@@ -12,10 +12,10 @@ namespace hwj.MarkTableObject.BLL
 {
     public class BuilderDAL
     {
-        public static void CreateTableFile(ProjectInfo projectInfo, string tableName, GeneralMethodInfo methodInfo)
+        public static void CreateTableFile(GeneralInfo genInfo, string tableName, GeneralMethodInfo methodInfo)
         {
-            DALInfo dalInfo = new DALInfo(projectInfo, DBModule.Table, tableName);
-            string text = CreateDALCode(dalInfo, projectInfo.Template, methodInfo);
+            DALInfo dalInfo = new DALInfo(genInfo, DBModule.Table, tableName);
+            string text = CreateDALCode(dalInfo, genInfo.Template, methodInfo);
             hwj.MarkTableObject.Common.CreateFile(dalInfo.FileName, text);
         }
         public static string CreateDALCode(DALInfo dalInfo, TemplateType templateType, GeneralMethodInfo methodInfo)

@@ -48,21 +48,31 @@ namespace hwj.MarkTableObject.Forms
         {
             try
             {
-                ProjectInfo prj = new ProjectInfo();
-                prj.Name = txtPrjName.Text.Trim();
-                prj.MainPath = txtPrjPath.Text.Trim();
-                prj.BusinessNamespace = txtBLLName.Text.Trim();
-                prj.BusinessPath = txtBLLPath.Text.Trim();
-                prj.BusinessPrefixChar = txtBLLPrefixChar.Text.Trim();
-                prj.BusinessConnection = txtBLLConnection.Text.Trim();
-                prj.DataAccessNamespace = txtDALName.Text.Trim();
-                prj.DataAccessPath = txtDALPath.Text.Trim();
-                prj.DataAccessPrefixChar = txtDALPrefixChar.Text.Trim();
-                prj.EntityNamespace = txtEntityName.Text.Trim();
-                prj.EntityPath = txtEntityPath.Text.Trim();
-                prj.EntityPrefixChar = txtEntityPrefixChar.Text.Trim();
-                prj.Database = Project.Database;
-                prj.Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business;
+                ProjectInfo prj = new ProjectInfo()
+                {
+                    Name = txtPrjName.Text.Trim(),
+                    MainPath = txtPrjPath.Text.Trim(),
+                    BusinessConnection = txtBLLConnection.Text.Trim(),
+
+                    BusinessNamespace = txtBLLName.Text.Trim(),
+                    BusinessPath = txtBLLPath.Text.Trim(),
+                    BusinessPrefixChar = txtBLLPrefixChar.Text.Trim(),
+                    BusinessPath4View=txtBLLPath.Text.Trim(),
+                    
+                    DataAccessNamespace = txtDALName.Text.Trim(),
+                    DataAccessPath = txtDALPath.Text.Trim(),
+                    DataAccessPrefixChar = txtDALPrefixChar.Text.Trim(),
+                    DataAccessPath4View = txtDALPath.Text.Trim(),
+
+                    EntityNamespace = txtEntityName.Text.Trim(),
+                    EntityPath = txtEntityPath.Text.Trim(),
+                    EntityPrefixChar = txtEntityPrefixChar.Text.Trim(),
+                    EntityPath4View = txtEntityPath.Text.Trim(),
+
+                    Database = Project.Database,
+                    Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business,
+                };
+
                 //prj.Database.ConnectionString = txtConnStr.Text.Trim();
                 //prj.Database.DatabaseType = ConnectionDataSource;
                 //prj.Database.ServerVersion = lblDataSource.Text;

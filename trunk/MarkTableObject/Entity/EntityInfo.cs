@@ -32,17 +32,17 @@ namespace hwj.MarkTableObject.Entity
         {
             ColumnInfoList = new ColumnInfos();
         }
-        public EntityInfo(ProjectInfo prjInfo, DBModule module, string tableName)
+        public EntityInfo(GeneralInfo genInfo, DBModule module, string tableName)
         {
             Module = module;
-            ConnType = prjInfo.Database.DatabaseType;
-            ConnectionString = prjInfo.Database.ConnectionString;
-            NameSpace = prjInfo.EntityNamespace;
+            ConnType = genInfo.Database.DatabaseType;
+            ConnectionString = genInfo.Database.ConnectionString;
+            NameSpace = genInfo.EntityNamespace;
             TableName = tableName;
-            PrefixChar = prjInfo.EntityPrefixChar;
+            PrefixChar = genInfo.EntityPrefixChar;
 
             EntityName = PrefixChar + TableName;
-            FileName = string.Format("{0}\\{1}.cs", prjInfo.EntityPath.TrimEnd('\\'), EntityName);
+            FileName = string.Format("{0}\\{1}.cs", genInfo.EntityPath.TrimEnd('\\'), EntityName);
         }
 
         #region Public Function
