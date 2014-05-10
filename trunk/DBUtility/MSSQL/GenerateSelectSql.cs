@@ -17,7 +17,7 @@ namespace hwj.DBUtility.MSSQL
         private const string _MsSqlParam = "@{0}";
         private const string _MsSqlWhereParam = "@_{0}";
         private const string _MsSqlGetDate = "GetDate()";
-        private const string _MsSqlFieldFmt = "[{0}]";
+        private const string _MsSqlFieldFormat = "[{0}]";
         internal const string _ViewSqlFormat = "({0}) AS TEMPHWJ";
 
         /// <summary>
@@ -26,8 +26,9 @@ namespace hwj.DBUtility.MSSQL
         public GenerateSelectSql()
         {
             base.DatabaseGetDateSql = _MsSqlGetDate;
-            _FieldFormat = _MsSqlFieldFmt;
+            _FieldFormat = _MsSqlFieldFormat;
             _SqlParam = _MsSqlParam;
+            _SqlWhereParam = _MsSqlWhereParam;
         }
 
         #region Select Sql
@@ -241,63 +242,63 @@ namespace hwj.DBUtility.MSSQL
         //    else
         //        return string.Empty;
         //}
-        protected override string GetCondition(SqlParam para, bool isFilter, bool isPage)
-        {
-            StringBuilder sbStr = new StringBuilder();
-            string __MsSqlParam = string.Empty;
-            if (isFilter)
-            {
-                __MsSqlParam = _MsSqlWhereParam;
-            }
-            else
-            {
-                __MsSqlParam = _MsSqlParam;
-            }
+        //protected override string GetCondition(SqlParam para, bool isFilter, bool isPage)
+        //{
+        //    StringBuilder sbStr = new StringBuilder();
+        //    string __MsSqlParam = string.Empty;
+        //    if (isFilter)
+        //    {
+        //        __MsSqlParam = _MsSqlWhereParam;
+        //    }
+        //    else
+        //    {
+        //        __MsSqlParam = _MsSqlParam;
+        //    }
 
-            sbStr.AppendFormat(_MsSqlFieldFmt, para.FieldName).Append(Enums.RelationString(para.Operator));
+        //    sbStr.AppendFormat(_MsSqlFieldFormat, para.FieldName).Append(Enums.RelationString(para.Operator));
 
-            if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
-            {
-                //sbStr.Append(para.Expression.ToSqlString());
-            }
-            else if (isPage)
-            {
-                if (para.IsUnicode)
-                {
-                    sbStr.Append("N");//.Append('\'');
-                }
-                sbStr.Append('\'');
+        //    if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
+        //    {
+        //        //sbStr.Append(para.Expression.ToSqlString());
+        //    }
+        //    else if (isPage)
+        //    {
+        //        if (para.IsUnicode)
+        //        {
+        //            sbStr.Append("N");//.Append('\'');
+        //        }
+        //        sbStr.Append('\'');
 
-                if (IsDatabaseDate(para))
-                {
-                    sbStr.Append(_MsSqlGetDate);
-                }
-                else
-                {
-                    if (para.Operator == Enums.Relation.Like || para.Operator == Enums.Relation.NotLike)
-                    {
-                        sbStr.Append(para.FieldValue.ToString().Replace("'", "''").Replace("[", "[[]"));
-                    }
-                    else
-                    {
-                        sbStr.Append(para.FieldValue.ToString().Replace("'", "''"));
-                    }
-                }
+        //        if (IsDatabaseDate(para))
+        //        {
+        //            sbStr.Append(_MsSqlGetDate);
+        //        }
+        //        else
+        //        {
+        //            if (para.Operator == Enums.Relation.Like || para.Operator == Enums.Relation.NotLike)
+        //            {
+        //                sbStr.Append(para.FieldValue.ToString().Replace("'", "''").Replace("[", "[[]"));
+        //            }
+        //            else
+        //            {
+        //                sbStr.Append(para.FieldValue.ToString().Replace("'", "''"));
+        //            }
+        //        }
 
-                sbStr.Append('\'');//.Append('\'');
-            }
-            else if (IsDatabaseDate(para))
-            {
-                sbStr.Append(_MsSqlGetDate);
-            }
-            else
-            {
-                sbStr.AppendFormat(__MsSqlParam, !string.IsNullOrEmpty(para.ParamName) ? para.ParamName : para.FieldName);
-            }
+        //        sbStr.Append('\'');//.Append('\'');
+        //    }
+        //    else if (IsDatabaseDate(para))
+        //    {
+        //        sbStr.Append(_MsSqlGetDate);
+        //    }
+        //    else
+        //    {
+        //        sbStr.AppendFormat(__MsSqlParam, !string.IsNullOrEmpty(para.ParamName) ? para.ParamName : para.FieldName);
+        //    }
 
-            sbStr.Append(Enums.ExpressionString(para.Expression));
-            return sbStr.ToString();
-        }
+        //    sbStr.Append(Enums.ExpressionString(para.Expression));
+        //    return sbStr.ToString();
+        //}
         private string GetNoLock(Enums.LockType type)
         {
             switch (type)
@@ -329,7 +330,7 @@ namespace hwj.DBUtility.MSSQL
         //    }
         //    return null;
         //}
-        private object CheckValue(SqlParameter param, object value)
+        private object CheckValue(IDbDataParameter param, object value)
         {
             if (IsDateType(param.DbType))
             {
