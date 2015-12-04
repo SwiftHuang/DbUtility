@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
+using System.Xml.Serialization;
 
 namespace hwj.DBUtility.TableMapping
 {
@@ -7,6 +8,7 @@ namespace hwj.DBUtility.TableMapping
     public abstract class BaseTable<T> : BaseSqlTable<T>
         where T : class, new()
     {
+
         public BaseTable(string tableName)
             : base(tableName)
         {
@@ -15,16 +17,13 @@ namespace hwj.DBUtility.TableMapping
         }
 
         private string DBTableName = string.Empty;
-
         public string GetTableName()
         {
             return DBTableName;
         }
 
         #region Use Assigned Status
-
         private bool _useAssigned = true;
-
         /// <summary>
         /// 设置是否使用赋值字段检测
         /// </summary>
@@ -32,7 +31,6 @@ namespace hwj.DBUtility.TableMapping
         {
             _useAssigned = use;
         }
-
         /// <summary>
         /// 获取当前赋值字段检测状态
         /// </summary>
@@ -40,13 +38,10 @@ namespace hwj.DBUtility.TableMapping
         {
             return _useAssigned;
         }
-
-        #endregion Use Assigned Status
+        #endregion
 
         #region Assigned List
-
         private List<String> _assigned = null;
-
         /// <summary>
         /// 获取或设置被赋值字段
         /// </summary>
@@ -54,94 +49,17 @@ namespace hwj.DBUtility.TableMapping
         {
             return _assigned;
         }
-
-        public void RemoveAssigned(Enum fieldName)
-        {
-            RemoveAssigned(fieldName.ToString());
-        }
-
         public void RemoveAssigned(string fieldName)
         {
             if (_assigned != null)
                 _assigned.Remove(fieldName);
         }
-
         protected void AddAssigned(string fieldName)
         {
-            if (_assigned != null && !_assigned.Contains(fieldName))
-            {
+            if (_assigned != null)
                 _assigned.Add(fieldName);
-            }
         }
-
-        #endregion Assigned List
-
-        #region CustomSqlText
-
-        private List<KeyValuePair<string, string>> _CustomSqlText = null;
-
-        public List<KeyValuePair<string, string>> GetCustomSqlText()
-        {
-            return _CustomSqlText;
-        }
-
-        public void RemoveCustomSqlText(Enum fieldName)
-        {
-            RemoveCustomSqlText(fieldName.ToString());
-        }
-
-        public void RemoveCustomSqlText(string fieldName)
-        {
-            if (_CustomSqlText != null)
-                _CustomSqlText.RemoveAll(c => c.Key == fieldName);
-        }
-        /// <summary>
-        /// 标示列为自定义SQL语句
-        /// eg.INSERT INTO Table (Field1) Value(@@DBTS)
-        /// AddCustomSqlText("Field1","@@DBTS")
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="sqlText"></param>
-        public void AddCustomSqlText(Enum fieldName, string sqlText)
-        {
-            AddCustomSqlText(fieldName.ToString(), sqlText);
-        }
-        /// <summary>
-        /// 标示列为自定义SQL语句
-        /// eg.INSERT INTO Table (Field1) Value(@@DBTS)
-        /// AddCustomSqlText("Field1","@@DBTS")
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="sqlText"></param>
-        public void AddCustomSqlText(string fieldName, string sqlText)
-        {
-            if (_CustomSqlText == null)
-                _CustomSqlText = new List<KeyValuePair<string, string>>();
-
-            if (_CustomSqlText != null && !_CustomSqlText.Exists(c => c.Key == fieldName))
-                _CustomSqlText.Add(new KeyValuePair<string, string>(fieldName, sqlText));
-        }
-        public bool ExistCustomSqlText(string fieldName)
-        {
-            if (_CustomSqlText == null)
-                return false;
-            else
-            {
-                return _CustomSqlText.Exists(c => c.Key == fieldName);
-            }
-        }
-
-        internal string GetCustomSqlTextValue(string fieldName)
-        {
-            if (_CustomSqlText == null)
-                return null;
-            else
-            {
-                return _CustomSqlText.Find(c => c.Key == fieldName).Value;
-            }
-        }
-
-        #endregion CustomSqlText
+        #endregion
 
         public static void SetValue(T entity, string fieldName, object value)
         {
@@ -153,39 +71,30 @@ namespace hwj.DBUtility.TableMapping
                     case System.Data.DbType.DateTime:
                         value = Convert.ToDateTime(value);
                         break;
-
                     case System.Data.DbType.Decimal:
                         value = Convert.ToDecimal(value);
                         break;
-
                     case System.Data.DbType.Double:
                         value = Convert.ToDouble(value);
                         break;
-
                     case System.Data.DbType.Int16:
                         value = Convert.ToInt16(value);
                         break;
-
                     case System.Data.DbType.Int32:
                         value = Convert.ToInt32(value);
                         break;
-
                     case System.Data.DbType.Int64:
                         value = Convert.ToInt64(value);
                         break;
-
                     case System.Data.DbType.UInt16:
                         value = Convert.ToUInt16(value);
                         break;
-
                     case System.Data.DbType.UInt32:
                         value = Convert.ToUInt32(value);
                         break;
-
                     case System.Data.DbType.UInt64:
                         value = Convert.ToUInt64(value);
                         break;
-
                     default:
                         break;
                 }
@@ -197,5 +106,6 @@ namespace hwj.DBUtility.TableMapping
         {
             return (this.MemberwiseClone() as T);
         }
+
     }
 }

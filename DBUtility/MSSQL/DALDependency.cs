@@ -1,14 +1,14 @@
-﻿using hwj.DBUtility.Interface;
-using hwj.DBUtility.TableMapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using hwj.DBUtility.TableMapping;
+using hwj.DBUtility.Interface;
 
 namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TS"></typeparam>
@@ -16,20 +16,18 @@ namespace hwj.DBUtility.MSSQL
         where T : BaseTable<T>, new()
         where TS : List<T>, new()
     {
-        #region Property
 
+        #region Property
         /// <summary>
-        ///
+        /// 
         /// </summary>
         protected static GenerateSelectSql<T> GenSelectSql = new GenerateSelectSql<T>();
-
         /// <summary>
-        ///
+        /// 
         /// </summary>
         protected static GenerateUpdateSql<T> GenUpdateSql = new GenerateUpdateSql<T>();
 
         private static string _TableName;
-
         protected static string TableName
         {
             get
@@ -43,38 +41,36 @@ namespace hwj.DBUtility.MSSQL
             }
             set { _TableName = value; }
         }
-
         //private static bool _EnableSqlLog = false;
         //public static bool EnableSqlLog
         //{
         //    get { return _EnableSqlLog; }
         //    set { _EnableSqlLog = value; }
         //}
-
-        #endregion Property
+        #endregion
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
-        protected internal DALDependency(string connectionString)
+        internal protected DALDependency(string connectionString)
             : this(connectionString, 30, Enums.LockType.None)
         {
-        }
 
+        }
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="connectionString">数据连接字符串</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="defaultLock">锁类型</param>
-        protected internal DALDependency(string connectionString, int timeout, Enums.LockType defaultLock)
+        internal protected DALDependency(string connectionString, int timeout, Enums.LockType defaultLock)
             : base(connectionString, timeout, defaultLock)
         {
-        }
 
+        }
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="lockType"></param>
@@ -85,7 +81,6 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region Insert
-
         /// <summary>
         /// 执行插入数据
         /// </summary>
@@ -105,7 +100,6 @@ namespace hwj.DBUtility.MSSQL
                 throw;
             }
         }
-
         /// <summary>
         /// 执行插入数据,并返回标识值
         /// </summary>
@@ -143,7 +137,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
         }
-
         ///// <summary>
         ///// 执行插入数据
         ///// </summary>
@@ -162,11 +155,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return Convert.ToInt64(ExecuteScalar(GenUpdateSql.InsertLastIDSql()));
         }
-
-        #endregion Insert
+        #endregion
 
         #region Update
-
         /// <summary>
         /// 获取更新的Sql对象
         /// </summary>
@@ -188,7 +179,6 @@ namespace hwj.DBUtility.MSSQL
             //else
             return sqlEty;
         }
-
         /// <summary>
         /// 获取更新的Sql对象
         /// </summary>
@@ -216,7 +206,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return Update(param, null);
         }
-
         /// <summary>
         /// 执行数据更新
         /// </summary>
@@ -229,7 +218,6 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = tmpSqlEty;
             return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
         }
-
         /// <summary>
         /// 执行数据更新
         /// </summary>
@@ -276,10 +264,9 @@ namespace hwj.DBUtility.MSSQL
         //    return ExecuteSqlByTrans(trans, tmpSqlEty);
         //}
 
-        #endregion Update
+        #endregion
 
         #region Delete
-
         /// <summary>
         /// 获取删除的Sql对象
         /// </summary>
@@ -305,7 +292,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return Delete(new FilterParams());
         }
-
         /// <summary>
         /// 删除记录
         /// </summary>
@@ -351,10 +337,9 @@ namespace hwj.DBUtility.MSSQL
         //    return ExecuteSqlByTrans(trans, tmpSqlEty);
         //}
 
-        #endregion Delete
+        #endregion
 
         #region Sql Log
-
         //private const string SqlParamsFormat = "{0}={1}$";
         //private const string InsertSqlLogFormat = "INSERT INTO tbSqlLog VALUES(@Table,@Type,@SQL,@Param,getdate())";
         ///// <summary>
@@ -393,11 +378,9 @@ namespace hwj.DBUtility.MSSQL
         //    else
         //        return string.Empty;
         //}
-
-        #endregion Sql Log
+        #endregion
 
         #region Get Entity
-
         /// <summary>
         /// 获取表对象的Sql对象
         /// </summary>
@@ -417,7 +400,6 @@ namespace hwj.DBUtility.MSSQL
 
             return sqlEty;
         }
-
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -433,11 +415,9 @@ namespace hwj.DBUtility.MSSQL
 
             return base.GetEntity(sqlEty);
         }
-
-        #endregion Get Entity
+        #endregion
 
         #region Get List
-
         public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType, int commandTimeout)
         {
             SqlEntity sqlEty = new SqlEntity();
@@ -448,7 +428,6 @@ namespace hwj.DBUtility.MSSQL
 
             return sqlEty;
         }
-
         /// <summary>
         /// 获取表集合
         /// </summary>
@@ -456,7 +435,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="maxCount">返回最大记录数</param>
-        /// <param name="lockType">锁类型</param>
+        /// <param name="lockType">锁类型</param>    
         /// <returns></returns>
         public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
@@ -465,36 +444,9 @@ namespace hwj.DBUtility.MSSQL
 
             return base.GetList(sqlEty);
         }
-
-        public List<C> GetList<C>(Enum displayField, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
-        {
-            List<C> lst = new List<C>();
-            DisplayFields df = new DisplayFields(displayField);
-            SqlEntity sqlEty = new SqlEntity();
-            sqlEty = GetListSqlEntity(df, filterParam, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
-
-            IDataReader reader = ExecuteReader(sqlEty.CommandText, sqlEty.Parameters, sqlEty.CommandTimeout);
-            try
-            {
-                while (reader.Read())
-                {
-                    //C obj = reader[0];
-                    //if (obj != null)
-                    lst.Add((C)reader[0]);
-                }
-                return lst;
-            }
-            catch { throw; }
-            finally
-            {
-                if (!reader.IsClosed) reader.Close();
-            }
-        }
-
-        #endregion Get List
+        #endregion
 
         #region Get Page
-
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
@@ -510,7 +462,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetPage3(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
-
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
@@ -527,7 +478,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
-
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
@@ -599,7 +549,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
-
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
@@ -654,7 +603,6 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
@@ -670,7 +618,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetPageForTable(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
-
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
@@ -725,11 +672,9 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-
-        #endregion Get Page
+        #endregion
 
         #region Record Count
-
         /// <summary>
         /// 返回表的记录数
         /// </summary>
@@ -738,7 +683,6 @@ namespace hwj.DBUtility.MSSQL
         {
             return RecordCount(null);
         }
-
         /// <summary>
         /// 返回表的记录数
         /// </summary>
@@ -755,7 +699,6 @@ namespace hwj.DBUtility.MSSQL
             _SqlEntity = sqlEty;
             return Convert.ToInt32(ExecuteScalar(sqlEty.CommandText, sqlEty.Parameters));
         }
-
         /// <summary>
         /// 返回表的记录数
         /// </summary>
@@ -766,11 +709,9 @@ namespace hwj.DBUtility.MSSQL
         {
             return Convert.ToInt32(ExecuteScalar(sql, parameters));
         }
-
-        #endregion Record Count
+        #endregion
 
         #region DataTable
-
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
@@ -790,7 +731,6 @@ namespace hwj.DBUtility.MSSQL
 
             return base.GetDataTable(sqlEty, tableName);
         }
-
         ///// <summary>
         ///// 通过事务，返回DataTable(建议用于Report或自定义列表)
         ///// </summary>
@@ -806,22 +746,20 @@ namespace hwj.DBUtility.MSSQL
         //    SqlEntity tmpSqlEty = new SqlEntity(GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock), GenSelectSql.GenParameter(filterParam));
         //    return base.GetDataTableByTran(trans, tmpSqlEty, tableName);
         //}
-
-        #endregion DataTable
+        #endregion
 
         #region Private Member
-
         private static void CheckSqlException(ref SqlException e, T entity)
         {
             if ((e.Number == 8152 || e.Number == 8115) && entity != null)
             {
                 string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
                 Common.AddExData(e.Data, fieldStr);
+
             }
             //}
             //return null;
         }
-
         //private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
         //{
         //    if (trans != null)
@@ -833,8 +771,7 @@ namespace hwj.DBUtility.MSSQL
         //        return false;
         //    }
         //}
-
-        #endregion Private Member
+        #endregion
 
         /// <summary>
         /// 获取数据库服务器时间
@@ -849,5 +786,6 @@ namespace hwj.DBUtility.MSSQL
                 DateTime.TryParse(tmp.ToString(), out tmpDateTime);
             return tmpDateTime;
         }
+
     }
 }

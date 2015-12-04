@@ -41,18 +41,10 @@ namespace hwj.DBUtility
             {
                 if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnUpdate))
                 {
-                    if (entity.ExistCustomSqlText(field.FieldName))
-                    {
-                        string value = entity.GetCustomSqlTextValue(field.FieldName);
-                        up.AddCustomParam(field.FieldName, value);
-                    }
-                    else
-                    {
-                        //if (!IsDatabaseDate(field.DataTypeCode, obj))
-                        up.AddParam(field.FieldName, obj);
-                        //else
-                        //    up.AddParam(field.FieldName, DatabaseGetDateSql);
-                    }
+                    //if (!IsDatabaseDate(field.DataTypeCode, obj))
+                    up.AddParam(field.FieldName, obj);
+                    //else
+                    //    up.AddParam(field.FieldName, DatabaseGetDateSql);
                 }
             }
             else

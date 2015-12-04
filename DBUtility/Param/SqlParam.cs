@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace hwj.DBUtility
 {
     public class SqlParam
     {
         private static DateTime _DatabaseDate = DateTime.Parse("9999-09-09");
-
         /// <summary>
         /// 设置为数据库当前时间日期
         /// </summary>
@@ -13,43 +13,19 @@ namespace hwj.DBUtility
         {
             get { return _DatabaseDate; }
         }
-
         #region Property
-
         public string FieldName { get; set; }
-
         public object FieldValue { get; set; }
-
         public Enums.Relation Operator { get; set; }
-
         public Enums.Expression Expression { get; set; }
-
         public bool IsUnicode { get; set; }
-
         /// <summary>
-        /// 自定义参数名(防止相同的参数名)
+        /// 自定义参数名(防止From To的情况下相同的参数名)
         /// </summary>
         public string ParamName { get; set; }
-
-        /// <summary>
-        /// 自定义SQL语句条件。
-        /// eg. Where Field1=Field2 AND Field3='VINSON'
-        /// Field1=Field2可以用以下语句实现:
-        /// AddCustomParam("Field1=Field2", Enums.Expression.AND);
-        /// </summary>
-        public string CustomText { get; set; }
-        /// <summary>
-        /// 是否自定义SQL语句条件
-        /// </summary>
-        public bool IsCustomText { get; private set; }
-        #endregion Property
-
+        #endregion
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
-            : this(fieldName.ToString(), fieldValue, oper, exp, paramName, isUnicode)
-        {
-        }
-
-        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+            : base()
         {
             FieldName = fieldName.ToString();
             FieldValue = fieldValue;
@@ -57,63 +33,103 @@ namespace hwj.DBUtility
             Expression = exp;
             ParamName = paramName;
             IsUnicode = isUnicode;
-            IsCustomText = false;
         }
-
-        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
-            : this(fieldName, fieldValue, oper, exp, paramName, true)
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+            : base()
         {
-        }
-
-        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
-            : this(fieldName, fieldValue, oper, exp, paramName, true)
-        {
-        }
-
-        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
-            : this(fieldName, fieldValue, oper, exp, null, true)
-        {
-        }
-
-        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
-            : this(fieldName, fieldValue, oper, exp, null, true)
-        {
-        }
-
-        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper)
-            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, true)
-        {
-        }
-
-        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper)
-            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, true)
-        {
-        }
-
-        public SqlParam(Enum fieldName, object fieldValue)
-            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, true)
-        {
-        }
-
-        public SqlParam(string fieldName, object fieldValue)
-            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, true)
-        {
-        }
-
-        public SqlParam(string customText, Enums.Expression exp)
-        {
-            FieldName = null;
-            FieldValue = null;
-            CustomText = customText;
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
             Expression = exp;
-            IsCustomText = true;
+            ParamName = paramName;
+            IsUnicode = isUnicode;
+        }
+        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = paramName;
+            IsUnicode = true;
+        }
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = paramName;
+            IsUnicode = true;
+        }
+        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = null;
+            IsUnicode = true;
+        }
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = exp;
+            ParamName = null;
+            IsUnicode = true;
+        }
+        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = Enums.Expression.Comma;
+            ParamName = null;
+            IsUnicode = true;
+        }
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = oper;
+            Expression = Enums.Expression.Comma;
+            ParamName = null;
+            IsUnicode = true;
+        }
+        public SqlParam(Enum fieldName, object fieldValue)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = Enums.Relation.Equal;
+            Expression = Enums.Expression.Comma;
+            ParamName = null;
+            IsUnicode = true;
+        }
+        public SqlParam(string fieldName, object fieldValue)
+            : base()
+        {
+            FieldName = fieldName.ToString();
+            FieldValue = fieldValue;
+            Operator = Enums.Relation.Equal;
+            Expression = Enums.Expression.Comma;
+            ParamName = null;
+            IsUnicode = true;
         }
     }
 
     //public static class SqlParamExtensions
     //{
     //    /// <summary>
-    //    ///
+    //    /// 
     //    /// </summary>
     //    /// <param name="lst"></param>
     //    /// <param name="fieldName"></param>
@@ -160,3 +176,6 @@ namespace hwj.DBUtility
     //    }
     //}
 }
+
+
+

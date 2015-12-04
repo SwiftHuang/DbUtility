@@ -88,6 +88,10 @@ namespace hwj.DBUtility.MSSQL
             ConnectionString = connectionString;
             DefaultCommandTimeout = timeout;
             InnerConnection = new SqlConnection(connectionString);
+            if (InnerConnection.ConnectionTimeout > DefaultCommandTimeout)
+            {
+                DefaultCommandTimeout = InnerConnection.ConnectionTimeout;
+            }
 
             SelectLock = defaultSelectLock;// Enums.LockType.UpdLock;
             UpdateLock = Enums.LockType.UpdLock;
@@ -810,7 +814,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         public void RollbackTransaction()
         {
-            if (InnerTransaction != null)
+            if (InnerTransaction != null && InnerTransaction.Connection != null)
             {
                 if (TransactionState == Enums.TransactionState.Begin)
                 {
