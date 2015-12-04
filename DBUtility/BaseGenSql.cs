@@ -1,9 +1,9 @@
-﻿using System;
+﻿using hwj.DBUtility.TableMapping;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using hwj.DBUtility.TableMapping;
-using System.Collections;
 
 namespace hwj.DBUtility
 {
@@ -12,6 +12,9 @@ namespace hwj.DBUtility
         protected const string _StringFormat = "'{0}'";
         protected const string _DecimalFormat = "{0}";
         protected static string _FieldFormat = string.Empty;
+        protected static string _SqlParam = string.Empty;
+        protected static string _SqlWhereParam = string.Empty;
+
         /// <summary>
         /// 获取数据库SQL
         /// </summary>
@@ -21,21 +24,209 @@ namespace hwj.DBUtility
         private static readonly int andR = Enums.ExpressionString(Enums.Expression.OR).Length;
 
         #region Protected Functions
-        protected abstract string GetCondition(SqlParam para, bool isWhere, bool isPage);
 
-        protected abstract string GenFilterParamsSql(FilterParams listParam, bool isPage);
+        protected string GetCondition(SqlParam para, bool isFilter, bool isPage)
+        {
+            StringBuilder sbStr = new StringBuilder();
+            if (!para.IsCustomText)
+            {
+                string __MsSqlParam = string.Empty;
+                if (isFilter)
+                {
+                    __MsSqlParam = _SqlWhereParam;
+                }
+                else
+                {
+                    __MsSqlParam = _SqlParam;
+                }
+
+                sbStr.AppendFormat(_FieldFormat, para.FieldName).Append(Enums.RelationString(para.Operator));
+
+                if (para.Operator == Enums.Relation.IsNotNull || para.Operator == Enums.Relation.IsNull)
+                {
+                    //sbStr.Append(para.Expression.ToSqlString());
+                }
+                else if (isPage)
+                {
+                    if (para.IsUnicode)
+                    {
+                        sbStr.Append("N");//.Append('\'');
+                    }
+                    sbStr.Append('\'');
+
+                    if (IsDatabaseDate(para))
+                    {
+                        sbStr.Append(DatabaseGetDateSql);
+                    }
+                    else
+                    {
+                        if (para.Operator == Enums.Relation.Like || para.Operator == Enums.Relation.NotLike)
+                        {
+                            sbStr.Append(para.FieldValue.ToString().Replace("'", "''").Replace("[", "[[]"));
+                        }
+                        else
+                        {
+                            sbStr.Append(para.FieldValue.ToString().Replace("'", "''"));
+                        }
+                    }
+
+                    sbStr.Append('\'');//.Append('\'');
+                }
+                else if (IsDatabaseDate(para))
+                {
+                    sbStr.Append(DatabaseGetDateSql);
+                }
+                else
+                {
+                    sbStr.AppendFormat(__MsSqlParam, !string.IsNullOrEmpty(para.ParamName) ? para.ParamName : para.FieldName);
+                }
+            }
+            else
+            {
+                sbStr.Append(para.CustomText);
+            }
+            sbStr.Append(Enums.ExpressionString(para.Expression));
+            return sbStr.ToString();
+        }
+
+        protected string GenFilterParamsSql(FilterParams listParam, bool isPage)
+        {
+            if (listParam != null && listParam.Count > 0)
+            {
+                string strWhere = "WHERE ";
+                StringBuilder sbWhere = new StringBuilder();
+                int index = 0;
+                if (!isPage)
+                    sbWhere.Append(strWhere);
+                foreach (SqlParam para in listParam)
+                {
+                    if (!para.IsCustomText)
+                    {
+                        if (string.IsNullOrEmpty(para.FieldName))
+                        {
+                            if (para.FieldValue.ToString() == ")")
+                            {
+                                string tmp = TrimSql(sbWhere.ToString());
+                                sbWhere = new StringBuilder();
+                                sbWhere.Append(tmp).Append(para.FieldValue).Append(Enums.ExpressionString(para.Expression));
+                            }
+                            else
+                            {
+                                sbWhere.Append(para.FieldValue);
+                            }
+                        }
+
+                        #region IN
+
+                        else if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN
+                            || para.Operator == Enums.Relation.IN_InsertSQL || para.Operator == Enums.Relation.NotIN_InsertSQL)
+                        {
+                            StringBuilder inSql = new StringBuilder();
+                            string[] strList = GetSQL_IN_Value(para.FieldValue);
+                            if (strList == null || strList.Length == 0)
+                            {
+                                sbWhere.Append(" 1=0 ").Append(Enums.ExpressionString(para.Expression));
+                                continue;
+                            }
+                            if (!isPage)
+                            {
+                                if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
+                                {
+                                    foreach (string s in strList)
+                                    {
+                                        inSql.AppendFormat(_SqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
+                                        index++;
+                                    }
+                                }
+                                else
+                                {
+                                    string tmpFormat = _StringFormat;
+                                    FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
+                                    if (f != null)
+                                    {
+                                        if (IsNumType(f.DataTypeCode))
+                                        {
+                                            tmpFormat = _DecimalFormat;
+                                        }
+
+                                        foreach (string s in strList)
+                                        {
+                                            inSql.AppendFormat(tmpFormat, s).Append(',');
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
+                                if (f != null)
+                                {
+                                    if (IsNumType(f.DataTypeCode))
+                                    {
+                                        foreach (string s in strList)
+                                        {
+                                            inSql.AppendFormat(_DecimalFormat, s).Append(',');
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (string s in strList)
+                                        {
+                                            inSql.Append('N').AppendFormat(_StringFormat, s).Append(',');
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(inSql.ToString()))
+                            {
+                                sbWhere.AppendFormat(_FieldFormat, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), inSql.ToString().TrimEnd(',')).Append(Enums.ExpressionString(para.Expression));
+                            }
+                        }
+                        else if (para.Operator == Enums.Relation.IN_SelectSQL || para.Operator == Enums.Relation.NotIN_SelectSQL)
+                        {
+                            if (!string.IsNullOrEmpty(para.FieldValue.ToString()))
+                            {
+                                sbWhere.AppendFormat(_FieldFormat, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), para.FieldValue.ToString()).Append(Enums.ExpressionString(para.Expression));
+                            }
+                        }
+
+                        #endregion IN
+                        else
+                        {
+                            sbWhere.Append(GetCondition(para, true, isPage));
+                        }
+                    }
+                    else
+                    {
+                        sbWhere.Append(GetCondition(para, true, isPage));
+                    }
+                }
+                //格式化最后的表达式，
+                if (sbWhere.ToString() == strWhere)
+                    return string.Empty;
+                else
+                    return TrimSql(sbWhere.ToString());
+            }
+            else
+                return string.Empty;
+        }
+
         protected string GenFilterParamsSql(FilterParams listParam)
         {
             return GenFilterParamsSql(listParam, false);
         }
+
         protected string GenGroupParamsSql(GroupParams param)
         {
             return GenDisplayFieldsSql(param, true);
         }
+
         protected string GenDisplayFieldsSql(DisplayFields fields)
         {
             return GenDisplayFieldsSql(fields, false);
         }
+
         protected string GenDisplayFieldsSql(List<Enum> fields, bool isPage)
         {
             if (fields != null && fields.Count > 0)
@@ -52,10 +243,12 @@ namespace hwj.DBUtility
             else
                 return "";
         }
+
         protected string GenSortParamsSql(SortParams orders)
         {
             return GenSortParamsSql(orders, false);
         }
+
         protected string GenSortParamsSql(SortParams orders, bool isPage)
         {
             if (orders != null)
@@ -86,6 +279,7 @@ namespace hwj.DBUtility
                 sql = sql.Substring(0, sql.Length - andR);
             return sql.TrimEnd(',');
         }
+
         ///// <summary>
         ///// 检查非法字符
         ///// </summary>
@@ -110,6 +304,7 @@ namespace hwj.DBUtility
         {
             return Common.IsNumType(typeCode);
         }
+
         protected bool IsDateType(DbType typeCode)
         {
             if (typeCode == DbType.DateTime)
@@ -117,12 +312,14 @@ namespace hwj.DBUtility
             else
                 return false;
         }
+
         protected bool IsDatabaseDate(SqlParam param)
         {
             if (param.FieldValue is DateTime && Convert.ToDateTime(param.FieldValue) == SqlParam.DatabaseDate)
                 return true;
             return false;
         }
+
         protected bool IsDatabaseDate(System.Data.DbType dbType, object value)
         {
             if (IsDateType(dbType) && Convert.ToDateTime(value) == SqlParam.DatabaseDate)
@@ -160,6 +357,9 @@ namespace hwj.DBUtility
                 return (string[])obj;
             }
         }
-        #endregion
+
+        #endregion Protected Functions
+
+
     }
 }
