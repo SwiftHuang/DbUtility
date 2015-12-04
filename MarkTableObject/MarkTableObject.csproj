@@ -10,11 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>hwj.MarkTableObject</RootNamespace>
     <AssemblyName>hwj.MarkTableObject</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>26AEFF981E01D256FD6A7D1B3945EE514BB58D09</ManifestCertificateThumbprint>
-    <ManifestKeyFile>MarkTableObject_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>109ECA2F279B7E453A49F231BDA8ECCA29930FB7</ManifestCertificateThumbprint>
+    <ManifestKeyFile>MarkTableObject_3_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <StartupObject>hwj.MarkTableObject.Program</StartupObject>
@@ -23,6 +23,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>E:\Project\GoogleCode\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -84,6 +85,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="hwj.CommonLibrary, Version=1.1.7.12, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\hwj.CommonLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -120,9 +125,7 @@
     <Compile Include="Components\MSSQLCtrl.Designer.cs">
       <DependentUpon>MSSQLCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\MSSQLSetting.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Components\MSSQLSetting.cs" />
     <Compile Include="Components\MSSQLSetting.Designer.cs">
       <DependentUpon>MSSQLSetting.cs</DependentUpon>
     </Compile>
@@ -222,7 +225,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="MarkTableObject_TemporaryKey_OLD.pfx" />
+    <None Include="MarkTableObject_3_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -235,11 +238,7 @@
     <Compile Include="XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonLibrary\CommonLibrary.csproj">
-      <Project>{700126CB-2266-4639-AC78-1060D5E38C96}</Project>
-      <Name>CommonLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UserControls\UserControls.csproj">
+    <ProjectReference Include="..\..\UserControl_CS\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
     </ProjectReference>
@@ -279,8 +278,6 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MarkTableObject_1_TemporaryKey.pfx" />
-    <None Include="MarkTableObject_TemporaryKey.pfx" />
     <None Include="Resources\add2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
