@@ -77,17 +77,19 @@ namespace hwj.DBUtility
 
             /// <summary>
             /// 不包含(not in) 以追加SQL语句形式实现，不能处理转义字符，没有数量限制(分页有参数长度限制)。
-            /// eg. Status IN ('S','E')
+            /// eg. Status NOT IN ('S','E')
             /// </summary>
             NotIN_InsertSQL,
 
             /// <summary>
             /// 包含(in) 以Select SQL语句形式实现，没有数量限制。
+            /// eg. Status IN (Select Status From Table)
             /// </summary>
             IN_SelectSQL,
 
             /// <summary>
             /// 不包含(not in) 以Select SQL语句形式实现，没有数量限制。
+            /// eg. Status NOT IN (Select Status From Table)
             /// </summary>
             NotIN_SelectSQL,
         }

@@ -72,9 +72,10 @@ namespace hwj.DBUtility.MSSQL
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
-                if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnInsert))
+                if (entity.ExistIgnoreUnInsert(field.FieldName) || !Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnInsert))
                 {
-                    insField.Append(field.FieldName).Append(',');
+                    //insField.Append(field.FieldName).Append(',');
+                    insField.AppendFormat(_MsSqlFieldFmt, field.FieldName).Append(',');
                     if (entity.ExistCustomSqlText(field.FieldName))
                     {
                         string value = entity.GetCustomSqlTextValue(field.FieldName);

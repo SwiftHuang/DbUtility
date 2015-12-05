@@ -478,9 +478,11 @@ namespace hwj.DBUtility.MSSQL
             {
                 while (reader.Read())
                 {
-                    //C obj = reader[0];
-                    //if (obj != null)
-                    lst.Add((C)reader[0]);
+                    object obj = reader[0];
+                    if (obj != null && reader[0] is System.DBNull == false)
+                    {
+                        lst.Add((C)reader[0]);
+                    }
                 }
                 return lst;
             }

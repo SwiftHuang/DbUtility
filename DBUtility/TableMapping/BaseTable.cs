@@ -11,6 +11,7 @@ namespace hwj.DBUtility.TableMapping
             : base(tableName)
         {
             _assigned = new List<String>();
+
             DBTableName = tableName;
         }
 
@@ -95,6 +96,7 @@ namespace hwj.DBUtility.TableMapping
             if (_CustomSqlText != null)
                 _CustomSqlText.RemoveAll(c => c.Key == fieldName);
         }
+
         /// <summary>
         /// 标示列为自定义SQL语句
         /// eg.INSERT INTO Table (Field1) Value(@@DBTS)
@@ -106,6 +108,7 @@ namespace hwj.DBUtility.TableMapping
         {
             AddCustomSqlText(fieldName.ToString(), sqlText);
         }
+
         /// <summary>
         /// 标示列为自定义SQL语句
         /// eg.INSERT INTO Table (Field1) Value(@@DBTS)
@@ -121,6 +124,7 @@ namespace hwj.DBUtility.TableMapping
             if (_CustomSqlText != null && !_CustomSqlText.Exists(c => c.Key == fieldName))
                 _CustomSqlText.Add(new KeyValuePair<string, string>(fieldName, sqlText));
         }
+
         public bool ExistCustomSqlText(string fieldName)
         {
             if (_CustomSqlText == null)
@@ -142,6 +146,47 @@ namespace hwj.DBUtility.TableMapping
         }
 
         #endregion CustomSqlText
+
+        #region Ignore UnInsert
+
+        private List<String> _ignUnInsertList = null;
+
+        internal bool ExistIgnoreUnInsert(string fieldName)
+        {
+            if (_ignUnInsertList != null && _ignUnInsertList.Count > 0)
+            {
+                return _ignUnInsertList.Contains(fieldName);
+            }
+            return false;
+        }
+
+        public void RemoveIgnoreUnInsert(Enum fieldName)
+        {
+            RemoveIgnoreUnInsert(fieldName.ToString());
+        }
+
+        public void RemoveIgnoreUnInsert(string fieldName)
+        {
+            if (_ignUnInsertList != null)
+                _ignUnInsertList.Remove(fieldName);
+        }
+
+        public void AddIgnoreUnInsert(Enum fieldName)
+        {
+            AddIgnoreUnInsert(fieldName.ToString());
+        }
+
+        public void AddIgnoreUnInsert(string fieldName)
+        {
+            if (_ignUnInsertList == null)
+                _ignUnInsertList = new List<string>();
+            if (!_ignUnInsertList.Contains(fieldName))
+            {
+                _ignUnInsertList.Add(fieldName);
+            }
+        }
+
+        #endregion Ignore UnInsert
 
         public static void SetValue(T entity, string fieldName, object value)
         {
