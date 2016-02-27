@@ -187,7 +187,7 @@ namespace hwj.DBUtility
                         {
                             if (!string.IsNullOrEmpty(para.FieldValue.ToString()))
                             {
-                                sbWhere.AppendFormat(_FieldFormat, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), para.FieldValue.ToString()).Append(Enums.ExpressionString(para.Expression));
+                                sbWhere.AppendFormat(_FieldFormat, para.FieldName).AppendFormat(Enums.RelationString(para.Operator), para.FieldValue.ToString().TrimEnd(';')).Append(Enums.ExpressionString(para.Expression));
                             }
                         }
 
