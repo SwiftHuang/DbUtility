@@ -53,11 +53,20 @@ namespace hwj.DBUtility.MSSQL
         { }
 
         /// <summary>
+        /// 数据库连接实体(默认超时时间为30秒)
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="autoCloseConnection">每次调用重新创建新的连接，使用后自动关闭</param>
+        public DbConnection(string connectionString, bool autoCloseConnection)
+            : this(connectionString, 30, Enums.LockType.None, false, autoCloseConnection)
+        { }
+
+        /// <summary>
         /// 数据库连接实体
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout">超时时间(单位:秒)</param>
-        /// <param name="defaultSelectLock"></param>
+        /// <param name="defaultSelectLock">默认锁的类型</param>
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock)
             : this(connectionString, timeout, defaultSelectLock, false)
         {
@@ -68,8 +77,8 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout">超时时间(单位:秒)</param>
-        /// <param name="defaultSelectLock"></param>
-        /// <param name="logSql"></param>
+        /// <param name="defaultSelectLock">默认锁的类型</param>
+        /// <param name="logSql">记录Sql</param>
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock, bool logSql)
             : this(connectionString, timeout, defaultSelectLock, logSql, false)
         {
@@ -80,9 +89,9 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="timeout">超时时间(单位:秒)</param>
-        /// <param name="defaultSelectLock"></param>
-        /// <param name="logSql"></param>
-        /// <param name="autoCloseConnection"></param>
+        /// <param name="defaultSelectLock">默认锁的类型</param>
+        /// <param name="logSql">记录Sql</param>
+        /// <param name="autoCloseConnection">每次调用重新创建新的连接，使用后自动关闭</param>
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock, bool logSql, bool autoCloseConnection)
         {
             ConnectionString = connectionString;
