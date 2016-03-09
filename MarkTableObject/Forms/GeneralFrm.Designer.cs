@@ -60,9 +60,9 @@
             this.chkAdd = new System.Windows.Forms.CheckBox();
             this.chkUpdate = new System.Windows.Forms.CheckBox();
             this.chkDelete = new System.Windows.Forms.CheckBox();
+            this.chkExists = new System.Windows.Forms.CheckBox();
             this.chkGetList = new System.Windows.Forms.CheckBox();
             this.chkGetPage = new System.Windows.Forms.CheckBox();
-            this.chkExists = new System.Windows.Forms.CheckBox();
             this.chkGetAllList = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtBLLConnection = new System.Windows.Forms.TextBox();
@@ -416,7 +416,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 33);
+            this.label7.Location = new System.Drawing.Point(3, 34);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(71, 12);
             this.label7.TabIndex = 0;
@@ -428,7 +428,7 @@
             this.lblBLLFileName.AutoSize = true;
             this.tableLayoutPanel3.SetColumnSpan(this.lblBLLFileName, 3);
             this.lblBLLFileName.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblBLLFileName.Location = new System.Drawing.Point(80, 33);
+            this.lblBLLFileName.Location = new System.Drawing.Point(80, 34);
             this.lblBLLFileName.Name = "lblBLLFileName";
             this.lblBLLFileName.Size = new System.Drawing.Size(580, 12);
             this.lblBLLFileName.TabIndex = 0;
@@ -450,7 +450,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 60);
+            this.label9.Location = new System.Drawing.Point(3, 61);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 12);
             this.label9.TabIndex = 0;
@@ -485,12 +485,12 @@
             this.tableLayoutPanel4.Controls.Add(this.chkGetList, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.chkGetPage, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.chkGetAllList, 6, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(77, 52);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(77, 54);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(586, 29);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(586, 27);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
             // chkAdd
@@ -499,7 +499,7 @@
             this.chkAdd.AutoSize = true;
             this.chkAdd.Checked = true;
             this.chkAdd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAdd.Location = new System.Drawing.Point(3, 6);
+            this.chkAdd.Location = new System.Drawing.Point(3, 5);
             this.chkAdd.Name = "chkAdd";
             this.chkAdd.Size = new System.Drawing.Size(42, 16);
             this.chkAdd.TabIndex = 0;
@@ -512,7 +512,7 @@
             this.chkUpdate.AutoSize = true;
             this.chkUpdate.Checked = true;
             this.chkUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdate.Location = new System.Drawing.Point(82, 6);
+            this.chkUpdate.Location = new System.Drawing.Point(82, 5);
             this.chkUpdate.Name = "chkUpdate";
             this.chkUpdate.Size = new System.Drawing.Size(60, 16);
             this.chkUpdate.TabIndex = 0;
@@ -525,12 +525,25 @@
             this.chkDelete.AutoSize = true;
             this.chkDelete.Checked = true;
             this.chkDelete.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDelete.Location = new System.Drawing.Point(161, 6);
+            this.chkDelete.Location = new System.Drawing.Point(161, 5);
             this.chkDelete.Name = "chkDelete";
             this.chkDelete.Size = new System.Drawing.Size(60, 16);
             this.chkDelete.TabIndex = 0;
             this.chkDelete.Text = "Delete";
             this.chkDelete.UseVisualStyleBackColor = true;
+            // 
+            // chkExists
+            // 
+            this.chkExists.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkExists.AutoSize = true;
+            this.chkExists.Checked = true;
+            this.chkExists.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkExists.Location = new System.Drawing.Point(240, 5);
+            this.chkExists.Name = "chkExists";
+            this.chkExists.Size = new System.Drawing.Size(60, 16);
+            this.chkExists.TabIndex = 0;
+            this.chkExists.Text = "Exists";
+            this.chkExists.UseVisualStyleBackColor = true;
             // 
             // chkGetList
             // 
@@ -538,7 +551,7 @@
             this.chkGetList.AutoSize = true;
             this.chkGetList.Checked = true;
             this.chkGetList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGetList.Location = new System.Drawing.Point(319, 6);
+            this.chkGetList.Location = new System.Drawing.Point(319, 5);
             this.chkGetList.Name = "chkGetList";
             this.chkGetList.Size = new System.Drawing.Size(66, 16);
             this.chkGetList.TabIndex = 0;
@@ -551,31 +564,18 @@
             this.chkGetPage.AutoSize = true;
             this.chkGetPage.Checked = true;
             this.chkGetPage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGetPage.Location = new System.Drawing.Point(398, 6);
+            this.chkGetPage.Location = new System.Drawing.Point(398, 5);
             this.chkGetPage.Name = "chkGetPage";
             this.chkGetPage.Size = new System.Drawing.Size(66, 16);
             this.chkGetPage.TabIndex = 0;
             this.chkGetPage.Text = "GetPage";
             this.chkGetPage.UseVisualStyleBackColor = true;
             // 
-            // chkExists
-            // 
-            this.chkExists.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkExists.AutoSize = true;
-            this.chkExists.Checked = true;
-            this.chkExists.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExists.Location = new System.Drawing.Point(240, 6);
-            this.chkExists.Name = "chkExists";
-            this.chkExists.Size = new System.Drawing.Size(60, 16);
-            this.chkExists.TabIndex = 0;
-            this.chkExists.Text = "Exists";
-            this.chkExists.UseVisualStyleBackColor = true;
-            // 
             // chkGetAllList
             // 
             this.chkGetAllList.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkGetAllList.AutoSize = true;
-            this.chkGetAllList.Location = new System.Drawing.Point(477, 6);
+            this.chkGetAllList.Location = new System.Drawing.Point(477, 5);
             this.chkGetAllList.Name = "chkGetAllList";
             this.chkGetAllList.Size = new System.Drawing.Size(84, 16);
             this.chkGetAllList.TabIndex = 0;
@@ -766,6 +766,7 @@
             this.lblDALFileName4View.TabIndex = 0;
             this.lblDALFileName4View.TabStop = true;
             this.lblDALFileName4View.Text = "--";
+            this.lblDALFileName4View.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label14
             // 
@@ -878,6 +879,7 @@
             this.lblEntityFileName4View.TabIndex = 0;
             this.lblEntityFileName4View.TabStop = true;
             this.lblEntityFileName4View.Text = "--";
+            this.lblEntityFileName4View.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label17
             // 
@@ -1020,6 +1022,7 @@
             this.lblBLLFileName4View.TabIndex = 0;
             this.lblBLLFileName4View.TabStop = true;
             this.lblBLLFileName4View.Text = "--";
+            this.lblBLLFileName4View.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBLLFileName_LinkClicked);
             // 
             // label21
             // 

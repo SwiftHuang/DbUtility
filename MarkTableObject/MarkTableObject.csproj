@@ -85,10 +85,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="hwj.CommonLibrary, Version=1.1.7.12, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\hwj.CommonLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -243,6 +239,10 @@
     <None Include="WTLKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{ea76e51a-970b-49fe-8a42-9de6ef898813}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UserControl_CS\UserControls.csproj">
       <Project>{2545D533-9E25-4895-AFD1-CA59A72BA2B9}</Project>
       <Name>UserControls</Name>
