@@ -28,9 +28,9 @@ namespace hwj.DBUtility.MSSQL
         public IDbConnection InnerConnection { get; private set; }
 
         //public Enums.LockType DefaultLock { get; set; }
-        public Enums.LockType SelectLock { get; set; }
+        public List<Enums.LockType> SelectLock { get; set; }
 
-        public Enums.LockType UpdateLock { get; set; }
+        public List<Enums.LockType> UpdateLock { get; set; }
 
         public Enums.TransactionState TransactionState { get; set; }
 

@@ -17,9 +17,9 @@ namespace hwj.DBUtility.Interface
         IDbTransaction InnerTransaction { get; }
 
         //Enums.LockType DefaultLock { get; set; }
-        Enums.LockType SelectLock { get; set; }
+        List<Enums.LockType> SelectLock { get; set; }
 
-        Enums.LockType UpdateLock { get; set; }
+        List<Enums.LockType> UpdateLock { get; set; }
 
         Enums.TransactionState TransactionState { get; set; }
 

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using hwj.DBUtility.TableMapping;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
-using hwj.DBUtility.TableMapping;
-using System.Data;
 
 namespace hwj.DBUtility.MSSQL
 {
@@ -11,6 +11,7 @@ namespace hwj.DBUtility.MSSQL
     {
         //private const string _MsSqlInsertLastID = "SELECT @@IDENTITY AS 'Identity';";
         private const string _MsSqlSelectString = "SELECT {0} {1} FROM {2} {3} {4} {5};";
+
         private const string _MsSqlTopCount = "top {0}";
         private const string _MsSqlPaging_RowCount = "EXEC dbo.Hwj_Paging_RowCount @TableName,@FieldKey,@Sort,@PageIndex,@PageSize,@DisplayField,@Where,@Group,@_PTotalCount output";
         private const string _MsSqlPageView = "EXEC dbo.sp_PageView @TableName,@FieldKey,@PageIndex,@PageSize,@DisplayField,@Sort,@Where,@_RecordCount output";
@@ -32,15 +33,18 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region Select Sql
+
         public string SelectServerDateTime()
         {
             return "SELECT GETDATE() AS [DateTime]";
         }
+
         public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
         {
             return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, Enums.LockType.NoLock);
         }
-        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, Enums.LockType lockType)
+
+        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, List<Enums.LockType> lockTypes)
         {
             string sMaxCount = string.Empty;
 
@@ -48,8 +52,9 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(lockType), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(lockTypes), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
         }
+
         /// <summary>
         /// 数据分页
         /// </summary>
@@ -96,6 +101,7 @@ namespace hwj.DBUtility.MSSQL
             SE.Parameters.Add(new SqlParameter("@Group", GenGroupParamsSql(groupParam)));
             return SE;
         }
+
         //public string SelectPageSql2(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         //{
         //    string _SelectFields = GenDisplayFieldsSql(displayFields);
@@ -130,9 +136,11 @@ namespace hwj.DBUtility.MSSQL
             SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
             return SE;
         }
-        #endregion
+
+        #endregion Select Sql
 
         #region Private Functions
+
         ///// <summary>
         ///// 生成筛选SQL
         ///// </summary>
@@ -299,22 +307,50 @@ namespace hwj.DBUtility.MSSQL
         //    sbStr.Append(Enums.ExpressionString(para.Expression));
         //    return sbStr.ToString();
         //}
-        private string GetNoLock(Enums.LockType type)
+        private string GetNoLocks(List<Enums.LockType> lockTypes)
         {
-            switch (type)
+            if (lockTypes != null && lockTypes.Count > 0)
+            {
+                string str = string.Empty;
+                StringBuilder sb = new StringBuilder();
+                foreach (var t in lockTypes)
+                {
+                    str = GetNoLockByEnums(t);
+                    if (!string.IsNullOrEmpty(str) && !sb.ToString().Contains(str))
+                    {
+                        sb.AppendFormat("{0},", str);
+                    }
+                }
+                str = sb.ToString().TrimEnd(',');
+                if (!string.IsNullOrEmpty(str))
+                {
+                    return string.Format("({0})", str);
+                }
+            }
+            return string.Empty;
+
+        }
+        private string GetNoLockByEnums(Enums.LockType lockType)
+        {
+            switch (lockType)
             {
                 case Enums.LockType.None:
                     return string.Empty;
+
                 case Enums.LockType.NoLock:
-                    return "(NOLOCK)";
+                    return "NOLOCK";
+
                 case Enums.LockType.HoldLock:
-                    return "(HOLDLOCK)";
+                    return "HOLDLOCK";
+
                 case Enums.LockType.RowLock:
-                    return "(ROWLOCK)";
+                    return "ROWLOCK";
+
                 case Enums.LockType.UpdLock:
-                    return "(UPDLOCK)";
+                    return "UPDLOCK";
+
                 default:
-                    return "(NOLOCK)";
+                    return "NOLOCK";
             }
         }
         //private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
@@ -339,9 +375,11 @@ namespace hwj.DBUtility.MSSQL
             }
             return value;
         }
-        #endregion
+
+        #endregion Private Functions
 
         #region Public Functions
+
         public List<IDbDataParameter> GenParameter(FilterParams filterParam)
         {
             if (filterParam != null)
@@ -399,6 +437,7 @@ namespace hwj.DBUtility.MSSQL
                 return null;
             }
         }
-        #endregion
+
+        #endregion Public Functions
     }
 }

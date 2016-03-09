@@ -409,10 +409,15 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType, int commandTimeout)
         {
+            return GetEntitySqlEntity(displayFields, filterParam, sortParams, new List<Enums.LockType>() { lockType }, commandTimeout);
+        }
+
+        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, List<Enums.LockType> lockTypes, int commandTimeout)
+        {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = commandTimeout;
-            sqlEty.LockType = lockType;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockType);
+            sqlEty.LockType = lockTypes;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockTypes);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 
             return sqlEty;
@@ -440,10 +445,15 @@ namespace hwj.DBUtility.MSSQL
 
         public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType, int commandTimeout)
         {
+            return GetListSqlEntity(displayFields, filterParam, sortParams, maxCount, new List<Enums.LockType>() { lockType }, commandTimeout);
+        }
+
+        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes, int commandTimeout)
+        {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = commandTimeout;
-            sqlEty.LockType = lockType;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
+            sqlEty.LockType = lockTypes;
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockTypes);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
 
             return sqlEty;
@@ -547,7 +557,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
-            tmpSqlEty.LockType = Enums.LockType.NoLock;
+            tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
             _SqlEntity = tmpSqlEty;
 
@@ -618,7 +628,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
-            tmpSqlEty.LockType = Enums.LockType.NoLock;
+            tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
             _SqlEntity = tmpSqlEty;
 
@@ -689,7 +699,7 @@ namespace hwj.DBUtility.MSSQL
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
-            tmpSqlEty.LockType = Enums.LockType.NoLock;
+            tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
             _SqlEntity = tmpSqlEty;
 

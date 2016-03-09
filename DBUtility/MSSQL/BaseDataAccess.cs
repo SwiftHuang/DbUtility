@@ -320,17 +320,26 @@ namespace hwj.DBUtility.MSSQL
             return GetEntity(null, filterParam, null, InnerConnection.SelectLock);
         }
 
+        ///// <summary>
+        ///// 获取表对象
+        ///// </summary>
+        ///// <param name="filterParam">条件参数</param>
+        ///// <param name="lockType">锁类型</param>
+        ///// <returns></returns>
+        //public T GetEntity(FilterParams filterParam, Enums.LockType lockType)
+        //{
+        //    return GetEntity(null, filterParam, null, lockType);
+        //}
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="filterParam">条件参数</param>
-        /// <param name="lockType">锁类型</param>
+        /// <param name="lockTypes">锁类型</param>
         /// <returns></returns>
-        public T GetEntity(FilterParams filterParam, Enums.LockType lockType)
+        public T GetEntity(FilterParams filterParam, List<Enums.LockType> lockTypes)
         {
-            return GetEntity(null, filterParam, null, lockType);
+            return GetEntity(null, filterParam, null, lockTypes);
         }
-
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -342,6 +351,18 @@ namespace hwj.DBUtility.MSSQL
             return GetEntity(displayFields, filterParam, null, InnerConnection.SelectLock);
         }
 
+        ///// <summary>
+        ///// 获取表对象
+        ///// </summary>
+        ///// <param name="displayFields">返回指定字段</param>
+        ///// <param name="filterParam">条件参数</param>
+        ///// <param name="lockType">锁类型</param>
+        ///// <returns></returns>
+        //public T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        //{
+        //    return GetEntity(displayFields, filterParam, null, new List<Enums.LockType>() { lockType });
+        //}
+
         /// <summary>
         /// 获取表对象
         /// </summary>
@@ -349,9 +370,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParam">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, List<Enums.LockType> lockTypes)
         {
-            return GetEntity(displayFields, filterParam, null, lockType);
+            return GetEntity(displayFields, filterParam, null, lockTypes);
         }
 
         /// <summary>
@@ -374,7 +395,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType);
+        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, List<Enums.LockType> lockTypes);
 
         /// <summary>
         /// 获取表对象
