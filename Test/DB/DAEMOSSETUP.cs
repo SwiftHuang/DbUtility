@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using hwj.DBUtility;
 using hwj.DBUtility.MSSQL;
+using hwj.DBUtility.Interface;
 
 namespace Test.DB
 {
@@ -18,10 +19,10 @@ namespace Test.DB
         {
             TableName = tbEMOSSETUP.DBTableName;
         }
-        public DAEMOSSETUP(DbTransaction trans)
-            : base(trans)
+        public DAEMOSSETUP(IConnection conn)
+            : base(conn)
         {
-            
+
         }
 
         public bool Add(tbEMOSSETUP entity)
@@ -36,16 +37,6 @@ namespace Test.DB
             fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
             fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
             return base.Update(updateEntity, fp);
-        }
-
-        public static bool Update(DbTransaction trans, tbEMOSSETUP updateEntity, string id, string companyCode, string branchCode)
-        {
-            FilterParams fp = new FilterParams();
-            fp.AddParam(tbEMOSSETUP.Fields.ID, id, Enums.Relation.Equal, Enums.Expression.AND);
-            fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
-            fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
-            return DAEMOSSETUP.Update(trans, updateEntity, fp);
-            //return  .Update(updateEntity, fp);
         }
 
         public bool Delete(string id, string companyCode, string branchCode)
@@ -66,16 +57,15 @@ namespace Test.DB
             return base.GetEntity(fp);
         }
 
-        public tbEMOSSETUP GetEntity(DbTransaction trans, string id, string companyCode, string branchCode)
+        public tbEMOSSETUPs GetList(string companyCode, List<string> IDList)
         {
             FilterParams fp = new FilterParams();
-            fp.AddParam(tbEMOSSETUP.Fields.ID, id, Enums.Relation.Equal, Enums.Expression.AND);
+            //fp.AddParam(tbEMOSSETUP.Fields.ID, IDList, Enums.Relation.IN, Enums.Expression.AND);
+            fp.AddParam(tbEMOSSETUP.Fields.ID, new List<string>(), Enums.Relation.IN, Enums.Expression.AND);
+            //fp.AddParam(tbEMOSSETUP.Fields.ID, new List<string>() { "BKGREF", "BKGREF2" }, Enums.Relation.IN, Enums.Expression.OR);
             fp.AddParam(tbEMOSSETUP.Fields.CompanyCode, companyCode, Enums.Relation.Equal, Enums.Expression.AND);
-            fp.AddParam(tbEMOSSETUP.Fields.BranchCode, branchCode, Enums.Relation.Equal, Enums.Expression.AND);
 
-            viEMOSSETUP vi = trans.GetEntity<viEMOSSETUP>(fp);
-            //return trans.GetEntity<tbEMOSSETUP>(DAEMOSSETUP.GetSQLEntity(fp));
-            return trans.GetEntity<tbEMOSSETUP>(fp);
+            return base.GetList(null, fp);
         }
     }
 }

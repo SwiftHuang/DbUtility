@@ -19,98 +19,114 @@ namespace Test
 
         private void xButton1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //string connStr = "Data Source=192.168.123.131;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=113502";
-                string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
-                DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(connStr);
-                DB.tbEMOSSETUP setup = da.GetEntity("BKGREF", "JT", "J");
+            //try
+            //{
+            //    //string connStr = "Data Source=192.168.123.131;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=113502";
+            //    string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
+            //    DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(connStr);
+            //    DB.tbEMOSSETUP setup = da.GetEntity("BKGREF", "JT", "J");
 
-                using (hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
-                {
-                    try
-                    {
+            //    using (hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
+            //    {
+            //        try
+            //        {
 
-                        DB.tbEMOSSETUP setup2 = da.GetEntity(trans, "BKGREF", "JT", "J");
-                        trans.Commit();
-                        return;
-                        //trans.Commit();
-                        //string tmp = GetNewBkgRefKey(trans, "V", "VI", "BKGREF", 1);
+            //            DB.tbEMOSSETUP setup2 = da.GetEntity(trans, "BKGREF", "JT", "J");
+            //            trans.Commit();
+            //            return;
+            //            //trans.Commit();
+            //            //string tmp = GetNewBkgRefKey(trans, "V", "VI", "BKGREF", 1);
 
-                        DB.tbEMOSSETUP s1 = new Test.DB.tbEMOSSETUP();
-                        s1.BranchCode = "V";
-                        s1.CompanyCode = "VI";
-                        //s1.ID = "BKGREF-BKGREF";
-                        s1.ID = "BKGREF";
-                        s1.VALUE = "0000000006";
+            //            DB.tbEMOSSETUP s1 = new Test.DB.tbEMOSSETUP();
+            //            s1.BranchCode = "V";
+            //            s1.CompanyCode = "VI";
+            //            //s1.ID = "BKGREF-BKGREF";
+            //            s1.ID = "BKGREF";
+            //            s1.VALUE = "0000000006";
 
-                        DB.DAEMOSSETUP.Update(trans, s1, s1.ID, s1.CompanyCode, s1.BranchCode);
-                        //trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
+            //            DB.DAEMOSSETUP.Update(trans, s1, s1.ID, s1.CompanyCode, s1.BranchCode);
+            //            //trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
 
-                        //using (hwj.DBUtility.MSSQL.DbTransaction trans2 = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
-                        //{
-                        //    DB.tbEMOSSETUP setup1 = da.GetEntity(trans2, "BKGREF", "VI", "V");
-                        //}
+            //            //using (hwj.DBUtility.MSSQL.DbTransaction trans2 = new hwj.DBUtility.MSSQL.DbTransaction(connStr))
+            //            //{
+            //            //    DB.tbEMOSSETUP setup1 = da.GetEntity(trans2, "BKGREF", "VI", "V");
+            //            //}
 
-                        hwj.DBUtility.FilterParams fp = new hwj.DBUtility.FilterParams();
-                        fp.AddParam(DB.tbEMOSSETUP.Fields.CompanyCode, s1.CompanyCode, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
-                        fp.AddParam(DB.tbEMOSSETUP.Fields.ID, s1.ID, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
+            //            hwj.DBUtility.FilterParams fp = new hwj.DBUtility.FilterParams();
+            //            fp.AddParam(DB.tbEMOSSETUP.Fields.CompanyCode, s1.CompanyCode, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
+            //            fp.AddParam(DB.tbEMOSSETUP.Fields.ID, s1.ID, hwj.DBUtility.Enums.Relation.Equal, hwj.DBUtility.Enums.Expression.AND);
 
-                        DB.DAEMOSSETUP.Update(trans, s1, fp);
+            //            DB.DAEMOSSETUP.Update(trans, s1, fp);
 
-                        //trans.ExecuteSqlList(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.DeleteSqlEntity(fp) });
+            //            //trans.ExecuteSqlList(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.DeleteSqlEntity(fp) });
 
-                        s1.ID = "BKGREF8";
-                        trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
-                        //trans.ExecuteSqlTran(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.AddSqlEntity(s1) }, -1);
-                        trans.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        trans.Rollback();
-                        trans.SqlConn.Close();
-                        //throw;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+            //            s1.ID = "BKGREF8";
+            //            trans.ExecuteSql(DB.DAEMOSSETUP.AddSqlEntity(s1));
+            //            //trans.ExecuteSqlTran(new hwj.DBUtility.SqlList() { DB.DAEMOSSETUP.AddSqlEntity(s1) }, -1);
+            //            trans.Commit();
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            trans.Rollback();
+            //            trans.SqlConn.Close();
+            //            //throw;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show(ex.Message);
-            }
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
-        private string GetNewBkgRefKey(hwj.DBUtility.MSSQL.DbTransaction trans, string branchCode, string companyCode, string moduleCode, int numOfKey)
-        {
+        //private string GetNewBkgRefKey(hwj.DBUtility.MSSQL.DbTransaction trans, string branchCode, string companyCode, string moduleCode, int numOfKey)
+        //{
 
-            SqlCommand cmd = new SqlCommand("SP_CREATEBKGKEY", trans.SqlConn, trans.SqlTrans);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@IN_MODULECODE", moduleCode));
-            cmd.Parameters.Add(new SqlParameter("@IN_BRANCHCODE", branchCode));
-            cmd.Parameters.Add(new SqlParameter("@IN_NUMOFKEY", numOfKey));
-            cmd.Parameters.Add(new SqlParameter("@IN_COMPANYCODE", companyCode));
+        //    SqlCommand cmd = new SqlCommand("SP_CREATEBKGKEY", trans.SqlConn, trans.SqlTrans);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.Add(new SqlParameter("@IN_MODULECODE", moduleCode));
+        //    cmd.Parameters.Add(new SqlParameter("@IN_BRANCHCODE", branchCode));
+        //    cmd.Parameters.Add(new SqlParameter("@IN_NUMOFKEY", numOfKey));
+        //    cmd.Parameters.Add(new SqlParameter("@IN_COMPANYCODE", companyCode));
 
-            SqlParameter sp = new SqlParameter("@OUT_PEONYREF", SqlDbType.VarChar, 10);
-            sp.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(sp);
-            cmd.ExecuteScalar();
-            return sp.Value.ToString();
-        }
+        //    SqlParameter sp = new SqlParameter("@OUT_PEONYREF", SqlDbType.VarChar, 10);
+        //    sp.Direction = ParameterDirection.Output;
+        //    cmd.Parameters.Add(sp);
+        //    cmd.ExecuteScalar();
+        //    return sp.Value.ToString();
+        //}
 
         private void xButton2_Click(object sender, EventArgs e)
         {
             string connStr = "Data Source=10.100.133.83;Initial Catalog=wtlemos;Persist Security Info=True;User ID=sa;Password=gzuat";
-            hwj.DBUtility.MSSQL.DbTransaction trans = new hwj.DBUtility.MSSQL.DbTransaction(connStr);
-            DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(trans);
+            hwj.DBUtility.MSSQL.DbConnection conn = new hwj.DBUtility.MSSQL.DbConnection(connStr);
+            DB.DAEMOSSETUP da = new Test.DB.DAEMOSSETUP(conn);
 
-            //trans.Begin();
-            DB.tbEMOSSETUP s1 = da.GetEntity("BKGREF", "JT", "J");
+            //conn.BeginTransaction();
+            //DB.tbEMOSSETUP s1 = da.GetEntity("BKGREF", "JT", "J");
+            //conn.CommitTransaction();
 
-            trans.Commit();
+            //conn.BeginTransaction();
+            //DB.tbEMOSSETUP s2 = da.GetEntity("BKGREF", "JT", "J");
+            //conn.CommitTransaction();
 
-            trans.Begin();
-            DB.tbEMOSSETUP s2 = da.GetEntity("BKGREF", "JT", "J");
-            trans.Commit();
+            //DB.tbEMOSSETUPs lst = da.GetList("VI", new List<string> { "BKGREF", "BKGREF2" });
+
+            //DB.tbEMOSSETUPs lst1 = da.GetList("VI", new List<decimal>());
+
+            DB.tbEMOSSETUPs lst2 = da.GetList("VI", new List<string>());
+        }
+
+        private void xButton3_Click(object sender, EventArgs e)
+        {
+            string connStr = "Data Source=10.100.133.83;Initial Catalog=AutoSync;Persist Security Info=True;User ID=sa;Password=gzuat";
+            DB.DAL.DAAptx da = new Test.DB.DAL.DAAptx(connStr);
+            xButton3.Text = da.GetServerDateTime().ToString();
+            xButton3.Text = da.GetServerDateTime().ToString();
+            xButton3.Text = da.GetServerDateTime().ToString();
+            xButton3.Text = da.GetServerDateTime().ToString();
+
         }
     }
 }

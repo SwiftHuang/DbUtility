@@ -49,8 +49,8 @@
             // 
             this.bwGetList.WorkerReportsProgress = true;
             this.bwGetList.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwGetList_DoWork);
-            this.bwGetList.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetList_RunWorkerCompleted);
             this.bwGetList.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwGetList_ProgressChanged);
+            this.bwGetList.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetList_RunWorkerCompleted);
             // 
             // textBox1
             // 
@@ -74,8 +74,8 @@
             // 
             this.bwGetList2.WorkerReportsProgress = true;
             this.bwGetList2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwGetList2_DoWork);
-            this.bwGetList2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetList2_RunWorkerCompleted);
             this.bwGetList2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwGetList2_ProgressChanged);
+            this.bwGetList2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetList2_RunWorkerCompleted);
             // 
             // FrmAsync
             // 
