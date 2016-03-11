@@ -740,16 +740,16 @@
             <returns></returns>
         </member>
         <member name="F:hwj.CommonLibrary.Object.StringHelper.strChineseCharList">
-            <summary>
-            汉字拼音首字母列表 本列表包含了20901个汉字,用于配合 GetChineseSpell 函数使用,本表收录的字符的Unicode编码范围为19968至40869[南京 yyf]
-            </summary>
+            <summary> 
+            汉字拼音首字母列表 本列表包含了20901个汉字,用于配合 GetChineseSpell 函数使用,本表收录的字符的Unicode编码范围为19968至40869[南京 yyf] 
+            </summary> 
         </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.GetChineseSpell(System.String)">
-            <summary>
+            <summary> 
             获得字符串的汉语拼音码
-            </summary>
-            <param name="strText">字符串</param>
-            <returns>汉语拼音码,该字符串只包含大写的英文字母</returns>
+            </summary> 
+            <param name="strText">字符串</param> 
+            <returns>汉语拼音码,该字符串只包含大写的英文字母</returns> 
         </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.IsLetterOrNumeric(System.String)">
             <summary>
