@@ -313,13 +313,13 @@ namespace hwj.DBUtility.MSSQL
 
         #region Public Functions
 
-        public List<IDbDataParameter> GenParameter(FilterParams filterParam)
+        public List<IDbDataParameter> GenParameter(FilterParams filterParams)
         {
-            if (filterParam != null)
+            if (filterParams != null)
             {
                 int index = 0;
                 List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
-                foreach (SqlParam sp in filterParam)
+                foreach (SqlParam sp in filterParams)
                 {
                     if (IsDatabaseDate(sp))
                         continue;

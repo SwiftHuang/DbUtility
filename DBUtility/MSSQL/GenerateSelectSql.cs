@@ -39,12 +39,12 @@ namespace hwj.DBUtility.MSSQL
             return "SELECT GETDATE() AS [DateTime]";
         }
 
-        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount)
+        public override string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParams, SortParams sortFields, int? maxCount)
         {
-            return SelectSql(tableName, displayFields, filterParam, sortFields, maxCount, Enums.LockType.NoLock);
+            return SelectSql(tableName, displayFields, filterParams, sortFields, maxCount, new List<Enums.LockType>() { Enums.LockType.NoLock });
         }
 
-        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortFields, int? maxCount, List<Enums.LockType> lockTypes)
+        public string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParams, SortParams sortFields, int? maxCount, List<Enums.LockType> lockTypes)
         {
             string sMaxCount = string.Empty;
 
@@ -52,7 +52,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 sMaxCount = string.Format(_MsSqlTopCount, maxCount);
             }
-            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLock(lockTypes), GenFilterParamsSql(filterParam), GenSortParamsSql(sortFields));
+            return string.Format(_MsSqlSelectString, sMaxCount, GenDisplayFieldsSql(displayFields), tableName, GetNoLocks(lockTypes), GenFilterParamsSql(filterParams), GenSortParamsSql(sortFields));
         }
 
         /// <summary>
@@ -79,14 +79,14 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="tableName">表名</param>
         /// <param name="displayFields">需要显示的字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">分页依据(关键字)</param>
         /// <param name="groupParam">分组显示</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页显示记录数</param>
         /// <returns></returns>
-        public SqlEntity GetGroupPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
+        public SqlEntity GetGroupPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize)
         {
             SqlEntity SE = new SqlEntity();
             SE.CommandText = _MsSqlPaging_RowCount;
@@ -97,7 +97,7 @@ namespace hwj.DBUtility.MSSQL
             SE.Parameters.Add(new SqlParameter("@PageSize", pageSize));
             SE.Parameters.Add(new SqlParameter("@DisplayField", GenDisplayFieldsSql(displayFields)));
             SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sortParams, true)));
-            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
+            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParams, true)));
             SE.Parameters.Add(new SqlParameter("@Group", GenGroupParamsSql(groupParam)));
             return SE;
         }
@@ -109,7 +109,7 @@ namespace hwj.DBUtility.MSSQL
         //    string _OrderParam = GenSortParamsSql(sortParams, true);
         //    return string.Format(_MsSqlPageView, tableName, GenDisplayFieldsSql(PK, true), pageNumber, pageSize, _SelectFields, _OrderParam, _FilterParam);
         //}
-        public SqlEntity GetPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
+        public SqlEntity GetPageSqlEntity(string tableName, DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize)
         {
             SqlEntity SE = new SqlEntity();
             SE.CommandText = _MsSqlPageView;
@@ -133,7 +133,7 @@ namespace hwj.DBUtility.MSSQL
                 }
                 SE.Parameters.Add(new SqlParameter("@Sort", GenSortParamsSql(sort, true)));
             }
-            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParam, true)));
+            SE.Parameters.Add(new SqlParameter("@Where", GenFilterParamsSql(filterParams, true)));
             return SE;
         }
 
@@ -324,12 +324,12 @@ namespace hwj.DBUtility.MSSQL
                 str = sb.ToString().TrimEnd(',');
                 if (!string.IsNullOrEmpty(str))
                 {
-                    return string.Format("({0})", str);
+                    return string.Format("WITH ({0})", str);
                 }
             }
             return string.Empty;
-
         }
+
         private string GetNoLockByEnums(Enums.LockType lockType)
         {
             switch (lockType)
@@ -353,6 +353,7 @@ namespace hwj.DBUtility.MSSQL
                     return "NOLOCK";
             }
         }
+
         //private SqlParameter GetSqlParameter(FieldMappingInfo field, T entity)
         //{
         //    object value = field.Property.GetValue(entity, null);
@@ -380,13 +381,13 @@ namespace hwj.DBUtility.MSSQL
 
         #region Public Functions
 
-        public List<IDbDataParameter> GenParameter(FilterParams filterParam)
+        public List<IDbDataParameter> GenParameter(FilterParams filterParams)
         {
-            if (filterParam != null)
+            if (filterParams != null)
             {
                 int index = 0;
                 List<IDbDataParameter> LstDP = new List<IDbDataParameter>();
-                foreach (SqlParam sp in filterParam)
+                foreach (SqlParam sp in filterParams)
                 {
                     if (IsDatabaseDate(sp))
                         continue;

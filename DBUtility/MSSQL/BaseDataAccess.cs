@@ -313,89 +313,91 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取表对象
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public T GetEntity(FilterParams filterParam)
+        public T GetEntity(FilterParams filterParams)
         {
-            return GetEntity(null, filterParam, null, InnerConnection.SelectLock);
+            return GetEntity(null, filterParams, null, InnerConnection.SelectLock);
         }
 
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <param name="lockType">锁类型</param>
-        ///// <returns></returns>
-        //public T GetEntity(FilterParams filterParam, Enums.LockType lockType)
-        //{
-        //    return GetEntity(null, filterParam, null, lockType);
-        //}
         /// <summary>
         /// 获取表对象
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <returns></returns>
+        public T GetEntity(FilterParams filterParams, Enums.LockType lockType)
+        {
+            return GetEntity(null, filterParams, null, new List<Enums.LockType>() { lockType });
+        }
+
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="lockTypes">锁类型</param>
         /// <returns></returns>
-        public T GetEntity(FilterParams filterParam, List<Enums.LockType> lockTypes)
+        public T GetEntity(FilterParams filterParams, List<Enums.LockType> lockTypes)
         {
-            return GetEntity(null, filterParam, null, lockTypes);
+            return GetEntity(null, filterParams, null, lockTypes);
         }
+
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParams)
         {
-            return GetEntity(displayFields, filterParam, null, InnerConnection.SelectLock);
+            return GetEntity(displayFields, filterParams, null, InnerConnection.SelectLock);
         }
-
-        ///// <summary>
-        ///// 获取表对象
-        ///// </summary>
-        ///// <param name="displayFields">返回指定字段</param>
-        ///// <param name="filterParam">条件参数</param>
-        ///// <param name="lockType">锁类型</param>
-        ///// <returns></returns>
-        //public T GetEntity(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
-        //{
-        //    return GetEntity(displayFields, filterParam, null, new List<Enums.LockType>() { lockType });
-        //}
 
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, List<Enums.LockType> lockTypes)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParams, Enums.LockType lockType)
         {
-            return GetEntity(displayFields, filterParam, null, lockTypes);
+            return GetEntity(displayFields, filterParams, null, new List<Enums.LockType>() { lockType });
         }
 
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
-        /// <param name="sortParams">排序参数</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="lockTypes">锁类型</param>
         /// <returns></returns>
-        public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParams, List<Enums.LockType> lockTypes)
         {
-            return GetEntity(displayFields, filterParam, sortParams, InnerConnection.SelectLock);
+            return GetEntity(displayFields, filterParams, null, lockTypes);
         }
 
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
-        /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, List<Enums.LockType> lockTypes);
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
+        {
+            return GetEntity(displayFields, filterParams, sortParams, InnerConnection.SelectLock);
+        }
+
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        abstract public T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes);
 
         /// <summary>
         /// 获取表对象
@@ -452,7 +454,7 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList()
         {
-            return GetList(null, null, null, null);
+            return GetList(null, null, null, null, null);
         }
 
         /// <summary>
@@ -484,80 +486,116 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public TS GetList(DisplayFields displayFields, Enums.LockType lockType)
         {
-            return GetList(displayFields, null, null, null, lockType);
+            return GetList(displayFields, new List<Enums.LockType>() { lockType });
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="lockTypes">锁类型</param>
         /// <returns></returns>
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        public TS GetList(DisplayFields displayFields, List<Enums.LockType> lockTypes)
         {
-            return GetList(displayFields, filterParam, null, null, InnerConnection.SelectLock);
+            return GetList(displayFields, null, null, null, lockTypes);
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams)
+        {
+            return GetList(displayFields, filterParams, null, null, InnerConnection.SelectLock);
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, Enums.LockType lockType)
         {
-            return GetList(displayFields, filterParam, null, null, lockType);
+            return GetList(displayFields, filterParams, new List<Enums.LockType>() { lockType });
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, List<Enums.LockType> lockTypes)
+        {
+            return GetList(displayFields, filterParams, null, null, lockTypes);
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
         {
-            return GetList(displayFields, filterParam, sortParams, null, InnerConnection.SelectLock);
+            return GetList(displayFields, filterParams, sortParams, null, InnerConnection.SelectLock);
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType)
         {
-            return GetList(displayFields, filterParam, sortParams, null, lockType);
+            return GetList(displayFields, filterParams, sortParams, new List<Enums.LockType>() { lockType });
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes)
+        {
+            return GetList(displayFields, filterParams, sortParams, null, lockTypes);
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return GetList(displayFields, filterParam, sortParams, maxCount, InnerConnection.SelectLock);
+            return GetList(displayFields, filterParams, sortParams, maxCount, InnerConnection.SelectLock);
         }
 
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType);
+        abstract public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes);
 
         /// <summary>
         /// 获取表集合
@@ -630,40 +668,52 @@ namespace hwj.DBUtility.MSSQL
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
+            return GetDataTable(displayFields, filterParams, sortParams, maxCount, string.Empty);
         }
 
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName)
         {
-            return GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, InnerConnection.SelectLock);
+            return GetDataTable(displayFields, filterParams, sortParams, maxCount, tableName, InnerConnection.SelectLock);
         }
 
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        abstract public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType);
+        abstract public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType);
+
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="tableName">Data Table Name</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        abstract public DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName, List<Enums.LockType> lockTypes);
 
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)

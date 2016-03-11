@@ -37,32 +37,32 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取表对象
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new T GetEntity(FilterParams filterParam)
+        public new T GetEntity(FilterParams filterParams)
         {
-            return this.GetEntity(null, filterParam, null);
+            return this.GetEntity(null, filterParams, null);
         }
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParams)
         {
-            return this.GetEntity(displayFields, filterParam, null);
+            return this.GetEntity(displayFields, filterParams, null);
         }
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
         {
-            return base.GetEntity(displayFields, filterParam, sortParams, Enums.LockType.NoLock);
+            return base.GetEntity(displayFields, filterParams, sortParams, Enums.LockType.NoLock);
         }
         #endregion
 
@@ -88,34 +88,34 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams)
         {
-            return this.GetList(displayFields, filterParam, null, null);
+            return this.GetList(displayFields, filterParams, null, null);
         }
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
         {
-            return this.GetList(displayFields, filterParam, sortParams, null);
+            return this.GetList(displayFields, filterParams, sortParams, null);
         }
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return base.GetList(displayFields, filterParam, sortParams, maxCount, Enums.LockType.NoLock);
+            return base.GetList(displayFields, filterParams, sortParams, maxCount, Enums.LockType.NoLock);
         }
         #endregion
 
@@ -132,26 +132,26 @@ namespace hwj.DBUtility.MSSQL
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return this.GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
+            return this.GetDataTable(displayFields, filterParams, sortParams, maxCount, string.Empty);
         }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName)
         {
-            return base.GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, Enums.LockType.NoLock);
+            return base.GetDataTable(displayFields, filterParams, sortParams, maxCount, tableName, Enums.LockType.NoLock);
         }
         #endregion
 
@@ -198,21 +198,21 @@ namespace hwj.DBUtility.MSSQL
         /// 执行数据更新
         /// </summary>
         /// <param name="updateParam">更新字段</param>
-        /// <param name="filterParam">更新条件</param>
+        /// <param name="filterParams">更新条件</param>
         /// <returns></returns>
-        public new bool Update(UpdateParam updateParam, FilterParams filterParam)
+        public new bool Update(UpdateParam updateParam, FilterParams filterParams)
         {
-            return base.Update(updateParam, filterParam);
+            return base.Update(updateParam, filterParams);
         }
         /// <summary>
         /// 执行数据更新
         /// </summary>
         /// <param name="entity">更新实体</param>
-        /// <param name="filterParam">更新条件</param>
+        /// <param name="filterParams">更新条件</param>
         /// <returns></returns>
-        public new bool Update(T entity, FilterParams filterParam)
+        public new bool Update(T entity, FilterParams filterParams)
         {
-            return base.Update(entity, filterParam);
+            return base.Update(entity, filterParams);
         }
         #endregion
 
@@ -228,11 +228,11 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 删除记录
         /// </summary>
-        /// <param name="filterParam">删除条件</param>
+        /// <param name="filterParams">删除条件</param>
         /// <returns></returns>
-        public new bool Delete(FilterParams filterParam)
+        public new bool Delete(FilterParams filterParams)
         {
-            return base.Delete(filterParam);
+            return base.Delete(filterParams);
         }
 
         /// <summary>
@@ -250,71 +250,71 @@ namespace hwj.DBUtility.MSSQL
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return base.GetPage3(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, out TotalCount);
+            return base.GetPage3(displayFields, filterParams, sortParams, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
-        /// <param name="groupParam">分组条件</param>
+        /// <param name="groupParams">分组条件</param>
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return base.GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, out TotalCount);
+            return base.GetPage3(displayFields, filterParams, sortParams, groupParams, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
-        /// <param name="groupParam">分组条件</param>
+        /// <param name="groupParams">分组条件</param>
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="times">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
+        public new TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParams, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
-            return base.GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, times, out TotalCount);
+            return base.GetPage3(displayFields, filterParams, sortParams, groupParams, PK, pageNumber, pageSize, times, out TotalCount);
         }
 
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public new TS GetPage(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return base.GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, out TotalCount);
+            return base.GetPage(displayFields, filterParams, sortParams, PK, pageNumber, pageSize, out TotalCount);
         }
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
@@ -322,9 +322,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        public new TS GetPage(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
-            return base.GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, timeout, out TotalCount);
+            return base.GetPage(displayFields, filterParams, sortParams, PK, pageNumber, pageSize, timeout, out TotalCount);
         }
         #endregion
 
@@ -340,11 +340,11 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 返回表的记录数
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns>记录数</returns>
-        public new int RecordCount(FilterParams filterParam)
+        public new int RecordCount(FilterParams filterParams)
         {
-            return base.RecordCount(filterParam);
+            return base.RecordCount(filterParams);
         }
         /// <summary>
         /// 返回表的记录数

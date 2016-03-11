@@ -93,6 +93,19 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="logSql">记录Sql</param>
         /// <param name="autoCloseConnection">每次调用重新创建新的连接，使用后自动关闭</param>
         public DbConnection(string connectionString, int timeout, Enums.LockType defaultSelectLock, bool logSql, bool autoCloseConnection)
+            : this(connectionString, timeout, new List<Enums.LockType>() { defaultSelectLock }, logSql, autoCloseConnection)
+        {
+        }
+
+        /// <summary>
+        /// 数据库连接实体
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="timeout">超时时间(单位:秒)</param>
+        /// <param name="defaultSelectLocks">默认锁的类型</param>
+        /// <param name="logSql">记录Sql</param>
+        /// <param name="autoCloseConnection">每次调用重新创建新的连接，使用后自动关闭</param>
+        public DbConnection(string connectionString, int timeout, List<Enums.LockType> defaultSelectLocks, bool logSql, bool autoCloseConnection)
         {
             ConnectionString = connectionString;
             DefaultCommandTimeout = timeout;
@@ -102,8 +115,8 @@ namespace hwj.DBUtility.MSSQL
                 DefaultCommandTimeout = InnerConnection.ConnectionTimeout;
             }
 
-            SelectLock = defaultSelectLock;// Enums.LockType.UpdLock;
-            UpdateLock = Enums.LockType.UpdLock;
+            SelectLock = defaultSelectLocks;// Enums.LockType.UpdLock;
+            UpdateLock = new List<Enums.LockType>() { Enums.LockType.UpdLock };
 
             LogSql = logSql;
             if (logSql)
@@ -556,27 +569,43 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
+        /// <param name="filterParams"></param>
         /// <param name="sortParams"></param>
         /// <param name="lockType"></param>
         /// <returns></returns>
-        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
         {
-            return GetEntity<T>(displayFields, filterParam, sortParams, lockType, DefaultCommandTimeout);
+            return GetEntity<T>(displayFields, filterParams, sortParams, lockType, DefaultCommandTimeout);
         }
 
         /// <summary>
-        ///
+        ///获取表对象
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="lockType"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="lockType">锁类型</param>
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType, int timeout)
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType, int timeout)
+                 where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        {
+            return GetEntity<T>(displayFields, filterParams, sortParams, new List<Enums.LockType>() { lockType }, timeout);
+        }
+
+        /// <summary>
+        ///获取表对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes, int timeout)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
         {
             SqlEntity sqlEty = null;
@@ -584,10 +613,10 @@ namespace hwj.DBUtility.MSSQL
             string tableName = GetTableName<T>();
 
             sqlEty = new SqlEntity();
-            sqlEty.LockType = lockType;
+            sqlEty.LockType = lockTypes;
             sqlEty.CommandTimeout = timeout;
-            sqlEty.CommandText = genSelectSql.SelectSql(tableName, displayFields, filterParam, sortParams, 1, lockType);
-            sqlEty.Parameters = genSelectSql.GenParameter(filterParam);
+            sqlEty.CommandText = genSelectSql.SelectSql(tableName, displayFields, filterParams, sortParams, 1, lockTypes);
+            sqlEty.Parameters = genSelectSql.GenParameter(filterParams);
 
             return GetEntity<T>(sqlEty);
         }
@@ -653,68 +682,88 @@ namespace hwj.DBUtility.MSSQL
         #region Get List
 
         /// <summary>
-        ///
+        ///获取表集合
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
-        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            return GetList<T, TS>(displayFields, filterParam, sortParams, null, Enums.LockType.RowLock);
+            return GetList<T, TS>(displayFields, filterParams, sortParams, null, Enums.LockType.RowLock);
         }
 
         /// <summary>
-        ///
+        ///获取表集合
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
         /// <returns></returns>
-        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, Enums.LockType.RowLock);
+            return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, Enums.LockType.RowLock);
         }
 
         /// <summary>
-        ///
+        ///获取表集合
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
-        /// <param name="lockType"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            return GetList<T, TS>(displayFields, filterParam, sortParams, maxCount, lockType, DefaultCommandTimeout);
+            return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, lockType, DefaultCommandTimeout);
         }
 
         /// <summary>
-        ///
+        ///获取表集合
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TS"></typeparam>
-        /// <param name="displayFields"></param>
-        /// <param name="filterParam"></param>
-        /// <param name="sortParams"></param>
-        /// <param name="maxCount"></param>
-        /// <param name="lockType"></param>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockType">锁类型</param>
+        /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
-        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType, int timeout)
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType, int timeout)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new()
+        {
+            return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, new List<Enums.LockType>() { lockType }, timeout);
+        }
+
+        /// <summary>
+        ///获取表集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes, int timeout)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
@@ -723,9 +772,9 @@ namespace hwj.DBUtility.MSSQL
 
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = timeout;
-            sqlEty.LockType = lockType;
-            sqlEty.CommandText = genSelectSql.SelectSql(tableName, displayFields, filterParam, sortParams, maxCount, lockType);
-            sqlEty.Parameters = genSelectSql.GenParameter(filterParam);
+            sqlEty.LockType = lockTypes;
+            sqlEty.CommandText = genSelectSql.SelectSql(tableName, displayFields, filterParams, sortParams, maxCount, lockTypes);
+            sqlEty.Parameters = genSelectSql.GenParameter(filterParams);
 
             return GetList<T, TS>(sqlEty);
         }

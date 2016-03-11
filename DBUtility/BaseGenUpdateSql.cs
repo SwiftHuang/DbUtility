@@ -19,11 +19,11 @@ namespace hwj.DBUtility
         /// 获取Delete Sql
         /// </summary>
         /// <param name="tableName">表名</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <returns></returns>
-        public string DeleteSql(string tableName, FilterParams filterParam)
+        public string DeleteSql(string tableName, FilterParams filterParams)
         {
-            return string.Format(_DeleteString, tableName, GenFilterParamsSql(filterParam));
+            return string.Format(_DeleteString, tableName, GenFilterParamsSql(filterParams));
         }
         /// <summary>
         /// 彻底清除表的内容(重置自动增量)
@@ -94,11 +94,11 @@ namespace hwj.DBUtility
         /// </summary>
         /// <param name="tableName">表名</param>
         /// <param name="updateParam">Update参数</param>
-        /// <param name="filterParam">筛选参选</param>
+        /// <param name="filterParams">筛选参选</param>
         /// <returns></returns>
-        internal string UpdateSql(string tableName, UpdateParam updateParam, FilterParams filterParam)
+        internal string UpdateSql(string tableName, UpdateParam updateParam, FilterParams filterParams)
         {
-            return string.Format(_UpdateString, tableName, GenFieldsSql(updateParam), GenFilterParamsSql(filterParam));
+            return string.Format(_UpdateString, tableName, GenFieldsSql(updateParam), GenFilterParamsSql(filterParams));
         }
         #endregion
 

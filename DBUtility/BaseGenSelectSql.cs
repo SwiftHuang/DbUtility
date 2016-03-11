@@ -11,12 +11,21 @@ namespace hwj.DBUtility
         protected const string _SelectCountString = "SELECT COUNT(1) FROM {0} (NOLOCK) {1};";
 
         #region Public Functions
-        public abstract string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParam, SortParams orderParam, int? maxCount);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="displayFields"></param>
+        /// <param name="filterParams"></param>
+        /// <param name="orderParam"></param>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
+        public abstract string SelectSql(string tableName, DisplayFields displayFields, FilterParams filterParams, SortParams orderParam, int? maxCount);
 
         #region Record Count Sql
-        public string SelectCountSql(string tableName, FilterParams filterParam)
+        public string SelectCountSql(string tableName, FilterParams filterParams)
         {
-            return string.Format(_SelectCountString, tableName, GenFilterParamsSql(filterParam));
+            return string.Format(_SelectCountString, tableName, GenFilterParamsSql(filterParams));
         }
         #endregion
 

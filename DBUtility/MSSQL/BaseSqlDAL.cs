@@ -39,32 +39,32 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取表对象
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new T GetEntity(FilterParams filterParam)
+        public new T GetEntity(FilterParams filterParams)
         {
-            return this.GetEntity(null, filterParam, null);
+            return this.GetEntity(null, filterParams, null);
         }
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam)
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParams)
         {
-            return this.GetEntity(displayFields, filterParam, null);
+            return this.GetEntity(displayFields, filterParams, null);
         }
         /// <summary>
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        public new T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public new T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
         {
-            return base.GetEntity(displayFields, filterParam, sortParams, Enums.LockType.NoLock);
+            return base.GetEntity(displayFields, filterParams, sortParams, Enums.LockType.NoLock);
         }
         #endregion
 
@@ -90,34 +90,34 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams)
         {
-            return this.GetList(displayFields, filterParam, null, null);
+            return this.GetList(displayFields, filterParams, null, null);
         }
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
         {
-            return this.GetList(displayFields, filterParam, sortParams, null);
+            return this.GetList(displayFields, filterParams, sortParams, null);
         }
         /// <summary>
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public new TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public new TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return base.GetList(displayFields, filterParam, sortParams, maxCount, Enums.LockType.NoLock);
+            return base.GetList(displayFields, filterParams, sortParams, maxCount, Enums.LockType.NoLock);
         }
         #endregion
 
@@ -134,26 +134,26 @@ namespace hwj.DBUtility.MSSQL
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <returns></returns>
-        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount)
+        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
         {
-            return this.GetDataTable(displayFields, filterParam, sortParams, maxCount, string.Empty);
+            return this.GetDataTable(displayFields, filterParams, sortParams, maxCount, string.Empty);
         }
         /// <summary>
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
         /// <returns></returns>
-        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName)
+        public new DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName)
         {
-            return base.GetDataTable(displayFields, filterParam, sortParams, maxCount, tableName, Enums.LockType.NoLock);
+            return base.GetDataTable(displayFields, filterParams, sortParams, maxCount, tableName, Enums.LockType.NoLock);
         }
         #endregion
     }

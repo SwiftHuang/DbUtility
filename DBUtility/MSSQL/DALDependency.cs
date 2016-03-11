@@ -171,17 +171,17 @@ namespace hwj.DBUtility.MSSQL
         /// 获取更新的Sql对象
         /// </summary>
         /// <param name="updateParam">需要更新的字段</param>
-        /// <param name="filterParam">需要更新的条件</param>
+        /// <param name="filterParams">需要更新的条件</param>
         /// <returns>Sql对象</returns>
-        public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParam)
+        public static SqlEntity UpdateSqlEntity(UpdateParam updateParam, FilterParams filterParams)
         {
             SqlEntity sqlEty = new SqlEntity();
             List<IDbDataParameter> up = new List<IDbDataParameter>();
             up.AddRange(GenUpdateSql.GenParameter(updateParam));
-            up.AddRange(GenUpdateSql.GenParameter(filterParam));
+            up.AddRange(GenUpdateSql.GenParameter(filterParams));
 
             sqlEty = new SqlEntity();
-            sqlEty.CommandText = GenUpdateSql.UpdateSql(TableName, updateParam, filterParam);
+            sqlEty.CommandText = GenUpdateSql.UpdateSql(TableName, updateParam, filterParams);
             sqlEty.Parameters = up;
             //if (EnableSqlLog)
             //    return InsertSqlLog(se, "UPDATE");
@@ -193,16 +193,16 @@ namespace hwj.DBUtility.MSSQL
         /// 获取更新的Sql对象
         /// </summary>
         /// <param name="entity">需要Table对象</param>
-        /// <param name="filterParam">被更新的条件</param>
+        /// <param name="filterParams">被更新的条件</param>
         /// <returns>Sql对象</returns>
-        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParam)
+        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams)
         {
             SqlEntity se = new SqlEntity();
-            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParam);
+            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParams);
             se.Parameters = GenUpdateSql.GenParameter(entity);
-            if (filterParam != null)
+            if (filterParams != null)
             {
-                se.Parameters.AddRange(GenUpdateSql.GenParameter(filterParam));
+                se.Parameters.AddRange(GenUpdateSql.GenParameter(filterParams));
             }
             return se;
         }
@@ -221,11 +221,11 @@ namespace hwj.DBUtility.MSSQL
         /// 执行数据更新
         /// </summary>
         /// <param name="updateParam">更新字段</param>
-        /// <param name="filterParam">更新条件</param>
+        /// <param name="filterParams">更新条件</param>
         /// <returns></returns>
-        public bool Update(UpdateParam updateParam, FilterParams filterParam)
+        public bool Update(UpdateParam updateParam, FilterParams filterParams)
         {
-            SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParam);
+            SqlEntity tmpSqlEty = UpdateSqlEntity(updateParam, filterParams);
             _SqlEntity = tmpSqlEty;
             return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
         }
@@ -234,13 +234,13 @@ namespace hwj.DBUtility.MSSQL
         /// 执行数据更新
         /// </summary>
         /// <param name="entity">更新实体</param>
-        /// <param name="filterParam">更新条件</param>
+        /// <param name="filterParams">更新条件</param>
         /// <returns></returns>
-        public bool Update(T entity, FilterParams filterParam)
+        public bool Update(T entity, FilterParams filterParams)
         {
             try
             {
-                SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParam);
+                SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParams);
                 _SqlEntity = tmpSqlEty;
                 return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }
@@ -283,16 +283,16 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 获取删除的Sql对象
         /// </summary>
-        /// <param name="filterParam">被删除的条件</param>
+        /// <param name="filterParams">被删除的条件</param>
         /// <returns>Sql对象</returns>
-        public static SqlEntity DeleteSqlEntity(FilterParams filterParam)
+        public static SqlEntity DeleteSqlEntity(FilterParams filterParams)
         {
             //if (EnableSqlLog)
             //    return InsertSqlLog(new SqlEntity(GenUpdateSql.DeleteSql(TableName, filterParam), GenUpdateSql.GenParameter(filterParam)), "DELETE");
             //else
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandText = GenUpdateSql.DeleteSql(TableName, filterParam);
-            sqlEty.Parameters = GenUpdateSql.GenParameter(filterParam);
+            sqlEty.CommandText = GenUpdateSql.DeleteSql(TableName, filterParams);
+            sqlEty.Parameters = GenUpdateSql.GenParameter(filterParams);
 
             return sqlEty;
         }
@@ -309,11 +309,11 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 删除记录
         /// </summary>
-        /// <param name="filterParam">删除条件</param>
+        /// <param name="filterParams">删除条件</param>
         /// <returns></returns>
-        public bool Delete(FilterParams filterParam)
+        public bool Delete(FilterParams filterParams)
         {
-            SqlEntity tmpSqlEty = DeleteSqlEntity(filterParam);
+            SqlEntity tmpSqlEty = DeleteSqlEntity(filterParams);
             _SqlEntity = tmpSqlEty;
             return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
         }
@@ -402,23 +402,32 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表对象的Sql对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">查询条件</param>
+        /// <param name="filterParams">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="lockType">锁类型</param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType, int commandTimeout)
+        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType, int commandTimeout)
         {
-            return GetEntitySqlEntity(displayFields, filterParam, sortParams, new List<Enums.LockType>() { lockType }, commandTimeout);
+            return GetEntitySqlEntity(displayFields, filterParams, sortParams, new List<Enums.LockType>() { lockType }, commandTimeout);
         }
 
-        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, List<Enums.LockType> lockTypes, int commandTimeout)
+        /// <summary>
+        /// 获取表对象的Sql对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        public static SqlEntity GetEntitySqlEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes, int commandTimeout)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = commandTimeout;
             sqlEty.LockType = lockTypes;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, 1, lockTypes);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParams, sortParams, 1, lockTypes);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
 
             return sqlEty;
         }
@@ -427,14 +436,27 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表对象
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">查询条件</param>
+        /// <param name="filterParams">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public override T GetEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, Enums.LockType lockType)
+        public T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType)
+        {
+            return GetEntity(displayFields, filterParams, sortParams, new List<Enums.LockType>() { lockType });
+        }
+
+        /// <summary>
+        /// 获取表对象
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        public override T GetEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty = GetEntitySqlEntity(displayFields, filterParam, sortParams, lockType, InnerConnection.DefaultCommandTimeout);
+            sqlEty = GetEntitySqlEntity(displayFields, filterParams, sortParams, lockTypes, InnerConnection.DefaultCommandTimeout);
 
             return base.GetEntity(sqlEty);
         }
@@ -443,18 +465,18 @@ namespace hwj.DBUtility.MSSQL
 
         #region Get List
 
-        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType, int commandTimeout)
+        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType, int commandTimeout)
         {
-            return GetListSqlEntity(displayFields, filterParam, sortParams, maxCount, new List<Enums.LockType>() { lockType }, commandTimeout);
+            return GetListSqlEntity(displayFields, filterParams, sortParams, maxCount, new List<Enums.LockType>() { lockType }, commandTimeout);
         }
 
-        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes, int commandTimeout)
+        public static SqlEntity GetListSqlEntity(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes, int commandTimeout)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = commandTimeout;
             sqlEty.LockType = lockTypes;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockTypes);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParams, sortParams, maxCount, lockTypes);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
 
             return sqlEty;
         }
@@ -463,25 +485,39 @@ namespace hwj.DBUtility.MSSQL
         /// 获取表集合
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">查询条件</param>
+        /// <param name="filterParams">查询条件</param>
         /// <param name="sortParams">排序方式</param>
         /// <param name="maxCount">返回最大记录数</param>
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public override TS GetList(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        public TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        {
+            return GetList(displayFields, filterParams, sortParams, maxCount, new List<Enums.LockType>() { lockType });
+        }
+
+        /// <summary>
+        /// 获取表集合
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">查询条件</param>
+        /// <param name="sortParams">排序方式</param>
+        /// <param name="maxCount">返回最大记录数</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        public override TS GetList(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes)
         {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty = GetListSqlEntity(displayFields, filterParam, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
+            sqlEty = GetListSqlEntity(displayFields, filterParams, sortParams, maxCount, lockTypes, InnerConnection.DefaultCommandTimeout);
 
             return base.GetList(sqlEty);
         }
 
-        public List<C> GetList<C>(Enum displayField, FilterParams filterParam, SortParams sortParams, int? maxCount, Enums.LockType lockType)
+        public List<C> GetList<C>(Enum displayField, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType)
         {
             List<C> lst = new List<C>();
             DisplayFields df = new DisplayFields(displayField);
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty = GetListSqlEntity(df, filterParam, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
+            sqlEty = GetListSqlEntity(df, filterParams, sortParams, maxCount, lockType, InnerConnection.DefaultCommandTimeout);
 
             IDataReader reader = ExecuteReader(sqlEty.CommandText, sqlEty.Parameters, sqlEty.CommandTimeout);
             try
@@ -511,23 +547,23 @@ namespace hwj.DBUtility.MSSQL
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage3(displayFields, filterParam, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
+            return GetPage3(displayFields, filterParams, sortParams, null, PK, pageNumber, pageSize, out TotalCount);
         }
 
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
         /// <param name="groupParam">分组条件</param>
         /// <param name="PK">分页依据</param>
@@ -535,16 +571,16 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage3(displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
+            return GetPage3(displayFields, filterParams, sortParams, groupParam, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
 
         /// <summary>
         /// 获取分页对象(单主键,以主键作为排序,支持分组)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序(只能填一个字段)</param>
         /// <param name="groupParam">分组条件</param>
         /// <param name="PK">分页依据</param>
@@ -553,9 +589,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="times">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage3(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
         {
-            SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParam, sortParams, groupParam, PK, pageNumber, pageSize);
+            SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParams, sortParams, groupParam, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
@@ -600,23 +636,23 @@ namespace hwj.DBUtility.MSSQL
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPage(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
+            return GetPage(displayFields, filterParams, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
 
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
@@ -624,9 +660,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        public TS GetPage(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
-            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParams, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
             tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
@@ -671,23 +707,23 @@ namespace hwj.DBUtility.MSSQL
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
+        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, out int TotalCount)
         {
-            return GetPageForTable(displayFields, filterParam, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
+            return GetPageForTable(displayFields, filterParams, sortParams, PK, pageNumber, pageSize, InnerConnection.DefaultCommandTimeout, out TotalCount);
         }
 
         /// <summary>
         /// 获取分页对象(支持多主键、多排序)
         /// </summary>
         /// <param name="displayFields">显示字段</param>
-        /// <param name="filterParam">筛选条件</param>
+        /// <param name="filterParams">筛选条件</param>
         /// <param name="sortParams">排序</param>
         /// <param name="PK">主键</param>
         /// <param name="pageNumber">页数</param>
@@ -695,9 +731,9 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
+        public DataTable GetPageForTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
-            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParam, sortParams, PK, pageNumber, pageSize);
+            SqlEntity tmpSqlEty = GenSelectSql.GetPageSqlEntity(TableName, displayFields, filterParams, sortParams, PK, pageNumber, pageSize);
             tmpSqlEty.CommandTimeout = timeout;
             tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
@@ -754,15 +790,15 @@ namespace hwj.DBUtility.MSSQL
         /// <summary>
         /// 返回表的记录数
         /// </summary>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <returns>记录数</returns>
-        public int RecordCount(FilterParams filterParam)
+        public int RecordCount(FilterParams filterParams)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = InnerConnection.SelectLock;
-            sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParam);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParams);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
 
             _SqlEntity = sqlEty;
             return Convert.ToInt32(ExecuteScalar(sqlEty.CommandText, sqlEty.Parameters));
@@ -787,18 +823,34 @@ namespace hwj.DBUtility.MSSQL
         /// 返回DataTable(建议用于Report或自定义列表)
         /// </summary>
         /// <param name="displayFields">返回指定字段</param>
-        /// <param name="filterParam">条件参数</param>
+        /// <param name="filterParams">条件参数</param>
         /// <param name="sortParams">排序参数</param>
         /// <param name="maxCount">返回记录数</param>
         /// <param name="tableName">Data Table Name</param>
+        /// <param name="lockType">锁类型</param>
         /// <returns></returns>
-        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParam, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
+        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName, Enums.LockType lockType)
+        {
+            return GetDataTable(displayFields, filterParams, sortParams, maxCount, tableName, new List<Enums.LockType>() { lockType });
+        }
+
+        /// <summary>
+        /// 返回DataTable(建议用于Report或自定义列表)
+        /// </summary>
+        /// <param name="displayFields">返回指定字段</param>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="sortParams">排序参数</param>
+        /// <param name="maxCount">返回记录数</param>
+        /// <param name="tableName">Data Table Name</param>
+        /// <param name="lockTypes">锁类型</param>
+        /// <returns></returns>
+        public override DataTable GetDataTable(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, string tableName, List<Enums.LockType> lockTypes)
         {
             SqlEntity sqlEty = new SqlEntity();
             sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
             sqlEty.LockType = base.InnerConnection.SelectLock;
-            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParam, sortParams, maxCount, lockType);
-            sqlEty.Parameters = GenSelectSql.GenParameter(filterParam);
+            sqlEty.CommandText = GenSelectSql.SelectSql(TableName, displayFields, filterParams, sortParams, maxCount, lockTypes);
+            sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
 
             return base.GetDataTable(sqlEty, tableName);
         }
