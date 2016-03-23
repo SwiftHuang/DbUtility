@@ -26,7 +26,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("using System;");
             //strclass.AppendLine("using System.Collections.Generic;");
             strclass.AppendLine("using System.Data;");
-            //strclass.AppendLine("using hwj.DBUtility;");
+            strclass.AppendLine("using hwj.DBUtility;");
             strclass.AppendLine("using hwj.DBUtility.Entity;");
             strclass.AppendLine("using hwj.DBUtility.TableMapping;");
             strclass.AppendLine("");
