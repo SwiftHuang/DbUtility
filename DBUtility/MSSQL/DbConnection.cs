@@ -839,6 +839,15 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         public void BeginTransaction()
         {
+            BeginTransaction(IsolationLevel.ReadCommitted);
+        }
+
+        /// <summary>
+        /// 打开事务
+        /// </summary>
+        /// <param name="il">指定连接的事务锁定行为</param>
+        public void BeginTransaction(IsolationLevel il)
+        {
             if (InnerConnection == null)
             {
                 InnerConnection = new SqlConnection(ConnectionString);
@@ -847,7 +856,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 InnerConnection.Open();
             }
-            InnerTransaction = InnerConnection.BeginTransaction();
+            InnerTransaction = InnerConnection.BeginTransaction(il);
             TransactionState = Enums.TransactionState.Begin;
         }
 

@@ -154,6 +154,8 @@ namespace hwj.DBUtility.Interface
 
         void BeginTransaction();
 
+        void BeginTransaction(IsolationLevel il);
+
         void CommitTransaction();
 
         void RollbackTransaction();
