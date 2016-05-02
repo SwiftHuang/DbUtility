@@ -16,15 +16,30 @@ namespace hwj.DBUtility
 
         #region Property
 
+        /// <summary>
+        /// 设置字段名
+        /// </summary>
         public string FieldName { get; set; }
 
+        /// <summary>
+        /// 设置字段内容
+        /// </summary>
         public object FieldValue { get; set; }
 
+        /// <summary>
+        /// 设置字段关系
+        /// </summary>
         public Enums.Relation Operator { get; set; }
 
+        /// <summary>
+        /// 设置逻辑运算符
+        /// </summary>
         public Enums.Expression Expression { get; set; }
 
-        public bool IsUnicode { get; set; }
+        /// <summary>
+        /// 设置为Unicode（值前加N）
+        /// </summary>
+        public bool? IsUnicode { get; set; }
 
         /// <summary>
         /// 自定义参数名(防止相同的参数名)
@@ -38,18 +53,20 @@ namespace hwj.DBUtility
         /// AddCustomParam("Field1=Field2", Enums.Expression.AND);
         /// </summary>
         public string CustomText { get; set; }
+
         /// <summary>
         /// 是否自定义SQL语句条件
         /// </summary>
         public bool IsCustomText { get; private set; }
+
         #endregion Property
 
-        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+        public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool? isUnicode)
             : this(fieldName.ToString(), fieldValue, oper, exp, paramName, isUnicode)
         {
         }
 
-        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool isUnicode)
+        public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName, bool? isUnicode)
         {
             FieldName = fieldName.ToString();
             FieldValue = fieldValue;
@@ -61,42 +78,42 @@ namespace hwj.DBUtility
         }
 
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
-            : this(fieldName, fieldValue, oper, exp, paramName, true)
+            : this(fieldName, fieldValue, oper, exp, paramName, null)
         {
         }
 
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp, string paramName)
-            : this(fieldName, fieldValue, oper, exp, paramName, true)
+            : this(fieldName, fieldValue, oper, exp, paramName, null)
         {
         }
 
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
-            : this(fieldName, fieldValue, oper, exp, null, true)
+            : this(fieldName, fieldValue, oper, exp, null, null)
         {
         }
 
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper, Enums.Expression exp)
-            : this(fieldName, fieldValue, oper, exp, null, true)
+            : this(fieldName, fieldValue, oper, exp, null, null)
         {
         }
 
         public SqlParam(Enum fieldName, object fieldValue, Enums.Relation oper)
-            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, true)
+            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, null)
         {
         }
 
         public SqlParam(string fieldName, object fieldValue, Enums.Relation oper)
-            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, true)
+            : this(fieldName, fieldValue, oper, Enums.Expression.Comma, null, null)
         {
         }
 
         public SqlParam(Enum fieldName, object fieldValue)
-            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, true)
+            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, null)
         {
         }
 
         public SqlParam(string fieldName, object fieldValue)
-            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, true)
+            : this(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, null, null)
         {
         }
 

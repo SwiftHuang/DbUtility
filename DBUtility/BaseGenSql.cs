@@ -10,7 +10,10 @@ namespace hwj.DBUtility
     public abstract class BaseGenSql<T> where T : class, new()
     {
         protected const string _StringFormat = "'{0}'";
+        protected const string _StringCommaFormat = "'{0}',";
+        protected const string _UnicodeStringCommaFormat = "N'{0}',";
         protected const string _DecimalFormat = "{0}";
+        protected const string _DecimalCommaFormat = "{0},";
         protected static string _FieldFormat = string.Empty;
         protected static string _SqlParam = string.Empty;
         protected static string _SqlWhereParam = string.Empty;
@@ -48,10 +51,25 @@ namespace hwj.DBUtility
                 }
                 else if (isPage)
                 {
-                    if (para.IsUnicode)
+                    if (para.IsUnicode.HasValue)
                     {
-                        sbStr.Append("N");//.Append('\'');
+                        if (para.IsUnicode.Value)
+                        {
+                            sbStr.Append('N');//.Append('\'');
+                        }
                     }
+                    else
+                    {
+                        FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
+                        if (f != null)
+                        {
+                            if (IsUnicode(f.DataTypeCode))
+                            {
+                                sbStr.Append('N');//.Append('\'');
+                            }
+                        }
+                    }
+
                     sbStr.Append('\'');
 
                     if (IsDatabaseDate(para))
@@ -165,15 +183,26 @@ namespace hwj.DBUtility
                                     {
                                         foreach (string s in strList)
                                         {
-                                            inSql.AppendFormat(_DecimalFormat, s).Append(',');
+                                            inSql.AppendFormat(_DecimalCommaFormat, s);
                                         }
                                     }
                                     else
                                     {
-                                        foreach (string s in strList)
+                                        if (IsUnicode(f.DataTypeCode))
                                         {
-                                            inSql.Append('N').AppendFormat(_StringFormat, s).Append(',');
+                                            foreach (string s in strList)
+                                            {
+                                                inSql.AppendFormat(_UnicodeStringCommaFormat, s);
+                                            }
                                         }
+                                        else
+                                        {
+                                            foreach (string s in strList)
+                                            {
+                                                inSql.AppendFormat(_StringCommaFormat, s);
+                                            }
+                                        }
+
                                     }
                                 }
                             }
@@ -311,6 +340,15 @@ namespace hwj.DBUtility
                 return true;
             else
                 return false;
+        }
+
+        protected bool IsUnicode(DbType typeCode)
+        {
+            if (typeCode == DbType.StringFixedLength || typeCode == DbType.String)
+            {
+                return true;
+            }
+            return false;
         }
 
         protected bool IsDatabaseDate(SqlParam param)
