@@ -354,7 +354,7 @@ namespace hwj.DBUtility.MSSQL
                         CheckSqlException(ref ex, cmdList[index]);
                         throw;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         if (trans.Connection != null)
                         {
@@ -410,9 +410,8 @@ namespace hwj.DBUtility.MSSQL
                 cmd.Parameters.Clear();
                 return myReader;
             }
-            catch (System.Data.SqlClient.SqlException e)
+            catch
             {
-                //throw e;
                 throw;
             }
         }
@@ -501,7 +500,7 @@ namespace hwj.DBUtility.MSSQL
                                 }
                             }
                             PrepareCommand(cmd, conn, trans, myDE);
-                            int val = cmd.ExecuteNonQuery();
+                            cmd.ExecuteNonQuery();
                             foreach (SqlParameter q in myDE.Parameters)
                             {
                                 if (q.Direction == ParameterDirection.Output)
@@ -706,18 +705,18 @@ namespace hwj.DBUtility.MSSQL
             if (e.Number == 8152 && entity != null && entity.DataEntity != null)
             {
                 string fieldStr = FormatMsgFor8152(entity.TableName, entity.DataEntity);
-                Common.AddExData(e.Data, fieldStr);
+                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
             }
         }
-        private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
-        {
-            try
-            {
-                SqlEntityXml sex = new SqlEntityXml(SQLString, cmdParms);
-                e.HelpLink = sex.ToXml();
-            }
-            catch { }
-        }
+        //private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
+        //{
+        //    try
+        //    {
+        //        SqlEntityXml sex = new SqlEntityXml(SQLString, cmdParms);
+        //        e.HelpLink = sex.ToXml();
+        //    }
+        //    catch { }
+        //}
         /// <summary>
         /// 检查字符长度是否与数据相符。
         /// </summary>
@@ -765,7 +764,7 @@ namespace hwj.DBUtility.MSSQL
             errFields = errFields.TrimEnd('/');
             if (!string.IsNullOrEmpty(errFields))
             {
-                return string.Format("Exception Fields:\r\n-Table:{0}\r\n-Field:{1}", tableName, errFields);
+                return string.Format("Table:{0};Field:{1};", tableName, errFields);
             }
             else
             {

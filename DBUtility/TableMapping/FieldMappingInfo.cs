@@ -21,7 +21,7 @@ namespace hwj.DBUtility.TableMapping
         {
             Property = property;
             FieldName = fieldName;
-            NullValue = NullValue;
+            NullValue = nullValue;
             DataTypeCode = typeCode;
             FieldIndex = fieldIndex;
             DataHandles = dataHandles;

@@ -586,13 +586,13 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="PK">分页依据</param>
         /// <param name="pageNumber">页数</param>
         /// <param name="pageSize">每页记录数</param>
-        /// <param name="times">超时时间(秒)</param>
+        /// <param name="timeout">超时时间(秒)</param>
         /// <param name="TotalCount">返回记录数</param>
         /// <returns></returns>
-        public TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int times, out int TotalCount)
+        public TS GetPage3(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, GroupParams groupParam, DisplayFields PK, int pageNumber, int pageSize, int timeout, out int TotalCount)
         {
             SqlEntity tmpSqlEty = GenSelectSql.GetGroupPageSqlEntity(TableName, displayFields, filterParams, sortParams, groupParam, PK, pageNumber, pageSize);
-            tmpSqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
+            tmpSqlEty.CommandTimeout = timeout;
             tmpSqlEty.LockType = new List<Enums.LockType>() { Enums.LockType.NoLock };
 
             _SqlEntity = tmpSqlEty;
@@ -880,10 +880,8 @@ namespace hwj.DBUtility.MSSQL
             if ((e.Number == 8152 || e.Number == 8115) && entity != null)
             {
                 string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
-                Common.AddExData(e.Data, fieldStr);
+                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
             }
-            //}
-            //return null;
         }
 
         //private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)

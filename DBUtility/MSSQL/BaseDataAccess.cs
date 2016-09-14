@@ -421,7 +421,7 @@ namespace hwj.DBUtility.MSSQL
         {
             //if (IsUseTrans())
             //{
-            return InnerConnection.GetEntity<T>(sql, parameters);
+            return InnerConnection.GetEntity<T>(sql, parameters, timeout);
             //}
             //else
             //{
@@ -619,7 +619,7 @@ namespace hwj.DBUtility.MSSQL
         {
             //if (IsUseTrans())
             //{
-            return InnerConnection.GetList<T, TS>(sql, parameters);
+            return InnerConnection.GetList<T, TS>(sql, parameters, timeout);
             //}
             //else
             //{

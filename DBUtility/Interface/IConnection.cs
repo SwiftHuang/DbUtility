@@ -43,6 +43,16 @@ namespace hwj.DBUtility.Interface
         T GetEntity<T>(string sql, List<IDbDataParameter> parameters) where T : class, new();
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        T GetEntity<T>(string sql, List<IDbDataParameter> parameters, int timeout) where T : class, new();
+
+        /// <summary>
         /// 通过事务，获取表集合
         /// </summary>
         /// <param name="sqlEntity">SQL实体</param>
@@ -60,6 +70,19 @@ namespace hwj.DBUtility.Interface
         /// <param name="parameters"></param>
         /// <returns></returns>
         TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters)
+            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where TS : List<T>, new();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TS"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters, int timeout)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
 

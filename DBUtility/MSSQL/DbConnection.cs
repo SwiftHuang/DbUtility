@@ -809,12 +809,13 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <param name="parameters">SQL参数</param>
+        /// <param name="timeout">超时时间</param>
         /// <returns></returns>
         public TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters, int timeout)
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            IDataReader reader = ExecuteReader(sql, parameters, DefaultCommandTimeout);
+            IDataReader reader = ExecuteReader(sql, parameters, timeout);
             try
             {
                 return GenerateEntity.CreateListEntity<T, TS>(reader);
@@ -934,30 +935,24 @@ namespace hwj.DBUtility.MSSQL
         {
             if (sqlEx.Data != null)
             {
-                string msg = FormatExMessage(sqlEx.Message, sql, parameters, timeout);
+                string msg = FormatExMessage(sql, parameters, timeout);
                 sqlEx.Data.Add(Common.SqlInfoKey, msg);
             }
         }
 
-        private string FormatExMessage(string message, string sql, List<IDbDataParameter> parameters, int timeout)
+        private string FormatExMessage(string sql, List<IDbDataParameter> parameters, int timeout)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("SQL Information:");
-            sb.AppendFormat("CommandTimeout:{0}", timeout);
-            sb.AppendLine();
-            sb.AppendFormat("CommandText:{0}", sql);
-            sb.AppendLine();
-            sb.AppendLine("Parameter:");
+            sb.AppendFormat("CommandTimeout:{0};CommandText:{1};", timeout, string.IsNullOrEmpty(sql) ? sql : sql.TrimEnd(';'));
             if (parameters != null)
             {
+                sb.Append("Parameter:");
                 foreach (IDbDataParameter p in parameters)
                 {
-                    sb.AppendFormat("{{{0}={1}}}", p.ParameterName, p.Value);
-                    sb.AppendLine();
+                    sb.AppendFormat("{{{0}={1}}},", p.ParameterName, p.Value);
                 }
             }
-
-            return sb.ToString();
+            return sb.ToString().TrimEnd(',');
         }
 
         #endregion Private Member
