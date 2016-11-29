@@ -303,6 +303,17 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public IDataReader ExecuteReader(string sql, List<IDbDataParameter> parameters, int timeout)
         {
+            return ExecuteReader4MSSQL(sql, parameters, timeout);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeout"></param>
+        /// <returns></returns>
+        public SqlDataReader ExecuteReader4MSSQL(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
             AddLog(sql, parameters, timeout);
             try
             {
@@ -331,7 +342,6 @@ namespace hwj.DBUtility.MSSQL
                 //throw new Exception(msg, ex);
             }
         }
-
         #endregion ExecuteReader
 
         #region ExecuteScalar
@@ -815,10 +825,17 @@ namespace hwj.DBUtility.MSSQL
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            IDataReader reader = ExecuteReader(sql, parameters, timeout);
+            SqlDataReader reader = ExecuteReader4MSSQL(sql, parameters, timeout);
             try
             {
-                return GenerateEntity.CreateListEntity<T, TS>(reader);
+                if (reader.HasRows)
+                {
+                    return GenerateEntity.CreateListEntity<T, TS>(reader);
+                }
+                else
+                {
+                    return new TS();
+                }
             }
             catch
             { throw; }

@@ -1,17 +1,20 @@
-﻿using System;
+﻿using hwj.DBUtility.TableMapping;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using hwj.DBUtility.TableMapping;
+using System.Data.SqlClient;
 
 namespace hwj.DBUtility.MSSQL
 {
     public class GenerateEntity
     {
         #region Protected Functions
+
         internal static DataTable CreateDataTable(IDataReader reader)
         {
             return CreateDataTable(reader, string.Empty);
         }
+
         internal static DataTable CreateDataTable(IDataReader reader, string tableName)
         {
             try
@@ -29,7 +32,6 @@ namespace hwj.DBUtility.MSSQL
 
                 while (reader.Read())
                 {
-
                     DataRow mydr = dataTable.NewRow();//关键的第三步
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
@@ -47,6 +49,7 @@ namespace hwj.DBUtility.MSSQL
                 if (!reader.IsClosed) reader.Close();
             }
         }
+
         internal static T CreateSingleEntity<T>(IDataReader reader) where T : class, new()
         {
             IList<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
@@ -56,6 +59,7 @@ namespace hwj.DBUtility.MSSQL
             //reader.Read();
             return CreateEntityNotClose<T>(reader, lstFieldInfo);
         }
+
         internal static TS CreateListEntity<T, TS>(IDataReader reader)
             where T : class, new()
             where TS : List<T>, new()
@@ -70,9 +74,11 @@ namespace hwj.DBUtility.MSSQL
             }
             return DataList;
         }
-        #endregion
+
+        #endregion Protected Functions
 
         #region Private Functions
+
         private static T CreateEntityNotClose<T>(IDataReader reader, IList<FieldMappingInfo> lstFieldInfo) where T : class, new()
         {
             T RowInstance = new T();
@@ -95,6 +101,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return RowInstance;
         }
+
         private static IList<FieldMappingInfo> SetFieldIndex(IDataReader reader, IList<FieldMappingInfo> list)
         {
             IList<FieldMappingInfo> datalist = new List<FieldMappingInfo>();
@@ -116,6 +123,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return datalist;
         }
-        #endregion
+
+        #endregion Private Functions
     }
 }
