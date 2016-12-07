@@ -961,6 +961,7 @@ namespace hwj.DBUtility.MSSQL
                         string tmpMsg = sqlEx.Data[Common.SqlInfoKey].ToString();
                         msg = string.Format("{0}\r\n{1}", tmpMsg, msg);
                     }
+                    sqlEx.Data.Remove(Common.SqlInfoKey);
                 }
                 sqlEx.Data.Add(Common.SqlInfoKey, msg);
             }
