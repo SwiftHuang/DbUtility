@@ -953,6 +953,15 @@ namespace hwj.DBUtility.MSSQL
             if (sqlEx.Data != null)
             {
                 string msg = FormatExMessage(sql, parameters, timeout);
+                if (sqlEx.Data.Contains(Common.SqlInfoKey))
+                {
+                    object obj = sqlEx.Data[Common.SqlInfoKey];
+                    if (obj != null)
+                    {
+                        string tmpMsg = sqlEx.Data[Common.SqlInfoKey].ToString();
+                        msg = string.Format("{0}\r\n{1}", tmpMsg, msg);
+                    }
+                }
                 sqlEx.Data.Add(Common.SqlInfoKey, msg);
             }
         }
