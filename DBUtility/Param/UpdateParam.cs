@@ -27,14 +27,26 @@ namespace hwj.DBUtility
             this.Add(new UpdateFields(fieldName, fieldValue));
         }
 
+        public void AddParam(Enum fieldName, object fieldValue, string paramName)
+        {
+            this.Add(new UpdateFields(fieldName, fieldValue, paramName));
+        }
+
         public void AddParam(string fieldName, object fieldValue)
         {
             this.Add(new UpdateFields(fieldName, fieldValue));
         }
+
+        public void AddParam(string fieldName, object fieldValue, string paramName)
+        {
+            this.Add(new UpdateFields(fieldName, fieldValue, paramName));
+        }
+
         public void AddCustomParam(Enum fieldName, string text)
         {
             AddCustomParam(fieldName.ToString(), text);
         }
+
         public void AddCustomParam(string fieldName, string text)
         {
             string str = string.Format("{0}={1}", fieldName, text);
@@ -54,14 +66,24 @@ namespace hwj.DBUtility
         {
         }
 
+        public UpdateFields(Enum fieldName, object fieldValue, string paramName)
+            : base(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, paramName)
+        {
+        }
+
         public UpdateFields(string fieldName, object fieldValue)
             : base(fieldName, fieldValue, Enums.Relation.Equal)
         {
         }
+
+        public UpdateFields(string fieldName, object fieldValue, string paramName)
+            : base(fieldName, fieldValue, Enums.Relation.Equal, Enums.Expression.Comma, paramName)
+        {
+        }
+
         public UpdateFields(string text)
             : base(text, Enums.Expression.Comma)
         {
-
         }
     }
 

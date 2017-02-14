@@ -43,17 +43,26 @@ namespace hwj.DBUtility.MSSQL
             return _MsSqlInsertLastID;
         }
 
-        public override string InsertSql(T entity)
+        public override string InsertSql(T entity, out List<IDbDataParameter> dbDataParameters)
         {
+            int index = 0;
+            dbDataParameters = new List<IDbDataParameter>();
             StringBuilder sbInsField = new StringBuilder();
             StringBuilder sbInsValue = new StringBuilder();
+
             if (entity.GetAssignedStatus())
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
-                        InsertSqlString(ref sbInsField, ref sbInsValue, f, entity);
+                        IDbDataParameter dp = null;
+                        InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
+                        if (dp != null)
+                        {
+                            dbDataParameters.Add(dp);
+                        }
+                        index++;
                     }
                 }
             }
@@ -61,14 +70,21 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity);
+                    IDbDataParameter dp = null;
+                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
+                    if (dp != null)
+                    {
+                        dbDataParameters.Add(dp);
+                    }
+                    index++;
                 }
             }
             return string.Format(_InsertString, entity.GetTableName(), sbInsField.ToString().TrimEnd(','), sbInsValue.ToString().TrimEnd(','));
         }
 
-        private void InsertSqlString(ref StringBuilder insField, ref StringBuilder insValue, FieldMappingInfo field, T entity)
+        private void InsertSqlString(ref StringBuilder insField, ref StringBuilder insValue, FieldMappingInfo field, T entity, string paramName, out IDbDataParameter dbDataParameter)
         {
+            bool existCustomSqlText = entity.ExistCustomSqlText(field.FieldName);
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
@@ -76,20 +92,26 @@ namespace hwj.DBUtility.MSSQL
                 {
                     //insField.Append(field.FieldName).Append(',');
                     insField.AppendFormat(_MsSqlFieldFmt, field.FieldName).Append(',');
-                    if (entity.ExistCustomSqlText(field.FieldName))
+                    if (existCustomSqlText)
                     {
                         string value = entity.GetCustomSqlTextValue(field.FieldName);
                         insValue.Append(value).Append(',');
                     }
                     else if (!IsDatabaseDate(field.DataTypeCode, obj))
                     {
-                        insValue.AppendFormat(_MsSqlParam, field.FieldName).Append(',');
+                        insValue.AppendFormat(_MsSqlParam, string.IsNullOrEmpty(paramName) ? field.FieldName : paramName).Append(',');
                     }
                     else
                     {
                         insValue.Append(_MsSqlGetDate).Append(',');
                     }
                 }
+            }
+
+            dbDataParameter = null;
+            if (!existCustomSqlText)
+            {
+                dbDataParameter = GetSqlParameter(field, obj, paramName);
             }
         }
 
@@ -274,7 +296,9 @@ namespace hwj.DBUtility.MSSQL
             if (IsDateType(param.DbType))
             {
                 if (Convert.ToDateTime(value) == DateTime.MinValue)
+                {
                     return DBNull.Value;
+                }
             }
             return value;
         }
@@ -297,7 +321,7 @@ namespace hwj.DBUtility.MSSQL
                         {
                             IDbDataParameter dp = new SqlParameter();
                             dp.DbType = f.DataTypeCode;
-                            dp.ParameterName = string.Format(_MsSqlParam, up.FieldName);
+                            dp.ParameterName = string.Format(_MsSqlParam, string.IsNullOrEmpty(up.ParamName) ? up.FieldName : up.ParamName);
                             dp.Value = CheckValue(dp, up.FieldValue);
                             LstDP.Add(dp);
                         }
@@ -404,5 +428,18 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion Public Functions
+
+        internal override IDbDataParameter GetSqlParameter(FieldMappingInfo field, object value, string paramName)
+        {
+            if (!IsDatabaseDate(field.DataTypeCode, value))
+            {
+                IDbDataParameter dp = new SqlParameter();
+                dp.DbType = field.DataTypeCode;
+                dp.ParameterName = string.Format(_MsSqlParam, string.IsNullOrEmpty(paramName) ? field.FieldName : paramName);
+                dp.Value = CheckValue(dp, value);
+                return dp;
+            }
+            return null;
+        }
     }
 }

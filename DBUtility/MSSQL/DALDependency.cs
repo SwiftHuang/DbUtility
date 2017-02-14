@@ -141,7 +141,9 @@ namespace hwj.DBUtility.MSSQL
         /// <returns>Sql对象</returns>
         public static SqlEntity AddSqlEntity(T entity)
         {
-            return new SqlEntity(GenUpdateSql.InsertSql(entity), GenUpdateSql.GenParameter(entity), entity.GetTableName(), entity);
+            List<IDbDataParameter> dbDataParameters = null;
+            string sqlText = GenUpdateSql.InsertSql(entity, out dbDataParameters);
+            return new SqlEntity(sqlText, dbDataParameters, entity.GetTableName(), entity);
         }
 
         ///// <summary>
@@ -198,8 +200,9 @@ namespace hwj.DBUtility.MSSQL
         public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams)
         {
             SqlEntity se = new SqlEntity();
-            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParams);
-            se.Parameters = GenUpdateSql.GenParameter(entity);
+            List<IDbDataParameter> dpList = null;
+            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParams, out dpList);
+            se.Parameters = dpList;//GenUpdateSql.GenParameter(entity);
             if (filterParams != null)
             {
                 se.Parameters.AddRange(GenUpdateSql.GenParameter(filterParams));

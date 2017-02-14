@@ -34,14 +34,15 @@ namespace hwj.DBUtility
         #endregion
 
         #region Update Sql
-        private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity)
+        private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity, string paramName, out IDbDataParameter dbDataParameter)
         {
+            bool existCustomSqlText = entity.ExistCustomSqlText(field.FieldName);
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
                 if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnUpdate))
                 {
-                    if (entity.ExistCustomSqlText(field.FieldName))
+                    if (existCustomSqlText)
                     {
                         string value = entity.GetCustomSqlTextValue(field.FieldName);
                         up.AddCustomParam(field.FieldName, value);
@@ -49,7 +50,7 @@ namespace hwj.DBUtility
                     else
                     {
                         //if (!IsDatabaseDate(field.DataTypeCode, obj))
-                        up.AddParam(field.FieldName, obj);
+                        up.AddParam(field.FieldName, obj, paramName);
                         //else
                         //    up.AddParam(field.FieldName, DatabaseGetDateSql);
                     }
@@ -58,25 +59,42 @@ namespace hwj.DBUtility
             else
             {
                 if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnNull))
-                    up.AddParam(field.FieldName, DBNull.Value);
+                {
+                    up.AddParam(field.FieldName, DBNull.Value, paramName);
+                }
+            }
+            dbDataParameter = null;
+            if (!existCustomSqlText)
+            {
+                dbDataParameter = GetSqlParameter(field, obj, paramName);
             }
         }
+        internal abstract IDbDataParameter GetSqlParameter(FieldMappingInfo field, object value, string paramName);
         /// <summary>
         /// 获取Update Sql
         /// </summary>
         /// <param name="entity">表对象</param>
         /// <param name="filterParams">筛选条件</param>
         /// <returns></returns>
-        internal string UpdateSql(T entity, FilterParams filterParams)
+        internal string UpdateSql(T entity, FilterParams filterParams, out List<IDbDataParameter> dbDataParameters)
         {
+            dbDataParameters = new List<IDbDataParameter>();
             UpdateParam up = new UpdateParam();
+            int index = 0;
             if (entity.GetAssignedStatus())
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
-                        SetUpdateParam(ref up, f, entity);
+
+                        IDbDataParameter dp = null;
+                        SetUpdateParam(ref up, f, entity, "_P_" + index.ToString(), out dp);
+                        if (dp != null)
+                        {
+                            dbDataParameters.Add(dp);
+                        }
+                        index++;
                     }
                 }
             }
@@ -84,7 +102,13 @@ namespace hwj.DBUtility
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    SetUpdateParam(ref up, f, entity);
+                    IDbDataParameter dp = null;
+                    SetUpdateParam(ref up, f, entity, "_P" + index.ToString(), out dp);
+                    if (dp != null)
+                    {
+                        dbDataParameters.Add(dp);
+                    }
+                    index++;
                 }
             }
             return UpdateSql(entity.GetTableName(), up, filterParams);
@@ -104,7 +128,7 @@ namespace hwj.DBUtility
 
         #region Insert Sql
         public abstract string InsertLastIDSql();
-        public abstract string InsertSql(T entity);
+        public abstract string InsertSql(T entity, out List<IDbDataParameter> dbDataParameters);
         #endregion
 
         #endregion
