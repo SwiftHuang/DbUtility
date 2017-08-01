@@ -687,7 +687,9 @@ namespace hwj.DBUtility.MSSQL
                         TS result = GenerateEntity.CreateListEntity<T, TS>(reader);
                         reader.Close();
                         if (cmd.Parameters.Count > 0)
+                        {
                             TotalCount = int.Parse(cmd.Parameters["@_RecordCount"].Value.ToString());
+                        }
                         cmd.Parameters.Clear();
                         return result;
                     }

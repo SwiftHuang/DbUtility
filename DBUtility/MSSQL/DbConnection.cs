@@ -305,6 +305,14 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader4MSSQL(sql, parameters, timeout);
         }
+
+        public SqlDataReader ExecuteReader4MSSQL(string sql, List<IDbDataParameter> parameters, int timeout)
+        {
+            SqlCommand cmd;
+            SqlDataReader reader = ExecuteReader4MSSQL(sql, parameters, timeout, out cmd);
+            cmd.Parameters.Clear();
+            return reader;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -312,12 +320,12 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
-        public SqlDataReader ExecuteReader4MSSQL(string sql, List<IDbDataParameter> parameters, int timeout)
+        private SqlDataReader ExecuteReader4MSSQL(string sql, List<IDbDataParameter> parameters, int timeout, out SqlCommand cmd)
         {
             AddLog(sql, parameters, timeout);
             try
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (cmd = new SqlCommand())
                 {
                     DbHelperSQL.PrepareCommand(cmd, InnerConnection, InnerTransaction, sql, parameters, timeout);
                     SqlDataReader myReader;
@@ -329,8 +337,6 @@ namespace hwj.DBUtility.MSSQL
                     {
                         myReader = cmd.ExecuteReader();
                     }
-
-                    cmd.Parameters.Clear();
                     return myReader;
                 }
             }
@@ -668,20 +674,31 @@ namespace hwj.DBUtility.MSSQL
         public T GetEntity<T>(string sql, List<IDbDataParameter> parameters, int timeout)
             where T : class, new()
         {
-            IDataReader reader = ExecuteReader(sql, parameters, timeout);
+            SqlCommand cmd;
+            IDataReader reader = ExecuteReader4MSSQL(sql, parameters, timeout, out cmd);
             try
             {
                 if (reader.Read())
+                {
                     return GenerateEntity.CreateSingleEntity<T>(reader);
+                }
                 else
+                {
                     return null;
+                }
             }
             catch
-            { throw; }
+            {
+                throw;
+            }
             finally
             {
                 if (!reader.IsClosed)
+                {
                     reader.Close();
+                }
+                GetOutputParams(parameters, cmd);
+                cmd.Parameters.Clear();
             }
         }
 
@@ -825,7 +842,8 @@ namespace hwj.DBUtility.MSSQL
             where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
-            SqlDataReader reader = ExecuteReader4MSSQL(sql, parameters, timeout);
+            SqlCommand cmd;
+            SqlDataReader reader = ExecuteReader4MSSQL(sql, parameters, timeout, out cmd);
             try
             {
                 if (reader.HasRows)
@@ -838,11 +856,17 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
             catch
-            { throw; }
+            {
+                throw;
+            }
             finally
             {
                 if (!reader.IsClosed)
+                {
                     reader.Close();
+                }
+                GetOutputParams(parameters, cmd);
+                cmd.Parameters.Clear();
             }
         }
 
@@ -982,6 +1006,20 @@ namespace hwj.DBUtility.MSSQL
             return sb.ToString().TrimEnd(',');
         }
 
+        private void GetOutputParams(List<IDbDataParameter> parameters, SqlCommand cmd)
+        {
+            if (parameters != null && cmd != null && cmd.Parameters != null)
+            {
+                List<IDbDataParameter> outputLst = parameters.FindAll(c => c.Direction == ParameterDirection.Output || c.Direction == ParameterDirection.InputOutput);
+                if (outputLst != null && outputLst.Count > 0)
+                {
+                    foreach (var o in outputLst)
+                    {
+                        o.Value = cmd.Parameters[o.ParameterName].Value;
+                    }
+                }
+            }
+        }
         #endregion Private Member
 
         #region IDisposable 成员
