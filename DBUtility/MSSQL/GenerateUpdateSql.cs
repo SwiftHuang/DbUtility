@@ -293,7 +293,7 @@ namespace hwj.DBUtility.MSSQL
 
         private object CheckValue(IDbDataParameter param, object value)
         {
-            if (IsDateType(param.DbType))
+            if (Common.IsDateType(param.DbType))
             {
                 if (Convert.ToDateTime(value) == DateTime.MinValue)
                 {

@@ -64,7 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\MOE\DAMOE_BookFolder_VIN.cs" />
     <Compile Include="DB\MOE\DAMOE_BookFolder.cs" />
+    <Compile Include="DB\MOE\tbMOE_BookFolder_VIN.cs" />
     <Compile Include="DB\MOE\tbMOE_BookFolder.cs" />
     <Compile Include="DB\Test\BOTest_IMG.cs" />
     <Compile Include="DB\Test\BOTest_Table.cs" />
@@ -118,6 +120,12 @@
     <Compile Include="FrmAsync.Designer.cs">
       <DependentUpon>FrmAsync.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HttpFrm.Designer.cs">
+      <DependentUpon>HttpFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImgTestFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAsync.resx">
       <DependentUpon>FrmAsync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HttpFrm.resx">
+      <DependentUpon>HttpFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImgTestFrm.resx">
       <DependentUpon>ImgTestFrm.cs</DependentUpon>

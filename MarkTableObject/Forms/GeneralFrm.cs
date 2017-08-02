@@ -59,7 +59,7 @@ namespace hwj.MarkTableObject.Forms
                 lblEntityFileName4View.Text = ProjectInfo.EntityPath4View;
                 txtEntityPrefixChar4View.Text = ProjectInfo.EntityPrefixChar4View;
 
-                cboTemplateType.SelectedIndex = ProjectInfo.Template == TemplateType.DataAccess ? 0 : 1;
+                cboTemplateType.SelectedIndex = Common.GetComboxIndex(ProjectInfo.Template);
             }
             else
             {
@@ -95,7 +95,7 @@ namespace hwj.MarkTableObject.Forms
             ProjectInfo.EntityNamespace4View = txtEntityNameSpace4View.Text.Trim();
             ProjectInfo.EntityPrefixChar4View = txtEntityPrefixChar4View.Text.Trim();
 
-            ProjectInfo.Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business;
+            ProjectInfo.Template = Common.GetTemplateTypeByComboxIndex(cboTemplateType.SelectedIndex);
             ProjectInfo.SaveXML();
         }
 
@@ -220,7 +220,7 @@ namespace hwj.MarkTableObject.Forms
 
         private void cboTemplateType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboTemplateType.SelectedIndex == 0)
+            if (cboTemplateType.SelectedIndex == 0 || cboTemplateType.SelectedIndex == 2)
             {
                 chkBLL.Checked = false;
                 txtBLLConnection.Enabled = false;
@@ -231,7 +231,6 @@ namespace hwj.MarkTableObject.Forms
             {
                 chkBLL.Checked = true;
                 txtBLLConnection.Enabled = true;
-
                 txtBLLNameSpace.Enabled = txtBLLNameSpace4View.Enabled = true;
                 txtBLLPrefixChar.Enabled = txtBLLPrefixChar4View.Enabled = true;
             }

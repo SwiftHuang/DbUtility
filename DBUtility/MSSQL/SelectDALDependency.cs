@@ -1,4 +1,5 @@
 ﻿using hwj.DBUtility.Interface;
+using hwj.DBUtility.MSSQL.Interface;
 using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace hwj.DBUtility.MSSQL
         ///
         /// </summary>
         /// <param name="connection"></param>
-        protected SelectDALDependency(IConnection connection)
+        protected SelectDALDependency(IMSSQLConnection connection)
             : base(connection)
         {
             CommandText = Activator.CreateInstance<T>().GetCommandText();

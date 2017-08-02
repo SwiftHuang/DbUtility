@@ -28,6 +28,7 @@ namespace Test
             //Application.Run(new ImgTestFrm());
             //Application.Run(new FrmAsync());
             Application.Run(new TestDBUtility());
+            //Application.Run(new HttpFrm());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

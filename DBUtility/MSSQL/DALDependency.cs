@@ -1,4 +1,5 @@
 ﻿using hwj.DBUtility.Interface;
+using hwj.DBUtility.MSSQL.Interface;
 using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="lockType"></param>
-        protected DALDependency(IConnection connection)
+        protected DALDependency(IMSSQLConnection connection)
             : base(connection)
         {
             TableName = Activator.CreateInstance<T>().GetTableName();
@@ -165,6 +166,57 @@ namespace hwj.DBUtility.MSSQL
             return Convert.ToInt64(ExecuteScalar(GenUpdateSql.InsertLastIDSql()));
         }
 
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public bool AddList(List<T> list)
+        {
+            return AddList(list, InnerConnection.DefaultCommandTimeout);
+        }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns></returns>
+        public bool AddList(List<T> list, int timeout)
+        {
+            if (list != null)
+            {
+                DataTable dt = new DataTable(TableName);
+                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                {
+                    dt.Columns.Add(f.FieldName);
+                }
+
+                foreach (var e in list)
+                {
+                    DataRow dr = dt.NewRow();
+                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    {
+                        if (e.GetAssigned().IndexOf(f.FieldName) != -1)
+                        {
+                            object obj = f.Property.GetValue(e, null);
+                            if (Common.IsDateType(f.DataTypeCode))
+                            {
+                                if (Convert.ToDateTime(obj) == DateTime.MinValue)
+                                {
+                                    obj = DBNull.Value;
+                                }
+                            }
+                            dr[f.FieldName] = obj;
+                        }
+                    }
+                    dt.Rows.Add(dr);
+                }
+                InnerConnection.BulkCopy(dt, timeout);
+                return true;
+            }
+            return false;
+        }
         #endregion Insert
 
         #region Update

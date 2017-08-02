@@ -57,8 +57,8 @@ namespace hwj.MarkTableObject.Forms
                     BusinessNamespace = txtBLLName.Text.Trim(),
                     BusinessPath = txtBLLPath.Text.Trim(),
                     BusinessPrefixChar = txtBLLPrefixChar.Text.Trim(),
-                    BusinessPath4View=txtBLLPath.Text.Trim(),
-                    
+                    BusinessPath4View = txtBLLPath.Text.Trim(),
+
                     DataAccessNamespace = txtDALName.Text.Trim(),
                     DataAccessPath = txtDALPath.Text.Trim(),
                     DataAccessPrefixChar = txtDALPrefixChar.Text.Trim(),
@@ -70,7 +70,7 @@ namespace hwj.MarkTableObject.Forms
                     EntityPath4View = txtEntityPath.Text.Trim(),
 
                     Database = Project.Database,
-                    Template = cboTemplateType.SelectedIndex == 0 ? TemplateType.DataAccess : TemplateType.Business,
+                    Template = Common.GetTemplateTypeByComboxIndex(cboTemplateType.SelectedIndex),
                 };
 
                 //prj.Database.ConnectionString = txtConnStr.Text.Trim();
@@ -178,7 +178,7 @@ namespace hwj.MarkTableObject.Forms
                     lblDataSource.Text = Project.Database.ServerVersion;
                     ConnectionDataSource = Project.Database.DatabaseType;
                 }
-                cboTemplateType.SelectedIndex = Project.Template == TemplateType.DataAccess ? 0 : 1;
+                cboTemplateType.SelectedIndex = Common.GetComboxIndex(Project.Template);
 
             }
         }

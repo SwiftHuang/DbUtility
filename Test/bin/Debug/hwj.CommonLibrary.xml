@@ -337,6 +337,125 @@
             <param name="genFunReturnType">生成代码的方法的返回类型</param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.ExcelHelper.GetExcelSheetNames(System.String,System.Boolean,System.Int32)">
+            <summary>
+            获取Excel中的Sheet.
+            </summary>
+            <param name="excelFile">文件完整路径</param>
+            <param name="hdrIsNo">HDR=Yes，这代表第一行是标题，不做为数据使用 ，如果用HDR=NO，则表示第一行不是标题，做为数据来使用。系统默认的是YES</param>
+            <param name="IMEX">0 ---输出模式;1---输入模式;2----链接模式(完全更新能力)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.ExcelHelper.ExcelToDataTable(System.String,System.String,System.Boolean,System.Int32)">
+            <summary>
+            获取Excel中指定Sheet的内容
+            </summary>
+            <param name="excelFile">文件完整路径</param>
+            <param name="sheetName">指定获取的Sheet名</param>
+            <param name="hdrIsNo">HDR=Yes，这代表第一行是标题，不做为数据使用 ，如果用HDR=NO，则表示第一行不是标题，做为数据来使用。系统默认的是YES</param>
+            <param name="IMEX">0 ---输出模式;1---输入模式;2----链接模式(完全更新能力)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExDecimalHelper.Median(System.Collections.Generic.IList{System.Decimal})">
+            <summary>
+            计算中位数
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExDecimalHelper.Median(System.Decimal[])">
+            <summary>
+            计算中位数
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExDoubleHelper.Median(System.Collections.Generic.IList{System.Double})">
+            <summary>
+            计算中位数
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExDoubleHelper.Median(System.Double[])">
+            <summary>
+            计算中位数
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExStringHelper.ToUpperTrim(System.String)">
+            <summary>
+            从当前 System.String 对象的开始和末尾移除所有空白字符并转大写，如Null则返回Null。
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExStringHelper.ToLowerTrim(System.String)">
+            <summary>
+            从当前 System.String 对象的开始和末尾移除所有空白字符并转小写，如Null则返回Null。
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.Extensions.ExStringHelper.TryTrim(System.String)">
+            <summary>
+            从当前 System.String 对象的开始和末尾移除所有空白字符，如Null则返回Null。
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:hwj.CommonLibrary.Object.HttpHelper">
+            <summary>
+            HttpHelper
+            </summary>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.HttpHelper.PostAction(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            使用Post的方式提交数据（Timeout默认30秒;ContentType为application/x-www-form-urlencoded）
+            </summary>
+            <param name="url">提交Url</param>
+            <param name="param">提交参数</param>
+            <param name="encoding">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.HttpHelper.PostAction(System.String,System.String,System.Text.Encoding,System.Int32)">
+            <summary>
+            使用Post的方式提交数据（Timeout默认30秒;ContentType为application/x-www-form-urlencoded）
+            </summary>
+            <param name="url">提交Url</param>
+            <param name="param">提交参数</param>
+            <param name="encoding">字符编码</param>
+            <param name="timeout">超时时间(单位:毫秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.HttpHelper.PostJsonAction(System.String,System.String,System.Text.Encoding,System.Int32)">
+             <summary>
+            使用Post的方式提交Json数据（Timeout默认30秒;ContentType为application/json）
+             </summary>
+             <param name="url">提交Url</param>
+             <param name="param">提交参数</param>
+             <param name="encoding">字符编码</param>
+             <param name="timeout">超时时间(单位:毫秒)</param>
+             <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.HttpHelper.PostAction(System.String,System.String,System.String,System.Text.Encoding,System.Int32)">
+            <summary>
+            使用Post的方式提交数据（Timeout默认30秒）
+            </summary>
+            <param name="url">提交Url</param>
+            <param name="contentType">Http标头</param>
+            <param name="param">提交参数</param>
+            <param name="encoding">字符编码</param>
+            <param name="timeout">超时时间(单位:毫秒)</param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.HttpHelper.GetIP">
+            <summary>
+            获取IP地址
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:hwj.CommonLibrary.Object.Base.LogHelper.ShowInvalidSmtpError">
             <summary>
             是否抛出SmtpList异常
@@ -421,14 +540,22 @@
             <summary>
             创建文件
             </summary>
-            <param name="fileName"></param>
+            <param name="fileName">要写入的完整文件路径。</param>
         </member>
         <member name="M:hwj.CommonLibrary.Object.FileHelper.CreateFile(System.String,System.String)">
             <summary>
             创建文件
             </summary>
-            <param name="fileName"></param>
-            <param name="text"></param>
+            <param name="fileName">要写入的完整文件路径。</param>
+            <param name="text">文本</param>
+        </member>
+        <member name="M:hwj.CommonLibrary.Object.FileHelper.CreateFile(System.String,System.String,System.Boolean)">
+            <summary>
+            创建文件
+            </summary>
+            <param name="fileName">要写入的完整文件路径。</param>
+            <param name="text">文本</param>
+            <param name="append"> 确定是否将数据追加到文件。如果该文件存在，并且 append 为 false，则该文件被覆盖。如果该文件存在，并且 append 为 true，则数据被追加到该文件中。否则，将创建新文件。</param>
         </member>
         <member name="M:hwj.CommonLibrary.Object.FileHelper.CopyFolder(System.String,System.String)">
             <summary>
@@ -740,16 +867,16 @@
             <returns></returns>
         </member>
         <member name="F:hwj.CommonLibrary.Object.StringHelper.strChineseCharList">
-            <summary> 
-            汉字拼音首字母列表 本列表包含了20901个汉字,用于配合 GetChineseSpell 函数使用,本表收录的字符的Unicode编码范围为19968至40869[南京 yyf] 
-            </summary> 
+            <summary>
+            汉字拼音首字母列表 本列表包含了20901个汉字,用于配合 GetChineseSpell 函数使用,本表收录的字符的Unicode编码范围为19968至40869[南京 yyf]
+            </summary>
         </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.GetChineseSpell(System.String)">
-            <summary> 
+            <summary>
             获得字符串的汉语拼音码
-            </summary> 
-            <param name="strText">字符串</param> 
-            <returns>汉语拼音码,该字符串只包含大写的英文字母</returns> 
+            </summary>
+            <param name="strText">字符串</param>
+            <returns>汉语拼音码,该字符串只包含大写的英文字母</returns>
         </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.IsLetterOrNumeric(System.String)">
             <summary>
@@ -789,8 +916,19 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:hwj.CommonLibrary.Object.StringHelper.ToSBC(System.String)">
+            <summary>
+            半角转全角
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:hwj.CommonLibrary.Object.StringHelper.ToDBC(System.String)">
-            
+            <summary>
+            全角转半角
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:hwj.CommonLibrary.WebSite.Base.BasePage">
             <summary>

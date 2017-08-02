@@ -78,7 +78,7 @@
     <Compile Include="Entity\Reverser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interface\IConnection.cs" />
+    <Compile Include="Interface\IBaseConnection.cs" />
     <Compile Include="MSSQL\DALDependency.cs" />
     <Compile Include="BaseGenSql.cs">
       <SubType>Code</SubType>
@@ -86,6 +86,7 @@
     <Compile Include="DBCache.cs" />
     <Compile Include="MSSQL\BaseDataAccess.cs" />
     <Compile Include="MSSQL\DbConnection.cs" />
+    <Compile Include="MSSQL\Interface\IMSSQLConnection.cs" />
     <Compile Include="MSSQL\SelectDALDependency.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />
     <Compile Include="MSSQL\DbHelper.cs">

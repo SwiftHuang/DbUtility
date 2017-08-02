@@ -162,7 +162,7 @@ namespace hwj.DBUtility
                                     FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
                                     if (f != null)
                                     {
-                                        if (IsNumType(f.DataTypeCode))
+                                        if (Common.IsNumType(f.DataTypeCode))
                                         {
                                             tmpFormat = _DecimalFormat;
                                         }
@@ -179,7 +179,7 @@ namespace hwj.DBUtility
                                 FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), para.FieldName);
                                 if (f != null)
                                 {
-                                    if (IsNumType(f.DataTypeCode))
+                                    if (Common.IsNumType(f.DataTypeCode))
                                     {
                                         foreach (string s in strList)
                                         {
@@ -202,7 +202,6 @@ namespace hwj.DBUtility
                                                 inSql.AppendFormat(_StringCommaFormat, s);
                                             }
                                         }
-
                                     }
                                 }
                             }
@@ -221,6 +220,7 @@ namespace hwj.DBUtility
                         }
 
                         #endregion IN
+
                         else
                         {
                             sbWhere.Append(GetCondition(para, true, isPage));
@@ -329,18 +329,15 @@ namespace hwj.DBUtility
         //    return s;
         //}
 
-        protected bool IsNumType(DbType typeCode)
-        {
-            return Common.IsNumType(typeCode);
-        }
+        //protected bool IsNumType(DbType typeCode)
+        //{
+        //    return Common.IsNumType(typeCode);
+        //}
 
-        protected bool IsDateType(DbType typeCode)
-        {
-            if (typeCode == DbType.DateTime)
-                return true;
-            else
-                return false;
-        }
+        //protected bool IsDateType(DbType typeCode)
+        //{
+        //    return Common.IsDateType(typeCode);
+        //}
 
         protected bool IsUnicode(DbType typeCode)
         {
@@ -360,7 +357,7 @@ namespace hwj.DBUtility
 
         protected bool IsDatabaseDate(System.Data.DbType dbType, object value)
         {
-            if (IsDateType(dbType) && Convert.ToDateTime(value) == SqlParam.DatabaseDate)
+            if (Common.IsDateType(dbType) && Convert.ToDateTime(value) == SqlParam.DatabaseDate)
                 return true;
             else
                 return false;
@@ -397,7 +394,5 @@ namespace hwj.DBUtility
         }
 
         #endregion Protected Functions
-
-
     }
 }

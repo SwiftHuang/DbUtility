@@ -1,15 +1,14 @@
+using hwj.DBUtility.TableMapping;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility.MSSQL
 {
     /// <summary>
     /// 数据访问抽象基础类
-    /// Copyright (C) 2004-2008 By LiTianPing 
+    /// Copyright (C) 2004-2008 By LiTianPing
     /// </summary>
     public abstract class DbHelperSQL
     {
@@ -21,6 +20,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #region 公用方法
+
         /// <summary>
         /// 判断是否存在某表的某个字段
         /// </summary>
@@ -37,6 +37,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return Convert.ToInt32(res) > 0;
         }
+
         public static int GetMaxID(string ConnectionString, string FieldName, string TableName)
         {
             string strsql = "select max(" + FieldName + ")+1 from " + TableName;
@@ -50,6 +51,7 @@ namespace hwj.DBUtility.MSSQL
                 return int.Parse(obj.ToString());
             }
         }
+
         public static bool Exists(string ConnectionString, string strSql)
         {
             object obj = DbHelperSQL.GetSingle(ConnectionString, strSql);
@@ -101,6 +103,7 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
+
         public static bool Exists(string ConnectionString, string strSql, List<IDbDataParameter> cmdParms)
         {
             object obj = DbHelperSQL.GetSingle(ConnectionString, strSql, cmdParms);
@@ -122,6 +125,7 @@ namespace hwj.DBUtility.MSSQL
                 return true;
             }
         }
+
         public static bool ClearDatabaseLog(string ConnectionString, string databsae)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -148,9 +152,10 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion
+        #endregion 公用方法
 
         #region 执行带参数的SQL语句
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -161,6 +166,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetSingle(ConnectionString, SQLString, null, -1);
         }
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -172,6 +178,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return GetSingle(ConnectionString, SQLString, cmdParms, -1);
         }
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -223,6 +230,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSql(ConnectionString, SQLString, null, -1);
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -234,6 +242,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSql(ConnectionString, SQLString, cmdParms, -1);
         }
+
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -278,6 +287,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteSqlTran(ConnectionString, cmdList, -1);
         }
+
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -361,13 +371,10 @@ namespace hwj.DBUtility.MSSQL
                             trans.Rollback();
                         }
                         throw;
-
                     }
                 }
             }
         }
-
-
 
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
@@ -379,6 +386,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(ConnectionString, SQLString, null);
         }
+
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
@@ -390,6 +398,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return ExecuteReader(ConnectionString, SQLString, cmdParms, -1);
         }
+
         /// <summary>
         /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
@@ -426,6 +435,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return Query(ConnectionString, SQLString, null);
         }
+
         /// <summary>
         /// 执行查询语句，返回DataSet
         /// </summary>
@@ -437,6 +447,7 @@ namespace hwj.DBUtility.MSSQL
         {
             return Query(ConnectionString, SQLString, -1, cmdParms);
         }
+
         /// <summary>
         /// 执行查询语句，返回DataSet
         /// </summary>
@@ -520,7 +531,8 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
-        #endregion
+
+        #endregion 执行带参数的SQL语句
 
         #region 存储过程操作
 
@@ -539,9 +551,7 @@ namespace hwj.DBUtility.MSSQL
             command.CommandType = CommandType.StoredProcedure;
             returnReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             return returnReader;
-
         }
-
 
         /// <summary>
         /// 执行存储过程
@@ -563,6 +573,7 @@ namespace hwj.DBUtility.MSSQL
                 return dataSet;
             }
         }
+
         public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, string tableName, int timeout)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -577,7 +588,6 @@ namespace hwj.DBUtility.MSSQL
                 return dataSet;
             }
         }
-
 
         /// <summary>
         /// 构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
@@ -608,7 +618,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// 执行存储过程，返回影响的行数		
+        /// 执行存储过程，返回影响的行数
         /// </summary>
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
@@ -629,7 +639,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// 创建 SqlCommand 对象实例(用来返回一个整数值)	
+        /// 创建 SqlCommand 对象实例(用来返回一个整数值)
         /// </summary>
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
@@ -642,9 +652,11 @@ namespace hwj.DBUtility.MSSQL
                 false, 0, 0, string.Empty, DataRowVersion.Default, null));
             return command;
         }
-        #endregion
+
+        #endregion 存储过程操作
 
         #region Private Function
+
         private static void PrepareCommand4Arry(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, string cmdText, IDbDataParameter[] cmdParms, int timeout)
         {
             if (conn.State != ConnectionState.Open)
@@ -684,10 +696,12 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
         internal static void PrepareCommand(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, SqlEntity sqlEntity)
         {
             PrepareCommand(cmd, conn, trans, sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
         }
+
         internal static void PrepareCommand(IDbCommand cmd, IDbConnection conn, IDbTransaction trans, string cmdText, List<IDbDataParameter> cmdParms, int timeout)
         {
             if (cmdParms != null)
@@ -708,6 +722,7 @@ namespace hwj.DBUtility.MSSQL
                 e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
             }
         }
+
         //private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
         //{
         //    try
@@ -744,11 +759,9 @@ namespace hwj.DBUtility.MSSQL
                         }
                         else if (field.DataTypeCode == DbType.Boolean)
                         {
-
                         }
                         else if (field.DataTypeCode == DbType.DateTime)
                         {
-
                         }
                         else
                         {
@@ -771,7 +784,7 @@ namespace hwj.DBUtility.MSSQL
                 return null;
             }
         }
-        #endregion
-    }
 
+        #endregion Private Function
+    }
 }

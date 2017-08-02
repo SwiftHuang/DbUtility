@@ -160,14 +160,8 @@ namespace hwj.MarkTableObject.Components
                 if (colList != null)
                 {
                     PrjInfo.EntityPrefixChar = string.Empty;
-                    if (cboTemplateType.SelectedIndex == 1)
-                    {
-                        PrjInfo.Template = TemplateType.Business;
-                    }
-                    else
-                    {
-                        PrjInfo.Template = TemplateType.DataAccess;
-                    }
+                    PrjInfo.Template = Common.GetTemplateTypeByComboxIndex(cboTemplateType.SelectedIndex);
+
                     GeneralInfo genInfo = new GeneralInfo(PrjInfo, Module);
                     BLLInfo inf = new BLLInfo(genInfo, Module, txtTableName.Text.Trim(), txtSQL.Text.Trim(), colList);
                     inf.EntityInfo.SPParamInfos = EntyInfo.SPParamInfos;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.xButton1 = new hwj.UserControls.CommonControls.xButton();
+            this.btnBulkCopy = new hwj.UserControls.CommonControls.xButton();
             this.SuspendLayout();
             // 
             // xButton1
@@ -42,11 +43,23 @@
             this.xButton1.UseVisualStyleBackColor = true;
             this.xButton1.Click += new System.EventHandler(this.xButton1_Click);
             // 
+            // btnBulkCopy
+            // 
+            this.btnBulkCopy.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
+            this.btnBulkCopy.Location = new System.Drawing.Point(102, 12);
+            this.btnBulkCopy.Name = "btnBulkCopy";
+            this.btnBulkCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnBulkCopy.TabIndex = 0;
+            this.btnBulkCopy.Text = "BulkCopy";
+            this.btnBulkCopy.UseVisualStyleBackColor = true;
+            this.btnBulkCopy.Click += new System.EventHandler(this.btnBulkCopy_Click);
+            // 
             // TestDBUtility
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 276);
+            this.Controls.Add(this.btnBulkCopy);
             this.Controls.Add(this.xButton1);
             this.Name = "TestDBUtility";
             this.Text = "TestDBUtility";
@@ -57,5 +70,6 @@
         #endregion
 
         private hwj.UserControls.CommonControls.xButton xButton1;
+        private hwj.UserControls.CommonControls.xButton btnBulkCopy;
     }
 }

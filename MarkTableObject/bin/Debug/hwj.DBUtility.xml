@@ -17,15 +17,15 @@
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.BaseGenSelectSql`1.SelectSql(System.String,hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,System.Nullable{System.Int32})">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="tableName"></param>
-            <param name="displayFields"></param>
-            <param name="filterParams"></param>
-            <param name="orderParam"></param>
-            <param name="maxCount"></param>
-            <returns></returns>
+             </summary>
+             <param name="tableName"></param>
+             <param name="displayFields"></param>
+             <param name="filterParams"></param>
+             <param name="orderParam"></param>
+             <param name="maxCount"></param>
+             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.DeleteSql(System.String,hwj.DBUtility.FilterParams)">
             <summary>
@@ -42,7 +42,7 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.UpdateSql(`0,hwj.DBUtility.FilterParams)">
+        <member name="M:hwj.DBUtility.BaseGenUpdateSql`1.UpdateSql(`0,hwj.DBUtility.FilterParams,System.Collections.Generic.List{System.Data.IDbDataParameter}@)">
             <summary>
             获取Update Sql
             </summary>
@@ -121,7 +121,7 @@
             对象比较时使用的信息类
             </summary>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetEntity``1(hwj.DBUtility.SqlEntity)">
             <summary>
             获取表对象
             </summary>
@@ -129,7 +129,7 @@
             <param name="sqlEntity">SQL实体</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
              <summary>
             
              </summary>
@@ -138,14 +138,24 @@
              <param name="parameters"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.GetList``2(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetEntity``1(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetList``2(hwj.DBUtility.SqlEntity)">
             <summary>
             通过事务，获取表集合
             </summary>
             <param name="sqlEntity">SQL实体</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.GetList``2(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetList``2(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
              <summary>
             
              </summary>
@@ -155,21 +165,32 @@
              <param name="parameters"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.GetList``2(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TS"></typeparam>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteSqlList(hwj.DBUtility.SqlList)">
              <summary>
             
              </summary>
              <param name="sqlList"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteSql(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteSql(hwj.DBUtility.SqlEntity)">
              <summary>
             
              </summary>
              <param name="sqlEntity"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteSql(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
              <summary>
             
              </summary>
@@ -178,14 +199,14 @@
              <param name="timeout"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteReader(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteReader(hwj.DBUtility.SqlEntity)">
              <summary>
             
              </summary>
              <param name="sqlEntity"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteReader(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
              <summary>
             
              </summary>
@@ -194,14 +215,14 @@
              <param name="timeout"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteScalar(hwj.DBUtility.SqlEntity)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteScalar(hwj.DBUtility.SqlEntity)">
              <summary>
             
              </summary>
              <param name="sqlEntity"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteScalar(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
              <summary>
             
              </summary>
@@ -210,7 +231,7 @@
              <param name="timeout"></param>
              <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
             <summary>
             执行存储过程,返回Output参数的值。
             </summary>
@@ -218,7 +239,7 @@
             <param name="parameters">SQL参数</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteStoredProcedure(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
             <summary>
             执行存储过程,返回Output参数的值。
             </summary>
@@ -227,7 +248,7 @@
             <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedureForDataTable(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteStoredProcedureForDataTable(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter})">
             <summary>
             执行存储过程,并返回DataTable。
             </summary>
@@ -235,7 +256,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:hwj.DBUtility.Interface.IConnection.ExecuteStoredProcedureForDataTable(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.ExecuteStoredProcedureForDataTable(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32)">
             <summary>
             执行存储过程,并返回DataTable。
             </summary>
@@ -243,6 +264,13 @@
             <param name="parameters"></param>
             <param name="timeout"></param>
             <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.Interface.IBaseConnection.BulkCopy(System.Data.DataTable,System.Int32)">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="table"></param>
+            <param name="timeout">超时时间(秒)</param>
         </member>
         <member name="T:hwj.DBUtility.MSSQL.DALDependency`2">
              <summary>
@@ -266,7 +294,7 @@
              <param name="timeout"></param>
              <param name="lockType"></param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.#ctor(hwj.DBUtility.Interface.IConnection)">
+        <member name="M:hwj.DBUtility.MSSQL.BaseDataAccess`2.#ctor(hwj.DBUtility.MSSQL.Interface.IMSSQLConnection)">
              <summary>
             
              </summary>
@@ -736,7 +764,7 @@
              <param name="timeout">超时时间(秒)</param>
              <param name="defaultLock">锁类型</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection)">
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.#ctor(hwj.DBUtility.MSSQL.Interface.IMSSQLConnection)">
              <summary>
             
              </summary>
@@ -768,6 +796,21 @@
             <summary>
             获取最后一次自增ID
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.AddList(System.Collections.Generic.List{`0})">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.AddList(System.Collections.Generic.List{`0},System.Int32)">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="list"></param>
+            <param name="timeout">超时时间(秒)</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DALDependency`2.UpdateSqlEntity(hwj.DBUtility.UpdateParam,hwj.DBUtility.FilterParams)">
@@ -937,7 +980,7 @@
             <param name="PK">分页依据</param>
             <param name="pageNumber">页数</param>
             <param name="pageSize">每页记录数</param>
-            <param name="times">超时时间(秒)</param>
+            <param name="timeout">超时时间(秒)</param>
             <param name="TotalCount">返回记录数</param>
             <returns></returns>
         </member>
@@ -1051,6 +1094,21 @@
             
              </summary>
         </member>
+        <member name="T:hwj.DBUtility.MSSQL.Interface.IMSSQLConnection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.MSSQL.Interface.IMSSQLConnection.InnerConnection">
+            <summary>
+            当前数据库连接
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.MSSQL.Interface.IMSSQLConnection.InnerTransaction">
+            <summary>
+            当前数据库连接的事务
+            </summary>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.#ctor(System.String)">
             <summary>
             数据库连接实体(默认超时时间为30秒)
@@ -1156,6 +1214,15 @@
              <param name="timeout"></param>
              <returns></returns>
         </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteReader4MSSQL(System.String,System.Collections.Generic.List{System.Data.IDbDataParameter},System.Int32,System.Data.SqlClient.SqlCommand@)">
+             <summary>
+            
+             </summary>
+             <param name="sql"></param>
+             <param name="parameters"></param>
+             <param name="timeout"></param>
+             <returns></returns>
+        </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.ExecuteScalar(hwj.DBUtility.SqlEntity)">
              <summary>
             
@@ -1213,6 +1280,13 @@
              <param name="parameters"></param>
              <param name="timeout"></param>
              <returns></returns>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.BulkCopy(System.Data.DataTable,System.Int32)">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="table">DataTable数据</param>
+            <param name="timeout">超时时间(秒)</param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.GetEntity``1(hwj.DBUtility.DisplayFields,hwj.DBUtility.FilterParams,hwj.DBUtility.SortParams,hwj.DBUtility.Enums.LockType)">
              <summary>
@@ -1362,12 +1436,19 @@
             </summary>
             <param name="sql">SQL语句</param>
             <param name="parameters">SQL参数</param>
+            <param name="timeout">超时时间</param>
             <returns></returns>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.BeginTransaction">
             <summary>
             打开事务
             </summary>
+        </member>
+        <member name="M:hwj.DBUtility.MSSQL.DbConnection.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            打开事务
+            </summary>
+            <param name="il">指定连接的事务锁定行为</param>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbConnection.CommitTransaction">
             <summary>
@@ -1405,7 +1486,7 @@
              <param name="timeout">超时时间(秒)</param>
              <param name="lockType">锁类型</param>
         </member>
-        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(hwj.DBUtility.Interface.IConnection)">
+        <member name="M:hwj.DBUtility.MSSQL.SelectDALDependency`2.#ctor(hwj.DBUtility.MSSQL.Interface.IMSSQLConnection)">
              <summary>
             
              </summary>
@@ -1749,7 +1830,7 @@
         <member name="T:hwj.DBUtility.MSSQL.DbHelperSQL">
             <summary>
             数据访问抽象基础类
-            Copyright (C) 2004-2008 By LiTianPing 
+            Copyright (C) 2004-2008 By LiTianPing
             </summary>
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.#ctor">
@@ -1933,7 +2014,7 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.RunProcedure(System.String,System.String,System.Data.IDbDataParameter[],System.Int32@)">
             <summary>
-            执行存储过程，返回影响的行数		
+            执行存储过程，返回影响的行数
             </summary>
             <param name="storedProcName">存储过程名</param>
             <param name="parameters">存储过程参数</param>
@@ -1942,7 +2023,7 @@
         </member>
         <member name="M:hwj.DBUtility.MSSQL.DbHelperSQL.BuildIntCommand(System.Data.SqlClient.SqlConnection,System.String,System.Data.IDbDataParameter[])">
             <summary>
-            创建 SqlCommand 对象实例(用来返回一个整数值)	
+            创建 SqlCommand 对象实例(用来返回一个整数值)
             </summary>
             <param name="storedProcName">存储过程名</param>
             <param name="parameters">存储过程参数</param>
@@ -2316,6 +2397,31 @@
         <member name="P:hwj.DBUtility.SqlParam.DatabaseDate">
             <summary>
             设置为数据库当前时间日期
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.FieldName">
+            <summary>
+            设置字段名
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.FieldValue">
+            <summary>
+            设置字段内容
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.Operator">
+            <summary>
+            设置字段关系
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.Expression">
+            <summary>
+            设置逻辑运算符
+            </summary>
+        </member>
+        <member name="P:hwj.DBUtility.SqlParam.IsUnicode">
+            <summary>
+            设置为Unicode（值前加N）
             </summary>
         </member>
         <member name="P:hwj.DBUtility.SqlParam.ParamName">

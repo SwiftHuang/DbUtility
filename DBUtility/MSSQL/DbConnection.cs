@@ -1,4 +1,5 @@
 ﻿using hwj.DBUtility.Interface;
+using hwj.DBUtility.MSSQL.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ namespace hwj.DBUtility.MSSQL
     /// <summary>
     ///
     /// </summary>
-    public class DbConnection : IConnection, IDisposable
+    public class DbConnection : IMSSQLConnection
     {
         #region Property
 
@@ -23,9 +24,9 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         public int DefaultCommandTimeout { get; private set; }
 
-        public IDbTransaction InnerTransaction { get; private set; }
+        public SqlTransaction InnerTransaction { get; private set; }
 
-        public IDbConnection InnerConnection { get; private set; }
+        public SqlConnection InnerConnection { get; private set; }
 
         //public Enums.LockType DefaultLock { get; set; }
         public List<Enums.LockType> SelectLock { get; set; }
@@ -313,8 +314,9 @@ namespace hwj.DBUtility.MSSQL
             cmd.Parameters.Clear();
             return reader;
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
@@ -348,6 +350,7 @@ namespace hwj.DBUtility.MSSQL
                 //throw new Exception(msg, ex);
             }
         }
+
         #endregion ExecuteReader
 
         #region ExecuteScalar
@@ -571,6 +574,37 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion Stored Procedure
+
+        #region SqlBulkCopy
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="table">DataTable数据</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        public void BulkCopy(DataTable table, int timeout)
+        {
+            SqlBulkCopy bulkCopy = new SqlBulkCopy(InnerConnection, SqlBulkCopyOptions.Default, InnerTransaction);
+            bulkCopy.DestinationTableName = table.TableName;
+            bulkCopy.BatchSize = table.Rows.Count;
+            bulkCopy.BulkCopyTimeout = timeout;
+
+            if (InnerConnection.State != ConnectionState.Open)
+            {
+                InnerConnection.Open();
+            }
+
+            foreach (DataColumn c in table.Columns)
+            {
+                bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+            }
+            if (table != null && table.Rows.Count != 0)
+            {
+                bulkCopy.WriteToServer(table);
+            }
+        }
+
+        #endregion SqlBulkCopy
 
         #endregion Public Execute Member
 
@@ -1020,6 +1054,7 @@ namespace hwj.DBUtility.MSSQL
                 }
             }
         }
+
         #endregion Private Member
 
         #region IDisposable 成员
@@ -1060,5 +1095,6 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion IDisposable 成员
+
     }
 }

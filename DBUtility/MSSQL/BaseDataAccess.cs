@@ -1,4 +1,5 @@
 ﻿using hwj.DBUtility.Interface;
+using hwj.DBUtility.MSSQL.Interface;
 using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace hwj.DBUtility.MSSQL
             get { return _SqlEntity; }
         }
 
-        public IConnection InnerConnection { get; set; }
+        public IMSSQLConnection InnerConnection { get; set; }
 
         #endregion Property
 
@@ -64,7 +65,7 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="lockType"></param>
-        protected BaseDataAccess(IConnection connection)
+        protected BaseDataAccess(IMSSQLConnection connection)
         {
             ConnectionString = connection.ConnectionString;
             InnerConnection = connection;

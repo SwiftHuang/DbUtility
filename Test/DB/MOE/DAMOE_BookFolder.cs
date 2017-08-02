@@ -7,6 +7,7 @@ using hwj.DBUtility;
 using hwj.DBUtility.Interface;
 using hwj.DBUtility.MSSQL;
 using Westminster.MOE.Entity.MOEDB.Table;
+using hwj.DBUtility.MSSQL.Interface;
 
 namespace Westminster.MOE.DataAccess.MOEDB.Table
 {
@@ -15,7 +16,7 @@ namespace Westminster.MOE.DataAccess.MOEDB.Table
     /// </summary>
     public partial class DAMOE_BookFolder : DALDependency<tbMOE_BookFolder, tbMOE_BookFolders>
     {
-        public DAMOE_BookFolder(IConnection conn)
+        public DAMOE_BookFolder(IMSSQLConnection conn)
             : base(conn)
         { }
 

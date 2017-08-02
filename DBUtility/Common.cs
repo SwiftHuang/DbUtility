@@ -56,5 +56,17 @@ namespace hwj.DBUtility
                 return false;
             }
         }
+
+        internal static bool IsDateType(DbType typeCode)
+        {
+            if (typeCode == DbType.DateTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

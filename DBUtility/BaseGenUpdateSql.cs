@@ -1,8 +1,8 @@
-﻿using System;
+﻿using hwj.DBUtility.TableMapping;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using hwj.DBUtility.TableMapping;
 
 namespace hwj.DBUtility
 {
@@ -15,6 +15,7 @@ namespace hwj.DBUtility
         #region Public Functions
 
         #region Delete Sql
+
         /// <summary>
         /// 获取Delete Sql
         /// </summary>
@@ -25,15 +26,18 @@ namespace hwj.DBUtility
         {
             return string.Format(_DeleteString, tableName, GenFilterParamsSql(filterParams));
         }
+
         /// <summary>
         /// 彻底清除表的内容(重置自动增量)
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
         public abstract string TruncateSql(string tableName);
-        #endregion
+
+        #endregion Delete Sql
 
         #region Update Sql
+
         private void SetUpdateParam(ref UpdateParam up, FieldMappingInfo field, T entity, string paramName, out IDbDataParameter dbDataParameter)
         {
             bool existCustomSqlText = entity.ExistCustomSqlText(field.FieldName);
@@ -69,7 +73,9 @@ namespace hwj.DBUtility
                 dbDataParameter = GetSqlParameter(field, obj, paramName);
             }
         }
+
         internal abstract IDbDataParameter GetSqlParameter(FieldMappingInfo field, object value, string paramName);
+
         /// <summary>
         /// 获取Update Sql
         /// </summary>
@@ -87,7 +93,6 @@ namespace hwj.DBUtility
                 {
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
-
                         IDbDataParameter dp = null;
                         SetUpdateParam(ref up, f, entity, "_P_" + index.ToString(), out dp);
                         if (dp != null)
@@ -113,6 +118,7 @@ namespace hwj.DBUtility
             }
             return UpdateSql(entity.GetTableName(), up, filterParams);
         }
+
         /// <summary>
         /// 获取Update Sql
         /// </summary>
@@ -124,16 +130,21 @@ namespace hwj.DBUtility
         {
             return string.Format(_UpdateString, tableName, GenFieldsSql(updateParam), GenFilterParamsSql(filterParams));
         }
-        #endregion
+
+        #endregion Update Sql
 
         #region Insert Sql
-        public abstract string InsertLastIDSql();
-        public abstract string InsertSql(T entity, out List<IDbDataParameter> dbDataParameters);
-        #endregion
 
-        #endregion
+        public abstract string InsertLastIDSql();
+
+        public abstract string InsertSql(T entity, out List<IDbDataParameter> dbDataParameters);
+
+        #endregion Insert Sql
+
+        #endregion Public Functions
 
         #region Protected Functions
+
         protected string GenFieldsSql(UpdateParam listParam)
         {
             if (listParam != null && listParam.Count > 0)
@@ -148,6 +159,7 @@ namespace hwj.DBUtility
             else
                 return string.Empty;
         }
-        #endregion
+
+        #endregion Protected Functions
     }
 }

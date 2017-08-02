@@ -5,6 +5,7 @@ namespace hwj.DBUtility
     public static class DBCache
     {
         private static Dictionary<string, List<TableMapping.FieldMappingInfo>> cache = new Dictionary<string, List<TableMapping.FieldMappingInfo>>();
+
         public static List<TableMapping.FieldMappingInfo> GetCache(string typeName)
         {
             List<TableMapping.FieldMappingInfo> info = null;
@@ -29,10 +30,10 @@ namespace hwj.DBUtility
                 cache[typeName] = mappingInfoList;
             }
         }
+
         public static void ClearCache()
         {
             cache.Clear();
         }
     }
 }
-

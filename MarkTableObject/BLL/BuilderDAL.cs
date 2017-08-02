@@ -44,6 +44,10 @@ namespace hwj.MarkTableObject.BLL
             {
                 strclass.AppendLine("using hwj.DBUtility.Interface;");
             }
+            else if (templateType == TemplateType.DataAccess2)
+            {
+                strclass.AppendLine("using hwj.DBUtility.MSSQL.Interface;");
+            }
             strclass.AppendLine("using hwj.DBUtility.MSSQL;");
             strclass.AppendLine("using " + dalInfo.EntityInfo.NameSpace + ";");
             strclass.AppendLine("");
@@ -84,6 +88,12 @@ namespace hwj.MarkTableObject.BLL
                 strclass.AppendLine(3, ": base(conn)");
                 strclass.AppendLine(2, "{ }");
             }
+            else if (templateType == TemplateType.DataAccess2)
+            {
+                strclass.AppendLine(2, "public " + dalInfo.DALName + "(IMSSQLConnection conn)");
+                strclass.AppendLine(3, ": base(conn)");
+                strclass.AppendLine(2, "{ }");
+            }
             else
             {
                 strclass.AppendLine(2, "public " + dalInfo.DALName + "(string connectionString)");
@@ -101,7 +111,7 @@ namespace hwj.MarkTableObject.BLL
                 strclass.AppendLine(2, "}");
             }
 
-            if (templateType == TemplateType.DataAccess)
+            if (templateType == TemplateType.DataAccess || templateType == TemplateType.DataAccess2)
             {
                 BLL.BuilderBLL.GeneralMethod(methodInfo, templateType, dalInfo.EntityInfo, ref strclass);
             }

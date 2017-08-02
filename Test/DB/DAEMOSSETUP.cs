@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using hwj.DBUtility;
 using hwj.DBUtility.MSSQL;
 using hwj.DBUtility.Interface;
+using hwj.DBUtility.MSSQL.Interface;
 
 namespace Test.DB
 {
@@ -19,7 +20,7 @@ namespace Test.DB
         {
             TableName = tbEMOSSETUP.DBTableName;
         }
-        public DAEMOSSETUP(IConnection conn)
+        public DAEMOSSETUP(IMSSQLConnection conn)
             : base(conn)
         {
 
