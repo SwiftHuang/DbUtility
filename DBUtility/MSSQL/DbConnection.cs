@@ -584,7 +584,18 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         public void BulkCopy(DataTable table, int timeout)
         {
-            SqlBulkCopy bulkCopy = new SqlBulkCopy(InnerConnection, SqlBulkCopyOptions.Default, InnerTransaction);
+            BulkCopy(table, timeout, SqlBulkCopyOptions.Default);
+        }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="table">DataTable数据</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="copyOptions">批量插入选项</param>
+        public void BulkCopy(DataTable table, int timeout, SqlBulkCopyOptions copyOptions)
+        {
+            SqlBulkCopy bulkCopy = new SqlBulkCopy(InnerConnection, copyOptions, InnerTransaction);
             bulkCopy.DestinationTableName = table.TableName;
             bulkCopy.BatchSize = table.Rows.Count;
             bulkCopy.BulkCopyTimeout = timeout;
@@ -1095,6 +1106,9 @@ namespace hwj.DBUtility.MSSQL
         }
 
         #endregion IDisposable 成员
+
+
+
 
     }
 }

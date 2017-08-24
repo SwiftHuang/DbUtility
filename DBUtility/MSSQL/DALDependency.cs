@@ -173,7 +173,18 @@ namespace hwj.DBUtility.MSSQL
         /// <returns></returns>
         public bool AddList(List<T> list)
         {
-            return AddList(list, InnerConnection.DefaultCommandTimeout);
+            return AddList(list, InnerConnection.DefaultCommandTimeout, SqlBulkCopyOptions.Default);
+        }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="copyOptions">批量插入选项</param>
+        /// <returns></returns>
+        public bool AddList(List<T> list, SqlBulkCopyOptions copyOptions)
+        {
+            return AddList(list, InnerConnection.DefaultCommandTimeout, copyOptions);
         }
 
         /// <summary>
@@ -181,8 +192,9 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="list"></param>
         /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="copyOptions">批量插入选项</param>
         /// <returns></returns>
-        public bool AddList(List<T> list, int timeout)
+        public bool AddList(List<T> list, int timeout, SqlBulkCopyOptions copyOptions)
         {
             if (list != null)
             {
@@ -212,7 +224,7 @@ namespace hwj.DBUtility.MSSQL
                     }
                     dt.Rows.Add(dr);
                 }
-                InnerConnection.BulkCopy(dt, timeout);
+                InnerConnection.BulkCopy(dt, timeout, copyOptions);
                 return true;
             }
             return false;

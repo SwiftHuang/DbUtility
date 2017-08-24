@@ -183,6 +183,14 @@ namespace hwj.DBUtility.Interface
         /// <param name="timeout">超时时间(秒)</param>
         void BulkCopy(DataTable table, int timeout);
 
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="copyOptions">批量导入参数</param>
+        void BulkCopy(DataTable table, int timeout, SqlBulkCopyOptions copyOptions);
+
         void BeginTransaction();
 
         void BeginTransaction(IsolationLevel il);
