@@ -1,5 +1,4 @@
-﻿using hwj.DBUtility.Interface;
-using hwj.DBUtility.MSSQL.Interface;
+﻿using hwj.DBUtility.MSSQL.Interface;
 using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
@@ -141,6 +140,21 @@ namespace hwj.DBUtility.MSSQL
             //    return DbHelper.ExecuteSql(ConnectionString, sql, parameters, timeout);
             //}
             //throw new Exception(Msg_InvalidConnection);
+        }
+
+        /// <summary>
+        /// 执行多条SQL语句，返回影响的记录数(方法内部不自动开启事务)
+        /// </summary>
+        /// <param name="sqlList"></param>
+        /// <returns></returns>
+        public int ExecuteSqlList(SqlList sqlList)
+        {
+            int cnt = 0;
+            foreach (var sql in sqlList)
+            {
+                cnt = InnerConnection.ExecuteSql(sql) + cnt;
+            }
+            return cnt;
         }
 
         #endregion ExecuteSql
