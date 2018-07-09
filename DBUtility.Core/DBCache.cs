@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace hwj.DBUtility
-{
+namespace hwj.DBUtility.Core
+{   
     public static class DBCache
     {
         private static Dictionary<string, List<TableMapping.FieldMappingInfo>> cache = new Dictionary<string, List<TableMapping.FieldMappingInfo>>();
@@ -26,7 +26,7 @@ namespace hwj.DBUtility
             }
             catch
             {
-                cache = new Dictionary<string, List<hwj.DBUtility.TableMapping.FieldMappingInfo>>();
+                cache = new Dictionary<string, List<TableMapping.FieldMappingInfo>>();
                 cache[typeName] = mappingInfoList;
             }
         }

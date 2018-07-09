@@ -1,4 +1,4 @@
-﻿namespace hwj.DBUtility.MSSQL
+﻿namespace hwj.DBUtility.Core.MSSQL
 {
     public class DbHelper : DbHelperSQL
     {

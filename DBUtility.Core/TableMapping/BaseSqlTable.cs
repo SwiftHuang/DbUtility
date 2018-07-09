@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace hwj.DBUtility.TableMapping
+namespace hwj.DBUtility.Core.TableMapping
 {
     [Serializable]
     public abstract class BaseSqlTable<T> where T : class, new()

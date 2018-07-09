@@ -1,11 +1,11 @@
-﻿using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace hwj.DBUtility
+namespace hwj.DBUtility.Core
 {
     public abstract class BaseGenSql<T> where T : class, new()
     {

@@ -1,11 +1,11 @@
-﻿using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     public class GenerateUpdateSql<T> : BaseGenUpdateSql<T> where T : BaseTable<T>, new()
     {

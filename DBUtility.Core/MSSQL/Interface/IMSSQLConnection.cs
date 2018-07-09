@@ -1,7 +1,7 @@
-﻿using hwj.DBUtility.Interface;
+﻿using hwj.DBUtility.Core.Interface;
 using System.Data.SqlClient;
 
-namespace hwj.DBUtility.MSSQL.Interface
+namespace hwj.DBUtility.Core.MSSQL.Interface
 {
     /// <summary>
     ///

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace hwj.DBUtility.TableMapping
+namespace hwj.DBUtility.Core.TableMapping
 {
     public class FieldMappingInfo
     {

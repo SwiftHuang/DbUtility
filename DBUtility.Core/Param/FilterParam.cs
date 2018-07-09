@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace hwj.DBUtility
+namespace hwj.DBUtility.Core
 {
     public class FilterParams : List<SqlParam>
     {

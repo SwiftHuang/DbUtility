@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace hwj.DBUtility.Entity
+namespace hwj.DBUtility.Core.Entity
 {
     /// <summary>
     /// 继承IComparer<T>接口，实现同一自定义类型　对象比较

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace hwj.DBUtility
+namespace hwj.DBUtility.Core
 {
     public class LogEntity
     {

@@ -1,13 +1,13 @@
-using hwj.DBUtility.TableMapping;
+using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     /// <summary>
-    /// Êý¾Ý·ÃÎÊ³éÏó»ù´¡Àà
+    /// ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Ê³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// Copyright (C) 2004-2008 By LiTianPing
     /// </summary>
     public abstract class DbHelperSQL
@@ -19,14 +19,14 @@ namespace hwj.DBUtility.MSSQL
         {
         }
 
-        #region ¹«ÓÃ·½·¨
+        #region ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½
 
         /// <summary>
-        /// ÅÐ¶ÏÊÇ·ñ´æÔÚÄ³±íµÄÄ³¸ö×Ö¶Î
+        /// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ö¶ï¿½
         /// </summary>
-        /// <param name="tableName">±íÃû³Æ</param>
-        /// <param name="columnName">ÁÐÃû³Æ</param>
-        /// <returns>ÊÇ·ñ´æÔÚ</returns>
+        /// <param name="tableName">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="columnName">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <returns>ï¿½Ç·ï¿½ï¿½ï¿½ï¿½</returns>
         public static bool ColumnExists(string ConnectionString, string tableName, string columnName)
         {
             string sql = "select count(1) from syscolumns where [id]=object_id('" + tableName + "') and [name]='" + columnName + "'";
@@ -75,7 +75,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// ±íÊÇ·ñ´æÔÚ
+        /// ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="ConnectionString"></param>
         /// <param name="TableName"></param>
@@ -152,41 +152,41 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion ¹«ÓÃ·½·¨
+        #endregion ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½
 
-        #region Ö´ÐÐ´ø²ÎÊýµÄSQLÓï¾ä
+        #region Ö´ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
 
         /// <summary>
-        /// Ö´ÐÐÒ»Ìõ¼ÆËã²éÑ¯½á¹ûÓï¾ä£¬·µ»Ø²éÑ¯½á¹û£¨object£©¡£
+        /// Ö´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½Ø²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <returns>²éÑ¯½á¹û£¨object£©</returns>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <returns>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½</returns>
         public static object GetSingle(string ConnectionString, string SQLString)
         {
             return GetSingle(ConnectionString, SQLString, null, -1);
         }
 
         /// <summary>
-        /// Ö´ÐÐÒ»Ìõ¼ÆËã²éÑ¯½á¹ûÓï¾ä£¬·µ»Ø²éÑ¯½á¹û£¨object£©¡£
+        /// Ö´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½Ø²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="cmdParms">Ìõ¼þÓï¾ä</param>
-        /// <returns>²éÑ¯½á¹û£¨object£©</returns>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <returns>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½</returns>
         public static object GetSingle(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
             return GetSingle(ConnectionString, SQLString, cmdParms, -1);
         }
 
         /// <summary>
-        /// Ö´ÐÐÒ»Ìõ¼ÆËã²éÑ¯½á¹ûÓï¾ä£¬·µ»Ø²éÑ¯½á¹û£¨object£©¡£
+        /// Ö´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½Ø²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="connectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="cmdParms">Ìõ¼þÓï¾ä</param>
-        /// <param name="timeout">³¬Ê±Ê±¼ä(Ãë)</param>
-        /// <returns>²éÑ¯½á¹û£¨object£©</returns>
+        /// <param name="connectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="timeout">ï¿½ï¿½Ê±Ê±ï¿½ï¿½(ï¿½ï¿½)</param>
+        /// <returns>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½ï¿½</returns>
         public static object GetSingle(string connectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -221,22 +221,22 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐSQLÓï¾ä£¬·µ»ØÓ°ÏìµÄ¼ÇÂ¼Êý
+        /// Ö´ï¿½ï¿½SQLï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <returns>Ó°ÏìµÄ¼ÇÂ¼Êý</returns>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <returns>Ó°ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½</returns>
         public static int ExecuteSql(string ConnectionString, string SQLString)
         {
             return ExecuteSql(ConnectionString, SQLString, null, -1);
         }
 
         /// <summary>
-        /// Ö´ÐÐSQLÓï¾ä£¬·µ»ØÓ°ÏìµÄ¼ÇÂ¼Êý
+        /// Ö´ï¿½ï¿½SQLï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="cmdParms">Ìõ¼þ²ÎÊý</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns></returns>
         public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
@@ -244,12 +244,12 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐSQLÓï¾ä£¬·µ»ØÓ°ÏìµÄ¼ÇÂ¼Êý
+        /// Ö´ï¿½ï¿½SQLï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="cmdParms">Ìõ¼þ²ÎÊý</param>
-        /// <param name="timeout">³¬Ê±Ê±¼ä(Ãë)</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="timeout">ï¿½ï¿½Ê±Ê±ï¿½ï¿½(ï¿½ï¿½)</param>
         /// <returns></returns>
         public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
@@ -278,10 +278,10 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ¶àÌõSQLÓï¾ä£¬ÊµÏÖÊý¾Ý¿âÊÂÎñ¡£
+        /// Ö´ï¿½Ð¶ï¿½ï¿½ï¿½SQLï¿½ï¿½ä£¬Êµï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="cmdList">¶àÌõSQLÓï¾ä</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="cmdList">ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½</param>
         /// <returns></returns>
         public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList)
         {
@@ -289,11 +289,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ¶àÌõSQLÓï¾ä£¬ÊµÏÖÊý¾Ý¿âÊÂÎñ¡£
+        /// Ö´ï¿½Ð¶ï¿½ï¿½ï¿½SQLï¿½ï¿½ä£¬Êµï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="cmdList">¶àÌõSQLÓï¾ä</param>
-        /// <param name="timeout">³¬Ê±Ê±¼ä(Ãë)</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="cmdList">ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½</param>
+        /// <param name="timeout">ï¿½ï¿½Ê±Ê±ï¿½ï¿½(ï¿½ï¿½)</param>
         /// <returns></returns>
         public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList, int timeout)
         {
@@ -307,7 +307,7 @@ namespace hwj.DBUtility.MSSQL
                     try
                     {
                         int count = 0;
-                        //Ñ­»·
+                        //Ñ­ï¿½ï¿½
                         foreach (SqlEntity myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
@@ -377,10 +377,10 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØSqlDataReader ( ×¢Òâ£ºµ÷ÓÃ¸Ã·½·¨ºó£¬Ò»¶¨Òª¶ÔSqlDataReader½øÐÐClose )
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½SqlDataReader ( ×¢ï¿½â£ºï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½SqlDataReaderï¿½ï¿½ï¿½ï¿½Close )
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">²éÑ¯Óï¾ä</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½</param>
         /// <returns>SqlDataReader</returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString)
         {
@@ -388,11 +388,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØSqlDataReader ( ×¢Òâ£ºµ÷ÓÃ¸Ã·½·¨ºó£¬Ò»¶¨Òª¶ÔSqlDataReader½øÐÐClose )
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½SqlDataReader ( ×¢ï¿½â£ºï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½SqlDataReaderï¿½ï¿½ï¿½ï¿½Close )
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">²éÑ¯Óï¾ä</param>
-        /// <param name="cmdParms">²éÑ¯Ìõ¼þ</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns></returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
@@ -400,12 +400,12 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØSqlDataReader ( ×¢Òâ£ºµ÷ÓÃ¸Ã·½·¨ºó£¬Ò»¶¨Òª¶ÔSqlDataReader½øÐÐClose )
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½SqlDataReader ( ×¢ï¿½â£ºï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½SqlDataReaderï¿½ï¿½ï¿½ï¿½Close )
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">²éÑ¯Óï¾ä</param>
-        /// <param name="cmdParms">²éÑ¯Ìõ¼þ</param>
-        /// <param name="timeout">³¬Ê±Ê±¼ä(Ãë)</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="timeout">ï¿½ï¿½Ê±Ê±ï¿½ï¿½(ï¿½ï¿½)</param>
         /// <returns></returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
@@ -426,10 +426,10 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØDataSet
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½DataSet
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
         /// <returns></returns>
         public static DataSet Query(string ConnectionString, string SQLString)
         {
@@ -437,11 +437,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØDataSet
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½DataSet
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="cmdParms">²éÑ¯Ìõ¼þ</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="cmdParms">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns>DataSet</returns>
         public static DataSet Query(string ConnectionString, string SQLString, params SqlParameter[] cmdParms)
         {
@@ -449,12 +449,12 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ²éÑ¯Óï¾ä£¬·µ»ØDataSet
+        /// Ö´ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½DataSet
         /// </summary>
-        /// <param name="ConnectionString">Á¬½ÓÓï¾ä</param>
-        /// <param name="SQLString">SQLÓï¾ä</param>
-        /// <param name="timeout">³¬Ê±Ê±¼ä(Ãë)</param>
-        /// <param name="cmdParms">²éÑ¯Ìõ¼þ</param>
+        /// <param name="ConnectionString">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="SQLString">SQLï¿½ï¿½ï¿½</param>
+        /// <param name="timeout">ï¿½ï¿½Ê±Ê±ï¿½ï¿½(ï¿½ï¿½)</param>
+        /// <param name="cmdParms">ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns>DataSet</returns>
         public static DataSet Query(string ConnectionString, string SQLString, int timeout, params SqlParameter[] cmdParms)
         {
@@ -485,7 +485,7 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ¶àÌõSQLÓï¾ä£¬ÊµÏÖÊý¾Ý¿âÊÂÎñ¡£
+        /// Ö´ï¿½Ð¶ï¿½ï¿½ï¿½SQLï¿½ï¿½ä£¬Êµï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="ConnectionString"></param>
         /// <param name="cmdList"></param>
@@ -500,7 +500,7 @@ namespace hwj.DBUtility.MSSQL
                     try
                     {
                         int indentity = 0;
-                        //Ñ­»·
+                        //Ñ­ï¿½ï¿½
                         foreach (SqlEntity myDE in sqlList)
                         {
                             foreach (IDbDataParameter q in myDE.Parameters)
@@ -532,15 +532,15 @@ namespace hwj.DBUtility.MSSQL
             }
         }
 
-        #endregion Ö´ÐÐ´ø²ÎÊýµÄSQLÓï¾ä
+        #endregion Ö´ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
 
-        #region ´æ´¢¹ý³Ì²Ù×÷
+        #region ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½
 
         /// <summary>
-        /// Ö´ÐÐ´æ´¢¹ý³Ì£¬·µ»ØSqlDataReader ( ×¢Òâ£ºµ÷ÓÃ¸Ã·½·¨ºó£¬Ò»¶¨Òª¶ÔSqlDataReader½øÐÐClose )
+        /// Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½SqlDataReader ( ×¢ï¿½â£ºï¿½ï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½SqlDataReaderï¿½ï¿½ï¿½ï¿½Close )
         /// </summary>
-        /// <param name="storedProcName">´æ´¢¹ý³ÌÃû</param>
-        /// <param name="parameters">´æ´¢¹ý³Ì²ÎÊý</param>
+        /// <param name="storedProcName">ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="parameters">ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½</param>
         /// <returns>SqlDataReader</returns>
         public static SqlDataReader RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters)
         {
@@ -554,11 +554,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ´æ´¢¹ý³Ì
+        /// Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="storedProcName">´æ´¢¹ý³ÌÃû</param>
-        /// <param name="parameters">´æ´¢¹ý³Ì²ÎÊý</param>
-        /// <param name="tableName">DataSet½á¹ûÖÐµÄ±íÃû</param>
+        /// <param name="storedProcName">ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="parameters">ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½</param>
+        /// <param name="tableName">DataSetï¿½ï¿½ï¿½ï¿½ÐµÄ±ï¿½ï¿½ï¿½</param>
         /// <returns>DataSet</returns>
         public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, string tableName)
         {
@@ -590,11 +590,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// ¹¹½¨ SqlCommand ¶ÔÏó(ÓÃÀ´·µ»ØÒ»¸ö½á¹û¼¯£¬¶ø²»ÊÇÒ»¸öÕûÊýÖµ)
+        /// ï¿½ï¿½ï¿½ï¿½ SqlCommand ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ)
         /// </summary>
-        /// <param name="connection">Êý¾Ý¿âÁ¬½Ó</param>
-        /// <param name="storedProcName">´æ´¢¹ý³ÌÃû</param>
-        /// <param name="parameters">´æ´¢¹ý³Ì²ÎÊý</param>
+        /// <param name="connection">ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="storedProcName">ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="parameters">ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½</param>
         /// <returns>SqlCommand</returns>
         private static SqlCommand BuildQueryCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
@@ -604,7 +604,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 if (parameter != null)
                 {
-                    // ¼ì²éÎ´·ÖÅäÖµµÄÊä³ö²ÎÊý,½«Æä·ÖÅäÒÔDBNull.Value.
+                    // ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DBNull.Value.
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
                         (parameter.Value == null))
                     {
@@ -618,11 +618,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// Ö´ÐÐ´æ´¢¹ý³Ì£¬·µ»ØÓ°ÏìµÄÐÐÊý
+        /// Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="storedProcName">´æ´¢¹ý³ÌÃû</param>
-        /// <param name="parameters">´æ´¢¹ý³Ì²ÎÊý</param>
-        /// <param name="rowsAffected">Ó°ÏìµÄÐÐÊý</param>
+        /// <param name="storedProcName">ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="parameters">ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½</param>
+        /// <param name="rowsAffected">Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns></returns>
         public static int RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, out int rowsAffected)
         {
@@ -639,11 +639,11 @@ namespace hwj.DBUtility.MSSQL
         }
 
         /// <summary>
-        /// ´´½¨ SqlCommand ¶ÔÏóÊµÀý(ÓÃÀ´·µ»ØÒ»¸öÕûÊýÖµ)
+        /// ï¿½ï¿½ï¿½ï¿½ SqlCommand ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ)
         /// </summary>
-        /// <param name="storedProcName">´æ´¢¹ý³ÌÃû</param>
-        /// <param name="parameters">´æ´¢¹ý³Ì²ÎÊý</param>
-        /// <returns>SqlCommand ¶ÔÏóÊµÀý</returns>
+        /// <param name="storedProcName">ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="parameters">ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½</param>
+        /// <returns>SqlCommand ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½</returns>
         private static SqlCommand BuildIntCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
             SqlCommand command = BuildQueryCommand(connection, storedProcName, parameters);
@@ -653,7 +653,7 @@ namespace hwj.DBUtility.MSSQL
             return command;
         }
 
-        #endregion ´æ´¢¹ý³Ì²Ù×÷
+        #endregion ï¿½æ´¢ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½
 
         #region Private Function
 
@@ -678,7 +678,7 @@ namespace hwj.DBUtility.MSSQL
 
             if (cmdParms != null)
             {
-                //·ÀÖ¹¶àÏß³ÌµÄÊ±ºò£¬Í¬Ê±AddµÄ´íÎó
+                //ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ß³Ìµï¿½Ê±ï¿½ï¿½Í¬Ê±Addï¿½Ä´ï¿½ï¿½ï¿½
                 SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Length];
                 for (int i = 0, j = cmdParms.Length; i < j; i++)
                 {
@@ -733,7 +733,7 @@ namespace hwj.DBUtility.MSSQL
         //    catch { }
         //}
         /// <summary>
-        /// ¼ì²é×Ö·û³¤¶ÈÊÇ·ñÓëÊý¾ÝÏà·û¡£
+        /// ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="e"></param>
         /// <param name="tableName"></param>

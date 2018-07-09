@@ -1,8 +1,8 @@
-﻿using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.TableMapping;
 using System.Collections.Generic;
 using System.Data;
 
-namespace hwj.DBUtility.Entity
+namespace hwj.DBUtility.Core.Entity
 {
     public class PageResult<T, TS>
         where T : BaseSqlTable<T>, new()

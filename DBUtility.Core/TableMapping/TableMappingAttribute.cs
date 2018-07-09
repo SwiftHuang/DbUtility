@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace hwj.DBUtility.TableMapping
+namespace hwj.DBUtility.Core.TableMapping
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMappingAttribute : System.Attribute

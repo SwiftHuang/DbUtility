@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace hwj.DBUtility
+namespace hwj.DBUtility.Core
 {
     /// <summary>
     /// Sort parameter

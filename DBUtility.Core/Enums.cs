@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace hwj.DBUtility
+namespace hwj.DBUtility.Core
 {
     public class Enums
     {

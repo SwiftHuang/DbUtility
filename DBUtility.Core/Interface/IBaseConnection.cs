@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace hwj.DBUtility.Interface
+namespace hwj.DBUtility.Core.Interface
 {
     public interface IBaseConnection : IDisposable
     {
@@ -59,7 +59,7 @@ namespace hwj.DBUtility.Interface
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
         TS GetList<T, TS>(SqlEntity sqlEntity)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace hwj.DBUtility.Interface
         /// <param name="parameters"></param>
         /// <returns></returns>
         TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace hwj.DBUtility.Interface
         /// <param name="timeout"></param>
         /// <returns></returns>
         TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters, int timeout)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new();
 
         /// <summary>

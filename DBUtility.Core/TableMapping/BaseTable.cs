@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace hwj.DBUtility.TableMapping
+namespace hwj.DBUtility.Core.TableMapping
 {
     [Serializable]
     public abstract class BaseTable<T> : BaseSqlTable<T>

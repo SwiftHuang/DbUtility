@@ -1,8 +1,8 @@
-﻿using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.TableMapping;
 using System.Collections.Generic;
 using System.Data;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     /// <summary>
     ///

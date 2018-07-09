@@ -1,9 +1,9 @@
-﻿using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace hwj.DBUtility.Entity
+namespace hwj.DBUtility.Core.Entity
 {
     /// <summary>
     ///

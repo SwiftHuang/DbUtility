@@ -1,11 +1,11 @@
-﻿using hwj.DBUtility.MSSQL.Interface;
+﻿using hwj.DBUtility.Core.MSSQL.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     /// <summary>
     ///
@@ -634,7 +634,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="lockType"></param>
         /// <returns></returns>
         public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
         {
             return GetEntity<T>(displayFields, filterParams, sortParams, lockType, DefaultCommandTimeout);
         }
@@ -650,7 +650,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, Enums.LockType lockType, int timeout)
-                 where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+                 where T : TableMapping.BaseSqlTable<T>, new()
         {
             return GetEntity<T>(displayFields, filterParams, sortParams, new List<Enums.LockType>() { lockType }, timeout);
         }
@@ -666,7 +666,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public T GetEntity<T>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, List<Enums.LockType> lockTypes, int timeout)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
         {
             SqlEntity sqlEty = null;
             GenerateSelectSql<T> genSelectSql = new GenerateSelectSql<T>();
@@ -762,7 +762,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sortParams">排序方式</param>
         /// <returns></returns>
         public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(displayFields, filterParams, sortParams, null, Enums.LockType.RowLock);
@@ -779,7 +779,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="maxCount">返回最大记录数</param>
         /// <returns></returns>
         public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, Enums.LockType.RowLock);
@@ -797,7 +797,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="lockType">锁类型</param>
         /// <returns></returns>
         public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, lockType, DefaultCommandTimeout);
@@ -816,7 +816,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, Enums.LockType lockType, int timeout)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(displayFields, filterParams, sortParams, maxCount, new List<Enums.LockType>() { lockType }, timeout);
@@ -835,7 +835,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public TS GetList<T, TS>(DisplayFields displayFields, FilterParams filterParams, SortParams sortParams, int? maxCount, List<Enums.LockType> lockTypes, int timeout)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             GenerateSelectSql<T> genSelectSql = new GenerateSelectSql<T>();
@@ -856,7 +856,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="sqlEntity">SQL实体</param>
         /// <returns></returns>
         public TS GetList<T, TS>(SqlEntity sqlEntity)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(sqlEntity.CommandText, sqlEntity.Parameters, sqlEntity.CommandTimeout);
@@ -869,7 +869,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="parameters">SQL参数</param>
         /// <returns></returns>
         public TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             return GetList<T, TS>(sql, parameters, DefaultCommandTimeout);
@@ -883,7 +883,7 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="timeout">超时时间</param>
         /// <returns></returns>
         public TS GetList<T, TS>(string sql, List<IDbDataParameter> parameters, int timeout)
-            where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+            where T : TableMapping.BaseSqlTable<T>, new()
             where TS : List<T>, new()
         {
             SqlCommand cmd;
@@ -985,14 +985,14 @@ namespace hwj.DBUtility.MSSQL
 
         #region Private Member
 
-        private string GetTableName<T>() where T : hwj.DBUtility.TableMapping.BaseSqlTable<T>, new()
+        private string GetTableName<T>() where T : TableMapping.BaseSqlTable<T>, new()
         {
             string tableName = string.Empty;
-            if (typeof(T).BaseType == typeof(hwj.DBUtility.TableMapping.BaseTable<T>))
+            if (typeof(T).BaseType == typeof(TableMapping.BaseTable<T>))
             {
                 tableName = Activator.CreateInstance<T>().GetCommandText();
             }
-            else if (typeof(T).BaseType == typeof(hwj.DBUtility.TableMapping.BaseSqlTable<T>))
+            else if (typeof(T).BaseType == typeof(TableMapping.BaseSqlTable<T>))
             {
                 string cmdTxt = Activator.CreateInstance<T>().GetCommandText();
                 tableName = string.Format(GenerateSelectSql<T>._ViewSqlFormat, cmdTxt);

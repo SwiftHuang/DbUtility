@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Xml.Serialization;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     [Serializable]
     public class SqlEntityXml

@@ -1,4 +1,4 @@
-﻿namespace hwj.DBUtility
+﻿namespace hwj.DBUtility.Core
 {
     public abstract class BaseGenSelectSql<T> : BaseGenSql<T> where T : class, new()
     {

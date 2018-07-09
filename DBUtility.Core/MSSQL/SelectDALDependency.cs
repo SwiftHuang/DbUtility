@@ -1,10 +1,10 @@
-﻿using hwj.DBUtility.MSSQL.Interface;
-using hwj.DBUtility.TableMapping;
+﻿using hwj.DBUtility.Core.MSSQL.Interface;
+using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace hwj.DBUtility.MSSQL
+namespace hwj.DBUtility.Core.MSSQL
 {
     /// <summary>
     ///
