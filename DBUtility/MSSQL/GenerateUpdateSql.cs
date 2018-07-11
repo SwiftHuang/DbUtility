@@ -88,7 +88,7 @@ namespace hwj.DBUtility.MSSQL
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
-                if (entity.ExistIgnoreUnInsert(field.FieldName) || !Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnInsert))
+                if (entity.ExistIgnoreUnInsert(field.FieldName) || !field.IsUnInsert)
                 {
                     //insField.Append(field.FieldName).Append(',');
                     insField.AppendFormat(_MsSqlFieldFmt, field.FieldName).Append(',');

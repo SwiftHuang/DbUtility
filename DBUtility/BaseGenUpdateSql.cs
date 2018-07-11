@@ -44,7 +44,7 @@ namespace hwj.DBUtility
             object obj = field.Property.GetValue(entity, null);
             if (obj != null)
             {
-                if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnUpdate))
+                if (!field.IsUnUpdate)
                 {
                     if (existCustomSqlText)
                     {
@@ -62,7 +62,7 @@ namespace hwj.DBUtility
             }
             else
             {
-                if (!Enums.DataHandlesFind(field.DataHandles, Enums.DataHandle.UnNull))
+                if (!field.IsUnNull)
                 {
                     up.AddParam(field.FieldName, DBNull.Value, paramName);
                 }

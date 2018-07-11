@@ -249,17 +249,17 @@ namespace hwj.DBUtility
             UnNull,
         }
 
-        public static bool DataHandlesFind(Enums.DataHandle[] handles, Enums.DataHandle dataHandle)
-        {
-            if (handles == null || handles.Length == 0)
-                return false;
-            foreach (Enums.DataHandle dh in handles)
-            {
-                if (dh == dataHandle)
-                    return true;
-            }
-            return false;
-        }
+        //public static bool DataHandlesFind(Enums.DataHandle[] handles, Enums.DataHandle dataHandle)
+        //{
+        //    if (handles == null || handles.Length == 0)
+        //        return false;
+        //    foreach (Enums.DataHandle dh in handles)
+        //    {
+        //        if (dh == dataHandle)
+        //            return true;
+        //    }
+        //    return false;
+        //}
 
         public enum EffentNextType
         {
