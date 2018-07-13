@@ -17,7 +17,6 @@ namespace hwj.DBUtility.Core.TableMapping
             DataHandles = fieldMappingInfo.DataHandles;
             Size = 0;
         }
-
         public FieldMappingInfo(PropertyInfo property, string fieldName, DbType typeCode, object nullValue, int size, Enums.DataHandle[] dataHandles, int fieldIndex)
         {
             Property = property;
@@ -36,9 +35,31 @@ namespace hwj.DBUtility.Core.TableMapping
         public DbType DataTypeCode { get; set; }
         public object NullValue { get; set; }
         public int FieldIndex { get; set; }
-        public Enums.DataHandle[] DataHandles { get; set; }
+        private Enums.DataHandle[] _dataHandles;
+        public Enums.DataHandle[] DataHandles
+        {
+            get { return _dataHandles; }
+            private set
+            {
+                _dataHandles = value;
+                SetDataHandles();
+            }
+        }
         public int Size { get; set; }
+        /// <summary>
+        /// 不插入该字段
+        /// </summary>
+        public bool IsUnInsert { get; set; }
 
+        /// <summary>
+        /// 不更新该字段
+        /// </summary>
+        public bool IsUnUpdate { get; set; }
+
+        /// <summary>
+        /// 该字段不允许为Null
+        /// </summary>
+        public bool IsUnNull { get; set; }
         #endregion Property
 
         #region Public Functions
@@ -85,6 +106,24 @@ namespace hwj.DBUtility.Core.TableMapping
             return (this.MemberwiseClone() as FieldMappingInfo);
         }
 
+        private void SetDataHandles()
+        {
+            this.IsUnInsert = DataHandlesFind(this.DataHandles, Enums.DataHandle.UnInsert);
+            this.IsUnUpdate = DataHandlesFind(this.DataHandles, Enums.DataHandle.UnUpdate);
+            this.IsUnNull = DataHandlesFind(this.DataHandles, Enums.DataHandle.UnNull);
+        }
         #endregion Public Functions
+
+        private static bool DataHandlesFind(Enums.DataHandle[] handles, Enums.DataHandle dataHandle)
+        {
+            if (handles == null || handles.Length == 0)
+                return false;
+            foreach (Enums.DataHandle dh in handles)
+            {
+                if (dh == dataHandle)
+                    return true;
+            }
+            return false;
+        }
     }
 }
