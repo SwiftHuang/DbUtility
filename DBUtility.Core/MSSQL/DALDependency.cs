@@ -244,7 +244,14 @@ namespace hwj.DBUtility.Core.MSSQL
                 DataTable dt = new DataTable(TableName);
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    dt.Columns.Add(f.FieldName);
+                    if (f.DataTypeCode == DbType.Guid)
+                    {
+                        dt.Columns.Add(f.FieldName, typeof(System.Data.SqlTypes.SqlGuid));
+                    }
+                    else
+                    {
+                        dt.Columns.Add(f.FieldName);
+                    }
                 }
 
                 foreach (var e in list)
