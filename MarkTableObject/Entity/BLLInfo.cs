@@ -18,6 +18,7 @@ namespace hwj.MarkTableObject.Entity
         public string Connection { get; set; }
         public string BLLName { get; set; }
         public DatabaseEnum ConnType { get; set; }
+        public bool IsNetCore { get; set; }
 
         public BLLInfo(GeneralInfo genInfo, DBModule module, string tableName)
             : this(genInfo, module, tableName, string.Empty, null)
@@ -38,6 +39,7 @@ namespace hwj.MarkTableObject.Entity
 
             BLLName = PrefixChar + tableName;
             FileName = string.Format("{0}\\{1}.cs", genInfo.BusinessPath.TrimEnd('\\'), BLLName);
+            IsNetCore = genInfo.IsNetCore;
         }
     }
 }

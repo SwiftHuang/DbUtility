@@ -29,7 +29,7 @@ namespace hwj.MarkTableObject.Entity
         public string EntityPrefixChar { get; set; }
 
         //public string DataSourceName { get; set; }
-
+        public bool IsNetCore { get; set; }
 
         public GeneralInfo()
         {

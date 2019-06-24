@@ -20,7 +20,7 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("using System;");
             strclass.AppendLine("using System.Data;");
             strclass.AppendLine("using System.Collections.Generic;");
-            strclass.AppendLine("using hwj.DBUtility;");
+            strclass.AppendLine(string.Format("using hwj.DBUtility{0};", bllInfo.IsNetCore ? ".Core" : string.Empty));
 
             strclass.AppendLine("using " + bllInfo.DALInfo.Namespace + ";");
             strclass.AppendLine("using " + bllInfo.EntityInfo.NameSpace + ";");

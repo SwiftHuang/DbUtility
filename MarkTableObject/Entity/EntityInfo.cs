@@ -26,6 +26,7 @@ namespace hwj.MarkTableObject.Entity
         /// 前缀字符
         /// </summary>
         public string PrefixChar { get; set; }
+        public bool IsNetCore { get; set; }
         #endregion
 
         public EntityInfo()
@@ -43,6 +44,7 @@ namespace hwj.MarkTableObject.Entity
 
             EntityName = PrefixChar + TableName;
             FileName = string.Format("{0}\\{1}.cs", genInfo.EntityPath.TrimEnd('\\'), EntityName);
+            IsNetCore = genInfo.IsNetCore;
         }
 
         #region Public Function

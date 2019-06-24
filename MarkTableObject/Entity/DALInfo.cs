@@ -16,6 +16,7 @@ namespace hwj.MarkTableObject.Entity
         /// </summary>
         public string PrefixChar { get; set; }
         public string DALName { get; set; }
+        public bool IsNetCore { get; set; }
 
         public DALInfo(GeneralInfo genInfo, DBModule module, string tableName)
             : this(genInfo, module, tableName, string.Empty, null)
@@ -40,6 +41,7 @@ namespace hwj.MarkTableObject.Entity
 
             DALName = PrefixChar + tableName;
             FileName = string.Format("{0}\\{1}.cs", genInfo.DataAccessPath.TrimEnd('\\'), DALName);
+            IsNetCore = genInfo.IsNetCore;
         }
 
     }

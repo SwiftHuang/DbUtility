@@ -68,6 +68,7 @@ namespace hwj.MarkTableObject.Forms
                     EntityPath = txtEntityPath.Text.Trim(),
                     EntityPrefixChar = txtEntityPrefixChar.Text.Trim(),
                     EntityPath4View = txtEntityPath.Text.Trim(),
+                    IsNetCore = chkIsNetCore.Checked,
 
                     Database = Project.Database,
                     Template = Common.GetTemplateTypeByComboxIndex(cboTemplateType.SelectedIndex),
@@ -172,6 +173,7 @@ namespace hwj.MarkTableObject.Forms
                 txtEntityName.Text = Project.EntityNamespace;
                 txtEntityPath.Text = Project.EntityPath;
                 txtEntityPrefixChar.Text = Project.EntityPrefixChar;
+                chkIsNetCore.Checked = Project.IsNetCore;
                 if (Project.Database != null)
                 {
                     txtConnStr.Text = Project.Database.ConnectionString;

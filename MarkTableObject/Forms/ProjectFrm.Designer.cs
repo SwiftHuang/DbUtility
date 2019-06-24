@@ -77,6 +77,8 @@
             this.btnSave = new hwj.UserControls.CommonControls.xButton();
             this.btnClose = new hwj.UserControls.CommonControls.xButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label19 = new System.Windows.Forms.Label();
+            this.chkIsNetCore = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -95,6 +97,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.chkIsNetCore, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.cboTemplateType, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 2, 9);
@@ -127,7 +131,7 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -138,7 +142,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 255);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 280);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // cboTemplateType
@@ -198,10 +203,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.panel3, 3);
             this.panel3.Controls.Add(this.txtEntityPath);
             this.panel3.Controls.Add(this.btnEntityPath);
-            this.panel3.Location = new System.Drawing.Point(130, 227);
+            this.panel3.Location = new System.Drawing.Point(137, 225);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(442, 25);
+            this.panel3.Size = new System.Drawing.Size(435, 25);
             this.panel3.TabIndex = 26;
             // 
             // txtEntityPath
@@ -215,7 +220,7 @@
             this.txtEntityPath.ReadOnly = true;
             this.txtEntityPath.RequiredHandle = null;
             this.txtEntityPath.SetValueToControl = null;
-            this.txtEntityPath.Size = new System.Drawing.Size(396, 21);
+            this.txtEntityPath.Size = new System.Drawing.Size(389, 21);
             this.txtEntityPath.TabIndex = 0;
             this.txtEntityPath.TextIsChanged = false;
             this.txtEntityPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
@@ -223,7 +228,7 @@
             // btnEntityPath
             // 
             this.btnEntityPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnEntityPath.Location = new System.Drawing.Point(399, 0);
+            this.btnEntityPath.Location = new System.Drawing.Point(392, 0);
             this.btnEntityPath.Name = "btnEntityPath";
             this.btnEntityPath.Size = new System.Drawing.Size(43, 25);
             this.btnEntityPath.TabIndex = 1;
@@ -237,10 +242,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.panel2, 3);
             this.panel2.Controls.Add(this.txtDALPath);
             this.panel2.Controls.Add(this.btnDALPath);
-            this.panel2.Location = new System.Drawing.Point(130, 175);
+            this.panel2.Location = new System.Drawing.Point(137, 175);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(442, 25);
+            this.panel2.Size = new System.Drawing.Size(435, 25);
             this.panel2.TabIndex = 19;
             // 
             // txtDALPath
@@ -254,7 +259,7 @@
             this.txtDALPath.ReadOnly = true;
             this.txtDALPath.RequiredHandle = null;
             this.txtDALPath.SetValueToControl = null;
-            this.txtDALPath.Size = new System.Drawing.Size(396, 21);
+            this.txtDALPath.Size = new System.Drawing.Size(389, 21);
             this.txtDALPath.TabIndex = 0;
             this.txtDALPath.TextIsChanged = false;
             this.txtDALPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
@@ -262,7 +267,7 @@
             // btnDALPath
             // 
             this.btnDALPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDALPath.Location = new System.Drawing.Point(399, 0);
+            this.btnDALPath.Location = new System.Drawing.Point(392, 0);
             this.btnDALPath.Name = "btnDALPath";
             this.btnDALPath.Size = new System.Drawing.Size(43, 25);
             this.btnDALPath.TabIndex = 1;
@@ -276,10 +281,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 3);
             this.panel1.Controls.Add(this.txtBLLPath);
             this.panel1.Controls.Add(this.btnBLLPath);
-            this.panel1.Location = new System.Drawing.Point(130, 125);
+            this.panel1.Location = new System.Drawing.Point(137, 125);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(442, 25);
+            this.panel1.Size = new System.Drawing.Size(435, 25);
             this.panel1.TabIndex = 12;
             // 
             // txtBLLPath
@@ -293,7 +298,7 @@
             this.txtBLLPath.ReadOnly = true;
             this.txtBLLPath.RequiredHandle = null;
             this.txtBLLPath.SetValueToControl = null;
-            this.txtBLLPath.Size = new System.Drawing.Size(396, 21);
+            this.txtBLLPath.Size = new System.Drawing.Size(389, 21);
             this.txtBLLPath.TabIndex = 0;
             this.txtBLLPath.TextIsChanged = false;
             this.txtBLLPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPrjPath_MouseDoubleClick);
@@ -301,7 +306,7 @@
             // btnBLLPath
             // 
             this.btnBLLPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBLLPath.Location = new System.Drawing.Point(399, 0);
+            this.btnBLLPath.Location = new System.Drawing.Point(392, 0);
             this.btnBLLPath.Name = "btnBLLPath";
             this.btnBLLPath.Size = new System.Drawing.Size(43, 25);
             this.btnBLLPath.TabIndex = 1;
@@ -374,12 +379,12 @@
             this.txtBLLName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBLLName.BackColor = System.Drawing.SystemColors.Window;
             this.txtBLLName.Format = null;
-            this.txtBLLName.Location = new System.Drawing.Point(133, 78);
+            this.txtBLLName.Location = new System.Drawing.Point(140, 78);
             this.txtBLLName.Name = "txtBLLName";
             this.txtBLLName.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtBLLName.RequiredHandle = null;
             this.txtBLLName.SetValueToControl = null;
-            this.txtBLLName.Size = new System.Drawing.Size(291, 21);
+            this.txtBLLName.Size = new System.Drawing.Size(284, 21);
             this.txtBLLName.TabIndex = 6;
             this.txtBLLName.TextIsChanged = false;
             // 
@@ -388,12 +393,12 @@
             this.txtDALName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDALName.BackColor = System.Drawing.SystemColors.Window;
             this.txtDALName.Format = null;
-            this.txtDALName.Location = new System.Drawing.Point(133, 153);
+            this.txtDALName.Location = new System.Drawing.Point(140, 153);
             this.txtDALName.Name = "txtDALName";
             this.txtDALName.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtDALName.RequiredHandle = null;
             this.txtDALName.SetValueToControl = null;
-            this.txtDALName.Size = new System.Drawing.Size(291, 21);
+            this.txtDALName.Size = new System.Drawing.Size(284, 21);
             this.txtDALName.TabIndex = 15;
             this.txtDALName.TextIsChanged = false;
             // 
@@ -402,12 +407,12 @@
             this.txtEntityName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEntityName.BackColor = System.Drawing.SystemColors.Window;
             this.txtEntityName.Format = null;
-            this.txtEntityName.Location = new System.Drawing.Point(133, 203);
+            this.txtEntityName.Location = new System.Drawing.Point(140, 203);
             this.txtEntityName.Name = "txtEntityName";
             this.txtEntityName.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtEntityName.RequiredHandle = null;
             this.txtEntityName.SetValueToControl = null;
-            this.txtEntityName.Size = new System.Drawing.Size(291, 21);
+            this.txtEntityName.Size = new System.Drawing.Size(284, 21);
             this.txtEntityName.TabIndex = 22;
             this.txtEntityName.TextIsChanged = false;
             // 
@@ -480,7 +485,7 @@
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(68, 234);
+            this.label8.Location = new System.Drawing.Point(68, 231);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 12);
             this.label8.TabIndex = 25;
@@ -567,12 +572,12 @@
             this.txtBLLConnection.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.SetColumnSpan(this.txtBLLConnection, 3);
             this.txtBLLConnection.Format = null;
-            this.txtBLLConnection.Location = new System.Drawing.Point(133, 103);
+            this.txtBLLConnection.Location = new System.Drawing.Point(140, 103);
             this.txtBLLConnection.Name = "txtBLLConnection";
             this.txtBLLConnection.OldBackColor = System.Drawing.SystemColors.Window;
             this.txtBLLConnection.RequiredHandle = null;
             this.txtBLLConnection.SetValueToControl = null;
-            this.txtBLLConnection.Size = new System.Drawing.Size(436, 21);
+            this.txtBLLConnection.Size = new System.Drawing.Size(429, 21);
             this.txtBLLConnection.TabIndex = 10;
             this.txtBLLConnection.TextIsChanged = false;
             // 
@@ -591,7 +596,7 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Location = new System.Drawing.Point(6, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(578, 275);
+            this.groupBox1.Size = new System.Drawing.Size(578, 300);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "项目设置(鼠标双击路径内容,打开所在文件夹)";
@@ -599,7 +604,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox2.Location = new System.Drawing.Point(6, 286);
+            this.groupBox2.Location = new System.Drawing.Point(6, 310);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(578, 123);
             this.groupBox2.TabIndex = 1;
@@ -693,7 +698,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnSave.Location = new System.Drawing.Point(439, 417);
+            this.btnSave.Location = new System.Drawing.Point(439, 444);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(66, 23);
             this.btnSave.TabIndex = 2;
@@ -705,7 +710,7 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.CursorFromClick = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnClose.Location = new System.Drawing.Point(515, 417);
+            this.btnClose.Location = new System.Drawing.Point(515, 444);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(66, 23);
             this.btnClose.TabIndex = 3;
@@ -713,11 +718,32 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 259);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(59, 12);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "平台属性:";
+            // 
+            // chkIsNetCore
+            // 
+            this.chkIsNetCore.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkIsNetCore.AutoSize = true;
+            this.chkIsNetCore.Location = new System.Drawing.Point(68, 257);
+            this.chkIsNetCore.Name = "chkIsNetCore";
+            this.chkIsNetCore.Size = new System.Drawing.Size(66, 16);
+            this.chkIsNetCore.TabIndex = 28;
+            this.chkIsNetCore.Text = "NetCore";
+            this.chkIsNetCore.UseVisualStyleBackColor = true;
+            // 
             // ProjectFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 449);
+            this.ClientSize = new System.Drawing.Size(590, 476);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox2);
@@ -797,5 +823,7 @@
         private System.Windows.Forms.Button btnPrjPath;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cboTemplateType;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.CheckBox chkIsNetCore;
     }
 }

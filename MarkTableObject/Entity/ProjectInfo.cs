@@ -38,6 +38,7 @@ namespace hwj.MarkTableObject.Entity
         //public string DataSourceName { get; set; }
         public DatabaseInfo Database { get; set; }
         public TemplateType Template { get; set; }
+        public bool IsNetCore { get; set; }
 
         public ProjectInfo()
         {
