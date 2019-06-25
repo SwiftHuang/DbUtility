@@ -26,9 +26,9 @@ namespace hwj.MarkTableObject.BLL
             strclass.AppendLine("using System;");
             //strclass.AppendLine("using System.Collections.Generic;");
             strclass.AppendLine("using System.Data;");
-            strclass.AppendLine(string.Format("using hwj.DBUtility{0};", entity.IsNetCore ? ".Core" : string.Empty));
-            strclass.AppendLine(string.Format("using hwj.DBUtility{0}.Entity;", entity.IsNetCore ? ".Core" : string.Empty));
-            strclass.AppendLine(string.Format("using hwj.DBUtility{0}.TableMapping;", entity.IsNetCore ? ".Core" : string.Empty));
+            strclass.AppendLine("using hwj.DBUtility{0};".GetNamespace(entity.IsNetCore));
+            strclass.AppendLine("using hwj.DBUtility{0}.Entity;".GetNamespace(entity.IsNetCore));
+            strclass.AppendLine("using hwj.DBUtility{0}.TableMapping;".GetNamespace(entity.IsNetCore));
             strclass.AppendLine("");
             strclass.AppendLine("namespace " + entity.NameSpace);
             strclass.AppendLine("{");

@@ -6,7 +6,7 @@ using System.Data;
 
 namespace hwj.MarkTableObject.BLL
 {
-    public class Common
+    public static class Common
     {
         public static string GetStringValue(object value)
         {
@@ -69,6 +69,13 @@ namespace hwj.MarkTableObject.BLL
             c.DataType = BLL.Common.GetStringValue(row["DATA_TYPE"]);
             c.ParameterMode = BLL.Common.GetStringValue(row["PARAMETER_MODE"]);
             return c;
+        }
+
+        public static string GetNamespace(this string @namespace, bool isNetCore)
+        {
+            if (!isNetCore)
+                return @namespace;
+            return @namespace.Replace("hwj.DBUtility", "hwj.DBUtility.Core");
         }
     }
 }
