@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chkIsNetCore = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.cboTemplateType = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtPrjPath = new hwj.UserControls.CommonControls.xTextBox();
@@ -77,8 +79,6 @@
             this.btnSave = new hwj.UserControls.CommonControls.xButton();
             this.btnClose = new hwj.UserControls.CommonControls.xButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label19 = new System.Windows.Forms.Label();
-            this.chkIsNetCore = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -145,6 +145,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 280);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // chkIsNetCore
+            // 
+            this.chkIsNetCore.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkIsNetCore.AutoSize = true;
+            this.chkIsNetCore.Location = new System.Drawing.Point(68, 257);
+            this.chkIsNetCore.Name = "chkIsNetCore";
+            this.chkIsNetCore.Size = new System.Drawing.Size(66, 16);
+            this.chkIsNetCore.TabIndex = 28;
+            this.chkIsNetCore.Text = "NetCore";
+            this.chkIsNetCore.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 259);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(59, 12);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "使用平台:";
             // 
             // cboTemplateType
             // 
@@ -717,27 +738,6 @@
             this.btnClose.Text = "取 消";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // label19
-            // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(3, 259);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(59, 12);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "平台属性:";
-            // 
-            // chkIsNetCore
-            // 
-            this.chkIsNetCore.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkIsNetCore.AutoSize = true;
-            this.chkIsNetCore.Location = new System.Drawing.Point(68, 257);
-            this.chkIsNetCore.Name = "chkIsNetCore";
-            this.chkIsNetCore.Size = new System.Drawing.Size(66, 16);
-            this.chkIsNetCore.TabIndex = 28;
-            this.chkIsNetCore.Text = "NetCore";
-            this.chkIsNetCore.UseVisualStyleBackColor = true;
             // 
             // ProjectFrm
             // 

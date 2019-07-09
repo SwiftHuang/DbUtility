@@ -39,16 +39,16 @@ namespace hwj.MarkTableObject.BLL
                     break;
             }
             strclass.AppendLine("using System.Data;");
-            strclass.AppendLine("using hwj.DBUtility{0};".GetNamespace(dalInfo.IsNetCore));
+            strclass.AppendLine("using hwj.DBUtility;".GetNamespace(dalInfo.IsNetCore));
             if (templateType == TemplateType.DataAccess)
             {
                 strclass.AppendLine("using hwj.DBUtility.Interface;".GetNamespace(dalInfo.IsNetCore));
             }
             else if (templateType == TemplateType.DataAccess2)
             {
-                strclass.AppendLine("using hwj.DBUtility{0}.MSSQL.Interface;".GetNamespace(dalInfo.IsNetCore));
+                strclass.AppendLine("using hwj.DBUtility.MSSQL.Interface;".GetNamespace(dalInfo.IsNetCore));
             }
-            strclass.AppendLine("using hwj.DBUtility{0}.MSSQL;".GetNamespace(dalInfo.IsNetCore));
+            strclass.AppendLine("using hwj.DBUtility.MSSQL;".GetNamespace(dalInfo.IsNetCore));
             strclass.AppendLine("using " + dalInfo.EntityInfo.NameSpace + ";");
             strclass.AppendLine("");
             strclass.AppendLine("namespace " + dalInfo.Namespace);
