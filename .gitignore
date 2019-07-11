@@ -9,3 +9,8 @@
 /DBUtility.Core/obj
 /DBUtility.Core/bin
 /DBUtility.Core/nupkgs
+DBUtility/.vs/
+MarkTableObject/.vs/
+MarkTableObject/MarkTableObject.csproj.user
+MarkTableObject/MarkTableObject_TemporaryKey.pfx
+MarkTableObject/Properties/app.manifest

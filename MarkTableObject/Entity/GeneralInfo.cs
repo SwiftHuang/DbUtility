@@ -39,6 +39,7 @@ namespace hwj.MarkTableObject.Entity
         public GeneralInfo(ProjectInfo prjInfo, DBModule objectModule)
         {
             this.Template = prjInfo.Template;
+            this.IsNetCore = prjInfo.IsNetCore;
             if (objectModule == DBModule.View)
             {
                 this.Database = prjInfo.Database;
