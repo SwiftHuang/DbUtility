@@ -66,24 +66,25 @@ namespace hwj.DBUtility.Core.TableMapping
 
         public static List<FieldMappingInfo> GetFieldMapping(Type type)
         {
-            string entityID = type.ToString();
-            List<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
+            return DBCache.GetCache(type);
+            //string entityID = type.ToString();
+            //List<FieldMappingInfo> lstFieldInfo = new List<FieldMappingInfo>();
 
-            if (DBCache.GetCache(entityID) == null)
-            {
-                foreach (PropertyInfo Property in type.GetProperties())
-                {
-                    foreach (FieldMappingAttribute field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
-                    {
-                        lstFieldInfo.Add(new FieldMappingInfo(Property, field.DataFieldName, field.DataTypeCode, field.NullValue, field.Size, field.DataHandles, -1));
-                    }
-                }
-                DBCache.SetCache(entityID, lstFieldInfo);
-            }
-            else
-                lstFieldInfo = (List<FieldMappingInfo>)DBCache.GetCache(entityID);
+            //if (DBCache.GetCache(entityID) == null)
+            //{
+            //    foreach (PropertyInfo Property in type.GetProperties())
+            //    {
+            //        foreach (FieldMappingAttribute field in Property.GetCustomAttributes(typeof(FieldMappingAttribute), false))
+            //        {
+            //            lstFieldInfo.Add(new FieldMappingInfo(Property, field.DataFieldName, field.DataTypeCode, field.NullValue, field.Size, field.DataHandles, -1));
+            //        }
+            //    }
+            //    DBCache.SetCache(entityID, lstFieldInfo);
+            //}
+            //else
+            //    lstFieldInfo = (List<FieldMappingInfo>)DBCache.GetCache(entityID);
 
-            return lstFieldInfo;
+            //return lstFieldInfo;
         }
 
         public static FieldMappingInfo GetFieldInfo(Type type, string fieldName)
