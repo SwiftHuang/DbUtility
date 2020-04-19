@@ -1,4 +1,3 @@
-using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -361,7 +360,8 @@ namespace hwj.DBUtility.MSSQL
                         {
                             trans.Rollback();
                         }
-                        CheckSqlException(ref ex, cmdList[index]);
+                        DbExceptionHelper checking = new DbExceptionHelper(cmdList[index]);
+                        checking.CheckSqlException(ref ex);
                         throw;
                     }
                     catch
@@ -711,77 +711,6 @@ namespace hwj.DBUtility.MSSQL
             else
             {
                 PrepareCommand4Arry(cmd, conn, trans, cmdText, null, timeout);
-            }
-        }
-
-        internal static void CheckSqlException(ref SqlException e, SqlEntity entity)
-        {
-            if (e.Number == 8152 && entity != null && entity.DataEntity != null)
-            {
-                string fieldStr = FormatMsgFor8152(entity.TableName, entity.DataEntity);
-                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
-            }
-        }
-
-        //private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
-        //{
-        //    try
-        //    {
-        //        SqlEntityXml sex = new SqlEntityXml(SQLString, cmdParms);
-        //        e.HelpLink = sex.ToXml();
-        //    }
-        //    catch { }
-        //}
-        /// <summary>
-        /// 检查字符长度是否与数据相符。
-        /// </summary>
-        /// <param name="e"></param>
-        /// <param name="tableName"></param>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        internal static string FormatMsgFor8152(string tableName, object entity)
-        {
-            string errFields = string.Empty;
-            foreach (FieldMappingInfo field in FieldMappingInfo.GetFieldMapping(entity.GetType()))
-            {
-                if (field.Size != 0)
-                {
-                    object value = field.Property.GetValue(entity, null);
-                    if (value != null)
-                    {
-                        string str = value.ToString();
-                        if (Common.IsNumType(field.DataTypeCode) && str.IndexOf('.') >= 0)
-                        {
-                            if (str.IndexOf('.') > field.Size)
-                            {
-                                errFields += field.FieldName + "/";
-                            }
-                        }
-                        else if (field.DataTypeCode == DbType.Boolean)
-                        {
-                        }
-                        else if (field.DataTypeCode == DbType.DateTime)
-                        {
-                        }
-                        else
-                        {
-                            if (str.Length > field.Size)
-                            {
-                                errFields += field.FieldName + "/";
-                            }
-                        }
-                    }
-                }
-            }
-
-            errFields = errFields.TrimEnd('/');
-            if (!string.IsNullOrEmpty(errFields))
-            {
-                return string.Format("Table:{0};Field:{1};", tableName, errFields);
-            }
-            else
-            {
-                return null;
             }
         }
 

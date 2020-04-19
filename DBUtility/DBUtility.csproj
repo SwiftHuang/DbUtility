@@ -96,6 +96,7 @@
     <Compile Include="BaseGenUpdateSql.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Entity\BaseList.cs" />
+    <Compile Include="Entity\FieldCheckInfo.cs" />
     <Compile Include="Entity\Reverser.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -107,6 +108,7 @@
     <Compile Include="DBCache.cs" />
     <Compile Include="MSSQL\BaseDataAccess.cs" />
     <Compile Include="MSSQL\DbConnection.cs" />
+    <Compile Include="MSSQL\DbExceptionHelper.cs" />
     <Compile Include="MSSQL\Interface\IMSSQLConnection.cs" />
     <Compile Include="MSSQL\SelectDALDependency.cs" />
     <Compile Include="MSSQL\BaseDAL.cs" />

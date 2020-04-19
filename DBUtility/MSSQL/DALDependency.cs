@@ -1,5 +1,4 @@
-﻿using hwj.DBUtility.Interface;
-using hwj.DBUtility.MSSQL.Interface;
+﻿using hwj.DBUtility.MSSQL.Interface;
 using hwj.DBUtility.TableMapping;
 using System;
 using System.Collections.Generic;
@@ -102,7 +101,8 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -130,7 +130,8 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -198,23 +199,31 @@ namespace hwj.DBUtility.MSSQL
         {
             if (list != null)
             {
+                List<FieldMappingInfo> fieldMappings = FieldMappingInfo.GetFieldMapping(typeof(T));
                 DataTable dt = new DataTable(TableName);
-                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                dt.ExtendedProperties.Add(Common.FieldMappingsKey, fieldMappings);
+
+                foreach (FieldMappingInfo f in fieldMappings)
                 {
+                    DataColumn dc = new DataColumn();
+                    dc.ColumnName = f.FieldName;
                     if (f.DataTypeCode == DbType.Guid)
                     {
-                        dt.Columns.Add(f.FieldName, typeof(System.Data.SqlTypes.SqlGuid));
+                        dc.DataType = typeof(System.Data.SqlTypes.SqlGuid);
+                        //dt.Columns.Add(f.FieldName, );
                     }
-                    else
-                    {
-                        dt.Columns.Add(f.FieldName);
-                    }
+                    //else if(f.DataTypeCode== DbType.Decimal)
+                    //{
+                    //    dc.DataType = typeof(System.Data.SqlTypes.SqlDecimal);
+                    //}
+
+                    dt.Columns.Add(dc);
                 }
 
                 foreach (var e in list)
                 {
                     DataRow dr = dt.NewRow();
-                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    foreach (FieldMappingInfo f in fieldMappings)
                     {
                         if (e.GetAssigned().IndexOf(f.FieldName) != -1)
                         {
@@ -236,6 +245,7 @@ namespace hwj.DBUtility.MSSQL
             }
             return false;
         }
+
         #endregion Insert
 
         #region Update
@@ -320,7 +330,8 @@ namespace hwj.DBUtility.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -951,14 +962,14 @@ namespace hwj.DBUtility.MSSQL
 
         #region Private Member
 
-        private static void CheckSqlException(ref SqlException e, T entity)
-        {
-            if ((e.Number == 8152 || e.Number == 8115) && entity != null)
-            {
-                string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
-                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
-            }
-        }
+        //private static void CheckSqlException(ref SqlException e, T entity)
+        //{
+        //    if ((e.Number == 8152 || e.Number == 8115) && entity != null)
+        //    {
+        //        string fieldStr = DbExceptionChecking.FormatMsgFor8152(entity.GetTableName(), entity);
+        //        e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
+        //    }
+        //}
 
         //private static bool ExecuteSqlByTrans(DbTransaction trans, SqlEntity sqlEntity)
         //{
