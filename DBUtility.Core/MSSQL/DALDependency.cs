@@ -112,7 +112,8 @@ namespace hwj.DBUtility.Core.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -150,7 +151,8 @@ namespace hwj.DBUtility.Core.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -241,23 +243,26 @@ namespace hwj.DBUtility.Core.MSSQL
         {
             if (list != null)
             {
+                List<FieldMappingInfo> fieldMappings = FieldMappingInfo.GetFieldMapping(typeof(T));
                 DataTable dt = new DataTable(TableName);
-                foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                dt.ExtendedProperties.Add(Common.FieldMappingsKey, fieldMappings);
+
+                foreach (FieldMappingInfo f in fieldMappings)
                 {
+                    DataColumn dc = new DataColumn();
+                    dc.ColumnName = f.FieldName;
                     if (f.DataTypeCode == DbType.Guid)
                     {
-                        dt.Columns.Add(f.FieldName, typeof(System.Data.SqlTypes.SqlGuid));
+                        dc.DataType = typeof(System.Data.SqlTypes.SqlGuid);
                     }
-                    else
-                    {
-                        dt.Columns.Add(f.FieldName);
-                    }
+
+                    dt.Columns.Add(dc);
                 }
 
                 foreach (var e in list)
                 {
                     DataRow dr = dt.NewRow();
-                    foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
+                    foreach (FieldMappingInfo f in fieldMappings)
                     {
                         if (e.GetAssigned().IndexOf(f.FieldName) != -1)
                         {
@@ -405,7 +410,8 @@ namespace hwj.DBUtility.Core.MSSQL
             }
             catch (SqlException ex)
             {
-                CheckSqlException(ref ex, entity);
+                DbExceptionHelper checking = new DbExceptionHelper(entity.GetTableName(), entity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -1120,14 +1126,14 @@ namespace hwj.DBUtility.Core.MSSQL
 
         #region Private Member
 
-        private static void CheckSqlException(ref SqlException e, T entity)
-        {
-            if ((e.Number == 8152 || e.Number == 8115) && entity != null)
-            {
-                string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
-                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
-            }
-        }
+        //private static void CheckSqlException(ref SqlException e, T entity)
+        //{
+        //    if ((e.Number == 8152 || e.Number == 8115) && entity != null)
+        //    {
+        //        string fieldStr = DbHelperSQL.FormatMsgFor8152(entity.GetTableName(), entity);
+        //        e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
+        //    }
+        //}
 
         #endregion Private Member
 

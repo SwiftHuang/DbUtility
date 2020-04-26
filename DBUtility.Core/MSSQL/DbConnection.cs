@@ -186,7 +186,8 @@ namespace hwj.DBUtility.Core.MSSQL
             }
             catch (SqlException ex)
             {
-                DbHelperSQL.CheckSqlException(ref ex, sqlList[index]);
+                DbExceptionHelper checking = new DbExceptionHelper(sqlList[index]);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -208,7 +209,8 @@ namespace hwj.DBUtility.Core.MSSQL
             }
             catch (SqlException ex)
             {
-                DbHelperSQL.CheckSqlException(ref ex, sqlEntity);
+                DbExceptionHelper checking = new DbExceptionHelper(sqlEntity);
+                checking.CheckSqlException(ref ex);
                 throw;
             }
         }
@@ -594,23 +596,32 @@ namespace hwj.DBUtility.Core.MSSQL
         /// <param name="copyOptions">批量插入选项</param>
         public void BulkCopy(DataTable table, int timeout, SqlBulkCopyOptions copyOptions)
         {
-            SqlBulkCopy bulkCopy = new SqlBulkCopy(InnerConnection, copyOptions, InnerTransaction);
-            bulkCopy.DestinationTableName = table.TableName;
-            bulkCopy.BatchSize = table.Rows.Count;
-            bulkCopy.BulkCopyTimeout = timeout;
+            try
+            {
+                SqlBulkCopy bulkCopy = new SqlBulkCopy(InnerConnection, copyOptions, InnerTransaction);
+                bulkCopy.DestinationTableName = table.TableName;
+                bulkCopy.BatchSize = table.Rows.Count;
+                bulkCopy.BulkCopyTimeout = timeout;
 
-            if (InnerConnection.State != ConnectionState.Open)
-            {
-                InnerConnection.Open();
-            }
+                if (InnerConnection.State != ConnectionState.Open)
+                {
+                    InnerConnection.Open();
+                }
 
-            foreach (DataColumn c in table.Columns)
-            {
-                bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+                foreach (DataColumn c in table.Columns)
+                {
+                    bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
+                }
+                if (table != null && table.Rows.Count != 0)
+                {
+                    bulkCopy.WriteToServer(table);
+                }
             }
-            if (table != null && table.Rows.Count != 0)
+            catch (SqlException ex)
             {
-                bulkCopy.WriteToServer(table);
+                DbExceptionHelper checking = new DbExceptionHelper(table);
+                checking.CheckSqlException(ref ex);
+                throw;
             }
         }
 
@@ -1021,17 +1032,7 @@ namespace hwj.DBUtility.Core.MSSQL
             if (sqlEx.Data != null)
             {
                 string msg = FormatExMessage(sql, parameters, timeout);
-                if (sqlEx.Data.Contains(Common.SqlInfoKey))
-                {
-                    object obj = sqlEx.Data[Common.SqlInfoKey];
-                    if (obj != null)
-                    {
-                        string tmpMsg = sqlEx.Data[Common.SqlInfoKey].ToString();
-                        msg = string.Format("{0}\r\n{1}", tmpMsg, msg);
-                    }
-                    sqlEx.Data.Remove(Common.SqlInfoKey);
-                }
-                sqlEx.Data.Add(Common.SqlInfoKey, msg);
+                DbExceptionHelper.AddExData(ref sqlEx, Common.SqlInfoKey, msg);
             }
         }
 

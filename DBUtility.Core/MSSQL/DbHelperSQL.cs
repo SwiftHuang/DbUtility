@@ -1,4 +1,3 @@
-using hwj.DBUtility.Core.TableMapping;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Data.SqlClient;
 namespace hwj.DBUtility.Core.MSSQL
 {
     /// <summary>
-    /// ���ݷ��ʳ��������
+    /// 数据访问抽象基础类
     /// Copyright (C) 2004-2008 By LiTianPing
     /// </summary>
     public abstract class DbHelperSQL
@@ -19,14 +18,14 @@ namespace hwj.DBUtility.Core.MSSQL
         {
         }
 
-        #region ���÷���
+        #region 公用方法
 
         /// <summary>
-        /// �ж��Ƿ����ĳ���ĳ���ֶ�
+        /// 判断是否存在某表的某个字段
         /// </summary>
-        /// <param name="tableName">������</param>
-        /// <param name="columnName">������</param>
-        /// <returns>�Ƿ����</returns>
+        /// <param name="tableName">表名称</param>
+        /// <param name="columnName">列名称</param>
+        /// <returns>是否存在</returns>
         public static bool ColumnExists(string ConnectionString, string tableName, string columnName)
         {
             string sql = "select count(1) from syscolumns where [id]=object_id('" + tableName + "') and [name]='" + columnName + "'";
@@ -75,7 +74,7 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ���Ƿ����
+        /// 表是否存在
         /// </summary>
         /// <param name="ConnectionString"></param>
         /// <param name="TableName"></param>
@@ -152,41 +151,41 @@ namespace hwj.DBUtility.Core.MSSQL
             }
         }
 
-        #endregion ���÷���
+        #endregion 公用方法
 
-        #region ִ�д�������SQL���
+        #region 执行带参数的SQL语句
 
         /// <summary>
-        /// ִ��һ�������ѯ�����䣬���ز�ѯ�����object����
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <returns>��ѯ�����object��</returns>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <returns>查询结果（object）</returns>
         public static object GetSingle(string ConnectionString, string SQLString)
         {
             return GetSingle(ConnectionString, SQLString, null, -1);
         }
 
         /// <summary>
-        /// ִ��һ�������ѯ�����䣬���ز�ѯ�����object����
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="cmdParms">�������</param>
-        /// <returns>��ѯ�����object��</returns>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <returns>查询结果（object）</returns>
         public static object GetSingle(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
             return GetSingle(ConnectionString, SQLString, cmdParms, -1);
         }
 
         /// <summary>
-        /// ִ��һ�������ѯ�����䣬���ز�ѯ�����object����
+        /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
-        /// <param name="connectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="cmdParms">�������</param>
-        /// <param name="timeout">��ʱʱ��(��)</param>
-        /// <returns>��ѯ�����object��</returns>
+        /// <param name="connectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <returns>查询结果（object）</returns>
         public static object GetSingle(string connectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -221,22 +220,22 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ��SQL��䣬����Ӱ��ļ�¼��
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <returns>Ӱ��ļ�¼��</returns>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string ConnectionString, string SQLString)
         {
             return ExecuteSql(ConnectionString, SQLString, null, -1);
         }
 
         /// <summary>
-        /// ִ��SQL��䣬����Ӱ��ļ�¼��
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="cmdParms">��������</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件参数</param>
         /// <returns></returns>
         public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
@@ -244,12 +243,12 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ��SQL��䣬����Ӱ��ļ�¼��
+        /// 执行SQL语句，返回影响的记录数
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="cmdParms">��������</param>
-        /// <param name="timeout">��ʱʱ��(��)</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">条件参数</param>
+        /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public static int ExecuteSql(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
@@ -278,10 +277,10 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�ж���SQL��䣬ʵ�����ݿ�����
+        /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="cmdList">����SQL���</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="cmdList">多条SQL语句</param>
         /// <returns></returns>
         public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList)
         {
@@ -289,11 +288,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�ж���SQL��䣬ʵ�����ݿ�����
+        /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="cmdList">����SQL���</param>
-        /// <param name="timeout">��ʱʱ��(��)</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="cmdList">多条SQL语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public static int ExecuteSqlTran(string ConnectionString, SqlList cmdList, int timeout)
         {
@@ -307,7 +306,7 @@ namespace hwj.DBUtility.Core.MSSQL
                     try
                     {
                         int count = 0;
-                        //ѭ��
+                        //循环
                         foreach (SqlEntity myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
@@ -361,7 +360,8 @@ namespace hwj.DBUtility.Core.MSSQL
                         {
                             trans.Rollback();
                         }
-                        CheckSqlException(ref ex, cmdList[index]);
+                        DbExceptionHelper checking = new DbExceptionHelper(cmdList[index]);
+                        checking.CheckSqlException(ref ex);
                         throw;
                     }
                     catch
@@ -377,10 +377,10 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����SqlDataReader ( ע�⣺���ø÷�����һ��Ҫ��SqlDataReader����Close )
+        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">��ѯ���</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
         /// <returns>SqlDataReader</returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString)
         {
@@ -388,11 +388,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����SqlDataReader ( ע�⣺���ø÷�����һ��Ҫ��SqlDataReader����Close )
+        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">��ѯ���</param>
-        /// <param name="cmdParms">��ѯ����</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
+        /// <param name="cmdParms">查询条件</param>
         /// <returns></returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms)
         {
@@ -400,12 +400,12 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����SqlDataReader ( ע�⣺���ø÷�����һ��Ҫ��SqlDataReader����Close )
+        /// 执行查询语句，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">��ѯ���</param>
-        /// <param name="cmdParms">��ѯ����</param>
-        /// <param name="timeout">��ʱʱ��(��)</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">查询语句</param>
+        /// <param name="cmdParms">查询条件</param>
+        /// <param name="timeout">超时时间(秒)</param>
         /// <returns></returns>
         public static SqlDataReader ExecuteReader(string ConnectionString, string SQLString, List<IDbDataParameter> cmdParms, int timeout)
         {
@@ -426,10 +426,10 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����DataSet
+        /// 执行查询语句，返回DataSet
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
         /// <returns></returns>
         public static DataSet Query(string ConnectionString, string SQLString)
         {
@@ -437,11 +437,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����DataSet
+        /// 执行查询语句，返回DataSet
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="cmdParms">��ѯ����</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="cmdParms">查询条件</param>
         /// <returns>DataSet</returns>
         public static DataSet Query(string ConnectionString, string SQLString, params SqlParameter[] cmdParms)
         {
@@ -449,12 +449,12 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�в�ѯ��䣬����DataSet
+        /// 执行查询语句，返回DataSet
         /// </summary>
-        /// <param name="ConnectionString">�������</param>
-        /// <param name="SQLString">SQL���</param>
-        /// <param name="timeout">��ʱʱ��(��)</param>
-        /// <param name="cmdParms">��ѯ����</param>
+        /// <param name="ConnectionString">连接语句</param>
+        /// <param name="SQLString">SQL语句</param>
+        /// <param name="timeout">超时时间(秒)</param>
+        /// <param name="cmdParms">查询条件</param>
         /// <returns>DataSet</returns>
         public static DataSet Query(string ConnectionString, string SQLString, int timeout, params SqlParameter[] cmdParms)
         {
@@ -485,7 +485,7 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�ж���SQL��䣬ʵ�����ݿ�����
+        /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="ConnectionString"></param>
         /// <param name="cmdList"></param>
@@ -500,7 +500,7 @@ namespace hwj.DBUtility.Core.MSSQL
                     try
                     {
                         int indentity = 0;
-                        //ѭ��
+                        //循环
                         foreach (SqlEntity myDE in sqlList)
                         {
                             foreach (IDbDataParameter q in myDE.Parameters)
@@ -532,15 +532,15 @@ namespace hwj.DBUtility.Core.MSSQL
             }
         }
 
-        #endregion ִ�д�������SQL���
+        #endregion 执行带参数的SQL语句
 
-        #region �洢���̲���
+        #region 存储过程操作
 
         /// <summary>
-        /// ִ�д洢���̣�����SqlDataReader ( ע�⣺���ø÷�����һ��Ҫ��SqlDataReader����Close )
+        /// 执行存储过程，返回SqlDataReader ( 注意：调用该方法后，一定要对SqlDataReader进行Close )
         /// </summary>
-        /// <param name="storedProcName">�洢������</param>
-        /// <param name="parameters">�洢���̲���</param>
+        /// <param name="storedProcName">存储过程名</param>
+        /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlDataReader</returns>
         public static SqlDataReader RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters)
         {
@@ -554,11 +554,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�д洢����
+        /// 执行存储过程
         /// </summary>
-        /// <param name="storedProcName">�洢������</param>
-        /// <param name="parameters">�洢���̲���</param>
-        /// <param name="tableName">DataSet����еı���</param>
+        /// <param name="storedProcName">存储过程名</param>
+        /// <param name="parameters">存储过程参数</param>
+        /// <param name="tableName">DataSet结果中的表名</param>
         /// <returns>DataSet</returns>
         public static DataSet RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, string tableName)
         {
@@ -590,11 +590,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ���� SqlCommand ����(��������һ���������������һ������ֵ)
+        /// 构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
         /// </summary>
-        /// <param name="connection">���ݿ�����</param>
-        /// <param name="storedProcName">�洢������</param>
-        /// <param name="parameters">�洢���̲���</param>
+        /// <param name="connection">数据库连接</param>
+        /// <param name="storedProcName">存储过程名</param>
+        /// <param name="parameters">存储过程参数</param>
         /// <returns>SqlCommand</returns>
         private static SqlCommand BuildQueryCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
@@ -604,7 +604,7 @@ namespace hwj.DBUtility.Core.MSSQL
             {
                 if (parameter != null)
                 {
-                    // ���δ����ֵ���������,���������DBNull.Value.
+                    // 检查未分配值的输出参数,将其分配以DBNull.Value.
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
                         (parameter.Value == null))
                     {
@@ -618,11 +618,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ִ�д洢���̣�����Ӱ�������
+        /// 执行存储过程，返回影响的行数
         /// </summary>
-        /// <param name="storedProcName">�洢������</param>
-        /// <param name="parameters">�洢���̲���</param>
-        /// <param name="rowsAffected">Ӱ�������</param>
+        /// <param name="storedProcName">存储过程名</param>
+        /// <param name="parameters">存储过程参数</param>
+        /// <param name="rowsAffected">影响的行数</param>
         /// <returns></returns>
         public static int RunProcedure(string ConnectionString, string storedProcName, IDbDataParameter[] parameters, out int rowsAffected)
         {
@@ -639,11 +639,11 @@ namespace hwj.DBUtility.Core.MSSQL
         }
 
         /// <summary>
-        /// ���� SqlCommand ����ʵ��(��������һ������ֵ)
+        /// 创建 SqlCommand 对象实例(用来返回一个整数值)
         /// </summary>
-        /// <param name="storedProcName">�洢������</param>
-        /// <param name="parameters">�洢���̲���</param>
-        /// <returns>SqlCommand ����ʵ��</returns>
+        /// <param name="storedProcName">存储过程名</param>
+        /// <param name="parameters">存储过程参数</param>
+        /// <returns>SqlCommand 对象实例</returns>
         private static SqlCommand BuildIntCommand(SqlConnection connection, string storedProcName, IDbDataParameter[] parameters)
         {
             SqlCommand command = BuildQueryCommand(connection, storedProcName, parameters);
@@ -653,7 +653,7 @@ namespace hwj.DBUtility.Core.MSSQL
             return command;
         }
 
-        #endregion �洢���̲���
+        #endregion 存储过程操作
 
         #region Private Function
 
@@ -678,7 +678,7 @@ namespace hwj.DBUtility.Core.MSSQL
 
             if (cmdParms != null)
             {
-                //��ֹ���̵߳�ʱ��ͬʱAdd�Ĵ���
+                //防止多线程的时候，同时Add的错误
                 SqlParameter[] clonedParameters = new SqlParameter[cmdParms.Length];
                 for (int i = 0, j = cmdParms.Length; i < j; i++)
                 {
@@ -711,77 +711,6 @@ namespace hwj.DBUtility.Core.MSSQL
             else
             {
                 PrepareCommand4Arry(cmd, conn, trans, cmdText, null, timeout);
-            }
-        }
-
-        internal static void CheckSqlException(ref SqlException e, SqlEntity entity)
-        {
-            if (e.Number == 8152 && entity != null && entity.DataEntity != null)
-            {
-                string fieldStr = FormatMsgFor8152(entity.TableName, entity.DataEntity);
-                e.Data.Add(Common.ExceptionFieldsKey, fieldStr);
-            }
-        }
-
-        //private static void FormatSqlEx(string SQLString, List<SqlParameter> cmdParms, ref SqlException e)
-        //{
-        //    try
-        //    {
-        //        SqlEntityXml sex = new SqlEntityXml(SQLString, cmdParms);
-        //        e.HelpLink = sex.ToXml();
-        //    }
-        //    catch { }
-        //}
-        /// <summary>
-        /// ����ַ������Ƿ������������
-        /// </summary>
-        /// <param name="e"></param>
-        /// <param name="tableName"></param>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        internal static string FormatMsgFor8152(string tableName, object entity)
-        {
-            string errFields = string.Empty;
-            foreach (FieldMappingInfo field in FieldMappingInfo.GetFieldMapping(entity.GetType()))
-            {
-                if (field.Size != 0)
-                {
-                    object value = field.Property.GetValue(entity, null);
-                    if (value != null)
-                    {
-                        string str = value.ToString();
-                        if (Common.IsNumType(field.DataTypeCode) && str.IndexOf('.') >= 0)
-                        {
-                            if (str.IndexOf('.') > field.Size)
-                            {
-                                errFields += field.FieldName + "/";
-                            }
-                        }
-                        else if (field.DataTypeCode == DbType.Boolean)
-                        {
-                        }
-                        else if (field.DataTypeCode == DbType.DateTime)
-                        {
-                        }
-                        else
-                        {
-                            if (str.Length > field.Size)
-                            {
-                                errFields += field.FieldName + "/";
-                            }
-                        }
-                    }
-                }
-            }
-
-            errFields = errFields.TrimEnd('/');
-            if (!string.IsNullOrEmpty(errFields))
-            {
-                return string.Format("Table:{0};Field:{1};", tableName, errFields);
-            }
-            else
-            {
-                return null;
             }
         }
 
