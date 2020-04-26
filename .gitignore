@@ -14,3 +14,7 @@ MarkTableObject/.vs/
 MarkTableObject/MarkTableObject.csproj.user
 MarkTableObject/MarkTableObject_TemporaryKey.pfx
 MarkTableObject/Properties/app.manifest
+/DBUtilityTestProject/obj
+/DBUtilityTestProject/bin
+/DBUtilityTestProject.Core/obj
+/DBUtilityTestProject.Core/bin
