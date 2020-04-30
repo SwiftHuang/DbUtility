@@ -109,7 +109,7 @@ namespace hwj.DBUtility.Core.MSSQL
                 var fieldName = reader.GetName(i);
                 foreach (var field in list)
                 {
-                    if (field.FieldName == fieldName)
+                    if (field.FieldName.ToUpper() == fieldName.ToUpper())
                     {
                         var fieldInfo = field.Clone();
                         fieldInfo.FieldIndex = i;
