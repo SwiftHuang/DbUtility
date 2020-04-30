@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/SwiftHuang/DbUtility/tree/master/DBUtility</projectUrl>
+    <description>数据库底层</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © HWJ 2008</copyright>
+    <tags></tags>
+  </metadata>
+</package>
