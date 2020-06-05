@@ -67,6 +67,12 @@ namespace hwj.DBUtility.TableMapping
                 _assigned.Remove(fieldName);
         }
 
+        public void ClearAssigneds()
+        {
+            if (_assigned != null)
+                _assigned.Clear();
+        }
+
         protected void AddAssigned(string fieldName)
         {
             if (_assigned != null && !_assigned.Contains(fieldName))

@@ -81,11 +81,12 @@ namespace hwj.DBUtility.Core
         /// </summary>
         /// <param name="entity">表对象</param>
         /// <param name="filterParams">筛选条件</param>
+        /// <param name="updateParams">更新参数list</param>
         /// <returns></returns>
-        internal string UpdateSql(T entity, FilterParams filterParams, out List<IDbDataParameter> dbDataParameters)
+        internal string UpdateSql(T entity, FilterParams filterParams, out List<IDbDataParameter> dbDataParameters, out UpdateParam updateParams)
         {
             dbDataParameters = new List<IDbDataParameter>();
-            UpdateParam up = new UpdateParam();
+            updateParams = new UpdateParam();
             int index = 0;
             if (entity.GetAssignedStatus())
             {
@@ -94,7 +95,7 @@ namespace hwj.DBUtility.Core
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
                         IDbDataParameter dp = null;
-                        SetUpdateParam(ref up, f, entity, "_P_" + index.ToString(), out dp);
+                        SetUpdateParam(ref updateParams, f, entity, "_P_" + index.ToString(), out dp);
                         if (dp != null)
                         {
                             dbDataParameters.Add(dp);
@@ -108,7 +109,7 @@ namespace hwj.DBUtility.Core
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     IDbDataParameter dp = null;
-                    SetUpdateParam(ref up, f, entity, "_P" + index.ToString(), out dp);
+                    SetUpdateParam(ref updateParams, f, entity, "_P" + index.ToString(), out dp);
                     if (dp != null)
                     {
                         dbDataParameters.Add(dp);
@@ -116,7 +117,7 @@ namespace hwj.DBUtility.Core
                     index++;
                 }
             }
-            return UpdateSql(entity.GetTableName(), up, filterParams);
+            return UpdateSql(entity.GetTableName(), updateParams, filterParams);
         }
 
         /// <summary>

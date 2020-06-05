@@ -225,18 +225,15 @@ namespace hwj.DBUtility.MSSQL
                     DataRow dr = dt.NewRow();
                     foreach (FieldMappingInfo f in fieldMappings)
                     {
-                        if (e.GetAssigned().IndexOf(f.FieldName) != -1)
+                        object obj = f.Property.GetValue(e, null);
+                        if (Common.IsDateType(f.DataTypeCode))
                         {
-                            object obj = f.Property.GetValue(e, null);
-                            if (Common.IsDateType(f.DataTypeCode))
+                            if (Convert.ToDateTime(obj) == DateTime.MinValue)
                             {
-                                if (Convert.ToDateTime(obj) == DateTime.MinValue)
-                                {
-                                    obj = DBNull.Value;
-                                }
+                                obj = DBNull.Value;
                             }
-                            dr[f.FieldName] = obj;
                         }
+                        dr[f.FieldName] = obj;
                     }
                     dt.Rows.Add(dr);
                 }
@@ -277,12 +274,13 @@ namespace hwj.DBUtility.MSSQL
         /// </summary>
         /// <param name="entity">需要Table对象</param>
         /// <param name="filterParams">被更新的条件</param>
+        /// <param name="updateParams">更新参数list</param>
         /// <returns>Sql对象</returns>
-        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams)
+        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams, out UpdateParam updateParams)
         {
             SqlEntity se = new SqlEntity();
             List<IDbDataParameter> dpList = null;
-            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParams, out dpList);
+            se.CommandText = GenUpdateSql.UpdateSql(entity, filterParams, out dpList, out updateParams);
             se.Parameters = dpList;//GenUpdateSql.GenParameter(entity);
             if (filterParams != null)
             {
@@ -324,7 +322,10 @@ namespace hwj.DBUtility.MSSQL
         {
             try
             {
-                SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParams);
+                UpdateParam updateParams;
+                SqlEntity tmpSqlEty = UpdateSqlEntity(entity, filterParams, out updateParams);
+                if (updateParams == null || updateParams.Count == 0)
+                    return false;
                 _SqlEntity = tmpSqlEty;
                 return ExecuteSql(tmpSqlEty.CommandText, tmpSqlEty.Parameters) > 0;
             }

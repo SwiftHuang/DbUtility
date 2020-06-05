@@ -54,16 +54,13 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
+                    IDbDataParameter dp = null;
+                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
+                    if (dp != null)
                     {
-                        IDbDataParameter dp = null;
-                        InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
-                        if (dp != null)
-                        {
-                            dbDataParameters.Add(dp);
-                        }
-                        index++;
+                        dbDataParameters.Add(dp);
                     }
+                    index++;
                 }
             }
             else
