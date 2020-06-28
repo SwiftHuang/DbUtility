@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DBUtility")]
-[assembly: AssemblyDescription("DBUtility")]
+[assembly: AssemblyDescription("https://github.com/SwiftHuang/DbUtility/tree/master/DBUtility")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Vinson Huang (vinsonhwj@qq.com)")]
 [assembly: AssemblyProduct("DBUtility")]
