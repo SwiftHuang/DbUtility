@@ -54,13 +54,16 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    IDbDataParameter dp = null;
-                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
-                    if (dp != null)
+                    if (entity.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
                     {
-                        dbDataParameters.Add(dp);
+                        IDbDataParameter dp = null;
+                        InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, _ParamPrefix + index.ToString(), out dp);
+                        if (dp != null)
+                        {
+                            dbDataParameters.Add(dp);
+                        }
+                        index++;
                     }
-                    index++;
                 }
             }
             else
@@ -68,7 +71,7 @@ namespace hwj.DBUtility.MSSQL
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     IDbDataParameter dp = null;
-                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, "_P_" + index.ToString(), out dp);
+                    InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, _ParamPrefix + index.ToString(), out dp);
                     if (dp != null)
                     {
                         dbDataParameters.Add(dp);

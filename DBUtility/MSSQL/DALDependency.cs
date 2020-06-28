@@ -225,15 +225,18 @@ namespace hwj.DBUtility.MSSQL
                     DataRow dr = dt.NewRow();
                     foreach (FieldMappingInfo f in fieldMappings)
                     {
-                        object obj = f.Property.GetValue(e, null);
-                        if (Common.IsDateType(f.DataTypeCode))
+                        if (e.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
                         {
-                            if (Convert.ToDateTime(obj) == DateTime.MinValue)
+                            object obj = f.Property.GetValue(e, null);
+                            if (Common.IsDateType(f.DataTypeCode))
                             {
-                                obj = DBNull.Value;
+                                if (Convert.ToDateTime(obj) == DateTime.MinValue)
+                                {
+                                    obj = DBNull.Value;
+                                }
                             }
+                            dr[f.FieldName] = obj;
                         }
-                        dr[f.FieldName] = obj;
                     }
                     dt.Rows.Add(dr);
                 }

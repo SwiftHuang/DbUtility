@@ -8,6 +8,7 @@ namespace hwj.DBUtility.Core
 {
     public abstract class BaseGenUpdateSql<T> : BaseGenSql<T> where T : BaseTable<T>, new()
     {
+        protected const string _ParamPrefix = "_P_";
         protected const string _DeleteString = "DELETE FROM {0} {1};";
         protected const string _UpdateString = "UPDATE {0} SET {1} {2};";
         protected const string _InsertString = "INSERT INTO {0} ({1}) VALUES({2});";
@@ -95,7 +96,7 @@ namespace hwj.DBUtility.Core
                     if (entity.GetAssigned().IndexOf(f.FieldName) != -1)
                     {
                         IDbDataParameter dp = null;
-                        SetUpdateParam(ref updateParams, f, entity, "_P_" + index.ToString(), out dp);
+                        SetUpdateParam(ref updateParams, f, entity, _ParamPrefix + index.ToString(), out dp);
                         if (dp != null)
                         {
                             dbDataParameters.Add(dp);
@@ -109,7 +110,7 @@ namespace hwj.DBUtility.Core
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
                     IDbDataParameter dp = null;
-                    SetUpdateParam(ref updateParams, f, entity, "_P" + index.ToString(), out dp);
+                    SetUpdateParam(ref updateParams, f, entity, _ParamPrefix + index.ToString(), out dp);
                     if (dp != null)
                     {
                         dbDataParameters.Add(dp);
