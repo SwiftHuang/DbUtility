@@ -1028,6 +1028,7 @@ namespace hwj.DBUtility.Core.MSSQL
             return RecordCount(null);
         }
 
+
         /// <summary>
         /// 返回表的记录数
         /// </summary>
@@ -1035,8 +1036,19 @@ namespace hwj.DBUtility.Core.MSSQL
         /// <returns>记录数</returns>
         public int RecordCount(FilterParams filterParams)
         {
+            return RecordCount(filterParams, InnerConnection.DefaultCommandTimeout);
+        }
+        
+        /// <summary>
+        /// 返回表的记录数
+        /// </summary>
+        /// <param name="filterParams">条件参数</param>
+        /// <param name="commandTimeoutSeconds"></param>
+        /// <returns>记录数</returns>
+        public int RecordCount(FilterParams filterParams, int commandTimeoutSeconds)
+        {
             SqlEntity sqlEty = new SqlEntity();
-            sqlEty.CommandTimeout = InnerConnection.DefaultCommandTimeout;
+            sqlEty.CommandTimeout = commandTimeoutSeconds;
             sqlEty.LockType = InnerConnection.SelectLock;
             sqlEty.CommandText = GenSelectSql.SelectCountSql(TableName, filterParams);
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
