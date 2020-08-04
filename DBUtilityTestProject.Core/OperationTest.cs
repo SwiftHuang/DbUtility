@@ -90,7 +90,7 @@ namespace TestProject.Core
         [TestMethod]
         public void AddList()
         {
-            string dataKey = "AddList";
+            string dataKey = "AddListI";
             string errMsg = null;
             string xmlRS = string.Empty;
             string xmlRQ = string.Empty;
@@ -434,6 +434,10 @@ namespace TestProject.Core
             Assert.AreEqual(xmlRQ, xmlRS);
         }
 
+        public void Update_GetDB()
+        {
+
+        }
         public void Delete()
         {
         }

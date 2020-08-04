@@ -92,7 +92,7 @@ namespace TestProject
         [TestMethod]
         public void AddList()
         {
-            string dataKey = "AddList";
+            string dataKey = "AddListI";
             string errMsg = null;
             string xmlRS = string.Empty;
             string xmlRQ = string.Empty;
