@@ -101,7 +101,11 @@ namespace hwj.DBUtility.MSSQL
             }
             //上面Property.SetValue导致所有Get出来的Field被Assignd=true，其实不是我们期望的，clear掉
             var tt = RowInstance as hwj.DBUtility.TableMapping.BaseTable<T>;
-            if (tt != null) tt.ClearAssigneds();
+            if (tt != null)
+            {
+                tt.ClearAssigneds();
+                tt.Source = Enums.EntitySource.DB;
+            }
             return RowInstance;
         }
 

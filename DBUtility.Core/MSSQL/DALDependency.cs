@@ -264,7 +264,7 @@ namespace hwj.DBUtility.Core.MSSQL
                     DataRow dr = dt.NewRow();
                     foreach (FieldMappingInfo f in fieldMappings)
                     {
-                        if (e.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
+                        if (e.Source == Enums.EntitySource.DB || e.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
                         {
                             object obj = f.Property.GetValue(e, null);
                             if (Common.IsDateType(f.DataTypeCode))

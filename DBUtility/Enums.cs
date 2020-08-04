@@ -330,6 +330,21 @@ namespace hwj.DBUtility
             None,
             Begin,
         }
+
+        /// <summary>
+        /// 实体创建来源
+        /// </summary>
+        public enum EntitySource
+        {
+            /// <summary>
+            /// 用户自定义，外层自己New的
+            /// </summary>
+            Custom,
+            /// <summary>
+            /// 数据库取出的实体
+            /// </summary>
+            DB,
+        }
     }
 
     //public static class EnumsExtensions

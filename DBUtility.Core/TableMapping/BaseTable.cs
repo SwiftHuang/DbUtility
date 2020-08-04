@@ -22,6 +22,8 @@ namespace hwj.DBUtility.Core.TableMapping
             return DBTableName;
         }
 
+        internal Enums.EntitySource Source = Enums.EntitySource.Custom;
+        
         #region Use Assigned Status
 
         private bool _useAssigned = true;

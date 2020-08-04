@@ -54,7 +54,7 @@ namespace hwj.DBUtility.MSSQL
             {
                 foreach (FieldMappingInfo f in FieldMappingInfo.GetFieldMapping(typeof(T)))
                 {
-                    if (entity.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
+                    if (entity.Source == Enums.EntitySource.DB || entity.GetAssigned().IndexOf(f.FieldName) != -1)//插入字段时,不一定所有字段插入(例如:A字段int类型默认值为99).
                     {
                         IDbDataParameter dp = null;
                         InsertSqlString(ref sbInsField, ref sbInsValue, f, entity, _ParamPrefix + index.ToString(), out dp);
