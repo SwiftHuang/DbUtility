@@ -214,6 +214,67 @@ namespace TestProject.Core
         }
 
         [TestMethod]
+        public void AddList_ByDbEntity()
+        {
+            string dataKey = "AddListN";
+            string errMsg = null;
+            string xmlRS = string.Empty;
+            string xmlRQ = string.Empty;
+            bool isSuccess4Add = false;
+            try
+            {
+                tbTestTables rsLst = null;
+                tbTestTables rqLst = new tbTestTables();
+                for (int i = 0; i < 100; i++)
+                {
+                    tbTestTable dataRQ = TestCommon.GenData(string.Format("{0}{1}", dataKey, i));
+                    rqLst.Add(dataRQ);
+                }
+
+                using (DbConnection conn = new DbConnection(TestCommon.ConnString))
+                {
+                    try
+                    {
+                        conn.BeginTransaction();
+
+                        DATestTable da = new DATestTable(conn);
+                        da.AddList(rqLst);
+
+                        FilterParams fp = new FilterParams();
+                        fp.AddParam(tbTestTable.Fields.Key_EN, dataKey + "%", Enums.Relation.Like);
+                        SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
+
+                        var addEntityList = da.GetList(null, fp, sps);
+                        isSuccess4Add = da.AddList(addEntityList);
+
+                        conn.CommitTransaction();
+
+                        addEntityList.ForEach(c => c.Id = 0);
+                        rqLst.AddRange(addEntityList);
+
+                        rsLst = da.GetList(null, fp, sps);
+                        rsLst.ForEach(c => c.Id = 0);
+
+                        xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
+                        xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rsLst);
+                    }
+                    catch
+                    {
+                        conn.RollbackTransaction();
+                        throw;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            Assert.IsNull(errMsg);
+            Assert.IsTrue(isSuccess4Add);
+            Assert.AreEqual(xmlRQ, xmlRS);
+        }
+
+        [TestMethod]
         public void Add()
         {
             string errMsg = null;
@@ -304,6 +365,60 @@ namespace TestProject.Core
                 errMsg = ex.Message;
             }
 
+            Assert.IsNull(errMsg);
+            Assert.IsTrue(isSuccess4Add);
+            Assert.AreEqual(xmlRQ, xmlRS);
+        }
+
+        [TestMethod]
+        public void Add_ByDbEntity()
+        {
+            string errMsg = null;
+            string xmlRS = string.Empty;
+            string xmlRQ = string.Empty;
+            bool isSuccess4Add = false;
+            try
+            {
+                tbTestTable dataRS = null;
+                tbTestTable addRQ = null;
+                tbTestTable dataRQ = TestCommon.GenData("ADD");
+
+                using (DbConnection conn = new DbConnection(TestCommon.ConnString))
+                {
+                    try
+                    {
+                        DATestTable da = new DATestTable(conn);
+                        conn.BeginTransaction();
+
+                        decimal id = da.AddReturnIdentity(dataRQ);
+                        FilterParams fp = new FilterParams();
+                        fp.AddParam(tbTestTable.Fields.Id, id);
+                        addRQ = da.GetEntity(fp);
+
+                        decimal id_AddByDbEntity = da.AddReturnIdentity(addRQ);
+                        isSuccess4Add = id_AddByDbEntity > decimal.Zero;
+
+                        conn.CommitTransaction();
+
+                        FilterParams fp_AddByDbEntity = new FilterParams();
+                        fp_AddByDbEntity.AddParam(tbTestTable.Fields.Id, id_AddByDbEntity);
+                        dataRS = da.GetEntity(fp_AddByDbEntity);
+                        dataRS.Id = 0;
+                    }
+                    catch
+                    {
+                        conn.RollbackTransaction();
+                        throw;
+                    }
+                }
+
+                xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(dataRS);
+                xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(dataRQ);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
             Assert.IsNull(errMsg);
             Assert.IsTrue(isSuccess4Add);
             Assert.AreEqual(xmlRQ, xmlRS);
@@ -434,10 +549,71 @@ namespace TestProject.Core
             Assert.AreEqual(xmlRQ, xmlRS);
         }
 
-        public void Update_GetDB()
+        [TestMethod]
+        public void Update_ByDbEntity()
         {
+            string errMsg = null;
+            string xmlRS = string.Empty;
+            string xmlRQ = string.Empty;
+            bool isSuccess4Update = false;
 
+            try
+            {
+                tbTestTable dataRS = null;
+                tbTestTable insRQ = TestCommon.GenData("INSERT");
+                tbTestTable updateRQ = null;
+                using (DbConnection conn = new DbConnection(TestCommon.ConnString))
+                {
+                    try
+                    {
+                        DATestTable da = new DATestTable(conn);
+                        conn.BeginTransaction();
+
+                        decimal id = da.AddReturnIdentity(insRQ);
+
+                        FilterParams fp = new FilterParams();
+                        fp.AddParam(tbTestTable.Fields.Id, id);
+
+                        updateRQ = da.GetEntity(fp);
+                        updateRQ.Key_CN = "键值2".PadRight(10, ' ');
+                        updateRQ.Boolean = true;
+                        updateRQ.Amt_Decimal = 111.11m;
+                        updateRQ.Amt_Float = 111111111111111f;
+                        updateRQ.Amt_Int = 222;
+                        updateRQ.Amt_Numeric = 555.55m;
+                        updateRQ.Desc_CN = "测试数据2";
+                        updateRQ.Desc_EN = "Test Data2";
+                        updateRQ.Remark_CN = @"测试数据2[]~!@#$%^&*()_+{}"":?><,./;'|";
+                        updateRQ.Remark_EN = @"Test Data2[]~!@#$%^&*()_+{}"":?><,./;'|";
+                        updateRQ.XML_Data = "<TEST><DATA>测试数据2</DATA></TEST>";
+
+                        isSuccess4Update = da.Update(updateRQ, fp);
+
+                        conn.CommitTransaction();
+
+                        dataRS = da.GetEntity(fp);
+                        updateRQ.Id = (int)id;
+                    }
+                    catch
+                    {
+                        conn.RollbackTransaction();
+                        throw;
+                    }
+                }
+
+                xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(updateRQ);
+                xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(dataRS);
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+
+            Assert.IsNull(errMsg);
+            Assert.IsTrue(isSuccess4Update);
+            Assert.AreEqual(xmlRQ, xmlRS);
         }
+
         public void Delete()
         {
         }
