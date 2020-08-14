@@ -1,5 +1,5 @@
 ﻿using hwj.DBUtility.Core.Interface;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace hwj.DBUtility.Core.MSSQL.Interface
 {

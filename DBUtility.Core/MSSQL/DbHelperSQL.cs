@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace hwj.DBUtility.Core.MSSQL
 {
@@ -137,7 +137,7 @@ namespace hwj.DBUtility.Core.MSSQL
                         cmd.ExecuteNonQuery();
                         return true;
                     }
-                    catch (System.Data.SqlClient.SqlException e)
+                    catch (SqlException e)
                     {
                         connection.Close();
                         throw e;
@@ -470,7 +470,7 @@ namespace hwj.DBUtility.Core.MSSQL
                         da.Fill(ds, "ds");
                         cmd.Parameters.Clear();
                     }
-                    catch (System.Data.SqlClient.SqlException ex)
+                    catch (SqlException ex)
                     {
                         throw new Exception(ex.Message);
                     }
