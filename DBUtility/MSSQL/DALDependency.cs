@@ -903,7 +903,7 @@ namespace hwj.DBUtility.MSSQL
             sqlEty.Parameters = GenSelectSql.GenParameter(filterParams);
 
             _SqlEntity = sqlEty;
-            return Convert.ToInt32(ExecuteScalar(sqlEty.CommandText, sqlEty.Parameters));
+            return Convert.ToInt32(ExecuteScalar(sqlEty.CommandText, sqlEty.Parameters, sqlEty.CommandTimeout));
         }
 
         /// <summary>
