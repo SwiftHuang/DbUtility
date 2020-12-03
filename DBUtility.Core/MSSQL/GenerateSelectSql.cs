@@ -406,6 +406,13 @@ namespace hwj.DBUtility.Core.MSSQL
                                 p.DbType = f.DataTypeCode;
                                 p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
                                 p.Value = s.ToString();
+                                if (f.DataTypeCode == DbType.AnsiStringFixedLength && p.Size == 0)
+                                {
+                                    //案例: 字段BfRef系Char(10)，IN List传了两个Value: "DF00000157", null
+                                    //传了空值时p.Size=0，而char的长度是不能为0的，系统不知道char参数的长度，将其识别为char(8000)(为什么这样我也不知，sqlprofile捕捉到的最终sql就是这样)。
+                                    //char类型参数自动补位至8000，而sp_executesql整体长度最大支持8000，这样整体肯定超出长度了。而ADO查询不直接报错，只是GetList没有记录，较难发现
+                                    p.Size = f.Size;
+                                }
                                 LstDP.Add(p);
                                 index++;
                             }
