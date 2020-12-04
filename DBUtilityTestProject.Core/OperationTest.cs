@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TestProject.Core.DBUtility.DataAccess;
 using TestProject.Core.DBUtility.Entity;
+using System.Collections.Generic;
 
 namespace TestProject.Core
 {
@@ -620,6 +621,53 @@ namespace TestProject.Core
 
         public void GetList()
         {
+        }
+
+        [TestMethod]
+        public void GetList_IN()
+        {
+            string errMsg = null;
+            string xmlRS = string.Empty;
+            string xmlRQ = string.Empty;
+            bool isSuccess4Add = false;
+            try
+            {
+                using (DbConnection conn = new DbConnection(TestCommon.ConnString))
+                {
+                    try
+                    {
+                        var rq = TestCommon.GenData("GetList_IN");
+                        tbTestTables rqLst = new tbTestTables { rq };
+                        DATestTable da = new DATestTable(conn);
+
+                        conn.BeginTransaction();
+                        isSuccess4Add = da.Add(rq);
+                        conn.CommitTransaction();
+
+                        FilterParams fp = new FilterParams();
+                        //list field = char and inculde null
+                        fp.AddParam(tbTestTable.Fields.Key_EN, new List<string> { rq.Key_EN, null }, Enums.Relation.IN);
+                        SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
+                        var rsLst = da.GetList(null, fp, sps);
+                        rsLst.ForEach(r => r.Id = 0);
+
+                        xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
+                        xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rsLst);
+                    }
+                    catch
+                    {
+                        conn.RollbackTransaction();
+                        throw;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errMsg = ex.Message;
+            }
+            Assert.IsNull(errMsg);
+            Assert.IsTrue(isSuccess4Add);
+            Assert.AreEqual(xmlRQ, xmlRS);
         }
 
         public void GetPage()
