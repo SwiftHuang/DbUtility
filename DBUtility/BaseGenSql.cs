@@ -140,7 +140,7 @@ namespace hwj.DBUtility
                             || para.Operator == Enums.Relation.IN_InsertSQL || para.Operator == Enums.Relation.NotIN_InsertSQL)
                         {
                             StringBuilder inSql = new StringBuilder();
-                            string[] strList = GetSQL_IN_Value(para.FieldValue);
+                            object[] strList = GetSQL_IN_Value(para.FieldValue);
                             if (strList == null || strList.Length == 0)
                             {
                                 sbWhere.Append(" 1=0 ").Append(Enums.ExpressionString(para.Expression));
@@ -150,7 +150,7 @@ namespace hwj.DBUtility
                             {
                                 if (para.Operator == Enums.Relation.IN || para.Operator == Enums.Relation.NotIN)
                                 {
-                                    foreach (string s in strList)
+                                    foreach (var s in strList)
                                     {
                                         inSql.AppendFormat(_SqlParam, (para.ParamName != null ? para.ParamName : "T") + index).Append(',');
                                         index++;
@@ -167,7 +167,7 @@ namespace hwj.DBUtility
                                             tmpFormat = _DecimalFormat;
                                         }
 
-                                        foreach (string s in strList)
+                                        foreach (var s in strList)
                                         {
                                             inSql.AppendFormat(tmpFormat, s).Append(',');
                                         }
@@ -181,7 +181,7 @@ namespace hwj.DBUtility
                                 {
                                     if (Common.IsNumType(f.DataTypeCode))
                                     {
-                                        foreach (string s in strList)
+                                        foreach (var s in strList)
                                         {
                                             inSql.AppendFormat(_DecimalCommaFormat, s);
                                         }
@@ -190,14 +190,14 @@ namespace hwj.DBUtility
                                     {
                                         if (IsUnicode(f.DataTypeCode))
                                         {
-                                            foreach (string s in strList)
+                                            foreach (var s in strList)
                                             {
                                                 inSql.AppendFormat(_UnicodeStringCommaFormat, s);
                                             }
                                         }
                                         else
                                         {
-                                            foreach (string s in strList)
+                                            foreach (var s in strList)
                                             {
                                                 inSql.AppendFormat(_StringCommaFormat, s);
                                             }
@@ -363,7 +363,7 @@ namespace hwj.DBUtility
                 return false;
         }
 
-        protected string[] GetSQL_IN_Value(object obj)
+        protected object[] GetSQL_IN_Value(object obj)
         {
             if (obj == null)
             {
@@ -372,24 +372,24 @@ namespace hwj.DBUtility
             else if (obj.GetType().IsGenericType)
             {
                 Type type = obj.GetType();
-                List<string> sList = new List<string>();
+                List<object> sList = new List<object>();
                 if (Array.IndexOf(type.GetInterfaces(), typeof(IEnumerable)) > -1)
                 {
                     IEnumerable en = obj as IEnumerable;
                     foreach (object t in en)
                     {
-                        sList.Add(Convert.ToString(t));
+                        sList.Add(t);
                     }
                 }
                 return sList.ToArray();
             }
             else if (obj is string)
             {
-                return new string[] { obj.ToString() };
+                return new object[] { obj.ToString() };
             }
             else
             {
-                return (string[])obj;
+                return (Object[])obj;
             }
         }
 
