@@ -77,6 +77,10 @@ namespace TestProject.Core.DBUtility.Entity
             ///
             /// </summary>
             CreateOn,
+            /// <summary>
+            ///
+            /// </summary>
+            F_Guid,
         }
 
         #region Model
@@ -94,6 +98,7 @@ namespace TestProject.Core.DBUtility.Entity
         private String _remark_en;
         private String _xml_data;
         private DateTime _createon;
+        private Guid _f_guid;
         /// <summary>
         /// [PK/Un-Null/int(10)]
         /// </summary>
@@ -219,6 +224,15 @@ namespace TestProject.Core.DBUtility.Entity
         {
             set { AddAssigned("CreateOn"); _createon = value; }
             get { return _createon; }
+        }
+        /// <summary>
+        /// [Allow Null/uniqueidentifier(16)]
+        /// </summary>
+        [FieldMapping("F_Guid", DbType.Guid, 16)]
+        public Guid F_Guid
+        {
+            set { AddAssigned("F_Guid"); _f_guid = value; }
+            get { return _f_guid; }
         }
         #endregion Model
 

@@ -393,19 +393,19 @@ namespace hwj.DBUtility.Core.MSSQL
                         continue;
                     if (sp.Operator == Enums.Relation.IN || sp.Operator == Enums.Relation.NotIN)
                     {
-                        string[] strList = GetSQL_IN_Value(sp.FieldValue);
-                        if (strList == null || strList.Length == 0)
+                        object[] valList = GetSQL_IN_Values(sp.FieldValue);
+                        if (valList == null || valList.Length == 0)
                             continue;
 
                         FieldMappingInfo f = FieldMappingInfo.GetFieldInfo(typeof(T), sp.FieldName);
                         if (f != null)
                         {
-                            foreach (string s in strList)
+                            foreach (var valObj in valList)
                             {
                                 IDbDataParameter p = new SqlParameter();
                                 p.DbType = f.DataTypeCode;
                                 p.ParameterName = (sp.ParamName != null ? sp.ParamName : "T") + index;
-                                p.Value = s.ToString();
+                                p.Value = valObj;
                                 if (f.DataTypeCode == DbType.AnsiStringFixedLength && p.Size == 0)
                                 {
                                     //案例: 字段BfRef系Char(10)，IN List传了两个Value: "DF00000157", null

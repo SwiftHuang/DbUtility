@@ -626,9 +626,11 @@ namespace TestProject.Core
                     {
                         //测试各种IN
                         var rq1 = TestCommon.GenData("GetListIN1");
+                        rq1.F_Guid = Guid.NewGuid();
                         var rq2 = TestCommon.GenData("GetListIN2");
                         rq2.Amt_Decimal = Math.Round((rq2.Amt_Decimal / 2), 2);
                         rq2.Amt_Float = Math.Round((rq2.Amt_Float / 2), 2);
+                        rq2.F_Guid = Guid.NewGuid();
 
                         DATestTable da = new DATestTable(conn);
 
@@ -647,6 +649,7 @@ namespace TestProject.Core
                         fp.AddParam(tbTestTable.Fields.Id, new List<int> { rq1.Id, rq2.Id }, Enums.Relation.IN, Enums.Expression.AND);
                         fp.AddParam(tbTestTable.Fields.Amt_Decimal, new List<decimal> { rq1.Amt_Decimal, rq2.Amt_Decimal }, Enums.Relation.IN, Enums.Expression.AND);
                         fp.AddParam(tbTestTable.Fields.Amt_Float, new List<Double> { rq1.Amt_Float, rq2.Amt_Float }, Enums.Relation.IN, Enums.Expression.AND);
+                        fp.AddParam(tbTestTable.Fields.F_Guid, new List<Guid> { rq1.F_Guid, rq2.F_Guid }, Enums.Relation.IN, Enums.Expression.AND);
                         SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
                         var rsLst = da.GetList(null, fp, sps);
                         string sql = da.SqlEntity.CommandText;

@@ -61,7 +61,7 @@ namespace TestProject
         [TestMethod]
         public void Add()
         {
-            string expected = "Table:TestTable,Fields:[Amt_Decimal:3->6,Desc_EN:20->80,Key_EN:10->11]";
+            string expected = "Table:TestTable,Fields:[Amt_Decimal:3->6,Desc_EN:20->80,Key_EN:10->11,F_Guid:16->36]";
             string result = string.Empty;
             try
             {
@@ -101,7 +101,7 @@ namespace TestProject
         [TestMethod]
         public void Update()
         {
-            string expected = "Table:TestTable,Fields:[Amt_Decimal:3->6,Desc_EN:20->80]";
+            string expected = "Table:TestTable,Fields:[Amt_Decimal:3->6,Desc_EN:20->80,F_Guid:16->36]";
             string result = string.Empty;
             try
             {

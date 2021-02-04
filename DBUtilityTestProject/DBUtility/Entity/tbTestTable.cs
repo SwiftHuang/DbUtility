@@ -27,6 +27,10 @@ namespace TestProject.DBUtility.Entity
             /// <summary>
             ///
             /// </summary>
+            CreateOn,
+            /// <summary>
+            ///
+            /// </summary>
             Boolean,
             /// <summary>
             ///
@@ -75,11 +79,12 @@ namespace TestProject.DBUtility.Entity
             /// <summary>
             ///
             /// </summary>
-            CreateOn,
+            F_Guid,
         }
 
         #region Model
         private Int32 _id;
+        private DateTime _createon;
         private Boolean _boolean;
         private Decimal _amt_numeric;
         private Decimal _amt_decimal;
@@ -92,7 +97,7 @@ namespace TestProject.DBUtility.Entity
         private String _remark_cn;
         private String _remark_en;
         private String _xml_data;
-        private DateTime _createon;
+        private Guid _f_guid;
         /// <summary>
         /// [PK/Un-Null/int(10)]
         /// </summary>
@@ -101,6 +106,15 @@ namespace TestProject.DBUtility.Entity
         {
             set { AddAssigned("Id"); _id = value; }
             get { return _id; }
+        }
+        /// <summary>
+        /// [Allow Null/datetime(8)]
+        /// </summary>
+        [FieldMapping("CreateOn", DbType.DateTime, 8)]
+        public DateTime CreateOn
+        {
+            set { AddAssigned("CreateOn"); _createon = value; }
+            get { return _createon; }
         }
         /// <summary>
         /// [Allow Null/bit(1)]
@@ -139,7 +153,7 @@ namespace TestProject.DBUtility.Entity
             get { return _amt_float; }
         }
         /// <summary>
-        /// [Allow Null/int(10)]
+        /// [Allow Null/int(10)/Default:((99))]
         /// </summary>
         [FieldMapping("Amt_Int", DbType.Int32, 10)]
         public Int32 Amt_Int
@@ -211,13 +225,13 @@ namespace TestProject.DBUtility.Entity
             get { return _xml_data; }
         }
         /// <summary>
-        /// [Allow Null/datetime(8)]
+        /// [Allow Null/uniqueidentifier(16)]
         /// </summary>
-        [FieldMapping("CreateOn", DbType.DateTime, 8)]
-        public DateTime CreateOn
+        [FieldMapping("F_Guid", DbType.Guid, 16)]
+        public Guid F_Guid
         {
-            set { AddAssigned("CreateOn"); _createon = value; }
-            get { return _createon; }
+            set { AddAssigned("F_Guid"); _f_guid = value; }
+            get { return _f_guid; }
         }
         #endregion Model
 
