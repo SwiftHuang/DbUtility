@@ -111,17 +111,9 @@ namespace TestProject.Core
                     try
                     {
                         DATestTable da = new DATestTable(conn);
-                        SortParams sp1 = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Descending);
-                        var rs = da.GetEntity(null, null, sp1);
-                        int maxId = rs != null ? rs.Id : 0;
-                        foreach (var d in rqLst)
-                        {
-                            maxId++;
-                            d.Id = maxId;
-                        }
-                        xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
 
                         conn.BeginTransaction();
+
                         isSuccess4Add = da.AddList(rqLst);
 
                         conn.CommitTransaction();
@@ -130,7 +122,9 @@ namespace TestProject.Core
                         fp.AddParam(tbTestTable.Fields.Key_EN, dataKey + "%", Enums.Relation.Like);
                         SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
                         rsLst = da.GetList(null, fp, sps);
+                        rsLst.ForEach(c => c.Id = 0);
 
+                        xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
                         xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rsLst);
                     }
                     catch
@@ -172,16 +166,9 @@ namespace TestProject.Core
                     try
                     {
                         DATestTable da = new DATestTable(conn);
-                        SortParams sp1 = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Descending);
-                        var rs = da.GetEntity(null, null, sp1);
-                        int maxId = rs != null ? rs.Id : 0;
-                        foreach (var d in rqLst)
-                        {
-                            maxId++;
-                            d.Id = maxId;
-                        }
 
                         conn.BeginTransaction();
+
                         isSuccess4Add = da.AddList(rqLst);
 
                         conn.CommitTransaction();
@@ -190,11 +177,13 @@ namespace TestProject.Core
                         fp.AddParam(tbTestTable.Fields.Key_EN, dataKey + "%", Enums.Relation.Like);
                         SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
                         rsLst = da.GetList(null, fp, sps);
+                        rsLst.ForEach(c => c.Id = 0);
 
                         foreach (var d in rqLst)
                         {
                             d.Amt_Int = 99;
                         }
+
                         xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
                         xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rsLst);
                     }
@@ -629,28 +618,40 @@ namespace TestProject.Core
             string errMsg = null;
             string xmlRS = string.Empty;
             string xmlRQ = string.Empty;
-            bool isSuccess4Add = false;
             try
             {
                 using (DbConnection conn = new DbConnection(TestCommon.ConnString))
                 {
                     try
                     {
-                        var rq = TestCommon.GenData("GetList_IN");
-                        tbTestTables rqLst = new tbTestTables { rq };
+                        //测试各种IN
+                        var rq1 = TestCommon.GenData("GetListIN1");
+                        var rq2 = TestCommon.GenData("GetListIN2");
+                        rq2.Amt_Decimal = Math.Round((rq2.Amt_Decimal / 2), 2);
+                        rq2.Amt_Float = Math.Round((rq2.Amt_Float / 2), 2);
+
                         DATestTable da = new DATestTable(conn);
 
                         conn.BeginTransaction();
-                        isSuccess4Add = da.Add(rq);
+
+                        rq1.Id = (int)da.AddReturnIdentity(rq1);
+                        rq2.Id = (int)da.AddReturnIdentity(rq2);
+
                         conn.CommitTransaction();
 
                         FilterParams fp = new FilterParams();
-                        //list field = char and inculde null
-                        fp.AddParam(tbTestTable.Fields.Key_EN, new List<string> { rq.Key_EN, null }, Enums.Relation.IN);
+                        List<string> keys = new List<string> { rq1.Key_EN, rq2.Key_EN, null };//(field type = char and some value is null)
+                        fp.AddParam(tbTestTable.Fields.Key_EN, new List<string> { "NOT IN 1", "NOT IN 2" }, Enums.Relation.NotIN, Enums.Expression.AND, "NIP");
+                        fp.AddParam(tbTestTable.Fields.Key_EN, keys, Enums.Relation.IN, Enums.Expression.AND, "INP");
+                        fp.AddParam(tbTestTable.Fields.Key_EN, string.Format("'{0}'", string.Join("','", keys.FindAll(k => k != null))), Enums.Relation.IN_SelectSQL, Enums.Expression.AND, "INSP");
+                        fp.AddParam(tbTestTable.Fields.Id, new List<int> { rq1.Id, rq2.Id }, Enums.Relation.IN, Enums.Expression.AND);
+                        fp.AddParam(tbTestTable.Fields.Amt_Decimal, new List<decimal> { rq1.Amt_Decimal, rq2.Amt_Decimal }, Enums.Relation.IN, Enums.Expression.AND);
+                        fp.AddParam(tbTestTable.Fields.Amt_Float, new List<Double> { rq1.Amt_Float, rq2.Amt_Float }, Enums.Relation.IN, Enums.Expression.AND);
                         SortParams sps = new SortParams(tbTestTable.Fields.Id, Enums.OrderBy.Ascending);
                         var rsLst = da.GetList(null, fp, sps);
-                        rsLst.ForEach(r => r.Id = 0);
+                        string sql = da.SqlEntity.CommandText;
 
+                        tbTestTables rqLst = new tbTestTables { rq1, rq2 };
                         xmlRQ = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rqLst);
                         xmlRS = hwj.CommonLibrary.Object.SerializationHelper.SerializeToXml(rsLst);
                     }
@@ -666,7 +667,6 @@ namespace TestProject.Core
                 errMsg = ex.Message;
             }
             Assert.IsNull(errMsg);
-            Assert.IsTrue(isSuccess4Add);
             Assert.AreEqual(xmlRQ, xmlRS);
         }
 

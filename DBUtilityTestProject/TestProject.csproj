@@ -64,10 +64,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonLibrary\CommonLibrary.csproj">
-      <Project>{ea76e51a-970b-49fe-8a42-9de6ef898813}</Project>
-      <Name>CommonLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DBUtility\DBUtility.csproj">
       <Project>{8f72aa55-3556-4b3b-8fd7-fc6a9b50d21b}</Project>
       <Name>DBUtility</Name>
