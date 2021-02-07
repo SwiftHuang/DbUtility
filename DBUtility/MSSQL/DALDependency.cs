@@ -279,6 +279,19 @@ namespace hwj.DBUtility.MSSQL
         /// <param name="filterParams">被更新的条件</param>
         /// <param name="updateParams">更新参数list</param>
         /// <returns>Sql对象</returns>
+        public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams)
+        {
+            UpdateParam updateParams;
+            return UpdateSqlEntity(entity, filterParams, out updateParams);
+        }
+
+        /// <summary>
+        /// 获取更新的Sql对象
+        /// </summary>
+        /// <param name="entity">需要Table对象</param>
+        /// <param name="filterParams">被更新的条件</param>
+        /// <param name="updateParams">更新参数list</param>
+        /// <returns>Sql对象</returns>
         public static SqlEntity UpdateSqlEntity(T entity, FilterParams filterParams, out UpdateParam updateParams)
         {
             SqlEntity se = new SqlEntity();
